@@ -3,13 +3,13 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -24,12 +24,12 @@ export class JournalReconcilePagingComponent implements OnInit {
   listTemp = [];
 
   isSelected
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.ucTempPagingObj.urlJson = "./assets/ucpaging/journal/paging-journal-reconcile.json";
     this.ucTempPagingObj.pagingJson = "./assets/ucpaging/journal/paging-journal-reconcile.json";
-    this.ucTempPagingObj.apiQryPaging = URLConstant.GetJournalResultPagingObjectBySQL;
+    this.ucTempPagingObj.apiQryPaging = this.UrlConstantNew.GetJournalResultPagingObjectBySQL;
   }
 
   CallBack(ev: any) {
@@ -57,7 +57,7 @@ export class JournalReconcilePagingComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(environment.FoundationR3Url + URLConstant.RerunJournal, {
+    this.http.post<any>(environment.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
       ListTransactionNo: req
     }).subscribe(
       res => {

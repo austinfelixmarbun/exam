@@ -4,20 +4,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { ShareholderPublicObj } from 'app/shared/model/new-cust/shareholder/shareholder-public-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { NewCustSetData } from '../NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-new-cust-public',
@@ -33,7 +32,7 @@ export class NewCustPublicComponent implements OnInit {
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj();
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private newCustService: NewCustSetData) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private newCustService: NewCustSetData, private UrlConstantNew: UrlConstantNew) { }
 
   readonly RefMasterTypeCodePublicType: string = CommonConstant.RefMasterTypeCodePublicType;
 
@@ -41,7 +40,7 @@ export class NewCustPublicComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     await this.InitData();
-    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, URLConstant.GetListActiveRefMasterDetail);
+    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, this.UrlConstantNew.GetListActiveRefMasterDetail);
     this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
@@ -80,7 +79,7 @@ export class NewCustPublicComponent implements OnInit {
         MasterCode: item.MrPositionSlikCode,
         RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
       };
-      this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).subscribe(
         (response: RefMasterObj) => {
           this.positionSlikLookUpObj.nameSelect = response.Descr;
           this.positionSlikLookUpObj.jsonSelect = { Jabatan: response.Descr };
@@ -105,7 +104,7 @@ export class NewCustPublicComponent implements OnInit {
   tempExisting: ShareholderPublicObj = new ShareholderPublicObj();
   async GetExisting() {
     if (this.CustCompanyMgmntShrholderId == 0) return;
-    await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
       (response: ShareholderPublicObj) => {
         this.tempExisting = response;
         this.ClearForm(response);
@@ -119,7 +118,7 @@ export class NewCustPublicComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.CustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddrToCopy = response;
       }
@@ -162,8 +161,8 @@ export class NewCustPublicComponent implements OnInit {
   }
 
   SetUrlApi(): string {
-    let urlApi: string = URLConstant.AddCustCompanyMgmntShrholderPublic;
-    if (this.CustCompanyMgmntShrholderId != 0) urlApi = URLConstant.EditCustCompanyMgmntShrholderPublic;
+    let urlApi: string = this.UrlConstantNew.AddCustCompanyMgmntShrholderPublic;
+    if (this.CustCompanyMgmntShrholderId != 0) urlApi = this.UrlConstantNew.EditCustCompanyMgmntShrholderPublic;
     return urlApi;
   }
 

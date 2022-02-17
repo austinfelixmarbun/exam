@@ -13,7 +13,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-organization-model-paging',
@@ -42,7 +42,7 @@ export class OrganizationModelPagingComponent implements OnInit {
   foundationUrl: any = environment.FoundationR3Url;
   addCrit: CriteriaObj[];
 
-  constructor(private route: ActivatedRoute, private service: NGXToastrService, private https: HttpClient, private location: Location) {
+  constructor(private route: ActivatedRoute, private service: NGXToastrService, private http: HttpClient, private location: Location, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['refOrgId'] != null) {
         this.refOrgId = +params['refOrgId'];
@@ -53,12 +53,12 @@ export class OrganizationModelPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgModel.json";
-    this.inputObj.apiQryPaging = URLConstant.GetOrgMdlPaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgMdlPaging;
     
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + URLConstant.GetOrgMdlPaging;
+    this.apiUrl = this.UrlConstantNew.GetOrgMdlPaging;
     this.initiateForm()
   }
 
@@ -89,10 +89,10 @@ export class OrganizationModelPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    var getOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
+    var getOrgUrl = this.UrlConstantNew.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.refOrgId;
-    this.https.post(getOrgUrl, this.orgObj).subscribe(
+    this.http.post(getOrgUrl, this.orgObj).subscribe(
       (response) => {
         this.orgObj = response['returnObject'];
       },
@@ -113,10 +113,10 @@ export class OrganizationModelPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = URLConstant.DeleteOrgMdl;
+      this.deleteUrl = this.UrlConstantNew.DeleteOrgMdl;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +id;
-      this.https.post(this.deleteUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.deleteUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response['message']);
           var order = null;

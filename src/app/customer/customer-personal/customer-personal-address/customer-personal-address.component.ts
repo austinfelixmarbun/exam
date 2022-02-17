@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class CustomerPersonalAddressComponent implements OnInit {
   legalAddr: CustAddrObj;
   residenceAddr: CustAddrObj;
   custAddrObj: CustAddrObj;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -47,11 +47,11 @@ export class CustomerPersonalAddressComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.IdCust;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.legalAddr = response;
         reqObj.Code = CommonConstant.CustAddrTypeResidence;
-        this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+        this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
           (response: CustAddrObj) => {
             this.residenceAddr = response;
             if (this.legalAddr.Addr == null || this.residenceAddr.Addr == null) {

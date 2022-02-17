@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-customer-asset',
@@ -13,7 +13,7 @@ export class CustomerViewCustomerAssetComponent implements OnInit {
   CustId: number = 0;
   ListAsset: Array<any> = new Array<any>();
 
-  constructor(private http: HttpClient, private route: ActivatedRoute){
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -22,7 +22,7 @@ export class CustomerViewCustomerAssetComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.http.post(URLConstant.GetListCustAssetByCustId, { Id: this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListCustAssetByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         console.log(response)
         this.ListAsset = response["CustAssetList"];

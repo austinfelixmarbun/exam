@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-journal-result',
   templateUrl: './journal-result.component.html',
@@ -14,7 +14,7 @@ export class JournalResultComponent implements OnInit {
   JrMsgH: any = {};
   ErrMsg = [];
   JrResult = [];
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -22,7 +22,7 @@ export class JournalResultComponent implements OnInit {
     })
 
 
-    this.http.post<any>(URLConstant.GetJournalResultByJrMsgHId, {
+    this.http.post<any>(this.UrlConstantNew.GetJournalResultByJrMsgHId, {
       Id: this.JrMsgHId
     }).subscribe(res => {
       this.JrMsgH = res.JrMsgH[0]

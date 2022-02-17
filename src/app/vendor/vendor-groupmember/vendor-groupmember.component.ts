@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -25,7 +24,7 @@ export class VendorGroupmemberComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_GRP_VIEW;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
@@ -88,7 +87,7 @@ export class VendorGroupmemberComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddRangeVendorGrpMbr, obj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddRangeVendorGrpMbr, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });

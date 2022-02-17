@@ -13,8 +13,8 @@ import { EmpPositionObj } from 'app/shared/model/emp-position-obj.model';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-emp-pos',
@@ -49,9 +49,9 @@ export class OfficeEmpPosComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   readonly EditLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
-    this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
-    this.deleteUrl = URLConstant.DeleteEmpPosition;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
+    this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
 
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
@@ -69,7 +69,7 @@ export class OfficeEmpPosComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetEmpPositionPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
@@ -123,7 +123,7 @@ export class OfficeEmpPosComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
-      this.httpClient.post(this.deleteUrl, this.empPositionObj).subscribe(
+      this.http.post(this.deleteUrl, this.empPositionObj).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
         });

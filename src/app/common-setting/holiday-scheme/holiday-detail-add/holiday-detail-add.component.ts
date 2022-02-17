@@ -5,11 +5,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HolidayDObj } from 'app/shared/model/holiday-d-obj.model';
 import { HolidayDByYearObj } from 'app/shared/model/holiday-d-by-year-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -39,7 +39,7 @@ export class HolidayDetailAddComponent implements OnInit {
     UntilYear: ['', [Validators.required, Validators.pattern("^[0-9]+$")]]
   })
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       this.HolidaySchmHId = params["HolidaySchmHId"];
@@ -59,7 +59,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.HolidayDt = this.HolidayListForm.controls.Date.value;
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
-      this.http.post(URLConstant.AddHolidaySchmD, this.holidayDetailObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
+      this.http.post(this.UrlConstantNew.AddHolidaySchmD, this.holidayDetailObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId });
         this.toastr.successMessage(response['message']);
       });
@@ -92,7 +92,7 @@ export class HolidayDetailAddComponent implements OnInit {
       if (this.HolidayListForm.controls.Saturday.value) {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
-      this.http.post(URLConstant.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
+      this.http.post(this.UrlConstantNew.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });

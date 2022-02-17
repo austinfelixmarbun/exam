@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CustAssetObj } from 'app/shared/model/cust-asset-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-asset-detail',
@@ -34,17 +33,18 @@ export class CustAssetDetailComponent implements OnInit {
   });
 
   constructor(
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.CustAssetTypeList = new Array<KeyValueObj>();
     this.Mode = "ADD";
    }
 
   ngOnInit() {
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCustAsset }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCustAsset }).toPromise().then(
       (response) => {
         this.CustAssetTypeList = response[CommonConstant.ReturnObj];
       }
@@ -55,7 +55,7 @@ export class CustAssetDetailComponent implements OnInit {
     );
     if(this.CustAssetId && this.CustAssetId > 0){
       this.Mode = "EDIT"
-      this.httpClient.post<CustAssetObj>(URLConstant.GetCustAssetByCustAssetId, { Id: this.CustAssetId }).toPromise().then(
+      this.http.post<CustAssetObj>(this.UrlConstantNew.GetCustAssetByCustAssetId, { Id: this.CustAssetId }).toPromise().then(
         (response) => {
           this.CustAssetForm.patchValue({
             CustAssetId: response.CustAssetId,
@@ -86,12 +86,12 @@ export class CustAssetDetailComponent implements OnInit {
     formValue.AssetTotalValue = formValue.AssetValue * formValue.AssetQty;
     var url = "";
     if(this.CustAssetId && this.CustAssetId > 0){
-      url = URLConstant.EditCustAsset;
+      url = this.UrlConstantNew.EditCustAsset;
     }
     else{
-      url = URLConstant.AddCustAsset;
+      url = this.UrlConstantNew.AddCustAsset;
     }
-    this.httpClient.post(url, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(url, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.activeModal.close(response);
       }

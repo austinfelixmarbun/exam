@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/cabinet-with-list-rack-obj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-rack-paging',
@@ -20,7 +19,8 @@ export class RackPagingComponent implements OnInit {
   readonly EditLink: string = NavigationConstant.BACK_TO_ADD_EDIT;
   constructor(private http: HttpClient,
     private router: Router,
-    private activeRoute: ActivatedRoute) { 
+    private activeRoute: ActivatedRoute, 
+    private UrlConstantNew: UrlConstantNew) { 
     this.activeRoute.queryParams.subscribe(
       params => {
         if(params['CabinetCode'] !== null){
@@ -34,7 +34,7 @@ export class RackPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, {Code: this.Cabinet.CabinetCode}).subscribe(
+    this.http.post<CabinetWithListRackObj>(this.UrlConstantNew.GetCabinetAndListRackByCabinetCode, {Code: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.Cabinet = response;
       },

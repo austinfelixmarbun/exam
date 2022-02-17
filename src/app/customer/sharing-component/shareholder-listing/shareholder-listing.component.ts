@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
 import { ShareholderListingObj } from 'app/shared/model/new-cust/shareholder/shareholder-listing-obj.model';
@@ -24,7 +24,7 @@ export class ShareholderListingComponent implements OnInit {
 
   readonly CustDataModeShareholder: string = CommonConstant.CustMainDataModeMgmntShrholder;
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   selectedCustId: number = 0;
   selectedCustCompanyMgmntShrholderId: number = 0;
@@ -39,7 +39,7 @@ export class ShareholderListingComponent implements OnInit {
   tempIsSigner: boolean = false;
   listCustNoToExclude: Array<string> = new Array();
   GetListPaging() {
-    this.http.post(URLConstant.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
       (response: GenericListObj) => {
         this.tempShareholderListingObj = response.ReturnObject;
         let tempTotalSharePrct: number = 0;

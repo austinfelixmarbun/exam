@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe, Location } from '@angular/common';
 import { NegativeCustObj } from 'app/shared/model/negative-cust-obj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/negative-cust-change-trx-obj.model';
 import { forkJoin } from 'rxjs';
-import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-negative-customer-view',
@@ -27,7 +24,8 @@ export class NegativeCustomerViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private httpClient: HttpClient,
+    private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['negativeCustId'] != null) {
@@ -41,21 +39,21 @@ export class NegativeCustomerViewComponent implements OnInit {
     var negativeCustObj = new NegativeCustObj();
     negativeCustObj.NegativeCustId = this.negativeCustId;
 
-    this.httpClient.post(URLConstant.GetNegativeCustByNegativeCustId, {Id : this.negativeCustId}).pipe(
+    this.http.post(this.UrlConstantNew.GetNegativeCustByNegativeCustId, {Id : this.negativeCustId}).pipe(
       map((response) => {
         return response;
       }),
       mergeMap((response: any) => {
         var negativeCustChangeTrxObj = new NegativeCustChangeTrxObj();
         negativeCustChangeTrxObj.NegativeCustId = response.NegativeCustId;
-        const negativeCustChangeTrx = this.httpClient.post(URLConstant.GetListNegativeCustChangeTrxByNegativeCustId, {Id : response.NegativeCustId});
+        const negativeCustChangeTrx = this.http.post(this.UrlConstantNew.GetListNegativeCustChangeTrxByNegativeCustId, {Id : response.NegativeCustId});
         var tempResponse = [response];
         return forkJoin([tempResponse, negativeCustChangeTrx]);
       }),
       mergeMap((response: any) => {        
-        let requestIdType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code : response[0].MrIdTypeCode });
-        let requestNegativeCustType = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code : response[0].MrNegCustTypeCode});
-        let requestNegativeSource = this.httpClient.post(URLConstant.GetRefMasterByMasterCode, {Code : response[0].MrNegCustSourceCode});
+        let requestIdType = this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : response[0].MrIdTypeCode });
+        let requestNegativeCustType = this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : response[0].MrNegCustTypeCode});
+        let requestNegativeSource = this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : response[0].MrNegCustSourceCode});
 
         var tempResponse = [response];
 

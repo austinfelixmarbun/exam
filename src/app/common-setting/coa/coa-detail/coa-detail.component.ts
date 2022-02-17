@@ -3,18 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { first } from 'rxjs/operators';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { Router } from '@angular/router';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { CookieService } from 'ngx-cookie';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-coa-detail',
@@ -46,7 +43,8 @@ export class CoaDetailComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private toastr: NGXToastrService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew) {
   }
 
   ngOnInit() {
@@ -54,7 +52,7 @@ export class CoaDetailComponent implements OnInit {
 
     let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterEntityType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeEntityType;
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterEntityType).pipe(first()).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterEntityType).pipe(first()).subscribe(
       (response) => {
         this.entityTypeList = response["ReturnObject"];
       }
@@ -64,7 +62,7 @@ export class CoaDetailComponent implements OnInit {
   }
 
   GetDdlCurr() {
-    this.http.post(URLConstant.GetListKvpActiveRefCurr, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetListKvpActiveRefCurr, null).subscribe(
       (response) => {
         this.ListCurrCode = response["ReturnObject"]
       },
@@ -170,7 +168,7 @@ export class CoaDetailComponent implements OnInit {
     var RequestListRefCoa = {
       ListRequestRefCoaObjs: this.ListRefCoaObj
     }
-    this.http.post(URLConstant.SubmitListCoa, RequestListRefCoa, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SubmitListCoa, RequestListRefCoa, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);
@@ -192,7 +190,7 @@ export class CoaDetailComponent implements OnInit {
         comp => comp.Key == this.entitySelect);
 
       if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypePayAlloc) {
-        await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocActive, {}).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKeyValueRefPaymentAllocActive, {}).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -203,7 +201,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeBankAcc) {
-        await this.http.post<any>(URLConstant.GetListKeyValueActiveOfficeBankAcc, {}).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKeyValueActiveOfficeBankAcc, {}).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -214,7 +212,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl) {
-        await this.http.post<any>(URLConstant.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.SUPPLIER }).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.SUPPLIER }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -225,7 +223,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany) {
-        await this.http.post<any>(URLConstant.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
             console.log(this.ListPaymentAlloc)
@@ -238,7 +236,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeOffice) {
-        await this.http.post<any>(URLConstant.GetListKvpActiveRefOffice, {}).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKvpActiveRefOffice, {}).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },

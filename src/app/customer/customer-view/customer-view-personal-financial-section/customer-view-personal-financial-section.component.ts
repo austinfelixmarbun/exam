@@ -2,20 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
   templateUrl: './customer-view-personal-financial-section.component.html'
 })
 export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
-  GetCustPersonalFinDataForCustViewByCustIdUrl = URLConstant.GetCustPersonalFinDataForCustViewByCustId;
+  GetCustPersonalFinDataForCustViewByCustIdUrl = this.UrlConstantNew.GetCustPersonalFinDataForCustViewByCustId;
   custObj: CustObj;
   tempCustObj: any;
   IdCust: number;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-shareholder-menu',
@@ -11,12 +10,12 @@ import { environment } from 'environments/environment';
 export class CustomerShareholderMenuComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor() { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustShareholder.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustShareholder.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetAccessory;
   }
 
 }

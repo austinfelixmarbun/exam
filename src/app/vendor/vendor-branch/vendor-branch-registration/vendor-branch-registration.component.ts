@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-registration',
@@ -14,7 +14,7 @@ export class VendorBranchRegistrationComponent implements OnInit {
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
   Registration : string;
-  constructor(private route: ActivatedRoute,private http: HttpClient) { 
+  constructor(private route: ActivatedRoute,private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       if(!params['VendorEmpId']){
@@ -29,7 +29,7 @@ export class VendorBranchRegistrationComponent implements OnInit {
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
 
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"]; 
         if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){

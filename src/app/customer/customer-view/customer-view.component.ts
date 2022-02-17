@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view',
@@ -17,7 +17,7 @@ export class CustomerViewComponent implements OnInit {
   CustId: number;
   custType: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { 
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { 
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class CustomerViewComponent implements OnInit {
         this.CustId = params["CustId"];
       }
     });
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, {Id : this.CustId}).subscribe(
       (response) => {
         this.custResultData = response;
         this.custModel = this.custResultData['MrCustModelCode'];

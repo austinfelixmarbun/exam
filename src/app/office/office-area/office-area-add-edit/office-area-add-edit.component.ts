@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeAreaObj } from 'app/shared/model/ref-office-area-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-area-add-edit',
@@ -26,7 +26,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
   foundationUrl: string = environment.FoundationR3Url;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefOfficeAreaId = params["RefOfficeAreaId"];
       this.mode = params["mode"];
@@ -46,7 +46,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj = new RefOfficeAreaObj();
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
       this.OfficeAreaForm.controls.AreaCode.disable();
-      this.http.post(URLConstant.GetRefOfficeAreaByRefOfficeAreaId, {Id : this.RefOfficeAreaId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefOfficeAreaByRefOfficeAreaId, {Id : this.RefOfficeAreaId}).subscribe(
         (response) => {
           this.result = response;
           this.OfficeAreaForm.patchValue({
@@ -67,7 +67,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.refOfficeAreaObj.AreaCode = this.result.AreaCode;
       this.refOfficeAreaObj.RefOfficeAreaId = this.RefOfficeAreaId;
 
-      this.http.post(URLConstant.EditRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
@@ -75,7 +75,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
     }
     else {
       this.refOfficeAreaObj.RefOfficeAreaId = 0;
-      this.http.post(URLConstant.AddRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});

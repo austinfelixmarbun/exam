@@ -3,7 +3,6 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { OfficeBankAccObj } from 'app/shared/model/common-setting/office-bank-acc.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
@@ -11,6 +10,7 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-bank-account-acc-detail',
@@ -36,7 +36,8 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew) {
       this.route.queryParams.subscribe(params => {
         if (params["OfficeBankAccId"] != null) {
           this.OfficeBankAccId = params["OfficeBankAccId"];
@@ -56,7 +57,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.inputFieldObj.inputLookupObj = new InputLookupObj();
 
     this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
-    this.http.post<OfficeBankAccObj>(URLConstant.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
+    this.http.post<OfficeBankAccObj>(this.UrlConstantNew.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
       (response) => {
         this.OfficeBankAccObj = response;
         this.AccCode = this.OfficeBankAccObj.OfficeBankAccCode;
@@ -120,7 +121,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     this.OfficeBankAccObj.BankPhnExt2 = this.AccDetailForm.value.UcAddress.PhnExt2;
     this.OfficeBankAccObj.RowVersion = "";
 
-    this.http.post(URLConstant.EditDetailOfficeBankAcc, this.OfficeBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditDetailOfficeBankAcc, this.OfficeBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage("Update Account Detail Success!");
         this.router.navigateByUrl(NavigationConstant.CS_OFFICE_BANK_ACCOUNT_PAGING);

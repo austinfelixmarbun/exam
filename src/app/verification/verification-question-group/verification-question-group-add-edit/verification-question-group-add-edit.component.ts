@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
@@ -21,7 +20,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   isActive: boolean = true;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
       this.mode = params["mode"];
@@ -39,7 +38,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.mode == "edit") {
-      this.http.post<VerfQuestionGrpHObj>(URLConstant.GetQuestionGrpHById, {Id : this.VerfQuestionGrpHId}).subscribe(
+      this.http.post<VerfQuestionGrpHObj>(this.UrlConstantNew.GetQuestionGrpHById, {Id : this.VerfQuestionGrpHId}).subscribe(
         (response) => {
           this.verfQuestionGrpHObj = response;
           this.QuestionGroupForm.patchValue({
@@ -59,7 +58,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     this.verfQuestionGrpHObj.VerfQuestionGrpName = this.QuestionGroupForm.value.VerfQuestionGrpName;
     this.verfQuestionGrpHObj.IsActive = this.QuestionGroupForm.value.IsActive;
     if (this.mode == "edit") {
-      this.http.post(URLConstant.EditVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
@@ -67,7 +66,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionGrpHObj.VerfQuestionGrpHId = 0;
-      this.http.post(URLConstant.AddVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -8,13 +7,13 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { VerfQuestionGrpDObj } from 'app/shared/model/verf-question-grp-d-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-group-member-add',
@@ -30,7 +29,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_MBR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
     })
@@ -48,7 +47,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   }
 
   GetListVerfQuestionGrpDByVerfQuestionGrpHId() {
-    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, { Id: this.VerfQuestionGrpHId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVerfQuestionGrpDByGrpHId, { Id: this.VerfQuestionGrpHId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
 
@@ -84,7 +83,7 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
     this.verfQuestionGrpDObj.VerfQuestionGrpDId = 0;
     this.verfQuestionGrpDObj.ListVerfQuestionAnswerId = this.listSelectedId;
 
-    this.http.post(URLConstant.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddListVerfQuestionGrpD, this.verfQuestionGrpDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });

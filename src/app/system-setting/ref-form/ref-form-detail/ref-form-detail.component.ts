@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -7,7 +7,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { RefFormObj } from 'app/shared/model/ref-form-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ParameterObj } from 'app/shared/model/parameter-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -15,6 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -41,7 +41,7 @@ export class RefFormDetailComponent implements OnInit {
     }
   }
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['RefFormId'] != null) this.RefFormId = params['RefFormId'];
       if (params['mode'] != null) this.mode = params['mode'];
@@ -67,11 +67,11 @@ export class RefFormDetailComponent implements OnInit {
   });
   async ngOnInit() { 
     this.checkIsAutoFormNoFromSetting("FR");
-    this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
+    this.ddlTemplateIcon.apiUrl = this.UrlConstantNew.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
     this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
 
-    await this.http.post(URLConstant.GetListRefModuleKeyValue, {}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListRefModuleKeyValue, {}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemModuleType = response[CommonConstant.ReturnObj];
@@ -85,7 +85,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeFormClass }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeFormClass }).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemClassType = response[CommonConstant.ReturnObj];
@@ -100,7 +100,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
     if (this.mode == "edit") {
-      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, { Id: this.RefFormId }).subscribe(
+      this.http.post<RefFormObj>(this.UrlConstantNew.GetRefFormDataByRefFormId, { Id: this.RefFormId }).subscribe(
         (response) => {
           this.refFormObj = response;
           this.refFormObj.RefFormId = this.RefFormId;
@@ -284,14 +284,14 @@ export class RefFormDetailComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.refFormObj.RowVersion = this.RefForm.controls.RowVersion.value;
-      this.http.post(URLConstant.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
 
         });
     } else {
-      this.http.post(URLConstant.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
@@ -307,7 +307,7 @@ export class RefFormDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

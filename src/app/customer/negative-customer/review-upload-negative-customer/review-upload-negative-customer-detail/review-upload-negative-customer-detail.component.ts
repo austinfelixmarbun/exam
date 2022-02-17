@@ -5,7 +5,6 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -16,6 +15,7 @@ import { CurrentUserContext } from 'app/shared/model/current-user-context.model'
 import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/upload-review-custom-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
@@ -30,7 +30,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
   
   readonly CancelLink: string = NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
         this.uploadNo = params["UploadNo"];
@@ -58,7 +58,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
   
   cancel() {
-    let CancelUrl = environment.isCore? URLConstant.CancelUploadV2 : URLConstant.CancelUpload;
+    let CancelUrl = environment.isCore? this.UrlConstantNew.CancelUploadV2 : this.UrlConstantNew.CancelUpload;
     var wfObj = new WorkflowApiObj();
     wfObj.TransactionNo = this.uploadNo;
     wfObj.ListValue["Status"] = "RJC";
@@ -75,7 +75,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
 
   uploadReview(status: string) {
-      let urlPost = environment.isCore ? URLConstant.UploadReviewV2 : URLConstant.UploadReview;
+      let urlPost = environment.isCore ? this.UrlConstantNew.UploadReviewV2 : this.UrlConstantNew.UploadReview;
 
       var uploadObj = new UploadReviewCustomObj();
       uploadObj.MrUploadStatusCode = status;

@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Injectable()
 export class ErrorDialogService {
-    constructor(public dialog: MatDialog,private http:HttpClient, private cookieService: CookieService) { }
+    constructor(public dialog: MatDialog,private http:HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
     openDialog(data): void {
         //Ini Logout jadi panggil Service untuk Call Logoutnya
         if(data.status=="001" && AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_NAME) != undefined)
         {   
-            this.http.post(AdInsConstant.Logout,"");
+            this.http.post(this.UrlConstantNew.Logout,"");
         }
         const dialogRef = this.dialog.open(ErrorDialogComponent, {
             width: '300px',

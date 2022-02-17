@@ -8,14 +8,10 @@ import { SearchComponent } from 'app/shared/search/search.component';
 import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
-import { UserTitleRoleObj } from 'app/shared/model/user-title-role-obj';
-import { EmpPositionObj } from 'app/shared/model/emp-position-obj.model';
-import { NgForm, FormBuilder } from '@angular/forms';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { FormBuilder } from '@angular/forms';
 import { UploadService } from 'app/shared/upload/upload.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-upload-setting-edit',
@@ -59,11 +55,11 @@ export class UploadSettingEditComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.UPLOAD_SETTING_PAGING;
   constructor(private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
-    private uploadService: UploadService) { }
+    private uploadService: UploadService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.tempRefRole = new Array();
@@ -106,7 +102,7 @@ export class UploadSettingEditComponent implements OnInit {
       this.inputLookupObj.pagingJson = "./assets/lookup/lookupRole.json";
       this.inputLookupObj.genericJson = "./assets/lookup/lookupRole.json";
 
-      this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
+      this.apiUrl = this.UrlConstantNew.GetRefRolePaging;
       this.initiateForm();
     });
   }
@@ -149,8 +145,8 @@ export class UploadSettingEditComponent implements OnInit {
     const assignRoleToUpload = { uploadTypeId: this.uploadTypeId, listRoleId: this.listRefRoleId }
     this.spinner.show();
 
-    this.apiUrl = this.foundationUrl + URLConstant.AssignRoleToUploadSetting;
-    this.httpClient.post(this.apiUrl, assignRoleToUpload, AdInsConstant.SpinnerOptions).subscribe(
+    this.apiUrl = this.UrlConstantNew.AssignRoleToUploadSetting;
+    this.http.post(this.apiUrl, assignRoleToUpload, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
 
         this.service.typeSave('Assign Role to Upload Setting Success');

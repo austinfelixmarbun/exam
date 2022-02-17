@@ -13,7 +13,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
-import { URLConstant } from "app/shared/constant/URLConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
@@ -51,10 +51,11 @@ export class RoleUserComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private location: Location,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["refRoleId"] != null) {
@@ -70,13 +71,13 @@ export class RoleUserComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.apiQryPaging = URLConstant.GetListUserEmployee;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetListUserEmployee;
     
     this.initiateForm();
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + URLConstant.GetListUserEmployee;
+    this.apiUrl = this.UrlConstantNew.GetListUserEmployee;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'Numeric'
@@ -125,12 +126,11 @@ export class RoleUserComponent implements OnInit {
   initiateForm() {
     this.spinner.show();
     /// GET INFO USER AND EMPLOYEE
-    var urlGetRefRole: any =
-    this.foundationUrl + URLConstant.GetRefRoleByRefRoleId;
+    var urlGetRefRole: any = this.UrlConstantNew.GetRefRoleByRefRoleId;
 
     this.refRoleObj = new RefRoleObj();
     this.refRoleObj.RefRoleId = this.refRoleId;
-    this.httpClient.post(urlGetRefRole, {Id : this.refRoleId}).subscribe(
+    this.http.post(urlGetRefRole, {Id : this.refRoleId}).subscribe(
       response => {
         this.refRoleObj = response["returnObject"];
         this.spinner.hide();
@@ -157,11 +157,11 @@ export class RoleUserComponent implements OnInit {
   }
 
   Save(RoleUserForm: NgForm): void {
-    var urlAssignRole = this.foundationUrl + URLConstant.AssignRoleToUsers;
+    var urlAssignRole = this.foundationUrl + this.UrlConstantNew.AssignRoleToUsers;
     this.refRoleObj.RefRoleId = this.refRoleId;
     // this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
     // this.refRoleObj.listDelEmpPositionId = this.listDeletedId;
-    this.httpClient.post(urlAssignRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(urlAssignRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.typeSave(response['message']);
         this.location.back();

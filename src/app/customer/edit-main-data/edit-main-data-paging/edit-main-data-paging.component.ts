@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-edit-main-data-paging',
@@ -12,11 +11,11 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 export class EditMainDataPagingComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor() { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/editMainDataCustomer.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/editMainDataCustomer.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetAccessory;
     this.inputPagingObj.addCritInput = [];
     var critObj = new CriteriaObj();
     critObj.propName = "C.IS_CUSTOMER";

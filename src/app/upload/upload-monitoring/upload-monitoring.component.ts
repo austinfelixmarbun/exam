@@ -8,7 +8,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-upload-monitoring',
@@ -37,12 +37,12 @@ export class UploadMonitoringComponent implements OnInit {
   orderByValue = true;
 
   foundationUrl: any = environment.FoundationR3Url;
-  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = './assets/search/searchUploadMonitoring.json';
-    this.inputObj.apiQryPaging = URLConstant.GetUploadMonitoringPaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetUploadMonitoringPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "uploadTypeId",
@@ -55,8 +55,8 @@ export class UploadMonitoringComponent implements OnInit {
     ];
 
     this.pageNow = 1;
-    this.apiUrl = this.foundationUrl + URLConstant.GetUploadMonitoringPaging;
-    this.deleteUrl = URLConstant.DeleteRefEmpAndEmpBankAcc;
+    this.apiUrl = this.UrlConstantNew.GetUploadMonitoringPaging;
+    this.deleteUrl = this.UrlConstantNew.DeleteRefEmpAndEmpBankAcc;
     this.initiateForm()
   }
   initiateForm() {

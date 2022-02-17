@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorBranchObj } from 'app/shared/model/vendor-branch-obj.model';
 import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -23,6 +22,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-coll-company-add-edit',
@@ -60,7 +60,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
   BpbkAgingDefaultVal: number;
   DaysAPDuePaymentAfterGoLiveDefaultVal: number;
 
-  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -185,14 +185,14 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       this.settingDefaultValue();
     }
 
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
         if (this.ListVendorAttrContent != null) {
           if (this.ListVendorAttrContent.length < 1) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
-            this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
+            this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
@@ -247,7 +247,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
           else {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
-            this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
+            this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -315,7 +315,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
                           RefMasterTypeCode: vendorAttr.AttrValue,
                           MasterCode: item["AttrContent"]
                         };
-                        await this.http.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                        await this.http.post(this.UrlConstantNew.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
                           (response: KeyValueObj) => {
                             tempLookup[vendorAttr["AttrCode"]].jsonSelect = { Descr: response.Value }
                           });
@@ -347,7 +347,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
   }
 
   async getData() {
-    await this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).toPromise().then(
       async (response) => {
         this.result = response;
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
@@ -401,7 +401,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory
     }
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -415,7 +415,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refAssignmentType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssgmntType
     }
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refAssignmentType).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refAssignmentType).toPromise().then(
       (response) => {
         this.itemAssignmentTypeTele = response[CommonConstant.ReturnObj];
         if (this.itemAssignmentTypeTele.length > 0) {
@@ -429,7 +429,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refMrSupplierClass = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierClass
     }
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMrSupplierClass).toPromise().then(
       (response) => {
         this.itemSupplierClass = response[CommonConstant.ReturnObj];
         if (this.itemSupplierClass.length > 0) {
@@ -443,7 +443,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refMRSupplierUpCalcMethod = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSupplierUpCalcMethod,
     }
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMRSupplierUpCalcMethod).toPromise().then(
       (response) => {
         this.itemTypeUpCalcMethod = response[CommonConstant.ReturnObj];
         if (this.itemTypeUpCalcMethod.length > 0) {
@@ -457,7 +457,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).toPromise().then(
       async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
@@ -477,7 +477,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+          await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -499,7 +499,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -565,7 +565,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -710,7 +710,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       this.vendorBranchObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
       this.vendorBranchObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-      this.http.post<GenericObj>(URLConstant.EditVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<GenericObj>(this.UrlConstantNew.EditVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -718,7 +718,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
     }
     else {
 
-      this.http.post<GenericObj>(URLConstant.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<GenericObj>(this.UrlConstantNew.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -746,7 +746,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 
@@ -811,7 +811,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
   settingDefaultValue() {
     var generalSettingObj: GenericObj = new GenericObj();
     generalSettingObj.Codes = ["DEFAULT_BPKB_AGING", "DEFAULT_APDUEAFTGLV"];
-    this.http.post(URLConstant.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListGeneralSettingByListGsCode, generalSettingObj).subscribe(
       (response) => {
         var tempResponse = response['ResGetListGeneralSettingObj'];
         let GSBpkpAgingDefaultValue = tempResponse.find(x => x.GsCode == "DEFAULT_BPKB_AGING");

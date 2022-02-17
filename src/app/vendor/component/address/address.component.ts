@@ -5,10 +5,10 @@ import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { WizardComponent } from 'angular-archwizard';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-address',
@@ -28,7 +28,7 @@ export class AddressComponent implements OnInit {
   getUrl: string;
   ReqGetVendor : GenericObj = new GenericObj();
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent, private UrlConstantNew: UrlConstantNew) {
   }
 
   AddressForm = this.fb.group({
@@ -53,17 +53,17 @@ export class AddressComponent implements OnInit {
     this.AddressForm.controls.Province.disable();
 
     if (this.objInput.Type == "Vendor") {
-      this.getUrl = URLConstant.GetVendorAddrByVendorId;
+      this.getUrl = this.UrlConstantNew.GetVendorAddrByVendorId;
       this.ReqVendorAddrObj.Id = this.objInput.VendorId;
       this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
     } else if (this.objInput.Type == "VendorEmployee") {
-      this.getUrl = URLConstant.GetVendorAddrByVendorEmpId;
+      this.getUrl = this.UrlConstantNew.GetVendorAddrByVendorEmpId;
       this.ReqVendorAddrObj.Id = this.objInput.VendorEmpId;
       this.ReqVendorAddrObj.Code = CommonConstant.AddrTypeLegal;
     }
 
     
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorClass = this.result.MrVendorClass;
@@ -121,7 +121,7 @@ export class AddressComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.vendorAddrObj.RowVersion = this.AddressForm.controls.RowVersion.value;
-      this.http.post(URLConstant.EditVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.wizard.goToNextStep();
@@ -129,7 +129,7 @@ export class AddressComponent implements OnInit {
         });
     }
     else {
-      this.http.post<VendorAddrObj>(URLConstant.AddVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<VendorAddrObj>(this.UrlConstantNew.AddVendorAddr, this.vendorAddrObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.vendorAddrObj = response;
           this.mode = "edit";

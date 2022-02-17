@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ref-form-role-paging',
@@ -19,7 +19,7 @@ export class RefFormRolePagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefFormId = params["RefFormId"];
     })
@@ -31,7 +31,7 @@ export class RefFormRolePagingComponent implements OnInit {
     this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchRefFormRole.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefFormRole.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAuthForm;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAuthForm;
 
     var critInput = new CriteriaObj();
     critInput.DataType = "numeric";

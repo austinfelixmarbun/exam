@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 import { ReqCoyObj } from 'app/shared/model/new-cust/req-coy-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -17,12 +17,12 @@ export class CustDupCheckCompanyComponent implements OnInit {
   
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.InitCustMainDataMode();
     this.initRefMaster(this.RefMasterTypeCodeCompanyType);
-    this.initRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    this.initRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
   }
 
   CustNameLabel: string = "Customer";
@@ -42,7 +42,7 @@ export class CustDupCheckCompanyComponent implements OnInit {
   }
 
   DictRefMaster: { [id: string]: { [code: string]: string } } = {};
-  initRefMaster(refMasterTypeCode: string, mappingCode: string = null, urlApi: string = URLConstant.GetListActiveRefMaster) {
+  initRefMaster(refMasterTypeCode: string, mappingCode: string = null, urlApi: string = this.UrlConstantNew.GetListActiveRefMaster) {
     let refMasterObjMrIdTypeCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
       MappingCode: mappingCode

@@ -7,9 +7,9 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: "app-org-add-edit",
@@ -36,7 +36,8 @@ export class OrgAddEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: NGXToastrService,
-    private http: HttpClient
+    private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       this.param = params["refOrgId"];
@@ -63,9 +64,9 @@ export class OrgAddEditComponent implements OnInit {
     ) {
       this.service.typeErrorCustom(ExceptionConstant.MUST_HAVE_PARENT);
     } else {
-      this.GetUrl = this.foundationUrl + URLConstant.GetRefOrg;
+      this.GetUrl = this.UrlConstantNew.GetRefOrg;
       if (this.mode != "edit") {
-        this.apiUrl = this.foundationUrl + URLConstant.AddRefOrg;
+        this.apiUrl = this.UrlConstantNew.AddRefOrg;
 
         //GENERATE OBJECT
         this.orgObj = new OrganizationObj();
@@ -96,8 +97,7 @@ export class OrgAddEditComponent implements OnInit {
 
 
       } else {
-        this.apiUrl =
-          this.foundationUrl + URLConstant.EditRefOrg;
+        this.apiUrl = this.UrlConstantNew.EditRefOrg;
 
         //GENERATE OBJECT
         this.orgObj.oldParentId = this.orgObj.parentId;
@@ -132,7 +132,7 @@ export class OrgAddEditComponent implements OnInit {
   }
 
   GetListParents() {
-    this.apiUrl = this.foundationUrl + URLConstant.GetListAllRefOrg;
+    this.apiUrl = this.UrlConstantNew.GetListAllRefOrg;
     var organizationObj = new OrganizationObj();
     this.http.post(this.apiUrl, organizationObj).subscribe(
       response => {
@@ -141,7 +141,7 @@ export class OrgAddEditComponent implements OnInit {
   }
 
   FillFormEdit() {
-    this.apiUrl = this.foundationUrl + URLConstant.GetRefOrg;
+    this.apiUrl = this.UrlConstantNew.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.param;
 

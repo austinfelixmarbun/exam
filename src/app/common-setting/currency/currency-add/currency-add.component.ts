@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CurrObj } from 'app/shared/model/curr-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-currency-add',
@@ -37,7 +37,7 @@ export class CurrencyAddComponent implements OnInit {
   isInvalid: boolean = false;
 
   readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -53,7 +53,7 @@ export class CurrencyAddComponent implements OnInit {
       this.RefCurrForm.controls["CurrCode"].disable();
       this.currObj = new CurrObj();
       this.currObj.RefCurrId = this.refCurrId;
-      this.http.post(URLConstant.GetRefCurrById, { Id: this.refCurrId }).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefCurrById, { Id: this.refCurrId }).subscribe(
         response => {
           this.resultData = response;
           this.RefCurrForm.patchValue({
@@ -101,7 +101,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
-      this.http.post(URLConstant.AddRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
@@ -114,7 +114,7 @@ export class CurrencyAddComponent implements OnInit {
       this.currObj.RegRptCode = this.RefCurrForm.controls["RegRptCode"].value;
       this.currObj.IsActive = this.RefCurrForm.controls["IsActive"].value;
       this.currObj.RoundedAmt = this.RefCurrForm.controls["RoundedAmt"].value;
-      this.http.post(URLConstant.EditRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});

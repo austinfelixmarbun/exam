@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-survey-order-view',
@@ -18,7 +18,7 @@ export class SurveyOrderViewComponent implements OnInit {
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   readonly ViewCust: string = NavigationConstant.VIEW_CUST_PERSONAL_DETAIL;
   
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
@@ -29,7 +29,7 @@ export class SurveyOrderViewComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewSurveyOrder.json";
     
-    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForView, {Id : this.SrvyOrderId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListSrvyTaskBySrvyOrderIdForView, {Id : this.SrvyOrderId}).subscribe(
       response => {
         console.log(response);
         this.TaskList = response[CommonConstant.ReturnObj];

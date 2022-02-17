@@ -12,10 +12,10 @@ import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
 import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-employee-businessunit-add',
@@ -47,7 +47,8 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.EMP_BZ_UNIT_PAGING;
   constructor(private route: ActivatedRoute,
     private router: Router, private http: HttpClient,
-    private fb: FormBuilder, private toastr: NGXToastrService) {
+    private fb: FormBuilder, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
       this.RefUserRoleId = params["RefUserRoleId"];
@@ -63,7 +64,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.title = "Business Unit-Edit";
       this.userRole.RefUserRoleId = this.RefUserRoleId;
 
-      this.http.post(URLConstant.GetRefUserRoleById, {Id : this.RefUserRoleId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefUserRoleById, {Id : this.RefUserRoleId}).subscribe(
         (response) => {
           this.result = response;
           this.userRole = this.result;
@@ -74,7 +75,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           BizUnit.RefBizUnitId = this.result["RefBizUnitId"];
 
-          this.http.post(URLConstant.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
             (response) => {
               this.inputPagingObjBusinessUnit.nameSelect = response["BizUnitName"];
             }
@@ -83,7 +84,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           var JobTitle = new RefJobTitleObj();
           JobTitle.RefJobTitleId = this.result["RefJobTitleId"];
 
-          this.http.post(URLConstant.GetRefJobTitleById, {Id: this.result["RefJobTitleId"]}).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefJobTitleById, {Id: this.result["RefJobTitleId"]}).subscribe(
             (response) => {
               this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
             }
@@ -95,7 +96,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
             this.inputPagingObjSupervisor.nameSelect = "";
           }
           else {
-            this.http.post(URLConstant.GetEmpNameByRefUserId, {Id : Supervisor.RefUserId}).subscribe(
+            this.http.post(this.UrlConstantNew.GetEmpNameByRefUserId, {Id : Supervisor.RefUserId}).subscribe(
               (response) => {
                 this.inputPagingObjSupervisor.nameSelect = response["EmpName"];
               }
@@ -103,7 +104,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
           }
           var Office = new OfficeObj();
           Office.RefOfficeId = this.result["RefOfficeId"];
-          this.http.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
             (response) => {
               this.inputPagingObjOffice.nameSelect = response["OfficeName"];
             }
@@ -111,7 +112,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
 
           var Role = new RefRoleObj();
           Role.RefRoleId = this.result["RefRoleId"];
-          this.http.post(URLConstant.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
             (response) => {
               this.inputPagingObjRole.nameSelect = response["RoleName"];
             }
@@ -186,7 +187,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.userRole.RowVersion = this.result["RowVersion"];
 
-      this.http.post(URLConstant.EditRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
@@ -197,7 +198,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.IsActive = this.EmployeeBusinessUnitForm.controls.IsActive.value;
       this.userRole.RowVersion = "";
       this.userRole.RefUserId = this.RefUserId;
-      this.http.post(URLConstant.AddRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe((response) => {
+      this.http.post(this.UrlConstantNew.AddRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe((response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
       });

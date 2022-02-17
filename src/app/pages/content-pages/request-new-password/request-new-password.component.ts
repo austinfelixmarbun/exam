@@ -4,11 +4,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { DatePipe } from '@angular/common';
-import { environment } from 'environments/environment';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 
@@ -25,7 +23,7 @@ export class RequestNewPasswordComponent implements OnInit {
   version: string;
   isRequested: boolean = false;
   censoredEmail: string = "";
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router, private UrlConstantNew: UrlConstantNew) {
     this.version = localStorage.getItem(CommonConstant.VERSION);
   }
 
@@ -39,7 +37,7 @@ export class RequestNewPasswordComponent implements OnInit {
     {
       UserName: this.ReqPassForm.controls["Username"].value
     };
-    this.http.post(URLConstant.RequestNewPassword, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.RequestNewPassword, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.censoredEmail = response["CensoredEmail"];
         this.isRequested = true;

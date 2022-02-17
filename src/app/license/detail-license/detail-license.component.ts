@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-detail-license',
@@ -18,7 +18,7 @@ export class DetailLicenseComponent implements OnInit {
   modules : any;
   LicenseData : any;
   readonly CancelLink: string = NavigationConstant.LICENSE_PAGING;
-  constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private httpClient: HttpClient) {
+  constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.systemName = params["systemName"];
       this.licenseType = params["licenseType"];
@@ -30,7 +30,7 @@ export class DetailLicenseComponent implements OnInit {
   ngOnInit() {
     var LicenseObj = { SystemName : this.systemName, LicenseType : this.licenseType, Module : ""};
 
-    this.httpClient.post(URLConstant.RetrieveLicenseDetail, LicenseObj).subscribe(
+    this.http.post(this.UrlConstantNew.RetrieveLicenseDetail, LicenseObj).subscribe(
       (response) => {
         this.LicenseData = response;
         console.log(this.LicenseData);

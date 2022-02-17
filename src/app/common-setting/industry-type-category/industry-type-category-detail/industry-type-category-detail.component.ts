@@ -5,10 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { IndustryTypeCategoryObj } from 'app/shared/model/industry-type-category-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-industry-type-category-detail',
@@ -29,7 +28,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
     RegRptCode: ['',[Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.pageType = params["mode"];
@@ -53,7 +52,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
       this.RefIndustryTypeCategoryForm.controls["RefIndustryTypeCategoryCode"].disable();
       this.industryTypeCategoryObj = new IndustryTypeCategoryObj();
       this.industryTypeCategoryObj.RefIndustryTypeCategoryId = this.RefIndustryTypeCategoryId ;
-      this.http.post(URLConstant.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).subscribe(
         response => {
           this.resultData = response;
           console.log(response)
@@ -90,7 +89,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
       this.industryTypeCategoryObj.IsActive = this.RefIndustryTypeCategoryForm.controls["IsActive"].value;
     }
 
-    this.http.post(URLConstant.AddEditIndustryTypeCategory, this.industryTypeCategoryObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddEditIndustryTypeCategory, this.industryTypeCategoryObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,["/CommonSetting/IndustryTypeCategory/Paging"],{});         
@@ -112,7 +111,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

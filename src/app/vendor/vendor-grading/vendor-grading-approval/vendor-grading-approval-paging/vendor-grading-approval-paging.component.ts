@@ -1,16 +1,12 @@
-import { UcpagingModule } from '@adins/ucpaging';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { ApprovalObj } from 'app/shared/model/approval/approval-obj.model';
-import { ApprovalReqObj, ApvClaimTaskObj } from 'app/shared/model/approval/approval-req-obj.model';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { ApprovalReqObj } from 'app/shared/model/approval/approval-req-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { IntegrationObj } from 'app/shared/model/library/integration-obj.model';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
@@ -33,7 +29,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
   arrCrit: any;
   userContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));;
 
-  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService, private apvTaskService: ApprovalTaskService) { }
+  constructor(private toastr: NGXToastrService, private httpClient: HttpClient, private router: Router, private cookieService: CookieService, private apvTaskService: ApprovalTaskService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/dealer-grading/searchDealerGradingApproval.json";
@@ -49,7 +45,7 @@ export class VendorGradingApprovalPagingComponent implements OnInit {
       this.apvReqObj.RoleCode = this.userContext.RoleCode;
       //agar bisa lintas cabang
       //this.apvReqObj.OfficeCode = this.userContext.OfficeCode;
-      this.integrationObj.baseUrl = URLConstant.GetListOSApvTaskByCategoryCodeAndCurrentUserIdOrMainUserIdAndRoleCode;
+      this.integrationObj.baseUrl = this.UrlConstantNew.GetListOSApvTaskByCategoryCodeAndCurrentUserIdOrMainUserIdAndRoleCode;
       this.integrationObj.requestObj = this.apvReqObj;
       this.integrationObj.leftColumnToJoin = "VendorGradingHistNo";
       this.integrationObj.rightColumnToJoin = "TransactionNo";

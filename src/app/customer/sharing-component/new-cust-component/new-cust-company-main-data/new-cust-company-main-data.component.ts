@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
@@ -28,6 +26,7 @@ import { NewCustSetData } from '../NewCustSetData.Service';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-new-cust-company-main-data',
@@ -58,7 +57,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute, private newCustService: NewCustSetData) { 
+    private route: ActivatedRoute, private newCustService: NewCustSetData, 
+    private UrlConstantNew: UrlConstantNew) { 
       this.route.queryParams.subscribe(params => {
         if (params["From"] != null) {        
           this.pageFrom = params["From"];
@@ -87,7 +87,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     await this.InitCustAddr();
     this.BindLookupSupplier();
     this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
@@ -158,7 +158,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       SupplId: e.VendorId
     });
 
-    this.http.post(URLConstant.GetVendorByVendorCode, { Code: e.VendorCode }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorCode, { Code: e.VendorCode }).subscribe(
       (response: VendorObj) => {
         this.CustomerForm.patchValue({
           CustName: e.VendorName,
@@ -168,7 +168,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         });
       });
 
-    this.http.post(URLConstant.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
       (response: VendorAddrObj) => {
         this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
@@ -239,7 +239,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.ParentCustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddrToCopy = response;
       }
@@ -266,7 +266,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   async GetCustData(custId: number = this.CustId) {
-    await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
         this.custObj = response;
         this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
@@ -289,7 +289,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddr = response;
         this.inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
@@ -314,7 +314,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   tempCustCompanyObj: CustCompanyObj = new CustCompanyObj();
   GetCustCompanyData(custId: number = this.CustId) {
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: custId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: custId }).subscribe(
       (response: CustCompanyObj) => {
         this.tempCustCompanyObj = response;
         this.CustomerForm.patchValue({

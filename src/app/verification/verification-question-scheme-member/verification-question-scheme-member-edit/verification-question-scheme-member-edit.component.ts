@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfSchemeDObj } from 'app/shared/model/verf-scheme-d-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
@@ -32,7 +31,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   VerfQuestionGrpName: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfSchemeHId = params["VerfSchemeHId"];
       this.VerfSchemeDId = params["VerfSchemeDId"];
@@ -54,7 +53,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.http.post(URLConstant.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, {Id : this.VerfSchemeDId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetQuestionGrpHAndRowVersionVerfSchemeDForUpdateById, {Id : this.VerfSchemeDId}).subscribe(
       (response) => {
         this.verfQuestionGroup = response[CommonConstant.ReturnObj];
         this.QuestionGroupForm.patchValue({
@@ -75,7 +74,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.verfSchemeDObj = this.QuestionGroupForm.value;
     this.verfSchemeDObj.VerfSchemeHId = this.VerfSchemeHId;
     this.verfSchemeDObj.VerfSchemeDId = this.VerfSchemeDId;
-    this.http.post(URLConstant.EditVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });

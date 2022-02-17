@@ -9,9 +9,9 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-zipcode-member-add',
@@ -46,7 +46,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   data = [];
 
   readonly CancelLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -57,7 +57,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputObj.apiQryPaging = URLConstant.GetOfficeZipcodeMemberAddPaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
@@ -69,7 +69,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
 
   initiateForm() {
     var officeId = { refOfficeId: this.refOfficeId };
-    this.http.post(URLConstant.GetRefOfficeObj, officeId).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefOfficeObj, officeId).subscribe(
       (response) => {
         this.officeCode = response['returnObject']['officeCode'];
         this.officeName = response['returnObject']['officeName'];
@@ -103,7 +103,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
       key: this.orderByKey,
       value: this.orderByValue
     }
-    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
   }
 
   searchPagination(event: number) {
@@ -115,7 +115,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       }
     }
-    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
+    this.searchComponent.search(this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order);
   }
 
   Checked(refZipcodeId: any, isChecked: any): void {
@@ -148,7 +148,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
           value: this.orderByValue
         };
       }
-      this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
+      this.searchComponent.search(this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
 
       this.listSelectedId = [];
     } else {
@@ -178,7 +178,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
         value: this.orderByValue
       };
     }
-    this.searchComponent.search(URLConstant.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
+    this.searchComponent.search(this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging, this.pageNow, this.pageSize, order, this.arrAddCrit);
   }
   
   saveZipMember() {
@@ -193,7 +193,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
     }
     var zipCodeMemberList = { listOfOfficeZipcodeMember: listObj };
 
-    this.http.post(URLConstant.AddOfficeZipcodeMember, zipCodeMemberList, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddOfficeZipcodeMember, zipCodeMemberList, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_OFFICE_ZIPCODE_MBR_PAGING],{ "refOfficeId": this.refOfficeId });

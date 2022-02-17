@@ -2,10 +2,6 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -13,6 +9,7 @@ import { CookieService } from 'ngx-cookie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-upload-journal-detail',
   templateUrl: './upload-journal-detail.component.html'
@@ -74,7 +71,8 @@ export class UploadJournalDetailComponent implements OnInit {
     private router: Router,
     private cookieService: CookieService,
     private route: ActivatedRoute,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
 
@@ -91,7 +89,7 @@ export class UploadJournalDetailComponent implements OnInit {
 
     this.userAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
-    this.http.post(URLConstant.GetJrSourceFileByJrSourceFileId, { Id: this.JrSourceFileId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetJrSourceFileByJrSourceFileId, { Id: this.JrSourceFileId }).subscribe(
       (response: any) => {
         this.businessDt = formatDate(response['StartDate'], 'yyyy-MM-dd', 'en-US')
       }
@@ -111,7 +109,7 @@ export class UploadJournalDetailComponent implements OnInit {
       environmentUrl: environment.FoundationR3Url,
       apiQryPaging: "/Generic/GetPagingObjectBySQL",
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
-      url: URLConstant.UploadJournalFile,
+      url: this.UrlConstantNew.UploadJournalFile,
       isDownloadTmplt: false,
       ddlEnvironments: []
     }
@@ -445,7 +443,7 @@ export class UploadJournalDetailComponent implements OnInit {
   }
 
   // setResult() {
-  //   this.http.post(URLConstant.CheckAccount, null).subscribe(
+  //   this.http.post(this.UrlConstantNew.CheckAccount, null).subscribe(
   //     (response: any) => {
   //       this.CheckAccount = response["ReturnObject"];
   //       this.totalAccount = Number(this.CheckAccount["TotalAccount"]);
@@ -453,7 +451,7 @@ export class UploadJournalDetailComponent implements OnInit {
   //     }
   //   );
 
-  //   this.http.post(URLConstant.GetPaymentArthaJasaReconcile, null).subscribe(
+  //   this.http.post(this.UrlConstantNew.GetPaymentArthaJasaReconcile, null).subscribe(
   //     (response: any) => {
   //       this.ListSuccessResultInfo = response["ReturnObject"];
   //     }

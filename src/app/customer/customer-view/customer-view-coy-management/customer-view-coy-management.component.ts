@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-coy-management',
@@ -24,9 +23,10 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
-    this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = URLConstant.GetCustCompanyMgmntShrholderForCustViewByCustId
+    this.GetCustCompanyMgmntShrholderForCustViewByCustIdUrl = this.UrlConstantNew.GetCustCompanyMgmntShrholderForCustViewByCustId
   }
 
   ngOnInit() {

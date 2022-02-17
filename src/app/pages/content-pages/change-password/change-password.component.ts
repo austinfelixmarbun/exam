@@ -3,14 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-change-password',
@@ -31,14 +30,14 @@ export class ChangePasswordComponent implements OnInit {
   customPattern = new Array<CustomPatternObj>();
   showPass: Array<boolean> = Array<boolean>(3);
 
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.username = params['Username'];
     });
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
       (response: { GsValue }) => {
         let patternObj: CustomPatternObj = new CustomPatternObj();
         patternObj.pattern = response.GsValue;
@@ -69,7 +68,7 @@ export class ChangePasswordComponent implements OnInit {
         this.username = context[CommonConstant.USER_NAME];
       }
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
-      this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.ChangePasswordRefUserByUsername, requestObj).subscribe(
         (response) => {
           if (response["Message"] == "Success") {
             this.toastr.successMessage(response["message"]);

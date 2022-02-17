@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -60,7 +60,8 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.IsAddrDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
@@ -74,10 +75,10 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   ngOnInit() {
     let tempReqJob: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
     let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
-    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJob);
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
+    let getJobPosition = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqJob);
+    let getGender = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqGender);
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetContactInfoForUpdateMasterCustCompanyContactInfo, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetContactInfoForUpdateMasterCustCompanyContactInfo, this.ReqCustDataTrxIdObj);
     forkJoin([getDetail, getJobPosition, getGender]).toPromise().then(
       (response) => {
         this.AppContactInfo = response[0]["AppContactInfo"];
@@ -220,7 +221,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyContactInfo, this.CustomerContactInfoForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

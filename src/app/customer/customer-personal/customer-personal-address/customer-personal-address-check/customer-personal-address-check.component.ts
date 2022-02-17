@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-personal-address-check',
@@ -44,7 +44,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
   MotherMaidenName: string;
 
   From : string;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -60,13 +60,13 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
     this.GetListToBeEdit();
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, {Id : this.IdCust}).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, {Id : this.IdCust}).subscribe(
       (response) => {
           this.custObj = response;
       });
 
       this.custAddrObj.Id = this.IdCust;
-      this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetListCustAddr, this.custAddrObj).subscribe(
         (response : ResGetListCustAddrObj) => {
             this.listCustAddr = response[CommonConstant.ReturnObj];
             let idxEmergency = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeEmergency);
@@ -76,7 +76,7 @@ export class CustomerPersonalAddressCheckComponent implements OnInit {
 
   listAddressType: Array<string> = new Array();
   GetListToBeEdit() {
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GsValue) {
           let listAddrToFilter: Array<string> = result.GsValue.split(';');

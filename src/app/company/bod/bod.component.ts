@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -10,8 +9,8 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-bod',
@@ -38,7 +37,7 @@ export class BODComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.COY;
   readonly AddLink: string = NavigationConstant.COY_BOD_ADD;
   readonly EditLink: string = NavigationConstant.COY_BOD_ADD;
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.refCoyId = params["refCoyId"];
     })
@@ -47,11 +46,11 @@ export class BODComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchBod.json";
-    this.inputObj.apiQryPaging = URLConstant.GetCoyBodPaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetCoyBodPaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + URLConstant.GetCoyBodPaging;
+    this.apiUrl = this.UrlConstantNew.GetCoyBodPaging;
   }
 
   getResult(event) {
@@ -110,7 +109,7 @@ export class BODComponent implements OnInit {
 
   delete(coyBodId: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.editUrl = this.foundationUrl + URLConstant.DeleteCoyBod;
+      this.editUrl = this.foundationUrl + this.UrlConstantNew.DeleteCoyBod;
       this.bodObj = new CoyBodObj();
       this.bodObj.coyBodId = coyBodId;
       this.http.post(this.editUrl, this.bodObj).subscribe(

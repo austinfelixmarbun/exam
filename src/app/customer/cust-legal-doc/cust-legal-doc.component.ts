@@ -7,11 +7,11 @@ import { CustCompanyLegalDocObj } from 'app/shared/model/cust-company-legal-doc-
 import { CustLegalDocDetailComponent } from './cust-legal-doc-detail/cust-legal-doc-detail.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -32,11 +32,12 @@ export class CustLegalDocComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -51,13 +52,13 @@ export class CustLegalDocComponent implements OnInit {
   ngOnInit() {
     
     var custObj = { CustId: this.IdCust };
-    this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust}).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: this.IdCust}).subscribe(
       (response: any) => {
 
         this.CustCompanyId = response['CustCompanyId'];
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
+        this.http.post(this.UrlConstantNew.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           }
@@ -69,7 +70,7 @@ export class CustLegalDocComponent implements OnInit {
 
   async checkGSLegalDoc(){
     this.ReqByCodeObj.Code = CommonConstant.GSCodeListLegalDocCantDuplicate;
-    await this.httpClient.post(URLConstant.GetGeneralSettingValueByCode, this.ReqByCodeObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, this.ReqByCodeObj).toPromise().then(
       (response) => {
         if (response["GsValue"] != undefined && response["GsValue"] != "") {
           this.ListLegalDocCantDuplicate = response["GsValue"].split('|')
@@ -88,7 +89,7 @@ export class CustLegalDocComponent implements OnInit {
         this.spinner.show();
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
+        this.http.post(this.UrlConstantNew.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           }
@@ -116,7 +117,7 @@ export class CustLegalDocComponent implements OnInit {
         this.spinner.show();
         var custCompanyLegalDoc = new CustCompanyLegalDocObj();
         custCompanyLegalDoc.CustCompanyId = this.CustCompanyId;
-        this.httpClient.post(URLConstant.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
+        this.http.post(this.UrlConstantNew.GetListViewCustCompanyLegalDocByCustCompanyId, {Id : this.CustCompanyId}).subscribe(
           (response: any) => {
             this.custLegalDocs = response.ListCustCompanyLegalDoc;
           }
@@ -137,7 +138,7 @@ export class CustLegalDocComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       let reqObj: GenericObj = new GenericObj();
       reqObj.Id = custCompanyLegalDocId
-      this.httpClient.post(URLConstant.DeleteCustCompanyLegalDoc, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.DeleteCustCompanyLegalDoc, reqObj, AdInsConstant.SpinnerOptions).subscribe(
         (response: any) => {
           this.custLegalDocs.splice(idx, 1);
           this.toastr.successMessage(response["message"]);

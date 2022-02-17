@@ -11,11 +11,11 @@ import { OrgJobTitleObj } from 'app/shared/model/org-job-title-obj.model';
 import { formatDate } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
     selector: 'app-employee-position',
@@ -72,17 +72,17 @@ export class EmployeePositionAddComponent implements OnInit {
     RefEmpPositionForm = this.fb.group({});
 
     readonly CancelLink: string = NavigationConstant.EMP_POS;
-    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-        this.getUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
-        this.addUrl = this.foundationUrl + URLConstant.AddEmpPosition;
-        this.refOfficeUrl = this.foundationUrl + URLConstant.GetAllRefOffice;
-        this.supervisorUrl = this.foundationUrl + URLConstant.GetEmpListByOfficeIdAndIsActive;
-        this.refMasterUrl = this.settingUrl + URLConstant.GetRefMasterListDesc;
-        this.bizUrl = this.foundationUrl + URLConstant.GetRefBizUnitByOffice;
-        this.orgJobTitleUrl = this.foundationUrl + URLConstant.GetOrgJobTitleByMdlStruc;
-        this.getEditUrl = this.foundationUrl + URLConstant.GetEmpByEmpPositionId;
-        this.editUrl = this.foundationUrl + URLConstant.EditEmpPosition;
-        this.getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
+    constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+        this.getUrl = this.UrlConstantNew.GetRefEmployeeById;
+        this.addUrl = this.UrlConstantNew.AddEmpPosition;
+        this.refOfficeUrl = this.UrlConstantNew.GetAllRefOffice;
+        this.supervisorUrl = this.UrlConstantNew.GetEmpListByOfficeIdAndIsActive;
+        this.refMasterUrl = this.UrlConstantNew.GetRefMasterListDesc;
+        this.bizUrl = this.UrlConstantNew.GetRefBizUnitByOffice;
+        this.orgJobTitleUrl = this.UrlConstantNew.GetOrgJobTitleByMdlStruc;
+        this.getEditUrl = this.UrlConstantNew.GetEmpByEmpPositionId;
+        this.editUrl = this.UrlConstantNew.EditEmpPosition;
+        this.getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
 
         this.route.queryParams.subscribe(params => {
             if (params['param'] != null) {

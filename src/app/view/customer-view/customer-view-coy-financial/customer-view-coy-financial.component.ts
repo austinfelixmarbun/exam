@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-coy-financial',
@@ -14,7 +14,7 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
   CustId: number;
   TitleSuffix:string = '';
   IsShowDetail:boolean = false;
-  GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
+  GetCBAForCustFinDataByCustIdUrl = this.UrlConstantNew.GetCBAForCustFinDataByCustId;
   ListCustCoyFinData: Array<object> = [];
   CustCoyFinData: object;
   responseCBAObj: any;
@@ -23,7 +23,8 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     
@@ -42,7 +43,7 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
       (response) => {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
         this.IsAttrExist = true;

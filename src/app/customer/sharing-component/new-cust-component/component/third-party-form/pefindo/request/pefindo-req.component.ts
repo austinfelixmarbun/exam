@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ReqPefindoSmartSearchObj } from 'app/shared/model/digitalization/req-pefindo-smart-search-obj.model';
 import { PefindoSmartSearchCoyObj } from 'app/shared/model/digitalization/pefindo-smart-search-coy-obj.model';
@@ -11,6 +10,7 @@ import { PefindoSmartSearchPersonalObj } from 'app/shared/model/digitalization/p
 import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -32,7 +32,8 @@ export class PefindoReqComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     public activeModal: NgbActiveModal,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class PefindoReqComponent implements OnInit {
   }
 
   initGrid(){
-    this.http.post(URLConstant.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).subscribe(
+    this.http.post(this.UrlConstantNew.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).subscribe(
       (response) => {
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal){
           this.PefindoSmartSearchPersonalObjs = response["ReturnObject"];
@@ -65,14 +66,14 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
     if(environment.isCore){
-      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     }else{
-      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
@@ -94,14 +95,14 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
 
     if(environment.isCore){
-      this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     }else{
-      this.http.post(URLConstant.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');

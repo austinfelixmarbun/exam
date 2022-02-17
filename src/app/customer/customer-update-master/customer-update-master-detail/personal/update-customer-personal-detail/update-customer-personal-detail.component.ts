@@ -6,14 +6,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UpdateCustPersonalDetailObj } from 'app/shared/model/update-master-cust/update-cust-personal-detail-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -73,7 +72,8 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.AppCustPersonalDetail = new UpdateCustPersonalDetailObj();
     this.MrMaritalStatCodeList = new Array<any>();
@@ -102,19 +102,19 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   ngOnInit() {
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetCustDataForUpdateMasterCustDetail, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetCustDataForUpdateMasterCustDetail, this.ReqCustDataTrxIdObj);
     let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
-    let getMaritalStat = this.http.post(URLConstant.GetListActiveRefMaster, tempReqMarStat);
+    let getMaritalStat = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqMarStat);
     
     let tempReqNationality: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality, MappingCode: null };
-    let getNationality = this.http.post(URLConstant.GetListActiveRefMaster, tempReqNationality);
+    let getNationality = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqNationality);
 
     let tempReqEducation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeEducation, MappingCode: null };
-    let getEducation = this.http.post(URLConstant.GetListActiveRefMaster, tempReqEducation);
+    let getEducation = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqEducation);
 
     let tempReqReligion: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeReligion, MappingCode: null };
-    let getReligion = this.http.post(URLConstant.GetListActiveRefMaster, tempReqReligion);
-    let getGeneralSettingNationality = this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
+    let getReligion = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqReligion);
+    let getGeneralSettingNationality = this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality });
     forkJoin([getDetail, getMaritalStat, getNationality, getEducation, getReligion, getGeneralSettingNationality]).pipe(
       map((response) => {
         var detailData = response[0];
@@ -151,9 +151,9 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
         return detailData;
       }),
       mergeMap((response) => {
-        let getMasterCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["MasterCustDetail"]["Country"] });
-        let getAppCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["AppCustDetail"]["Country"] });
-        let getDefaultCountry = this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: response["GsValueCountry"] });
+        let getMasterCountry = this.http.post(this.UrlConstantNew.GetRefCountryByCountryCode, { Code: response["MasterCustDetail"]["Country"] });
+        let getAppCountry = this.http.post(this.UrlConstantNew.GetRefCountryByCountryCode, { Code: response["AppCustDetail"]["Country"] });
+        let getDefaultCountry = this.http.post(this.UrlConstantNew.GetRefCountryByCountryCode, { Code: response["GsValueCountry"] });
         return forkJoin([getMasterCountry, getAppCountry, getDefaultCountry]);
       })
     ).toPromise().then(
@@ -278,7 +278,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
 
   SaveValue() {
     var formValue = this.CustomerDetailForm.getRawValue();
-    this.http.post(URLConstant.UpdateMasterCustomer, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustomer, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

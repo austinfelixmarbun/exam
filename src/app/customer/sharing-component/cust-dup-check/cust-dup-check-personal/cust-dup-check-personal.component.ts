@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -15,7 +15,7 @@ export class CustDupCheckPersonalComponent implements OnInit {
   @Input() CustObj: ReqPersonalObj;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   readonly RefMasterTypeCodeIdType: string = CommonConstant.RefMasterTypeCodeIdType;
   readonly RefMasterTypeCodeGender: string = CommonConstant.RefMasterTypeCodeGender;
@@ -53,7 +53,7 @@ export class CustDupCheckPersonalComponent implements OnInit {
       MappingCode: mappingCode
     };
     this.DictRefMaster[refMasterTypeCode] = {};
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response: GenericKeyValueListObj) => {
         for (let index = 0; index < response.ReturnObject.length; index++) {
           const element = response.ReturnObject[index];

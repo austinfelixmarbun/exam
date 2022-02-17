@@ -12,7 +12,6 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/request-cust-per
 import { formatDate } from '@angular/common';
 import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -22,6 +21,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -122,7 +122,8 @@ export class JobDataEmployeeComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService,
-    private addressService: AddressService) {
+    private addressService: AddressService, 
+    private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -227,7 +228,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.jobPosition = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobPosition.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobPosition;
-    this.http.post(URLConstant.GetListActiveRefMaster, this.jobPosition).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, this.jobPosition).toPromise().then(
       (response) => {
         this.listJobPosition = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ JobPosition: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -236,7 +237,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.jobStatus = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.jobStatus.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeJobStat;
-    this.http.post(URLConstant.GetListActiveRefMaster, this.jobStatus).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, this.jobStatus).toPromise().then(
       (response) => {
         this.listJobStatus = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ JobStatus: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -245,7 +246,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.companyScale = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     this.companyScale.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCoyScale;
-    this.http.post(URLConstant.GetListActiveRefMaster, this.companyScale).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, this.companyScale).toPromise().then(
       (response) => {
         this.listCompanyScale = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ CompanyScale: response[CommonConstant.ReturnObj][0]['Key'] });
@@ -254,13 +255,13 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
       (response) => {
         this.custObj = response;
       }
     );
 
-    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -290,7 +291,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
           if (!this.IsReset) {
             if (this.returnCustJobDataObj.RefProfessionId != null) {
-              this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
+              this.http.post(this.UrlConstantNew.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
                 (response) => {
                   this.returnRefProfessionObj = response;
                   this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -304,7 +305,7 @@ export class JobDataEmployeeComponent implements OnInit {
           if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
             this.refIndustryTypeObj = new RefIndustryTypeObj();
             this.refIndustryTypeObj.RefIndustryTypeId = this.returnCustJobDataObj.RefIndustryTypeId;
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).toPromise().then(
               (response) => {
                 this.returnIndustryTypeObj = response;
                 this.industryLookUpObj.nameSelect = this.returnIndustryTypeObj.IndustryTypeName;
@@ -317,7 +318,7 @@ export class JobDataEmployeeComponent implements OnInit {
           let reqObj: GenericObj = new GenericObj();
           reqObj.Id = this.IdCust;
           reqObj.Code = CommonConstant.CustAddrTypeJob;
-          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
             (response) => {
               this.getJobAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -356,7 +357,7 @@ export class JobDataEmployeeComponent implements OnInit {
           );
 
           reqObj.Code = CommonConstant.CustAddrTypeOthBiz;
-          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
             (response) => {
               this.getOthBizAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -395,7 +396,7 @@ export class JobDataEmployeeComponent implements OnInit {
           );
 
           reqObj.Code = CommonConstant.CustAddrTypePreJob;
-          this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).toPromise().then(
             (response) => {
               this.getPreJobAddr = response;
               this.JobDataEmpForm.patchValue({
@@ -604,7 +605,7 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
-      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.EditCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           if (!IsParent) this.outputTab.emit({ stepMode: "next" });
@@ -623,7 +624,7 @@ export class JobDataEmployeeComponent implements OnInit {
       this.reqCustPersonalJobDataObj.PreJobAddr = this.preJobAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
 
-      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           // this.router.navigate(

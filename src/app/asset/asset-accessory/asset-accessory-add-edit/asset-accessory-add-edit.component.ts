@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-accessory-add-edit',
@@ -27,7 +28,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   assetTypeName: string;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -42,7 +43,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
   }
   ngOnInit() {
     
-    this.http.post(URLConstant.GetAssetTypeById, {Id: this.AssetTypeId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetAssetTypeById, {Id: this.AssetTypeId }).subscribe(
       (response) => {
         this.assetTypeName = response['AssetTypeName'];
       }
@@ -54,7 +55,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.AssetAccessoryForm.controls.AssetAccessoryCode.disable();
       let obj = {Id: this.AssetAccessoryId};
 
-      this.http.post<AssetAccessoryObj>(URLConstant.GetAssetAccessorybyAssetAccessoryId, obj).subscribe(
+      this.http.post<AssetAccessoryObj>(this.UrlConstantNew.GetAssetAccessorybyAssetAccessoryId, obj).subscribe(
         (response) => {
           this.result = response;
           this.AssetAccessoryForm.patchValue({
@@ -75,7 +76,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
       this.acObj.AssetTypeId = this.AssetTypeId;
-      this.http.post(URLConstant.AddNewAssetAccesory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddNewAssetAccesory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
@@ -86,7 +87,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       this.acObj.AssetAccessoryCode = this.AssetAccessoryForm.controls["AssetAccessoryCode"].value;
       this.acObj.AssetAccessoryName = this.AssetAccessoryForm.controls["AssetAccessoryName"].value;
       this.acObj.IsActive = this.AssetAccessoryForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditAssetAccessory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditAssetAccessory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ACC_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
@@ -103,7 +104,7 @@ export class AssetAccessoryAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

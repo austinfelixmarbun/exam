@@ -5,9 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetTypeObj } from 'app/shared/model/asset-type-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-type-add-edit',
@@ -50,7 +50,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   serialNoShown: Array<boolean> = [false, false, false, false, false];
 
   readonly CancelLink: string = NavigationConstant.ASSET_TYPE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -87,7 +87,7 @@ export class AssetTypeAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: 'MAXASSETTYPELVL' }).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: 'MAXASSETTYPELVL' }).subscribe(
       response => {
         this.ItemMaxHierarchyLevelNumber = this.ItemMaxHierarchyLevelNumber.slice(0, parseInt(response['GsValue']));
         this.AssetTypeForm.patchValue({
@@ -99,7 +99,7 @@ export class AssetTypeAddEditComponent implements OnInit {
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.assetTypeId;
           this.AssetTypeForm.controls["AssetTypeCode"].disable();
-          this.http.post(URLConstant.GetAssetTypeById, {Id: this.assetTypeId}).subscribe(
+          this.http.post(this.UrlConstantNew.GetAssetTypeById, {Id: this.assetTypeId}).subscribe(
             (response: AssetTypeObj) => {
               this.resultData = response;
               this.RowVersion = this.resultData.RowVersion;
@@ -254,7 +254,7 @@ export class AssetTypeAddEditComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetTypeObj.RowVersion = "";
-      this.http.post(URLConstant.AddAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
@@ -263,7 +263,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
       this.assetTypeObj.RowVersion = this.RowVersion;
       this.assetTypeObj.AssetTypeId = this.assetTypeId;
-      this.http.post(URLConstant.EditAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
@@ -279,7 +279,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

@@ -4,11 +4,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -25,7 +25,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
   itemCategoryType: any;
   MrVendorCategoryCode: string;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params["VendorSchmId"];
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -45,7 +45,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "VENDOR_CATEGORY" }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "VENDOR_CATEGORY" }).subscribe(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -61,7 +61,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
       this.VendorSchmForm.controls.MrVendorCategoryCode.disable();
       this.VendorSchmForm.controls.VendorSchmCode.disable();
-      this.http.post(URLConstant.GetVendorSchmByVendorSchmId, { Id: this.VendorSchmId }).subscribe(
+      this.http.post(this.UrlConstantNew.GetVendorSchmByVendorSchmId, { Id: this.VendorSchmId }).subscribe(
         (response) => {
           this.result = response;
           this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -92,7 +92,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.vendorSchemeObj.VendorSchmCode = this.result.VendorSchmCode;
       this.vendorSchemeObj.VendorSchmId = this.VendorSchmId;
 
-      this.http.post(URLConstant.EditVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -100,7 +100,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
     }
     else {
       this.vendorSchemeObj.VendorSchmId = 0;
-      this.http.post(URLConstant.AddVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -116,7 +116,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

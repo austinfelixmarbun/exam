@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
@@ -59,7 +59,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
-    private claimTaskService: ClaimTaskService
+    private claimTaskService: ClaimTaskService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -85,7 +86,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.claimTask();
 
     this.CustNoObj.CustNo = this.CustNo;
-    await this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
         this.IdCust = response.CustId;
@@ -112,7 +113,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       }
     )
 
-    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response) => {
         if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
           this.isMarried = true;

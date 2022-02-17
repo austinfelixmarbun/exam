@@ -6,8 +6,8 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { RefProvDistrictObj } from 'app/shared/model/ref-prov-district-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 
@@ -29,8 +29,8 @@ export class DistrictComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
   readonly AddLink: string = NavigationConstant.CS_DISTRICT_DETAIL;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
-    this.getUrl = URLConstant.GetRefProvDistrictById;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+    this.getUrl = this.UrlConstantNew.GetRefProvDistrictById;
     this.route.queryParams.subscribe(params => {
       if (params['refProvDistrictId'] != null) {
         this.parentId = params['refProvDistrictId'];

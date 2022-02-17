@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ResSysConfigResultObj } from 'app/shared/model/response/res-sys-config-result-obj,model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view',
@@ -44,8 +41,8 @@ export class CustomerViewComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
   digitalizationSysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) {
-    this.getCustByCustIdUrl = URLConstant.GetCustByCustId;
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private UrlConstantNew: UrlConstantNew) {
+    this.getCustByCustIdUrl = this.UrlConstantNew.GetCustByCustId;
   }
 
   changeRoute(url) {
@@ -78,7 +75,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLOSObj = new GenericObj();
     reqGetSysConfigResultLOSObj.Code = CommonConstant.MODULE_LOS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLOSObj.Code }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLOSObj.Code }).toPromise().then(
       (response) => {
         if (response.ConfigValue === "1") {
           this.IsLos = true;
@@ -91,7 +88,7 @@ export class CustomerViewComponent implements OnInit {
 
     let reqGetSysConfigResultLMSObj = new GenericObj();
     reqGetSysConfigResultLMSObj.Code = CommonConstant.MODULE_LMS;
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLMSObj.Code }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigResultByCode, { ConfigCode: reqGetSysConfigResultLMSObj.Code }).toPromise().then(
       (response) => {
         if (response.ConfigValue === "1") {
           this.IsLms = true;
@@ -103,7 +100,7 @@ export class CustomerViewComponent implements OnInit {
     );
 
     //check DMS
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
         if (response.ConfigValue === "1") {
@@ -137,7 +134,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   async GetCustListIframeView() {
-    await this.http.post(URLConstant.GetCustListIframeView, {}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustListIframeView, {}).toPromise().then(
       (response) => {
         this.listIframe = response[CommonConstant.ReturnObj];
         this.IsIframe = true;
@@ -234,7 +231,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   async getIsUseDigitalization() {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
       async (response) => {
         if (response["GsValue"] === CommonConstant.TRUE_CONDITION) {
           this.IsUseDigitalization = true;
@@ -248,7 +245,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   async getDigitalizationSvcType() {
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
       (response) => {
         this.digitalizationSysConfigResultObj = response;
       });

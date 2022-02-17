@@ -8,11 +8,11 @@ import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { CustBankStmntObj } from 'app/shared/model/cust-bank-stmnt-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-bank-acc-detail-section-findata',
@@ -52,11 +52,12 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     CustBankStmnts: this.fb.array([])
   });
 
-  constructor(private httpClient: HttpClient,
+  constructor(private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     public activeModal: NgbActiveModal, 
-    private cookieService: CookieService) {
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew) {
     moment.locale('en');
     this.monthOfYear = new Array(...moment.months());
     this.rowCustBankStmnt = 0;
@@ -84,7 +85,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     if (this.pageType == "edit") {
       let custBankAcc = new CustBankAccObj();
       custBankAcc.CustBankAccId = this.CustBankAccId;
-      this.httpClient.post(URLConstant.GetCustBankAccByCustBankAccIdWithRefBank, { Id: this.CustBankAccId }).subscribe(
+      this.http.post(this.UrlConstantNew.GetCustBankAccByCustBankAccIdWithRefBank, { Id: this.CustBankAccId }).subscribe(
         (response: any) => {
           this.inputLookupBank.nameSelect = response.RefBankObj.BankName;
           this.inputLookupBank.jsonSelect = response.RefBankObj;
@@ -116,7 +117,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
 
       this.CustBankAccForm.controls['BegBalanceAmt'].setValidators([Validators.required]);
 
-      this.httpClient.post(URLConstant.GetCBAForCustFinDataEditModeByCustBankAccId, ReqCustBankAcc).subscribe(
+      this.http.post(this.UrlConstantNew.GetCBAForCustFinDataEditModeByCustBankAccId, ReqCustBankAcc).subscribe(
         (response: any) => {
           this.bankName = response.RefBankObj.BankName;
           this.CustBankAccForm.patchValue({
@@ -321,7 +322,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     custBankAccObj.BegBalanceAmt = formData.BegBalanceAmt;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddCustBankAcc, custBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddCustBankAcc, custBankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }
@@ -330,7 +331,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     else {
       if (this.pageType == "edit") {
         let custBankData = this.CustBankAccForm.getRawValue();
-        this.httpClient.post(URLConstant.EditCustBankAcc, custBankData, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.EditCustBankAcc, custBankData, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.activeModal.close(response);
           }
@@ -380,7 +381,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
         custBankAccObj.EndPeriod = "";
 
         let reqObj = { "custBankAccObj": custBankAccObj, "custBankStmntObjs": listCustBankStmnt };
-        this.httpClient.post(URLConstant.EditCBAForCustFinData, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.EditCBAForCustFinData, reqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.activeModal.close(response);
           }

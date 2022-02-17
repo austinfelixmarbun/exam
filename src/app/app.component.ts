@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CommonConstant } from './shared/constant/CommonConstant';
 import { URLConstant } from './shared/constant/URLConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
+import { UrlConstantNew } from './shared/constant/URLConstantNew';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -18,21 +19,22 @@ export class AppComponent implements OnInit {
 
     private _hubConnection: HubConnection;
     //TEST PUSH MASTER 5
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router
+      , private UrlConstantNew: UrlConstantNew) { }
  
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
 
         if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
-            this.checkisEODforlogout();
-            this.validateIp();
+            // this.checkisEODforlogout();
+            // this.validateIp();
         }
         const appVersion = require('../../package.json').version;
         localStorage.setItem("Version", appVersion);
     }
 
     checkisEODforlogout(){
-        this.http.post(URLConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+        this.http.post(this.UrlConstantNew.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
               if(response["SysValue"] == '1')
               {
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit {
 
     validateIp(){
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+        this.http.post(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
               {        
@@ -60,7 +62,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        var url = URLConstant.LogoutAuth;
+        var url = this.UrlConstantNew.LogoutAuth;
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();

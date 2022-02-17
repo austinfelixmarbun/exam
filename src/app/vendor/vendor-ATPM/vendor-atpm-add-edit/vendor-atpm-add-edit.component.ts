@@ -8,7 +8,6 @@ import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { VendorService } from '../../vendor.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
@@ -19,8 +18,8 @@ import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-ob
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { RegexService } from 'app/customer/regex.service';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -49,7 +48,7 @@ export class VendorATPMAddEditComponent implements OnInit {
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, 
               private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, 
-              private cookieService: CookieService, private http: HttpClient) {
+              private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -473,7 +472,7 @@ export class VendorATPMAddEditComponent implements OnInit {
   }
 
   GetGeneralSetting(){
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;

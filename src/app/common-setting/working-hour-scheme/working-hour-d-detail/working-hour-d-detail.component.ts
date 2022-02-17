@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NgForm, FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { WorkingHourSchmHObj } from 'app/shared/model/working-hour-schm-h-obj.model';
 import { WorkingHourSchmDObj } from 'app/shared/model/working-hour-schm-d-obj.model';
 import { ListWorkingHourSchmDObj } from 'app/shared/model/list-working-hour-schm-d-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 
-import { String, StringBuilder } from 'typescript-string-operations';
+import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-working-hour-d-detail',
@@ -107,9 +106,9 @@ export class WorkingHourDDetailComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_WORKING_HOUR;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
 
-    this.postUrl = URLConstant.AddListWorkingHourSchmD;
+    this.postUrl = this.UrlConstantNew.AddListWorkingHourSchmD;
 
     this.route.queryParams.subscribe(params => {
       if (params["workingHourSchmHId"] != null) {
@@ -124,7 +123,7 @@ export class WorkingHourDDetailComponent implements OnInit {
     this.workingHourSchmHObj = new WorkingHourSchmHObj();
     this.workingHourSchmHObj.WorkingHourSchmHId = this.workingHourSchmHId;
     this.items = this.WorkingHourSchmDForm.get('items') as FormArray;
-    this.http.post(URLConstant.GetListWorkingHourSchmDByWorkingHourHId, {Id : this.workingHourSchmHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListWorkingHourSchmDByWorkingHourHId, {Id : this.workingHourSchmHId}).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.isEdit = true;
@@ -204,7 +203,7 @@ export class WorkingHourDDetailComponent implements OnInit {
       this.listWorkingHourSchmDObj.WorkingHourSchmDObj.push(this.workingHourSchmDObj);
     }
     if (this.isEdit) {
-      this.postUrl = URLConstant.EditListWorkingHourSchmD;
+      this.postUrl = this.UrlConstantNew.EditListWorkingHourSchmD;
     }
     this.http.post(this.postUrl, this.listWorkingHourSchmDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {

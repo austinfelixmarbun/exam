@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { SrvyTaskObj } from 'app/shared/model/srvy-task-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -32,7 +32,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
     ListSurveyTask: this.fb.array([])
   });
 
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
@@ -48,7 +48,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
   }
 
   async getSurveyTaskListData() {
-    await this.httpClient.post(URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview, { Id: this.SrvyOrderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview, { Id: this.SrvyOrderId }).toPromise().then(
       (response) => {
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
@@ -155,7 +155,7 @@ export class SurveyResultReviewDetailComponent implements OnInit {
     }
 
     /* istanbul ignore next */
-    this.httpClient.post(URLConstant.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.ReviewSurveyResult, { reqListSrvyTaskObjs: this.reqListSrvyTaskObj }, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         /* istanbul ignore next */
         this.toastr.successMessage(response['message']);

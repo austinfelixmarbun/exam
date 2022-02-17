@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { SurveyorObj } from 'app/shared/model/surveyor-obj.model';
@@ -13,6 +12,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-surveyor-add',
@@ -58,9 +58,10 @@ export class SurveyorAddComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['SurveyorId'] != null) {
         this.isEdit = true;
@@ -76,7 +77,7 @@ export class SurveyorAddComponent implements OnInit {
 
   setDropDown() {
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: "SURVEYOR_TYPE", MappingCode: null };
-    this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReq).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];
       }
@@ -157,7 +158,7 @@ export class SurveyorAddComponent implements OnInit {
       this.surveyorObj = new SurveyorObj();
       this.SurveyorForm.controls['SurveyorType'].disable();
       this.SurveyorForm.controls['SurveyorNo'].disable();
-      this.httpClient.post<SurveyorObj>(URLConstant.GetSurveyorBySurveyorId, { Id: this.surveyorId }).subscribe(
+      this.http.post<SurveyorObj>(this.UrlConstantNew.GetSurveyorBySurveyorId, { Id: this.surveyorId }).subscribe(
         (response) => {
           this.surveyorObj = response;
           this.SurveyorForm.patchValue({
@@ -171,7 +172,7 @@ export class SurveyorAddComponent implements OnInit {
             IsActive: this.surveyorObj.IsActive
           });
 
-          this.httpClient.post(URLConstant.GetCenterGrpById, { Id: this.surveyorObj.CenterGrpId }).subscribe(
+          this.http.post(this.UrlConstantNew.GetCenterGrpById, { Id: this.surveyorObj.CenterGrpId }).subscribe(
             (response) => {
               this.lookupSurveyorGrpObj.nameSelect = response['CenterGrpName'];
               this.lookupSurveyorGrpObj.jsonSelect = response;
@@ -180,7 +181,7 @@ export class SurveyorAddComponent implements OnInit {
 
           if (this.surveyorObj['MrSurveyorTypeCode'] == CommonConstant.EXTERNAL_SURVEYOR) {
             this.isExternal = true;
-            this.httpClient.post(URLConstant.GetVendorByVendorId, { Id: this.surveyorObj.VendorId }).subscribe(
+            this.http.post(this.UrlConstantNew.GetVendorByVendorId, { Id: this.surveyorObj.VendorId }).subscribe(
               (response) => {
                 this.lookupVendorObj.nameSelect = response['VendorName'];
                 this.lookupVendorObj.jsonSelect = response['VendorId'];
@@ -188,7 +189,7 @@ export class SurveyorAddComponent implements OnInit {
             )
           }
 
-          this.httpClient.post(URLConstant.GetRefUserById, { Id: this.surveyorObj.RefUserId }).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefUserById, { Id: this.surveyorObj.RefUserId }).subscribe(
             (response) => {
               this.lookupUsernameObj.nameSelect = response['Username'];
               this.lookupVendorObj.jsonSelect = response;
@@ -211,7 +212,7 @@ export class SurveyorAddComponent implements OnInit {
     this.surveyorObj.IsActive = this.SurveyorForm.value.IsActive;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});
@@ -221,7 +222,7 @@ export class SurveyorAddComponent implements OnInit {
     else {
       this.surveyorObj.SurveyorId = this.surveyorId;
       this.surveyorObj.RowVersion = '';
-      this.httpClient.post(URLConstant.EditSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});

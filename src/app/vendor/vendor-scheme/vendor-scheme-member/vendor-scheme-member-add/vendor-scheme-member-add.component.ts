@@ -5,10 +5,10 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { ToastrService } from 'ngx-toastr';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
@@ -22,7 +22,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
   readonly CancelLink: string = NavigationConstant.VENDOR_SCHM_MBR;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params['VendorSchmId'];
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -62,7 +62,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
       VendorId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddVendorSchmMember, obj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddVendorSchmMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_SCHM_MBR],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });

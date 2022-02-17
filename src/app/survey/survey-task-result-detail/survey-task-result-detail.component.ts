@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqUpdateSrvyTaskAndAddVerfResultHDObj } from 'app/shared/model/request/srvy-task/req-update-srvy-task-and-add-verf-result-h-d-obj.model';
@@ -17,11 +16,11 @@ import { ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj } from 'app/shared/model/r
 import { VerfQuestionAnswerCustomObj } from 'app/shared/model/verf-question-answer/verf-question-answer-custom.model';
 import { VerfResultDObj } from 'app/shared/model/verf-result-d/VerfResultD.model';
 import { VerifResulHDetailObj } from 'app/shared/model/verf-result-h/verf-result-h-detail-obj.model';
-import { VerfResultHObj } from 'app/shared/model/verf-result-h-obj.model';
 import { VerfResultObj } from 'app/shared/model/verf-result-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-survey-task-result-detail',
@@ -67,7 +66,8 @@ export class SurveyTaskResultDetailComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router,
-    private cookieService: CookieService) {
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
     });
   }
@@ -87,7 +87,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
   async getData(){
     this.ReqGetVerfResultHObj.TrxRefNo = this.ResSrvyTaskObj.SrvyTaskNo;
     this.ReqGetVerfResultHObj.MrAddrTypeCode = this.ResSrvyTaskObj.MrSrvyObjTypeCode;
-    await this.http.post(URLConstant.GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode, this.ReqGetVerfResultHObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode, this.ReqGetVerfResultHObj).toPromise().then(
       (response) => {
         if(response["VerfResultH"] != null){
           this.ResVerfResultHObj = response["VerfResultH"];
@@ -123,7 +123,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
   async GetVerfResultData() {
     let verfResObj: ReqGetVerfResultObj = { TrxRefNo: this.SrvyOrderNo, MrVerfTrxTypeCode: CommonConstant.VerfTrxTypeCodeSurvey, };
-    await this.http.post(URLConstant.GetVerfResultByTrxRefNoAndVerfTrxTypeCode, verfResObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetVerfResultByTrxRefNoAndVerfTrxTypeCode, verfResObj).toPromise().then(
       (response) => {
         this.VerfResultId = response["VerfResultId"];
       }
@@ -145,7 +145,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
       this.addVerifResultObj.LobName = this.LobCode;
       this.addVerifResultObj.Notes = "-";
 
-      await this.http.post(URLConstant.AddVerfResult, this.addVerifResultObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddVerfResult, this.addVerifResultObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.VerfResultId = response["Id"];
         }
@@ -155,7 +155,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
   async getSrvyOrderData(){
     this.ReqGenericObj.Id = this.SrvyOrderId;
-    await this.http.post(URLConstant.GetSrvyOrderDataBySrvyOrderId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyOrderDataBySrvyOrderId, this.ReqGenericObj).toPromise().then(
       (response) => {
         this.LobCode = response["LobCode"];
       });
@@ -163,7 +163,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
   async getSrvyOrder(){
     this.ReqGenericObj.Id = this.SrvyOrderId;
-    await this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
       (response) => {
         this.TrxRefNo = response["TrxRefNo"];
         this.CustName = response["CustName"];
@@ -173,7 +173,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
   async getSrvyTask(){
     this.ReqGenericObj.Id = this.SrvyTaskId;
-    await this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyTaskBySrvyTaskId, this.ReqGenericObj).toPromise().then(
       (response:ResSrvyTaskObj) => {
         this.ResSrvyTaskObj = response;
       });
@@ -185,7 +185,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
     this.ReqGenericObj = new GenericObj();
     this.ReqGenericObj.Id = this.ResSrvyTaskObj.SrvyFormSchmId;
 
-    await this.http.post(URLConstant.GetSrvyFormSchmBySrvyFormSchmId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyFormSchmBySrvyFormSchmId, this.ReqGenericObj).toPromise().then(
       (response) => {
         if(response["VerfSchemeHId"] != null){
         this.VerfSchemeHId = response["VerfSchemeHId"];
@@ -193,7 +193,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
 
       this.ReqGenericObj = new GenericObj();
       this.ReqGenericObj.Id = this.VerfSchemeHId; 
-      this.http.post(URLConstant.GetVerfQuestionAnswerListByVerfSchemeHId, this.ReqGenericObj).toPromise().then(
+      this.http.post(this.UrlConstantNew.GetVerfQuestionAnswerListByVerfSchemeHId, this.ReqGenericObj).toPromise().then(
       (response) => {
         if(response["ReturnObject"]!=null){
           this.QuestionObj = response[CommonConstant.ReturnObj];
@@ -207,7 +207,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
   }
 
   bindResultObj() {
-    this.http.post(URLConstant.GetListActiveRefStatusByStatusGrpCode, { Code: CommonConstant.StatusGrpVerfResultStat }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefStatusByStatusGrpCode, { Code: CommonConstant.StatusGrpVerfResultStat }).subscribe(
       (response) => {
         this.ResultObj = response[CommonConstant.ReturnObj];
         if (this.ResultObj.length > 0) {
@@ -358,7 +358,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
         this.setSurveyVerifData();
         this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
-        this.http.post(URLConstant.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
 
@@ -372,7 +372,7 @@ export class SurveyTaskResultDetailComponent implements OnInit {
         this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.SrvyTaskId;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
         this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD.VerfResultHId = this.ResVerfResultHObj.VerfResultHId;
-        this.http.post(URLConstant.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
 

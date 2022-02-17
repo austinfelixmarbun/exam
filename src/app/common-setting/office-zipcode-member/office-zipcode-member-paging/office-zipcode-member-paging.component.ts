@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-zipcode-member-paging',
@@ -35,13 +34,12 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   officeUrl: any;
   arrCrit: any;
 
-  foundationUrl: any = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
   readonly CancelLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR;
   readonly AddLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR_ADD;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params['refOfficeId'] != null) {
         this.refOfficeId = params['refOfficeId'];
@@ -52,13 +50,13 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
   ngOnInit() {
     this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
-    this.inputObj.apiQryPaging = URLConstant.GetRefOfficeZipcodePaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetRefOfficeZipcodePaging;
 
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + URLConstant.GetRefOfficeZipcodePaging;
-    this.officeUrl = this.foundationUrl + URLConstant.GetRefOfficeObj;
-    this.deleteUrl = URLConstant.DeleteOfficeZipcodeMember;
+    this.apiUrl = this.UrlConstantNew.GetRefOfficeZipcodePaging;
+    this.officeUrl = this.UrlConstantNew.GetRefOfficeObj;
+    this.deleteUrl = this.UrlConstantNew.DeleteOfficeZipcodeMember;
 
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();

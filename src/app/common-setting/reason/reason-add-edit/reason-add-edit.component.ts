@@ -3,13 +3,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefReasonObj } from 'app/shared/model/ref-reason-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-reason-add-edit',
@@ -31,7 +31,7 @@ export class ReasonAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_REASON_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.pageType = params["mode"];
@@ -43,7 +43,7 @@ export class ReasonAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetValueReasonType, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetValueReasonType, null).subscribe(
       (response) => {
         this.allRefReasonType = response[CommonConstant.ReturnObj];
         if (this.allRefReasonType.length > 0) {
@@ -55,7 +55,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.RefReasonForm.controls["ReasonCode"].disable();
       var refReasonObj = new RefReasonObj();
       refReasonObj.RefReasonId = this.refReasonId;
-      this.http.post<RefReasonObj>(URLConstant.GetRefReasonById, {Id : this.refReasonId}).subscribe(
+      this.http.post<RefReasonObj>(this.UrlConstantNew.GetRefReasonById, {Id : this.refReasonId}).subscribe(
         response => {
           this.resultData = response;
           this.RefReasonForm.patchValue({
@@ -78,7 +78,7 @@ export class ReasonAddEditComponent implements OnInit {
       refReasonObj.IsActive = this.RefReasonForm.controls["IsActive"].value;
       refReasonObj.IsSystem = false;
 
-      this.http.post(URLConstant.AddRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
@@ -89,7 +89,7 @@ export class ReasonAddEditComponent implements OnInit {
       refReasonObj.ReasonDescr = this.RefReasonForm.controls["ReasonDescr"].value;
       refReasonObj.RefReasonTypeCode = this.RefReasonForm.controls["RefReasonTypeCode"].value;
       refReasonObj.IsActive = this.RefReasonForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});

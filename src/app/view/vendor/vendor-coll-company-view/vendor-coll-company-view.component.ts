@@ -6,9 +6,9 @@ import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorBankAccObj } from 'app/shared/model/vendor-bank-acc-obj.model';
 import { VendorEmpObj } from 'app/shared/model/vendor-emp-obj.model';
 import { VendorOfficeMbrObj } from 'app/shared/model/vendor-office-mbr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-coll-company-view',
@@ -55,7 +55,7 @@ export class VendorCollCompanyViewComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
@@ -66,7 +66,7 @@ export class VendorCollCompanyViewComponent implements OnInit {
   }
   ngOnInit() {
     
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.MrVendorTypeObj = response;
         this.MrVendorCategoryCode = this.MrVendorTypeObj.MrVendorCategoryCode;
@@ -80,27 +80,27 @@ export class VendorCollCompanyViewComponent implements OnInit {
     this.viewVendorCollCompanyTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorCollCompanyTaxAddr.json";
     this.viewVendorCollCompanyAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorCollCompanyAddr.json";
 
-    this.http.post(URLConstant.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorBankAcc = response[CommonConstant.ReturnObj]
 
       }
     )
 
-    // this.http.post(URLConstant.GetListVendorGrpByVendorId, { Id: this.VendorId }).subscribe(
+    // this.http.post(this.UrlConstantNew.GetListVendorGrpByVendorId, { Id: this.VendorId }).subscribe(
     //   response => {
     //     this.VendorGrp = response[CommonConstant.ReturnObj]
 
     //   }
     // )
 
-    this.http.post(URLConstant.GetListVendorEmpByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorEmpByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorEmp = response[CommonConstant.ReturnObj]
       }
     )
 
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
       }

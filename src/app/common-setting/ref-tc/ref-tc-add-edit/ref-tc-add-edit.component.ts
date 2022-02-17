@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { RefTcObj } from 'app/shared/model/ref-tc.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -30,7 +30,7 @@ export class RefTcAddEditComponent implements OnInit {
   })
 
   readonly CancelLink: string = NavigationConstant.CS_REF_TC_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.pageType = params["mode"];
@@ -46,7 +46,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.RefTcForm.controls["TcCode"].disable();
       let reqByIdObj: GenericObj = new GenericObj;
       reqByIdObj.Id = this.refTcId;
-      this.http.post(URLConstant.GetRefTcById, reqByIdObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefTcById, reqByIdObj).subscribe(
         (response: RefTcObj) => {
           this.resultData = response;
           this.RefTcForm.patchValue({
@@ -71,7 +71,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.refTcObj.TcType = this.RefTcForm.controls["TcType"].value;
       this.refTcObj.IsMandatory = this.RefTcForm.controls["IsMandatory"].value;
       this.refTcObj.IsActive = this.RefTcForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});
@@ -85,7 +85,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.refTcObj.TcType = this.RefTcForm.controls["TcType"].value;
       this.refTcObj.IsMandatory = this.RefTcForm.controls["IsMandatory"].value;
       this.refTcObj.IsActive = this.RefTcForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});

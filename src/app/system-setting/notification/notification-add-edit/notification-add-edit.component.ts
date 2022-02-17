@@ -7,13 +7,13 @@ import { environment } from 'environments/environment';
 import { NotificationHObj } from 'app/shared/model/notification-h-obj.model';
 import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -54,9 +54,9 @@ export class NotificationAddEditComponent implements OnInit {
   })
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
-    this.getHUrl = this.settingUrl + URLConstant.GetNotificationHByNotificationHId;
-    this.addUrl = this.settingUrl + URLConstant.AddNotificationHAndD;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+    this.getHUrl = this.UrlConstantNew.GetNotificationHByNotificationHId;
+    this.addUrl = this.UrlConstantNew.AddNotificationHAndD;
 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
@@ -73,7 +73,7 @@ export class NotificationAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationType,
       MappingCode: null
     };
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterNotifTypeObj).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempListNotifType = response[CommonConstant.ReturnObj];
@@ -88,7 +88,7 @@ export class NotificationAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationMethod,
       MappingCode: null
     };
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterNotifMethodObj).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.tempListNotifMethod = response[CommonConstant.ReturnObj];
@@ -124,7 +124,7 @@ export class NotificationAddEditComponent implements OnInit {
 
   settingMultiSelectDropdown() {
 
-    var urlOffice = this.settingUrl + URLConstant.GetListActiveRefOffice;
+    var urlOffice = this.settingUrl + this.UrlConstantNew.GetListActiveRefOffice;
     this.http.post(urlOffice, null).subscribe(
       (response) => {
         this.refOfficeObj = response[CommonConstant.ReturnObj];
@@ -134,7 +134,7 @@ export class NotificationAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post(this.settingUrl + URLConstant.GetListActiveRefRole, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefRole, null).subscribe(
       (response) => {
         this.refRoleObj = response[CommonConstant.ReturnObj];
         for (let i = 0; i < this.refRoleObj.length; i++) {

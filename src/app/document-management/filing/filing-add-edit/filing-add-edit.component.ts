@@ -6,12 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FilingObj } from 'app/shared/model/document-management/filing-obj.model';
 import { CabinetWithListRackObj } from 'app/shared/model/document-management/cabinet-with-list-rack-obj.model';
-import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RackObj } from 'app/shared/model/document-management/rack-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-filing-add-edit',
@@ -36,7 +35,7 @@ export class FilingAddEditComponent implements OnInit {
     IsActive: [true]
   });
   
-  constructor(private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) { 
+  constructor(private fb: FormBuilder, private router: Router, private activeRoute: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { 
     this.activeRoute.queryParams.subscribe(
       params => {
         if(params['RackCode'] !== null && params['CabinetCode'] !== null){
@@ -66,10 +65,7 @@ export class FilingAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.rackWithListFilling.RackCode);
-    console.log(this.RackCode);
-    console.log(this.Cabinet.CabinetCode);
-    this.http.post<RackObj>(URLConstant.GetRackByCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
+    this.http.post<RackObj>(this.UrlConstantNew.GetRackByCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.Rack = response;
         this.RackId = this.Rack.RackId;
@@ -79,10 +75,9 @@ export class FilingAddEditComponent implements OnInit {
           this.FillingForm.controls.FilingCode.disable();
           this.filing.FilingCode = this.FilingCode;
           console.log(this.RackId);
-          this.http.post<any>(URLConstant.GetRackAndListFilingByFilingCodeAndRackId, {FilingCode: this.FilingCode, RackId: this.RackId}).subscribe(
+          this.http.post<any>(this.UrlConstantNew.GetRackAndListFilingByFilingCodeAndRackId, {FilingCode: this.FilingCode, RackId: this.RackId}).subscribe(
             (response) => {
               this.rackWithListFilling = response;
-              console.log(this.rackWithListFilling);
               this.FillingForm.controls['FilingCode'].patchValue(response.ListFiling[0].FilingCode);
               this.FillingForm.controls['FilingName'].patchValue(response.ListFiling[0].FilingName);
               this.FillingForm.controls['FilingInformation'].patchValue(response.ListFiling[0].FilingInfo);
@@ -99,10 +94,9 @@ export class FilingAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post<RackWithListFilingObj>(URLConstant.GetRackAndListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
+    this.http.post<RackWithListFilingObj>(this.UrlConstantNew.GetRackAndListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.Cabinet.CabinetCode}).subscribe(
       (response) => {
         this.rackWithListFilling = response;
-        console.log(this.rackWithListFilling);
       },
       (error) => {
         console.log(error);
@@ -111,7 +105,7 @@ export class FilingAddEditComponent implements OnInit {
 
     let GetCabinetAndListRackByCabinetCode: GenericObj = new GenericObj();
     GetCabinetAndListRackByCabinetCode.Code = this.Cabinet.CabinetCode;
-    this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndListRackByCabinetCode, GetCabinetAndListRackByCabinetCode).subscribe(
+    this.http.post<CabinetWithListRackObj>(this.UrlConstantNew.GetCabinetAndListRackByCabinetCode, GetCabinetAndListRackByCabinetCode).subscribe(
       (response) => {
         this.Cabinet = response;
       },
@@ -131,7 +125,7 @@ export class FilingAddEditComponent implements OnInit {
     if(this.Mode === 'Edit'){
       this.filing.RackId = this.rackWithListFilling.RackId;
       this.filing.CurrentFilingCode = this.FilingCode;
-      this.http.post(URLConstant.EditFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });
@@ -145,7 +139,7 @@ export class FilingAddEditComponent implements OnInit {
       this.filing.RackCode = this.rackWithListFilling.RackCode;
       this.filing.RackId = this.Rack.RackId;
       console.log(this.filing);
-      this.http.post(URLConstant.AddFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddFiling, this.filing, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_FILING_PAGING], { queryParams: { CabinetCode: this.Cabinet.CabinetCode, RackCode: this.rackWithListFilling.RackCode } });

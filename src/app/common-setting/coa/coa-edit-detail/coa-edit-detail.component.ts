@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -27,7 +27,8 @@ export class CoaEditDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['RefCoaId'] != null) {
         this.refCoaId = params['RefCoaId'];
@@ -40,7 +41,7 @@ export class CoaEditDetailComponent implements OnInit {
   }
 
   GetInitialData() {
-    this.http.post<RefCoaObj>(URLConstant.GetRefCoaByRefCoaId, {Id: this.refCoaId }).subscribe(
+    this.http.post<RefCoaObj>(this.UrlConstantNew.GetRefCoaByRefCoaId, {Id: this.refCoaId }).subscribe(
       (response) => {
         this.refCoaObj = response
 
@@ -57,7 +58,7 @@ export class CoaEditDetailComponent implements OnInit {
   Submit() {
     this.refCoaObj.Coa = this.CoaForm.controls["Coa"].value
 
-    this.http.post(URLConstant.SubmitCoa, this.refCoaObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SubmitCoa, this.refCoaObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_PAGING]);
         this.toastr.successMessage(response["Message"]);

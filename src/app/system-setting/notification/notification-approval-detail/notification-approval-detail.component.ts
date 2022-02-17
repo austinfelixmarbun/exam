@@ -7,12 +7,12 @@ import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { NotificationHObj } from 'app/shared/model/notification-h-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -32,7 +32,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationHId"] != null) {
         this.NotificationHId = params["NotificationHId"];
@@ -46,7 +46,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
 
     this.notificationHObj = new NotificationHObj();
     this.notificationHObj.NotificationHId = this.NotificationHId;
-    this.http.post(URLConstant.GetNotificationHByNotificationHId, { Id: this.NotificationHId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetNotificationHByNotificationHId, { Id: this.NotificationHId }).subscribe(
       response => {
         this.resultData = response;
       }
@@ -89,7 +89,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.notificationHObj.Status = notificationResultStat;
     this.notificationHObj.ApproveBy = currentUserContext.UserName;
 
-    this.http.post(URLConstant.EditNotificationH, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditNotificationH, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(resultForMsg + " " + response["Message"]);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV], {});

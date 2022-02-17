@@ -4,13 +4,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssetSchemeHObj } from 'app/shared/model/asset-scheme-h-obj.model';
 import { AssetSchmDObj } from 'app/shared/model/asset-schm-d-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -26,7 +26,7 @@ export class AddAssetSchemeComponent implements OnInit {
 
   AssetSchmHId: any;
   viewObj: string;
-  getListAssetSchmDByAssetSchmHId = URLConstant.GetListAssetSchmDByAssetSchmHId;
+  getListAssetSchmDByAssetSchmHId = this.UrlConstantNew.GetListAssetSchmDByAssetSchmHId;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
@@ -36,7 +36,8 @@ export class AddAssetSchemeComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.pageType = params['param'];
@@ -64,7 +65,7 @@ export class AddAssetSchemeComponent implements OnInit {
     this.tempPagingObj.fromValue.push(fromValueObj);
     
 
-    this.http.post(URLConstant.GetAssetSchmHById, { Id: this.AssetSchmHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetAssetSchmHById, { Id: this.AssetSchmHId}).subscribe(
       (response: AssetSchemeHObj) => {
         this.responseResultData = response;
         this.AssetTypeId = this.responseResultData.AssetTypeId;
@@ -100,7 +101,7 @@ export class AddAssetSchemeComponent implements OnInit {
       AssetSchmH: this.assetSchmHObj,
       AssetSchmDObjs: this.arrAssetSchmD
     }
-    this.http.post(URLConstant.AddRangeAssetSchmD, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddRangeAssetSchmD, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": this.AssetSchmHId });

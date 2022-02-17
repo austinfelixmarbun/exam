@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-personal-other-attr',
@@ -12,13 +12,14 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class CustomerViewPersonalOtherAttrComponent implements OnInit {
   CustId: number;
-  GetCustAttrContentForCustViewByCustIdUrl = URLConstant.GetCustAttrContentForCustViewByCustId;
+  GetCustAttrContentForCustViewByCustIdUrl = this.UrlConstantNew.GetCustAttrContentForCustViewByCustId;
   responseCustAttr: any;
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {

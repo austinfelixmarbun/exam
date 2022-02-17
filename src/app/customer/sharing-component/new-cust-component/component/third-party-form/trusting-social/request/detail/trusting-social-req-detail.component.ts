@@ -1,20 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
-import { ReqUploadConsentTsObj } from 'app/shared/model/third-party-rslt/req-upload-consent-ts-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ThirdPartyRsltHObj } from 'app/shared/model/third-party-rslt/third-party-rslt-h-obj.model';
 import { ThirdPartyTrustsocRsltObj } from 'app/shared/model/third-party-rslt/third-party-trustsoc-rslt-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { ReqAddTrxSrcDataForTsObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-ts-obj.model';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -37,7 +35,8 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     public activeModal: NgbActiveModal,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
@@ -49,7 +48,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     var refMasterObj = new ReqRefMasterByTypeCodeAndMasterCodeObj();
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustType;
     refMasterObj.MasterCode = this.CustObj.MrCustTypeCode;
-    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObj).subscribe(
       (response) => {
         this.CustTypeName = response["Descr"];
       }
@@ -116,14 +115,14 @@ export class TrustingSocialReqDetailComponent implements OnInit {
       return;
     }
     if (environment.isCore) {
-      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');
         }
       );
     } else {
-      this.http.post(URLConstant.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.activeModal.dismiss('Cross click');

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
@@ -13,7 +12,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 })
 export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   CustId: number;
-  GetCBAForCustFinDataByCustIdUrl = URLConstant.GetCBAForCustFinDataByCustId;
+  GetCBAForCustFinDataByCustIdUrl = this.UrlConstantNew.GetCBAForCustFinDataByCustId;
   viewCustFinData: UcViewGenericObj = new UcViewGenericObj();
   responseCBAObj: any;
   allBankStmntList : any;
@@ -21,7 +20,8 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {

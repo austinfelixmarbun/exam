@@ -6,9 +6,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustBankAccDetailSectionFindataComponent } from '../cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-bank-acc-section-findata',
@@ -19,17 +19,18 @@ export class CustBankAccSectionFindataComponent implements OnInit {
   cbaFinDataList: any;
 
   constructor(
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private fb: FormBuilder,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
     var custBankAccObj = new CustBankAccObj();
     custBankAccObj.CustId = this.CustId;
-    this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
       (response: any) => {
         this.cbaFinDataList = response.ListCBAForCustFinData;
       }
@@ -44,9 +45,9 @@ export class CustBankAccSectionFindataComponent implements OnInit {
         let reqObj = {
           Id: custBankAccId
         };
-        this.httpClient.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
-            this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
+            this.http.post(this.UrlConstantNew.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
               (response: any) => {
                 this.cbaFinDataList = response.ListCBAForCustFinData;
                 this.toastr.successMessage(response["message"]);
@@ -83,7 +84,7 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     modalCustBank.result.then(
       (response) => {
         this.spinner.show();
-        this.httpClient.post(URLConstant.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
+        this.http.post(this.UrlConstantNew.GetCBAForCustFinDataByCustId, { id: this.CustId }).subscribe(
           (response: any) => {
             this.cbaFinDataList = response.ListCBAForCustFinData;
             this.spinner.hide();

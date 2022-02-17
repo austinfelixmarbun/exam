@@ -5,17 +5,15 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { map, mergeMap } from 'rxjs/operators';
-import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { AssetNegativeObj } from 'app/shared/model/asset-negative-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -59,9 +57,10 @@ export class NegativeAssetDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
@@ -98,7 +97,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       negativeAsset.AssetNegativeId = this.assetNegativeId;
       let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
       refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
-      this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterObj).pipe(
+      this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObj).pipe(
         map((response) => {
           this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
           if (this.negativeAssetSourceList.length > 0) {
@@ -108,7 +107,7 @@ export class NegativeAssetDetailComponent implements OnInit {
           }
         }),
         mergeMap(() => {
-          const assetNegativeData = this.httpClient.post(URLConstant.GetAssetNegativeByIdEditPage, {Id: this.assetNegativeId});
+          const assetNegativeData = this.http.post(this.UrlConstantNew.GetAssetNegativeByIdEditPage, {Id: this.assetNegativeId});
           return assetNegativeData;
         })
       ).subscribe(
@@ -162,7 +161,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     else {
       let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
       tempReq.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeNegAssetSource;
-      this.httpClient.post(URLConstant.GetListActiveRefMaster, tempReq).subscribe(
+      this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReq).subscribe(
         (response) => {
           this.negativeAssetSourceList = [...response[CommonConstant.ReturnObj]];
           if (this.negativeAssetSourceList.length > 0) {
@@ -180,7 +179,7 @@ export class NegativeAssetDetailComponent implements OnInit {
     this.serial3Mandatory = false;
     this.serial4Mandatory = false;
     this.serial5Mandatory = false;
-    this.httpClient.post(URLConstant.GetAssetTypeById, { Id: e.assetTypeId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: e.assetTypeId }).subscribe(
       (response) => {
         if (response["IsMndtrySerialNo1"] == "1") {
           this.AssetNegativeForm.controls['SerialNo1'].setValidators([Validators.required]);
@@ -258,7 +257,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   Save() {
     var assetNegativeObj = this.AssetNegativeForm.value;
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
@@ -266,7 +265,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       );
     }
     else {
-      this.httpClient.post(URLConstant.EditAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResViewPefindoAlertQuestObj } from 'app/shared/model/response/pefindo/res-view-pefindo-alert-quest-obj.model';
 
@@ -13,7 +13,7 @@ export class PefindoViewPefindoAlertQuestComponent implements OnInit {
   TrxNo: string;
   ResViewPefindoAlertQuestObj: ResViewPefindoAlertQuestObj = new ResViewPefindoAlertQuestObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["TrxNo"] != null) {
         this.TrxNo = params["TrxNo"];
@@ -24,7 +24,7 @@ export class PefindoViewPefindoAlertQuestComponent implements OnInit {
   ngOnInit() {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    this.http.post(URLConstant.GetViewPefindoAlertQuest, reqByTrxNo).subscribe(
+    this.http.post(this.UrlConstantNew.GetViewPefindoAlertQuest, reqByTrxNo).subscribe(
       (response: ResViewPefindoAlertQuestObj) => {
         this.ResViewPefindoAlertQuestObj = response;
       }

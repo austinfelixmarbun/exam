@@ -9,11 +9,17 @@ export class UrlConstantService {
     constructor(private _http: HttpClient){ }
 
     loadConfig() {
-        return this._http.get('../../assets/urlConstant.json')
-        .toPromise()
-        .then(res => {
-            this.urlConstant = res;
-        });
+        let temp = this._http.get('../../../assets/urlConstant.json').subscribe({
+            next: (response) => {
+                console.log(response);
+                this.urlConstant = response;
+                // use `response`
+            },
+            error: (error) => {
+                // handle HTTP errors
+            }
+        });;
+        return this.urlConstant;
     }
 
     getConfig() {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-master-type-add-edit',
@@ -32,7 +31,7 @@ export class MasterTypeAddEditComponent implements OnInit {
   sandiBiModel: any;
   
 
-  constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, private httpClient: HttpClient, private service: NGXToastrService) {
+  constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, private http: HttpClient, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.type = params['mode'];
@@ -48,7 +47,7 @@ export class MasterTypeAddEditComponent implements OnInit {
     if (this.type == 'edit') {
       this.refRoleObj = new RefRoleObj()
       this.refRoleObj.RefRoleId = +this.refRoleId
-      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, {Id : this.refRoleObj.RefRoleId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefRoleByRefRoleId, {Id : this.refRoleObj.RefRoleId}).subscribe(
         (response) => {
           this.refRoleObj = response['returnObject'];
           this.roleCodeModel = response['returnObject']['roleCode']
@@ -73,7 +72,7 @@ export class MasterTypeAddEditComponent implements OnInit {
     //MODE-ADD
     if (this.type != 'edit') {
       //CHECK-DUPLICATE-CODE
-      this.httpClient.post(URLConstant.GetRefRole, roleObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefRole, roleObj).subscribe(
         (response) => {
           roleObj = response['returnObject'];
           if (roleObj != null) {
@@ -86,7 +85,7 @@ export class MasterTypeAddEditComponent implements OnInit {
             this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
             //SAVE
-            this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(this.UrlConstantNew.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
               (response) => {
                 this.service.typeSave(ExceptionConstant.SAVE_SUCCESSED);
                 this.location.back();
@@ -115,7 +114,7 @@ export class MasterTypeAddEditComponent implements OnInit {
       this.refRoleObj.IsActive = RoleAddEditForm.value.isActive;
 
       //SAVE
-      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.typeSave(ExceptionConstant.EDIT_SUCCESSED);
           this.location.back();

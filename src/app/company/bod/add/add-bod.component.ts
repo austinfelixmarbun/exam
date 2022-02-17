@@ -6,13 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { CoyBodObj } from 'app/shared/model/coy-bod-obj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
     selector: 'add-bod',
@@ -46,7 +45,7 @@ export class BodAddComponent implements OnInit {
     refCoyId: any;
 
     readonly CancelLink: string = NavigationConstant.COY_BOD;
-    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyBodId"];
             this.refCoyId = params["refCoyId"];
@@ -55,7 +54,7 @@ export class BodAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.settingUrl + URLConstant.GetRefMasterList;
+        this.idTypeUrl = this.UrlConstantNew.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         // refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
@@ -65,7 +64,7 @@ export class BodAddComponent implements OnInit {
             }
         );
         if (this.mode == "edit") {
-            this.apiUrl = this.foundationUrl + URLConstant.GetCoyBod;
+            this.apiUrl = this.UrlConstantNew.GetCoyBod;
             var coyBodObj = new CoyBodObj();
             coyBodObj.coyBodId = this.param;
             this.http.post(this.apiUrl, coyBodObj).subscribe(
@@ -125,7 +124,7 @@ export class BodAddComponent implements OnInit {
         coyAdd.refCoyId = this.refCoyId;
 
         if (this.mode == "edit") {
-            this.editUrl = this.foundationUrl + URLConstant.EditCoyBod;
+            this.editUrl = this.UrlConstantNew.EditCoyBod;
             coyAdd.coyBodId = this.param;
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
@@ -134,7 +133,7 @@ export class BodAddComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.foundationUrl + URLConstant.AddCoyBod;
+            this.editUrl = this.UrlConstantNew.AddCoyBod;
             this.http.post(this.editUrl, coyAdd).subscribe(
                 (response) => {
                     this.toastr.successMessage(response['message']);

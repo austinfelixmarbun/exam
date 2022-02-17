@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -15,6 +14,7 @@ import { formatDate } from '@angular/common';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-auction-company-addedit',
@@ -41,7 +41,8 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private vendorService: VendorService) { 
+    private vendorService: VendorService, 
+    private UrlConstantNew: UrlConstantNew) { 
     this.activeRoute.queryParams.subscribe(
       params => {
         if(params['VendorId'] !== null){
@@ -205,7 +206,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
@@ -218,7 +219,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.mode != "edit") {
@@ -234,7 +235,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -328,7 +329,7 @@ export class AuctionCompanyAddeditComponent implements OnInit {
           });
       }
       else{
-        this.http.post(URLConstant.AddAuctionCompany , this.AuctionCompanyObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.AddAuctionCompany , this.AuctionCompanyObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage("Success!");
             this.router.navigateByUrl(NavigationConstant.VENDOR_AUCTION_COY_PAGING);

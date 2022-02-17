@@ -1,16 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
 import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -44,7 +43,7 @@ export class VendorHoldingViewComponent implements OnInit {
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
@@ -56,7 +55,7 @@ export class VendorHoldingViewComponent implements OnInit {
 
   ngOnInit() {
    
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
@@ -79,7 +78,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.GroupListObj = new VendorGroupObj();
     this.GroupListObj.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListVendorGrpByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorGrpByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
@@ -89,7 +88,7 @@ export class VendorHoldingViewComponent implements OnInit {
     this.HoListObj.VendorId = this.VendorId;
     let ReqGetListHO : GenericObj = new GenericObj();
     ReqGetListHO.Id = this.VendorId;
-    this.http.post(URLConstant.GetListHoByVendorId, ReqGetListHO).subscribe(
+    this.http.post(this.UrlConstantNew.GetListHoByVendorId, ReqGetListHO).subscribe(
       response => {
         this.Vendor = response[CommonConstant.ReturnObj]
 
@@ -99,7 +98,7 @@ export class VendorHoldingViewComponent implements OnInit {
 
   GetListVendorContactPersonByVendorId() {
     
-    var getListUrl = URLConstant.GetListVendorContactPersonByVendorId;
+    var getListUrl = this.UrlConstantNew.GetListVendorContactPersonByVendorId;
     this.http.post(getListUrl, {Id : this.VendorId}).subscribe(
       (response) => {
         this.vendorContactPerson = response[CommonConstant.ReturnObj];

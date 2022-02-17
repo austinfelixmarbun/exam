@@ -7,13 +7,12 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqSrvyTaskAndSendToMobileObj } from 'app/shared/model/request/req-srvy-task-and-send-to-mobile-obj.model';
 import { ReqSrvyTaskIdAndUsername } from 'app/shared/model/request/srvy-task/req-srvy-task-id-and-username-obj.model';
 import { SrvyTaskObj } from 'app/shared/model/srvy-task-obj.model';
-import { WhereValueObj } from 'app/shared/model/uc-paging-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CookieService } from 'ngx-cookie';
@@ -58,7 +57,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   surveyorNumber: { [key: string]: any; } = {};
   surveyorNumberNationNo: { [key: string]: any; } = {};
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['SurveyOrderId'] != null) {
         this.surveyOrderId = params['SurveyOrderId'];
@@ -84,12 +83,12 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
 
   async getSurveyTaskListData() {
 
-    await this.httpClient.post(URLConstant.GetListSrvyTaskBySrvyOrderIdForUpdate, { Id: this.surveyOrderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListSrvyTaskBySrvyOrderIdForUpdate, { Id: this.surveyOrderId }).toPromise().then(
       (response) => {        
         if (response['ReturnObject'].length > 0) {
           this.SurveyTaskForm.controls['ListSurveyTask'] = this.fb.array([]);
           for (let i = 0; i < response['ReturnObject'].length; i++) {
-            this.httpClient.post(URLConstant.GetSrvyFormSchmBySrvyFormSchmId, { Id: response['ReturnObject'][i].SrvyFormSchmId }).subscribe(
+            this.http.post(this.UrlConstantNew.GetSrvyFormSchmBySrvyFormSchmId, { Id: response['ReturnObject'][i].SrvyFormSchmId }).subscribe(
               (res) => {
                 var surveyTask = {
                   SurveyTaskId: response['ReturnObject'][i].SrvyTaskId,
@@ -119,13 +118,13 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   }
 
   getDropdown() {
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "SURVEY_TYPE" }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "SURVEY_TYPE" }).subscribe(
       (response) => {
         this.dropdownSurveyType = response['ReturnObject'];
       }
     );
 
-    this.httpClient.post(URLConstant.GetListKeyValueSrvyFormSchm, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetListKeyValueSrvyFormSchm, null).subscribe(
       (response) => {
         this.dropdownSurveyFormSchm = response['ReturnObject'];
       }
@@ -252,7 +251,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
       const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
       this.reqByIdAndUsername.SrvyTaskId = surveyTaskId;
       this.reqByIdAndUsername.Username = getuserAccess.UserName;
-      this.httpClient.post(URLConstant.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.CancelSurveyTaskBySurveyTaskId, this.reqByIdAndUsername, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Survey Task has been cancelled!");
           window.location.reload();
@@ -289,7 +288,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.reqSrvyTaskAndSendToMobile.ReqListSrvyTaskObjs = this.reqListSrvyTaskObj;
     this.reqSrvyTaskAndSendToMobile.SrvyOrderId = this.surveyOrderId;
 
-    this.httpClient.post(URLConstant.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING], {});

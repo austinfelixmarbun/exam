@@ -7,7 +7,6 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
@@ -16,7 +15,6 @@ import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
@@ -24,6 +22,7 @@ import { RequestCustPersonalJobDataObj } from 'app/shared/model/request-cust-per
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../new-cust-component/NewCustSetData.Service';
 import { JobAddrSectionComponent } from './job-addr-section/job-addr-section.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-personal-job-data',
@@ -48,7 +47,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
-  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
     this.InitData();
@@ -163,7 +162,7 @@ export class CustPersonalJobDataComponent implements OnInit {
 
   tempCustPersonalJobDataObj: CustPersonalJobDataObj = new CustPersonalJobDataObj();
   async GetExisting() {
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.CustId }).subscribe(
       async (response: CustObj) => {
         this.CustomerJobForm.patchValue({
           MrCustModelCode: response.MrCustModelCode,
@@ -171,7 +170,7 @@ export class CustPersonalJobDataComponent implements OnInit {
         this.changeCustModel();
       }
     )
-    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: this.CustId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (response.CustPersonalJobDataId != 0) {
           this.tempCustPersonalJobDataObj = response;
@@ -197,7 +196,7 @@ export class CustPersonalJobDataComponent implements OnInit {
             this.CustomerJobForm.patchValue({
               RefProfessionId: response.RefProfessionId,
             });
-            this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+            this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
               (response: RefProfessionObj) => {
                 this.professionLookUpObj.nameSelect = response.ProfessionName;
                 this.professionLookUpObj.jsonSelect = response;
@@ -209,7 +208,7 @@ export class CustPersonalJobDataComponent implements OnInit {
             this.CustomerJobForm.patchValue({
               RefIndustryTypeId: response.RefIndustryTypeId,
             });
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response.RefIndustryTypeId }).subscribe(
+            this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: response.RefIndustryTypeId }).subscribe(
               (response: RefIndustryTypeObj) => {
                 this.industryLookUpObj.nameSelect = response.IndustryTypeName;
                 this.industryLookUpObj.jsonSelect = response;
@@ -234,7 +233,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       RefMasterTypeCode: refMasterTypeCode
     };
     let tempDesc: string = "";
-    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
       (response: RefMasterObj) => {
         tempDesc = response.Descr;
       }
@@ -409,8 +408,8 @@ export class CustPersonalJobDataComponent implements OnInit {
       reqObjSave.PreJobAddr = this.SetAddrObj(CommonConstant.CustAddrTypePreJob);
     }
     // console.log(reqObjSave);
-    let urlSave: string = URLConstant.AddCustPersonalJobData;
-    if (this.tempCustPersonalJobDataObj.CustPersonalJobDataId != 0) urlSave = URLConstant.EditCustPersonalJobData;
+    let urlSave: string = this.UrlConstantNew.AddCustPersonalJobData;
+    if (this.tempCustPersonalJobDataObj.CustPersonalJobDataId != 0) urlSave = this.UrlConstantNew.EditCustPersonalJobData;
     this.http.post(urlSave, reqObjSave, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);

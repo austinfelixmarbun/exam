@@ -3,13 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl, FormArray, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CoaSchmObj } from 'app/shared/model/common-setting/coa-schm-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { environment } from 'environments/environment';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-coa-scheme-detail',
@@ -51,7 +50,8 @@ export class CoaSchemeDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['CoaSchmId'] != null) {
         this.coaSchmId = params['CoaSchmId'];
@@ -79,7 +79,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     }
   }
   getListCopy() {
-    this.http.post<any>(URLConstant.GetListCoaSchm, {}).subscribe
+    this.http.post<any>(this.UrlConstantNew.GetListCoaSchm, {}).subscribe
       (
         (response: any) => {
           this.ListCopy = response.ReturnObject
@@ -173,7 +173,7 @@ export class CoaSchemeDetailComponent implements OnInit {
     }
     this.coaSchmObj.ListRefCoa = this.ListRefCoaObj;
 
-    this.http.post(URLConstant.SubmitCoaSchm, this.coaSchmObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SubmitCoaSchm, this.coaSchmObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.router.navigate([NavigationConstant.CS_COA_SCHM_PAGING]);
         this.toastr.successMessage(response["Message"]);
@@ -185,7 +185,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetDdlCurr() {
-    this.http.post<any>(URLConstant.GetListKvpActiveRefCurr, {}).subscribe
+    this.http.post<any>(this.UrlConstantNew.GetListKvpActiveRefCurr, {}).subscribe
       (
         (response: any) => {
           this.ListCurr = response.ReturnObject
@@ -197,7 +197,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   async GetListPaymentAlloc() {
-    await this.http.post<any>(URLConstant.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.MrPayAllocGrpCode }).toPromise().then(
+    await this.http.post<any>(this.UrlConstantNew.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.MrPayAllocGrpCode }).toPromise().then(
       (response: any) => {
         this.ListPaymentAlloc = response.ReturnObject
 
@@ -213,7 +213,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   GetCoaSchmData() {
-    this.http.post<CoaSchmObj>(URLConstant.GetCoaSchmByCoaSchmId, { Id: this.coaSchmId }).subscribe(
+    this.http.post<CoaSchmObj>(this.UrlConstantNew.GetCoaSchmByCoaSchmId, { Id: this.coaSchmId }).subscribe(
       (response) => {
         this.coaSchmObj = response;
 
@@ -230,7 +230,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   async GetCoaSchmDetail(Id: string) {
-    await this.http.post<any>(URLConstant.GetListRefCoaByCoaSchmId, { Id: Id }).toPromise().then(
+    await this.http.post<any>(this.UrlConstantNew.GetListRefCoaByCoaSchmId, { Id: Id }).toPromise().then(
       (response) => {
         this.ListRefCoaObj = response;
         this.ListGetCoaCurr = this.ListRefCoaObj.map(item => item.CurrCode)

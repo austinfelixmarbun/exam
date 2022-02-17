@@ -6,10 +6,10 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -35,9 +35,10 @@ export class RoleAddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -56,7 +57,7 @@ export class RoleAddEditComponent implements OnInit {
       this.RefRoleForm.controls["RoleCode"].disable();
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = this.RefRoleId;
-      this.httpClient.post(URLConstant.GetRefRoleByRefRoleId, {Id : this.RefRoleId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefRoleByRefRoleId, {Id : this.RefRoleId}).subscribe(
         response => {
           this.resultData = response;
           this.RefRoleForm.patchValue({
@@ -75,7 +76,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(URLConstant.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
@@ -87,7 +88,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value;
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.httpClient.post(URLConstant.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });

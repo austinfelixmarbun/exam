@@ -6,7 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/update-master-cust/update-cust-personal-fin-data-obj.model';
@@ -54,7 +54,8 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.SourceIncomeList = new Array<any>();
     this.AppCustFinData = new UpdateCustPersonalFinDataObj();
@@ -73,9 +74,9 @@ export class UpdateCustomerFinDataComponent implements OnInit {
       TaskListId: this.WfTaskListId
     });
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetCustFinDataForUpdateMasterCustFinData, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetCustFinDataForUpdateMasterCustFinData, this.ReqCustDataTrxIdObj);
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeSourceIncome, MappingCode: null };
-    let getSourceIncome = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
+    let getSourceIncome = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReq);
     forkJoin([getDetail, getSourceIncome]).toPromise().then(
       (response) => {
         this.AppCustFinData = response[0]["AppCustFinData"];
@@ -337,7 +338,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
 
-    let UpdateMasterCustFinDataUrl = environment.isCore ? URLConstant.UpdateMasterCustFinDataV2 : URLConstant.UpdateMasterCustFinData;
+    let UpdateMasterCustFinDataUrl = environment.isCore ? this.UrlConstantNew.UpdateMasterCustFinDataV2 : this.UrlConstantNew.UpdateMasterCustFinData;
     this.http.post(UpdateMasterCustFinDataUrl, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);

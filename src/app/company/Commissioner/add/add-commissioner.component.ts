@@ -8,9 +8,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { CoyCommissionerObj } from 'app/shared/model/coy-commissioner-obj.model';
 import { UcInfoComponent } from 'app/shared/UserControl/uc-info/uc-info.component';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
     selector: 'add-commissioner',
@@ -44,7 +44,7 @@ export class CommissionerAddComponent implements OnInit {
     refCoyId: any;
 
     readonly CancelLink: string = NavigationConstant.COY_COMMISSIONER;
-    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient) {
+    constructor(private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
         this.route.queryParams.subscribe(params => {
             this.param = params["coyCommissionerId"];
             this.refCoyId = params["refCoyId"];
@@ -53,7 +53,7 @@ export class CommissionerAddComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.idTypeUrl = this.settingUrl + URLConstant.GetRefMasterList;
+        this.idTypeUrl = this.UrlConstantNew.GetRefMasterList;
         var refMasterObj = new RefMasterObj();
         // refMasterObj.refMasterTypeCode = "ID_TYPE";
         this.http.post(this.idTypeUrl, refMasterObj).subscribe(
@@ -63,7 +63,7 @@ export class CommissionerAddComponent implements OnInit {
             }
         );
         if (this.mode == "edit") {
-            this.apiUrl = this.foundationUrl + URLConstant.GetCoyCommissioner;
+            this.apiUrl = this.UrlConstantNew.GetCoyCommissioner;
             var coyCommissionerObj = new CoyCommissionerObj();
             coyCommissionerObj.coyCommissionerId = this.param;
             this.http.post(this.apiUrl, coyCommissionerObj).subscribe(
@@ -124,7 +124,7 @@ export class CommissionerAddComponent implements OnInit {
             coyCommisionerObj.refCoyId = this.refCoyId;
 
             if (this.mode == "edit") {
-                this.editUrl = this.foundationUrl + URLConstant.EditCoyCommissioner;
+                this.editUrl = this.UrlConstantNew.EditCoyCommissioner;
                 coyCommisionerObj.coyCommissionerId = this.param;
                 this.http.post(this.editUrl, coyCommisionerObj, AdInsConstant.SpinnerOptions).subscribe(
                     (response) => {
@@ -133,7 +133,7 @@ export class CommissionerAddComponent implements OnInit {
                     });
             }
             else {
-                this.editUrl = this.foundationUrl + URLConstant.AddCoyCommissioner;
+                this.editUrl = this.UrlConstantNew.AddCoyCommissioner;
                 this.http.post(this.editUrl, coyCommisionerObj, AdInsConstant.SpinnerOptions).subscribe(
                     (response) => {
                         this.toastr.successMessage(response['message']);

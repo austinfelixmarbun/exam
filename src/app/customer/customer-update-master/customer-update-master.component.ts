@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { IntegrationObj } from 'app/shared/model/library/integration-obj.model';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { RequestTaskModelObj } from 'app/shared/model/v2/request-task-model-obj.model';
@@ -18,7 +18,7 @@ export class CustomerUpdateMasterComponent implements OnInit {
   IntegrationObj: IntegrationObj = new IntegrationObj();
   RequestTaskModel: RequestTaskModelObj = new RequestTaskModelObj();
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -37,7 +37,7 @@ export class CustomerUpdateMasterComponent implements OnInit {
                                                UserAccess[CommonConstant.OFFICE_CODE],
                                                UserAccess[CommonConstant.ROLE_CODE] + "-" + UserAccess[CommonConstant.OFFICE_CODE]];
       
-      this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
+      this.IntegrationObj.baseUrl = this.UrlConstantNew.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.RequestTaskModel;
       this.IntegrationObj.leftColumnToJoin = "RefNo";
       this.IntegrationObj.rightColumnToJoin = "ProcessInstanceBusinessKey";

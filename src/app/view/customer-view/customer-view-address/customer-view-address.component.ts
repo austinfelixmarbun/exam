@@ -4,10 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -31,7 +31,8 @@ export class CustomerViewAddressComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew
   ) {
   }
 
@@ -41,7 +42,7 @@ export class CustomerViewAddressComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.http.post(URLConstant.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddr = response[CommonConstant.ReturnObj];
@@ -53,13 +54,13 @@ export class CustomerViewAddressComponent implements OnInit {
     );
     var custObj = new CustObj();
     custObj.CustId = this.CustId;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.CustId }).subscribe(
       response => {
         this.CustType = response['MrCustTypeCode'];
         let refMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
         refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
         refMasterObj.MappingCode = this.CustType;
-        this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterObj).subscribe(
+        this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterObj).subscribe(
           response => {
             if (response[CommonConstant.ReturnObj].length > 0) {
               this.ddlItem = response[CommonConstant.ReturnObj];
@@ -70,7 +71,7 @@ export class CustomerViewAddressComponent implements OnInit {
           }
         );
       });
-    this.http.post(URLConstant.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
       response => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.responseResultCustAddrHist = response[CommonConstant.ReturnObj];

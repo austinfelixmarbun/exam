@@ -4,10 +4,10 @@ import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ref-job-title-add',
@@ -31,10 +31,10 @@ export class RefJobTitleAddComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.ORG_JOB_TITLE;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
-    this.apiUrl = URLConstant.GetRefJobTitleById;
-    this.addUrl = URLConstant.AddRefJobTitle;
-    this.editUrl = URLConstant.EditRefJobTitle;
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+    this.apiUrl = this.UrlConstantNew.GetRefJobTitleById;
+    this.addUrl = this.UrlConstantNew.AddRefJobTitle;
+    this.editUrl = this.UrlConstantNew.EditRefJobTitle;
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {

@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { PaymentAllocGrpObj } from 'app/shared/model/common-setting/payment-alloc-grp-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
@@ -32,7 +32,8 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.mode = params['mode'];
@@ -57,7 +58,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     this.inputLookUpPaymentAllocObj.genericJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.isRequired = true
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { refMasterTypeCode: RefMasterConstant.PAY_ALLOC_GRP }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { refMasterTypeCode: RefMasterConstant.PAY_ALLOC_GRP }).subscribe(
       (response) => {
         this.ListPayAllocGrp = response["ReturnObject"]
       },
@@ -68,7 +69,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
 
     if (this.mode === 'edit') {
       this.PaymentAllocGrpObj.RefPaymentAllocGrpId = +this.RefPaymentAllocGrpId
-      this.http.post(URLConstant.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate, {Id : +this.RefPaymentAllocGrpId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate, {Id : +this.RefPaymentAllocGrpId}).subscribe(
         (response) => {
           this.PaymentAllocGrpForm.patchValue({
             MrPayAllocGrpCode: response['MrPayAllocGrpCode'],
@@ -77,7 +78,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
           });
 
           
-          this.http.post(URLConstant.GetRefPaymentAllocByID, {Id : response['RefPaymentAllocId'] }).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefPaymentAllocByID, {Id : response['RefPaymentAllocId'] }).subscribe(
             (response) => {
               this.inputLookUpPaymentAllocObj.idSelect = response["RefPaymentAllocId"]
               this.inputLookUpPaymentAllocObj.nameSelect = response["PaymentAllocCode"]
@@ -106,7 +107,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
     this.PaymentAllocGrpObj.IsActive = this.PaymentAllocGrpForm.controls["IsActive"].value;
 
     if (this.mode == 'add') {
-      this.http.post(URLConstant.AddRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);
@@ -118,7 +119,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
       );
     }
     else {
-      this.http.post(URLConstant.EditRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefPaymentAllocGrp, this.PaymentAllocGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         //EDIT
         (response) => {
           this.router.navigate([NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING]);

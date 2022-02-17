@@ -3,15 +3,14 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefCoyObj } from 'app/shared/model/ref-coy-obj.model';
 import { UcAddressComponent } from 'app/shared/UserControl/ucAddress/ucAddress.component';
 import { UcContactInfoComponent } from 'app/shared/UserControl/ucContactInfo/ucContactInfo.component';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
     selector: 'edit-company',
@@ -26,7 +25,6 @@ export class EditCompanyComponent implements OnInit {
     result: any;
     mode: string = "add";
     apiUrl: any;
-    foundationUrl: string = environment.FoundationR3Url;
     editUrl: any;
     coyCode: any;
     fullName: any;
@@ -39,7 +37,7 @@ export class EditCompanyComponent implements OnInit {
     registrationNo: any;
 
     readonly CancelLink: string = NavigationConstant.COY;
-    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService) {
+    constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
         this.route.queryParams.subscribe(params => {
             this.param = params["refCoyId"];
             this.mode = params["mode"];
@@ -48,7 +46,7 @@ export class EditCompanyComponent implements OnInit {
 
     ngOnInit() {
         if (this.mode == "edit") {
-            this.apiUrl = this.foundationUrl + URLConstant.GetRefCoy;
+            this.apiUrl = this.UrlConstantNew.GetRefCoy;
             var refCoyObj = new RefCoyObj();
             refCoyObj.refCoyId = this.param;
             this.http.post(this.apiUrl, refCoyObj).subscribe(
@@ -110,7 +108,7 @@ export class EditCompanyComponent implements OnInit {
         refCoyObj.refCoyId = this.param;
 
         if (this.mode == "edit") {
-            this.editUrl = this.foundationUrl + "/v1" + URLConstant.EditRefCoy;
+            this.editUrl = this.UrlConstantNew.EditRefCoy;
             refCoyObj.refCoyId = this.param;
             refCoyObj.RowVersion = this.result.RowVersion;
             this.http.post(this.editUrl, refCoyObj, AdInsConstant.SpinnerOptions).subscribe(
@@ -119,7 +117,7 @@ export class EditCompanyComponent implements OnInit {
                 });
         }
         else {
-            this.editUrl = this.foundationUrl + "/v1" + URLConstant.AddCoyCommissioner;
+            this.editUrl = this.UrlConstantNew.AddCoyCommissioner;
             this.http.post(this.editUrl, refCoyObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.COY],{ });

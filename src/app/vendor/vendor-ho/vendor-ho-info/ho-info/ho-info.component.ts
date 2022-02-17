@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
-import { environment } from 'environments/environment';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ho-info',
@@ -15,7 +14,7 @@ export class HoInfoComponent implements OnInit {
   viewSupplierObj: UcViewGenericObj = new UcViewGenericObj();
   viewSurveyorObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -24,7 +23,7 @@ export class HoInfoComponent implements OnInit {
   ngOnInit() {
     
 
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["MrVendorCategoryCode"];
       }

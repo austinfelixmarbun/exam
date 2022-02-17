@@ -15,6 +15,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { StorageService } from '../services/StorageService';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 @Component({
     selector: 'app-navbar',
@@ -43,18 +44,20 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
     constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
-        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
+        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService, 
+        private UrlConstantNew: UrlConstantNew) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
 
     ngOnInit() {
         this.GetListNotifH();
+        this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
-            .withUrl(URLConstant.WebSocketUrl)
+            .withUrl(this.UrlConstantNew.WebSocketUrl)
             .withAutomaticReconnect()
             .build();
 
@@ -87,7 +90,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
-        this.setUser();
     }
     
     setUser(){
@@ -102,7 +104,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         var requestObj = {
             isLoading: false
         };
-        this.http.post(URLConstant.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
+        this.http.post(this.UrlConstantNew.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
             (response) => {
                 this.TotalUnread = response["TotalUnreadNotification"];
                 this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
@@ -116,7 +118,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ClickNotification(item) {
-        this.http.post(URLConstant.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
+        this.http.post(this.UrlConstantNew.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
             (response) => {
             });
         if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {
@@ -128,7 +130,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        this.http.post(AdInsConstant.Logout, "", AdInsConstant.SpinnerOptions);
+        this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);

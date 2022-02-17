@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ho-group-info',
@@ -16,7 +15,7 @@ export class HoGroupInfoComponent implements OnInit {
   VendorId: any;
   resultData: any;
   
-  constructor(private route: ActivatedRoute,  private http: HttpClient) { 
+  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -30,7 +29,7 @@ export class HoGroupInfoComponent implements OnInit {
     this.VendorGroupObj = new VendorGroupObj();
     this.VendorGroupObj.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListVendorGrpByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorGrpByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
       }

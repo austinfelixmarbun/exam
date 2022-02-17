@@ -6,20 +6,19 @@ import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, V
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import { CustFormExistingObj as CustFormExistingObj } from 'app/shared/model/new-cust/shareholder/shareholder-form-existing-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-shareholder-form',
@@ -47,7 +46,7 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -117,7 +116,7 @@ export class ShareholderFormComponent implements OnInit {
 
   async GetExistingShareholder(custCompanyMgmntShrholderId: number = this.CustCompanyMgmntShrholderId) {
     if (custCompanyMgmntShrholderId == 0) return;
-    await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
       async (response: CustCompanyMgmntShrholderObj) => {
         this.parentForm.patchValue({
           MrPositionSlikCode: response.MrPositionSlikCode,
@@ -142,7 +141,7 @@ export class ShareholderFormComponent implements OnInit {
 
   async GetExistingJobData(custId: number = this.CustId) {
     if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
@@ -154,7 +153,7 @@ export class ShareholderFormComponent implements OnInit {
         this.jobPositionLookupObj.nameSelect = tempDesc;
         this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
         if (!response.RefProfessionId) return;
-        await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+        await this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
             this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode });
             this.professionLookUpObj.nameSelect = response.ProfessionName;
@@ -170,7 +169,7 @@ export class ShareholderFormComponent implements OnInit {
       RefMasterTypeCode: refMasterTypeCode
     };
     let tempDesc: string = "";
-    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
       (response: RefMasterObj) => {
         tempDesc = response.Descr;
       }

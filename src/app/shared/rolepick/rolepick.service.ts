@@ -11,16 +11,17 @@ import { CookieService } from 'ngx-cookie';
 import { formatDate } from '@angular/common';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 @Injectable()
 export class RolePickService {
     constructor(public dialog: MatDialog, private http: HttpClient,
         private currentUserContextService: CurrentUserContextService,
-        private router: Router, private cookieService: CookieService) { }
+        private router: Router, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
     openDialog(data, type = ""): void {
         if (type == "modal") {
             let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-            this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : UserAccess['UserName'], Module : environment.Module}, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(this.UrlConstantNew.GetListJobTitleByUsernameAndModuleV2, {UserName : UserAccess['UserName'], Module : environment.Module}, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     const object = {
                         response: response
@@ -78,7 +79,7 @@ export class RolePickService {
                   'IsLoading': "true"
                 });
                 let SpinnerOptions = { headers: SpinnerHeaders, withCredentials: true };
-                this.http.post(AdInsConstant.LoginByRoleV2, roleObject, SpinnerOptions).subscribe(
+                this.http.post(this.UrlConstantNew.LoginByRoleV2, roleObject, SpinnerOptions).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
 
@@ -91,7 +92,7 @@ export class RolePickService {
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-                        this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
+                        this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
                             (response) => {
                                 AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                                 this.router.navigate([NavigationConstant.DASHBOARD]);

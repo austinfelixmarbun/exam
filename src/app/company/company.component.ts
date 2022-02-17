@@ -1,13 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { SearchComponent } from 'app/shared/search/search.component';
+import { Component, OnInit } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-company',
@@ -19,13 +16,12 @@ export class CompanyComponent implements OnInit {
   pageNow: any;
   pageSize: any;
   apiUrl: any;
-  foundationUrl: string = environment.FoundationR3Url;
   resultData: string;
 
   readonly BodLink: string = NavigationConstant.COY_BOD;
   readonly CommissionerLink: string = NavigationConstant.COY_COMMISSIONER;
   readonly EditLink: string = NavigationConstant.COY_EDIT;
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService) { }
+  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.search();
@@ -33,7 +29,7 @@ export class CompanyComponent implements OnInit {
 
   search() {
     this.pageNow = 1;
-    this.apiUrl = this.foundationUrl + URLConstant.GetRefCoyPaging;
+    this.apiUrl = this.UrlConstantNew.GetRefCoyPaging;
     this.http.post(this.apiUrl, null)
       .subscribe(
         (response) => {

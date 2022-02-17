@@ -5,20 +5,21 @@ import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "../AdInsHelper";
 import { AdInsConstant } from "../AdInstConstant";
 import { CommonConstant } from "../constant/CommonConstant";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 import { ApprovalObj } from "../model/approval/approval-obj.model";
 import { ApvClaimTaskObj } from "../model/approval/approval-req-obj.model";
 
 @Injectable()
 export class ApprovalTaskService{
 
-    constructor(private http: HttpClient, private cookieService: CookieService, private toastr: NGXToastrService) { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
   
     async ClaimApvTask(TaskId: number){
         let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         var claimTaskObj = new ApvClaimTaskObj();
         claimTaskObj.TaskId = TaskId;
         claimTaskObj.Username = currentUserContext[CommonConstant.USER_NAME];
-        await this.http.post(AdInsConstant.ApvClaimTask, claimTaskObj, AdInsConstant.SpinnerOptions).toPromise().then(
+        await this.http.post(this.UrlConstantNew.ApvClaimTask, claimTaskObj, AdInsConstant.SpinnerOptions).toPromise().then(
             (response) => {
                 if (response["StatusCode"] != 200) {
                     this.toastr.errorMessage(response["Message"]);
@@ -30,7 +31,7 @@ export class ApprovalTaskService{
     HoldApvTask(TaskId: number){
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
-        this.http.post(AdInsConstant.ApvHoldTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.ApvHoldTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
                 this.toastr.successMessage(response["Message"]);
             }
@@ -41,7 +42,7 @@ export class ApprovalTaskService{
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
         ApvReqObj.Username = Username;
-        this.http.post(AdInsConstant.ApvTakeBackTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.ApvTakeBackTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
                this.toastr.successMessage(response["Message"]);
             }
@@ -51,7 +52,7 @@ export class ApprovalTaskService{
     UnclaimApvTask(TaskId: number){
         let ApvReqObj = new ApprovalObj();
         ApvReqObj.TaskId = TaskId;
-        this.http.post(AdInsConstant.ApvUnclaimTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.ApvUnclaimTaskUrl, ApvReqObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
           }

@@ -8,12 +8,12 @@ import { formatDate, DatePipe } from '@angular/common';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { RefEmpObj } from '../../../shared/model/ref-emp-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -37,7 +37,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   businessDt: Date;
 
   readonly CancelLink: string = NavigationConstant.EMP_LEAVE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
@@ -61,7 +61,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.http.post(URLConstant.GetRefEmpLeaveMngmntById, {Id : this.refEmpLeaveMngmntId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefEmpLeaveMngmntById, {Id : this.refEmpLeaveMngmntId}).subscribe(
         response => {
           this.resultData = response;
           this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
@@ -75,7 +75,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           });
           this.refEmp = new RefEmpObj();
           this.refEmp.RefEmpId = this.resultData.RefEmpId;
-          this.http.post(URLConstant.GetRefEmployeeById, {Id : this.resultData.RefEmpId}).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefEmployeeById, {Id : this.resultData.RefEmpId}).subscribe(
             (response) => {
               this.resultEmpData = response;
               this.empName = this.resultEmpData.EmpName;
@@ -112,7 +112,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
    
       if (this.pageType == "add") {
         this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
-        this.http.post(URLConstant.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
@@ -122,7 +122,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.relmObj.RefEmpId = this.RefEmpId;
         this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
         this.relmObj.RowVersion = this.resultData.RowVersion;
-        this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});

@@ -1,6 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SearchComponent } from 'app/shared/search/search.component';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +7,7 @@ import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { environment } from 'environments/environment';
 import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -29,7 +28,8 @@ export class UserRoleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
-    private location: Location,
+    private location: Location, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['refUserId'] != null) {
@@ -39,17 +39,16 @@ export class UserRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = this.foundationUrl + URLConstant.GetRefUserPaging;
+    this.apiUrl = this.UrlConstantNew.GetRefUserPaging;
 
     this.initiateForm();
   }
 
   initiateForm() {
-    var urlGetUser: any = this.foundationUrl + URLConstant.GetRefUser;
-    var urlGetEmp: any = this.foundationUrl + URLConstant.GetRefEmployeeById;
-    var urlGetListEmpPos: any = this.foundationUrl + URLConstant.GetListEmployeebyRefEmpId;
+    var urlGetUser: any = this.UrlConstantNew.GetRefUser;
+    var urlGetEmp: any = this.UrlConstantNew.GetRefEmployeeById;
+    var urlGetListEmpPos: any = this.UrlConstantNew.GetListEmployeebyRefEmpId;
     var empObj: RefEmpObj = new RefEmpObj;
-    var urlGetEmpPosition: any;
 
     this.refUserObj = new RefUserObj();
     this.refEmpObj = new RefEmpObj();

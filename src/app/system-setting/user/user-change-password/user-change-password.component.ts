@@ -9,11 +9,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { RefEmpObj } from "app/shared/model/ref-emp-obj.model";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: "app-user-change-password",
@@ -38,10 +38,11 @@ export class UserChangePasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
     private service: NGXToastrService, 
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.username = currentUserContext.UserName;
@@ -50,16 +51,16 @@ export class UserChangePasswordComponent implements OnInit {
   ngOnInit() {
     var getEmpUrl: any;
 
-    this.apiUrl = this.foundationUrl + URLConstant.GetUserByUsername;
+    this.apiUrl = this.UrlConstantNew.GetUserByUsername;
     this.refUserObj = new RefUserObj();
     // this.refUserObj.username = this.username;
-    this.httpClient.post(this.apiUrl, this.refUserObj).subscribe(
+    this.http.post(this.apiUrl, this.refUserObj).subscribe(
       response => {
         this.refUserObj = response["returnObject"];
         this.refEmpObj = new RefEmpObj();
-        getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
+        getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
         // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
-        this.httpClient.post(getEmpUrl, {Id : this.refEmpObj.RefEmpId}).subscribe(response => {
+        this.http.post(getEmpUrl, {Id : this.refEmpObj.RefEmpId}).subscribe(response => {
           this.refEmpObj = response["returnObject"];
         });
       }
@@ -84,8 +85,8 @@ export class UserChangePasswordComponent implements OnInit {
       // this.refUserObj.oldPass = UserAddEditForm.value.Password;
       // this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
       //SAVE
-      this.apiUrl = this.foundationUrl + URLConstant.ChangePassword;
-      this.httpClient.post(this.apiUrl, this.refUserObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.apiUrl = this.UrlConstantNew.ChangePassword;
+      this.http.post(this.apiUrl, this.refUserObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.typeSave(response["message"]);
           this.router.navigateByUrl(NavigationConstant.SYSTEM_SETTING_REF_USER, { skipLocationChange: true })

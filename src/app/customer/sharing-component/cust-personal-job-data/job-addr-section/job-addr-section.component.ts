@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
@@ -27,7 +27,7 @@ export class JobAddrSectionComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.AddControlFormJobAddr();
@@ -114,7 +114,7 @@ export class JobAddrSectionComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.CustId;
     reqObj.Code = addrTypeCode;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         console.log(response);
         this.DictCustAddr[addrTypeCode] = new CustAddrObj();

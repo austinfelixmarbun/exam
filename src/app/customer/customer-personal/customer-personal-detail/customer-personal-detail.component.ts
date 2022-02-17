@@ -9,7 +9,6 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
@@ -17,6 +16,7 @@ import { NewCustSetData } from 'app/customer/sharing-component/new-cust-componen
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CustGrpObj } from 'app/shared/model/cust-grp-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -69,7 +69,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsAffiliateWithMf: [false],
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -88,7 +88,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   ngOnInit() {
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
       (response) => {
         this.Country = response;
         let splitCodeDesc = this.Country.GsValue.split(';');
@@ -110,7 +110,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custObj = new CustObj()
     this.custObj.CustId = this.IdCust;
 
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
         this.tempCustObj = response;
         this.CustomerDetailForm.patchValue({
@@ -123,10 +123,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
       });
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj.CustId = this.IdCust;
-    this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
+    this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustPersonalObj = response;
-        this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
+        this.http.post(this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
           (response) => {
             this.tempNationality = response["RefMasterObjs"];
 
@@ -138,7 +138,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
                 this.flag = true;
                 this.lookUpObj.isRequired = false;
               } else {
-                this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
+                this.http.post(this.UrlConstantNew.GetRefCountryByCountryCode, { Code: this.tempCustPersonalObj.WnaCountryCode }).subscribe(
                   (response) => {
                     this.tempCountry = response;
                     this.lookUpObj.nameSelect = this.tempCountry.CountryName;
@@ -175,12 +175,12 @@ export class CustomerPersonalDetailComponent implements OnInit {
           IsRestInPeace: this.tempCustPersonalObj.IsRestInPeace,
         });
       });
-    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           let reqById: GenericObj = new GenericObj();
           reqById.Id = response[CommonConstant.ReturnObj][0].CustId;
-          this.http.post(URLConstant.GetCustByCustId, reqById).subscribe(
+          this.http.post(this.UrlConstantNew.GetCustByCustId, reqById).subscribe(
             (responseCustGrp) => {
               this.lookupCustGrpObj.nameSelect = responseCustGrp["CustName"];
               this.lookupCustGrpObj.jsonSelect = { CustName: responseCustGrp["CustName"] };
@@ -268,7 +268,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     this.custPersonalObj.IsVip = this.CustomerDetailForm.controls["IsVip"].value;
     this.custPersonalObj.VipNotes = this.CustomerDetailForm.controls["VipNotes"].value;
     this.custPersonalObj.IsAffiliateWithMf = this.CustomerDetailForm.controls["IsAffiliateWithMf"].value;
-    await this.http.post(URLConstant.EditCustPersonal, this.custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.EditCustPersonal, this.custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
       response => {
         this.toastr.successMessage(response["Message"]);
         // this.wizard.goToNextStep();

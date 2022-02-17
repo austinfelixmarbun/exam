@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-view-cabinet',
@@ -20,7 +20,8 @@ export class ViewCabinetComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/view-cabinet-detail.json";
@@ -33,7 +34,7 @@ export class ViewCabinetComponent implements OnInit {
 
     var rackObj: GenericObj = new GenericObj();
     rackObj.Code = this.CabinetCode;
-    this.http.post(URLConstant.GetListRackByCabinetCode, rackObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListRackByCabinetCode, rackObj).subscribe(
       response => {
         this.responseRack = response['ReturnObject'];
       },

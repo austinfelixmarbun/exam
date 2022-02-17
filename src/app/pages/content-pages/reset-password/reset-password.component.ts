@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 
@@ -32,7 +32,7 @@ export class ResetPasswordComponent implements OnInit {
   RefUserObj: any;
   customPattern = new Array<CustomPatternObj>();
   
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router, private UrlConstantNew: UrlConstantNew) {
     this.version = localStorage.getItem(CommonConstant.VERSION);
     this.code = this.route.snapshot.paramMap.get('code');
   }
@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
       this.getRefUser();
     }
 
-    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
       (response: { GsValue }) => {
         let patternObj: CustomPatternObj = new CustomPatternObj();
         patternObj.pattern = response.GsValue;
@@ -62,7 +62,7 @@ export class ResetPasswordComponent implements OnInit {
         NewPassword: this.ResetPassForm.controls["NewPassword"].value,
         Password: "-",
       };
-      this.http.post(URLConstant.ResetPasswordByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.ResetPasswordByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.isCompleted = true;
@@ -79,7 +79,7 @@ export class ResetPasswordComponent implements OnInit {
     {
       ResetCode: this.code
     };
-    this.http.post(URLConstant.GetRefUserByResetCode, requestObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefUserByResetCode, requestObj).subscribe(
       (response) => {
         this.RefUserObj = response;
         if (this.RefUserObj.RefUserId != 0) {

@@ -3,14 +3,13 @@ import { OrganizationObj } from 'app/shared/model/organization-obj.model';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -19,8 +18,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class OrganizationModelDetailComponent implements OnInit {
 
-
-  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   orgModelObj: OrgMdlObj;
   orgObj: OrganizationObj;
@@ -38,8 +35,9 @@ export class OrganizationModelDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private httpClient: HttpClient,
-    private service: NGXToastrService,
+    private http: HttpClient,
+    private service: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -59,10 +57,10 @@ export class OrganizationModelDetailComponent implements OnInit {
     this.orgModelObj = new OrgMdlObj()
     this.GetRefOrg();
     if (this.type == 'edit') {
-      this.apiUrl = this.foundationUrl + URLConstant.GetOrgMdlByOrgMdlId;
+      this.apiUrl = this.UrlConstantNew.GetOrgMdlByOrgMdlId;
       this.orgModelObj = new OrgMdlObj();
       this.orgModelObj.orgMdlId = +this.orgMdlId;
-      this.httpClient.post(this.apiUrl, this.orgModelObj).subscribe(
+      this.http.post(this.apiUrl, this.orgModelObj).subscribe(
         (response) => {
           this.orgModelObj = response['returnObject'];
           this.modelCode = response['returnObject']['orgMdlCode'];
@@ -79,7 +77,7 @@ export class OrganizationModelDetailComponent implements OnInit {
 
   Save(OrgMdlForm: NgForm): void {
     this.spinner.show();
-    var getOrgModel = this.foundationUrl + URLConstant.GetOrgMdl;
+    var getOrgModel = this.UrlConstantNew.GetOrgMdl;
     var orgMdlObj: OrgMdlObj;
     orgMdlObj = new OrgMdlObj()
     orgMdlObj.refOrgId = +this.refOrgId;
@@ -89,13 +87,13 @@ export class OrganizationModelDetailComponent implements OnInit {
     if (this.type != 'edit') {
 
       //CHECK-DUPLICATE-CODE
-      this.httpClient.post(getOrgModel, orgMdlObj).subscribe(
+      this.http.post(getOrgModel, orgMdlObj).subscribe(
         (response) => {
           if (response['returnObject'] != null) {
             this.service.typeErrorCustom(ExceptionConstant.CODE_HAS_BEEN_USED);
           }
           else {
-            this.apiUrl = this.foundationUrl + URLConstant.AddOrgMdl;
+            this.apiUrl = this.UrlConstantNew.AddOrgMdl;
             this.orgModelObj = new OrgMdlObj();
             this.orgModelObj.refOrgId = +this.refOrgId;
             this.orgModelObj.orgMdlCode = OrgMdlForm.value.modelCode;
@@ -103,7 +101,7 @@ export class OrganizationModelDetailComponent implements OnInit {
             if (OrgMdlForm.value.isActive) { this.orgModelObj.isActive = '1' } else { this.orgModelObj.isActive = '0' };
 
             //SAVE
-            this.httpClient.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
               (response) => {
                 this.service.typeSave(response['message']);
                 this.location.back();
@@ -123,14 +121,14 @@ export class OrganizationModelDetailComponent implements OnInit {
     }
     //MODE-EDIT
     else {
-      this.apiUrl = this.foundationUrl + URLConstant.EditOrgMdl;
+      this.apiUrl = this.UrlConstantNew.EditOrgMdl;
       this.orgModelObj.refOrgId = +this.refOrgId;
       this.orgModelObj.orgMdlCode = OrgMdlForm.value.modelCode;
       this.orgModelObj.orgMdlName = OrgMdlForm.value.modelName;
       if (OrgMdlForm.value.isActive) { this.orgModelObj.isActive = '1' } else { this.orgModelObj.isActive = '0' };
 
       //SAVE
-      this.httpClient.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.apiUrl, this.orgModelObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.typeSave(response['message']);
           this.location.back();
@@ -147,10 +145,10 @@ export class OrganizationModelDetailComponent implements OnInit {
   }
 
   GetRefOrg() {
-    var getOrgUrl = this.foundationUrl + URLConstant.GetRefOrg;
+    var getOrgUrl = this.UrlConstantNew.GetRefOrg;
     this.orgObj = new OrganizationObj();
     this.orgObj.refOrgId = +this.refOrgId;
-    this.httpClient.post(getOrgUrl, this.orgObj).subscribe(
+    this.http.post(getOrgUrl, this.orgObj).subscribe(
       (response) => {
         this.orgObj = response['returnObject'];
       },

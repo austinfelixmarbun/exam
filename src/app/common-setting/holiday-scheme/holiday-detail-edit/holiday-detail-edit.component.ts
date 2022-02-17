@@ -6,11 +6,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { HolidayDObj } from 'app/shared/model/holiday-d-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { formatDate } from '@angular/common';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { environment } from 'environments/environment';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-holiday-detail-edit',
@@ -29,7 +28,7 @@ export class HolidayDetailEditComponent implements OnInit {
   result: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.HolidaySchmDId = params["HolidaySchmDId"];
       this.HolidaySchmHId = params["HolidaySchmHId"];
@@ -42,7 +41,7 @@ export class HolidayDetailEditComponent implements OnInit {
     this.title = "Holiday Scheme-Edit";
     var HolidayObj = new HolidayDObj;
     HolidayObj.HolidaySchmDId = this.HolidaySchmDId;
-    this.http.post(URLConstant.GetHolidaySchmDById, {Id: this.HolidaySchmDId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetHolidaySchmDById, {Id: this.HolidaySchmDId}).subscribe(
       (response) => {
         this.result = response;
         this.HolidayListForm.patchValue({
@@ -63,7 +62,7 @@ export class HolidayDetailEditComponent implements OnInit {
     HolidayObj.HolidaySchmDId = this.result.HolidaySchmDId;
     HolidayObj.RowVersion = this.result.RowVersion;
 
-    this.http.post(URLConstant.EditHolidaySchmD, HolidayObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditHolidaySchmD, HolidayObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);

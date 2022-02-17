@@ -5,6 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-paging',
@@ -16,7 +17,13 @@ export class CustomerPagingComponent implements OnInit {
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
   readonly AddLinkNewCust: string = NavigationConstant.CUST_NEW_FORM;
-  constructor() { }
+
+  listUrlConstant = [];
+
+  errorUrlTs = '';
+  errorUrlJson = '';
+  errorNotSame = '';
+  constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustomer.json";
@@ -29,6 +36,52 @@ export class CustomerPagingComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = '1';
     this.inputPagingObj.addCritInput.push(critObj);
+
+    // this.testGetListUrl();
+    // this.testUrl();
+    
+  }
+
+  testGetListUrl() {
+    this.listUrlConstant = [];
+    let key = "";
+    for (key in URLConstant) {
+      this.listUrlConstant.push(key);
+    }
+  }
+
+  testUrl() {
+    this.errorUrlTs = "TS";
+    this.errorUrlJson = "JSON";
+    for(let index = 0; index < this.listUrlConstant.length; index++) { 
+      if(URLConstant[this.listUrlConstant[index]] == undefined) {
+        this.errorUrlTs = "TS error in " + this.listUrlConstant[index];
+        break;
+      }
+      if(this.UrlConstantNew[this.listUrlConstant[index]] == undefined) {
+        this.errorUrlJson = "JSON error in " + this.listUrlConstant[index];
+        break;
+      }
+      
+      if(URLConstant[this.listUrlConstant[index]] !== this.UrlConstantNew[this.listUrlConstant[index]]) {
+        this.errorNotSame = this.listUrlConstant[index] + " not same";
+        console.log(URLConstant[this.listUrlConstant[index]]);
+        console.log(this.UrlConstantNew[this.listUrlConstant[index]]);
+        break;
+      }
+      this.errorUrlTs = 'TS';
+      this.errorUrlJson = 'JSON';
+      this.errorNotSame = '';
+
+      if(index == this.listUrlConstant.length-1) {
+        this.errorUrlTs = '';
+        this.errorUrlJson = '';
+        this.errorNotSame = "ALL URL DONE";
+        console.log(index+1);
+      }
+    }
+
+    
   }
 
 }

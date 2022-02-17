@@ -3,7 +3,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -12,8 +11,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { DatePipe, formatDate } from '@angular/common';
 import { CustCompanyLegalDocObj } from 'app/shared/model/cust-company-legal-doc-obj.model';
 import { String } from 'typescript-string-operations';
-import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -46,11 +45,12 @@ export class CustLegalDocDetailComponent implements OnInit {
   });
 
   constructor(
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private fb: FormBuilder,
     public activeModal: NgbActiveModal, 
     private cookieService: CookieService,
-    private toastr: NGXToastrService
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class CustLegalDocDetailComponent implements OnInit {
 
     var refMasterDocType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     refMasterDocType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeLegalDocType;
-    this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterDocType).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterDocType).subscribe(
       (response: any) => {
         this.legalDocTypeList = response;
         this.CustCompanyLegalDocForm.patchValue({
@@ -72,7 +72,7 @@ export class CustLegalDocDetailComponent implements OnInit {
     );
 
     if(this.Mode == "Edit"){
-      this.httpClient.post(URLConstant.GetCustCompanyLegalDocByCustCompanyLegalDocId, {Id : this.CustCompanyLegalDocId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetCustCompanyLegalDocByCustCompanyLegalDocId, {Id : this.CustCompanyLegalDocId}).subscribe(
         (response: CustCompanyLegalDocObj) => {
           this.CustCompanyLegalDocForm.patchValue({
             CustCompanyLegalDocId: response.CustCompanyLegalDocId,
@@ -123,13 +123,13 @@ export class CustLegalDocDetailComponent implements OnInit {
     }
 
     if(this.Mode == "Add"){
-      this.httpClient.post(URLConstant.AddCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }
       );
     }else{
-      this.httpClient.post(URLConstant.EditCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditCustCompanyLegalDoc, custCompanyLegalDocData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.activeModal.close(response);
         }

@@ -3,10 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, tap, switchMap, merge } from 'rxjs/operators'
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
 import { RequestCriteriaObj } from 'app/shared/model/request-criteria-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 // State constant declaration
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -144,10 +143,9 @@ export class TypeaheadComponent {
   searching = false;
   searchFailed = false;
   hideSearchingWhenUnsubscribed = new Observable(() => () => this.searching = false);
-  settingUrl: string = environment.FoundationR3Url;
   userData: any[] = [];
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   searched(term: string) {
     this.userData = [];
@@ -167,7 +165,7 @@ export class TypeaheadComponent {
     critObj.value = "%" + term + "%";
     arrCrit.push(critObj);
     request.criteria = arrCrit;
-    var Url = this.settingUrl + URLConstant.GetBankPaging;
+    var Url = this.UrlConstantNew.GetBankPaging;
     return this.http.post(Url, request).pipe(
         map(response => {
           var num = 0;

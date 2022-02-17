@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefEconomicSectorObj } from 'app/shared/model/ref-economic-sector-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-economic-sector-add-edit',
@@ -27,7 +27,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_ECONOMIC_SECTOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.pageType = params["mode"];
@@ -44,7 +44,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.RefEconomicSectorForm.controls["EconomicSectorCode"].disable();
       this.refEconomicSectorObj = new RefEconomicSectorObj();
       this.refEconomicSectorObj.RefEconomicSectorId = this.RefEconomicSectorId;
-      this.http.post(URLConstant.GetRefEconomicSectorById, {Id: this.RefEconomicSectorId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefEconomicSectorById, {Id: this.RefEconomicSectorId}).subscribe(
         response => {
           this.resultData = response;
           this.RefEconomicSectorForm.patchValue({
@@ -68,7 +68,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(URLConstant.AddRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});         
@@ -80,7 +80,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.refEconomicSectorObj.EconomicSectorName = this.RefEconomicSectorForm.controls["EconomicSectorName"].value;
       this.refEconomicSectorObj.RegRptCode = this.RefEconomicSectorForm.controls["RegRptCode"].value;
       this.refEconomicSectorObj.IsActive = this.RefEconomicSectorForm.controls["IsActive"].value;
-      this.http.post(URLConstant.EditRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});  
@@ -98,7 +98,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

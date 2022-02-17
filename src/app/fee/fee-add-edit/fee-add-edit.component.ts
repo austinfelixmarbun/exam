@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { RefFeeObj } from 'app/shared/model/ref-fee-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RefLobObj } from 'app/shared/model/ref-lob-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-fee-add-edit',
@@ -37,7 +37,7 @@ export class FeeAddEditComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.FEE_PAGING;
 
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params['RefFeeId'] != null) {
@@ -54,7 +54,7 @@ export class FeeAddEditComponent implements OnInit {
   }
 
   setDropDown() {
-    this.httpClient.post<RefLobObj>(URLConstant.GetListBizTmpltCode, null).subscribe(
+    this.http.post<RefLobObj>(this.UrlConstantNew.GetListBizTmpltCode, null).subscribe(
       (response) => {
         
         this.dropdownList = response['ReturnObject']
@@ -77,7 +77,7 @@ export class FeeAddEditComponent implements OnInit {
     this.setDropDown();
     if (this.pageType == "edit") {
       this.FeeForm.controls['FeeCode'].disable();
-      this.httpClient.post<RefFeeObj>(URLConstant.GetRefFeeByRefFeeId, { Id: this.refFeeId }).subscribe(
+      this.http.post<RefFeeObj>(this.UrlConstantNew.GetRefFeeByRefFeeId, { Id: this.refFeeId }).subscribe(
         (response) => {
           this.refFeeObj = response;
           this.FeeForm.patchValue({
@@ -89,7 +89,7 @@ export class FeeAddEditComponent implements OnInit {
         }
       );
 
-      this.httpClient.post(URLConstant.GetListBizTemplateCodeByRefFeeId, {Id: this.refFeeId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetListBizTemplateCodeByRefFeeId, {Id: this.refFeeId}).subscribe(
         (response) => {
           this.selectedItems = response['ReturnObject'];
           
@@ -123,7 +123,7 @@ export class FeeAddEditComponent implements OnInit {
 
     if (this.pageType == "add") {
       
-      this.httpClient.post(URLConstant.AddRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.FEE_PAGING], {});
@@ -131,7 +131,7 @@ export class FeeAddEditComponent implements OnInit {
       )
     } else {
       this.refFeeObj.RefFeeId = this.refFeeId;
-      this.httpClient.post(URLConstant.EditRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefFee, this.refFeeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.FEE_PAGING], {});

@@ -11,12 +11,12 @@ import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe, formatDate} from '@angular/common';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -107,12 +107,13 @@ export class CustFinDataTabComponent implements OnInit {
 
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       this.isCalculated = false;
@@ -144,7 +145,7 @@ export class CustFinDataTabComponent implements OnInit {
       var custPersonalData;
       var custPersonal = new CustPersonalObj();
       custPersonal.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).pipe(
+      this.http.post(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.CustId }).pipe(
         map((response: CustPersonalObj) => {
           if (!response || response.MrMaritalStatCode == null) {
             this.mrMaritalStatCode = CommonConstant.MR_MARITAL_STAT_CODE_SINGLE;
@@ -158,10 +159,10 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
+          let custFinData = this.http.post(this.UrlConstantNew.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
           let refMasterSourceIncome: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
-          let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
+          let sourceIncomeList = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterSourceIncome);
           return forkJoin([custFinData, sourceIncomeList]);
         })
       ).subscribe(
@@ -200,7 +201,7 @@ export class CustFinDataTabComponent implements OnInit {
       var custCompanyData;
       var custCompany = new CustCompanyObj();
       custCompany.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustCompanyByCustId, {Id : this.CustId}).pipe(
+      this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, {Id : this.CustId}).pipe(
         map((response: CustCompanyObj) => {
           custCompanyData = response;
           return response;
@@ -208,7 +209,7 @@ export class CustFinDataTabComponent implements OnInit {
         mergeMap((response: CustCompanyObj) => {
           var custCompanyFinData = new CustCompanyFinDataObj();
           custCompanyFinData.CustCompanyId = response.CustCompanyId;
-          return this.httpClient.post(URLConstant.GetCustCompanyFinDataByCustCompanyId, {Id : response.CustCompanyId});
+          return this.http.post(this.UrlConstantNew.GetCustCompanyFinDataByCustCompanyId, {Id : response.CustCompanyId});
         })
       ).subscribe(
         (response: any) => {
@@ -251,7 +252,7 @@ export class CustFinDataTabComponent implements OnInit {
   // Data DSF =================================
 
   initRefMaster() {
-    this.httpClient.post(URLConstant.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, { 'RefMasterTypeCode': CommonConstant.RefMasterTypeCodeSourceIncome }).subscribe((response) => {
       this.sourceOfIncomeList = response[CommonConstant.ReturnObj];
       this.CustPersonalFinDataForm.patchValue({
         MrSourceOfIncomeCode: this.sourceOfIncomeList[0].Key
@@ -262,12 +263,12 @@ export class CustFinDataTabComponent implements OnInit {
   async getListCustPersonalFinData() {
     this.ListCustPersonalFinData = [];
     if (!this.custPersonalId) {
-      await this.httpClient.post(URLConstant.GetCustPersonalbyCustId, { Id: this.CustId }).toPromise().then((response: CustPersonalObj) => {
+      await this.http.post(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.CustId }).toPromise().then((response: CustPersonalObj) => {
         this.custPersonalId = response.CustPersonalId;
         this.mrMaritalStatCode = (!response || response.MrMaritalStatCode == null) ? CommonConstant.MR_MARITAL_STAT_CODE_SINGLE : response.MrMaritalStatCode;
       })
     }
-    await this.httpClient.post(URLConstant.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
+    await this.http.post(this.UrlConstantNew.GetListCustPersonalFinDataByCustId, { 'CustId': this.CustId }).toPromise().then((response) => {
       this.ListCustPersonalFinData = response['ListCustPersonalFinData'];
     })
   }
@@ -276,12 +277,12 @@ export class CustFinDataTabComponent implements OnInit {
   async getListCustCoyFinData() {
     this.ListCustCoyFinData = [];
     if (!this.custCoyId) {
-      await this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.CustId }).toPromise().then((response: CustCompanyObj) => {
+      await this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: this.CustId }).toPromise().then((response: CustCompanyObj) => {
         this.custCoyId = response.CustCompanyId;
       })
     }
 
-    await this.httpClient.post(URLConstant.GetListCustCompanyFinDataByCustId, { Id: this.CustId }).toPromise().then((response) => {
+    await this.http.post(this.UrlConstantNew.GetListCustCompanyFinDataByCustId, { Id: this.CustId }).toPromise().then((response) => {
       this.ListCustCoyFinData = response['ListCustCompanyFinData'];
     })
   }
@@ -303,7 +304,7 @@ export class CustFinDataTabComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
         var CustPersonalFinDataCustomObj = { Id: this.ListCustPersonalFinData[FinDataIndex].CustPersonalFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
+        await this.http.post(this.UrlConstantNew.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
           (response) => {
             this.ListCustPersonalFinData.splice(FinDataIndex, 1);
           }
@@ -311,7 +312,7 @@ export class CustFinDataTabComponent implements OnInit {
       }
       else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
         var CustCoyFinDataCustomObj = { Id: this.ListCustCoyFinData[FinDataIndex].CustCompanyFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
+        await this.http.post(this.UrlConstantNew.DeleteCustCompanyFinData, CustCoyFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
           (response) => {
             this.ListCustCoyFinData.splice(FinDataIndex, 1);
           }
@@ -494,12 +495,12 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: this.CustPersonalFinDataForm.controls['RowVersion'].value,
     };
 
-    var url = this.IsAddFinData ? URLConstant.AddCustPersonalFinData : URLConstant.EditCustPersonalFinData
+    var url = this.IsAddFinData ? this.UrlConstantNew.AddCustPersonalFinData : this.UrlConstantNew.EditCustPersonalFinData
     var CustFinDataCustomObj = {
       CustFinDataObj: custFinData
     }
 
-    await this.httpClient.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (this.currentModal) this.currentModal.close();
       }
@@ -541,12 +542,12 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: this.CustCompanyFinDataForm.controls['RowVersion'].value,
     };
 
-    var url = this.IsAddFinData ? URLConstant.AddCustCompanyFinData : URLConstant.EditCustCompanyFinData
+    var url = this.IsAddFinData ? this.UrlConstantNew.AddCustCompanyFinData : this.UrlConstantNew.EditCustCompanyFinData
     var CustFinDataCustomObj = {
       CustFinDataObj: custFinData
     }
 
-    await this.httpClient.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (this.currentModal) this.currentModal.close();
       }
@@ -589,7 +590,7 @@ export class CustFinDataTabComponent implements OnInit {
       CustAttrContentObjs: custAttrRequest,
     }
 
-    await this.httpClient.post(URLConstant.AddCustFinDataAttrContent, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.AddCustFinDataAttrContent, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         if (!IsParent) this.outputTab.emit({ stepMode: "next" });
