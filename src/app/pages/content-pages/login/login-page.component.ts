@@ -68,7 +68,6 @@ export class LoginPageComponent implements OnInit {
   });
   SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   async ngOnInit() {
-    console.log(this.url.LoginV2);
     if (this.token != null) {
       await this.http.post(this.url.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
         async (response) => {

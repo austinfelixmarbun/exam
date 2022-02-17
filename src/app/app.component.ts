@@ -19,8 +19,7 @@ export class AppComponent implements OnInit {
 
     private _hubConnection: HubConnection;
     //TEST PUSH MASTER 5
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router
-      , private UrlConstantNew: UrlConstantNew) { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
  
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
@@ -34,7 +33,7 @@ export class AppComponent implements OnInit {
     }
 
     checkisEODforlogout(){
-        this.http.post(this.UrlConstantNew.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+        this.http.post(URLConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
               if(response["SysValue"] == '1')
               {
@@ -47,7 +46,7 @@ export class AppComponent implements OnInit {
 
     validateIp(){
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.http.post(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+        this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
               {        
@@ -62,7 +61,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        var url = this.UrlConstantNew.LogoutAuth;
+        var url = URLConstant.LogoutAuth;
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();

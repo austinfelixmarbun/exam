@@ -17,13 +17,13 @@ export class UrlConstantNew{
     public GetJournalResultPagingObjectBySQL = this.url.GetJournalResultPagingObjectBySQL;
 
     // SYS CONFIG RESULT
-    public GetSysConfigResultByCode = '';//this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;
+    public GetSysConfigResultByCode = this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;
 
     // DOWNLOAD
-    public DownloadTemplate = '';//this.env.FoundationR3Url + this.url.DownloadTemplate;
+    public DownloadTemplate = this.env.FoundationR3Url + this.url.DownloadTemplate;
 
     // WEB SOCKET
-    public WebSocketUrl = '';//this.env.WebSocketURL + this.url.Notificationhub;
+    public WebSocketUrl = this.env.WebSocketURL + this.url.Notificationhub;
 
     //GENERAL SETTING
     public AddGeneralSetting = this.env.FoundationR3Url + this.url.AddGeneralSetting;

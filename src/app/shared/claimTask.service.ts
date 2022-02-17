@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "./AdInsHelper";
 import { CommonConstant } from "./constant/CommonConstant";
-import { URLConstant } from "./constant/URLConstant";
+import { UrlConstantNew } from "./constant/URLConstantNew";
 import { ClaimWorkflowObj } from "./model/claim-workflow-obj.model";
 import { CurrentUserContext } from "./model/current-user-context.model";
 import { ClaimTaskModelObj } from "./model/v2/claim-task-model-obj.model";
@@ -15,14 +15,15 @@ export class ClaimTaskService{
   
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private UrlConstantNew: UrlConstantNew) { }
 
 
   ClaimTask(WfTaskListId: number){
     let wfClaimObj: ClaimWorkflowObj = new ClaimWorkflowObj();
     wfClaimObj.pWFTaskListID = WfTaskListId.toString();
     wfClaimObj.pUserID = this.currentUserContext[CommonConstant.USER_NAME];
-    this.http.post(URLConstant.ClaimTask, wfClaimObj).subscribe(
+    this.http.post(this.UrlConstantNew.ClaimTask, wfClaimObj).subscribe(
       () => {
       });
   }
@@ -31,7 +32,7 @@ export class ClaimTaskService{
     let ClaimTaskObj: ClaimTaskModelObj = new ClaimTaskModelObj();
     ClaimTaskObj.TaskId = WfTaskListId;
     ClaimTaskObj.UserId = this.currentUserContext[CommonConstant.USER_NAME];
-    this.http.post(URLConstant.ClaimTaskV2, ClaimTaskObj).subscribe(
+    this.http.post(this.UrlConstantNew.ClaimTaskV2, ClaimTaskObj).subscribe(
       () => {
       });
   }
