@@ -5,7 +5,7 @@
         <div class="form-body">
           <lib-ucSubsection [id]="'AssetType'" [title]="'Customer Address Listing'" [panel]="'CustAddressListingPanel'">
           </lib-ucSubsection>
-          <div id="CustAddressListingPanel">
+          <div id="CustAddressListingPanel" style="overflow-x: auto;">
             <table class="table table-responsive-md text-center table-hover">
               <thead>
                 <tr class="table-header">
@@ -42,31 +42,33 @@
                 </option>
               </select>
             </form>
-            <table class="table table-responsive-md text-center table-hover">
-              <thead>
-                <tr class="table-header">
-                  <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>ADDRESS TYPE NAME</span> </th>
-                  <th class="text-center"><span class="thead-header" name='fullAssetName' translate>ADDRESS</span> </th>
-                  <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>BUILDING OWNERSHIP</span> </th>
-                  <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>PHONE (FIX LINE) 1</span> </th>
-                  <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>PHONE (FIX LINE) 2</span> </th>
-                  <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>NOTES</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let item of responseResultCustAddrHist">
-                  <tr *ngIf="item.AddressTypeName == selectedOption">
-                    <td class="text-center">{{item.AddressTypeName}}</td>
-                    <td class="text-center">{{item.Address}}</td>
-                    <td class="text-center">{{item.BuildingOwnership}}</td>
-                    <td class="text-center">{{item.Phone1}}</td>
-                    <td class="text-center">{{item.Phone2}}</td>
-                    <td class="text-center">{{item.Notes}}</td>
+            <div style="overflow-x: auto;">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th class="text-center"><span class="thead-header" name='fullAssetCode' translate>ADDRESS TYPE NAME</span> </th>
+                    <th class="text-center"><span class="thead-header" name='fullAssetName' translate>ADDRESS</span> </th>
+                    <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>BUILDING OWNERSHIP</span> </th>
+                    <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>PHONE (FIX LINE) 1</span> </th>
+                    <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>PHONE (FIX LINE) 2</span> </th>
+                    <th class="text-center"><span class="thead-header" name='assetCategoryName' translate>NOTES</span>
+                    </th>
                   </tr>
-                </ng-container>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of responseResultCustAddrHist">
+                    <tr *ngIf="item.AddressTypeName == selectedOption">
+                      <td class="text-center">{{item.AddressTypeName}}</td>
+                      <td class="text-center">{{item.Address}}</td>
+                      <td class="text-center">{{item.BuildingOwnership}}</td>
+                      <td class="text-center">{{item.Phone1}}</td>
+                      <td class="text-center">{{item.Phone2}}</td>
+                      <td class="text-center">{{item.Notes}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
