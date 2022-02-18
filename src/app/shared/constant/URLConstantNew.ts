@@ -727,6 +727,7 @@ export class UrlConstantNew{
     public EditCustAsset = this.env.FoundationR3Url + this.url.EditCustAsset;
     public GetCustAssetByCustAssetId = this.env.FoundationR3Url + this.url.GetCustAssetByCustAssetId;
     public GetListCustAssetByCustId = this.env.FoundationR3Url + this.url.GetListCustAssetByCustId;
+    public UpdateToMainCustomer = this.env.FoundationR3Url + this.url.UpdateToMainCustomer;
 
     public SaveCustPersonalShareholderMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainData;
     public SaveCustPersonalShareholderMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainDataV2;

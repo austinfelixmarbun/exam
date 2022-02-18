@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';

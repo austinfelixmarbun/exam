@@ -20,7 +20,7 @@
         <p class="text-user">Job Title - Role</p>
       </div>
       <div class="text-left">
-        <lib-ucdropdownsearch [dropdownSearchObj]="rolesDropdownSearchObj" [parentForm]="RolepickForm"
+        <lib-ucdropdownsearch [dropdownSearchObj]="rolesDropdownSearchObj" [parentForm]="RolepickForm" #ddsValue
             [enjiForm]="enjiForm" [identifier]="'Role'" [genericList]="selectedOffice == -1 ? tempList : listRole[selectedOffice]?.Roles" (callback)="setRole($event)"></lib-ucdropdownsearch>
       </div>
     </div>  
@@ -33,4 +33,4 @@
   </form>
   <div class="form-group" class="mt-3">
 </div>
-  
+      

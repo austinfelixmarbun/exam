@@ -114,8 +114,7 @@ export class RolePickService {
             }
         }
     }
-
-    closeDialog() {
-        this.dialog.closeAll;
-    }
+        closeDialog() {
+            this.dialog.closeAll;
+        }
 }

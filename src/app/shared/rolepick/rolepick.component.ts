@@ -59,8 +59,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
-
   }
 
   setRole(event) {
@@ -137,8 +135,6 @@ export class RolepickComponent implements OnInit, AfterViewInit {
               });
               this.dialog.closeAll();
             });
-
-
         }
       );
 

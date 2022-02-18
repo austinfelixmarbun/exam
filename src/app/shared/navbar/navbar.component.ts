@@ -55,6 +55,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
+        this.setUser();
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
             .withUrl(this.UrlConstantNew.WebSocketUrl)
