@@ -18,9 +18,5 @@ export class UploadAssetMasterComponent implements OnInit {
     this.uploadObj.TemplateName = "Upload_Asset_Master_Template";
     this.uploadObj.FileErrorName = "Upload_Asset_Master_ErrorDownload";
     this.uploadObj.pagingJson = "./assets/ucpaging/searchAssetMasterMonitoring.json";
-    if (!environment.isCore) {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx";
-      this.uploadObj.url = this.UrlConstantNew.UploadFile;
-    }
   }
 }

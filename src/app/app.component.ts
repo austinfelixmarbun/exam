@@ -8,6 +8,7 @@ import { CommonConstant } from './shared/constant/CommonConstant';
 import { URLConstant } from './shared/constant/URLConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
+import { AdInsConstant } from './shared/AdInstConstant';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
     }
 
     checkisEODforlogout(){
-        this.http.post(URLConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+        this.http.post(AdInsConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
               if(response["SysValue"] == '1')
               {
@@ -46,7 +47,7 @@ export class AppComponent implements OnInit {
 
     validateIp(){
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+        this.http.post(AdInsConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
               {        
@@ -61,7 +62,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        var url = URLConstant.LogoutAuth;
+        var url = AdInsConstant.LogoutAuth;
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();

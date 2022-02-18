@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { URLConstant } from "../constant/URLConstant";
+import { AdInsConstant } from "../AdInstConstant";
 import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./criteria-obj.model";
 import { IntegrationObj } from "./library/integration-obj.model";
@@ -27,8 +27,8 @@ export class UcPagingObj {
     constructor() {
         this._url = "";
         this.title = "";
-        this.enviromentUrl = environment.isCore ? environment.FoundationR3Url + '/v2' : environment.FoundationR3Url + '/v1';
-        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
+        this.enviromentUrl = environment.FoundationR3Url + '/v2';
+        this.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
         this.arrCritObj = null;

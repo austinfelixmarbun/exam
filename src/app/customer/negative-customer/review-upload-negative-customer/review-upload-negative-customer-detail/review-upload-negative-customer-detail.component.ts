@@ -58,13 +58,12 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
   
   cancel() {
-    let CancelUrl = environment.isCore? this.UrlConstantNew.CancelUploadV2 : this.UrlConstantNew.CancelUpload;
     var wfObj = new WorkflowApiObj();
     wfObj.TransactionNo = this.uploadNo;
     wfObj.ListValue["Status"] = "RJC";
     wfObj.ListValue["WfCode"] = CommonConstant.WorkflowUploadNegativeCustomer;
     wfObj.ListValue["TaskId"] = this.taskListId;
-    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.CancelUploadV2, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -75,13 +74,11 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
 
   uploadReview(status: string) {
-      let urlPost = environment.isCore ? this.UrlConstantNew.UploadReviewV2 : this.UrlConstantNew.UploadReview;
-
       var uploadObj = new UploadReviewCustomObj();
       uploadObj.MrUploadStatusCode = status;
       uploadObj.TaskListId = this.taskListId;
       uploadObj.UploadMonitoringNo = this.uploadNo;
-      this.http.post(urlPost, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.UploadReviewV2, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
@@ -90,11 +87,6 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   }
 
   claimTask() {
-    if(environment.isCore){
-      this.claimTaskService.ClaimTaskV2(this.taskListId);
-    }
-    else{
-      this.claimTaskService.ClaimTask(this.taskListId);
-    }
+    this.claimTaskService.ClaimTaskV2(this.taskListId);
   }
 }

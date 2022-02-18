@@ -47,7 +47,7 @@ export class CustPersonalJobDataComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
-  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) { }
 
   async ngOnInit() {
     this.InitData();
@@ -68,10 +68,10 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.BindLookupIndustry();
     this.BindLookupJobPosition();
 
-    this.DictUcDDLObj[this.RefMasterTypeCodeJobStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCoyScale] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
-    this.DictUcDDLObj[this.RefMasterTypeCodeInvestmentType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeJobStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeJobStat);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCoyScale] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCoyScale);
+    this.DictUcDDLObj[this.RefMasterTypeCodeInvestmentType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeInvestmentType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel].ddlType = UcDropdownListConstant.DDL_TYPE_BLANK;
 
     this.ResetForm();

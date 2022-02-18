@@ -53,12 +53,11 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
   }
   
   cancel(ev) {
-    let CancelUrl = environment.isCore? this.UrlConstantNew.CancelUploadV2 : this.UrlConstantNew.CancelUpload;
     var wfObj = new WorkflowApiObj();
-    wfObj.TaskListId = environment.isCore? ev.RowObj.ProcessInstanceId : ev.RowObj.TaskListId;
+    wfObj.TaskListId = ev.RowObj.ProcessInstanceId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.CancelUploadV2, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

@@ -43,6 +43,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-new-cust-personal-main-data',
   templateUrl: './new-cust-personal-main-data.component.html',
+  providers: [NewCustSetData]
 })
 export class NewCustPersonalMainDataComponent implements OnInit {
 
@@ -119,11 +120,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.GetCustRelationship();
     this.ClearCustForm();
     this.getInitPattern();
-    this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
-    this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeGender] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeGender);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;

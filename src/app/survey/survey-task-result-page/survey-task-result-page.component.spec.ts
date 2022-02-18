@@ -63,17 +63,17 @@ describe('SurveyTaskResultPageComponent', function () {
         withCredentials?: boolean;
       }) => {
         let response: Object;
-        if (url === URLConstant.GetSysConfigPncplResultByCode) {
+        if (url === /**URLConstant.GetSysConfigPncplResultByCode**/) {
             if(sysConfigValue == '0'){
               response = MockResponseSysConfigWithoutValue;
             }else{
               response = MockResponseSysConfigWithValue;
             }
-         } else if (url === URLConstant.GetSrvyTaskBySrvyTaskId) {
+         } else if (url === /**URLConstant.GetSrvyTaskBySrvyTaskId**/) {
           response = {
             SrvyTaskNo: 'SRVYTASKNO1'
           };
-        } else if (url === URLConstant.GetSrvyOrderBySrvyOrderId) {
+        } else if (url === /**URLConstant.GetSrvyOrderBySrvyOrderId**/) {
             response = {
                 SrvyOrderNo: 'SRVYORDERNO1'
             }

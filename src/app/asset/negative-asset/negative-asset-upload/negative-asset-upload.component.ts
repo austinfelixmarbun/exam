@@ -18,9 +18,5 @@ export class NegativeAssetUploadComponent implements OnInit {
     this.uploadObj.TemplateName = "Upload_Negative_Asset_Template";
     this.uploadObj.FileErrorName = "Upload_Negative_Asset_ErrorDownload";
     this.uploadObj.pagingJson = "./assets/ucpaging/searchNegativeAssetMonitoring.json";
-    if (!environment.isCore) {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx";
-      this.uploadObj.url = this.UrlConstantNew.UploadFile;
-    }
   }
 }

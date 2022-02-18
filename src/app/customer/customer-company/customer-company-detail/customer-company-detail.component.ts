@@ -66,7 +66,8 @@ export class CustomerCompanyDetailComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService,
-    private UrlConstantNew: UrlConstantNew) {
+    private UrlConstantNew: UrlConstantNew,
+    private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -91,7 +92,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.MaxDate.setDate(this.MaxDate.getDate() - 1);
     this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
 
     this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {

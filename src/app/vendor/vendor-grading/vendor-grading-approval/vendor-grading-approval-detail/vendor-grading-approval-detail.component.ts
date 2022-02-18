@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ApprovalObj } from 'app/shared/model/approval/approval-obj.model';
 import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/uc-input-approval-general-info-obj.model';
@@ -88,7 +89,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     let obj = {
       Tasks: event.Tasks
     }
-    this.http.post(environment.FoundationR3Url + this.UrlConstantNew.SubmitApproval, obj).subscribe(
+    this.http.post(environment.FoundationR3Url + AdInsConstant.SubmitApproval, obj).subscribe(
       (response)=>{
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
@@ -103,7 +104,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     this.UcInputApprovalGeneralInfoObj.TaskId = this.taskId;
     
     this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj();
-    this.InputApprovalHistoryObj.PathUrl = "/Approval/GetTaskHistory";
+    this.InputApprovalHistoryObj.PathUrl = AdInsConstant.GetTaskHistory;
     this.InputApprovalHistoryObj.RequestId = this.ApvReqId;
 
     this.InputApvObj = new UcInputApprovalObj();

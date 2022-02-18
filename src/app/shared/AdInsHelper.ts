@@ -80,7 +80,7 @@ export class AdInsHelper {
     }
 
     public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
-        var url = URLConstant.LogoutAuth;
+        var url = AdInsConstant.LogoutAuth;
         http.post(url, {}).subscribe();
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();

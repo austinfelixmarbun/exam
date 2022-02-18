@@ -1,5 +1,6 @@
 import { URLConstant } from "../constant/URLConstant"
 import { environment } from "environments/environment"
+import { AdInsConstant } from "../AdInstConstant";
 
 export class InputLookupObj {
     urlJson: string;
@@ -23,7 +24,7 @@ export class InputLookupObj {
     
     constructor() {
         this.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-        this.urlQryPaging = URLConstant.GetPagingObjectBySQL;
+        this.urlQryPaging = AdInsConstant.GetPagingObjectBySQL; //taruh di adins constant
         this.urlEnviPaging = environment.FoundationR3Url + "/v1";
         this.jsonSelect = "";
         this.idSelect = "";

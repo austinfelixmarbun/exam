@@ -29,7 +29,7 @@ describe('SurveyResultReviewDetailComponent', () => {
         withCredentials?: boolean;
       }) => {
         let response: Object;
-        if (url == URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview) {
+        if (url == '' /**URLConstant.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview**/) {
           response = {
             ReturnObj: [
               {
@@ -55,7 +55,7 @@ describe('SurveyResultReviewDetailComponent', () => {
               }
             ]
           }
-        } else if (url == URLConstant.ReviewSurveyResult) {
+        } else if (url == '' /**URLConstant.ReviewSurveyResult**/) {
           response = {
             message: 'Success'
           };

@@ -1,5 +1,5 @@
 import { environment } from "environments/environment";
-import { URLConstant } from "../constant/URLConstant";
+import { AdInsConstant } from "../AdInstConstant";
 
 export class UcUploadObj {
     title: string;
@@ -35,14 +35,14 @@ export class UcUploadObj {
         this.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
         this.UploadTypeCode = "";
         this.ErrorDownloadUrl = "";
-        this.TemplateUrl = URLConstant.DownloadTemplate;
+        this.TemplateUrl = AdInsConstant.DownloadTemplate;
         this.TemplateName = "";
         this.FileErrorName = "";
-        this.environmentUrl = environment.isCore ? environment.FoundationR3Url + '/v2' : environment.FoundationR3Url + '/v1';
-        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
+        this.environmentUrl = environment.FoundationR3Url + '/v2';
+        this.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.SheetName = "";
-        this.url = URLConstant.UploadFileV2;
+        this.url = AdInsConstant.UploadFileV2;
         this.hideProgressBar = false;
         this.hideResetBtn = false;
         this.hideSelectBtn = false;

@@ -236,109 +236,59 @@ export class NewCustHeaderComponent implements OnInit {
 
   SetUrlAddCoy(): string {
     let urlAdd: string = "";
-    if(environment.isCore){
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.AddCustCompanyMainDataV2;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
-          break;
-      }
-    }else{
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.AddCustCompanyMainData;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainData;
-          break;
-      }
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        urlAdd = this.UrlConstantNew.AddCustCompanyMainDataV2;
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        break;
     }
     return urlAdd;
   }
+
   SetUrlEditCoy(): string {
     let urlAdd: string = "";
-    if(environment.isCore){
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.EditCustCompanyMainDataV2;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
-          break;
-      }
-    }else{
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.EditCustCompanyMainData;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainData;
-          break;
-      }
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        urlAdd = this.UrlConstantNew.EditCustCompanyMainDataV2;
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        break;
     }
     return urlAdd;
   }
 
   SetUrlAddPersonal(): string {
     let urlAdd: string = "";
-    if(environment.isCore){
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.AddCustPersonalMainDataV2;
-          break;
-        case this.CustDataModeFamily:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
-          break;
-      }
-    }else{
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.AddCustPersonalMainData;
-          break;
-        case this.CustDataModeFamily:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainData;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainData;
-          break;
-      }
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        urlAdd = this.UrlConstantNew.AddCustPersonalMainDataV2;
+        break;
+      case this.CustDataModeFamily:
+        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
+        break;
     }
     return urlAdd;
   }
 
   SetUrlEditPersonal(): string {
     let urlAdd: string = "";
-    if(environment.isCore){
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.EditCustPersonalMainDataV2;
-          break;
-        case this.CustDataModeFamily:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
-          break;
-      }
-    }else{
-      switch (this.CustDataMode) {
-        case CommonConstant.CustMainDataModeCust:
-          urlAdd = this.UrlConstantNew.EditCustPersonalMainData;
-          break;
-        case this.CustDataModeFamily:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainData;
-          break;
-        case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainData;
-          break;
-      }
+    switch (this.CustDataMode) {
+      case CommonConstant.CustMainDataModeCust:
+        urlAdd = this.UrlConstantNew.EditCustPersonalMainDataV2;
+        break;
+      case this.CustDataModeFamily:
+        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
+        break;
+      case CommonConstant.CustMainDataModeMgmntShrholder:
+        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
+        break;
     }
-    
     return urlAdd;
   }
   //#endregion
@@ -367,19 +317,11 @@ export class NewCustHeaderComponent implements OnInit {
     reqEditDupCheck.CustPersonalJobObj = this.DupCheckPersonalObj.CustPersonalJobObj;
     reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     reqEditDupCheck.CustDocFileObjs = this.DupCheckPersonalObj.CustDocFileObjs;
-    if(environment.isCore){
-      this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
-        (response: GenericObj) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }else{
-      this.http.post(this.UrlConstantNew.NewEditDuplicateCust, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
-        (response: GenericObj) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }
+    this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
+      (response: GenericObj) => {
+        this.redirectSaveEditMainData(response.Id);
+      }
+    );
   }
 
   EditCustCoy(item: CustDuplicateObj) {
@@ -393,19 +335,11 @@ export class NewCustHeaderComponent implements OnInit {
     }
     reqEditDupCheck.CustDocFileObjs = this.DupCheckCoyObj.CustDocFileObjs;
 
-    if(environment.isCore){
-      this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
-        (response: GenericObj) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }else{
-      this.http.post(this.UrlConstantNew.NewEditDuplicateCust, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
-        (response: GenericObj) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }
+    this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqEditDupCheck, AdInsConstant.SpinnerOptions).subscribe(
+      (response: GenericObj) => {
+        this.redirectSaveEditMainData(response.Id);
+      }
+    );
   }
 
   EditNegativeCust(item: NegCustDuplicateObj) {
@@ -432,19 +366,11 @@ export class NewCustHeaderComponent implements OnInit {
     NegativeCustObj.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     NegativeCustObj.CustDocFileObjs = this.DupCheckPersonalObj.CustDocFileObjs;
 
-    if(environment.isCore){
-      this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCustV2, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }else{
-      this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCust, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }
+    this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCustV2, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
+      (response) => {
+        this.redirectSaveEditMainData(response.Id);
+      }
+    );
   }
 
   EditNegativeCustCoy(item: NegCustDuplicateObj) {
@@ -459,19 +385,11 @@ export class NewCustHeaderComponent implements OnInit {
       NegativeCustObj.CustCompanyMgmntShrholderObj = this.DupCheckCoyObj.CustCompanyMgmntShrholderObj;
     }
 
-    if(environment.isCore){
-      this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCustV2, NegativeCustObj).subscribe(
-        (response) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }else{
-      this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCust, NegativeCustObj).subscribe(
-        (response) => {
-          this.redirectSaveEditMainData(response.Id);
-        }
-      );
-    }
+    this.http.post<GenericObj>(this.UrlConstantNew.EditDuplicateNegativeCustV2, NegativeCustObj).subscribe(
+      (response) => {
+        this.redirectSaveEditMainData(response.Id);
+      }
+    );
   }
 
   //#endregion

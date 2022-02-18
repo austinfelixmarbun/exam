@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
-import { environment } from "environments/environment";
 import { RFAInfoObj } from 'app/shared/model/approval/rfa-info-obj.model'
 import { VendorObj } from "app/shared/model/vendor-obj.model";
 import { VendorGradingHistObj } from "app/shared/model/vendor-grading-hist-obj.model";
@@ -214,8 +213,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       RequestRFAObj: rfaInfo
     }
     
-    let SubmitRequestVendorGradingUrl = environment.isCore ? this.UrlConstantNew.SubmitRequestVendorGradingV2 : this.UrlConstantNew.SubmitRequestVendorGrading;
-    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SubmitRequestVendorGradingV2, submitVendorGradingReqObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);

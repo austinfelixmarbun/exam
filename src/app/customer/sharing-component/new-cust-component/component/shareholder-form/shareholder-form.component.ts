@@ -46,14 +46,14 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
     await this.GetExistingShareholder();
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;

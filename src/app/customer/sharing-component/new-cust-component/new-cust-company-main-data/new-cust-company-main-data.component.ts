@@ -86,8 +86,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.InitCustMainDataMode();
     await this.InitCustAddr();
     this.BindLookupSupplier();
-    this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;

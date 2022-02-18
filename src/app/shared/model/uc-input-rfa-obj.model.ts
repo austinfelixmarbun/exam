@@ -1,8 +1,8 @@
 import { environment } from "environments/environment";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "../AdInsHelper";
+import { AdInsConstant } from "../AdInstConstant";
 import { CommonConstant } from "../constant/CommonConstant";
-import { URLConstant } from "../constant/URLConstant";
 
 export class UcInputRFAObj {
     ApvTypecodes: any;
@@ -27,13 +27,13 @@ export class UcInputRFAObj {
         this.OfficeCode = context[CommonConstant.OFFICE_CODE];
         this.ApvTypecodes = [];
         this.EnvUrl = environment.FoundationR3Url + "/v1";
-        this.PathUrlGetSchemeBySchemeCode = URLConstant.GetSchemesBySchemeCode;
-        this.PathUrlGetCategoryByCategoryCode = URLConstant.GetRefSingleCategoryByCategoryCode;
-        this.PathUrlGetAdtQuestion = URLConstant.GetRefAdtQuestion;
-        this.PathUrlGetPossibleMemberAndAttributeExType = URLConstant.GetPossibleMemberAndAttributeExType;
-        this.PathUrlGetApprovalReturnHistory = URLConstant.GetApprovalReturnHistory;
-        this.PathUrlCreateNewRFA = URLConstant.CreateNewRFA;
-        this.PathUrlCreateJumpRFA = URLConstant.CreateJumpRFA;
+        this.PathUrlGetSchemeBySchemeCode = AdInsConstant.GetSchemesBySchemeCode;
+        this.PathUrlGetCategoryByCategoryCode = AdInsConstant.GetRefSingleCategoryByCategoryCode;
+        this.PathUrlGetAdtQuestion = AdInsConstant.GetRefAdtQuestion;
+        this.PathUrlGetPossibleMemberAndAttributeExType = AdInsConstant.GetPossibleMemberAndAttributeExType;
+        this.PathUrlGetApprovalReturnHistory = AdInsConstant.GetApprovalReturnHistory;
+        this.PathUrlCreateNewRFA = AdInsConstant.CreateNewRFA;
+        this.PathUrlCreateJumpRFA = AdInsConstant.CreateJumpRFA;
         this.CategoryCode = "";
         this.SchemeCode = "";
         this.TrxNo = "";

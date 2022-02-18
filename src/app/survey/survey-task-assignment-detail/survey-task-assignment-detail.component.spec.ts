@@ -34,7 +34,7 @@ describe('SurveyTaskAssignmentDetailComponent', () => {
                 withCredentials?: boolean;
             }) => {
                 let response: Object;
-                if (url == URLConstant.GetListSrvyTaskBySrvyOrderIdForUpdate) {
+                if (url == ''/**URLConstant.GetListSrvyTaskBySrvyOrderIdForUpdate**/) {
                     response = {
                         ReturnObj: [
                             {
@@ -78,7 +78,7 @@ describe('SurveyTaskAssignmentDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.GetSrvyFormSchmBySrvyFormSchmId) {
+                } else if (url == ''/**URLConstant.GetSrvyFormSchmBySrvyFormSchmId**/) {
                     response = {
                         ReturnObj: [
                             {
@@ -101,7 +101,7 @@ describe('SurveyTaskAssignmentDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.GetRefMasterListKeyValueActiveByCode) {
+                } else if (url == ''/**URLConstant.GetRefMasterListKeyValueActiveByCode**/) {
                     response = {
                         ReturnObj: [
                             {
@@ -124,7 +124,7 @@ describe('SurveyTaskAssignmentDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.GetListKeyValueSrvyFormSchm) {
+                } else if (url == ''/**URLConstant.GetListKeyValueSrvyFormSchm**/) {
                     response = {
                         ReturnObj: [
                             {
@@ -136,11 +136,11 @@ describe('SurveyTaskAssignmentDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.CancelSurveyTaskBySurveyTaskId) {
+                } else if (url == ''/**URLConstant.CancelSurveyTaskBySurveyTaskId**/) {
                     response = {
                         message: 'Survey Task has been cancelled!'
                     }
-                } else if (url == URLConstant.EditSrvyTaskAndSendToMobile) {
+                } else if (url == ''/**URLConstant.EditSrvyTaskAndSendToMobile**/) {
                     response = {
                         message: 'Success'
                     };

@@ -44,7 +44,7 @@ export class FamilyFormComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   CountryCode: string = "";
@@ -52,8 +52,8 @@ export class FamilyFormComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     await this.InitData();
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
-    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.lookUpObjCountry.isReady = true;

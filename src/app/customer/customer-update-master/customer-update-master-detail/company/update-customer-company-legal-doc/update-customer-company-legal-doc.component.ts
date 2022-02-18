@@ -9,7 +9,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustLegalDocObj } from 'app/shared/model/update-master-cust/update-cust-legal-doc-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-update-customer-company-legal-doc',
@@ -89,8 +88,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
       }
     }
 
-    let UpdateMasterCustCompanyLegalDocUrl = environment.isCore ? this.UrlConstantNew.UpdateMasterCustCompanyLegalDocv2 : this.UrlConstantNew.UpdateMasterCustCompanyLegalDoc;
-    this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyLegalDocv2, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

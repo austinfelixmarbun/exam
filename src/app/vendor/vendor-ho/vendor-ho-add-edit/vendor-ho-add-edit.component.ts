@@ -216,7 +216,7 @@ export class VendorHoAddEditComponent implements OnInit {
                     if (vendorAttr["AttrInputType"] == 'RM') {
                       tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                      tempLookup[vendorAttr["AttrCode"]].urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
                       tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                       tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -265,7 +265,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       if (vendorAttr["AttrInputType"] == 'RM') {
                         tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
                         tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -299,7 +299,7 @@ export class VendorHoAddEditComponent implements OnInit {
                       else if (vendorAttr["AttrInputType"] == 'RM') {
                         tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = AdInsConstant.GetPagingObjectBySQL;
                         tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";

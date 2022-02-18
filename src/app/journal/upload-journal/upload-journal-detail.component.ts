@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 @Component({
   selector: 'app-upload-journal-detail',
   templateUrl: './upload-journal-detail.component.html'
@@ -107,7 +108,7 @@ export class UploadJournalDetailComponent implements OnInit {
       FileErrorName: "Upload_Arthajasa_ErrorDownload", // Nama Excel Download Error File
 
       environmentUrl: environment.FoundationR3Url,
-      apiQryPaging: "/Generic/GetPagingObjectBySQL",
+      apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
       url: this.UrlConstantNew.UploadJournalFile,
       isDownloadTmplt: false,

@@ -18,9 +18,5 @@ export class UploadNegativeCustomerComponent implements OnInit {
     this.uploadObj.TemplateName = "Upload_Negative_Customer_Template";
     this.uploadObj.FileErrorName = "Upload_Negative_Customer_ErrorDownload";
     this.uploadObj.pagingJson = "./assets/ucpaging/searchNegativeCustomerMonitoring.json";
-    if (!environment.isCore) {
-      this.uploadObj.formatsAllowed = ".xls, .xlsx";
-      this.uploadObj.url = this.UrlConstantNew.UploadFile;
-    }
   }
 }

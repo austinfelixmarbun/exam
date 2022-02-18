@@ -1,6 +1,5 @@
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { environment } from "environments/environment";
 
 export class UcThingsToDoObj {
@@ -30,7 +29,7 @@ export class ThingsToDoIntegrationObj {
 
     constructor() {
         this.BaseUrl = environment.WFThingsToDoUrl;
-        this.ApiPath = URLConstant.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
+        this.ApiPath = AdInsConstant.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
         this.RequestObj = new IntegrationReqObj();
     }
 }

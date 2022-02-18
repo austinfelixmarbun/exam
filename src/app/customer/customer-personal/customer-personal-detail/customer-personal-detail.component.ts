@@ -69,7 +69,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsAffiliateWithMf: [false],
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -156,10 +156,10 @@ export class CustomerPersonalDetailComponent implements OnInit {
           }
         );
 
-        this.DictUcDDLObj[this.RefMasterTypeCodeSalutation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeSalutation);
-        this.DictUcDDLObj[this.RefMasterTypeCodeEducation] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeEducation);
-        this.DictUcDDLObj[this.RefMasterTypeCodeReligion] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeReligion);
-        this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
+        this.DictUcDDLObj[this.RefMasterTypeCodeSalutation] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeSalutation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeEducation] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeEducation);
+        this.DictUcDDLObj[this.RefMasterTypeCodeReligion] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeReligion);
+        this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
 
         this.CustomerDetailForm.patchValue({
           NickName: this.tempCustPersonalObj.NickName,

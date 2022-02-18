@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -17,11 +17,11 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
   AppId: number;
   AppNo: number;
 
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     

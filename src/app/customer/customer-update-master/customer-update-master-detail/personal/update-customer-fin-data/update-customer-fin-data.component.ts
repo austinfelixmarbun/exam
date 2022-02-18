@@ -11,7 +11,6 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UpdateCustPersonalFinDataObj } from 'app/shared/model/update-master-cust/update-cust-personal-fin-data-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -338,8 +337,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
 
-    let UpdateMasterCustFinDataUrl = environment.isCore ? this.UrlConstantNew.UpdateMasterCustFinDataV2 : this.UrlConstantNew.UpdateMasterCustFinData;
-    this.http.post(UpdateMasterCustFinDataUrl, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustFinDataV2, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

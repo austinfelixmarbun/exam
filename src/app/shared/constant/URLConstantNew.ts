@@ -7,20 +7,15 @@ import { UrlConstantService } from "../services/urlConstant.service";
 export class UrlConstantNew{
 
     constructor( public configEnv: EnviConfigService, public urlConfig: UrlConstantService) {
-        // console.log(this.urlConfig.getConfig().GetPagingObjectBySQL);
     }
     private env = this.configEnv.getConfig();
     private url = this.urlConfig.getConfig();
 
     // FRAMEWORK
-    public GetPagingObjectBySQL = this.url.GetPagingObjectBySQL;
     public GetJournalResultPagingObjectBySQL = this.url.GetJournalResultPagingObjectBySQL;
 
     // SYS CONFIG RESULT
     public GetSysConfigResultByCode = this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;
-
-    // DOWNLOAD
-    public DownloadTemplate = this.env.FoundationR3Url + this.url.DownloadTemplate;
 
     // WEB SOCKET
     public WebSocketUrl = this.env.WebSocketURL + this.url.Notificationhub;
@@ -155,7 +150,6 @@ export class UrlConstantNew{
     public GetCountRefUserByRefEmpId = this.env.FoundationR3Url + this.url.GetCountRefUserByRefEmpId;
     public ResetPassword = this.env.FoundationR3Url + this.url.ResetPassword;
     public GetRefUserById = this.env.FoundationR3Url + this.url.GetRefUserById;
-    public GetRefUserByUsername = this.env.FoundationR3Url + this.url.GetRefUserByUsername;
     public GetUserEmpByUsername = this.env.FoundationR3Url + this.url.GetUserEmpByUsername;
     public GetRefUserByRefEmpId = this.env.FoundationR3Url + this.url.GetRefUserByRefEmpId;
     public AddRefUserRole = this.env.FoundationR3Url + this.url.AddRefUserRole;
@@ -306,7 +300,6 @@ export class UrlConstantNew{
     public UpdateToken = this.env.FoundationR3Url + this.url.UpdateToken;
     public UpdateTokenV2 = this.env.FoundationR3Url + this.url.UpdateTokenV2;
     public UpdateTokenV2_1 = this.env.FoundationR3Url + this.url.UpdateTokenV2_1;
-    public LogoutAuth = this.env.FoundationR3Url + this.url.LogoutAuth;
 
     //FORM FEATURE
     public GetListRefFeature = this.env.FoundationR3Url + this.url.GetListRefFeature;
@@ -429,7 +422,6 @@ export class UrlConstantNew{
     public CancelUpload = this.env.FoundationR3Url + this.url.CancelUpload;
     public CancelUploadV2 = this.env.FoundationR3Url + this.url.CancelUploadV2;
     public UploadFile = this.env.FoundationR3Url + this.url.UploadFile;
-    public UploadFileV2 = this.env.FoundationR3Url + this.url.UploadFileV2;
 
     //UPLOAD MONITORING FOUNDATION
     public GetUploadMonitoringPaging = this.env.FoundationR3Url + this.url.GetUploadMonitoringPaging;
@@ -986,21 +978,7 @@ export class UrlConstantNew{
     public GetRecommendations = this.env.ApprovalURL + this.url.GetRecommendations;
 
     // New Approval R3
-    public CreateNewRFA = this.url.CreateNewRFA;
-    public CreateJumpRFA = this.url.CreateJumpRFA;
-    public GetRefSingleCategoryByCategoryCode = this.url.GetRefSingleCategoryByCategoryCode;
-    public GetSchemesBySchemeCode = this.url.GetSchemesBySchemeCode;
-    public GetRefAdtQuestion = this.url.GetRefAdtQuestion;
-    public GetPossibleMemberAndAttributeExType = this.url.GetPossibleMemberAndAttributeExType;
-    public GetApprovalReturnHistory = this.url.GetApprovalReturnHistory;
     public GetSchemesByCategoryId = this.url.GetSchemesByCategoryId;
-    public SubmitApproval = this.url.SubmitApproval;
-    public GetLevelVoting = this.url.GetLevelVoting;
-    public GetPossibleResult = this.url.GetPossibleResult;
-    public GetNextNodeMember = this.url.GetNextNodeMember;
-    public GetRefReasonActive = this.url.GetRefReasonActive;
-    public GetCanChangeMinFinalLevel = this.url.GetCanChangeMinFinalLevel;
-    public GetTaskHistory = this.url.GetTaskHistory;
     public ReturnLevel = this.url.ReturnLevel;
     public ContinueToLevel = this.url.ContinueToLevel;
 
@@ -1152,7 +1130,6 @@ export class UrlConstantNew{
     public PefindoSmartSearch = this.env.FoundationR3Url + this.url.PefindoSmartSearch;
 
     // THINGS TO DO
-    public GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = this.url.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
     public GetThingsToDoByRole = this.env.FoundationR3Url + this.url.GetThingsToDoByRole;
     public GetThingsToDoByRoleV2 = this.env.FoundationR3Url + this.url.GetThingsToDoByRoleV2;
 
@@ -1192,5 +1169,4 @@ export class UrlConstantNew{
     public GetListJobTitleByUsernameAndModuleV2 = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModuleV2;
     public CheckUserSessionLog = this.env.FoundationR3Url + this.url.CheckUserSessionLog;
 
-    public GetSysCtrlCoyBySysKey = this.env.FoundationR3Url + this.url.GetSysCtrlCoyBySysKey;
 }

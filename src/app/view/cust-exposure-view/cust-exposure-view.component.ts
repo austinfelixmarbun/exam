@@ -8,7 +8,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustExpsrHObj } from 'app/shared/model/credit-review/cust-expsr-h-obj.model';
 import { CustExpsrInfoObj } from 'app/shared/model/credit-review/cust-expsr-info-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -65,8 +64,7 @@ export class CustExposureViewComponent implements OnInit {
       return this.toastr.warning(ExceptionConstant.CUST_EXPR_REQ);
     }
 
-    let RequestExposureUrl = environment.isCore ? this.UrlConstantNew.RequestExposureV2 : this.UrlConstantNew.RequestExposure;
-    await this.http.post(RequestExposureUrl, { CustId: this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.RequestExposureV2, { CustId: this.CustId }).toPromise().then(
       (response) => { }
     );
   }

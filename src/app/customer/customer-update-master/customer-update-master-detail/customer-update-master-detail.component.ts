@@ -123,11 +123,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   claimTask() {
-    if(environment.isCore){
-      this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
-    }else{
-      this.claimTaskService.ClaimTask(this.WfTaskListId);
-    }
+    this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
   }
 
   EnterTab(step) {

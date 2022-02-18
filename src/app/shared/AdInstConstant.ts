@@ -20,6 +20,10 @@ export class AdInsConstant {
   public static RestrictionGTE = "GTE";
   public static RestrictionLTE = "LTE";
 
+  // Storage Watch Key
+  public static WatchRoleState = "RoleState";
+  public static WatchRoleLang = "lang";
+
   // public static ApvHoldTaskUrl = environment.ApprovalURL + "/ApprovalInstance/HoldUnholdTask";
   // public static ApvTakeBackTaskUrl = environment.ApprovalURL + "/ApprovalInstance/TakeBackTask";
   public static ApvHoldTaskUrl = environment.FoundationR3Url + "/v1" + "/Approval/Hold";
@@ -52,11 +56,44 @@ export class AdInsConstant {
   public static GetListJobTitleByUsernameAndModule = environment.FoundationR3Url + "/v1" + "/Authenticate/GetListJobTitleByUsernameAndModule";
   public static GetListJobTitleByUsernameAndModuleV2 = environment.FoundationR3Url + "/v2" + "/Authenticate/GetListJobTitleByUsernameAndModule";
   public static CheckUserSessionLog = environment.FoundationR3Url + "/v1" + "/Authenticate/CheckUserSessionLog";
-
-  // Storage Watch Key
-  public static WatchRoleState = "RoleState";
-  public static WatchRoleLang = "lang";
   
+  //MENU
+  public static LogoutAuth = environment.FoundationR3Url + "/v1" + "/Authenticate/Logout";
+
+  //SYS CTRL COY
+  public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey";
+
+  //REF-USER
+  public static GetRefUserByUsername = environment.FoundationR3Url + "/v1" + "/RefUser/GetRefUserByUsername";
+
+  //FRAMEWORK
+  public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL"; // UCPaging
+
+  //NEW APPROVAL R3
+  public static GetLevelVoting = "/Approval/GetLevelVoting";
+  public static GetPossibleResult = "/Approval/GetPossibleResult";
+  public static SubmitApproval = "/v1" + "/Approval/SubmitApproval";
+  public static GetNextNodeMember = "/Approval/GetNextNodeMember";
+  public static GetRefReasonActive = "/Approval/GetRefReasonActive";
+  public static GetCanChangeMinFinalLevel = "/Approval/GetCanChangeMinFinalLevel";
+  public static GetTaskHistory = "/Approval/GetTaskHistory";
+  public static GetSchemesBySchemeCode = "/Approval/GetSchemesBySchemeCode";
+  public static GetRefSingleCategoryByCategoryCode = "/Approval/GetRefSingleCategoryByCategoryCode";
+  public static GetRefAdtQuestion = "/Approval/GetRefAdtQuestion";
+  public static CreateNewRFA = "/Approval/CreateNewRFA";
+  public static CreateJumpRFA = "/Approval/CreateJumpRFA";
+  public static GetPossibleMemberAndAttributeExType = "/Approval/GetPossibleMemberAndAttributeExType";
+  public static GetApprovalReturnHistory = "/Approval/GetApprovalReturnHistory";
+
+  // DOWNLOAD
+  public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
+
+  //UPLOAD
+  public static UploadFileV2 = environment.FoundationR3Url + "/v2" + "/Upload/UploadFile";
+
+  // THINGS TO DO
+  public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";
+
   private static SpinnerHeaders = new HttpHeaders({
     'IsLoading': "true"});
   public static SpinnerOptions = {headers: AdInsConstant.SpinnerHeaders};

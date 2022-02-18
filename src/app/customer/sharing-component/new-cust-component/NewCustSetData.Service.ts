@@ -7,6 +7,7 @@ import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { GeneralSettingObj } from "app/shared/model/general-setting-obj.model";
 import { InputAddressObj } from "app/shared/model/input-address-obj.model";
@@ -21,7 +22,7 @@ import { AddressService } from "app/shared/services/custAddr.service";
 @Injectable()
 export class NewCustSetData {
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private addressService: AddressService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private addressService: AddressService, private UrlConstantNew: UrlConstantNew) { }
 
   public async BindSetLegalAddr(): Promise<InputAddressObj> {
     let listAddrRequiredOwnership: Array<string> = new Array();
@@ -105,7 +106,7 @@ export class NewCustSetData {
     return criteriaListCust;
   }
 
-  public static initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = URLConstant.GetListActiveRefMaster): UcDropdownListObj {
+  public initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = this.UrlConstantNew.GetListActiveRefMaster): UcDropdownListObj {
     let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
     let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
@@ -114,7 +115,7 @@ export class NewCustSetData {
     tempDdlObj.apiUrl = apiUrl;
     tempDdlObj.requestObj = ReqRefMasterObj;
     tempDdlObj.isSelectOutput = isSelectOutput;
-    if (apiUrl == URLConstant.GetListActiveRefMasterDetail) {
+    if (apiUrl == this.UrlConstantNew.GetListActiveRefMasterDetail) {
       tempDdlObj.customKey = "MasterCode";
       tempDdlObj.customValue = "Descr";
     }
@@ -123,7 +124,7 @@ export class NewCustSetData {
   }
 
   public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>> {
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GsValue) {
           let listAddrToFilter: Array<string> = result.GsValue.split(';');
@@ -139,7 +140,7 @@ export class NewCustSetData {
   }
 
   public async SendCustomerDataToRabbitMq(CustNo: string, UrlBack: string = NavigationConstant.CUST_PAGING) {
-    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.SendCustomerDataToRabbitMq, { CustNo: CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");

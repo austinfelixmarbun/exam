@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 
 @Component({
@@ -13,11 +12,11 @@ export class SurveyTaskResultPagingComponent implements OnInit {
   AppId: number;
   AppNo: number;
 
-  constructor(private router: Router, private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+    this.inputPagingObj.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyTaskResult.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTaskResult.json";
     

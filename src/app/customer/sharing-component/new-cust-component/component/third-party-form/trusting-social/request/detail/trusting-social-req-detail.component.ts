@@ -114,21 +114,12 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     if (!this.validateSubj(reqAddTrxSrcDataForTsObj.ThirdPartyTrustsocRsltObjs)) {
       return;
     }
-    if (environment.isCore) {
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    } else {
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForTrustingSocial, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    }
+    this.http.post(this.UrlConstantNew.AddTrxSrcDataForTrustingSocialV2, reqAddTrxSrcDataForTsObj, AdInsConstant.SpinnerOptions).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        this.activeModal.dismiss('Cross click');
+      }
+    );
   }
 
   validateMaxSubj() {

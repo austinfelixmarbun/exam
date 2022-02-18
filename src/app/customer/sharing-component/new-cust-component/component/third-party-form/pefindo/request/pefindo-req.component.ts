@@ -65,22 +65,12 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
-    if(environment.isCore){
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    }else{
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    }
-
+    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        this.activeModal.dismiss('Cross click');
+      }
+    );
   }
 
   RequestCompany(pefindoSmartSearchCoyObj: PefindoSmartSearchCoyObj){
@@ -94,21 +84,11 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
 
-    if(environment.isCore){
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    }else{
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
-          this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
-        }
-      );
-    }
-
+    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      (response) => {
+        this.toastr.successMessage(response["Message"]);
+        this.activeModal.dismiss('Cross click');
+      }
+    );
   }
 }

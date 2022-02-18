@@ -65,21 +65,21 @@ describe('ViewSurveyTaskDetailComponent', () => {
           withCredentials?: boolean;
         }) => {
           let response: Object;
-          if (url === URLConstant.GetVerfResultHByTrxRefNoAndMrAddrTypeCode) {
+          if (url === ''/**URLConstant.GetVerfResultHByTrxRefNoAndMrAddrTypeCode**/) {
               if(verfResultHWithId == 0){
                   response = MockResponseverfResultHWithId;
               }else{
                   response = MockResponseverfResultHWithoutId;
               }
-          } else if (url === URLConstant.GetListVerfResultDInQuestionGrp) {
+          } else if (url === ''/**URLConstant.GetListVerfResultDInQuestionGrp**/) {
             response = MockResponseVerfQuestion;
-          } else if (url === URLConstant.GetSrvyTaskBySrvyTaskId) {
+          } else if (url === ''/**URLConstant.GetSrvyTaskBySrvyTaskId**/) {
               if(srvyTaskWithMobileAssignment == 0){
                 response = MockResponseSrvyTaskWithMobileAssignmentId;
               } else{
                   response = MockResponseSrvyTaskWithoutMobileAssignmentId;
               }
-          } else if (url === URLConstant.GetHtmlCodeFromMobile) {
+          } else if (url === ''/**URLConstant.GetHtmlCodeFromMobile**/) {
               response = {
                   HtmlCode : 'Test'
               };

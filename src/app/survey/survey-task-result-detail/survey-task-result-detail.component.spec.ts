@@ -34,27 +34,27 @@ describe('SurveyTaskResultDetailComponent', () => {
                 withCredentials?: boolean;
             }) => {
                 let response: Object;
-                if (url == URLConstant.GetVerfResultByTrxRefNoAndVerfTrxTypeCode) {
+                if (url == ''/**URLConstant.GetVerfResultByTrxRefNoAndVerfTrxTypeCode**/) {
                     response = {
                         VerfResultId: 'VerfResultId'
                     }
                 } else if (VerfResultId == '0') {
-                    if( url == URLConstant.AddVerfResult){
+                    if( url == ''/**URLConstant.AddVerfResult**/){
                         response = {
                             VerfResultId : 'Id'
                         }
                     }
-                } else if (url == URLConstant.GetSrvyOrderDataBySrvyOrderId) {
+                } else if (url == ''/**URLConstant.GetSrvyOrderDataBySrvyOrderId**/) {
                     response = {
                         LobCode: 'LobCode'
                     }
-                } else if (url == URLConstant.GetSrvyOrderBySrvyOrderId) {
+                } else if (url == ''/**URLConstant.GetSrvyOrderBySrvyOrderId**/) {
                     response = {
                         TrxRefNo: 'TrxRefNo',
                         CustName: 'CustName',
                         SrvyOrderNo: 'SrvyOrderNo',
                     }
-                } else if (url == URLConstant.GetSrvyTaskBySrvyTaskId) {
+                } else if (url == ''/**URLConstant.GetSrvyTaskBySrvyTaskId**/) {
                     response = {
                         ResSrvyTaskObj: [
                             {
@@ -98,11 +98,11 @@ describe('SurveyTaskResultDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.GetSrvyFormSchmBySrvyFormSchmId) {
+                } else if (url == ''/**URLConstant.GetSrvyFormSchmBySrvyFormSchmId**/) {
                     response = {
                         VerfSchemeHId: ''
                     }
-                } else if (url == URLConstant.GetListActiveRefStatusByStatusGrpCode) {
+                } else if (url == ''/**URLConstant.GetListActiveRefStatusByStatusGrpCode**/) {
                     response = {
                         ResponseObj: [
                             {
@@ -116,7 +116,7 @@ describe('SurveyTaskResultDetailComponent', () => {
                             }
                         ]
                     }
-                } else if (url == URLConstant.UpdateSrvyTaskAndAddVerfResultH) {
+                } else if (url == ''/**URLConstant.UpdateSrvyTaskAndAddVerfResultH**/) {
                     response = {
                         message: 'Success'
                     }

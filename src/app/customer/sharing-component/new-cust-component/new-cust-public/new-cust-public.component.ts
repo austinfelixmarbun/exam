@@ -40,7 +40,7 @@ export class NewCustPublicComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     await this.InitData();
-    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, this.UrlConstantNew.GetListActiveRefMasterDetail);
+    this.DictUcDDLObj[this.RefMasterTypeCodePublicType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodePublicType, null, true, this.UrlConstantNew.GetListActiveRefMasterDetail);
     this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
