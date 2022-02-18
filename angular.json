@@ -82,9 +82,10 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false
+              "vendorChunk": false,
+              "buildOptimizer": true
             },
             "dev": {
               "budgets": [
@@ -514,6 +515,7 @@
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
+            "guessRoutes": false,
             "routes": [
               "/"
             ]
