@@ -5,7 +5,7 @@
         <div class="px-3">
           <lib-ucSubsection [id]="'branchListId'" [title]="'Branch List'" [panel]="'branchList'"></lib-ucSubsection>
           <div id="branchList">
-            <div id="gridBankAcc" [hidden]="ListData?.length < 1">
+            <div id="gridBankAcc" [hidden]="ListData?.length < 1" style="overflow-x: auto;">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
