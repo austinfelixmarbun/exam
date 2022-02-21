@@ -6,7 +6,6 @@ import { UIComponentsRoutingModule } from "./ui-components-routing.module";
 import { NouisliderModule } from 'ng2-nouislider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill'
-import { DragulaModule } from 'ng2-dragula';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { TagInputModule } from 'ngx-chips';
 import { UiSwitchModule } from 'ngx-ui-switch';
@@ -26,7 +25,6 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         ReactiveFormsModule,
         NgbModule,
         QuillModule,
-        DragulaModule,
         MatchHeightModule,
         TagInputModule,
         UiSwitchModule,

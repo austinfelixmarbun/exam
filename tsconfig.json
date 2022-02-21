@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "downlevelIteration": true,
-    "module": "ESNext",
+    "module": "es2020",
     "esModuleInterop": true,
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
@@ -10,7 +10,7 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "target": "ES6",
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
