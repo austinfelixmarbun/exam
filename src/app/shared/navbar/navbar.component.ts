@@ -100,7 +100,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ShowRole() {
         var data = { status: "200", reason: "OK" };
 
-        let isUseNewRolepick: string = AdInsHelper.GetLocalStorage('IS_USE_NEW_ROLEPICK');
+        let isUseNewRolepick: string = AdInsHelper.GetLocalStorage(CommonConstant.IS_USE_NEW_ROLEPICK);
         if(isUseNewRolepick == '0'){
             this.rolePickService.openDialog(data, "modal");
         }

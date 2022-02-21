@@ -66,10 +66,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: 'IS_USE_NEW_ROLEPICK'}).toPromise().then(
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.IS_USE_NEW_ROLEPICK}).toPromise().then(
       (response: GeneralSettingObj) => {
         this.isUseNewRolepick = response.GsValue == '1' ? true : false;
-        AdInsHelper.SetLocalStorage('IS_USE_NEW_ROLEPICK', response.GsValue);
+        AdInsHelper.SetLocalStorage(CommonConstant.IS_USE_NEW_ROLEPICK, response.GsValue);
       }
     );
     if(!this.isUseNewRolepick) {

@@ -38,7 +38,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
     private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService, private strService: StorageService) {
 
-    this.isUseNewRolepick = AdInsHelper.GetLocalStorage('IS_USE_NEW_ROLEPICK');
+    this.isUseNewRolepick = AdInsHelper.GetLocalStorage(CommonConstant.IS_USE_NEW_ROLEPICK);
     if(this.isUseNewRolepick == '0') {
       this.listRole = data["response"];
       console.log(this.listRole);
