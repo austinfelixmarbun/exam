@@ -174,10 +174,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@adins/ucdropdownsearch@^1.2.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@adins/ucdropdownsearch/-/ucdropdownsearch-1.2.1.tgz#e875092cfd21e6e49bb954d28529fba284c80384"
-  integrity sha512-3jsK6n8uOWq1m0sCdSOMKOhADN0Zp1bZ91EZTgrXEPnr95HKH25hRTOWB0vjnf7N/9LF90kBlalAv4JToSc3mw==
+"@adins/ucdropdownsearch@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@adins/ucdropdownsearch/-/ucdropdownsearch-1.2.2.tgz#135e7d522730981b34e82116dda118b8003dcdee"
+  integrity sha512-mqO2y+6i+iPddnsWYJig1Wk5qmStcpSFF2Xq0QfyrwqIl4n1tHdRx6qlZSOz43ApVADbJ47+UW93uT4Bt/uaSA==
   dependencies:
     tslib "^1.9.0"
 
@@ -202,10 +202,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@adins/ucmoduleselection@^1.0.2":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@adins/ucmoduleselection/-/ucmoduleselection-1.0.4.tgz#adbc20c3efae31c0b455c8bc71f6b297728103c6"
-  integrity sha512-joAeiUIqB+/UgKlOCGm5chRW2AzlAyfPuZFD9cheY+9Cl+p1W4x47QsIazWXZuwop94C3ThA3t57wHmFOB32/A==
+"@adins/ucmoduleselection@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@adins/ucmoduleselection/-/ucmoduleselection-1.0.5.tgz#d596761e1f77f0578ebf1944df4682030e93347e"
+  integrity sha512-+C+lJSLfKPVSMbOt6laL+LVS5sUzdGklEjat6oSH+QVNmFO28YPWlpJ8mFyiqV20qjYSI9oYC2l44U7AN2nKNg==
   dependencies:
     tslib "^1.9.0"
 
