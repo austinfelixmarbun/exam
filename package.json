@@ -7,7 +7,7 @@
     "start": "ng serve",
     "large-serve": "node --max_old_space_size=2048 ./node_modules/@angular/cli/bin/ng serve",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /Foundation/",
-    "BuildTest": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /FOUNDATION_ANGULAR_7_CORE_JENKINS_BUILD/",
+    "BuildTest": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --aot --base-href /FOUNDATION_ANGULAR_7_TEST_DEPLOY/",
     "dev": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=dev --base-href /FOUNDATION_DEV/",
     "devTest": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=devTest --base-href /FOUNDATION_DEV_TEST/",
     "sit": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=sit --base-href /FOUNDATION_SIT_CY6/",
