@@ -105,7 +105,7 @@ export class ShareholderFormXComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-
+    
     let listCriteriaObj: Array<CriteriaObj> = new Array();
     let criteriaCustObj = new CriteriaObj();
     criteriaCustObj.DataType = "text";
@@ -144,7 +144,7 @@ export class ShareholderFormXComponent implements OnInit {
 
   async GetExistingJobData(custId: number = this.CustId) {
     if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
