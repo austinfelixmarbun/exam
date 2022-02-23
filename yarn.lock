@@ -189,13 +189,13 @@
     tslib "^1.9.0"
 
 "@adins/ucdropdownsearch@^1.2.1":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@adins/ucdropdownsearch/-/ucdropdownsearch-1.2.2.tgz#135e7d522730981b34e82116dda118b8003dcdee"
-  integrity sha512-mqO2y+6i+iPddnsWYJig1Wk5qmStcpSFF2Xq0QfyrwqIl4n1tHdRx6qlZSOz43ApVADbJ47+UW93uT4Bt/uaSA==
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@adins/ucdropdownsearch/-/ucdropdownsearch-1.2.3.tgz#a77d468878470740c1d278db9cee477d219c401e"
+  integrity sha512-wMWNCkI4DKCoOxkAGjiUsXNRxWVJ0cYq+GJow8kZ70vVR6HcIZdKdRntNWQsM3ekHCJVd1pYM5Bq0v9cdq1VBQ==
   dependencies:
     tslib "^1.9.0"
 
-"@adins/ucgridfooter@^1.0.1", "@adins/ucgridfooter@^1.0.2":
+"@adins/ucgridfooter@1.0.2", "@adins/ucgridfooter@^1.0.1", "@adins/ucgridfooter@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@adins/ucgridfooter/-/ucgridfooter-1.0.2.tgz#7a50a2cf5dc81581f147fea061c7e2f6e70349ec"
   integrity sha512-IGpgrSRdlcM3BDAj0hbTPnF5HU+GO+UvP51RhT1+qbA9llzo8BkAHdwbVt83hNCt0ZcL7jLEdkbSoeOaD5+Sdw==
@@ -230,14 +230,14 @@
   dependencies:
     tslib "^1.9.0"
 
-"@adins/ucpaging@2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@adins/ucpaging/-/ucpaging-2.3.1.tgz#1b6f4a91e633851af58e72c92fbe752dc5430332"
-  integrity sha512-5wtvreix6+68XHe1OzPAxBvHa7xcU4r0vyEhnC7ZcHODhmQUxigy12VmkfYgcQVDae8KDZnet5XS8hB6Ob4G6Q==
+"@adins/ucpaging@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@adins/ucpaging/-/ucpaging-2.3.2.tgz#0e424cbb2d80c40fd643a54266e5443498cd8014"
+  integrity sha512-FO6N1SOLyVb5RQRayJ4aZ70LQGnAFJouLIdyi37M5RKUpZrOWHrNuh8kYBqKlAu6FalM8EBjrm31wsRyUZb3Bw==
   dependencies:
-    "@adins/ucgridfooter" "^1.0.1"
-    "@adins/ucgridview" "^2.0.58"
-    "@adins/ucsearch" "^2.0.27"
+    "@adins/ucgridfooter" "1.0.2"
+    "@adins/ucgridview" "2.2.0"
+    "@adins/ucsearch" "2.12.1"
     tslib "^1.9.0"
 
 "@adins/ucreport@^2.2.1":
@@ -8306,9 +8306,9 @@ urix@^0.1.0:
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
 url-parse@^1.4.3:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.9.tgz#05ff26484a0b5e4040ac64dcee4177223d74675e"
-  integrity sha512-HpOvhKBvre8wYez+QhHcYiVvVmeF6DVnuSOOPhe3cTum3BnqHhvKaZm8FU5yTiOu/Jut2ZpB2rA/SbBA1JIGlQ==
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.10.tgz#9d3c2f736c1d75dd3bd2be507dcc111f1e2ea9c1"
+  integrity sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
