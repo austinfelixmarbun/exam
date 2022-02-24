@@ -141,9 +141,9 @@ export class ShareholderFormComponent implements OnInit {
     )
   }
 
-  async GetExistingJobData(custId: number = this.CustId) {
-    if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustId, { Id: custId }).toPromise().then(
+  async GetExistingJobData(shareholderId: number = this.CustId) {
+    if (this.CustType != this.CustTypePersonal || shareholderId == 0) return;
+    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Id: [0, shareholderId] }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
