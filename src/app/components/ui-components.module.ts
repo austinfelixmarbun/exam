@@ -8,6 +8,7 @@ import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JsonpModule } from '@angular/http';
 import { QuillModule } from 'ngx-quill'
+import { DragulaModule } from 'ng2-dragula';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { TagInputModule } from 'ngx-chips';
@@ -31,6 +32,7 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         JsonpModule,
         NgbModule,
         QuillModule,
+        DragulaModule,
         MatchHeightModule,
         ImageCropperModule,
         TagInputModule,
