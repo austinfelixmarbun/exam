@@ -1,6 +1,7 @@
 import { Component, ViewContainerRef, OnInit } from '@angular/core';
 // import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Message } from 'primeng/primeng';
 import { AdInsConstant } from './shared/AdInstConstant';
 import { environment } from 'environments/environment';
 // import * as signalR from '@aspnet/signalr';
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
 
 
     private _hubConnection: HubConnection;
-    // msgs: Message[] = [];
+    msgs: Message[] = [];
     //TEST PUSH MASTER 5
     constructor() { }
  
