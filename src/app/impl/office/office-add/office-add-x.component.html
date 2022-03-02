@@ -10,7 +10,7 @@
   <div class="card-body">
     <div class="px-3">
       <form class="form form-horizontal" [formGroup]="OfficeForm" (ngSubmit)="OfficeForm.valid && SaveForm()"
-        #enjiForm="ngForm">
+            #enjiForm="ngForm">
 
         <lib-ucSubsection [id]="'OfficeDetailId'" [title]="'Office-' + this.pageType" [panel]="'OfficeDetail'">
         </lib-ucSubsection>
@@ -19,7 +19,8 @@
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Office Code</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" formControlName="OfficeCode">
+              <input type="text" class="form-control" formControlName="OfficeCode"
+                     [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeCode.invalid }">
               <lib-uc-show-errors [control]="OfficeForm.controls.OfficeCode" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -28,7 +29,8 @@
           <div class="form-group row adins-required">
             <label class="col-md-3  adInsLabel" translate>Office Name</label>
             <div class="col-md-4">
-              <input type="text" class="form-control" formControlName="OfficeName">
+              <input type="text" class="form-control" formControlName="OfficeName"
+                     [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeName.invalid }">
               <lib-uc-show-errors [control]="OfficeForm.controls.OfficeName" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -47,8 +49,8 @@
             <label class="col-md-3  adInsLabel" translate>Office Type </label>
             <div class="col-md-4">
               <select class="form-control" style="width: auto" formControlName="OfficeType"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeType.invalid }"
-                (change)="checkType()">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.OfficeType.invalid }"
+                      (change)="checkType()">
                 <option *ngFor="let ot of allOfficeType" value="{{ot.Key}}">
                   {{ot.Value}}</option>
               </select>
@@ -62,7 +64,7 @@
               <label class="col-md-3  adInsLabel" translate>Center Group Type </label>
               <div class="col-md-4">
                 <select class="form-control" style="width: auto" formControlName="MrCenterGrpTypeCode"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrCenterGrpTypeCode.invalid }">
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrCenterGrpTypeCode.invalid }">
                   <option *ngFor="let ct of allCgType" value="{{ct.Key}}">
                     {{ct.Value}}</option>
                 </select>
@@ -76,7 +78,7 @@
             <label class="col-md-3  adInsLabel" translate>Hierarchy Level </label>
             <div class="col-md-4" *ngIf="HierarchyLvlDdl.isReady">
               <lib-ucdropdownlist [dropdownListObj]="HierarchyLvlDdl" [genericList]="listMaxHierarchyLvl" [isDisabled]="isDisabledHierarchyLvlDdl"
-                [parentForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'HierarchyLvl'" (callback)="changeHierarchy($event.selectedObj)">
+                                  [parentForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'HierarchyLvl'" (callback)="changeHierarchy($event.selectedObj)">
               </lib-ucdropdownlist>
             </div>
           </div>
@@ -87,7 +89,7 @@
               </div>
               <div class="col-md-4" [hidden]="OfficeForm.controls.HierarchyLvl.value == ''">
                 <lib-uclookupgeneric [lookupInput]="InputLookupObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
-                  [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)" *ngIf="InputLookupObj.isReady" #LookupParent>
+                                     [identifier]="'lookupOfficeParent'" (lookup)="getLookUp($event)" *ngIf="InputLookupObj.isReady" #LookupParent>
                 </lib-uclookupgeneric>
               </div>
             </div>
@@ -97,7 +99,7 @@
             <label class="col-md-3  adInsLabel" translate>Konvensional/Syariah</label>
             <div class="col-md-4">
               <select class="form-control" style="width: auto" formControlName="KonSya"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.KonSya.invalid }">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.KonSya.invalid }">
                 <option *ngFor="let ky of allKonSya" value="{{ky.Key}}">
                   {{ky.Value}}</option>
               </select>
@@ -110,7 +112,7 @@
             <label class="col-md-3  adInsLabel" translate>Office Class</label>
             <div class="col-md-4">
               <select class="form-control" style="width: auto" formControlName="MrOfficeClassCode"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrOfficeClassCode.invalid }">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.MrOfficeClassCode.invalid }">
                 <option *ngFor="let oc of allOfficeClass" value="{{oc.Key}}">
                   {{oc.Value}}</option>
               </select>
@@ -123,7 +125,7 @@
             <label class="col-md-3  adInsLabel" translate>Holiday Scheme</label>
             <div class="col-md-4">
               <select class="form-control" style="width: auto" formControlName="HolidayScheme"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.HolidayScheme.invalid }">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.HolidayScheme.invalid }">
                 <option *ngFor="let hs of allHolidaySchm" value="{{hs.HolidaySchmHId}}">
                   {{hs.HolidaySchmName}}</option>
               </select>
@@ -136,7 +138,7 @@
             <label class="col-md-3  adInsLabel" translate>Working Hour Scheme</label>
             <div class="col-md-4">
               <select class="form-control" style="width: auto" formControlName="WorkingHourScheme"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.WorkingHourScheme.invalid }">
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.WorkingHourScheme.invalid }">
                 <option *ngFor="let oc of allWorkingHourSchm" value="{{oc.WorkingHourSchmHId}}">
                   {{oc.WorkingHourSchmName}}</option>
               </select>
@@ -174,7 +176,7 @@
 
         </div>
         <lib-ucaddress [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'UcAddress'"
-          [UCAddrForm]="OfficeForm"></lib-ucaddress>
+                       [UCAddrForm]="OfficeForm"></lib-ucaddress>
         <!-- <lib-ucaddress [UCAddrForm]="OfficeForm" [enjiForm]="enjiForm" [identifier]="'UcAddress'" [default]="addressObj"
           [inputField]="inputFieldAddr">
         </lib-ucaddress> -->
@@ -186,7 +188,7 @@
             <label class="col-md-3 adins-required-label adInsLabel" translate>Contact Person Name </label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="CntctPersonName"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonName.invalid }">
+                     [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonName.invalid }">
               <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonName" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -197,7 +199,7 @@
             </label>
             <div class="col-md-4">
               <input type="text" class="form-control" formControlName="CntctPersonJobTitle"
-                [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonJobTitle.invalid }">
+                     [ngClass]="{ 'is-invalid': enjiForm.submitted && OfficeForm.controls.CntctPersonJobTitle.invalid }">
               <lib-uc-show-errors [control]="OfficeForm.controls.CntctPersonJobTitle" [submit]="enjiForm.submitted">
               </lib-uc-show-errors>
             </div>
@@ -248,7 +250,7 @@
             </div>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="InputLookupTaxOfficeObj" [parentForm]='OfficeForm' [enjiForm]="enjiForm"
-                [identifier]="'lookupTaxOffice'" (lookup)="getLookUpTaxOffice($event)" *ngIf="InputLookupTaxOfficeObj.isReady">
+                                   [identifier]="'lookupTaxOffice'" (lookup)="getLookUpTaxOffice($event)" *ngIf="InputLookupTaxOfficeObj.isReady">
               </lib-uclookupgeneric>
             </div>
           </div>

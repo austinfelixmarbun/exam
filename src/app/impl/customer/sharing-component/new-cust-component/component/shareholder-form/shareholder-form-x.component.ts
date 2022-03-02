@@ -19,6 +19,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shareholder-form-x',
@@ -28,6 +29,7 @@ import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 export class ShareholderFormXComponent implements OnInit {
 
   @Input() CustId: number = 0;
+  @Input() ParentCustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() CustType: string;
   @Input() enjiForm: NgForm;
@@ -46,7 +48,13 @@ export class ShareholderFormXComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.ParentCustId = params["IdCust"];
+      }
+    });
+  }
 
   UserAccess: CurrentUserContext;
   MaxDate: Date;
@@ -105,7 +113,7 @@ export class ShareholderFormXComponent implements OnInit {
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
-    
+
     let listCriteriaObj: Array<CriteriaObj> = new Array();
     let criteriaCustObj = new CriteriaObj();
     criteriaCustObj.DataType = "text";
@@ -142,9 +150,9 @@ export class ShareholderFormXComponent implements OnInit {
     )
   }
 
-  async GetExistingJobData(custId: number = this.CustId) {
-    if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustId, { Id: custId }).toPromise().then(
+  async GetExistingJobData(shareholderId: number = this.CustId) {
+    if (this.CustType != this.CustTypePersonal || shareholderId == 0) return;
+    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Ids: [this.ParentCustId, shareholderId] }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
