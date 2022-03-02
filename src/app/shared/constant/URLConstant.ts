@@ -728,11 +728,8 @@ export class URLConstant {
     public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustCompanyShareholderMainData";
     public static SaveCustPersonalFamilyMainData = environment.FoundationR3Url  + '/v1' + "/Cust/SaveCustPersonalFamilyMainData";
     public static SaveCustPersonalFamilyMainDataV2 = environment.FoundationR3Url  + '/v2' + "/Cust/SaveCustPersonalFamilyMainData";
-
     public static NewEditDuplicateCust = environment.FoundationR3Url  + '/v1' + "/Cust/NewEditDuplicateCust";
     public static NewEditDuplicateCustV2 = environment.FoundationR3Url  + '/v2' + "/Cust/NewEditDuplicateCust";
-
-
     public static GetCustHighlightCommentByCustId = environment.FoundationR3Url + "/v1" + "/Cust/GetCustHighlightCommentByCustId";
     public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
     public static UpdateToMainCustomer = environment.FoundationR3Url + "/v1" + "/Cust/UpdateToMainCustomer";
@@ -820,7 +817,7 @@ export class URLConstant {
     public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetListManagementShareholderForListPagingByCustId";
     public static GetCustCompanyMgmntShrholderByCustIdAndShrholderId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId";
     public static GetCustCompanyMgmntShrholderJobInfoByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustId";
-    
+
     // CUST ATTR CONTENT
     public static GetCustAttrContentForCustViewByCustId = environment.FoundationR3Url + '/v1' + "/CustAttrContent/GetCustAttrContentForCustViewByCustId";
     public static AddEditListCustAttrContent = environment.FoundationR3Url + '/v1' + "/CustAttrContent/AddEditListCustAttrContent";
@@ -1048,8 +1045,6 @@ export class URLConstant {
     public static RequestExposureV2 = environment.FoundationR3Url + "/v2" + "/CustExpsrInfo/RequestExposure";
     public static GetListCustExpsrBucketByCustExpsrDId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId";
     public static GetListCustExpsrAppAgrHistByCustExpsrHId = environment.FoundationR3Url + "/v1" + "/CustExpsrInfo/GetListCustExpsrAppAgrHistByCustExpsrHId";
-    public static GetR2CustExposureByCustNo = environment.FoundationR3Url + "/v1" + "/CustX/GetR2CustExposureByCustNo";
-    public static GetR2CustGroupExposureByCustNo = environment.FoundationR3Url + "/v1" + "/CustX/GetR2CustGroupExposureByCustNo";
 
     //OTP
     public static SendOtp = environment.FoundationR3Url + "/v1" + "/Authenticate/SendOtp";
