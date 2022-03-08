@@ -1,12 +1,12 @@
 {
-    "title": "Collector Company",
+    "title": "Collection Company",
     "component": [
         {
             "type": "textbox",
             "name": "vdr.VENDOR_CODE",
             "id": "VendorCodeId",
             "value": "",
-            "label": "Supplier Code",
+            "label": "Collection Company Code",
             "placeholder": "Placeholder"
         },
         {
@@ -14,7 +14,7 @@
             "name": "vdr.VENDOR_NAME",
             "id": "VendorNameId",
             "value": "",
-            "label": "Supplier Name",
+            "label": "Collection Company Name",
             "placeholder": "Placeholder"
         },
         {
@@ -66,19 +66,19 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Supplier CODE",
+            "label": "Collection Company Code",
             "name": "vdr.VENDOR_CODE"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Supplier NAME",
+            "label": "Collection Company Name",
             "name": "vdr.VENDOR_NAME"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Supplier ADDRESS",
+            "label": "Collection Company Address",
             "name": "ADDR"
         },
         {
