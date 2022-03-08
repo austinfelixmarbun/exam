@@ -50,7 +50,7 @@
   <div class="col-md-6">
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-4 adins-required-label" translate>Customer Model </label>
+      <label class="col-md-4 adInsLabel" translate>Customer Model </label>
       <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
         <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
           [parentForm]="parentForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
