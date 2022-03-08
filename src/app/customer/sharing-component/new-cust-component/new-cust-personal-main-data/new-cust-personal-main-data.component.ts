@@ -225,7 +225,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplName: [''],
       SupplId: [''],
       MrCustRelationship: [''],
-      MrCustModelCode: [''],
+      MrCustModelCode: ['', [Validators.required]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
     });
@@ -582,6 +582,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   changeCustModel() {
+    console.log("meong");
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.shareholderForm.ResetLookupProfession();
     }
