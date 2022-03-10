@@ -32,7 +32,6 @@ export class URLConstant {
     public static GetRefOfficeObj = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeObj";
     public static GetRefOfficeByRefOfficeId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetRefOfficeByRefOfficeId"
     public static GetAllRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/GetAllRefOffice";
-    public static GetListUpperHierarchyRefOfficeByRefOrgId = environment.FoundationR3Url + "/v1" + "/RefOffice/GetListUpperHierarchyRefOfficeByRefOrgId";
     public static AddRefOffice = environment.FoundationR3Url + "/v1" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeV2 = environment.FoundationR3Url + "/v2" + "/RefOffice/AddRefOffice";
     public static AddRefOfficeV2_1 = environment.FoundationR3Url + "/v2.1" + "/RefOffice/AddRefOffice";
@@ -405,10 +404,10 @@ export class URLConstant {
 
     //REF EMP LEAVE MANAGEMENT
     public static GetRefEmpLeaveMngmntPaging = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveManagement/GetRefEmpLeaveMngmntPaging";
-    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
+    public static DeleteRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/DeleteRefEmpLeaveMngmnt";
     public static GetRefEmpLeaveMngmntById = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/GetRefEmpLeaveByRefEmpLeaveId";
-    public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
-    public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v1" + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
+    public static EditRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/EditRefEmpLeaveMngmnt";
+    public static AddRefEmpLeaveMngmnt = environment.FoundationR3Url + "/v2" + "/RefEmpLeaveMngmnt/AddRefEmpLeaveMngmnt";
 
     //UPLOAD
     public static UploadReview = environment.FoundationR3Url + "/v1" + "/Upload/UploadReview";
