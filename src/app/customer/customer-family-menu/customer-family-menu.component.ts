@@ -27,7 +27,7 @@ export class CustomerFamilyMenuComponent implements OnInit {
     if(e.Key == "UpdateIsCustomer"){
       if(confirm("Update to Main Customer?")){
         var ReqByIdObj = new GenericObj();
-        ReqByIdObj.Id = e.RowObj.ShareholderId;
+        ReqByIdObj.Id = e.RowObj.FamilyId;
         this.http.post(URLConstant.UpdateToMainCustomer, ReqByIdObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
