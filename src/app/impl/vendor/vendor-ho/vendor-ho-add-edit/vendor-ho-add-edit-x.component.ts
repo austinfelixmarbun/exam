@@ -101,6 +101,8 @@ export class VendorHoAddEditXComponent implements OnInit {
     Addr: [''],
     AreaCode2: [{ value: '', disabled: true }], //kelurahan
     AreaCode1: [{ value: '', disabled: true }], //kecamatan
+    AreaCode3: [''],
+    AreaCode4: [''],
     City: [{ value: '', disabled: true }],
     Province: [{ value: '', disabled: true }],
     RowVersionVendor: [''],
@@ -375,6 +377,8 @@ export class VendorHoAddEditXComponent implements OnInit {
           Addr: this.result.VendorAddrObj.Addr,
           AreaCode2: this.result.VendorAddrObj.AreaCode2,
           AreaCode1: this.result.VendorAddrObj.AreaCode1,
+          AreaCode3: this.result.VendorAddrObj.AreaCode3,
+          AreaCode4: this.result.VendorAddrObj.AreaCode4,
           City: this.result.VendorAddrObj.City,
           Province: this.result.VendorAddrObj.Province,
           RowVersionVendorAddr: this.result.VendorAddrObj.RowVersion,
@@ -745,6 +749,8 @@ export class VendorHoAddEditXComponent implements OnInit {
         this.vendorHoObj.VendorAddrObj.Zipcode = this.VendorForm.controls["Zipcode"]["controls"].value.value;
         this.vendorHoObj.VendorAddrObj.AreaCode2 = this.VendorForm.controls.AreaCode2.value;
         this.vendorHoObj.VendorAddrObj.AreaCode1 = this.VendorForm.controls.AreaCode1.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.VendorForm.controls.AreaCode3.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.VendorForm.controls.AreaCode4.value;
         this.vendorHoObj.VendorAddrObj.City = this.VendorForm.controls.City.value;
         this.vendorHoObj.VendorAddrObj.Province = this.VendorForm.controls.Province.value;
       } else if (this.result != null) {
@@ -753,6 +759,8 @@ export class VendorHoAddEditXComponent implements OnInit {
         this.vendorHoObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorHoObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
         this.vendorHoObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
+        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
         this.vendorHoObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorHoObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
