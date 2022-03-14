@@ -6,7 +6,6 @@ import { VendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-me
 import { VendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/vendor-scheme-member-paging/vendor-scheme-member-paging.component';
 import { VendorHoAddEditComponent } from './vendor-ho/vendor-ho-add-edit/vendor-ho-add-edit.component';
 import { VendorHoPagingComponent } from './vendor-ho/vendor-ho-paging/vendor-ho-paging.component';
-import { VendorHoldingViewComponent } from './vendor-holding-view/vendor-holding-view.component';
 import { VendorBranchPagingComponent } from './vendor-branch/vendor-branch-paging/vendor-branch-paging.component';
 import { VendorHoldingPagingComponent } from './vendor-holding-paging/vendor-holding-paging.component';
 import { VendorHoldingAddEditComponent } from './vendor-holding-add-edit/vendor-holding-add-edit.component';
@@ -18,19 +17,15 @@ import { ContactPersonAddEditComponent } from './component/contact-person-add-ed
 import { VendorBranchAddEditComponent } from './vendor-branch/vendor-branch-add-edit/vendor-branch-add-edit.component';
 import { VendorHoRegistrationComponent } from './vendor-ho/vendor-ho-registration/vendor-ho-registration.component';
 import { ContactPersonListComponent } from './component/contact-person-list/contact-person-list.component';
-import { VendorHoInfoComponent } from './vendor-ho/vendor-ho-info/vendor-ho-info.component';
 import { VendorBranchEmployeePagingComponent } from './vendor-branch/vendor-branch-employee-paging/vendor-branch-employee-paging.component';
 import { VendorBranchEmployeeAddEditComponent } from './vendor-branch/vendor-branch-employee-add-edit/vendor-branch-employee-add-edit.component';
 import { VendorHoldingRegistrationComponent } from './vendor-holding-registration/vendor-holding-registration.component';
 import { VendorBranchRegistrationComponent } from './vendor-branch/vendor-branch-registration/vendor-branch-registration.component';
 import { VendorBranchOfficeMemberComponent } from './vendor-branch/vendor-branch-office-member/vendor-branch-office-member.component';
 import { VendorBranchOfficeMemberAddComponent } from './vendor-branch/vendor-branch-office-member-add/vendor-branch-office-member-add.component';
-import { VendorBranchViewComponent } from './vendor-branch/vendor-branch-view/vendor-branch-view.component';
 import { VendorPagingComponent } from './component/vendor/vendor-paging/vendor-paging.component';
 import { VendorATPMAddEditComponent } from './vendor-ATPM/vendor-atpm-add-edit/vendor-atpm-add-edit.component';
 import { VendorATPMRegistrationComponent } from './vendor-ATPM/vendor-atpm-registration/vendor-atpm-registration.component';
-import { AuctionCompanyPagingComponent } from './auction-company/auction-company-paging/auction-company-paging.component';
-import { AuctionCompanyAddeditComponent } from './auction-company/auction-company-addedit/auction-company-addedit.component';
 import { PathConstant } from 'app/shared/PathConstant';
 
 import { VendorGradingRequestPagingComponent } from "./vendor-grading/vendor-grading-request/vendor-grading-request-paging/vendor-grading-request-paging.component";
@@ -68,13 +63,6 @@ const routes: Routes = [
         component: VendorBranchRegistrationComponent,
         data: {
           title: 'Vendor Branch Registration'
-        },
-      },
-      {
-        path: PathConstant.VENDOR_BRANCH_VIEW,
-        component: VendorBranchViewComponent,
-        data: {
-          title: 'Vendor Branch View'
         },
       },
       {
@@ -197,25 +185,10 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_HOLDING_VIEW,
-        component: VendorHoldingViewComponent,
-        data: {
-          title: 'Vendor Holding View'
-        },
-      },
-
-      {
         path: PathConstant.VENDOR_HO_REG,
         component: VendorHoRegistrationComponent,
         data: {
           title: 'Vendor HO Registration'
-        },
-      },
-      {
-        path: PathConstant.VENDOR_VIEW_HO,
-        component: VendorHoInfoComponent,
-        data: {
-          title: 'Vendor HO View'
         },
       },
       {
@@ -294,20 +267,6 @@ const routes: Routes = [
         data: {
           title: "Vendor Grading Inquiry", 
         }
-      },
-      {
-        path: PathConstant.VENDOR_AUCTION_COY_PAGING,
-        component: AuctionCompanyPagingComponent,
-        data: {
-          title: 'Auction Company Paging'
-        },
-      },
-      {
-        path: PathConstant.VENDOR_AUCTION_COY_ADD_EDIT,
-        component: AuctionCompanyAddeditComponent,
-        data: {
-          title: 'Auction Company Addedit'
-        },
       },
       {
         path: PathConstant.VENDOR_COLL_COMPANY_ADD,

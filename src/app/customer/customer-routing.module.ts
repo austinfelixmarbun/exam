@@ -5,14 +5,12 @@ import { NegativeCustomerComponent } from './negative-customer/negative-customer
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { CustomerPagingComponent } from './customer-paging/customer-paging.component';
 import { CustomerPersonalPageComponent } from './customer-personal/customer-personal-page/customer-personal-page.component';
-import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
 import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
 import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
 import { CustomerCompanyAddressAddComponent } from './customer-company/customer-company-address/customer-company-address-add/customer-company-address-add.component';
 import { CustomerPersonalJobDataComponent } from './customer-personal/customer-personal-job-data/customer-personal-job-data.component';
 import { JobDataNonProfessionalComponent } from './customer-personal/customer-personal-job-data/job-data-non-professional/job-data-non-professional.component';
-import { CustomerViewComponent } from './customer-view/customer-view.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
@@ -52,13 +50,6 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.CUST_NEG_VIEW,
-        component: NegativeCustomerViewComponent,
-        data: {
-          title: 'Negative Customer View'
-        }
-      },
-      {
         path: PathConstant.CUST_NEG_UPLOAD,
         component: UploadNegativeCustomerComponent,
         data: {
@@ -85,13 +76,6 @@ const routes: Routes = [
         component: CustomerPersonalPageComponent,
         data: {
           title: 'Customer Personal DuplicateCheck  '
-        }
-      },
-      {
-        path: PathConstant.CUST_VIEW_PAGE,
-        component: CustomerViewComponent,
-        data: {
-          title: 'Customer View Component'
         }
       },
       {

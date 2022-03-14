@@ -37,16 +37,8 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('app/system-setting/system-setting.module').then(m => m.SystemSettingModule)
   },
   {
-    path: PathConstant.LR_COY,
-    loadChildren: () => import('app/company/company.module').then(m => m.CompanyModule)
-  },
-  {
     path: PathConstant.LR_COMMON_SETTING,
     loadChildren: () => import('app/common-setting/common-setting.module').then(m => m.CommonSettingModule)
-  },
-  {
-    path: PathConstant.LR_NOTIF,
-    loadChildren: () => import('app/notification/notification.module').then(m => m.NotificationModule)
   },
   {
     path: PathConstant.LR_PAGES,
@@ -69,10 +61,6 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('app/verification/verification.module').then(m => m.VerificationModule)
   },
   {
-    path: PathConstant.LR_APPRV_SCRN,
-    loadChildren: () => import('app/approval-screen/approval-screen.module').then(m => m.ApprovalScreenModule)
-  },
-  {
     path: PathConstant.LR_ERROR,
     loadChildren: () => import('app/error-page/error-page.module').then(m => m.ErrorPageModule)
   },
@@ -91,10 +79,6 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_JOURNAL,
     loadChildren: () => import('app/journal/journal.module').then(m => m.JournalModule)
-  },
-  {
-    path: PathConstant.LR_FEE,
-    loadChildren: () => import('app/fee/fee.module').then(m => m.FeeModule)
   },
   {
     path: PathConstant.LR_LICENSE,
