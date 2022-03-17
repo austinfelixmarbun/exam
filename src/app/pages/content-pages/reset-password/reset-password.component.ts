@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: "reset-password",
-  templateUrl: "./reset-password.component.html",
+  templateUrl: "./reset-password-new.component.html",
   providers: [NGXToastrService]
 })
 export class ResetPasswordComponent implements OnInit {
@@ -31,6 +31,7 @@ export class ResetPasswordComponent implements OnInit {
   code: string = "";
   RefUserObj: any;
   customPattern = new Array<CustomPatternObj>();
+  isMatch = true;
   
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router, private UrlConstantNew: UrlConstantNew) {
     this.version = localStorage.getItem(CommonConstant.VERSION);
@@ -52,6 +53,15 @@ export class ResetPasswordComponent implements OnInit {
         this.ResetPassForm.controls.NewPassword.updateValueAndValidity();
       }
     );
+  }
+
+  eventValidatePassword() {
+    if (this.ResetPassForm.controls["NewPassword"].value != this.ResetPassForm.controls["ConfirmPassword"].value) {
+      this.isMatch = false;
+    }
+    else {
+      this.isMatch = true;
+    }
   }
 
   SaveForm() {

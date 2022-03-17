@@ -15,7 +15,6 @@ export class NavigationConstant {
     public static PAGES_REQ_PASSWORD = "/" + PathConstant.LR_PAGES + "/" + PathConstant.REQ_PASSWORD; //'/Pages/RequestPassword'
     public static PAGES_CONTENT = "/" + PathConstant.LR_PAGES + "/" + PathConstant.CONTENT; //'/Pages/Content'
     public static ERROR = "/" + PathConstant.LR_ERROR; //'/Error'
-    public static NOTIF = "/" + PathConstant.LR_NOTIF; //'/Notification'
     public static PAGES_MODULE_SELECTION = "/" + PathConstant.LR_PAGES + "/" + PathConstant.SELECT_MODULE; //'/Pages/SelectModule'
     
     //#region Asset
@@ -183,8 +182,6 @@ export class NavigationConstant {
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
     public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_REG; //'/Vendor/Holding/Registration'
-    public static VENDOR_AUCTION_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_PAGING; //'/Vendor/AuctionCompany/Paging'
-    public static VENDOR_AUCTION_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_AUCTION_COY_ADD_EDIT; //'/Vendor/AuctionCompany/AddEdit'
     public static VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_ATPM_DETAIL; //'/Vendor/ATPM/Detail'
     public static VENDOR_ATPM_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_ATPM_REG; //'/Vendor/ATPM/Registration'
     public static VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_BRANCH_ADD; //'/Vendor/Branch/Add'
@@ -248,15 +245,6 @@ export class NavigationConstant {
     public static EMP_LEAVE_ADD = "/" + PathConstant.LR_EMP + "/" + PathConstant.LEAVE_ADD; //'/Employee/Leave/Add'
     //#endregion
     
-    //#region COY
-    public static COY_BOD = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_BOD; //'/Company/Bod'
-    public static COY_BOD_ADD = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_BOD_ADD; //'/Company/Bod/Add'
-    public static COY_COMMISSIONER = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_COMMISSIONER; //'/Company/Commissioner'
-    public static COY_COMMISSIONER_ADD = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_COMMISSIONER_ADD; //'/Company/Commissioner/Add'
-    public static COY_EDIT = "/" + PathConstant.LR_COY + "/" + PathConstant.EDIT; //'/Company/Edit'
-    public static COY = "/" + PathConstant.LR_COY; //'/Company'
-    //#endregion
-
     //#region Office
     public static OFFICE = "/" + PathConstant.LR_OFFICE; //'/Office'
     public static OFFICE_PAGING = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.PAGING; //'/Office/Paging'
@@ -269,12 +257,6 @@ export class NavigationConstant {
     public static OFFICE_EMP_POS_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS_ADD; //'/Office/OfficeEmpPosAdd'
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
-    //#endregion
-
-    //#region 
-    public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
-    public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
-    public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
     //#endregion
 
     //#region 

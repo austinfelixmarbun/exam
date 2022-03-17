@@ -6,7 +6,6 @@ export class PathConstant {
     public static LR_DASHBOARD = "Dashboard";
     public static LR_FORMS = "forms";
     public static LR_COMPNT = "components";
-    public static LR_NOTIF = "Notification";
     public static LR_PAGES = "Pages";
     public static LR_OFFICE = "Office";
     public static LR_OFFICE_BANK_ACC = "OfficeBankAcc";
@@ -14,19 +13,16 @@ export class PathConstant {
     public static LR_ORG = "Organization";
     public static LR_CUST = "Customer";
     public static LR_SYSTEM_SETTING = "SystemSetting";
-    public static LR_COY = "company";
     public static LR_COMMON_SETTING = "CommonSetting";
     public static LR_UPLOAD = "Upload";
     public static LR_ASSET = "Asset";
     public static LR_VENDOR = "Vendor";
     public static LR_VERIF = "Verification";
-    public static LR_APPRV_SCRN = "ApprovalScreen";
     public static LR_ERROR = "Error";
     public static LR_SRVY = "Survey";
     public static LR_INTEGRATION = "Integration";
     public static LR_DOC_MNGMNT = "DocumentManagement";
     public static LR_JOURNAL = "journal"
-    public static LR_FEE = "Fee";
     public static LR_LICENSE = "License";
     public static LR_SYS_USER = "SystemUser";
     //#endregion
@@ -233,22 +229,12 @@ export class PathConstant {
     public static CUST_NEG = "NegativeCustomer";
     public static CUST_NEG_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.PAGING;
     public static CUST_NEG_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.DETAIL;
-    public static CUST_NEG_VIEW = PathConstant.CUST_NEG + "/" + PathConstant.VIEW;
     public static CUST_NEG_UPLOAD = PathConstant.CUST_NEG + "/" + PathConstant.UPLOAD;
     public static CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
-    public static CUST_VIEW = "CustomerView";
-    public static CUST_VIEW_PAGE = PathConstant.CUST_VIEW + "/" + PathConstant.CUST_PAGE;
     public static NEW_CUST = "NewCustomer";
     //#endregion
     
-    //#region COY
-    public static COY_BOD = "Bod";
-    public static COY_BOD_ADD = PathConstant.COY_BOD + "/" + PathConstant.ADD;
-    public static COY_COMMISSIONER = "Commissioner";
-    public static COY_COMMISSIONER_ADD = PathConstant.COY_COMMISSIONER + "/" + PathConstant.ADD;
-    //#endregion
-
     //#region Dashboard-Module
     public static DASHBOARD = "Dash-Board";
     public static DASHEMPTY = "Dash-Empty";
@@ -372,7 +358,6 @@ export class PathConstant {
     public static VENDOR_BRANCH_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING;
     public static VENDOR_BRANCH_ADD = PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD;
     public static VENDOR_BRANCH_REG = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_REG;
-    public static VENDOR_BRANCH_VIEW = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VIEW;
     public static VENDOR_BRANCH_EMP_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.PAGING;
     public static VENDOR_BRANCH_EMP_DETAIL = PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     public static VENDOR_BRANCH_MBR_PAGING = PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.PAGING;
@@ -392,7 +377,6 @@ export class PathConstant {
     public static VENDOR_HOLDING_PAGING = PathConstant.VENDOR_HOLDING + "/" + PathConstant.PAGING;
     public static VENDOR_HOLDING_DETAIL = PathConstant.VENDOR_HOLDING + "/" + PathConstant.DETAIL;
     public static VENDOR_HOLDING_REG = PathConstant.VENDOR_HOLDING + "/" + PathConstant.VENDOR_REG;
-    public static VENDOR_HOLDING_VIEW = PathConstant.VENDOR_HOLDING + "/" + PathConstant.VIEW;
     public static VENDOR_GRP_PAGING = PathConstant.GROUP + "/" + PathConstant.PAGING;
     public static VENDOR_GRP_ADD = PathConstant.GROUP + "/" + PathConstant.ADD;
     public static VENDOR_GRP_VIEW = PathConstant.GROUP + "/" + PathConstant.VIEW;
@@ -407,13 +391,9 @@ export class PathConstant {
     public static VENDOR_HO_PAGING = PathConstant.VENDOR_HO + "/" + PathConstant.PAGING;
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstant.DETAIL;
     public static VENDOR_HO_REG = PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
-    public static VENDOR_VIEW_HO = PathConstant.VIEW + "/" + "VendorHO";
     public static VENDOR_ATPM = "ATPM";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static VENDOR_ATPM_REG = PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
-    public static VENDOR_AUCTION_COY = "AuctionCompany";
-    public static VENDOR_AUCTION_COY_PAGING = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.PAGING;
-    public static VENDOR_AUCTION_COY_ADD_EDIT = PathConstant.VENDOR_AUCTION_COY + "/" + PathConstant.ADD_EDIT;
     public static VENDOR_GRADING = "VendorGrading";
     public static REQUEST = "Request";
     public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;

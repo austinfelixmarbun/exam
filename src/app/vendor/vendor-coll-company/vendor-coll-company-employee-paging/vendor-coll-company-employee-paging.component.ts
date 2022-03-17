@@ -28,8 +28,8 @@ export class VendorCollCompanyEmployeePagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputPagingObj._url = "./assets/ucpaging/searchVendorBranchEmployee.json";
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorBranchEmployee.json";
+    this.inputPagingObj._url = "./assets/ucpaging/searchVendorCollCompanyEmployee.json";
+    this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorCollCompanyEmployee.json";
 
     var critObj = new CriteriaObj();
     critObj.propName = 'VENDOR_ID';

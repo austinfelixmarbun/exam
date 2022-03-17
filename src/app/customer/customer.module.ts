@@ -16,10 +16,7 @@ import { CustomerPersonalDetailComponent } from './customer-personal/customer-pe
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { NegativeCustomerDetailComponent } from './negative-customer/negative-customer-detail/negative-customer-detail.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
-import { NegativeCustomerViewComponent } from './negative-customer/negative-customer-view/negative-customer-view.component';
 import { UcaddressModule } from '@adins/ucaddress';
-import { CustomerViewPersonalDetailComponent } from './customer-view/customer-view-personal-detail/customer-view-personal-detail.component';
-import { CustomerViewPersonalJobDataComponent } from './customer-view/customer-view-personal-job-data/customer-view-personal-job-data.component';
 import { CustomerPersonalAddressComponent } from './customer-personal/customer-personal-address/customer-personal-address.component';
 import { CustomerPersonalAddressAddComponent } from './customer-personal/customer-personal-address/customer-personal-address-add/customer-personal-address-add.component';
 import { CustomerCompanyAddressComponent } from './customer-company/customer-company-address/customer-company-address.component';
@@ -34,31 +31,13 @@ import { CustBankAccSectionFindataComponent } from './cust-bank-acc-section-find
 import { CustBankAccDetailSectionFindataComponent } from './cust-bank-acc-detail-section-findata/cust-bank-acc-detail-section-findata.component';
 import { CustLegalDocComponent } from './cust-legal-doc/cust-legal-doc.component';
 import { CustLegalDocDetailComponent } from './cust-legal-doc/cust-legal-doc-detail/cust-legal-doc-detail.component';
-import { CustomerViewPersonalContactPersonComponent } from './customer-view/customer-view-personal-contact-person/customer-view-personal-contact-person.component';
-import { CustomerViewPersonalFinancialDataComponent } from './customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data.component';
-import { CustomerViewPersonalJobDataNonProfComponent } from './customer-view/customer-view-personal-job-data-non-prof/customer-view-personal-job-data-non-prof.component';
-import { CustomerViewPersonalJobDataEmpComponent } from './customer-view/customer-view-personal-job-data-emp/customer-view-personal-job-data-emp.component';
-import { CustomerViewPersonalJobDataSmeComponent } from './customer-view/customer-view-personal-job-data-sme/customer-view-personal-job-data-sme.component';
-import { CustomerViewPersonalOtherAttrComponent } from './customer-view/customer-view-personal-other-attr/customer-view-personal-other-attr.component';
-import { CustomerViewCoyManagementComponent } from './customer-view/customer-view-coy-management/customer-view-coy-management.component';
-import { CustomerViewCoyContactComponent } from './customer-view/customer-view-coy-contact/customer-view-coy-contact.component';
-import { CustomerViewCoyFinancialComponent } from './customer-view/customer-view-coy-financial/customer-view-coy-financial.component';
-import { CustomerViewCoyLegalComponent } from './customer-view/customer-view-coy-legal/customer-view-coy-legal.component';
-import { CustomerViewCoyOtherComponent } from './customer-view/customer-view-coy-other/customer-view-coy-other.component';
-import { CustomerViewComponent } from './customer-view/customer-view.component';
-import { CustomerViewCoyDetailComponent } from './customer-view/customer-view-coy-detail/customer-view-coy-detail.component';
 import { CustomerCompanyPageComponent } from './customer-company/customer-company-page/customer-company-page.component';
 import { CustomerCompanyDetailComponent } from './customer-company/customer-company-detail/customer-company-detail.component';
 import { CustomerCompanyContactInformationComponent } from './customer-company/customer-company-contact-information/customer-company-contact-information.component';
 import { EditMainDataPagingComponent } from './edit-main-data/edit-main-data-paging/edit-main-data-paging.component';
 import { CustomerCompanyAddressCheckComponent } from './customer-company/customer-company-address/customer-company-address-check/customer-company-address-check.component';
 import { CustomerPersonalAddressCheckComponent } from './customer-personal/customer-personal-address/customer-personal-address-check/customer-personal-address-check.component';
-import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
-import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
-import { CustomerViewPersonalFinancialSectionComponent } from './customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
-import { CustomerViewCustomerGroupComponent } from './customer-view/customer-view-customer-group/customer-view-customer-group.component';
-import { CustomerViewAddressComponent } from './customer-view/customer-view-address/customer-view-address.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { UploadNegativeCustomerComponent } from './negative-customer/upload-negative-customer/upload-negative-customer.component';
@@ -66,8 +45,6 @@ import { ReviewUploadNegativeCustomerDetailComponent } from './negative-customer
 import { ReviewUploadNegativeCustomerPagingComponent } from './negative-customer/review-upload-negative-customer/review-upload-negative-customer-paging/review-upload-negative-customer-paging.component';
 import { UcuploadModule } from '@adins/ucupload';
 import { CustAttrSectionComponent } from './cust-attr-section/cust-attr-section.component';
-import { CustomerViewPersonalAddressComponent } from './customer-view/customer-view-personal-address/customer-view-personal-address.component';
-import { CustomerViewPersonalCustomerGroupComponent } from './customer-view/customer-view-personal-customer-group/customer-view-personal-customer-group.component';
 import { CustAttrListComponent } from './cust-attr-list/cust-attr-list.component';
 import { CustomerEmergencyContactComponent } from './customer-personal/customer-contact-person/customer-emergency-contact/customer-emergency-contact.component';
 import { CustomerFamilyMenuComponent } from './customer-family-menu/customer-family-menu.component';
@@ -91,12 +68,14 @@ import { CustAssetComponent } from './cust-asset/cust-asset.component';
 import { CustAssetDetailComponent } from './cust-asset/cust-asset-detail/cust-asset-detail.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { CustBankAccComponent } from './cust-bank-acc/cust-bank-acc.component';
-import { CustomerViewCustomerAssetComponent } from './customer-view/customer-view-customer-asset/customer-view-customer-asset.component';
 import { NewCustomerSharingModule } from './sharing-component/new-cust-sharing.model';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { CustomerViewModule } from 'app/view/customer-view/customer-view.module';
+import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
+import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -138,6 +117,7 @@ export const customCurrencyMaskConfig = {
         UcuploadModule,
         NgMultiSelectDropDownModule,
         NewCustomerSharingModule,
+        CustomerViewModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         UcdropdownlistModule
     ],
@@ -146,9 +126,6 @@ export const customCurrencyMaskConfig = {
         CustomerPersonalPageComponent, CustomerPersonalDetailComponent,
         NegativeCustomerComponent,
         NegativeCustomerDetailComponent,
-        NegativeCustomerViewComponent,
-        CustomerViewPersonalDetailComponent,
-        CustomerViewPersonalJobDataComponent,
         CustomerPersonalAddressComponent,
         CustomerPersonalAddressAddComponent,
         CustomerCompanyAddressComponent,
@@ -163,36 +140,16 @@ export const customCurrencyMaskConfig = {
         CustBankAccDetailSectionFindataComponent,
         CustLegalDocComponent,
         CustLegalDocDetailComponent,
-        CustomerViewPersonalContactPersonComponent,
-        CustomerViewPersonalFinancialDataComponent,
-        CustomerViewPersonalJobDataNonProfComponent,
-        CustomerViewPersonalJobDataEmpComponent,
-        CustomerViewPersonalJobDataSmeComponent,
-        CustomerViewPersonalOtherAttrComponent,
-        CustomerViewCoyManagementComponent,
-        CustomerViewCoyContactComponent,
-        CustomerViewCoyFinancialComponent,
-        CustomerViewCoyLegalComponent,
-        CustomerViewCoyOtherComponent,
-        CustomerViewComponent,
-        CustomerViewCoyDetailComponent,
         CustomerCompanyPageComponent,
         CustomerCompanyDetailComponent,
         CustomerCompanyContactInformationComponent,
         EditMainDataPagingComponent,
         CustomerCompanyAddressCheckComponent,
         CustomerPersonalAddressCheckComponent,
-        CustomerViewHeaderPersonalComponent,
-        CustomerViewHeaderCompanyComponent,
-        CustomerViewPersonalFinancialSectionComponent,
-        CustomerViewCustomerGroupComponent,
-        CustomerViewAddressComponent,
         UploadNegativeCustomerComponent,
         ReviewUploadNegativeCustomerDetailComponent,
         ReviewUploadNegativeCustomerPagingComponent,
         CustAttrSectionComponent,
-        CustomerViewPersonalAddressComponent,
-        CustomerViewPersonalCustomerGroupComponent,
         CustAttrListComponent,
         CustomerEmergencyContactComponent,
         CustomerFamilyMenuComponent,
@@ -213,7 +170,8 @@ export const customCurrencyMaskConfig = {
         UpdateCustomerCompanyLegalDocComponent,
         CustBankAccComponent,
         CustAssetComponent,
-        CustomerViewCustomerAssetComponent
+        CustomerViewHeaderPersonalComponent,
+        CustomerViewHeaderCompanyComponent
     ],
     providers: [
         CustAssetComponent,
