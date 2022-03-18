@@ -19,6 +19,7 @@ import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shareholder-form',
@@ -28,6 +29,7 @@ import { NewCustSetData } from '../../NewCustSetData.Service';
 export class ShareholderFormComponent implements OnInit {
 
   @Input() CustId: number = 0;
+  @Input() ParentCustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() CustType: string;
   @Input() enjiForm: NgForm;
@@ -46,7 +48,13 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.ParentCustId = params["IdCust"];
+      }
+    });
+  }
 
   UserAccess: CurrentUserContext;
   MaxDate: Date;
@@ -141,9 +149,9 @@ export class ShareholderFormComponent implements OnInit {
     )
   }
 
-  async GetExistingJobData(custId: number = this.CustId) {
-    if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustId, { Id: custId }).toPromise().then(
+  async GetExistingJobData(shareholderId: number = this.CustId) {
+    if (this.CustType != this.CustTypePersonal || shareholderId == 0) return;
+    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Ids: [this.ParentCustId, shareholderId] }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
