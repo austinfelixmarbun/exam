@@ -160,6 +160,10 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
     }
+	if (this.CustDataMode == this.CustDataModeShareholder || this.pageFrom == CommonConstant.CustFromCustShareholder) {
+      this.CustomerForm.get("MrCustModelCode").clearValidators();
+      this.CustomerForm.get("MrCustModelCode").updateValueAndValidity();
+    }
   }
   //#endregion
 
