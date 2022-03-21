@@ -28,6 +28,11 @@
           },
           {
             "type": "text",
+            "label": "Nama Perusahaan / Usaha",
+            "property": "CoyName"
+          },
+          {
+            "type": "text",
             "label": "Industry Type Name",
             "property": "IndustryTypeName"
           },
