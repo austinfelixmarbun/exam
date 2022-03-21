@@ -17,8 +17,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page-new.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  templateUrl: './login-page.component.html',
   providers: [RolePickService, NGXToastrService]
 })
 
@@ -38,7 +37,7 @@ export class LoginPageComponent implements OnInit {
   counterOtp: number = -1;
   otpConfirmCount: number = 0;
   loginObj = {
-    response: {},
+    response: "",
     user: "",
     pwd: ""
   };
@@ -111,9 +110,9 @@ export class LoginPageComponent implements OnInit {
         else {
           //this.cookieService.put("username", username);
 
-          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
+          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
             (response) => {
-              this.loginObj.response = response;
+              this.loginObj.response = response["ListOfficeRoleJobTitle"];
             });
           this.loginObj.user = username;
           this.loginObj.pwd = password;

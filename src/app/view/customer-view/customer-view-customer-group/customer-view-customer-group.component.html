@@ -4,7 +4,7 @@
 
       <lib-ucSubsection [id]="'GrpId'" [title]="'Customer Group'" [panel]="'GrpId'">
       </lib-ucSubsection>
-      <div id="GrpId" *ngIf="IsReady">
+      <div id="GrpId" *ngIf="IsReady" style="overflow-x: auto;">
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">
@@ -36,7 +36,7 @@
       </div>
       <lib-ucSubsection [id]="'MemberId'" [title]="'Member Of Customer Group'" [panel]="'MemberId'">
       </lib-ucSubsection>
-      <div id="MemberId" *ngIf="IsReady">
+      <div id="MemberId" *ngIf="IsReady" style="overflow-x: auto;">
         <table class="table table-responsive-md text-center table-hover">
           <thead>
             <tr class="table-header">

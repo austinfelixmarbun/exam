@@ -60,7 +60,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
     form.push(this.fb.group({
       Relation: [CommonConstant.TrustingSocialRelationCust, [Validators.required, Validators.maxLength(200)]],
-      Name: [this.CustObj.CustName, [Validators.required, Validators.maxLength(200)]],
+      Name: [this.CustObj.CustName, [Validators.required, Validators.maxLength(500)]],
       MobilePhnNo: [this.CustObj.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL ? this.CustPersonalObj.MobilePhnNo1 : "",
       [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
     }));
@@ -74,7 +74,7 @@ export class TrustingSocialReqDetailComponent implements OnInit {
     var form = this.DetailForm.controls['ThirdPartyTrustsocRslts'] as FormArray;
     form.push(this.fb.group({
       Relation: ['', [Validators.required, Validators.maxLength(200)]],
-      Name: ['', [Validators.required, Validators.maxLength(200)]],
+      Name: ['', [Validators.required, Validators.maxLength(500)]],
       MobilePhnNo: ['', [Validators.required, Validators.maxLength(50), Validators.pattern("^[0-9]+$")]]
     }));
   }

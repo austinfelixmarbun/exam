@@ -1,6 +1,6 @@
 {
   "name": "apex",
-  "version": "1.5.1-93",
+  "version": "1.5.1-218",
   "license": "",
   "scripts": {
     "ng": "ng",
@@ -40,6 +40,7 @@
     "@adins/lookuprole": "^1.0.5",
     "@adins/lookupsupervisor": "^1.0.2",
     "@adins/lookupzipcode": "^1.0.8",
+    "@adins/uc-attribute": "^1.0.3",
     "@adins/uc-directive-upper-case": "^1.1.1",
     "@adins/uc-show-errors": "^1.0.8",
     "@adins/uc-subsection": "^1.1.1",

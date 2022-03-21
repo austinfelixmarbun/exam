@@ -24,7 +24,7 @@
       <label class="col-md-4 adInsLabel" translate>Establishment Date</label>
       <div class="col-md-8">
         <input type="date" class="form-control adInsInput" formControlName="EstablishmentDt"
-          [max]="businessDtMin | date: 'yyyy-MM-dd'"
+          max = "{{MaxDate | date: 'yyyy-MM-dd'}}"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.EstablishmentDt.invalid}">
         <lib-uc-show-errors [control]="parentForm.controls.EstablishmentDt" [submit]="enjiForm.submitted">
         </lib-uc-show-errors>

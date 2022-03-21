@@ -13,6 +13,7 @@ export const environment = {
     DashboardURL: 'http://r3app-server.ad-ins.com/Dashboard',
     Module:"FOU",
     losR3Web: 'http://r3web-server.ad-ins.com/LOSR3',
+    cmsR3Web: 'http://r3web-server.ad-ins.com/CMS',
     lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
     ApprovalR3Url: 'http://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
     ApprovalURL : 'http://r3app-server/APPROVAL',

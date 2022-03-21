@@ -36,28 +36,30 @@
     <lib-UCSearch id="ucSearch" style="width:100%;" [searchInput]='inputObj' (result)="getResult($event)">
     </lib-UCSearch>
     <div [hidden]="resultData?.data == null">
-      <table class="table table-responsive-md text-center table-hover">
-        <thead>
-          <tr class="table-header">
-            <th translate>Select</th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
-            <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of resultData?.data">
-            <td>
-              <input type="checkbox" (change)="Checked(item.refZipcodeId, $event.target.checked, item.zipcodeNumber)">
-            </td>
-            <td class="text-left">{{item.areaCode2}}</td>
-            <td class="text-left">{{item.areaCode1}}</td>
-            <td class="text-left">{{item.city}}</td>
-            <td class="text-left">{{item.zipcode}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x:auto;">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th translate>Select</th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
+              <th class="text-left"><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of resultData?.data">
+              <td>
+                <input type="checkbox" (change)="Checked(item.refZipcodeId, $event.target.checked, item.zipcodeNumber)">
+              </td>
+              <td class="text-left">{{item.areaCode2}}</td>
+              <td class="text-left">{{item.areaCode1}}</td>
+              <td class="text-left">{{item.city}}</td>
+              <td class="text-left">{{item.zipcode}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <lib-ucgridfooter (select)="onSelect($event)"></lib-ucgridfooter>
       <div class="card-header">
         <div class="text-right">
@@ -66,32 +68,34 @@
           </button>
         </div>
       </div>
-      <table class="table table-responsive-md text-center table-hover">
-        <thead>
-          <tr class="table-header">
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
-            <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
-            <th translate>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of tempData;  let i = index">
-            <td>{{item.areaCode2}}</td>
-            <td class="text-left">{{item.areaCode1}}</td>
-            <td>{{item.city}}</td>
-            <td>{{item.zipcode}}</td>
-            <td>
-              <div>
-                <a class="danger p-0" data-original-title="" title=""
-                  (click)="deleteFromTemp(item.refZipcodeId)">
-                  <i class="ft-trash-2 font-medium-3 mr-2"></i>
-                </a></div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="overflow-x:auto;">
+        <table class="table table-responsive-md text-center table-hover">
+          <thead>
+            <tr class="table-header">
+              <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode2'>Kelurahan</span></th>
+              <th><span translate class="thead-header" (click)="searchSort($event)" name='areaCode1'>Kecamatan</span></th>
+              <th><span translate class="thead-header" (click)="searchSort($event)" name='city'>City</span></th>
+              <th><span translate class="thead-header" (click)="searchSort($event)" name='zipzode'>Zipcode</span></th>
+              <th translate>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of tempData;  let i = index">
+              <td>{{item.areaCode2}}</td>
+              <td class="text-left">{{item.areaCode1}}</td>
+              <td>{{item.city}}</td>
+              <td>{{item.zipcode}}</td>
+              <td>
+                <div>
+                  <a class="danger p-0" data-original-title="" title=""
+                    (click)="deleteFromTemp(item.refZipcodeId)">
+                    <i class="ft-trash-2 font-medium-3 mr-2"></i>
+                  </a></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

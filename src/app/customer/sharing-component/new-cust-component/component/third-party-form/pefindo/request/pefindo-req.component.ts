@@ -11,6 +11,7 @@ import { PefindoSmartSearchPersonalObj } from 'app/shared/model/digitalization/p
 import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 
 @Component({
@@ -64,6 +65,11 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
+    if (pefindoSmartSearchPersonalObj.KTP == null)
+    {
+      this.toastr.warningMessage(ExceptionConstant.PEFINDO_DATA_NOT_FOUND);
+    }
+    
     if(environment.isCore){
       this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
@@ -92,6 +98,11 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdNo = pefindoSmartSearchCoyObj.NPWP;
     reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
+
+    if (pefindoSmartSearchCoyObj.NPWP == null)
+    {
+      this.toastr.warningMessage(ExceptionConstant.PEFINDO_DATA_NOT_FOUND);
+    }
 
     if(environment.isCore){
       this.http.post(URLConstant.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(

@@ -8,7 +8,7 @@ import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-
 import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { RequestCustPersonalJobDataObj } from 'app/shared/model/request-cust-personal-job-data-obj.model';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
@@ -19,6 +19,9 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -56,6 +59,9 @@ export class JobDataProfessionalComponent implements OnInit {
   preJobAddrObj: CustAddrObj;
   getCustomerAddr: any;
   getPreJobAddr: any;
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
+  MaxDtValidate: string;
 
   EconomicSectorName: string;
   IndustryTypeCategoryName: string;
@@ -80,6 +86,7 @@ export class JobDataProfessionalComponent implements OnInit {
     OtherBusinessType: [''],
     OtherBusinessIndustry: [''],
     OtherJobPosition: [''],
+    OtherEstablishmentDate: [''],
     EstablishmentDatePro: [''],
     NotesOther: [''],
   });
@@ -120,9 +127,13 @@ export class JobDataProfessionalComponent implements OnInit {
   async ngOnInit() {
     await this.getAddrTypeOwnershipRequired();
 
-    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+
+    var datePipe = new DatePipe("en-US");
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
+    this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
+
     this.inputFieldAddressObj = new InputFieldObj();
     this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
     this.inputPreJobAddressObj = new InputFieldObj();
@@ -176,6 +187,7 @@ export class JobDataProfessionalComponent implements OnInit {
             OtherBusinessType: this.returnCustJobDataObj.OthBizType,
             OtherBusinessIndustry: this.returnCustJobDataObj.OthBizIndustryTypeCode,
             OtherJobPosition: this.returnCustJobDataObj.OthBizJobPosition,
+            OtherEstablishmentDate: formatDate(this.returnCustJobDataObj.OthBizEstablishmentDt, 'yyyy-MM-dd', 'en-US'), 
             PreviIndustryName: this.returnCustJobDataObj.PrevCoyName,
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
           });
@@ -406,7 +418,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.custPersonalJobDataObj.OthBizType = this.JobDataProForm.controls["OtherBusinessType"].value;
     this.custPersonalJobDataObj.OthBizIndustryTypeCode = this.JobDataProForm.controls["OtherBusinessIndustry"].value;
     this.custPersonalJobDataObj.OthBizJobPosition = this.JobDataProForm.controls["OtherJobPosition"].value;
-    this.custPersonalJobDataObj.OthBizEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
+    this.custPersonalJobDataObj.OthBizEstablishmentDt = this.JobDataProForm.controls["OtherEstablishmentDate"].value;
   }
 
   setPreJobAddr() {
@@ -434,6 +446,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.preJobAddressObj.MrBuildingOwnershipCode = this.JobDataProForm.controls["prejobAddress"]["controls"].MrHouseOwnershipCode.value;
     this.preJobAddressObj.Notes = this.JobDataProForm.controls["NotesPreJob"].value;
   }
+
   setOthBizAddr() {
     this.otherAddressObj.CustId = this.IdCust;
     this.otherAddressObj.MrCustAddrTypeCode = CommonConstant.CustAddrTypeOthBiz;
@@ -459,6 +472,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.otherAddressObj.MrBuildingOwnershipCode = this.JobDataProForm.controls["otherBusinessAddress"]["controls"].MrHouseOwnershipCode.value;
     this.otherAddressObj.Notes = this.JobDataProForm.controls["NotesOther"].value;
   }
+
   async SaveForm(IsParent: boolean = false): Promise<boolean> {
     if (this.JobDataProForm.invalid) {
       NewCustSetData.markFormGroupTouched(this.JobDataProForm);
@@ -489,7 +503,17 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
-      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           if (!IsParent) this.outputTab.emit({ stepMode: "next" });
@@ -512,7 +536,17 @@ export class JobDataProfessionalComponent implements OnInit {
       this.reqCustPersonalJobDataObj.OthBizAddr = this.otherAddressObj;
       this.reqCustPersonalJobDataObj.CustPersonalJobData.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
-      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      if(this.custPersonalJobDataObj.EmploymentEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      if(this.custPersonalJobDataObj.OthBizEstablishmentDt.toString() > this.MaxDtValidate){
+        this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+        return false;
+      }
+
+      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           if (!IsParent) this.outputTab.emit({ stepMode: "next" });
@@ -520,5 +554,19 @@ export class JobDataProfessionalComponent implements OnInit {
       );
     }
     return true;
+  }
+
+  onFocusOutEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
+  }
+
+  onFocusOutOtherBizEstDate(event){
+    if(event.target.value > this.MaxDtValidate){
+      this.toastr.warningMessage(String.Format(ExceptionConstant.OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE));
+      return;
+    }
   }
 }
