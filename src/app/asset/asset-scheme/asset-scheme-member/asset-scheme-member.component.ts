@@ -16,9 +16,9 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 export class AssetSchemeMemberComponent implements OnInit {
   AssetSchmHId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   assetSchmHObj: AssetSchemeHObj;
   AssetSchmHIsSystem: false;
   

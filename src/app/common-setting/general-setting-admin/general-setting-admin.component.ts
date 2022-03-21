@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 
@@ -9,9 +10,9 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
   styles: []
 })
 export class GeneralSettingAdminComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
-  constructor() { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchGeneralSettingAdmin.json";

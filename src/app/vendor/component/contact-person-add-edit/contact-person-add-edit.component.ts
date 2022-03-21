@@ -40,7 +40,7 @@ export class ContactPersonAddEditComponent implements OnInit {
     City: [{ value: '', disabled: true }],
     ProvDistrictName: [{ value: '', disabled: true }]
   })
-  inputZipcodeLookupObj: InputLookupObj = new InputLookupObj();
+  inputZipcodeLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
   contactPersonObj: VendorContactPersonObj;
 

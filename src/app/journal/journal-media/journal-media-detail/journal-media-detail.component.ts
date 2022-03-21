@@ -30,7 +30,7 @@ export class JournalMediaDetailComponent implements OnInit {
 
   SubsystemDesc = '';
 
-  ddlSubsystemObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlSubsystemObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   listEntityType = [];
   listHeaderFact = [];
   readonly CancelLink: string = NavigationConstant.JOURNAL_MEDIA_PAGING;
@@ -129,7 +129,7 @@ export class JournalMediaDetailComponent implements OnInit {
         }
       )
     } else {
-      this.ddlSubsystemObj = new UcDropdownListObj;
+      this.ddlSubsystemObj = new UcDropdownListObj(this.UrlConstantNew);
       this.ddlSubsystemObj.apiUrl = this.UrlConstantNew.GetListRefModuleKeyValue;
       this.ddlSubsystemObj.customKey = 'Value';
     }

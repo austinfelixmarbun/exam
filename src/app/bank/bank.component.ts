@@ -8,7 +8,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './bank.component.html'
 })
 export class BankComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   constructor(private UrlConstantNew: UrlConstantNew) {
 

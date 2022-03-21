@@ -37,6 +37,7 @@ import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 import { AddressService } from './shared/services/custAddr.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
+import { AdInsHelperService } from './shared/services/AdInsHelper.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -92,13 +93,13 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
     providers: [
         AuthService,
         AuthGuard,
-        ErrorDialogService,
         RolePickService,
         StorageService,
         NGXToastrService,
         ClaimTaskService,
         ApprovalTaskService,
         AddressService,
+        AdInsHelperService,
         UrlConstantNew,
         EnviConfigService,
         {
@@ -108,6 +109,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         {
             provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
         },
+        ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]

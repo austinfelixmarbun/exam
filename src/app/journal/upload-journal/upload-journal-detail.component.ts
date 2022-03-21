@@ -102,13 +102,13 @@ export class UploadJournalDetailComponent implements OnInit {
       subsectionId: 'UcUploadFile', // Ga perlu diubah
       formatsAllowed: '.xls', // File yang bisa di upload
       UploadTypeCode: 'UPL_ARTHAJASA', // UploadTypeCode berdasarkan keperluan
-      // ErrorDownloadUrl: environment.lmsUrl + '/UploadBillVatNo/GetUploadBillingVatNoByUploadMonitoringNoAndTrxType', // URL untuk Download Error File
-      TemplateUrl: environment.FoundationR3Url + '/Download/DownloadTemplate', // URL untuk Download Template File
+      // ErrorDownloadUrl: this.UrlConstantNew.env.lmsUrl + '/UploadBillVatNo/GetUploadBillingVatNoByUploadMonitoringNoAndTrxType', // URL untuk Download Error File
+      TemplateUrl: this.UrlConstantNew.env.FoundationR3Url + '/Download/DownloadTemplate', // URL untuk Download Template File
       TemplateName: 'Upload_Arthajasa_Template', // Nama Excel Template File
       FileErrorName: "Upload_Arthajasa_ErrorDownload", // Nama Excel Download Error File
 
-      environmentUrl: environment.FoundationR3Url,
-      apiQryPaging: AdInsConstant.GetPagingObjectBySQL,
+      environmentUrl: this.UrlConstantNew.env.FoundationR3Url,
+      apiQryPaging: this.UrlConstantNew.GetPagingObjectBySQL,
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
       url: this.UrlConstantNew.UploadJournalFile,
       isDownloadTmplt: false,

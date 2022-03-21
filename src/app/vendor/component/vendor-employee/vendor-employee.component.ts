@@ -34,9 +34,9 @@ export class VendorEmployeeComponent implements OnInit {
   VendorBranchEmpObj: VendorBranchEmpObj = new VendorBranchEmpObj();
   result: any;
   resultVendorEmpAndAddr: any;
-  inputLookupInternalEmpObj: InputLookupObj = new InputLookupObj();
-  inputLookupSpvObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupInternalEmpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupSpvObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   VendorPositionList = new Array();
   IdTypeList = new Array();
   itemCalcMethodType: any;

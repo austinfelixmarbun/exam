@@ -48,7 +48,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   ) { 
     this.AppCustCompanyDetail = new UpdateCustCompanyDetailObj();
     this.ResponseTab = new EventEmitter<any>();
-    this.IndustryLookupObj = new InputLookupObj();
+    this.IndustryLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.IndustryLookupObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.IndustryLookupObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.IndustryLookupObj.genericJson = "./assets/lookup/lookupIndustryType.json";

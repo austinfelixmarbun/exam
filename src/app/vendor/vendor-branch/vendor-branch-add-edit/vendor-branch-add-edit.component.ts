@@ -41,9 +41,9 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
-  inputLookupATPMObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupATPMObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
   MrVendorCategoryCode: string;
   MrVendorTypeCode: string;
@@ -239,7 +239,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
   
                     if (vendorAttr["AttrInputType"] == 'RM') {
-                      tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                      tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -288,7 +288,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                       parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
   
                       if (vendorAttr["AttrInputType"] == 'RM') {
-                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -315,7 +315,7 @@ export class VendorBranchAddEditComponent implements OnInit {
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
                       else if (vendorAttr["AttrInputType"] == 'RM') {
-                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";

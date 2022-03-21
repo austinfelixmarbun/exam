@@ -13,7 +13,7 @@ import { UcpagingComponent } from '@adins/ucpaging';
 })
 export class CustomerShareholderMenuComponent implements OnInit {
   @ViewChild('ucPaging') ucPaging: UcpagingComponent;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 

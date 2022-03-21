@@ -19,7 +19,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './review-upload-negative-asset-paging.component.html'
 })
 export class ReviewUploadNegativeAssetPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   IntegrationObj: IntegrationObj = new IntegrationObj();
   requestTaskModel : RequestTaskModelObj = new RequestTaskModelObj();
   

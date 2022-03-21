@@ -14,7 +14,7 @@ export class ViewCabinetComponent implements OnInit {
   CabinetCode: string;
   responseRack: Array<any> = new Array();
 
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly ViewLink: string = NavigationConstant.DOC_MNGMNT_VIEW_RACK;
   constructor(

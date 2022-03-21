@@ -22,10 +22,10 @@ export class HolidayDetailComponent implements OnInit {
   HolidaySchmHIdCopy: string;
   HolidaySchmHId: string;
   inputPagingObjHolidayScheme: InputLookupObj;
-  inputPagingObjHolidayDetail: UcPagingObj = new UcPagingObj();
+  inputPagingObjHolidayDetail: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   copyHoliday: any;
   title: string = "Copy Holiday Scheme";
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   HolidayManagementForm = this.fb.group({
 
@@ -45,7 +45,7 @@ export class HolidayDetailComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewHolidayDetail.json";
 
-    this.inputPagingObjHolidayScheme = new InputLookupObj;
+    this.inputPagingObjHolidayScheme = new InputLookupObj(this.UrlConstantNew);
     var critInputNotIn = new CriteriaObj();
     critInputNotIn.propName = "HOLIDAY_SCHM_H_ID";
     critInputNotIn.restriction = AdInsConstant.RestrictionNeq;

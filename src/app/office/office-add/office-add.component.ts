@@ -29,7 +29,7 @@ export class OfficeAddComponent implements OnInit {
   // @ViewChild(UcAddressComponent) ucAddr;
   // @ViewChild(UcContactInfoComponent) ucContact;
   // @ViewChild('ParentId') test: ElementRef;
-  inputFieldAddr: InputFieldObj = new InputFieldObj();
+  inputFieldAddr: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
   pageType: string = "add";
   mrKonvenSyariah = 'KON';
   isDisabledState: boolean = false;
@@ -96,10 +96,10 @@ export class OfficeAddComponent implements OnInit {
     NationalCourtOffice: [''],
     RefTaxOfficeId: [null]
   })
-  InputLookupObj: InputLookupObj = new InputLookupObj();
+  InputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   addressObj: UcAddressObj = new UcAddressObj();
-  inputAddressObj: InputAddressObj = new InputAddressObj();
-  InputLookupTaxOfficeObj: InputLookupObj = new InputLookupObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
+  InputLookupTaxOfficeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
 
@@ -187,7 +187,7 @@ export class OfficeAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.resultData.PhnExt3
           this.addressObj.FaxArea = this.resultData.FaxArea
           this.addressObj.Fax = this.resultData.Fax
-          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.resultData.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.resultData.Zipcode;
 
@@ -204,7 +204,7 @@ export class OfficeAddComponent implements OnInit {
           this.OfficeForm.controls.NationalCourtOffice.updateValueAndValidity();
         })
     }
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
     this.inputAddressObj.inputField.inputLookupObj.isReadonly = false;
@@ -308,7 +308,7 @@ export class OfficeAddComponent implements OnInit {
   }
 
   MaxHierarchyLvl: number = 0;
-  HierarchyLvlDdl: UcDropdownListObj = new UcDropdownListObj();
+  HierarchyLvlDdl: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   isDisabledHierarchyLvlDdl: string = '';
   listMaxHierarchyLvl: Array<KeyValueObj> = new Array();
   async GetGsMaxHierarchyLvl() {

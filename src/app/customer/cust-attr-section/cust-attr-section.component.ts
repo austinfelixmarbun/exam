@@ -72,25 +72,25 @@ export class CustAttrSectionComponent implements OnInit {
       (response: any) => {
         this.CustOtherInfo = response;
       });
-    this.inputDebitorGroupLookupObj = new InputLookupObj();
+    this.inputDebitorGroupLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.pagingJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.genericJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.isReady = true;
 
-    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj();
+    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputDebitorBusinessScaleLookupObj.urlJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.pagingJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.genericJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.isReady = true;
 
-    this.inputCounterpartCategoryLookupObj = new InputLookupObj();
+    this.inputCounterpartCategoryLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputCounterpartCategoryLookupObj.urlJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.pagingJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.genericJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.isReady = true;
 
-    this.inputSustaianableFinancialBusinessLookupObj = new InputLookupObj();
+    this.inputSustaianableFinancialBusinessLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputSustaianableFinancialBusinessLookupObj.urlJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.pagingJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";

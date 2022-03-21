@@ -25,8 +25,8 @@ export class VerificationQuestionGroupMemberAddComponent implements OnInit {
   verfQuestionGrpHObj: VerfQuestionGrpHObj;
   verfQuestionGrpDObj: VerfQuestionGrpDObj;
   VerfQuestionGrpHId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_MBR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {

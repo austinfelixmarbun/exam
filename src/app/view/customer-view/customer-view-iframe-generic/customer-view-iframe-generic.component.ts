@@ -18,7 +18,7 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   ngOnInit() {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
-    // this.rootServer = environment.losR3Web;
+    // this.rootServer = this.UrlConstantNew.env.losR3Web;
     this.urlLink = this.iframeObj.Url + queryParam;
     this.IsReady = true;
 

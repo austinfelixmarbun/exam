@@ -20,7 +20,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './notification-add-edit.component.html'
 })
 export class NotificationAddEditComponent implements OnInit {
-  settingUrl: string = environment.FoundationR3Url;
   title: string = "Notification-Add";
   mode: any = "add";
   notificationHObj: NotificationHObj;
@@ -124,7 +123,7 @@ export class NotificationAddEditComponent implements OnInit {
 
   settingMultiSelectDropdown() {
 
-    var urlOffice = this.settingUrl + this.UrlConstantNew.GetListActiveRefOffice;
+    var urlOffice = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.GetListActiveRefOffice;
     this.http.post(urlOffice, null).subscribe(
       (response) => {
         this.refOfficeObj = response[CommonConstant.ReturnObj];

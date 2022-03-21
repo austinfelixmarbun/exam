@@ -42,10 +42,10 @@ export class UcAddressComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
     this.inputLookupObj.urlQryPaging = this.UrlConstantNew.GetRefZipcodePaging;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";
   }

@@ -18,7 +18,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class SurveyResultReviewDetailComponent implements OnInit {
 
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   SrvyOrderId: number;
 
   srvyTaskObj: SrvyTaskObj;

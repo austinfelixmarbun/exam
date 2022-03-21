@@ -8,7 +8,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './upload-asset-master.component.html'
 })
 export class UploadAssetMasterComponent implements OnInit {
-  uploadObj: UcUploadObj = new UcUploadObj();
+  uploadObj: UcUploadObj = new UcUploadObj(this.UrlConstantNew);
   constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {

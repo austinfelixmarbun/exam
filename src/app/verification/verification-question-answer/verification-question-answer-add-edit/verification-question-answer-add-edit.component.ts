@@ -28,7 +28,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   verfQuestionAnswer: any;
   answerTypeCode: string = "DDL";
   isHidden: boolean = true;
-  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private regexService: RegexService, private UrlConstantNew: UrlConstantNew) {

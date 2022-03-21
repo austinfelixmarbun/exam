@@ -33,7 +33,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
   criteriaObj: CriteriaObj;
   lookUpObj: InputLookupObj;
   criteriaList: Array<CriteriaObj>;
-  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   CustGrpObj: CustGrpObj = new CustGrpObj();
 
   custObj: CustObj;
@@ -94,7 +94,7 @@ export class CustomerPersonalDetailComponent implements OnInit {
         let splitCodeDesc = this.Country.GsValue.split(';');
         this.LocalCountryCode = splitCodeDesc[0];
         this.LocalCountry = splitCodeDesc[1];
-        this.lookUpObj = new InputLookupObj();
+        this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
         this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";

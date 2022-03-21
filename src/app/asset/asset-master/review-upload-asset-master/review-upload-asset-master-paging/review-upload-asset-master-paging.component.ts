@@ -20,7 +20,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './review-upload-asset-master-paging.component.html'
 })
 export class ReviewUploadAssetMasterPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   IntegrationObj: IntegrationObj = new IntegrationObj();
   requestTaskModel : RequestTaskModelObj = new RequestTaskModelObj();
   arrCrit = new Array<CriteriaObj>();

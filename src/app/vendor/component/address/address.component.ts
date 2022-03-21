@@ -16,7 +16,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   vendorAddrObj: VendorAddrObj = new VendorAddrObj();
   ReqVendorAddrObj : GenericObj = new GenericObj();
   mode: string = "add";

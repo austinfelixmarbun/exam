@@ -9,6 +9,7 @@ import { URLConstant } from './shared/constant/URLConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { AdInsConstant } from './shared/AdInstConstant';
+import { EnviConfigService } from './shared/services/enviConfig.service';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -19,12 +20,14 @@ export class AppComponent implements OnInit {
 
 
     private _hubConnection: HubConnection;
+    private env;
     //TEST PUSH MASTER 5
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService, private UrlConstantNew: UrlConstantNew) {
+      this.env = this.configEnv.getConfig();
+    }
  
     ngOnInit(): void {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
-
         if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
             // this.checkisEODforlogout();
             // this.validateIp(); // force logout saat ada yg login di IP berbeda
@@ -34,7 +37,7 @@ export class AppComponent implements OnInit {
     }
 
     checkisEODforlogout(){
-        this.http.post(AdInsConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+        this.http.post(this.UrlConstantNew.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
               if(response["SysValue"] == '1')
               {
@@ -47,7 +50,7 @@ export class AppComponent implements OnInit {
 
     validateIp(){
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.http.post(AdInsConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+        this.http.post(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
               {        
@@ -62,7 +65,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        var url = AdInsConstant.LogoutAuth;
+        var url = this.env.FoundationR3Url + "/v1" + "/Authenticate/Logout";
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();

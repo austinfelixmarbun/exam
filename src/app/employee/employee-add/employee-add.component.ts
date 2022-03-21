@@ -70,7 +70,7 @@ export class EmployeeAddComponent implements OnInit {
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     BankAccName: ['', [Validators.required]]
   });
-  inputFieldAddr: InputFieldObj = new InputFieldObj();
+  inputFieldAddr: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
   
@@ -189,7 +189,7 @@ export class EmployeeAddComponent implements OnInit {
       }
     );
 
-    this.inputLookupBankObj = new InputLookupObj();
+    this.inputLookupBankObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -257,13 +257,13 @@ export class EmployeeAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.refEmpObj.PhnExt3;
           this.addressObj.FaxArea = this.refEmpObj.FaxArea;
           this.addressObj.Fax = this.refEmpObj.Fax;
-          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
         }
       );
     }
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.requiredPhn1 = true;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;

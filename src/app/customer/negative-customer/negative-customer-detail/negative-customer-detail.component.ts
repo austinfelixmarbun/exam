@@ -188,12 +188,12 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.businessDateIdExp = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDateIdExp.setDate(this.businessDateIdExp.getDate() + 1);
 
-    this.inputLookupZipcodeObj = new InputLookupObj();
+    this.inputLookupZipcodeObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
 
-    this.inputLookupCustPersonalObj = new InputLookupObj();
+    this.inputLookupCustPersonalObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupCustPersonalObj.urlJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
     this.inputLookupCustPersonalObj.pagingJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
     this.inputLookupCustPersonalObj.genericJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Personal.json";
@@ -206,7 +206,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     this.inputLookupCustPersonalObj.addCritInput = criteriaList;
     this.inputLookupCustPersonalObj.isRequired = false;
 
-    this.inputLookupCustCompanyObj = new InputLookupObj();
+    this.inputLookupCustCompanyObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupCustCompanyObj.urlJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";
     this.inputLookupCustCompanyObj.pagingJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";
     this.inputLookupCustCompanyObj.genericJson = "./assets/uclookup/Customer/NegativeCustomer/lookupCust_NegCust_Company.json";

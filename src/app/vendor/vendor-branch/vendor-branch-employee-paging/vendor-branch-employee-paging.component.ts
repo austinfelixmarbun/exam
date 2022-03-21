@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class VendorBranchEmployeePagingComponent implements OnInit {
 
   VendorId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit = new Array();
   MrVendorCategoryCode: string = "";
 

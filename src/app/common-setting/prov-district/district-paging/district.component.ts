@@ -18,7 +18,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class DistrictComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   parentId: any;
   arrCrit: any;
   resultData: any;

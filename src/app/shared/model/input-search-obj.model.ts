@@ -1,4 +1,5 @@
 import { environment } from "environments/environment";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 import { CriteriaObj } from "./criteria-obj.model";
 
 export class InputSearchObj {
@@ -10,9 +11,9 @@ export class InputSearchObj {
     ddlEnvironments: Array<EnviObj>;
     whereValue: Array<WhereValueObj>;
 
-    constructor() {
+    constructor(private UrlConstantNew: UrlConstantNew) {
         this._url = "";
-        this.enviromentUrl = environment.FoundationR3Url + "/v1";
+        this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
         this.apiQryPaging = "";
         this.arrCritObj = null;
         this.addCritInput = new Array<CriteriaObj>();

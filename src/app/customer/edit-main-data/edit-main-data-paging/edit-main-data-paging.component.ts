@@ -9,7 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './edit-main-data-paging.component.html'
 })
 export class EditMainDataPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   constructor(private UrlConstantNew: UrlConstantNew) { }
   ngOnInit() {

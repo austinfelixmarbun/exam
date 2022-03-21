@@ -9,7 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./ref-form-paging.component.scss']
 })
 export class RefFormPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_DETAIL;
   constructor(private UrlConstantNew: UrlConstantNew) { }

@@ -42,7 +42,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   criteria: CriteriaObj[] = [];
   result: any;
   userRole = new RefUserRole;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly CancelLink: string = NavigationConstant.EMP_BZ_UNIT_PAGING;
   constructor(private route: ActivatedRoute,
@@ -123,17 +123,17 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   }
 
   initLookUp() {
-    this.inputPagingObjBusinessUnit = new InputLookupObj();
+    this.inputPagingObjBusinessUnit = new InputLookupObj(this.UrlConstantNew);
     this.inputPagingObjBusinessUnit.urlJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
     this.inputPagingObjBusinessUnit.pagingJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
     this.inputPagingObjBusinessUnit.genericJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
 
-    this.inputPagingObjJobTitle = new InputLookupObj();
+    this.inputPagingObjJobTitle = new InputLookupObj(this.UrlConstantNew);
     this.inputPagingObjJobTitle.urlJson = "./assets/lookup/lookupEmployeeJobTitle.json";
     this.inputPagingObjJobTitle.pagingJson = "./assets/lookup/lookupEmployeeJobTitle.json";
     this.inputPagingObjJobTitle.genericJson = "./assets/lookup/lookupEmployeeJobTitle.json";
 
-    this.inputPagingObjSupervisor = new InputLookupObj();
+    this.inputPagingObjSupervisor = new InputLookupObj(this.UrlConstantNew);
     this.inputPagingObjSupervisor.urlJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.pagingJson = "./assets/lookup/lookupEmployeeSupervisor.json";
     this.inputPagingObjSupervisor.genericJson = "./assets/lookup/lookupEmployeeSupervisor.json";
@@ -145,12 +145,12 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
     critObj.value = this.RefUserId;
     this.inputPagingObjSupervisor.addCritInput.push(critObj);
 
-    this.inputPagingObjOffice = new InputLookupObj();
+    this.inputPagingObjOffice = new InputLookupObj(this.UrlConstantNew);
     this.inputPagingObjOffice.urlJson = "./assets/lookup/lookupEmployeeOffice.json";
     this.inputPagingObjOffice.pagingJson = "./assets/lookup/lookupEmployeeOffice.json";
     this.inputPagingObjOffice.genericJson = "./assets/lookup/lookupEmployeeOffice.json";
 
-    this.inputPagingObjRole = new InputLookupObj();
+    this.inputPagingObjRole = new InputLookupObj(this.UrlConstantNew);
     this.inputPagingObjRole.urlJson = "./assets/lookup/lookupEmployeeRole.json";
     this.inputPagingObjRole.pagingJson = "./assets/lookup/lookupEmployeeRole.json";
     this.inputPagingObjRole.genericJson = "./assets/lookup/lookupEmployeeRole.json";

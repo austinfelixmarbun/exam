@@ -11,7 +11,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class LeaveMaintenanceComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.EMP_LEAVE_ADD;
   constructor(private UrlConstantNew: UrlConstantNew) { }

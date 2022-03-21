@@ -21,8 +21,8 @@ export class SurveyTaskViewComponent implements OnInit {
   SrvyOrderId: number;
   SrvyTaskNo: string;
   SrvyOrderNo: string;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  viewGenericSbjctObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewGenericSbjctObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   isDmsReady: boolean = false;
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()

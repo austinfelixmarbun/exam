@@ -8,6 +8,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustExpsrHObj } from 'app/shared/model/credit-review/cust-expsr-h-obj.model';
 import { CustExpsrInfoObj } from 'app/shared/model/credit-review/cust-expsr-info-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -33,7 +34,8 @@ export class CustExposureViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: ToastrService, 
-    private UrlConstantNew: UrlConstantNew) {
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) {
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
@@ -73,7 +75,7 @@ export class CustExposureViewComponent implements OnInit {
     this.CustNoObj.CustNo = custNo;
     this.http.post(this.UrlConstantNew.GetCustByCustNo, {TrxNo : custNo}).subscribe(
       (response) => {
-        AdInsHelper.OpenCustomerViewByCustId(response["CustId"]);
+        this.adInsHelperService.OpenCustomerViewByCustId(response["CustId"]);
       }
     );
   }

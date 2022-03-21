@@ -1,5 +1,6 @@
 import { environment } from "environments/environment";
 import { AdInsConstant } from "../AdInstConstant";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./criteria-obj.model";
 import { IntegrationObj } from "./library/integration-obj.model";
@@ -24,19 +25,19 @@ export class UcPagingObj {
     isGetAllData: boolean;
     integrationObj: IntegrationObj;
 
-    constructor() {
+    constructor(private UrlConstantNew: UrlConstantNew) {
         this._url = "";
         this.title = "";
-        this.enviromentUrl = environment.FoundationR3Url + '/v2';
-        this.apiQryPaging = AdInsConstant.GetPagingObjectBySQL;
+        this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + '/v2';
+        this.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
         this.arrCritObj = null;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.isHideSearch = false;
         this.delay = 0;

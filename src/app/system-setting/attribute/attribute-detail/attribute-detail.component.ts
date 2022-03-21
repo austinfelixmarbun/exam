@@ -69,7 +69,7 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupRefMasterType = new InputLookupObj();
+    this.inputLookupRefMasterType = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupRefMasterType.urlJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.pagingJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.genericJson = "./assets/lookup/lookupRefMasterType.json";

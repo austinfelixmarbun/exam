@@ -1,5 +1,4 @@
-import { environment } from "environments/environment";
-import { AdInsConstant } from "../AdInstConstant";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 
 export class UcInputApprovalObj {
     TaskId: number;
@@ -15,19 +14,19 @@ export class UcInputApprovalObj {
     RequestId: number;
     PathUrlGetHistory: string;
     TrxNo: string;
-    constructor() { 
+    constructor(private UrlConstantNew: UrlConstantNew) { 
         this.TaskId = 0;
-        this.EnvUrl = environment.FoundationR3Url + "/v1";
-        this.PathUrlGetLevelVoting = AdInsConstant.GetLevelVoting; //pindah ke adins.constant
-        this.PathUrlGetPossibleResult = AdInsConstant.GetPossibleResult;
-        this.PathUrlSubmitApproval = AdInsConstant.SubmitApproval;
-        this.PathUrlGetNextNodeMember = AdInsConstant.GetNextNodeMember;
-        this.PathUrlGetReasonActive = AdInsConstant.GetRefReasonActive;
-        this.PathUrlGetChangeFinalLevel = AdInsConstant.GetCanChangeMinFinalLevel;
+        this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
+        this.PathUrlGetLevelVoting = this.UrlConstantNew.GetLevelVoting; //pindah ke adins.constant
+        this.PathUrlGetPossibleResult = this.UrlConstantNew.GetPossibleResult;
+        this.PathUrlSubmitApproval = this.UrlConstantNew.SubmitApproval;
+        this.PathUrlGetNextNodeMember = this.UrlConstantNew.GetNextNodeMember;
+        this.PathUrlGetReasonActive = this.UrlConstantNew.GetRefReasonActive;
+        this.PathUrlGetChangeFinalLevel = this.UrlConstantNew.GetCanChangeMinFinalLevel;
         this.PathUrlReturnToLevel = "";
         this.PathUrlContinueToLevel = "";
         this.TrxNo = "";
         this.RequestId = 0;
-        this.PathUrlGetHistory = AdInsConstant.GetTaskHistory;
+        this.PathUrlGetHistory = this.UrlConstantNew.GetTaskHistory;
     }
 }  

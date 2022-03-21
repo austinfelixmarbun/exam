@@ -119,7 +119,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         request = request.clone({ body: myObj });
         AdInsHelper.InsertLog(this.cookieService, request.url, "API", request.body);
-        console.log(JSON.stringify(request.body));
+        console.log(request.body);
+        // console.log(JSON.stringify(request.body));
 
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {

@@ -19,7 +19,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   VendorSchmId: number = 0;
   MrVendorCategoryCode: string;
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VENDOR_SCHM_MBR;
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew) {

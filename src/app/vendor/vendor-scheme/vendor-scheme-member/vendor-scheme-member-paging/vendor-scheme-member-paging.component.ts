@@ -14,9 +14,9 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class VendorSchemeMemberPagingComponent implements OnInit {
 
   VendorSchmId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_SCHM_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;

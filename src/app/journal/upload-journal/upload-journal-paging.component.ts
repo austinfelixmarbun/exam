@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 export class UploadJournalPagingComponent implements OnInit {
-    inputPagingObj: UcPagingObj = new UcPagingObj();
+    inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
     user: any;
     Id: number;
     constructor(

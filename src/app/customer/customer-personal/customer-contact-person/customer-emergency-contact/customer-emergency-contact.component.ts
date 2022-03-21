@@ -62,9 +62,9 @@ export class CustomerEmergencyContactComponent implements OnInit {
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj();
-  ddlIdType: UcDropdownListObj = new UcDropdownListObj();
-  ddlMrGenderCode : UcDropdownListObj = new UcDropdownListObj();
+  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlIdType: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlMrGenderCode : UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   IdCust: number;
   tempCustId: number;
@@ -114,7 +114,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
     this.BusinessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
-    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -122,7 +122,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.UcAddressObj = new UcAddressObj();
 
 
-    this.existingCustomerLookUpObj = new InputLookupObj();
+    this.existingCustomerLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.existingCustomerLookUpObj.isRequired = false;
     this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
@@ -149,8 +149,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
     }
 
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputFieldObj.inputLookupObj.isRequired = false;
 
     this.initDropdownListObj();
@@ -212,7 +212,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         });
 
     }
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.inputField = this.inputFieldObj;
@@ -259,8 +259,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.UcAddressObj.FaxArea = copyCustomerAddrFrom.FaxArea;
         this.UcAddressObj.Fax = copyCustomerAddrFrom.Fax;
 
-        this.inputFieldObj = new InputFieldObj();
-        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldObj.inputLookupObj.nameSelect = copyCustomerAddrFrom.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: copyCustomerAddrFrom.Zipcode };
         this.inputAddressObj.default = this.UcAddressObj;
@@ -515,7 +515,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     };
-    this.ddlIdType = new UcDropdownListObj;
+    this.ddlIdType = new UcDropdownListObj(this.UrlConstantNew);
     this.ddlIdType.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlIdType.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlIdType.requestObj = refMasterObjMrIdTypeCode;
@@ -527,7 +527,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
       MappingCode: null
     };
-    this.ddlMrCustRelationshipCode = new UcDropdownListObj;
+    this.ddlMrCustRelationshipCode = new UcDropdownListObj(this.UrlConstantNew);
     this.ddlMrCustRelationshipCode.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlMrCustRelationshipCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrCustRelationshipCode;
@@ -538,7 +538,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     };
-    this.ddlMrGenderCode = new UcDropdownListObj;
+    this.ddlMrGenderCode = new UcDropdownListObj(this.UrlConstantNew);
     this.ddlMrGenderCode.apiPath = this.UrlConstantNew.GetListActiveRefMasterOrderSeqNoDDL;
     this.ddlMrGenderCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrGenderCode.requestObj = refMasterObjMrGenderCode;
@@ -591,12 +591,12 @@ export class CustomerEmergencyContactComponent implements OnInit {
         });
 
       
-        this.inputFieldObj = new InputFieldObj();
-        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldObj.inputLookupObj.isRequired = false;
         this.inputFieldObj.inputLookupObj.isReadonly = false;
 
-        this.inputAddressObj = new InputAddressObj();
+        this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
         this.inputAddressObj.showSubsection = false;
         this.inputAddressObj.title = "Customer Address";
         this.inputAddressObj.default = new UcAddressObj;

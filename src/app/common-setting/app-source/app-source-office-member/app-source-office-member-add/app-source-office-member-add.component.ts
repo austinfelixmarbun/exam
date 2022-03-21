@@ -17,8 +17,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class AppSourceOfficeMemberAddComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   RefAppSrcId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {

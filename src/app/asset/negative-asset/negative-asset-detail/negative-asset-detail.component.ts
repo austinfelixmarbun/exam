@@ -22,7 +22,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class NegativeAssetDetailComponent implements OnInit {
   pageType: string = "add";
   assetNegativeId: number;
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   criteriaList: Array<CriteriaObj> = new Array<CriteriaObj>();
   criteriaObj: CriteriaObj;
   negativeAssetSourceList: Array<Object> = new Array<Object>();

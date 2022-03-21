@@ -8,7 +8,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './upload-negative-customer.component.html',
 })
 export class UploadNegativeCustomerComponent implements OnInit {
-  uploadObj: UcUploadObj = new UcUploadObj;
+  uploadObj: UcUploadObj = new UcUploadObj(this.UrlConstantNew);
   constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {

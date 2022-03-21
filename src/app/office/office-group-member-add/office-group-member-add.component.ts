@@ -16,11 +16,11 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './office-group-member-add.component.html'
 })
 export class OfficeGroupMemberAddComponent implements OnInit {
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeId: number;
   CenterGrpId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.OFFICE_GROUP_MEMBER;
   constructor(private http: HttpClient,

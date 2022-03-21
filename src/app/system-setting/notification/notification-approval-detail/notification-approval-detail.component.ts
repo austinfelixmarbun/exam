@@ -19,9 +19,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './notification-approval-detail.component.html'
 })
 export class NotificationApprovalDetailComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: any;
-  settingUrl: string = environment.FoundationR3Url;
   notificationHObj: NotificationHObj;
   NotificationHId: any;
   detailData: any;
@@ -29,7 +28,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
   detailDataForGrid: any;
   deleteUrl: any;
   resultData: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {

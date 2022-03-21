@@ -16,9 +16,9 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class VendorGroupViewComponent implements OnInit {
   VendorGrpId: any;
   vendorGrpObj: VendorGroupObj;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_GRP_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;

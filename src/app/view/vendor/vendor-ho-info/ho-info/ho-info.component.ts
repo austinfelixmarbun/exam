@@ -11,8 +11,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class HoInfoComponent implements OnInit {
   MrVendorCategoryCode:any;
   VendorId:any;
-  viewSupplierObj: UcViewGenericObj = new UcViewGenericObj();
-  viewSurveyorObj: UcViewGenericObj = new UcViewGenericObj();
+  viewSupplierObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewSurveyorObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {

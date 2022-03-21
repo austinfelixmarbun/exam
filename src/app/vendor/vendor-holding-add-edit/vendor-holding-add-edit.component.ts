@@ -32,8 +32,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";

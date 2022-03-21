@@ -39,20 +39,20 @@ export class VendorBranchViewComponent implements OnInit {
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchMainPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoSuppObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoSurObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoAssetObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoLifeObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchMainCObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchMainPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoSuppObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoSurObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoAssetObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoLifeObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchMainCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewVendorBranchTaxObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchTaxObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchTaxAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   VendorBankAccListObj: VendorBankAccObj;
   VendorBankAcc: any;

@@ -27,6 +27,7 @@ import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-f
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-third-party-form',
@@ -40,7 +41,8 @@ export class ThirdPartyFormComponent implements OnInit {
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService, private modalService: NgbModal,
     private thirdPartyUploadService: ThirdPartyUploadService, 
-    private UrlConstantNew: UrlConstantNew) {
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) {
   }
 
   @Input() parentForm: FormGroup;
@@ -214,7 +216,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
   ViewPefindo() {
     let TrxNo = this.thirdPartyTrxNo;
-    AdInsHelper.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+    this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
   }
 
   async ReqTrustingSocial() {

@@ -166,7 +166,7 @@ export class CustAttrFormComponent implements OnInit {
 
   dictRefMasterLookup: { [id: string]: InputLookupObj } = {};
   SetRefMasterInputType(attrCode: string, attrName: string, isMandatory: boolean, Descr: string, masterCode: string) {
-    this.dictRefMasterLookup[attrCode] = new InputLookupObj();
+    this.dictRefMasterLookup[attrCode] = new InputLookupObj(this.UrlConstantNew);
     this.dictRefMasterLookup[attrCode].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
     this.dictRefMasterLookup[attrCode].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
     this.dictRefMasterLookup[attrCode].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";

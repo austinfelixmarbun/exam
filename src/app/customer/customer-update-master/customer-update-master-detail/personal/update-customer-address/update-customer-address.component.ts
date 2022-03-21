@@ -42,7 +42,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
     this.ResponseTab = new EventEmitter<any>();
     this.OwnershipList = new Array<any>();
     this.ZipcodeLookupList = new Array<InputLookupObj>();
-    this.ZipcodeLookupObj = new InputLookupObj();
+    this.ZipcodeLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -142,7 +142,12 @@ export class UpdateCustomerAddressComponent implements OnInit {
           });
           formArray.push(formGroup);
 
-          var zipcodeObj = { ...this.ZipcodeLookupObj };
+          let zipcodeObj = new InputLookupObj(this.UrlConstantNew)
+          zipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.isReady = false;
+
           zipcodeObj.nameSelect = responseAddr[key]["MasterCustAddr"]["Zipcode"];
           zipcodeObj.jsonSelect = { Zipcode: responseAddr[key]["MasterCustAddr"]["Zipcode"] };
           zipcodeObj.isReady = true;

@@ -7,7 +7,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class IndustryTypeCategoryPagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   constructor(private UrlConstantNew: UrlConstantNew) { }
 

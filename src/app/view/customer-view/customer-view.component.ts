@@ -17,8 +17,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class CustomerViewComponent implements OnInit {
   custResultData: any;
 
-  viewCustMainInfoHeaderObj: UcViewGenericObj = new UcViewGenericObj();
-  viewCustCoyMainInfoHeader: UcViewGenericObj = new UcViewGenericObj();
+  viewCustMainInfoHeaderObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewCustCoyMainInfoHeader: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   CustId: number;
 

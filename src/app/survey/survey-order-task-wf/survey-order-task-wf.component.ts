@@ -42,7 +42,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   TrxNo: string;
   TrxType: string;
   isDataAlreadyLoaded: boolean = false;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;

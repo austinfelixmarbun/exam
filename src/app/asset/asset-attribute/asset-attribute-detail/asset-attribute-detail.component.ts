@@ -20,7 +20,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./asset-attribute-detail.component.scss']
 })
 export class AssetAttributeDetailComponent implements OnInit {
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   AssetAttrForm = this.fb.group({
     IsEditableAfterGoLive: [false],
     RefAttrId: ['']

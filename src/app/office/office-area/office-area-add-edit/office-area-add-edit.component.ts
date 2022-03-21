@@ -23,7 +23,6 @@ export class OfficeAreaAddEditComponent implements OnInit {
   result: any;
   title: string = "Area-Add"
   mode: string = "add";
-  foundationUrl: string = environment.FoundationR3Url;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {

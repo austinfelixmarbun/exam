@@ -89,12 +89,12 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
   async ngOnInit() {
     this.pageType = this.mode;
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.showOwnership = true;
-    this.inputFieldAddressObj = new InputFieldObj();
-    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
@@ -148,8 +148,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
           this.addressObj.StayLength = this.getCustomerAddr.StayLength;
 
-          this.inputFieldAddressObj = new InputFieldObj();
-          this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+          this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+          this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
           this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
           this.inputAddressObj.default = this.addressObj;
@@ -231,8 +231,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
         this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
-        this.inputFieldAddressObj = new InputFieldObj();
-        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
         this.inputAddressObj.default = this.addressObj;

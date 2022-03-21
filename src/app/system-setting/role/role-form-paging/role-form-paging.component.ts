@@ -13,8 +13,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class RoleFormPagingComponent implements OnInit {
   RefRoleId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM_ADD;

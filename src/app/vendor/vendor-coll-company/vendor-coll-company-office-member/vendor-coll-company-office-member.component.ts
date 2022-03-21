@@ -12,7 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './vendor-coll-company-office-member.component.html'
 })
 export class VendorCollCompanyOfficeMemberComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   VendorId: string;
   objPassing: any = {};
   MrVendorCategoryCode: string = "";

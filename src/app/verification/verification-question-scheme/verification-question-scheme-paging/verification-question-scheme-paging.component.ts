@@ -9,7 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class VerificationQuestionSchemePagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_ADD;
 

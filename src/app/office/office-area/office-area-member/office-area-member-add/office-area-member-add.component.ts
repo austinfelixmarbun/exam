@@ -17,7 +17,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class OfficeAreaMemberAddComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   tempDataExists = false;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA_MEMBER;

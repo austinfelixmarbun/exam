@@ -80,18 +80,18 @@ export class FamilyFormComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
   }
 
-  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupJobPosition() {
-    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.jobPositionLookupObj.isRequired = false;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
 
-  professionLookUpObj: InputLookupObj = new InputLookupObj();
+  professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupProfession() {
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -106,11 +106,11 @@ export class FamilyFormComponent implements OnInit {
     this.professionLookUpObj.addCritInput = listCriteriaObj;
   }
 
-  lookUpObjCountry: InputLookupObj = new InputLookupObj();
+  lookUpObjCountry: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   async BindLookupCountry() {
     await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
       (response: GeneralSettingObj) => {
-        this.lookUpObjCountry = new InputLookupObj();
+        this.lookUpObjCountry = new InputLookupObj(this.UrlConstantNew);
         this.lookUpObjCountry.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";

@@ -25,7 +25,7 @@ export class MasterAddEditComponent implements OnInit {
   type: string = 'add';
   RefMasterId: any;
   resultData: any;
-  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   RefMasterForm = this.fb.group({
     RefMasterId: [0, [Validators.required]],

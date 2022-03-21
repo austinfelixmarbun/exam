@@ -53,7 +53,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
-    this.inputEmpLookupObj = new InputLookupObj();
+    this.inputEmpLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmpLeave.json";

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { environment } from 'environments/environment';
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: 'app-vendor-grading-inquiry-paging',
@@ -15,15 +16,13 @@ export class VendorGradingInquiryPagingComponent implements OnInit {
   mode: string;
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
-    private toastr: NGXToastrService,
-    private router: Router
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe((params) => {});
   }
 
   ngOnInit(): void {
-    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
 
     this.inputPagingObj.pagingJson =
       "./assets/ucpaging/dealer-grading/searchDealerGradingInquiry.json";

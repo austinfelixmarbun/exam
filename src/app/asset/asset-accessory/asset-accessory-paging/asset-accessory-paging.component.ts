@@ -14,10 +14,10 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class AssetAccessoryPagingComponent implements OnInit {
   AssetTypeId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {

@@ -6,13 +6,10 @@ import { UrlConstantService } from "../services/urlConstant.service";
 
 export class UrlConstantNew{
 
-    constructor( public configEnv: EnviConfigService, public urlConfig: UrlConstantService) {
+    constructor( private configEnv: EnviConfigService, private urlConfig: UrlConstantService) {
     }
-    private env = this.configEnv.getConfig();
+    public env = this.configEnv.getConfig();
     private url = this.urlConfig.getConfig();
-
-    // FRAMEWORK
-    public GetJournalResultPagingObjectBySQL = this.url.GetJournalResultPagingObjectBySQL;
 
     // SYS CONFIG RESULT
     public GetSysConfigResultByCode = this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;
@@ -1170,4 +1167,41 @@ export class UrlConstantNew{
     public GetListJobTitleByUsernameAndModuleV2 = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModuleV2;
     public CheckUserSessionLog = this.env.FoundationR3Url + this.url.CheckUserSessionLog;
 
+    //MENU
+    public LogoutAuth = this.env.FoundationR3Url + this.url.LogoutAuth;
+
+    //SYS CTRL COY
+    public GetSysCtrlCoyBySysKey = this.env.FoundationR3Url + this.url.GetSysCtrlCoyBySysKey;
+
+    //REF-USER
+    public GetRefUserByUsername = this.env.FoundationR3Url + this.url.GetRefUserByUsername;
+
+    //FRAMEWORK
+    public GetPagingObjectBySQL = this.url.GetPagingObjectBySQL; // UCPaging
+    public GetJournalResultPagingObjectBySQL = this.url.GetJournalResultPagingObjectBySQL;
+
+    //NEW APPROVAL R3
+    public GetLevelVoting = this.url.GetLevelVoting;
+    public GetPossibleResult = this.url.GetPossibleResult;
+    public SubmitApproval = this.url.SubmitApproval;
+    public GetNextNodeMember = this.url.GetNextNodeMember;
+    public GetRefReasonActive = this.url.GetRefReasonActive;
+    public GetCanChangeMinFinalLevel = this.url.GetCanChangeMinFinalLevel;
+    public GetTaskHistory = this.url.GetTaskHistory;
+    public GetSchemesBySchemeCode = this.url.GetSchemesBySchemeCode;
+    public GetRefSingleCategoryByCategoryCode = this.url.GetRefSingleCategoryByCategoryCode;
+    public GetRefAdtQuestion = this.url.GetRefAdtQuestion;
+    public CreateNewRFA = this.url.CreateNewRFA;
+    public CreateJumpRFA = this.url.CreateJumpRFA;
+    public GetPossibleMemberAndAttributeExType = this.url.GetPossibleMemberAndAttributeExType;
+    public GetApprovalReturnHistory = this.url.GetApprovalReturnHistory;
+
+    // DOWNLOAD
+    public DownloadTemplate = this.env.FoundationR3Url + this.url.DownloadTemplate;
+
+    //UPLOAD
+    public UploadFileV2 = this.env.FoundationR3Url + this.url.UploadFileV2;
+
+    // THINGS TO DO
+    public GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = this.url.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
 }

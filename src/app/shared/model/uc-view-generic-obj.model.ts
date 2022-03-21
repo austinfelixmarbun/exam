@@ -1,4 +1,5 @@
 import { environment } from "environments/environment";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 import { NavigationConstant } from "../NavigationConstant";
 
 export class UcViewGenericObj {
@@ -9,13 +10,13 @@ export class UcViewGenericObj {
     navigationConst: any;
     listEnvironments: Array<EnvisObj>;
 
-    constructor() {
+    constructor(private UrlConstantNew: UrlConstantNew) {
         this.viewInput = "";
-        this.viewEnvironment = environment.FoundationR3Url + '/v1';
+        this.viewEnvironment = this.UrlConstantNew.env.FoundationR3Url + '/v1';
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.navigationConst = NavigationConstant;
     }

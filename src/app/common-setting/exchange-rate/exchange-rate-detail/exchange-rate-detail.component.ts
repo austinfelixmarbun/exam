@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ExchangeRateDetailComponent implements OnInit {
   
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   RefCurrId: number = 0;
   MaxBack: number = 0;
   SetDtReady: boolean = false;

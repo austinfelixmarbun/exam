@@ -34,7 +34,6 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   pageSize: any;
   arrCrit: any;
 
-  foundationUrl: string = environment.FoundationR3Url;
   orderByKey: any = null;
   orderByValue: boolean = true;
 
@@ -55,7 +54,7 @@ export class OfficeZipcodeMemberAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchOfficeZipcodeMember.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetOfficeZipcodeMemberAddPaging;
 

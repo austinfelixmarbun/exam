@@ -11,6 +11,7 @@ import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 import Stepper from 'bs-stepper';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
@@ -23,7 +24,7 @@ import { CookieService } from 'ngx-cookie';
 export class CustomerUpdateMasterDetailComponent implements OnInit {
   private CompanyWizard: Stepper;
   private PersonalWizard: Stepper;
-  ViewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  ViewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   CustNoObj: GenericObj = new GenericObj();
   CustDataTrxId: number;
   CustNo: string;
@@ -60,7 +61,8 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private router: Router,
     private cookieService: CookieService,
     private claimTaskService: ClaimTaskService, 
-    private UrlConstantNew: UrlConstantNew
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -201,6 +203,6 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   GetCallback(e) {
-    AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
+    this.adInsHelperService.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
   }
 }

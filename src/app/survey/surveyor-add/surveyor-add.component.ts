@@ -28,9 +28,9 @@ export class SurveyorAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.SURVEYOR_PAGING;
 
-  lookupUsernameObj: InputLookupObj = new InputLookupObj();
-  lookupSurveyorGrpObj: InputLookupObj = new InputLookupObj();
-  lookupVendorObj: InputLookupObj = new InputLookupObj();
+  lookupUsernameObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  lookupSurveyorGrpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  lookupVendorObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
   surveyorObj: SurveyorObj;
 

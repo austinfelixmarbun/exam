@@ -17,10 +17,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './role-add-edit.component.html'
 })
 export class RoleAddEditComponent implements OnInit {
-
-  foundationUrl: string = environment.FoundationR3Url;
-
-  
   refRoleObj: RefRoleObj;
   type: string = 'Add';
   RefRoleId: any;

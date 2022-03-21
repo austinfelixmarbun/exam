@@ -10,7 +10,7 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
   styles: []
 })
 export class CustomerGuarantorMenuComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   constructor(private UrlConstantNew: UrlConstantNew) { }
 

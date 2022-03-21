@@ -10,6 +10,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./journal-reconcile-paging.component.css']
 })
 export class JournalReconcilePagingComponent implements OnInit {
-  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   user: any;
 
   listTemp = [];
@@ -57,7 +58,7 @@ export class JournalReconcilePagingComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(environment.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
+    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
       ListTransactionNo: req
     }).subscribe(
       res => {

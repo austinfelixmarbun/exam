@@ -203,7 +203,7 @@ export class CustAttrListComponent implements OnInit {
     }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
-      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
+      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -291,7 +291,7 @@ export class CustAttrListComponent implements OnInit {
     }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
-      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
+      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";

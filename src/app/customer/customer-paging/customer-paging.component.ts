@@ -11,7 +11,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: []
 })
 export class CustomerPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   readonly AddLinkPersonal: string = NavigationConstant.CUST_PERSONAL_MAIN_INFO;
   readonly AddLinkCoy: string = NavigationConstant.CUST_COY_MAIN_INFO;
   readonly AddLinkNewCust: string = NavigationConstant.CUST_NEW_FORM;

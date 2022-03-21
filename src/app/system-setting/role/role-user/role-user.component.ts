@@ -35,7 +35,6 @@ export class RoleUserComponent implements OnInit {
   refRoleObj: RefRoleObj = new RefRoleObj();
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
 
   refRoleId: any;
   check: any;
@@ -69,7 +68,7 @@ export class RoleUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchUser.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetListUserEmployee;
     
@@ -157,7 +156,7 @@ export class RoleUserComponent implements OnInit {
   }
 
   Save(RoleUserForm: NgForm): void {
-    var urlAssignRole = this.foundationUrl + this.UrlConstantNew.AssignRoleToUsers;
+    var urlAssignRole = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.AssignRoleToUsers;
     this.refRoleObj.RefRoleId = this.refRoleId;
     // this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
     // this.refRoleObj.listDelEmpPositionId = this.listDeletedId;

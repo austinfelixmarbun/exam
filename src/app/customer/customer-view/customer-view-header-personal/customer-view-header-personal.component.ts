@@ -1,5 +1,6 @@
 import { UcviewgenericComponent } from '@adins/ucviewgeneric';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
@@ -7,7 +8,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
   templateUrl: './customer-view-header-personal.component.html'
 })
 export class CustomerViewHeaderPersonalComponent implements OnInit {
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   private viewGeneric: UcviewgenericComponent;
   @ViewChild('viewGeneric') set content(content: UcviewgenericComponent) {
@@ -15,6 +16,8 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
       this.viewGeneric = content;
     }
   }
+
+  constructor(private UrlConstantNew: UrlConstantNew) { }
   
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustPersonalHeader.json";

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from '../AdInstConstant';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 @Component({
   selector: 'app-things-to-do',
@@ -10,10 +10,10 @@ import { AdInsConstant } from '../AdInstConstant';
 export class ThingsToDoComponent implements OnInit {
   @Input() module : string;
   ListThingsToDo : any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    var url = AdInsConstant.GetThingsToDoByRole;
+    var url = this.UrlConstantNew.GetThingsToDoByRole;
     var obj = {
       ModuleCode : this.module
     };

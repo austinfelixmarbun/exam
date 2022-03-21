@@ -36,7 +36,6 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
   addCrit: CriteriaObj[];
 
   orgMdlObj: OrgMdlObj;
@@ -62,7 +61,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchOrgMdlStruc.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgMdlStrucPaging;
     

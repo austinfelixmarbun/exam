@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-bank-info',
@@ -19,7 +20,7 @@ export class BankInfoComponent implements OnInit {
   @Input() objInput: any;
   modal: any;
   closeResult: any;
-  inputLookupBankObj: InputLookupObj = new InputLookupObj();
+  inputLookupBankObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   mode: string = "add";
   VendorBankAcc: VendorBankAccObj = new VendorBankAccObj();
   VendorBankAccId: number;
@@ -36,7 +37,7 @@ export class BankInfoComponent implements OnInit {
   });
   objEdit: VendorBankAccObj;
 
-  constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService) { }
+  constructor(private toastr: NGXToastrService, private route: ActivatedRoute, private modalService: NgbModal, private fb: FormBuilder, private vendorService: VendorService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.getListData();

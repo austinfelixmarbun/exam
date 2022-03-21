@@ -66,7 +66,7 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
     this.IsAddrDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
     this.AppContactInfo = new UpdateCustContactInfoObj();
-    this.ZipcodeLookupObj = new InputLookupObj();
+    this.ZipcodeLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";

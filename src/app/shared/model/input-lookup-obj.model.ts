@@ -1,6 +1,7 @@
 import { URLConstant } from "../constant/URLConstant"
 import { environment } from "environments/environment"
 import { AdInsConstant } from "../AdInstConstant";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 
 export class InputLookupObj {
     urlJson: string;
@@ -22,18 +23,18 @@ export class InputLookupObj {
     title: any;
     isClear : boolean;
     
-    constructor() {
+    constructor(private UrlConstantNew: UrlConstantNew) {
         this.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-        this.urlQryPaging = AdInsConstant.GetPagingObjectBySQL; //taruh di adins constant
-        this.urlEnviPaging = environment.FoundationR3Url + "/v1";
+        this.urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL; //taruh di adins constant
+        this.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url + "/v1";
         this.jsonSelect = "";
         this.idSelect = "";
         this.nameSelect = "";
         this.addCritInput = null;
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url  + "/v1"});
-        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url  + "/v1"});
+        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
         this.isRequired = true;
         this.isReadonly = true;
         this.isReady = false;

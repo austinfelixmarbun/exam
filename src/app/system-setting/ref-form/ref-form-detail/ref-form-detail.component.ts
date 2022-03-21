@@ -31,7 +31,7 @@ export class RefFormDetailComponent implements OnInit {
   RefFormId: number;
   checkClass: boolean = false;
   parameterObj: Array<ParameterObj> = new Array<ParameterObj>();
-  ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj();
+  ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   // IsTextMode: boolean = false;
 
   private ucLookupParentForm: UclookupgenericComponent;
@@ -178,7 +178,7 @@ export class RefFormDetailComponent implements OnInit {
     let tempHierachyNo = 1;
     let tempListHierachyNo = [1, 2];
     if (isNew) {
-      this.inputLookupParentObj = new InputLookupObj();
+      this.inputLookupParentObj = new InputLookupObj(this.UrlConstantNew);
       this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";

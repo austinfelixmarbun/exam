@@ -70,8 +70,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   custObj: CustObj = new CustObj();
   CustomerForm: FormGroup = this.fb.group({});
-  inputAddressObj: InputAddressObj = new InputAddressObj();
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
@@ -162,7 +162,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   //#region UcLookup
   BindLookupSupplier() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
@@ -171,10 +171,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputLookupObj.isRequired = false;
   }
 
-  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
+  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
+    this.existingCustomerLookUpObj = this.newCustService.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
     if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
   //#endregion
@@ -183,7 +183,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   MrCustRelationshipCodeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   readonly RefMasterTypeCodeCustPersonalRelationship: string = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
   async GetCustRelationship() {
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship] = new UcDropdownListObj();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship] = new UcDropdownListObj(this.UrlConstantNew);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isSelectOutput = true;
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = this.RefMasterTypeCodeCustPersonalRelationship;
@@ -320,8 +320,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddr = response;
-        let inputFieldObj = new InputFieldObj();
-        inputFieldObj.inputLookupObj = new InputLookupObj();
+        let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
@@ -473,8 +473,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
     this.http.post(this.UrlConstantNew.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
       (response: VendorAddrObj) => {
-        let inputFieldObj = new InputFieldObj();
-        inputFieldObj.inputLookupObj = new InputLookupObj();
+        let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         inputFieldObj.inputLookupObj.isReadonly = false;
         inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
@@ -497,8 +497,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   CopyLegalAddr() {
-    let inputFieldObj = new InputFieldObj();
-    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
@@ -565,7 +565,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempMaritalStat.patchValue(this.tempCustPersonalObj.MrMaritalStatCode);
       }
     }
-    this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
+    this.existingCustomerLookUpObj.addCritInput = this.newCustService.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
     this.ucLookupExistingCust.setAddCritInput();
   }
 

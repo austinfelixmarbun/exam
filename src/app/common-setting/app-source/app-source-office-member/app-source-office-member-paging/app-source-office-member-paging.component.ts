@@ -13,8 +13,8 @@ export class AppSourceOfficeMemberPagingComponent implements OnInit {
 
   //param: any;
   RefAppSrcId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefAppSrcId = params["RefAppSrcId"];
@@ -24,7 +24,7 @@ export class AppSourceOfficeMemberPagingComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAppSource.json";
 
-    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
     this.inputPagingObj._url = "./assets/ucpaging/searchAppSourceOfficeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAppSourceOfficeMember.json";
     this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteRefAppSrcOfficeMbr;

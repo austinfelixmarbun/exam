@@ -14,8 +14,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class RefFormRolePagingComponent implements OnInit {
   RefFormId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD;
@@ -28,7 +28,7 @@ export class RefFormRolePagingComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefFormRole.json";
 
-    this.inputPagingObj = new UcPagingObj();
+    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
     this.inputPagingObj._url = "./assets/ucpaging/searchRefFormRole.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefFormRole.json";
     this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAuthForm;

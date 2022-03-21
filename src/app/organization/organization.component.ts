@@ -33,18 +33,17 @@ export class OrganizationComponent implements OnInit {
   excelData: any;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
 
   constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchOrganization.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetRefOrgPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "parentId",
-        environment: environment.FoundationR3Url
+        environment: this.UrlConstantNew.env.FoundationR3Url
       }
     ];
     
@@ -96,7 +95,7 @@ export class OrganizationComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      var url = this.foundationUrl + this.UrlConstantNew.DeleteRefOrg;
+      var url = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.DeleteRefOrg;
       var organizObj: OrganizationObj;
       organizObj = new OrganizationObj();
       organizObj.refOrgId = id;

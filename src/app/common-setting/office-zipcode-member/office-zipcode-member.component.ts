@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 
 @Component({
@@ -6,8 +7,8 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
   templateUrl: './office-zipcode-member.component.html'
 })
 export class OfficeZipcodeMemberComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  constructor() {
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  constructor(private UrlConstantNew: UrlConstantNew) {
   }
 
   ngOnInit() {

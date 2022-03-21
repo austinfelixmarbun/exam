@@ -24,8 +24,8 @@ export class RoleFormComponent implements OnInit {
   listAuthFormObj: ListAuthFormObj;
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM;
   constructor(private http: HttpClient,

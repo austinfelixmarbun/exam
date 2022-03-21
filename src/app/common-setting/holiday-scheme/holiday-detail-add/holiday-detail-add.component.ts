@@ -23,7 +23,7 @@ export class HolidayDetailAddComponent implements OnInit {
   holidayDetailByYearObj: HolidayDByYearObj;
   check: boolean = false;
   mode: any = "";
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   HolidayListForm = this.fb.group({
     IsPublicHoliday: [false, Validators.required],

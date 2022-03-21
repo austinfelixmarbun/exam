@@ -61,7 +61,7 @@ export class ShareholderFormComponent implements OnInit {
     this.outputExisting.emit(this.tempExisting);
   }
 
-  positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
+  positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
@@ -79,7 +79,7 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
     }
-    this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
+    this.positionSlikLookUpObj = this.newCustService.BindLookupPositionSlik();
     this.BindLookupProfession();
     this.BindLookupJobPosition();
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -87,18 +87,18 @@ export class ShareholderFormComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
   }
 
-  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupJobPosition() {
-    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.jobPositionLookupObj.isRequired = true;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
 
-  professionLookUpObj: InputLookupObj = new InputLookupObj();
+  professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupProfession() {
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";

@@ -53,8 +53,8 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
     )
 
     this.UcAddressObj = new UcAddressObj();
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
     this.OfficeBankAccObj.OfficeBankAccId = this.OfficeBankAccId;
     this.http.post<OfficeBankAccObj>(this.UrlConstantNew.GetOfficeBankAccByOfficeBankAccId, {Id: this.OfficeBankAccId}).subscribe(
@@ -90,7 +90,7 @@ export class OfficeBankAccountAccDetailComponent implements OnInit {
       }
     );
 
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;

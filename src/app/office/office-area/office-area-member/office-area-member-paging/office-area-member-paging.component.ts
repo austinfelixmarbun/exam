@@ -13,8 +13,8 @@ export class OfficeAreaMemberPagingComponent implements OnInit {
 
   param: any;
   RefOfficeAreaId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
   readonly AddLink: string = NavigationConstant.OFFICE_AREA_MEMBER_ADD;

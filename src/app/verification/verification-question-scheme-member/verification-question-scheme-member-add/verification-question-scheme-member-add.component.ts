@@ -21,10 +21,10 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   viewObj: any;
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   verfSchemeDObj: VerfSchemeDObj;
   VerfSchemeHId: number;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {

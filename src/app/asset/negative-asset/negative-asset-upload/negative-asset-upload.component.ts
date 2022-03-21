@@ -8,7 +8,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './negative-asset-upload.component.html'
 })
 export class NegativeAssetUploadComponent implements OnInit {
-  uploadObj: UcUploadObj = new UcUploadObj();
+  uploadObj: UcUploadObj = new UcUploadObj(this.UrlConstantNew);
   constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {

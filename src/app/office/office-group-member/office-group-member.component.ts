@@ -15,8 +15,8 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   RefOfficeId: string;
   CenterGrpId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   readonly AddLink: string = NavigationConstant.OFFICE_GROUP_MEMBER_ADD;

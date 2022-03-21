@@ -20,7 +20,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
   RefIndustryTypeCategoryId: number;
   industryTypeCategoryObj: IndustryTypeCategoryObj;
   resultData: any;
-  inputLookupObj : InputLookupObj = new InputLookupObj();
+  inputLookupObj : InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   RefIndustryTypeCategoryForm = this.fb.group({
     RefIndustryTypeCategoryCode: ['', [Validators.required, Validators.maxLength(100)]],
     RefIndustryTypeCategoryName: ['', [Validators.required, Validators.maxLength(200)]],

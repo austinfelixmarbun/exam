@@ -22,7 +22,6 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 export class OrgMdlStrucDetailComponent implements OnInit {
   inputLookupObj: any;
   inputLookupObj2: any;
-  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   orgModelObj: OrgMdlObj;
   orgMdlStrucObj: OrgMdlStrucObj;
@@ -71,17 +70,17 @@ export class OrgMdlStrucDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.urlJson = "./assets/lookup/lookupOrgMdlStruc.json";
     this.inputLookupObj.urlQryPaging = this.UrlConstantNew.GetOrgMdlStrucPaging;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/orgMdlStrucDetailPaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/orgMdlStrucDetailGeneric.json";
 
-    this.inputLookupObj2 = new InputLookupObj();
+    this.inputLookupObj2 = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupBizUnit.json";
     this.inputLookupObj2.urlQryPaging = this.UrlConstantNew.GetBusinessUnitPaging;
-    this.inputLookupObj2.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj2.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
     this.inputLookupObj2.pagingJson = "./assets/form-setting/bizUnitPaging.json";
     this.inputLookupObj2.genericJson = "./assets/form-setting/bizUnitGeneric.json";
     this.inputLookupObj2.isRequired = true;

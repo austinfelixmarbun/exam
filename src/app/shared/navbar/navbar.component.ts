@@ -16,6 +16,7 @@ import { NavigationConstant } from '../NavigationConstant';
 import { StorageService } from '../services/StorageService';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { UrlConstantNew } from '../constant/URLConstantNew';
+import { AdInsHelperService } from '../services/AdInsHelper.service';
 
 @Component({
     selector: 'app-navbar',
@@ -45,7 +46,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService, 
-        private UrlConstantNew: UrlConstantNew) {
+        private UrlConstantNew: UrlConstantNew,
+        private adInsHelperService: AdInsHelperService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
@@ -84,7 +86,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
             //this.GetListNotifH();
             if (response.isNeedLogout == true) {
-                AdInsHelper.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
+                this.adInsHelperService.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
             }
             if (response.removeLocalCookie == true) {
                 AdInsHelper.ForceLogOutClearCookie(this.cookieService, 3, this.toastr, this.http);
@@ -155,7 +157,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
         else {
             var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            var url = environment.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
+            var url = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
             window.open(url, "_blank");
         }
         

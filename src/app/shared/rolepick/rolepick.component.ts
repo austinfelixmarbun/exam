@@ -23,8 +23,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
   refUser: any;
   cookieOptions: CookieOptions;
-  officeDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
-  rolesDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
+  officeDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj(this.UrlConstantNew);
+  rolesDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj(this.UrlConstantNew);
   selectedOffice: number = -1;
   selectedRole: number= -1;
   tempList: Array<any> = new Array<any>();

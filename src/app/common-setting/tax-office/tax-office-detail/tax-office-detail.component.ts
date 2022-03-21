@@ -20,7 +20,7 @@ export class TaxOfficeDetailComponent implements OnInit {
   type: string = "add";
   refTaxOfficeId: number = 0;
   refTaxOfficeObj: RefTaxOfficeObj = new RefTaxOfficeObj();
-  InputLookupBankObj: InputLookupObj = new InputLookupObj();
+  InputLookupBankObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   TaxOfficeForm = this.fb.group({
     TaxOfficeCode: ['', Validators.required],
     TaxOfficeName: ['', Validators.required],

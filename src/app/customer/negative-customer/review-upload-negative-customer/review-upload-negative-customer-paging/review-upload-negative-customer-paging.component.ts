@@ -19,7 +19,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './review-upload-negative-customer-paging.component.html'
 })
 export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   IntegrationObj: IntegrationObj = new IntegrationObj();
   requestTaskModel : RequestTaskModelObj = new RequestTaskModelObj();
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew){}

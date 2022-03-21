@@ -10,8 +10,8 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./main-ho-info.component.scss']
 })
 export class MainHoInfoComponent implements OnInit {
-  viewCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   VendorId: any;
   MrVendorTypeCode: any;
   viewObj12345: any;

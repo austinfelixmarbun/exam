@@ -15,13 +15,14 @@ import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { EnviConfigService } from "app/shared/services/enviConfig.service";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
   providers: [NGXToastrService],
 })
 export class VendorGradingRequestDetailComponent implements OnInit {
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   VendorId: number;
   mode: string;
   businessDt: Date;
@@ -52,7 +53,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     }
   }
   ApprovalCreateOutput: any;
-  InputObj: UcInputRFAObj = new UcInputRFAObj(this.cookieService);
+  InputObj: UcInputRFAObj = new UcInputRFAObj(this.cookieService, this.UrlConstantNew);
   IsReady: boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -74,6 +75,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
   currentUserContext: any;
   async ngOnInit() {
+    console.log(this.InputObj);
     this.currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     if (this.mode == "edit") { this.title = "Detail Supplier Grading Request" }
     else { this.title = "Add Supplier Grading Request" }

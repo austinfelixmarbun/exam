@@ -86,9 +86,9 @@ export class JobAddrSectionComponent implements OnInit {
   readonly PrevJobAddr: string = CommonConstant.CustAddrTypePreJob;
   readonly OthBizAddr: string = CommonConstant.CustAddrTypeOthBiz;
   BindJobAdd(addrType: string) {
-    this.dictJobAddr[addrType] = new InputAddressObj();
-    let inputAddressObj = new InputFieldObj();
-    inputAddressObj.inputLookupObj = new InputLookupObj();
+    this.dictJobAddr[addrType] = new InputAddressObj(this.UrlConstantNew);
+    let inputAddressObj = new InputFieldObj(this.UrlConstantNew);
+    inputAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     let title: string = "";
     switch (addrType) {
       case this.JobAddr:
@@ -121,8 +121,8 @@ export class JobAddrSectionComponent implements OnInit {
         if (response || response.CustAddrId != 0) {
           this.DictCustAddr[addrTypeCode] = response;
 
-          let inputAddressObj = new InputFieldObj();
-          inputAddressObj.inputLookupObj = new InputLookupObj();
+          let inputAddressObj = new InputFieldObj(this.UrlConstantNew);
+          inputAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           if (addrTypeCode == this.OthBizAddr || addrTypeCode == this.PrevJobAddr) inputAddressObj.inputLookupObj.isRequired = false;
           inputAddressObj.inputLookupObj.nameSelect = response.Zipcode;
           inputAddressObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };

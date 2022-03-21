@@ -13,10 +13,10 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class AssetDocumentPagingComponent implements OnInit {
   AssetTypeId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
   readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;

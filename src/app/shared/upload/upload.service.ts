@@ -25,7 +25,6 @@ export class UploadService {
     AssignRoleToUploadSetting: any;
     GetListRefRoleByUploadTypeId: any;
     GetListUploadSettingDByUploadSettingHId: any;
-    foundationUrl: string = environment.FoundationR3Url;
     ReqGenericObj: GenericObj = new GenericObj();
 
     constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
@@ -35,7 +34,7 @@ export class UploadService {
         this.GetListUploadSettingDIdByUploadTypeId = this.UrlConstantNew.GetListUploadSettingDIdByUploadTypeId;
         this.AssignRoleToUploadSetting = this.UrlConstantNew.AssignRoleToUploadSetting;
         this.GetListRefRoleByUploadTypeId = this.UrlConstantNew.GetListRefRoleByUploadTypeId
-        this.GetListUploadSettingDByUploadSettingHId = this.foundationUrl + this.UrlConstantNew.GetListUploadSettingDByUploadSettingHId;
+        this.GetListUploadSettingDByUploadSettingHId = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.GetListUploadSettingDByUploadSettingHId;
     }
 
     getUploadTypeByUploadTypeId(uploadSettingObject: any): Observable<Object> {

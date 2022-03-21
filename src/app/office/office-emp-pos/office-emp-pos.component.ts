@@ -34,7 +34,6 @@ export class OfficeEmpPosComponent implements OnInit {
   empPositionObj: EmpPositionObj;
   apiUrl: any;
   deleteUrl: any;
-  foundationUrl: string = environment.FoundationR3Url;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -67,13 +66,13 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchEmpList.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetEmpPositionPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
-        environment: environment.FoundationR3Url
+        environment: this.UrlConstantNew.env.FoundationR3Url
       }
     ];
 

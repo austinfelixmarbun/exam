@@ -37,7 +37,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   SrvyOrderObj: any;
   SrvyTaskObj: SrvyTaskObj = new SrvyTaskObj();
   VendorObj: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;

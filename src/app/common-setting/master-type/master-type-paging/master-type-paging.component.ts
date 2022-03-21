@@ -22,7 +22,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: UcPagingObj = new UcPagingObj();
+  inputObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   resultData: any;
   pageNow: any;
   totalData: any;
@@ -35,7 +35,6 @@ export class MasterTypePagingComponent implements OnInit {
   refRoleObj: RefRoleObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
 
   readonly EditLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_DETAIL;
   constructor(

@@ -13,7 +13,7 @@ export class ViewRackComponent implements OnInit {
   RackCode: string;
   CabinetCode: string;
   responseFiling: Array<any> = new Array();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   constructor(
     private http: HttpClient,

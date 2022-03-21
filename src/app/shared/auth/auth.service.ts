@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 interface myData{
   success: boolean,
@@ -16,7 +17,7 @@ export class AuthService {
   loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'true')
   // private loggedInStatus = false
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) {}
 
   signupUser(email: string, password: string) {
     //your code for signing up the new user
@@ -51,7 +52,7 @@ export class AuthService {
   
   getuserDetails(username, password){
     // Post these details to API server return user info if correct
-    return this.http.get(AdInsConstant.Login);
+    return this.http.get(this.UrlConstantNew.Login);
     // return this.http.post('/api/auth.php',{
     //   username,
     //   password

@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie';
   styles: []
 })
 export class CustomerUpdateMasterComponent implements OnInit {
-  inputPagingObj: UcPagingObj= new UcPagingObj();
+  inputPagingObj: UcPagingObj= new UcPagingObj(this.UrlConstantNew);
   IntegrationObj: IntegrationObj = new IntegrationObj();
   RequestTaskModel: RequestTaskModelObj = new RequestTaskModelObj();
 

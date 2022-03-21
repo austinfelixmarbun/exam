@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-paging',
@@ -13,10 +14,10 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 })
 export class VendorBranchPagingComponent implements OnInit {
 
-  inputPagingObj : UcPagingObj = new UcPagingObj();
+  inputPagingObj : UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_ADD;
-  constructor(private route: ActivatedRoute) {
+  constructor(private UrlConstantNew: UrlConstantNew) {
 
   }
 

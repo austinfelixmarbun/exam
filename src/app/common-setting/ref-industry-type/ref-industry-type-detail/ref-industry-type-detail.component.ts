@@ -53,7 +53,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.urlJson = "./assets/lookup/lookupIndustryTypeCategory.json";
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupIndustryTypeCategory.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupIndustryTypeCategory.json";

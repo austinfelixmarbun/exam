@@ -22,7 +22,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
   title: string = "Payment Allocation Group Information";
   Code: string = "";
   Name: string = "-";
-  inputLookUpPaymentAllocObj: InputLookupObj = new InputLookupObj();
+  inputLookUpPaymentAllocObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   ListPayAllocGrp: Array<KeyValueObj> = new Array<KeyValueObj>();
   PaymentAllocGrpObj: PaymentAllocGrpObj = new PaymentAllocGrpObj()
 
@@ -52,7 +52,7 @@ export class PaymentAllocGroupDetailComponent implements OnInit {
 
   ngOnInit() {
     // LookUp Payment Alloc
-    this.inputLookUpPaymentAllocObj = new InputLookupObj();
+    this.inputLookUpPaymentAllocObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookUpPaymentAllocObj.urlJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.pagingJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";
     this.inputLookUpPaymentAllocObj.genericJson = "./assets/uclookup/payment-alloc/lookup-payment-alloc.json";

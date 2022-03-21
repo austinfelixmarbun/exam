@@ -32,7 +32,7 @@ export class WorkingHourDDetailComponent implements OnInit {
   isEdit: boolean = false;
   postUrl: any;
   items: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   listOfDay: any = [
     {

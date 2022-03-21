@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { environment } from 'environments/environment';
 
@@ -9,11 +10,11 @@ import { environment } from 'environments/environment';
 export class CustomerViewCoyContactComponent implements OnInit {
   responseResult: any;
   CustId: number;
-  viewCustCoyViewContactData: UcViewGenericObj = new UcViewGenericObj();
-  viewCustCoyViewContactAddress: UcViewGenericObj = new UcViewGenericObj();
-  viewCustCoyViewContactInformation: UcViewGenericObj = new UcViewGenericObj();
+  viewCustCoyViewContactData: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewCustCoyViewContactAddress: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewCustCoyViewContactInformation: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(){}
+  constructor(private UrlConstantNew: UrlConstantNew){}
 
   ngOnInit() {
     this.viewCustCoyViewContactData.viewInput  =  "./assets/ucviewgeneric/viewCustCoyViewContactData.json";

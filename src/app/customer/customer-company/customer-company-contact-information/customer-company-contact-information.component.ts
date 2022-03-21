@@ -88,8 +88,8 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.UcAddressObj = new UcAddressObj();
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       MappingCode: null
@@ -219,7 +219,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
       });
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showPhn3 = false;

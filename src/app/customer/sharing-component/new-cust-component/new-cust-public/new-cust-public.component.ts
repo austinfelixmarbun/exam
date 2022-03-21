@@ -30,7 +30,7 @@ export class NewCustPublicComponent implements OnInit {
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   CustomerForm: FormGroup = this.fb.group({});
-  inputAddressObj: InputAddressObj = new InputAddressObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private newCustService: NewCustSetData, private UrlConstantNew: UrlConstantNew) { }
 
@@ -46,7 +46,7 @@ export class NewCustPublicComponent implements OnInit {
     this.IsReady = true;
   }
 
-  positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
+  positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   ClearForm(item: ShareholderPublicObj = null) {
     this.CustomerForm = this.fb.group({
       MrPositionSlikCode: [item == null ? '' : item.MrPositionSlikCode, Validators.required],
@@ -59,8 +59,8 @@ export class NewCustPublicComponent implements OnInit {
 
     if (item != null) {
       //#region patch address
-      let inputFieldObj = new InputFieldObj();
-      inputFieldObj.inputLookupObj = new InputLookupObj();
+      let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+      inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
       inputFieldObj.inputLookupObj.nameSelect = item.PublicZipcode;
       inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: item.PublicZipcode };
       let tempUcAddObj: UcAddressObj = new UcAddressObj();
@@ -97,7 +97,7 @@ export class NewCustPublicComponent implements OnInit {
     this.inputAddressObj = await this.newCustService.BindSetLegalAddr();
     this.inputAddressObj.showOwnership = false;
     this.inputAddressObj.requiredOwnership = false;
-    this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
+    this.positionSlikLookUpObj = this.newCustService.BindLookupPositionSlik();
   }
 
   IsLockCopyAddrBtn: boolean = false;
@@ -204,8 +204,8 @@ export class NewCustPublicComponent implements OnInit {
   }
 
   CopyLegalAddr() {
-    let inputFieldObj = new InputFieldObj();
-    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };

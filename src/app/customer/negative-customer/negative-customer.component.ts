@@ -8,7 +8,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './negative-customer.component.html'
 })
 export class NegativeCustomerComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.CUST_NEG_DETAIL;
   constructor(private UrlConstantNew: UrlConstantNew) { }

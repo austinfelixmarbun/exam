@@ -83,19 +83,19 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.CompanyScaleList = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
 
-    this.lookupIndustryTypeObj = new InputLookupObj();
+    this.lookupIndustryTypeObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupIndustryTypeObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     // this.lookupIndustryTypeObj.isRequired = false;
 
-    this.lookupProfessionObj = new InputLookupObj();
+    this.lookupProfessionObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupProfessionObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
     // this.lookupProfessionObj.isRequired = false;
 
-    this.lookupZipcodeObj = new InputLookupObj();
+    this.lookupZipcodeObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";

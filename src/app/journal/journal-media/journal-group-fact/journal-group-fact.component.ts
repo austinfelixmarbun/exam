@@ -32,7 +32,7 @@ export class JournalGroupFactComponent implements OnInit {
 
   ddlFactTypeIsReady: boolean = false;
   ddlFactTypeGenericList: Array<KeyValueObj>;
-  ddlFactTypeObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlFactTypeObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   readonly CancelLink: string = NavigationConstant.JOURNAL_MEDIA_GROUP;
 
   GroupFactForm = this.fb.group({
@@ -62,7 +62,7 @@ export class JournalGroupFactComponent implements OnInit {
       code: CommonConstant.RefMasterTypeCodeJournalHeaderFactType
     }).subscribe(
       (response) => {
-        this.ddlFactTypeObj = new UcDropdownListObj;
+        this.ddlFactTypeObj = new UcDropdownListObj(this.UrlConstantNew);
         this.ddlFactTypeGenericList = response["RefMasterObjs"].map(item => ({
           Key: item.MasterCode,
           Value: item.Descr,

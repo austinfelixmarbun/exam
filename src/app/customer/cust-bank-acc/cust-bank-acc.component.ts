@@ -30,7 +30,7 @@ export class CustBankAccComponent implements OnInit {
   MonthObj: Array<KeyValueObj> = new Array();
   CustListBankStmntObj: Array<CustBankStmntObj> = new Array();
   BankStmntList: Array<CustBankStmntObj> = new Array();
-  InputLookupBankObj: InputLookupObj = new InputLookupObj();
+  InputLookupBankObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   CustBankAccList: Array<CustBankAccObj> = new Array<CustBankAccObj>();
 
   BankAccStmntForm = this.fb.group({

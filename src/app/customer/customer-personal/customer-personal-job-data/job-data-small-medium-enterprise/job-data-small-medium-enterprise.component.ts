@@ -143,11 +143,11 @@ export class JobDataSmeComponent implements OnInit {
   async ngOnInit() {
     await this.getAddrTypeOwnershipRequired();
 
-    this.inputAddressObjForJobAddr = new InputAddressObj();
+    this.inputAddressObjForJobAddr = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObjForJobAddr.showSubsection = false;
     this.inputAddressObjForJobAddr.title = "Job Address";
 
-    this.inputAddressObjForOthBiz = new InputAddressObj();
+    this.inputAddressObjForOthBiz = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObjForOthBiz.showSubsection = false;
     this.inputAddressObjForOthBiz.isRequired = false;
     this.inputAddressObjForOthBiz.title = "Other Business Address";
@@ -155,7 +155,7 @@ export class JobDataSmeComponent implements OnInit {
     this.inputAddressObjForOthBiz.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypeOthBiz);
     this.inputAddressObjForOthBiz.inputField.inputLookupObj.isRequired = false;
 
-    this.inputPreviousAddressObj = new InputAddressObj();
+    this.inputPreviousAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputPreviousAddressObj.showSubsection = false;
     this.inputPreviousAddressObj.isRequired = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
@@ -166,19 +166,19 @@ export class JobDataSmeComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
-    this.inputJobAddressObj = new InputFieldObj();
-    this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputJobAddressObj.inputLookupObj.isRequired = false;
     this.inputAddressObjForOthBiz.inputField = this.inputJobAddressObj;
-    this.inputOtherAddressObj = new InputFieldObj();
-    this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputOtherAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputOtherAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     this.inputPreviousAddressObj.inputField = this.inputOtherAddressObj;
-    this.inputPreJobAddressObj = new InputFieldObj();
-    this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputPreJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
 
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -193,13 +193,13 @@ export class JobDataSmeComponent implements OnInit {
     this.professionLookUpObj.addCritInput = listCriteriaObj;
 
 
-    this.industryLookUpObj = new InputLookupObj();
+    this.industryLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;
 
-    this.companyLookupObj = new InputLookupObj();
+    this.companyLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
@@ -341,8 +341,8 @@ export class JobDataSmeComponent implements OnInit {
                 this.addressObj.Fax = this.getJobAddr.Fax;
                 this.addressObj.MrHouseOwnershipCode = this.getJobAddr.MrBuildingOwnershipCode;
 
-                this.inputJobAddressObj = new InputFieldObj();
-                this.inputJobAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputJobAddressObj.inputLookupObj.nameSelect = this.getJobAddr.Zipcode;
                 this.inputJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getJobAddr.Zipcode };
                 this.inputAddressObjForJobAddr.default = this.addressObj;
@@ -384,8 +384,8 @@ export class JobDataSmeComponent implements OnInit {
                 this.otherAddrObj.Fax = this.getOthBizAddr.Fax;
                 this.otherAddrObj.MrHouseOwnershipCode = this.getOthBizAddr.MrBuildingOwnershipCode;
 
-                this.inputOtherAddressObj = new InputFieldObj();
-                this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputOtherAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputOtherAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
@@ -430,8 +430,8 @@ export class JobDataSmeComponent implements OnInit {
                 this.preJobAddrObj.Fax = this.getPreJobAddr.Fax;
                 this.preJobAddrObj.MrHouseOwnershipCode = this.getPreJobAddr.MrBuildingOwnershipCode;
 
-                this.inputPreJobAddressObj = new InputFieldObj();
-                this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputPreJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };

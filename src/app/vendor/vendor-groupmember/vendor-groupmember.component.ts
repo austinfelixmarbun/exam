@@ -20,7 +20,7 @@ export class VendorGroupmemberComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   VendorGrpId: number;
   MrVendorCategoryCode: string = '';
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VENDOR_GRP_VIEW;
   constructor(private http: HttpClient,

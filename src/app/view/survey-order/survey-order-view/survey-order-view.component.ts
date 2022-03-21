@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class SurveyOrderViewComponent implements OnInit {
   SrvyOrderId: string;
   TaskList = new Array();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   readonly ViewCust: string = NavigationConstant.VIEW_CUST_PERSONAL_DETAIL;

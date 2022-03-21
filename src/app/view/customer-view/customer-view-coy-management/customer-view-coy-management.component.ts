@@ -7,6 +7,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ShareholderListingObj } from 'app/shared/model/new-cust/shareholder/shareholder-listing-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-customer-view-coy-management',
@@ -27,7 +28,8 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
-    private UrlConstantNew: UrlConstantNew) { 
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) { 
   }
 
   ngOnInit() {
@@ -49,10 +51,10 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   }
 
   openViewPersonal(custId: number){
-    AdInsHelper.OpenCustomerViewByCustId(custId);
+    this.adInsHelperService.OpenCustomerViewByCustId(custId);
   }
 
   openViewCoy(custId: number){
-    AdInsHelper.OpenCustomerCoyViewByCustId(custId);
+    this.adInsHelperService.OpenCustomerCoyViewByCustId(custId);
   }
 }

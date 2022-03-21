@@ -49,7 +49,7 @@ export class ZipcodeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputDistrictLookupObj = new InputLookupObj();
+    this.inputDistrictLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.pagingJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.genericJson = "./assets/lookup/lookupDistrict.json";

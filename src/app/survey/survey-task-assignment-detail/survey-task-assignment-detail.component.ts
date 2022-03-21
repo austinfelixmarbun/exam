@@ -30,9 +30,9 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   readonly ViewCustLink: string = NavigationConstant.VIEW_CUST;
 
   reqSrvyTaskAndSendToMobile: ReqSrvyTaskAndSendToMobileObj = new ReqSrvyTaskAndSendToMobileObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  lookupSurveyorObj: InputLookupObj = new InputLookupObj();
-  lookupSurveyorNationNoObj: InputLookupObj = new InputLookupObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  lookupSurveyorObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  lookupSurveyorNationNoObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   surveyOrderId: number;
   reqByIdAndUsername: ReqSrvyTaskIdAndUsername = new ReqSrvyTaskIdAndUsername();
   parentForm: FormGroup;
@@ -197,7 +197,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   initLookupSurveyor(x) {
     let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = currentUserContext['OfficeId'];
-    this.InputLookupSurveyorObj = new InputLookupObj();
+    this.InputLookupSurveyorObj = new InputLookupObj(this.UrlConstantNew);
     this.InputLookupSurveyorObj.urlJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.pagingJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
     this.InputLookupSurveyorObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTask.json";
@@ -212,7 +212,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   initLookupSurveyorForNationalNo(x) {
     let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = currentUserContext['OfficeId'];
-    this.InputLookupSurveyorNationNoObj = new InputLookupObj();
+    this.InputLookupSurveyorNationNoObj = new InputLookupObj(this.UrlConstantNew);
     this.InputLookupSurveyorNationNoObj.urlJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";
     this.InputLookupSurveyorNationNoObj.pagingJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";
     this.InputLookupSurveyorNationNoObj.genericJson = "./assets/lookup/lookupSurveyorForSurveyTaskNationalNo.json";

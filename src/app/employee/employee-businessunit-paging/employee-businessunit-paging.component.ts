@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
@@ -15,12 +16,12 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
 
   pageType: string ="emp";
   RefUserId : string;
-  inputPagingObj : UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj : UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   CancelLink: string = NavigationConstant.EMP_PAGING;
   readonly AddLink: string = NavigationConstant.EMP_BZ_UNIT_ADD;
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];
       this.pageType = params["mode"];
@@ -35,7 +36,7 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchEmployeeBusinessUnit.json";
-    this.inputPagingObj.deleteUrl = environment.FoundationR3Url + "/v1" + "/RefUserRole/DeleteRefUserRole";
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1" + "/RefUserRole/DeleteRefUserRole";
 
     var critInput = new CriteriaObj();
     critInput.propName = "usr.REF_USER_ID";

@@ -6,15 +6,15 @@
 export const environment = {
   production: true,
   navbarColor: 'transparent',
-  //losUrl: 'http://localhost:5001',
-  //FoundationR3Url: 'http://localhost:5000',
+  // losUrl: 'http://localhost:5001',
+  // FoundationR3Url: 'http://localhost:5000',
   LosURL: 'http://r3app-server.ad-ins.com/LOS_DEV',
   FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_DEV',
   DMSUrl: "http://sky.ad-ins.com/LITEDMS_POC/Integration/ViewDoc.aspx",
   AMSUrl: "http://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "http://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
   lmsWeb: "http://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
-  //ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
+  // ApprovalURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalR3Url: 'http://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
   ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
   FoundationR3Web: 'http://r3web-server.ad-ins.com/FOUNDATION_DEV',

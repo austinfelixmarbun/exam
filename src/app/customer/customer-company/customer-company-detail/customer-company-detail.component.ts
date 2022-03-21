@@ -30,7 +30,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   lookUpObj: InputLookupObj;
   CustGrpObj: CustGrpObj = new CustGrpObj();
   criteriaObj: CriteriaObj;
@@ -82,7 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";

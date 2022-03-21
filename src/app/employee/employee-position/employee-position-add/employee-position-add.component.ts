@@ -52,8 +52,6 @@ export class EmployeePositionAddComponent implements OnInit {
     supervisorUrl: any;
     bizUrl: any;
     orgJobTitleUrl: any;
-    foundationUrl: string = environment.FoundationR3Url;
-    settingUrl: string = environment.FoundationR3Url;
     empPositionVisible: boolean = true;
     addEditVisible: boolean = false;
     pageNow: any;
@@ -110,7 +108,7 @@ export class EmployeePositionAddComponent implements OnInit {
 
     ngOnInit() {
 
-        this.inputLookupObj = new InputLookupObj();
+        this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";

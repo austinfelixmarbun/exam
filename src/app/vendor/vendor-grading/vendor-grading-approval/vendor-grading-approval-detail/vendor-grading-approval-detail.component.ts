@@ -9,7 +9,6 @@ import { UcInputApprovalGeneralInfoObj } from 'app/shared/model/uc-input-approva
 import { UcInputApprovalHistoryObj } from 'app/shared/model/uc-input-approval-history-obj.model';
 import { UcInputApprovalObj } from 'app/shared/model/uc-input-approval-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-vendor-grading-approval-detail',
@@ -23,7 +22,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   taskId: number;
   instanceId: number;
   inputObj: any;
-  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
    
   InputApvObj : UcInputApprovalObj;
   InputApprovalHistoryObj : UcInputApprovalHistoryObj;
@@ -89,7 +88,7 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     let obj = {
       Tasks: event.Tasks
     }
-    this.http.post(environment.FoundationR3Url + AdInsConstant.SubmitApproval, obj).subscribe(
+    this.http.post(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.SubmitApproval, obj).subscribe(
       (response)=>{
         this.toastr.successMessage(response["Message"]);
         this.router.navigate(["/Vendor/VendorGrading/Approval/Paging"]);
@@ -99,15 +98,15 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
 
   initInputApprovalObj(){
 
-    this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj();
+    this.UcInputApprovalGeneralInfoObj = new UcInputApprovalGeneralInfoObj(this.UrlConstantNew);
     this.UcInputApprovalGeneralInfoObj.PathUrl = "/Approval/GetSingleTaskInfo";
     this.UcInputApprovalGeneralInfoObj.TaskId = this.taskId;
     
-    this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj();
-    this.InputApprovalHistoryObj.PathUrl = AdInsConstant.GetTaskHistory;
+    this.InputApprovalHistoryObj = new UcInputApprovalHistoryObj(this.UrlConstantNew);
+    this.InputApprovalHistoryObj.PathUrl = this.UrlConstantNew.GetTaskHistory;
     this.InputApprovalHistoryObj.RequestId = this.ApvReqId;
 
-    this.InputApvObj = new UcInputApprovalObj();
+    this.InputApvObj = new UcInputApprovalObj(this.UrlConstantNew);
     this.InputApvObj.TaskId = this.taskId;
     this.InputApvObj.RequestId = this.ApvReqId;
     this.InputApvObj.TrxNo = this.VendorGradingHistNo;
@@ -120,6 +119,6 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
   }
 
   GetCallBack(e : any){
-    // AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
+    // this.adInsHelperService.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
   }
 }

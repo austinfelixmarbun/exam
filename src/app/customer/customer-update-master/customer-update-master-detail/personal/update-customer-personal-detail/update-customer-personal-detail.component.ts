@@ -84,7 +84,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     // this.DetailData = new Object();
     this.LocalNationalityConstant = CommonConstant.NationalityCodeLocal;
 
-    this.CustGrpLookupObj = new InputLookupObj();
+    this.CustGrpLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.CustGrpLookupObj.urlJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.pagingJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
     this.CustGrpLookupObj.genericJson = "./assets/uclookup/Customer/CustomerGroup/lookupCustGrp_UpdateMasterCust.json";
@@ -92,7 +92,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.CustGrpLookupObj.isReady = false;
     this.CustGrpLookupObj.isRequired = false;
 
-    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";

@@ -7,7 +7,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './office-bank-account-paging.component.html'
 })
 export class OfficeBankAccountPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   isReady: boolean;
 
   constructor(private UrlConstantNew: UrlConstantNew) { }

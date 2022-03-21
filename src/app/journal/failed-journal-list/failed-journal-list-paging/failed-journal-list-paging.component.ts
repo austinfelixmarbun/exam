@@ -17,7 +17,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./failed-journal-list-paging.component.css']
 })
 export class FailedJournalListPagingComponent implements OnInit {
-  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   user: any;
 
   listTemp = [];
@@ -48,7 +48,7 @@ export class FailedJournalListPagingComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(environment.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
+    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
       ListTransactionNo: req
     }, AdInsConstant.SpinnerOptions).subscribe(
       res => {

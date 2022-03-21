@@ -19,7 +19,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   VendorId: number;
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   tempDataExists = false;
 
   readonly CancelLink: string = NavigationConstant.VENDOR_BRANCH_MBR_PAGING;

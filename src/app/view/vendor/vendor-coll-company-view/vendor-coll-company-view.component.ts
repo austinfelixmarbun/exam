@@ -36,15 +36,15 @@ export class VendorCollCompanyViewComponent implements OnInit {
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-  viewVendorCollCompanyObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewCollCompanyMainInfoObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorCollCompanyObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewCollCompanyMainInfoObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewVendorCollCompanyTaxObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorCollCompanyTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorCollCompanyAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorCollCompanyTaxObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorCollCompanyTaxAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorCollCompanyAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   VendorBankAccListObj: VendorBankAccObj;
   VendorBankAcc: any;

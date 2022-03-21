@@ -105,18 +105,18 @@ export class CustPersonalJobDataComponent implements OnInit {
   }
 
   //#region Bind lookup
-  professionLookUpObj: InputLookupObj = new InputLookupObj();
+  professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupProfession() {
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
   }
 
-  companyLookupObj: InputLookupObj = new InputLookupObj();
+  companyLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupCompany() {
-    this.companyLookupObj = new InputLookupObj();
+    this.companyLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
@@ -140,18 +140,18 @@ export class CustPersonalJobDataComponent implements OnInit {
     this.companyLookupObj.addCritInput = ArrAddCritCoy;
   }
 
-  industryLookUpObj: InputLookupObj = new InputLookupObj();
+  industryLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupIndustry() {
-    this.industryLookUpObj = new InputLookupObj();
+    this.industryLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = false;
   }
 
-  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupJobPosition() {
-    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.jobPositionLookupObj.isRequired = false;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";

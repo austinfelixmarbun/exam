@@ -33,7 +33,6 @@ export class UploadSettingPagingComponent implements OnInit {
   deleteUrl: any;
   orderByKey: any = null;
   orderByValue = true;
-  foundationUrl: any = environment.FoundationR3Url
   inputObj: any;
   verfTrxTypeId: any;
   exportData: any;
@@ -42,7 +41,7 @@ export class UploadSettingPagingComponent implements OnInit {
   constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = './assets/search/searchUploadTypePaging.json';
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetUploadTypePaging;
     this.pageNow = 1;

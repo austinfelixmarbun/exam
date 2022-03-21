@@ -27,9 +27,9 @@ export class AddAssetSchemeComponent implements OnInit {
   AssetSchmHId: any;
   viewObj: string;
   getListAssetSchmDByAssetSchmHId = this.UrlConstantNew.GetListAssetSchmDByAssetSchmHId;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.ASSET_SCHM_MBR_DETAIL;
   constructor(

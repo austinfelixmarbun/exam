@@ -23,7 +23,7 @@ import { String } from 'typescript-string-operations';
 })
 export class VendorGradingApprovalPagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   apvReqObj: ApprovalReqObj = new ApprovalReqObj();
   integrationObj: IntegrationObj = new IntegrationObj();
   arrCrit: any;

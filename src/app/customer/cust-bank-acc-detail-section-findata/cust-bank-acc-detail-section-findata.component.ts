@@ -66,7 +66,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupBank = new InputLookupObj();
+    this.inputLookupBank = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupBank.urlJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.inputLookupBank.pagingJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
     this.inputLookupBank.genericJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";

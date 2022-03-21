@@ -63,7 +63,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
     this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgJobTitlePaging;
     

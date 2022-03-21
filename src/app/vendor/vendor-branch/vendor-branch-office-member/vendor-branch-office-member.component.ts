@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   templateUrl: './vendor-branch-office-member.component.html'
 })
 export class VendorBranchOfficeMemberComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   VendorId: string;
   objPassing: any = {};
   MrVendorCategoryCode: string = "";

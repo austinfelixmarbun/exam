@@ -21,7 +21,6 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
   providers: [NGXToastrService]
 })
 export class UserChangePasswordComponent implements OnInit {
-  foundationUrl: string = environment.FoundationR3Url;
   apiUrl: any;
   refUserObj: RefUserObj;
   refEmpObj: RefEmpObj = new RefEmpObj();

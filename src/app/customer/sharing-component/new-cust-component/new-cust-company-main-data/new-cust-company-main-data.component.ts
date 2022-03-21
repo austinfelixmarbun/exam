@@ -45,9 +45,9 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   CustomerForm: FormGroup = this.fb.group({});
-  inputAddressObj: InputAddressObj = new InputAddressObj();
-  inputFieldObj: InputFieldObj = new InputFieldObj();
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
+  inputFieldObj: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
@@ -101,7 +101,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   //#region Set Data
   //#region UcLookup
   BindLookupSupplier() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierCoy.json";
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierCoy.json";
@@ -124,10 +124,10 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     }
   }
 
-  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
+  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
+    this.existingCustomerLookUpObj = this.newCustService.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerCompany);
     if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
 
@@ -213,8 +213,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   CopyLegalAddr() {
-    let inputFieldObj = new InputFieldObj();
-    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };

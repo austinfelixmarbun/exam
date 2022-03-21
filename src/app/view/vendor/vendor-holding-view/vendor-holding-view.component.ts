@@ -21,18 +21,18 @@ export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;
   @ViewChild(UCSearchComponent) UCSearchComponent;
   VendorId: any;
-  viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   arrCrit: any[];
   vendorHoObj: VendorHoObj;
   MainInfo: any;
   vendorAddrObj: VendorHoObj;
   MrVendorTypeCode: any;
-  viewVendorHoldingMainPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorHoldingMainCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorHoldingTaxObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorHoldingTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorHoldingAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorHoldingLtLgObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorHoldingMainPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorHoldingMainCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorHoldingTaxObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorHoldingTaxAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorHoldingAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorHoldingLtLgObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   VendorGrp: any;
   GroupListObj: VendorGroupObj;

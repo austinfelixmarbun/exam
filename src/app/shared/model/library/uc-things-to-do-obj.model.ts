@@ -1,5 +1,6 @@
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { environment } from "environments/environment";
 
 export class UcThingsToDoObj {
@@ -27,9 +28,9 @@ export class ThingsToDoIntegrationObj {
     ApiPath: string;
     RequestObj: IntegrationReqObj;
 
-    constructor() {
-        this.BaseUrl = environment.WFThingsToDoUrl;
-        this.ApiPath = AdInsConstant.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
+    constructor(private UrlConstantNew: UrlConstantNew) {
+        this.BaseUrl = this.UrlConstantNew.env.WFThingsToDoUrl;
+        this.ApiPath = this.UrlConstantNew.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
         this.RequestObj = new IntegrationReqObj();
     }
 }
@@ -71,8 +72,8 @@ export class ThingsToDoIntegrationV2Obj {
     ApiPath: string;
     RequestObj: IntegrationReqV2Obj;
 
-    constructor() {
-        this.BaseUrl = environment.FoundationR3Url + AdInsConstant.GetThingsToDoCamunda;
+    constructor(private UrlConstantNew: UrlConstantNew) {
+        this.BaseUrl = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.GetThingsToDoCamunda;
         this.ApiPath = "";
         this.RequestObj = new IntegrationReqV2Obj();
     }
