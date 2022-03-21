@@ -40,6 +40,7 @@ export class FullLayoutComponent implements OnInit {
                 }
             }
         );
+        this.CheckDevice();
         // this.subEnd = this.strService.watch("isLoading").subscribe(
         //     (response) => {
         //         if (response == true) {
@@ -59,6 +60,17 @@ export class FullLayoutComponent implements OnInit {
             .addEventListener("click", this.onClick.bind(this));
         this.elementRef.nativeElement.querySelector("#cz-sidebar-width")
             .addEventListener("click", this.onClick.bind(this));
+    }
+
+    IsWeb: boolean = true;
+    CheckDevice() {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // true for mobile device
+            console.log("mobile device");
+            this.IsWeb = false;
+            return
+        }
+        console.log("not mobile device");
     }
 
     ngOnDestroy() {

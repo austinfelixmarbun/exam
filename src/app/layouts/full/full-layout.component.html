@@ -23,3 +23,7 @@
     <app-notification-sidebar></app-notification-sidebar>
     <app-customizer (directionEvent)="getOptions($event)" style="display: none;"></app-customizer>
 </div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a *ngIf="!IsWeb" href="https://api.whatsapp.com" class="float" target="_blank"></a>
+<a *ngIf="IsWeb" href="https://web.whatsapp.com" class="float" target="_blank"></a>
+<i class="fa fa-whatsapp my-float"></i>

@@ -227,6 +227,7 @@ export class PathConstant {
     public static CUST_UPDATE_DATA_PAGING = PathConstant.CUST_UPDATE_DATA + "/" + PathConstant.PAGING;
     public static CUST_UPDATE_DATA_DETAIL = PathConstant.CUST_UPDATE_DATA + "/" + PathConstant.DETAIL;
     public static CUST_NEG = "NegativeCustomer";
+    public static CUST_NEG_VIEW = PathConstant.CUST_NEG + "/" + PathConstant.VIEW;
     public static CUST_NEG_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.PAGING;
     public static CUST_NEG_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.DETAIL;
     public static CUST_NEG_UPLOAD = PathConstant.CUST_NEG + "/" + PathConstant.UPLOAD;
