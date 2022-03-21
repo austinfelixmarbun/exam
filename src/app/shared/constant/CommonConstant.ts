@@ -427,4 +427,7 @@ export class CommonConstant {
     public static NegCustTypeGood = "GOOD";
     public static NegCustTypeBad = "BAD";
     public static NegCustTypeWarning = "WARNING";
+
+    // SysCtrlCoy
+    public static IsEODRun = "IsEODRun"
 }
