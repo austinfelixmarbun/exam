@@ -427,4 +427,7 @@ export class CommonConstant {
     public static NegCustTypeGood = "GOOD";
     public static NegCustTypeBad = "BAD";
     public static NegCustTypeWarning = "WARNING";
+
+    // UI ROLEPICK
+    public static IS_USE_NEW_ROLEPICK = "IS_USE_NEW_ROLEPICK";
 }

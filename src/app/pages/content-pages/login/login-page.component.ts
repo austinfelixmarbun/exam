@@ -14,11 +14,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { RolePickNewService } from 'app/shared/rolepick/rolepick-new.service';
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  providers: [RolePickService, NGXToastrService]
+  templateUrl: './login-page-new.component.html',
+  providers: [NGXToastrService]
 })
 
 export class LoginPageComponent implements OnInit {
@@ -37,14 +39,15 @@ export class LoginPageComponent implements OnInit {
   counterOtp: number = -1;
   otpConfirmCount: number = 0;
   loginObj = {
-    response: "",
+    response: {},
     user: "",
     pwd: ""
   };
   isInvalidOtp: boolean = false;
   showPass: boolean = false;
+  isUseNewRolepick: boolean = false;
 
-  constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
+  constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService, public rolePickNewService: RolePickNewService,
     private route: ActivatedRoute, private currentUserContextService: CurrentUserContextService, private cookieService: CookieService,
     private toastr: NGXToastrService) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
@@ -63,6 +66,16 @@ export class LoginPageComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.IS_USE_NEW_ROLEPICK}).toPromise().then(
+      (response: GeneralSettingObj) => {
+        this.isUseNewRolepick = response.GsValue == '1' ? true : false;
+        AdInsHelper.SetLocalStorage(CommonConstant.IS_USE_NEW_ROLEPICK, response.GsValue);
+      }
+    );
+    if(!this.isUseNewRolepick) {
+      this.loginObj.response = "";
+    }
+    console.log(this.isUseNewRolepick);
     if (this.token != null) {
       await this.http.post(AdInsConstant.LoginWithToken, {ModuleCode: environment.Module},  {withCredentials: true}).toPromise().then(
         async (response) => {
@@ -106,10 +119,19 @@ export class LoginPageComponent implements OnInit {
         else {
           //this.cookieService.put("username", username);
 
-          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
-            (response) => {
-              this.loginObj.response = response["ListOfficeRoleJobTitle"];
-            });
+          if(this.isUseNewRolepick) {
+            await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
+              (response) => {
+                this.loginObj.response = response;
+              });
+          }
+          else {
+            await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModule, {UserName : username, Module : environment.Module}).toPromise().then(
+              (response) => {
+                this.loginObj.response = response["ListOfficeRoleJobTitle"];
+              });
+          }
+         
           this.loginObj.user = username;
           this.loginObj.pwd = password;
           
@@ -196,7 +218,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   selectRole(){
-    this.rolePickService.openDialog(this.loginObj);
+    if(this.isUseNewRolepick) {
+      this.rolePickNewService.openDialog(this.loginObj);
+    }
+    else {
+      this.rolePickService.openDialog(this.loginObj);
+    }
     let object2 = {
       Usernames: [
         this.loginObj.user
