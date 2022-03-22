@@ -40,6 +40,11 @@
             "type": "date",
             "label": "Establishment Date",
             "property": "EmploymentEstablishmentDt"
+          },
+          {
+            "type": "text",
+            "label": "Number Of Employee",
+            "property": "NoOfEmp"
           }
         ],
         "querystring": {
