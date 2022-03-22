@@ -44,6 +44,7 @@ export class JobDataProfessionalComponent implements OnInit {
   tempRefIndustryType: any;
   professionLookUpObj: InputLookupObj;
   industryLookUpObj: InputLookupObj;
+  companyLookupObj: InputLookupObj;
   custPersonalJobDataObj: CustPersonalJobDataObj;
   returnCustJobDataObj: any;
   inputPreJobAddressObj: InputFieldObj;
@@ -62,7 +63,8 @@ export class JobDataProfessionalComponent implements OnInit {
   UserAccess: CurrentUserContext;
   MaxDate: Date;
   MaxDtValidate: string;
-
+  IsWellknownCoy: boolean = false;
+  ArrAddCritCoy: Array<CriteriaObj> = new Array<CriteriaObj>();
   EconomicSectorName: string;
   IndustryTypeCategoryName: string;
   IsShowData: boolean = false;
@@ -71,6 +73,9 @@ export class JobDataProfessionalComponent implements OnInit {
     ProfessionName: [''],
     ProfessionalNo: [''],
     JobTitleName: [''],
+    IndustryName: ['', Validators.required],
+    IsWellknownCoy: [false],
+    MrWellknownCoyCode: [''],
     EstablishmentDate: ['', Validators.required],
     Notes: [''],
     LuasBangunan: [''],
@@ -161,6 +166,29 @@ export class JobDataProfessionalComponent implements OnInit {
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;
 
+    this.companyLookupObj = new InputLookupObj();
+    this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
+    this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
+    this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
+    this.companyLookupObj.isRequired = false;
+
+    this.companyLookupObj.addCritInput = new Array();
+    this.ArrAddCritCoy = new Array<CriteriaObj>();
+    let critCoyObj = new CriteriaObj();
+    critCoyObj.DataType = "text";
+    critCoyObj.propName = 'REF_MASTER_TYPE_CODE';
+    critCoyObj.restriction = AdInsConstant.RestrictionEq;
+    critCoyObj.value = "WELLKNOWN_COY";
+    this.ArrAddCritCoy.push(critCoyObj);
+    let critCoyObj1 = new CriteriaObj();
+    critCoyObj1.DataType = "text";
+    critCoyObj1.propName = 'IS_ACTIVE';
+    critCoyObj1.restriction = AdInsConstant.RestrictionEq;
+    critCoyObj1.value = "1";
+    this.ArrAddCritCoy.push(critCoyObj1);
+    this.companyLookupObj.addCritInput = this.ArrAddCritCoy;
+    this.companyLookupObj.isReady = true;
+
     this.inputOthBizAddressObj = new InputAddressObj();
     this.inputOthBizAddressObj.showSubsection = false;
     this.inputOthBizAddressObj.isRequired = false;
@@ -182,6 +210,9 @@ export class JobDataProfessionalComponent implements OnInit {
           this.JobDataProForm.patchValue({
             ProfessionalNo: this.returnCustJobDataObj.ProfessionalNo,
             JobTitleName: this.returnCustJobDataObj.JobTitleName,
+            IndustryName: this.returnCustJobDataObj.CoyName,
+            IsWellknownCoy: this.returnCustJobDataObj.IsWellknownCoy,
+            MrWellknownCoyCode: this.returnCustJobDataObj.MrWellknownCoyCode,
             EstablishmentDate: formatDate(this.returnCustJobDataObj.EmploymentEstablishmentDt, 'yyyy-MM-dd', 'en-US'),
             OtherBusinessName: this.returnCustJobDataObj.OthBizName,
             OtherBusinessType: this.returnCustJobDataObj.OthBizType,
@@ -191,6 +222,10 @@ export class JobDataProfessionalComponent implements OnInit {
             PreviIndustryName: this.returnCustJobDataObj.PrevCoyName,
             PreviEmploymentDate: formatDate(this.returnCustJobDataObj.PrevEmploymentDt, 'yyyy-MM-dd', 'en-US'),
           });
+          this.IsWellknownCoy = this.returnCustJobDataObj.IsWellknownCoy;
+          this.companyLookupObj.nameSelect = this.returnCustJobDataObj.CoyName;
+          this.companyLookupObj.jsonSelect = { Descr: this.returnCustJobDataObj.CoyName };
+
 
           if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
             this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
@@ -410,6 +445,9 @@ export class JobDataProfessionalComponent implements OnInit {
     this.custPersonalJobDataObj.RefProfessionId = this.tempProfession;
     this.custPersonalJobDataObj.ProfessionalNo = this.JobDataProForm.controls["ProfessionalNo"].value;
     this.custPersonalJobDataObj.JobTitleName = this.JobDataProForm.controls["JobTitleName"].value;
+    this.custPersonalJobDataObj.CoyName = this.JobDataProForm.controls["IndustryName"].value;
+    this.custPersonalJobDataObj.IsWellknownCoy = this.JobDataProForm.controls["IsWellknownCoy"].value;
+    this.custPersonalJobDataObj.MrWellknownCoyCode = this.JobDataProForm.controls["MrWellknownCoyCode"].value;
     this.custPersonalJobDataObj.RefIndustryTypeId = this.tempRefIndustryType;
     this.custPersonalJobDataObj.EmploymentEstablishmentDt = this.JobDataProForm.controls["EstablishmentDate"].value;
     this.custPersonalJobDataObj.PrevCoyName = this.JobDataProForm.controls["PreviIndustryName"].value;
@@ -569,4 +607,22 @@ export class JobDataProfessionalComponent implements OnInit {
       return;
     }
   }
+
+  isWellknownCoyChecked(checked: boolean) {
+    this.IsWellknownCoy = checked;
+    if(checked){
+      this.companyLookupObj.isRequired = true;
+    }
+    else{
+      this.companyLookupObj.isRequired = false;
+    }
+  }
+
+  getCoy(event: any) {
+    this.JobDataProForm.patchValue({
+      MrWellknownCoyCode: event.MasterCode,
+      IndustryName: event.Descr
+    });
+  }
+
 }
