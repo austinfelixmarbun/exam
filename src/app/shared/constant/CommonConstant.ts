@@ -430,4 +430,6 @@ export class CommonConstant {
 
     // SysCtrlCoy
     public static IsEODRun = "IsEODRun"
+    // UI ROLEPICK
+    public static IS_USE_NEW_ROLEPICK = "IS_USE_NEW_ROLEPICK";
 }
