@@ -15,11 +15,12 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { StorageService } from '../services/StorageService';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { RolePickNewService } from '../rolepick/rolepick-new.service';
 
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    providers: [RolePickService, NGXToastrService]
+    providers: [NGXToastrService]
 })
 
 export class NavbarComponent implements AfterViewChecked, OnInit {
@@ -43,7 +44,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
     constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
-        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService) {
+        private http: HttpClient, public rolePickService: RolePickService, private rolePickNewService: RolePickNewService,private toastr: NGXToastrService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
@@ -51,44 +52,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ngOnInit() {
         this.GetListNotifH();
         this.setUser();
-        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
-        
-        this.setUser();
-        console.log(this.userAccess.UserName);
-        var _hubConnection = new HubConnectionBuilder()
-            .withUrl(URLConstant.WebSocketUrl)
-            .withAutomaticReconnect()
-            .build();
-
-        _hubConnection.start()
-            .then(() => console.log("Connection Started !"))
-            .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
-            .catch((e) => console.log("Exception : " + e));
-
-        _hubConnection.on("ReceiveNotification", (response) => {
-            console.log("Response API : " + response);
-            if (response.type == "SUCCESS") {
-                this.toastr.successMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "ERROR") {
-                this.toastr.errorMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "INFO") {
-                this.toastr.infoMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "INFO" && response.removeLocalCookie == true) {
-                this.toastr.infoMessageTitleTimeout(response.title, response.message, 8000);
-            }
-
-            //this.GetListNotifH();
-            if (response.isNeedLogout == true) {
-                AdInsHelper.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
-            }
-            if (response.removeLocalCookie == true) {
-                AdInsHelper.ForceLogOutClearCookie(this.cookieService, 3, this.toastr, this.http);
-            }
-            //this.notifications.push({ title: response, desc: "User " + response });
-        });
+        this.connectWebSocket();
     }
     
     setUser(){
@@ -129,7 +93,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        this.http.post(AdInsConstant.Logout, "", AdInsConstant.SpinnerOptions);
+        this.http.post(URLConstant.LogoutAuth, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
@@ -137,7 +101,14 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ShowRole() {
         var data = { status: "200", reason: "OK" };
-        this.rolePickService.openDialog(data, "modal");
+
+        let isUseNewRolepick: string = AdInsHelper.GetLocalStorage(CommonConstant.IS_USE_NEW_ROLEPICK);
+        if(isUseNewRolepick == '0'){
+            this.rolePickService.openDialog(data, "modal");
+        }
+        else {
+            this.rolePickNewService.openDialog(data, "modal");
+        }
     }
 
 
@@ -165,5 +136,40 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
         else
             this.toggleClass = 'ft-maximize'
+    }
+
+    connectWebSocket(){
+        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+
+        console.log(this.userAccess.UserName);
+        var _hubConnection = new HubConnectionBuilder()
+            .withUrl(URLConstant.WebSocketUrl)
+            .withAutomaticReconnect()
+            .build();
+
+        _hubConnection.start()
+            .then(() => console.log("Connection Started !"))
+            .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
+            .catch((e) => console.log("Exception : " + e));
+
+        _hubConnection.on("ReceiveNotification", (response) => {
+            console.log("Response API : " + response);
+            if (response.type == "SUCCESS") {
+                this.toastr.successMessageTitle(response.title, response.message);
+            }
+            else if (response.type == "ERROR") {
+                this.toastr.errorMessageTitle(response.title, response.message);
+            }
+            else if (response.type == "INFO") {
+                this.toastr.infoMessageTitle(response.title, response.message);
+            }
+
+
+            this.GetListNotifH();
+            if (response.isNeedLogout == true) {
+                AdInsHelper.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
+            }
+            //this.notifications.push({ title: response, desc: "User " + response });
+        });
     }
 }

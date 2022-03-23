@@ -59,19 +59,6 @@ export class AdInsHelper {
         }, 1000)
     }
 
-    public static ForceLogOutClearCookie(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
-        let interval = setInterval(() => {
-            if (timeLeft > 0) {
-                console.log("Time Left : " + timeLeft)
-                toastr.warningMessage("Automatic Log out at : " + timeLeft);
-                timeLeft--;
-            } else {
-                this.ClearAllLog(cookieService);
-                window.location.reload();
-            }
-        }, 1000)
-    }
-
     public static ClearAllLog(cookieService: CookieService) {
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();
@@ -80,7 +67,7 @@ export class AdInsHelper {
     }
 
     public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
-        var url = URLConstant.LogoutAuth;
+        var url = environment.FoundationR3Url + URLConstant.LogoutAuth;
         http.post(url, {}).subscribe();
         let version = localStorage.getItem(CommonConstant.VERSION);
         localStorage.clear();

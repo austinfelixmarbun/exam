@@ -18,7 +18,7 @@ export class URLConstant {
     public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
 
     // WEB SOCKET
-    public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
+    public static WebSocketUrl = environment.FoundationR3Url + "/Notificationhub";
 
     //GENERAL SETTING
     public static AddGeneralSetting = environment.FoundationR3Url + "/v1" + "/GeneralSetting/AddGeneralSetting";
@@ -1067,6 +1067,7 @@ export class URLConstant {
 
     //SYS CONFIG
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigPncplResultByCode";
+    public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey"
 
     // JOURNAL
     public static RerunJournal = "/v1" + "/Journal/RerunJournal";

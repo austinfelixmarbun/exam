@@ -20,6 +20,11 @@
             "type": "text",
             "label": "Profession Name",
             "property": "ProfessionName"
+          },
+          {
+            "type": "text",
+            "label": "Number Of Employee",
+            "property": "NoOfEmp"
           }
         ],
         "querystring": {
