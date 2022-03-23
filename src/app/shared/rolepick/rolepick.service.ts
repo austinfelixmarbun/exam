@@ -4,7 +4,6 @@ import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
-import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
 import { AdInsHelper } from '../AdInsHelper';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
@@ -15,7 +14,6 @@ import { AdInsConstant } from '../AdInstConstant';
 @Injectable()
 export class RolePickService {
     constructor(public dialog: MatDialog, private http: HttpClient,
-        private currentUserContextService: CurrentUserContextService,
         private router: Router, private cookieService: CookieService) { }
     openDialog(data, type = ""): void {
         if (type == "modal") {

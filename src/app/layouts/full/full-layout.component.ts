@@ -63,13 +63,16 @@ export class FullLayoutComponent implements OnInit {
     }
 
     IsWeb: boolean = true;
+    webUrl: string = "";
     CheckDevice() {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // true for mobile device
             console.log("mobile device");
             this.IsWeb = false;
+            this.webUrl = "https://api.whatsapp.com";
             return
         }
+        this.webUrl = "https://wa.me";
         console.log("not mobile device");
     }
 
