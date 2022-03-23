@@ -20,7 +20,7 @@
 .my-float{
     position: relative;
     top: 15px;
-    transform: translate(-50%, -50%);
+    left: 1px;
 	margin-top:16px;
 	color: white;
 }
