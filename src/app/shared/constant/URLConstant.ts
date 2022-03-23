@@ -1067,7 +1067,7 @@ export class URLConstant {
 
     //SYS CONFIG
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigPncplResultByCode";
-    public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey"
+    // public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey"
 
     // JOURNAL
     public static RerunJournal = "/v1" + "/Journal/RerunJournal";
