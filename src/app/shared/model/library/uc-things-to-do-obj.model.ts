@@ -1,7 +1,5 @@
-import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
-import { environment } from "environments/environment";
 
 export class UcThingsToDoObj {
     Url: string;
@@ -72,8 +70,8 @@ export class ThingsToDoIntegrationV2Obj {
     ApiPath: string;
     RequestObj: IntegrationReqV2Obj;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
-        this.BaseUrl = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.GetThingsToDoCamunda;
+    constructor() {
+        this.BaseUrl = "";
         this.ApiPath = "";
         this.RequestObj = new IntegrationReqV2Obj();
     }
