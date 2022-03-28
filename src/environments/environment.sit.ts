@@ -6,16 +6,16 @@
 export const environment = {
     production: true,
     navbarColor: 'lightgray',
-    LosURL : 'http://r3web-server.ad-ins.com/LOS_SIT_CY6/',
-    FoundationR3Url: 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY6',
-    WebSocketURL : 'http://r3app-server.ad-ins.com/FOUNDATION_SIT_CY6',
-    //FoundationR3Url: 'http://localhost:5000',
-    losR3Web: 'http://r3impl-websvr.ad-ins.com/LOSDSF_SIT',
-    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
+    LosURL : 'https://r3web-server.ad-ins.com/LOS_SIT_CY6/',
+    FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_SIT_CY6',
+    WebSocketURL : 'https://r3app-server.ad-ins.com/FOUNDATION_SIT_CY6',
+    //FoundationR3Url: 'https://localhost:5000',
+    losR3Web: 'https://r3impl-websvr.ad-ins.com/LOSDSF_SIT',
+    lmsWeb: 'https://r3impl-websvr.ad-ins.com/LMS',
     Module:"FOU",
-    ApprovalURL : 'http://r3app-server/APPROVAL_SIT',
-    FoundationR3Web:'http://r3web-server.ad-ins.com/FOUNDATION_SIT_CY6',
+    ApprovalURL : 'https://r3app-server/APPROVAL_SIT',
+    FoundationR3Web:'https://r3web-server.ad-ins.com/FOUNDATION_SIT_CY6',
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
-    DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
+    DMSUrl: "https://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
 };

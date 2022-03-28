@@ -6,14 +6,14 @@
 export const environment = {
   production: false,
   navbarColor: 'lightgray',
-  LosURL: 'http://r3web-server.ad-ins.com/LOSR3/',
-  WebSocketURL: 'http://r3app-server.ad-ins.com/FOUNDATION_R3',
-  DMSUrl: "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
+  LosURL: 'https://r3web-server.ad-ins.com/LOSR3/',
+  WebSocketURL: 'https://r3app-server.ad-ins.com/FOUNDATION_R3',
+  DMSUrl: "https://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_HTTPS',
-  ApprovalURL : 'http://r3app-server.ad-ins.com/APPROVAL',
-  FoundationR3Web:'http://r3web-server.ad-ins.com/Foundation',
-  losR3Web: 'http://r3web-server/LOSR3',
-  lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
+  ApprovalURL : 'https://r3app-server.ad-ins.com/APPROVAL',
+  FoundationR3Web:'https://r3web-server.ad-ins.com/Foundation',
+  losR3Web: 'https://r3web-server/LOSR3',
+  lmsWeb: 'https://r3impl-websvr.ad-ins.com/LMS',
   Module:"FOU",
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE

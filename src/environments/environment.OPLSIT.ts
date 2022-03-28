@@ -6,18 +6,18 @@
 export const environment = {
     production: true,
     navbarColor: 'transparent',
-    LosURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE_OPL_SIT',
-    FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_BE_OPL_SIT',
-    ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_BE_OPL_SIT',
-    FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/FOUNDATION_FE_OPL_SIT',
-    losR3Web: 'http://r3impl-websvr.ad-ins.com/ROS_FE_OPL_SIT',
-    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS_FE_OPL_SIT',
-    WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL_SIT',
-    WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
-    DashboardURL: 'http://r3impl-appsvr.ad-ins.com/Dashboard',
+    LosURL: 'https://r3impl-appsvr.ad-ins.com/ROS_BE_OPL_SIT',
+    FoundationR3Url: 'https://r3impl-appsvr.ad-ins.com/FOUNDATION_BE_OPL_SIT',
+    ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_BE_OPL_SIT',
+    FoundationR3Web: 'https://r3impl-websvr.ad-ins.com/FOUNDATION_FE_OPL_SIT',
+    losR3Web: 'https://r3impl-websvr.ad-ins.com/ROS_FE_OPL_SIT',
+    lmsWeb: 'https://r3impl-websvr.ad-ins.com/LMS_FE_OPL_SIT',
+    WorkflowR3Url: 'https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL_SIT',
+    WebSocketURL: 'https://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
+    DashboardURL: 'https://r3impl-appsvr.ad-ins.com/Dashboard',
     Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 k
-    DMSUrl : "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
+    DMSUrl : "https://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
     isCore: false
 };

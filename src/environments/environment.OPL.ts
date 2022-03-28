@@ -6,18 +6,18 @@
 export const environment = {
     production: true,
     navbarColor: 'transparent',
-    LosURL: 'http://r3impl-appsvr.ad-ins.com/ROS_BE',
-    FoundationR3Url: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_OPL',
-    ApprovalURL: 'http://r3impl-appsvr.ad-ins.com/APPROVAL_OPL_BE_R3',
-    FoundationR3Web: 'http://r3impl-websvr.ad-ins.com/Foundation',
-    losR3Web: 'http://r3impl-websvr.ad-ins.com/ROS_FE',
-    lmsWeb: 'http://r3impl-websvr.ad-ins.com/LMS',
-    WorkflowR3Url: 'http://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL',
-    WebSocketURL: 'http://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
-    DashboardURL: 'http://r3impl-appsvr.ad-ins.com/Dashboard',
+    LosURL: 'https://r3impl-appsvr.ad-ins.com/ROS_BE',
+    FoundationR3Url: 'https://r3impl-appsvr.ad-ins.com/FOUNDATION_OPL',
+    ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_OPL_BE_R3',
+    FoundationR3Web: 'https://r3impl-websvr.ad-ins.com/Foundation',
+    losR3Web: 'https://r3impl-websvr.ad-ins.com/ROS_FE',
+    lmsWeb: 'https://r3impl-websvr.ad-ins.com/LMS',
+    WorkflowR3Url: 'https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL',
+    WebSocketURL: 'https://r3impl-appsvr.ad-ins.com/FOUNDATION_R3',
+    DashboardURL: 'https://r3impl-appsvr.ad-ins.com/Dashboard',
     Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 k
-    DMSUrl : "http://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
+    DMSUrl : "https://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
     isCore: false
 };
