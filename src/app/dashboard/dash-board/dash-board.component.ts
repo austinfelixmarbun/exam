@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
-import { ThingsToDoIntegrationObj, ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
-import { environment } from 'environments/environment';
+import { ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -45,14 +43,14 @@ export class DashBoardComponent implements OnInit {
     let integrationObj;
     let integrationObj2;
 
-    integrationObj = new ThingsToDoIntegrationV2Obj(this.UrlConstantNew);
+    integrationObj = new ThingsToDoIntegrationV2Obj();
     integrationObj.BaseUrl = this.UrlConstantNew.GetThingsToDoCamunda;
     integrationObj.ApiPath = "";
     integrationObj.RequestObj.OfficeCode = "";
     integrationObj.RequestObj.UserName = this.username;
     integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
     
-    integrationObj2 = new ThingsToDoIntegrationV2Obj(this.UrlConstantNew);
+    integrationObj2 = new ThingsToDoIntegrationV2Obj();
     integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
     integrationObj2.ApiPath = "";
     integrationObj2.RequestObj.OfficeCode = this.officeCode;
