@@ -219,7 +219,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
-      MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
+      MotherMaidenName: ['', [Validators.pattern("^[a-zA-Z `]*$"), Validators.required, Validators.minLength(2), Validators.maxLength(500)]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -584,7 +584,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   changeCustModel() {
-    console.log("meong");
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.shareholderForm.ResetLookupProfession();
     }
@@ -783,4 +782,5 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }
+
 }
