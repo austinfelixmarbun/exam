@@ -28,7 +28,7 @@
           },
           {
             "type": "text",
-            "label": "Nama Perusahaan / Usaha",
+            "label": "Company Name",
             "property": "CoyName"
           },
           {
