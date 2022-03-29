@@ -5,35 +5,35 @@ import { URLConstant } from "app/shared/constant/URLConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class RegexService {
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getErrMessage(pattern: string): string {
-        let errMessage: string = "";
-        switch (pattern) {
-          case "^[0-9]{16}$":
-            errMessage = 'must be numeric and 16 characters';
-            break;
-          case "^[0-9]{15}$":
-            errMessage = 'must be numeric and 15 characters';
-            break;
-          case "^\\d{0,20}$":
-            errMessage = 'must be numeric and between 20 characters';
-            break;
-          default:
-            errMessage = 'Not yet setting';
-            break;
-        }
-        return errMessage;
-      }
-
-    getListPattern(): Observable<Object> {
-        var RefMasterPatternCode = {
-          RefMasterTypeCode: CommonConstant.RefMasterTypeCodeRegularExpression,
-          RowVersion: ""
-        }
-        return this.http.post(URLConstant.GetListActiveRefMaster, RefMasterPatternCode);
+  getErrMessage(pattern: string): string {
+    let errMessage: string = "";
+    switch (pattern) {
+      case "^[0-9]{16}$":
+        errMessage = 'must be numeric and 16 characters';
+        break;
+      case "^[0-9]{15}$":
+        errMessage = 'must be numeric and 15 characters';
+        break;
+      case "^\\d{0,20}$":
+        errMessage = 'must be numeric and between 20 characters';
+        break;
+      default:
+        errMessage = 'Not yet setting';
+        break;
     }
+    return errMessage;
+  }
+
+  getListPattern(): Observable<Object> {
+    var RefMasterPatternCode = {
+      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeRegularExpression,
+      RowVersion: ""
+    }
+    return this.http.post(URLConstant.GetListActiveRefMaster, RefMasterPatternCode);
+  }
 }
