@@ -73,7 +73,7 @@ export class JobDataProfessionalComponent implements OnInit {
     ProfessionName: [''],
     ProfessionalNo: [''],
     JobTitleName: [''],
-    IndustryName: ['', Validators.required],
+    IndustryName: ['', [Validators.required, Validators.minLength(2)]],
     IsWellknownCoy: [false],
     MrWellknownCoyCode: [''],
     EstablishmentDate: ['', Validators.required],
