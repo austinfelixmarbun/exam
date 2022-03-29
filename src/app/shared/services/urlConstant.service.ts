@@ -8,7 +8,7 @@ export class UrlConstantService {
     constructor(private _http: HttpClient){ }
 
     async loadConfig(){
-      const _getUrl = this._http.get('../../../assets/urlConstant.json');
+      const _getUrl = this._http.get('assets/urlConstant.json');
       this.urlConstant = await lastValueFrom(_getUrl);
       return this.urlConstant;
     }

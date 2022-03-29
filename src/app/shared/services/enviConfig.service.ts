@@ -10,7 +10,7 @@ export class EnviConfigService {
     constructor(private _http: HttpClient){ }
 
     async loadConfig(){
-      const _getEnvi = this._http.get('../../../assets/config/enviConfig.json');
+      const _getEnvi = this._http.get('assets/config/enviConfig.json');
       this.appConfig = await lastValueFrom(_getEnvi);
       return this.appConfig;
     }
