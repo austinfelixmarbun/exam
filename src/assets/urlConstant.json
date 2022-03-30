@@ -883,5 +883,7 @@
     "DownloadTemplate": "/v2/Download/DownloadTemplate",
     "UploadFileV2": "/v2/Upload/UploadFile",
     "GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo": "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo",
-    "GetPagingObjectBySQL": "/Generic/GetPagingObjectBySQL"
+    "GetPagingObjectBySQL": "/Generic/GetPagingObjectBySQL",
+    "GetCustCompanyMgmntShrholderByCustIdAndShrholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId",
+    "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId"
 }

@@ -58,7 +58,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   MaxDate: Date;
 
   ContactInformationForm = this.fb.group({
-    ContactPersonName: ['', [Validators.maxLength(100), Validators.required]],
+    ContactPersonName: ['', [Validators.maxLength(500), Validators.required]],
     MrGenderCode: ['', [Validators.required, Validators.maxLength(100)]],
     MrJobPositionCode: ['', [Validators.required]],
     JobTitleName: ['', [Validators.required]],

@@ -46,18 +46,19 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOutClearCookie(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
-        let interval = setInterval(() => {
-            if (timeLeft > 0) {
-                console.log("Time Left : " + timeLeft)
-                toastr.warningMessage("Automatic Log out at : " + timeLeft);
-                timeLeft--;
-            } else {
-                this.ClearAllLog(cookieService);
-                window.location.reload();
-            }
-        }, 1000)
-    }
+    // see AdInsHelper.service.ts
+    // public static ForceLogOut(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
+    //     let interval = setInterval(() => {
+    //         if (timeLeft > 0) {
+    //             console.log("Time Left : " + timeLeft)
+    //             toastr.warningMessage("Automatic Log out at : " + timeLeft);
+    //             timeLeft--;
+    //         } else {
+    //             this.ClearAllLogAndRemoveToken(cookieService, http);
+    //             window.location.reload();
+    //         }
+    //     }, 1000)
+    // }
 
     public static ClearAllLog(cookieService: CookieService) {
         let version = localStorage.getItem(CommonConstant.VERSION);
@@ -65,6 +66,16 @@ export class AdInsHelper {
         localStorage.setItem("Version", version);
         cookieService.removeAll();
     }
+
+    // see AdInsHelper.service.ts
+    // public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
+    //     var url = environment.FoundationR3Url + this.UrlConstantNew.LogoutAuth;
+    //     http.post(url, {}).subscribe();
+    //     let version = localStorage.getItem(CommonConstant.VERSION);
+    //     localStorage.clear();
+    //     localStorage.setItem("Version", version);
+    //     cookieService.removeAll();
+    // }
 
     public static ClearPageAccessLog(cookieService: CookieService) {
         localStorage.removeItem("PageAccess");

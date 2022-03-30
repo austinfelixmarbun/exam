@@ -357,6 +357,12 @@ export class AssetMasterAddEditChildComponent implements OnInit {
             AssetAttrId: key,
             AttrContent: formValue["AssetMasterAttrContent"][key]["AttrValue"] == null ? "" : formValue["AssetMasterAttrContent"][key]["AttrValue"]
           };
+          let x = this.listAssetMasterAttrContent.find(f=>f.AssetAttrId == assetMasterAttr.AssetAttrId);
+          if(x != null){
+            if((x.AttrInputType == "A" || x.AttrInputType == "N") && assetMasterAttr.AttrContent == ""){
+              assetMasterAttr.AttrContent = "0"; 
+            }
+          }
           assetMasterAttrValues.push(assetMasterAttr);
         }
       }

@@ -11,6 +11,7 @@ import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/r
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 
 @Component({
@@ -65,12 +66,27 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
 
-    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.activeModal.dismiss('Cross click');
-      }
-    );
+    if (pefindoSmartSearchPersonalObj.KTP == null)
+    {
+      this.toastr.warningMessage(ExceptionConstant.PEFINDO_DATA_NOT_FOUND);
+    }
+    
+    if(environment.isCore){
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }else{
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }
+
   }
 
   RequestCompany(pefindoSmartSearchCoyObj: PefindoSmartSearchCoyObj){
@@ -84,11 +100,26 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchCoyObj.PefindoId;
 
-    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-      (response) => {
-        this.toastr.successMessage(response["Message"]);
-        this.activeModal.dismiss('Cross click');
-      }
-    );
+    if (pefindoSmartSearchCoyObj.NPWP == null)
+    {
+      this.toastr.warningMessage(ExceptionConstant.PEFINDO_DATA_NOT_FOUND);
+    }
+
+    if(environment.isCore){
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }else{
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.toastr.successMessage(response["Message"]);
+          this.activeModal.dismiss('Cross click');
+        }
+      );
+    }
+
   }
 }

@@ -52,8 +52,8 @@ export class CustomerPersonalDetailComponent implements OnInit {
   Page: String;
 
   CustomerDetailForm = this.fb.group({
-    CustFullName: ['', [Validators.maxLength(100)]],
-    NickName: ['', [Validators.maxLength(100)]],
+    CustFullName: ['', [Validators.maxLength(500)]],
+    NickName: ['', [Validators.maxLength(500)]],
     MrSalutationCode: ['', [Validators.required]],
     CustPrefixName: [''],
     CustSuffixName: [''],

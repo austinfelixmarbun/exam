@@ -820,6 +820,8 @@ export class UrlConstantNew{
     public AddCustCompanyMgmntShrholderPublic = this.env.FoundationR3Url + this.url.AddCustCompanyMgmntShrholderPublic;
     public EditCustCompanyMgmntShrholderPublic = this.env.FoundationR3Url + this.url.EditCustCompanyMgmntShrholderPublic;
     public GetListManagementShareholderForListPagingByCustId = this.env.FoundationR3Url + this.url.GetListManagementShareholderForListPagingByCustId;
+    public GetCustCompanyMgmntShrholderByCustIdAndShrholderId = this.env.FoundationR3Url + this.url.GetCustCompanyMgmntShrholderByCustIdAndShrholderId;
+    public GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId = this.env.FoundationR3Url + this.url.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId;
 
     // CUST ATTR CONTENT
     public GetCustAttrContentForCustViewByCustId = this.env.FoundationR3Url + this.url.GetCustAttrContentForCustViewByCustId;

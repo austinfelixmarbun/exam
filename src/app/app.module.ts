@@ -38,6 +38,7 @@ import { AddressService } from './shared/services/custAddr.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { AdInsHelperService } from './shared/services/AdInsHelper.service';
+import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,6 +95,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AuthService,
         AuthGuard,
         RolePickService,
+        RolePickNewService,
         StorageService,
         NGXToastrService,
         ClaimTaskService,

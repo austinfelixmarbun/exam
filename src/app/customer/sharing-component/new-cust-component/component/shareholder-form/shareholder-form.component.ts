@@ -19,6 +19,7 @@ import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shareholder-form',
@@ -28,6 +29,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class ShareholderFormComponent implements OnInit {
 
   @Input() CustId: number = 0;
+  @Input() ParentCustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() CustType: string;
   @Input() enjiForm: NgForm;
@@ -46,8 +48,16 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.ParentCustId = params["IdCust"];
+      }
+    });
+  }
 
+  UserAccess: CurrentUserContext;
+  MaxDate: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
@@ -62,7 +72,6 @@ export class ShareholderFormComponent implements OnInit {
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
-  businessDtMin: Date;
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
     this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
@@ -82,9 +91,10 @@ export class ShareholderFormComponent implements OnInit {
     this.positionSlikLookUpObj = this.newCustService.BindLookupPositionSlik();
     this.BindLookupProfession();
     this.BindLookupJobPosition();
-    let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
+    this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = new Date(this.UserAccess.BusinessDt);
+    this.MaxDate.setDate(this.MaxDate.getDate() - 1);
   }
 
   jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -139,9 +149,9 @@ export class ShareholderFormComponent implements OnInit {
     )
   }
 
-  async GetExistingJobData(custId: number = this.CustId) {
-    if (this.CustType != this.CustTypePersonal || custId == 0) return;
-    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+  async GetExistingJobData(shareholderId: number = this.CustId) {
+    if (this.CustType != this.CustTypePersonal || shareholderId == 0) return;
+    await this.http.post(this.UrlConstantNew.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Ids: [this.ParentCustId, shareholderId] }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;

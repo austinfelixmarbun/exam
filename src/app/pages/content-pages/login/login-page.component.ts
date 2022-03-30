@@ -5,7 +5,6 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
-import { CurrentUserContextService } from 'app/shared/current-user-context/current-user-context.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
@@ -18,7 +17,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page-new.component.html',
-  styleUrls: ['./login-page.component.scss'],
   providers: [RolePickService, NGXToastrService]
 })
 
@@ -46,7 +44,7 @@ export class LoginPageComponent implements OnInit {
   showPass: boolean = false;
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
-    private route: ActivatedRoute, private currentUserContextService: CurrentUserContextService, private cookieService: CookieService,
+    private route: ActivatedRoute, private cookieService: CookieService,
     private toastr: NGXToastrService, private url: UrlConstantNew) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 

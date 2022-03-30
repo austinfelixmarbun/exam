@@ -136,6 +136,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
           this.CustDocFileFormObjs.push(custDocFileFormObj);
         }
+        this.setDocFormCustMaritalTypeChanged();
         this.OutputUploadFile.emit(this.CustDocFileFormObjs);
       }
     );
