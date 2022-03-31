@@ -72,7 +72,7 @@ export class FullLayoutComponent implements OnInit {
             this.webUrl = "https://api.whatsapp.com";
             return
         }
-        this.webUrl = "https://wa.me";
+        this.webUrl = "https://web.whatsapp.com/";
         console.log("not mobile device");
     }
 

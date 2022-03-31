@@ -8,6 +8,7 @@ import { Full_ROUTES } from "app/shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
+import { RouteResolver } from 'app/shared/auth/route-resolver.service';
 import { NavigationConstant } from './shared/NavigationConstant';
 
 const appRoutes: Routes = [
@@ -16,7 +17,10 @@ const appRoutes: Routes = [
     redirectTo: '/Pages/SelectModule',
     pathMatch: 'full',
   },
-  { path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard] },
+  {
+    path: '', component: FullLayoutComponent, data: { title: 'full Views' }, children: Full_ROUTES, canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
+  },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
   { path: '**', redirectTo: '/Pages/SelectModule' }
 ];

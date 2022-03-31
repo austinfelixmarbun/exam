@@ -19,6 +19,7 @@ export const environment = {
   ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
   FoundationR3Web: 'https://r3web-server.ad-ins.com/FOUNDATION_DEV',
   losR3Web: 'https://r3web-server.ad-ins.com/LOS_DEV',
+  cmsR3Web: 'https://r3web-server.ad-ins.com/CMS_DEV',
   WorkflowR3Url: 'https://R3App-Server.ad-ins.com/WORKFLOW_R3',
   WebSocketURL: 'https://r3app-server.ad-ins.com/FOUNDATION_DEV',
   DashboardURL: 'https://r3app-server.ad-ins.com/Dashboard',

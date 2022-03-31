@@ -141,5 +141,13 @@
   "Debtor Group Code": "Debtor Group Code",
   "Debtor Group Name": "Debtor Group Name",
   "Debtor Business Scale Name": "Debtor Business Scale Name",
-  "Debtor Business Scale Description": "Debtor Business Scale Description"
+  "Debtor Business Scale Description": "Debtor Business Scale Description",
+  "NOTIF_TEMPLATE_FORM": "Notification Template Form",
+  "NOTIF_TYPE": "Notification Type",
+  "NOTIF_SOURCE": "Notification Source",
+  "NOTIF_LVL": "Notification Level",
+  "NOTIF_TEMPLATE": "Notification Template",
+  "SUBJECT": "Subject",
+  "BODY": "Body",
+  "NOTIF_BROADCAST_FORM": "Notification Broadcast Form"
 }

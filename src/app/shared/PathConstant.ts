@@ -25,6 +25,7 @@ export class PathConstant {
     public static LR_JOURNAL = "journal"
     public static LR_LICENSE = "License";
     public static LR_SYS_USER = "SystemUser";
+    public static LR_NOTIF_ENGINE = "NotifEngine";
     //#endregion
 
     //#region content-routes
@@ -517,5 +518,11 @@ export class PathConstant {
     public static VIEW_INQUIRIES = "Inquiries";
     public static VIEW_DISPUTES = "Disputes";
     public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
+    //#endregion
+    
+    //#region Notif-Engine
+    public static NOTIF_TEMPLATE = "NotifTemplate";
+    public static NOTIF_BROADCAST = "NotifBroadcast";
+
     //#endregion
 }

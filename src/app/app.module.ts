@@ -38,6 +38,8 @@ import { AddressService } from './shared/services/custAddr.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { RouteResolver } from './shared/auth/route-resolver.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -72,6 +74,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         SharedModule,
         AdInsSharedModule,
         HttpClientModule,
+        DragDropModule,
         ToastrModule.forRoot(),
         NgbModule,
         TranslateModule.forRoot({
@@ -93,6 +96,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
     providers: [
         AuthService,
         AuthGuard,
+        RouteResolver,
         ErrorDialogService,
         RolePickService,
         RolePickNewService,

@@ -352,4 +352,11 @@ export class NavigationConstant {
     public static SYS_USER_PAGING =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
     public static SYS_DETAIL = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL; //'/Employee/Detail'
     //#endregion
+
+    //#region Notif Engine
+    public static NOTIF_ENGINE_TEMPLATE_PAGING =  "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_TEMPLATE + "/" + PathConstant.PAGING;
+    public static NOTIF_ENGINE_TEMPLATE_ADD_EDIT = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_TEMPLATE + "/" + PathConstant.ADD_EDIT;
+    public static NOTIF_ENGINE_BROADCAST_PAGING =  "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_BROADCAST + "/" + PathConstant.PAGING;
+    public static NOTIF_ENGINE_BROADCAST_ADD_EDIT = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_BROADCAST + "/" + PathConstant.ADD_EDIT;
+    //#endregion
 }

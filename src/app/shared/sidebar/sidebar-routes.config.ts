@@ -171,7 +171,7 @@ export const ROUTES: RouteInfo[] = [
 
         ], Params: []
       },
-      { Path: NavigationConstant.VENDOR_AUCTION_COY_PAGING, Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      // { Path: NavigationConstant.VENDOR_AUCTION_COY_PAGING, Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
     ], Params: []
   },
   {
@@ -193,6 +193,15 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.VERIF_QA_SCHM_PAGING, Title: 'Question Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.VERIF_QA_GRP_PAGING, Title: 'Question Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
 
+    ], Params: []
+  },
+  {
+    Path: '', Title: 'Notification Engine', Icon: 'ft-layers', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Submenu: [
+      { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_PAGING, Title: 'Notification Engine Template Engine Paging', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_ADD_EDIT, Title: 'Notification Engine Template Engine Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.NOTIF_ENGINE_BROADCAST_PAGING, Title: 'Notification Engine Broadcast Message Engine Paging', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.NOTIF_ENGINE_BROADCAST_ADD_EDIT, Title: 'Notification Engine Broadcast Message Engine Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
     ], Params: []
   },
 

@@ -5,4 +5,6 @@
     </button>
   </span>
 </div>
-<lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+<div *ngIf="IsReady">
+  <lib-ucpaging [searchObj]="inputPagingObj"></lib-ucpaging>
+</div>

@@ -1,0 +1,57 @@
+<div class="row text-left">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-header header-title">
+            <div class="row">
+              <div class="col-md-8">
+                <h4 class="card-title" id="horz-layout-colored-controls" translate> NOTIF_BROADCAST_FORM</h4>
+                <br>
+              </div>
+            </div>
+          </div>
+          <div class="px-3">
+            <form class="form form-horizontal" [formGroup]="NotifBroadcastForm" #enjiForm="ngForm"
+              (ngSubmit)="NotifBroadcastForm.valid && SaveForm()">
+              <lib-ucSubsection [id]="'NotifBroadcastId'" [title]="title" [panel]="'NotifBroadcast'"></lib-ucSubsection>
+              <div class="form-body" id="NotifBroadcast">
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
+                  <div class="col-md-9">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }">
+                      <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
+                        {{it.Value}}</option>
+                    </select>
+                    <lib-uc-show-errors [control]="NotifBroadcastForm.controls.MrNotificationTypeCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins-required" [hidden]="GetMrNotificationTypeCodeValue == ''">
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
+                  <div class="col-md-9">
+                    <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
+                      [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)">
+                    </lib-uclookupgeneric>
+                  </div>
+                </div>
+                <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-email>
+                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypeNotif" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-notification>
+                <app-broadcast-message-whatsapp *ngIf="GetMrNotificationTypeCodeValue == TypeWA" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-whatsapp>
+                <app-broadcast-message-sms *ngIf="GetMrNotificationTypeCodeValue == TypeSms" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-sms>
+              </div>
+              <div class="form-actions right">
+                <button type="button" class="btn btn-raised btn-warning mr-1"
+                  [routerLink]="[CancelLink]" skipLocationChange>
+                  <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+                </button>
+                <button type="submit" class="btn btn-raised btn-primary">
+                  <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

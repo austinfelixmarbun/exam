@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
+import { ROUTES } from './sidebar-routes.config';
 
 declare var $: any;
 
@@ -44,6 +45,10 @@ export class SidebarComponent implements OnInit {
         //         this.menuItems = data;
         //     }
         //     );
+        if (environment.production == false) {
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+            return;
+        }
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         if (currentUserContext) {
             this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
@@ -79,8 +84,8 @@ export class SidebarComponent implements OnInit {
     navigateSkipLocationChange(ev) {
         //sementara Sementara begini dulu, belum ketemu solusi lain
         //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-empty terlebih dahulu
-        this.router.navigateByUrl(NavigationConstant.DASHEMPTY, { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params), false);
-        });
+        AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params), false);
+        // this.router.navigateByUrl(NavigationConstant.DASHEMPTY, { skipLocationChange: true }).then(() => {
+        // });
     }
 }

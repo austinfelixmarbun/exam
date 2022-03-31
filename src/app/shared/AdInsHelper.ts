@@ -180,6 +180,7 @@ export class AdInsHelper {
         //     [url.toString()], { queryParams: queryParams }
         //   ), { skipLocationChange: isSkipLocation }
         // );
+        // router.routeReuseStrategy.shouldReuseRoute = function() { return false; }
         router.navigate(url, { queryParams: queryParams, skipLocationChange: isSkipLocation });
     }
 

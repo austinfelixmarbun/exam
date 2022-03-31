@@ -3,7 +3,7 @@
 }
 
 .float{
-    position:fixed;
+    position:absolute;
     width:60px;
     height:60px;
     bottom:40px;
@@ -13,6 +13,7 @@
     border-radius:50px;
     text-align:center;
     font-size:30px;
+    cursor: move;
     box-shadow: 2px 2px 3px #999;
     z-index:100;
 }

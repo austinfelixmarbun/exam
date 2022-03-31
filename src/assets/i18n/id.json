@@ -218,5 +218,13 @@
   "Debtor Group Code": "Kode Grup Debitor",
   "Debtor Group Name": "Nama Grup Debitor",
   "Debtor Business Scale Name": "Nama Skala Bisnis Debitor",
-  "Debtor Business Scale Description": "Deskripsi Skala Bisnis Debitor"
+  "Debtor Business Scale Description": "Deskripsi Skala Bisnis Debitor",
+  "NOTIF_TEMPLATE_FORM": "Notifikasi Template Form",
+  "NOTIF_TYPE": "Notifikasi Tipe",
+  "NOTIF_SOURCE": "Sumber Notifikasi",
+  "NOTIF_LVL": "Notifikasi Level",
+  "NOTIF_TEMPLATE": "Notifikasi Template",
+  "SUBJECT": "Subyek",
+  "BODY": "Bodi Message",
+  "NOTIF_BROADCAST_FORM": "Notifikasi Broadcast Form"
 }
