@@ -15,7 +15,7 @@ export class URLConstant {
     public static DownloadTemplate = environment.FoundationR3Url + "/v2" + "/Download/DownloadTemplate";
 
     // WEB SOCKET
-    public static WebSocketUrl = environment.WebSocketURL + "/Notificationhub";
+    public static WebSocketUrl = environment.FoundationR3Url + "/Notificationhub";
 
     //GENERAL SETTING
     public static AddGeneralSetting = environment.FoundationR3Url + "/v1" + "/GeneralSetting/AddGeneralSetting";
@@ -294,6 +294,7 @@ export class URLConstant {
     public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+    public static LogoutAuth = environment.FoundationR3Url + "/v1" + "/Authenticate/Logout";
 
     //FORM FEATURE
     public static GetListRefFeature = environment.FoundationR3Url + "/v1" + "/RefFeature/GetListRefFeature";
@@ -1065,6 +1066,7 @@ export class URLConstant {
 
     //SYS CONFIG
     public static GetSysConfigPncplResultByCode = environment.FoundationR3Url + "/v1" + "/SysConfigResult/GetSysConfigPncplResultByCode";
+    public static GetSysCtrlCoyBySysKey = environment.FoundationR3Url + "/v1" + "/SysCtrlCoy/GetSysCtrlCoyByKey"
 
     // JOURNAL
     public static RerunJournal = "/v1" + "/Journal/RerunJournal";
