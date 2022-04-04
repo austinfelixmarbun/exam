@@ -198,6 +198,8 @@ export class CommonConstant {
     public static GSCodeMaxHierarchyLvlOffice = "MAX_HIERARCHY_LVL_OFFICE";
     public static GSCodeOwnershipMandatoryAddrType = "OWNERSHIP_MANDATORY_BY_ADDR_TYPE";
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
+    public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
+    public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
