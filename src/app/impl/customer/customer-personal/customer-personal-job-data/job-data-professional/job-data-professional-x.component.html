@@ -31,6 +31,27 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Is Well Known Company </label>
+            <div class="col-md-9">
+              <input class="border-primary" type="checkbox" data-md-icheck
+                formControlName="IsWellknownCoy" (change)="isWellknownCoyChecked($event.target.checked)"/>
+            </div>
+          </div>
+          <div class="form-group row adins-required">
+            <label class="col-md-2 adInsLabel adins-required-label" translate>Company Name</label>
+            <div class="col-md-4" *ngIf="!IsWellknownCoy">
+              <input type="text" class="form-control adInsInput" formControlName="IndustryName" required
+                [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.IndustryName.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.IndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
+            <div class="col-md-4" [hidden]="!IsWellknownCoy">
+              <lib-uclookupgeneric [enjiForm]="enjiForm"  [lookupInput]="companyLookupObj"
+                [parentForm]="JobDataProForm" [identifier]="'CompanyLookupObj'"
+                (lookup)="getCoy($event)">
+              </lib-uclookupgeneric>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-md-2 adInsLabel adins-required-label" translate>Economic Sector Slik </label>
             <div class="col-md-4">
               <lib-uclookupgeneric [lookupInput]="economicSectorSlikLookUpObj" [parentForm]="JobDataProForm"
