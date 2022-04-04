@@ -17,7 +17,7 @@
     "OPL": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=OPL --aot --base-href /Foundation/",
     "OPLsit": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=OPLsit --aot --base-href /FOUNDATION_FE_OPL_SIT/",
     "1_4_16": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=1_4_16_env --base-href /1.4.16/FOUNDATION/",
-    "CR_BATCH_1": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=crbatch1 --base-href /FOUNDATION_DSF_IMPL_CR_BATCH_1",
+    "CR_BATCH_1": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=crbatch1 --base-href /FOUNDATION_DSF_IMPL_CR_BATCH_1/",
     "test": "ng test",
     "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
