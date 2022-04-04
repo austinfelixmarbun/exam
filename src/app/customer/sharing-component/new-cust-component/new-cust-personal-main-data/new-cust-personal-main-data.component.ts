@@ -127,7 +127,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
-    alert('asu')
     await this.getMinMaxAgeCustPersonalFromGenSet();
   }
 
@@ -587,7 +586,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   changeCustModel() {
-    console.log("meong");
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.shareholderForm.ResetLookupProfession();
     }
