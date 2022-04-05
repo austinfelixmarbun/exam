@@ -64,4 +64,5 @@ export class ExceptionConstant {
 
     public static  EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Establishment Date Must Be Less Than Business Date";
     public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX"; 
+    public static DUPLICATE_SHRHLDR_ID_NO = "Shareholder's Id No cannot duplicate";
 }
