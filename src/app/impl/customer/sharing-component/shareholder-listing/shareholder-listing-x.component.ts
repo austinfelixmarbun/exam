@@ -39,6 +39,7 @@ export class ShareholderListingXComponent implements OnInit {
   tempIsOwner: boolean = false;
   tempIsSigner: boolean = false;
   listCustNoToExclude: Array<string> = new Array();
+  listUniqueIdNo: Array<string> = [];
   GetListPaging() {
     this.http.post(URLConstantX.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
       (response: GenericListObj) => {
@@ -61,6 +62,7 @@ export class ShareholderListingXComponent implements OnInit {
           if (element.CustNo) {
             this.listCustNoToExclude.push(element.CustNo);
           }
+          this.listUniqueIdNo.push(element["MrIdTypeCode"]+element["IdNo"]);
         }
         this.tempTotalSharePrct = tempTotalSharePrct;
         this.tempIsOwner = tempIsOwner;
@@ -114,6 +116,15 @@ export class ShareholderListingXComponent implements OnInit {
     if (!this.tempIsSigner) {
       this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Active_Signer);
       return;
+    }
+    if(this.tempShareholderListingObj.length)
+    {
+      var uniqueSet = Array.from(new Set(this.listUniqueIdNo));
+      if(uniqueSet.length != this.tempShareholderListingObj.length)
+      {
+        this.toastr.warningMessage(ExceptionConstant.DUPLICATE_SHRHLDR_ID_NO);
+        return;
+      }
     }
 
     this.outputTab.emit({ stepMode: 'next' });
