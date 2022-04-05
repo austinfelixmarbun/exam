@@ -75,7 +75,6 @@ export class ShareholderFormXComponent implements OnInit {
     this.outputExisting.emit(this.tempExisting);
     if(this.CustType == CommonConstant.CustTypePersonal){
       this.CheckJobPostionIsOwner();
-      this.parentForm.get("IsOwner").disable();
     }
     this.isShareholderReady = true;
   }
@@ -282,11 +281,13 @@ export class ShareholderFormXComponent implements OnInit {
       this.parentForm.patchValue({
         IsOwner: true,
       });
+      this.parentForm.get("IsOwner").enable();
     }
     else{
       this.parentForm.patchValue({
         IsOwner: false,
       });
+      this.parentForm.get("IsOwner").disable();
     }
   }
 }
