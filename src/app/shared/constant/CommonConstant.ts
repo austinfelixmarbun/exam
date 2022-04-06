@@ -248,6 +248,7 @@ export class CommonConstant {
 
     //Relationship Code
     public static MasteCodeRelationshipSpouse = "SPOUSE";
+    public static MasteCodeRelationshipSelfCustomer = "SELF";
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";
