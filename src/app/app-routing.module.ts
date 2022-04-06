@@ -8,7 +8,6 @@ import { Full_ROUTES } from "app/shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
-import { RouteResolver } from 'app/shared/auth/route-resolver.service';
 import { NavigationConstant } from './shared/NavigationConstant';
 
 const appRoutes: Routes = [

@@ -13,7 +13,36 @@ import { BroadcastMessageNotificationComponent } from './shared-component/broadc
 import { BroadcastMessageEmailComponent } from './shared-component/broadcast-message-email/broadcast-message-email.component';
 import { BroadcastMessageWhatsappComponent } from './shared-component/broadcast-message-whatsapp/broadcast-message-whatsapp.component';
 import { BroadcastMessageSmsComponent } from './shared-component/broadcast-message-sms/broadcast-message-sms.component';
+import { BodyMessageTosendComponent } from './shared-component/body-message-tosend/body-message-tosend.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { QuillModule } from 'ngx-quill';
+import { TagInputModule } from 'ngx-chips';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+const QuilConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+  
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+  
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+  
+      ['clean'],                                         // remove formatting button
+  
+      ['link', 'image', 'video', 'pdf']                         // link and image, video
+    ]
+  };
 @NgModule({
     imports: [
         AdInsModule,
@@ -23,6 +52,10 @@ import { BroadcastMessageSmsComponent } from './shared-component/broadcast-messa
         NgbModule,
         AdInsSharedModule,
         ReactiveFormsModule,
+        NgxMaskModule.forRoot(),
+        QuillModule.forRoot(),
+        TagInputModule,
+        NgxIntlTelInputModule
     ],
     declarations: [
         NotifTemplatePagingComponent,
@@ -32,7 +65,8 @@ import { BroadcastMessageSmsComponent } from './shared-component/broadcast-messa
         BroadcastMessageNotificationComponent,
         BroadcastMessageEmailComponent,
         BroadcastMessageWhatsappComponent,
-        BroadcastMessageSmsComponent
+        BroadcastMessageSmsComponent,
+        BodyMessageTosendComponent
     ],
     providers: [
     ]

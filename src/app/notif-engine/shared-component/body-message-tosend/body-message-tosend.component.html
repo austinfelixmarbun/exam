@@ -1,0 +1,18 @@
+<lib-ucSubsection [id]="'BodyPreviewId'" [title]="Title" [panel]="'NotifTemplate'"></lib-ucSubsection>
+<div class="form-body" id="BodyPreview" formArrayName="{{IdentifierBodyMessageParam}}">
+    <div class="form-group row">
+        <label class="col-md-3 adInsLabel" translate>PREVIEW_BODY </label>
+        <label class="col-md-9 adInsLabel" style="text-transform:none !important" translate>{{TempBodyMessage}} </label>
+    </div>
+    <div class="form-group row" *ngFor="let item of GetListBodyMessageParam.controls; let idx = index;">
+        <label class="col-md-3 adInsLabel" translate>Parameter {{item.controls.ParamIdxAt.value}} </label>
+        <div class="col-md-7" [formGroupName]="idx">
+            <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per"
+                formControlName="Param" (change)="InputParamValue()">
+        </div>
+        <button class="col-md-2" type="button" (click)="DeleteParam(idx)" class="btn btn-raised"
+            style="vertical-align: middle;">
+            <i class="ft-trash-2 font-medium-2"></i>
+        </button>
+    </div>
+</div>

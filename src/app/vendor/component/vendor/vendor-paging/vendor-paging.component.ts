@@ -31,9 +31,9 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     });
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
-      console.dir(e);
-      console.log(e instanceof NavigationEnd);
+      // console.dir(e);
       if (e instanceof NavigationEnd) {
+        console.log(e instanceof NavigationEnd);
         this.RefetchData();
       }
     });

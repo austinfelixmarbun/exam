@@ -224,7 +224,9 @@
   "NOTIF_SOURCE": "Sumber Notifikasi",
   "NOTIF_LVL": "Notifikasi Level",
   "NOTIF_TEMPLATE": "Notifikasi Template",
+  "SEND_TO": "Kirim",
   "SUBJECT": "Subyek",
+  "PREVIEW_BODY": "Pratinjau Bodi",
   "BODY": "Bodi Message",
   "NOTIF_BROADCAST_FORM": "Notifikasi Broadcast Form"
 }

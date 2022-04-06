@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { BodyMessageTosendComponent } from '../shared-component/body-message-tosend/body-message-tosend.component';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -16,6 +17,7 @@ export class NotifTemplateFormComponent implements OnInit {
     MrNotificationTypeCode: ['', Validators.required],
     Subject: '',
     Body: ['', Validators.required],
+    BodyMessageParam: this.fb.array([])
   });
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
@@ -39,39 +41,34 @@ export class NotifTemplateFormComponent implements OnInit {
     this.SetMrNotificationLevelCode();
     this.SetMrNotificationSourceCode();
     this.SetMrNotificationTypeCode();
-
   }
 
   SetMrNotificationLevelCode() {
     const listKeyValueObj: Array<KeyValueObj> = new Array();
     const keyValueObj1: KeyValueObj = new KeyValueObj();
-    keyValueObj1.Key = "LVL1";
-    keyValueObj1.Value = "Level 1";
+    keyValueObj1.Key = "WARN";
+    keyValueObj1.Value = "Warning";
     listKeyValueObj.push(keyValueObj1);
     const keyValueObj2: KeyValueObj = new KeyValueObj();
-    keyValueObj2.Key = "LVL2";
-    keyValueObj2.Value = "Level 2";
+    keyValueObj2.Key = "INFO";
+    keyValueObj2.Value = "Information";
     listKeyValueObj.push(keyValueObj2);
-    const keyValueObj3: KeyValueObj = new KeyValueObj();
-    keyValueObj3.Key = "LVL3";
-    keyValueObj3.Value = "Level 3";
-    listKeyValueObj.push(keyValueObj3);
     this.DictListRefMaster[this.MrNotificationLevelCode] = listKeyValueObj;
   }
 
   SetMrNotificationSourceCode() {
     const listKeyValueObj: Array<KeyValueObj> = new Array();
     const keyValueObj1: KeyValueObj = new KeyValueObj();
-    keyValueObj1.Key = "Source1";
-    keyValueObj1.Value = "Source 1";
+    keyValueObj1.Key = "NAP";
+    keyValueObj1.Value = "NAP";
     listKeyValueObj.push(keyValueObj1);
     const keyValueObj2: KeyValueObj = new KeyValueObj();
-    keyValueObj2.Key = "Source2";
-    keyValueObj2.Value = "Source 2";
+    keyValueObj2.Key = "PO";
+    keyValueObj2.Value = "Purchase Order";
     listKeyValueObj.push(keyValueObj2);
     const keyValueObj3: KeyValueObj = new KeyValueObj();
-    keyValueObj3.Key = "Source3";
-    keyValueObj3.Value = "Source 3";
+    keyValueObj3.Key = "CUST";
+    keyValueObj3.Value = "Customer";
     listKeyValueObj.push(keyValueObj3);
     this.DictListRefMaster[this.MrNotificationSourceCode] = listKeyValueObj;
   }
@@ -95,6 +92,31 @@ export class NotifTemplateFormComponent implements OnInit {
     keyValueObj4.Value = "Email";
     listKeyValueObj.push(keyValueObj4);
     this.DictListRefMaster[this.MrNotificationTypeCode] = listKeyValueObj;
+  }
+
+  readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
+  AddParameter() {
+    let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
+    const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
+    const LastIdx: number = ListParam.length;
+    const ParamaterVar: string = "{" + LastIdx + "}";
+    const lenBody: number = BodyMessage.length;
+    if (lenBody > 0 && BodyMessage.charAt(lenBody) != " ") {
+      BodyMessage += " ";
+    }
+    BodyMessage += ParamaterVar + " ";
+    this.NotifTemplateForm.get("Body").setValue(BodyMessage);
+    // this.ListParameterBodyMessage.push(ParamaterVar);
+    ListParam.push(this.fb.group({
+      Param: "",
+      ParamIdxAt: ParamaterVar
+    }));
+    this.InputParamValue();
+  }
+
+  @ViewChild("TempMessage") TempMessage: BodyMessageTosendComponent;
+  InputParamValue() {
+    this.TempMessage.InputParamValue();
   }
 
   SaveForm() {

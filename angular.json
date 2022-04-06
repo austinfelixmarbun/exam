@@ -25,6 +25,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/prism.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
               "src/assets/css/wizard.css",
@@ -49,6 +50,7 @@
               "src/adins-theme/styles-theme-red.scss",
               "src/styles.css",
               "src/adInsStyles.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/angular-archwizard/archwizard.css"
             ],
             "scripts": [
@@ -343,6 +345,7 @@
               "src/assets/css/demo.css",
               "src/assets/sass/app.scss",
               "src/styles.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/adInsStyles.css"
             ],
             "assets": [

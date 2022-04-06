@@ -24,6 +24,10 @@
     <app-customizer (directionEvent)="getOptions($event)" style="display: none;"></app-customizer>
 </div>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
-<a [href]="webUrl" class="float" target="_blank" cdkDrag>
-    <i class="bi-whatsapp my-float bi-align-center" cdkDragHandle></i>
-</a>
+<div class="float" cdkDrag>
+    <div cdkDragHandle>
+        <a [href]="webUrl" target="_blank">
+            <i class="bi-whatsapp my-float bi-align-center"></i>
+        </a>
+    </div>
+</div>

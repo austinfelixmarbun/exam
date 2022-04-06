@@ -19,7 +19,8 @@
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }">
+                      <option value="">Select One</option>
                       <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
                         {{it.Value}}</option>
                     </select>
@@ -27,24 +28,57 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="form-group row adins-required" [hidden]="GetMrNotificationTypeCodeValue == ''">
-                  <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
-                  <div class="col-md-9">
-                    <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
-                      [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)">
-                    </lib-uclookupgeneric>
+                <div class="form-group" [hidden]="GetMrNotificationTypeCodeValue == ''">
+                  <div class="row">
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
+                    <div class="col-md-9">
+                      <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
+                        [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)">
+                      </lib-uclookupgeneric>
+                    </div>
+                  </div>
+
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_LVL </label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationLevelCode"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationLevelCode.invalid }">
+                        <option value="">Select One</option>
+                        <option *ngFor="let it of DictListRefMaster[MrNotificationLevelCode]" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <lib-uc-show-errors [control]="NotifBroadcastForm.controls.MrNotificationLevelCode" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
+                  </div>
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_SOURCE </label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationSourceCode"
+                        [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationSourceCode.invalid }">
+                        <option value="">Select One</option>
+                        <option *ngFor="let it of DictListRefMaster[MrNotificationSourceCode]" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <lib-uc-show-errors [control]="NotifBroadcastForm.controls.MrNotificationSourceCode" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
+                    </div>
                   </div>
                 </div>
-                <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-email>
-                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypeNotif" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-notification>
-                <app-broadcast-message-whatsapp *ngIf="GetMrNotificationTypeCodeValue == TypeWA" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-whatsapp>
-                <app-broadcast-message-sms *ngIf="GetMrNotificationTypeCodeValue == TypeSms" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"></app-broadcast-message-sms>
+                <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-email>
+                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypeNotif" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-notification >
+                <app-broadcast-message-whatsapp *ngIf="GetMrNotificationTypeCodeValue == TypeWA" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-whatsapp>
+                <app-broadcast-message-sms *ngIf="GetMrNotificationTypeCodeValue == TypeSms" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-sms>
+                <app-body-message-tosend *ngIf="IsUsedTemplate" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" #TempMessage></app-body-message-tosend>
               </div>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1"
                   [routerLink]="[CancelLink]" skipLocationChange>
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                 </button>
+                <!-- <button type="button" class="btn btn-raised btn-primary" (click)="getFormValidationErrors()">
+                  <i class="far fa-check-square"></i>&nbsp;<span translate>Test</span>
+                </button> -->
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
                 </button>

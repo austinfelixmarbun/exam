@@ -147,7 +147,9 @@
   "NOTIF_SOURCE": "Notification Source",
   "NOTIF_LVL": "Notification Level",
   "NOTIF_TEMPLATE": "Notification Template",
+  "SEND_TO": "Send To",
   "SUBJECT": "Subject",
+  "PREVIEW_BODY": "Preview Body",
   "BODY": "Body",
   "NOTIF_BROADCAST_FORM": "Notification Broadcast Form"
 }
