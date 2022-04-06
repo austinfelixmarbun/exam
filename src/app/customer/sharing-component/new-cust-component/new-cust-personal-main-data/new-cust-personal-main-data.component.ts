@@ -798,7 +798,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     // jika family & bukan spouse maka skip
     if(
       this.CustDataMode == this.CustDataModeFamily && 
-      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse)
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer
+    )
     {
       this.minCustPerAge = 0;
       this.minCustPerAgeDt = new Date(businessDt);
@@ -824,7 +826,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     // jika family & bukan spouse maka skip
     if(
       this.CustDataMode == this.CustDataModeFamily && 
-      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer
     ) return true;
 
     var birthDt:Date = new Date(this.CustomerForm.get('BirthDt').value);
