@@ -584,7 +584,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   changeCustModel() {
-    console.log("meong");
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.shareholderForm.ResetLookupProfession();
     }
@@ -783,4 +782,5 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }
+
 }
