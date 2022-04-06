@@ -840,4 +840,5 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
     return true;
   }
+
 }
