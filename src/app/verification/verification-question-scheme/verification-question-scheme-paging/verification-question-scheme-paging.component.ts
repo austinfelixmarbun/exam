@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-scheme-paging',
@@ -9,12 +9,15 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class VerificationQuestionSchemePagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_ADD;
+
+  constructor(private UrlConstantNew: UrlConstantNew) {}
+
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/verification/searchVerificationQuestionScheme.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchVerificationQuestionScheme.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteVerfSchemeHById;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteVerfSchemeHById;
   }
 }

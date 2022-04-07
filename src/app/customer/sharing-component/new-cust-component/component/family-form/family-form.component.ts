@@ -6,7 +6,6 @@ import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } 
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
@@ -22,6 +21,7 @@ import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-family-form',
@@ -44,7 +44,7 @@ export class FamilyFormComponent implements OnInit {
       this.ucLookupProfession = content;
     }
   }
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) { }
 
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   CountryCode: string = "";
@@ -52,8 +52,8 @@ export class FamilyFormComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     await this.InitData();
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
-    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeNationality] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeNationality, null, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.lookUpObjCountry.isReady = true;
@@ -80,18 +80,18 @@ export class FamilyFormComponent implements OnInit {
     this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
   }
 
-  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupJobPosition() {
-    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.jobPositionLookupObj.isRequired = false;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
 
-  professionLookUpObj: InputLookupObj = new InputLookupObj();
+  professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupProfession() {
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -106,11 +106,11 @@ export class FamilyFormComponent implements OnInit {
     this.professionLookUpObj.addCritInput = listCriteriaObj;
   }
 
-  lookUpObjCountry: InputLookupObj = new InputLookupObj();
+  lookUpObjCountry: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   async BindLookupCountry() {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).toPromise().then(
       (response: GeneralSettingObj) => {
-        this.lookUpObjCountry = new InputLookupObj();
+        this.lookUpObjCountry = new InputLookupObj(this.UrlConstantNew);
         this.lookUpObjCountry.urlJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
         this.lookUpObjCountry.genericJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -137,7 +137,7 @@ export class FamilyFormComponent implements OnInit {
   
 
   GetRefCountry(code: string, isLocal: boolean = false) {
-    this.http.post(URLConstant.GetRefCountryByCountryCode, { Code: code }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefCountryByCountryCode, { Code: code }).subscribe(
       (response: RefCountry) => {
         if (isLocal) {
           this.CountryName = this.CountryName;
@@ -154,7 +154,7 @@ export class FamilyFormComponent implements OnInit {
 
   ListNationality: Array<RefMasterObj> = new Array();
   GetListRefCountry() {
-    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeNationality }).subscribe(
       (response) => {
         this.ListNationality = response["RefMasterObjs"];
       }
@@ -163,7 +163,7 @@ export class FamilyFormComponent implements OnInit {
 
   async GetExistingJobData(custId: number = this.CustId) {
     if (custId == 0) return;
-    await this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
@@ -178,7 +178,7 @@ export class FamilyFormComponent implements OnInit {
         this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
         this.jobPositionLookupObj.isReady = true;
         if (!response.RefProfessionId) return;
-        await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+        await this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
             this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode });
             this.professionLookUpObj.nameSelect = response.ProfessionName;
@@ -202,7 +202,7 @@ export class FamilyFormComponent implements OnInit {
       RefMasterTypeCode: refMasterTypeCode
     };
     let tempDesc: string = "";
-    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
       (response: RefMasterObj) => {
         tempDesc = response.Descr;
       }

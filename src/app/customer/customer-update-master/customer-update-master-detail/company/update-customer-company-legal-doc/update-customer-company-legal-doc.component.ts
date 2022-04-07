@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustLegalDocObj } from 'app/shared/model/update-master-cust/update-cust-legal-doc-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-update-customer-company-legal-doc',
@@ -30,7 +29,8 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.ResponseTab = new EventEmitter<any>();
     this.AppLegalDoc = new Array<UpdateCustLegalDocObj>();
@@ -39,7 +39,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
 
   ngOnInit() {
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    this.http.post(URLConstant.GetLegalDocForUpdateMasterCustCompanyLegalDoc, this.ReqCustDataTrxIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetLegalDocForUpdateMasterCustCompanyLegalDoc, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         this.AppLegalDoc = response["AppLegalDocList"];
         this.MasterLegalDoc = response["MasterLegalDocList"];
@@ -88,8 +88,7 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
       }
     }
 
-    let UpdateMasterCustCompanyLegalDocUrl = environment.isCore ? URLConstant.UpdateMasterCustCompanyLegalDocv2 : URLConstant.UpdateMasterCustCompanyLegalDoc;
-    this.http.post(UpdateMasterCustCompanyLegalDocUrl, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyLegalDocv2, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

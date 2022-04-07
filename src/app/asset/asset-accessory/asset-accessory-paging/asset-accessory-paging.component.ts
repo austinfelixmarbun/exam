@@ -6,6 +6,7 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-accessory-paging',
@@ -13,12 +14,12 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class AssetAccessoryPagingComponent implements OnInit {
   AssetTypeId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -30,7 +31,7 @@ export class AssetAccessoryPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetAccessory.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetAccessory.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetAccessory;
     
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
 

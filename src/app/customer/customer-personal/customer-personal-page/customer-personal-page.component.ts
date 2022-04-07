@@ -1,12 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import Stepper from 'bs-stepper';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/dms/dms-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -23,6 +20,7 @@ import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin
 import { CustomerPersonalJobDataComponent } from '../customer-personal-job-data/customer-personal-job-data.component';
 import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 import { CustomerViewHeaderPersonalComponent } from 'app/customer/customer-view/customer-view-header-personal/customer-view-header-personal.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -50,7 +48,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -88,18 +86,18 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.CustPersonalId = response['CustPersonalId'];
       }
     );
 
     //check DMS
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
       });
-    await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
       (response: CustObj) => {
         this.CustNo = response.CustNo;
       }
@@ -115,7 +113,7 @@ export class CustomerPersonalPageComponent implements OnInit {
       this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
       this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadDownloadView));
 
-      await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
+      await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
         (response) => {
           if (response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried) {
             this.isMarried = true;

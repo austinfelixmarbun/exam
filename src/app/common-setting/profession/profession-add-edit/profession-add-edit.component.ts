@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -33,7 +33,7 @@ export class ProfessionAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_PROFESSION_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
    
 
     this.route.queryParams.subscribe(params => {
@@ -47,7 +47,7 @@ export class ProfessionAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeCustModel }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCode, { Code: CommonConstant.RefMasterTypeCodeCustModel }).subscribe(
       (response) => {
         this.allRefProfessionMethod = response["RefMasterObjs"];
         if (this.allRefProfessionMethod.length > 0) {
@@ -59,7 +59,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.RefProfessionForm.controls["ProfessionCode"].disable();
       this.refProfessionObj = new RefProfessionObj();
       this.refProfessionObj.RefProfessionId = this.refProfessionId;
-      this.http.post(URLConstant.GetRefProfessionById, {Id : this.refProfessionId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefProfessionById, {Id : this.refProfessionId}).subscribe(
         response => {
           this.resultData = response;
           this.RefProfessionForm.patchValue({
@@ -81,7 +81,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(URLConstant.AddRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
@@ -93,7 +93,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.refProfessionObj.ProfessionName = this.RefProfessionForm.controls["ProfessionName"].value;
       this.refProfessionObj.MrCustModelCode = this.RefProfessionForm.controls["MrCustModelCode"].value;
       this.refProfessionObj.RegRptCode = this.RefProfessionForm.controls["RegRptCode"].value;
-      this.http.post(URLConstant.EditRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});

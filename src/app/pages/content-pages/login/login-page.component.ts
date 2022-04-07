@@ -6,13 +6,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-login-page',
@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private cookieService: CookieService,
-    private toastr: NGXToastrService) {
+    private toastr: NGXToastrService, private url: UrlConstantNew) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
     this.version = localStorage.getItem(CommonConstant.VERSION);
@@ -67,7 +67,7 @@ export class LoginPageComponent implements OnInit {
   SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   async ngOnInit() {
     if (this.token != null) {
-      await this.http.post(AdInsConstant.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
+      await this.http.post(this.url.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
         async (response) => {
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
           AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
@@ -77,7 +77,7 @@ export class LoginPageComponent implements OnInit {
           AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-          await this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).toPromise().then(
+          await this.http.post(this.url.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).toPromise().then(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               AdInsHelper.RedirectUrl(this.router, [NavigationConstant.DASHBOARD], {});
@@ -85,8 +85,8 @@ export class LoginPageComponent implements OnInit {
         }
       );
     }
-    else {
-      this.http.post(URLConstant.GetOtpProperties, {}).subscribe(
+    else{
+      this.http.post(this.url.GetOtpProperties, {}).subscribe(
         (response) => {
           this.otpProperties = response;
         }
@@ -101,7 +101,7 @@ export class LoginPageComponent implements OnInit {
     var requestObj = { "Username": username, "Password": password };
     //this.rolePickService.openDialog(data.returnObject);
 
-    this.http.post(AdInsConstant.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.url.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       async (response) => {
         if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
           this.mode = "locked";
@@ -109,14 +109,14 @@ export class LoginPageComponent implements OnInit {
         else {
           //this.cookieService.put("username", username);
 
-          await this.http.post(AdInsConstant.GetListJobTitleByUsernameAndModuleV2, { UserName: username, Module: environment.Module }).toPromise().then(
+          await this.http.post(this.url.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
             (response) => {
               this.loginObj.response = response;
             });
           this.loginObj.user = username;
           this.loginObj.pwd = password;
-
-          await this.http.post<any>(URLConstant.GetUserEmpByUsername, requestObj).toPromise().then(
+          
+          await this.http.post<any>(this.url.GetUserEmpByUsername, requestObj).toPromise().then(
             (response) => {
               this.result = response;
               if (this.result.IsNeedUpdatePassword) {
@@ -150,7 +150,7 @@ export class LoginPageComponent implements OnInit {
         IsLastAttempt: this.otpConfirmCount >= this.otpProperties['MaxAttempOTP'] ? true : false
       }
 
-      this.http.post<any>(URLConstant.ConfirmOtp, reqConfirmOtpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.url.ConfirmOtp, reqConfirmOtpObj).subscribe(
         (response) => {
           if (response.IsOtpMatch) {
             this.selectRole();
@@ -182,8 +182,8 @@ export class LoginPageComponent implements OnInit {
     this.router.navigate(['register'], { relativeTo: this.route.parent });
   }
 
-  sendOtp() {
-    this.http.post<any>(URLConstant.SendOtp, { Counter: this.counterOtp, Username: this.result.Username }, AdInsConstant.SpinnerOptions).subscribe(
+  sendOtp(){
+    this.http.post<any>(this.url.SendOtp, {Counter: this.counterOtp, Username: this.result.Username}).subscribe(
       (response) => {
         this.toastr.successMessage(response.msg);
         this.counterOtp = response.Counter;
@@ -209,7 +209,7 @@ export class LoginPageComponent implements OnInit {
       Title: "Password Expiration",
       Type: "Notification"
     };
-    this.http.post(URLConstant.SendNotificationRemainingPasswordExpirationDaysToUser, object2, AdInsConstant.SpinnerOptions).subscribe();
+    this.http.post(this.url.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();    
   }
 
   startTimer() {

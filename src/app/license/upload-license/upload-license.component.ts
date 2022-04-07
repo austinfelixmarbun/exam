@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CookieService } from 'ngx-cookie';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-upload-license',
@@ -30,10 +30,11 @@ export class UploadLicenseComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder, 
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private router: Router,
     private toastr: NGXToastrService,
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
     ) { }
 
   ngOnInit() {
@@ -73,7 +74,7 @@ export class UploadLicenseComponent implements OnInit {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var LicenseObj = { LicenseFileContent : this.LicenseForm.controls['LicenseFile'].value, LicenseStateFileContent :this.LicenseForm.controls['LicenseStateFile'].value, Username : currentUserContext[CommonConstant.USER_NAME] };
     
-    this.httpClient.post(URLConstant.UploadLicense, LicenseObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.UploadLicense, LicenseObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.LICENSE_PAGING],{});

@@ -15,6 +15,8 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { StorageService } from '../services/StorageService';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { UrlConstantNew } from '../constant/URLConstantNew';
+import { AdInsHelperService } from '../services/AdInsHelper.service';
 import { RolePickNewService } from '../rolepick/rolepick-new.service';
 
 @Component({
@@ -44,7 +46,10 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
     constructor(public translate: TranslateService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
-        private http: HttpClient, public rolePickService: RolePickService, private rolePickNewService: RolePickNewService,private toastr: NGXToastrService) {
+        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService, 
+        private UrlConstantNew: UrlConstantNew,
+        private adInsHelperService: AdInsHelperService,
+        private rolePickNewService: RolePickNewService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
@@ -52,6 +57,41 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     ngOnInit() {
         this.GetListNotifH();
         this.setUser();
+        Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+        
+        this.setUser();
+        console.log(this.userAccess.UserName);
+        var _hubConnection = new HubConnectionBuilder()
+            .withUrl(this.UrlConstantNew.WebSocketUrl)
+            .withAutomaticReconnect()
+            .build();
+
+        _hubConnection.start()
+            .then(() => console.log("Connection Started !"))
+            .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
+            .catch((e) => console.log("Exception : " + e));
+
+        _hubConnection.on("ReceiveNotification", (response) => {
+            console.log("Response API : " + response);
+            if (response.type == "SUCCESS") {
+                this.toastr.successMessageTitle(response.title, response.message);
+            }
+            else if (response.type == "ERROR") {
+                this.toastr.errorMessageTitle(response.title, response.message);
+            }
+            else if (response.type == "INFO") {
+                this.toastr.infoMessageTitle(response.title, response.message);
+            }
+            else if (response.type == "INFO" && response.removeLocalCookie == true) {
+                this.toastr.infoMessageTitleTimeout(response.title, response.message, 8000);
+            }
+
+            //this.GetListNotifH();
+            if (response.isNeedLogout == true) {
+                this.adInsHelperService.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
+            }
+            //this.notifications.push({ title: response, desc: "User " + response });
+        });
         this.connectWebSocket();
     }
     
@@ -67,7 +107,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         var requestObj = {
             isLoading: false
         };
-        this.http.post(URLConstant.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
+        this.http.post(this.UrlConstantNew.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
             (response) => {
                 this.TotalUnread = response["TotalUnreadNotification"];
                 this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
@@ -81,7 +121,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ClickNotification(item) {
-        this.http.post(URLConstant.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
+        this.http.post(this.UrlConstantNew.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
             (response) => {
             });
         if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {
@@ -93,7 +133,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        this.http.post(URLConstant.LogoutAuth, {}).subscribe();
+        this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
@@ -124,7 +164,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
         else {
             var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            var url = environment.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
+            var url = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
             window.open(url, "_blank");
         }
         
@@ -143,7 +183,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
-            .withUrl(URLConstant.WebSocketUrl)
+            .withUrl(this.UrlConstantNew.WebSocketUrl)
             .withAutomaticReconnect()
             .build();
 
@@ -167,7 +207,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
             this.GetListNotifH();
             if (response.isNeedLogout == true) {
-                AdInsHelper.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
+                this.adInsHelperService.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });

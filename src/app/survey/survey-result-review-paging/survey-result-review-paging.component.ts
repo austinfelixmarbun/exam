@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -10,11 +11,11 @@ import { environment } from 'environments/environment';
 })
 export class SurveyResultReviewPagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   AppNo: string;
   AppId: number;
 
-  constructor(private router: Router) { }  
+  constructor(private UrlConstantNew: UrlConstantNew) { }  
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyResultReview.json";
@@ -23,7 +24,7 @@ export class SurveyResultReviewPagingComponent implements OnInit {
 
   viewApp(event: any){
     this.AppNo = event['RowObj']['TrxRefNo'];
-    window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
+    window.open(this.UrlConstantNew.env.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
   }
 
 }

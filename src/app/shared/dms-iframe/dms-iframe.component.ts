@@ -3,6 +3,7 @@ import { Component, Input,EventEmitter, OnInit, Output } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AdInsHelper } from '../AdInsHelper';
 import { CommonConstant } from '../constant/CommonConstant';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 import { DMSObj } from '../model/dms/dms-obj.model';
 
 @Component({
@@ -24,10 +25,10 @@ export class DmsIframeComponent implements OnInit {
   prm : any = "";
   noParamGiven: boolean = true;
 
-  constructor() { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
   
   ngOnInit() {
-    this.rootServer = environment.DMSUrl;
+    this.rootServer = this.UrlConstantNew.env.DMSUrl;
     this.dmsKey = CommonConstant.DmsKey;
     this.dmsIv = CommonConstant.DmsIV;
     if (this.dmsObj != undefined && this.dmsObj != null) {

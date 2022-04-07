@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ho-bank-info',
@@ -13,7 +12,7 @@ export class HoBankInfoComponent implements OnInit {
 VendorId: any;
 ListData : any = new Array();
 
-  constructor(private route: ActivatedRoute,  private http: HttpClient) { 
+  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -21,7 +20,7 @@ ListData : any = new Array();
 
   ngOnInit() {    
 
-    this.http.post(URLConstant.GetListVendorBankAccByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorBankAccByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.ListData = response[CommonConstant.ReturnObj];
       }

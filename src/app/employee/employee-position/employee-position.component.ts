@@ -9,13 +9,12 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/ref-office-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { DecimalPipe } from '@angular/common';
-import { formatDate } from '@angular/common';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
@@ -35,7 +34,6 @@ export class EmployeePositionComponent implements OnInit {
   empPositionObj: EmpPositionObj;
   apiUrl: any;
   deleteUrl: any;
-  foundationUrl: string = environment.FoundationR3Url;
   pageNow: any;
   totalData: any;
   pageSize: any = 10;
@@ -48,9 +46,9 @@ export class EmployeePositionComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.EMP_PAGING;
   readonly AddLink: string = NavigationConstant.EMP_POS_DETAIL;
   readonly EditLink: string = NavigationConstant.EMP_POS_DETAIL;
-  constructor(private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService) {
-    this.apiUrl = this.foundationUrl + URLConstant.GetEmpPositionPaging;
-    this.deleteUrl = URLConstant.DeleteEmpPosition;
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
+    this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
       if (params['refEmpId'] != null) {
@@ -66,14 +64,14 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
-    this.getEmpUrl = this.foundationUrl + URLConstant.GetRefEmployeeById;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetEmpPositionPaging;
+    this.getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
-        environment: environment.FoundationR3Url
+        environment: this.UrlConstantNew.env.FoundationR3Url
       }
     ];
 
@@ -87,7 +85,7 @@ export class EmployeePositionComponent implements OnInit {
     this.arrCrit.push(critObj);
     this.inputObj.arrCritObj = this.arrCrit;
 
-    this.httpClient.post(this.getEmpUrl, {Id : this.refEmpId}).subscribe(
+    this.http.post(this.getEmpUrl, {Id : this.refEmpId}).subscribe(
       (response) => {
         this.empNo = response["returnObject"].empNo;
         this.empName = response["returnObject"].empName;
@@ -126,7 +124,7 @@ export class EmployeePositionComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = empPositionId;
-      this.httpClient.post(this.deleteUrl, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.deleteUrl, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.searchPagination(this.pageNow);

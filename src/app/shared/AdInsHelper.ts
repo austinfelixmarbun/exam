@@ -46,18 +46,19 @@ export class AdInsHelper {
         localStorage.setItem('PageAccess', JSON.stringify(pageAccess));
     }
 
-    public static ForceLogOut(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
-        let interval = setInterval(() => {
-            if (timeLeft > 0) {
-                console.log("Time Left : " + timeLeft)
-                toastr.warningMessage("Automatic Log out at : " + timeLeft);
-                timeLeft--;
-            } else {
-                this.ClearAllLogAndRemoveToken(cookieService, http);
-                window.location.reload();
-            }
-        }, 1000)
-    }
+    // see AdInsHelper.service.ts
+    // public static ForceLogOut(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {
+    //     let interval = setInterval(() => {
+    //         if (timeLeft > 0) {
+    //             console.log("Time Left : " + timeLeft)
+    //             toastr.warningMessage("Automatic Log out at : " + timeLeft);
+    //             timeLeft--;
+    //         } else {
+    //             this.ClearAllLogAndRemoveToken(cookieService, http);
+    //             window.location.reload();
+    //         }
+    //     }, 1000)
+    // }
 
     public static ClearAllLog(cookieService: CookieService) {
         let version = localStorage.getItem(CommonConstant.VERSION);
@@ -66,14 +67,15 @@ export class AdInsHelper {
         cookieService.removeAll();
     }
 
-    public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
-        var url = environment.FoundationR3Url + URLConstant.LogoutAuth;
-        http.post(url, {}).subscribe();
-        let version = localStorage.getItem(CommonConstant.VERSION);
-        localStorage.clear();
-        localStorage.setItem("Version", version);
-        cookieService.removeAll();
-    }
+    // see AdInsHelper.service.ts
+    // public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
+    //     var url = environment.FoundationR3Url + this.UrlConstantNew.LogoutAuth;
+    //     http.post(url, {}).subscribe();
+    //     let version = localStorage.getItem(CommonConstant.VERSION);
+    //     localStorage.clear();
+    //     localStorage.setItem("Version", version);
+    //     cookieService.removeAll();
+    // }
 
     public static ClearPageAccessLog(cookieService: CookieService) {
         localStorage.removeItem("PageAccess");
@@ -155,20 +157,6 @@ export class AdInsHelper {
             });
         return encrypted
     }
-    public static OpenCustomerViewByCustId(CustId) {
-        let url = environment.FoundationR3Web + NavigationConstant.VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
-        window.open(url, "_blank");
-    }
-
-    public static OpenCustomerCoyViewByCustId(CustId) {
-        let url = environment.FoundationR3Web + NavigationConstant.VIEW_CUST_COY_DETAIL + "?CustId=" + CustId;
-        window.open(url, "_blank");
-    }
-
-    public static OpenPefindoView(TrxNo: string, MrCustTypeCode: string) {
-        var url = environment.FoundationR3Web + "/View/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
-        window.open(url, "_blank");
-    }
 
     public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
         // Ngebuat bisa jalanin Constructor dan NgOnInit lagi
@@ -188,21 +176,6 @@ export class AdInsHelper {
         router.navigate(url, { queryParams: queryParams, skipLocationChange: isSkipLocation });
     }
 
-    public static OpenProdOfferingViewByCodeAndVersion(Code, Version) {
-        window.open(environment.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
-    }
-
-    public static OpenCustExposure(CustId: number) {
-        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_CUST_EXPOSURE + "?CustId=" + CustId);
-    }
-
-    public static OpenSurveyOrderViewBySrvyOrderId(SrvyOrderId: number) {
-        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_ORDER + "?SrvyOrderId=" + SrvyOrderId, '_blank');
-    }
-
-    public static OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number) {
-        window.open(environment.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
-    }
     public static SetLocalStorage(key: string, value: string) {
         return localStorage.setItem(key, this.EncryptString(value, environment.ChipperKeyLocalStorage));
     }

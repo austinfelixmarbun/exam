@@ -4,7 +4,6 @@ import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -14,18 +13,19 @@ import { IntegrationObj } from 'app/shared/model/library/integration-obj.model';
 import { RequestTaskModelObj } from 'app/shared/model/v2/request-task-model-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-review-upload-asset-master-paging',
   templateUrl: './review-upload-asset-master-paging.component.html'
 })
 export class ReviewUploadAssetMasterPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   IntegrationObj: IntegrationObj = new IntegrationObj();
   requestTaskModel : RequestTaskModelObj = new RequestTaskModelObj();
   arrCrit = new Array<CriteriaObj>();
 
-  constructor(private router: Router, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) { }
+  constructor(private router: Router, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -42,7 +42,7 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
                                                UserAccess[CommonConstant.OFFICE_CODE],
                                                UserAccess[CommonConstant.ROLE_CODE] + "-" + UserAccess[CommonConstant.OFFICE_CODE]];
       
-      this.IntegrationObj.baseUrl = URLConstant.GetAllTaskWorkflow;
+      this.IntegrationObj.baseUrl = this.UrlConstantNew.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.requestTaskModel;
       this.IntegrationObj.leftColumnToJoin = "UploadNo";
       this.IntegrationObj.rightColumnToJoin = "ProcessInstanceBusinessKey";
@@ -57,12 +57,11 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
     
   }
   cancel(ev) {
-    let CancelUrl = environment.isCore? URLConstant.CancelUploadV2 : URLConstant.CancelUpload;
     let wfObj = new WorkflowApiObj();
-    wfObj.TaskListId = environment.isCore? ev.RowObj.ProcessInstanceId : ev.RowObj.TaskListId;
+    wfObj.TaskListId = ev.RowObj.ProcessInstanceId;
     wfObj.TransactionNo = ev.RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
-    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.CancelUploadV2, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

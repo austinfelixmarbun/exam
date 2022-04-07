@@ -5,6 +5,7 @@ import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-working-hour-paging',
@@ -12,10 +13,10 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   providers: [DecimalPipe]
 })
 export class WorkingHourPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   
   readonly AddLink: string = NavigationConstant.CS_WORKING_HOUR_ADD;
-  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchWorkingHourSchm.json";

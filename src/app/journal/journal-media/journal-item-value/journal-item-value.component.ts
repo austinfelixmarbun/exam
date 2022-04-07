@@ -5,9 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-journal-item-value',
@@ -38,7 +37,8 @@ export class JournalItemValueComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: NGXToastrService) { }
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
@@ -74,7 +74,7 @@ export class JournalItemValueComponent implements OnInit {
 
   getData() {
     if (this.JrMGroupId != null) {
-      this.http.post<any>(URLConstant.GetJrMGroupAndJrMItemValueByJrMGroupId, { JrMGroupId: this.JrMGroupId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.GetJrMGroupAndJrMItemValueByJrMGroupId, { JrMGroupId: this.JrMGroupId }).subscribe(
         response => {
           this.JrMHeaderId = response.JrMHeaderId
           this.SubsystemDesc = response.SubSystem
@@ -112,7 +112,7 @@ export class JournalItemValueComponent implements OnInit {
     }
 
     if (this.JrMGroupId != null) {
-      this.http.post<any>(URLConstant.SaveJrMItemValue, request, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.UrlConstantNew.SaveJrMItemValue, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })

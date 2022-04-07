@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-view-rack',
@@ -15,12 +13,13 @@ export class ViewRackComponent implements OnInit {
   RackCode: string;
   CabinetCode: string;
   responseFiling: Array<any> = new Array();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -34,7 +33,7 @@ export class ViewRackComponent implements OnInit {
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/viewRack.json";
 
-    this.http.post(URLConstant.GetListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.CabinetCode}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListFilingByRackCodeAndCabinetCode, {RackCode: this.RackCode, CabinetCode: this.CabinetCode}).subscribe(
       response => {
         this.responseFiling = response['ReturnObject'];
       },

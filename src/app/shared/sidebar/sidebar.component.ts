@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
-import { ROUTES } from './sidebar-routes.config';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 declare var $: any;
 
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
-        private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService) {
+        private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
         this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
@@ -51,7 +51,7 @@ export class SidebarComponent implements OnInit {
         // }
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         if (currentUserContext) {
-            this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
+            this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
                 (response) => {
                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));

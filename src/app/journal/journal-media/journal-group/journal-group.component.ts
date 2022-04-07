@@ -5,9 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-journal-group',
@@ -41,7 +40,8 @@ export class JournalGroupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: NGXToastrService) { }
+    private toastr: NGXToastrService,
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
@@ -90,7 +90,7 @@ export class JournalGroupComponent implements OnInit {
 
   getData() {
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMGroupByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.GetJrMHeaderAndJrMGroupByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.SubsystemDesc = response.SubSystem
           this.TransactionTypeCode = response.TrxTypeCode
@@ -124,7 +124,7 @@ export class JournalGroupComponent implements OnInit {
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMGroup, request, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.UrlConstantNew.SaveJrMGroup, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

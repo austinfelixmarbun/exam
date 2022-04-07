@@ -5,10 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
     selector: 'add-bank',
@@ -32,7 +32,7 @@ export class BankAddComponent implements OnInit {
     criteria: CriteriaObj[] = [];
 
     readonly CancelLink: string = NavigationConstant.CS_BANK_PAGING;
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
         this.route.queryParams.subscribe(params => {
             this.refBankId = params["RefBankId"];
             this.mode = params["mode"];
@@ -52,7 +52,7 @@ export class BankAddComponent implements OnInit {
             var bankObj = new RefBankObj();
             bankObj.RefBankId = this.refBankId;
             
-            this.http.post(URLConstant.GetRefBankByRefBankIdAsync, {Id: this.refBankId}).subscribe(
+            this.http.post(this.UrlConstantNew.GetRefBankByRefBankIdAsync, {Id: this.refBankId}).subscribe(
                 (response) => {
                     this.result = response;
                     this.BankAddForm.patchValue({
@@ -77,7 +77,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = this.refBankId;
             this.bankObj.RowVersion  = this.result.RowVersion;
 
-            this.http.post(URLConstant.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(this.UrlConstantNew.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
                     this.toastr.successMessage(response['message']);
@@ -89,7 +89,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = 0;
             this.bankObj.RowVersion = "";
 
-            this.http.post(URLConstant.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
+            this.http.post(this.UrlConstantNew.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
             });
@@ -103,7 +103,7 @@ export class BankAddComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
       }
       var result: any;
-      this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
         (response) => {
           result = response;
 

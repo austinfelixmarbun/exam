@@ -3,23 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
   templateUrl: './vendor-branch-office-member.component.html'
 })
 export class VendorBranchOfficeMemberComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   VendorId: string;
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_MBR_ADD;
-  constructor(private route: ActivatedRoute, private http : HttpClient) {
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       this.objPassing["VendorEmpId"] = params['VendorEmpId'];
@@ -30,7 +30,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorOfficeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorOfficeMember.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorOfficeMember;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteVendorOfficeMember;
 
     this.inputPagingObj.addCritInput = new Array();
     var critObj = new CriteriaObj();
@@ -39,7 +39,7 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
     critObj.value = this.VendorId;
     this.inputPagingObj.addCritInput.push(critObj);
 
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
       }

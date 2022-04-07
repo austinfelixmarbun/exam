@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-office-member-add',
@@ -21,12 +19,12 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
 
   VendorId: number;
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   tempDataExists = false;
 
   readonly CancelLink: string = NavigationConstant.VENDOR_BRANCH_MBR_PAGING;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -65,7 +63,7 @@ export class VendorBranchOfficeMemberAddComponent implements OnInit {
       RefOfficeId: this.listSelectedId
     }
 
-    this.http.post(URLConstant.AddListVendorOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddListVendorOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_BRANCH_MBR_PAGING],{ "VendorId": this.VendorId });

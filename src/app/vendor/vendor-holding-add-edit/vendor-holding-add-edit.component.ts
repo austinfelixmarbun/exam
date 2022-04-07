@@ -9,15 +9,14 @@ import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -33,8 +32,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   result: any;
   check: any;
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
@@ -46,7 +45,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   VatForPersonal: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, 
-              private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient) {
+              private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       this.VendorId = params['VendorId'];
@@ -428,7 +427,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 
@@ -458,7 +457,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   }
 
   GetGeneralSetting(){
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;

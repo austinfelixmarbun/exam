@@ -4,7 +4,7 @@ import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AttrContent } from 'app/shared/model/attr-content.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
@@ -54,9 +54,10 @@ export class CustAttrListComponent implements OnInit {
   dictMultiOptions: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
   selectedMultiDDLItems: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
 
-  constructor(private httpClient: HttpClient,
+  constructor(private http: HttpClient,
     private fb: FormBuilder,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, 
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.CustId = params["Page"];
@@ -71,12 +72,12 @@ export class CustAttrListComponent implements OnInit {
 
       this.ReqByIdAndAttrObj.CustId = this.CustId;
       this.ReqByIdAndAttrObj.AttrGroup = this.attrGroup;
-      await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustAttrContentByCustIdAndAttrGroup, this.ReqByIdAndAttrObj).toPromise().then(
+      await this.http.post<Array<AttrContent>>(this.UrlConstantNew.GetListCustAttrContentByCustIdAndAttrGroup, this.ReqByIdAndAttrObj).toPromise().then(
         (response) => {
           this.ListAttrContent = response[CommonConstant.ReturnObj];
           let parentFormGroup = new Object();
 
-          this.httpClient.post<Array<RefAttr>>(URLConstant.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
+          this.http.post<Array<RefAttr>>(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, custGrp).subscribe(
             async (response: any) => {
               this.RefAttrList = response[CommonConstant.ReturnObj];
 
@@ -104,12 +105,12 @@ export class CustAttrListComponent implements OnInit {
       );
     }
     else if(this.attrGroups !== undefined) {
-      await this.httpClient.post<Array<AttrContent>>(URLConstant.GetListCustFinDataAttrContentByCustIdAndListAttrGroup, { CustId: this.CustId, AttrGroups: this.attrGroups }).toPromise().then(
+      await this.http.post<Array<AttrContent>>(this.UrlConstantNew.GetListCustFinDataAttrContentByCustIdAndListAttrGroup, { CustId: this.CustId, AttrGroups: this.attrGroups }).toPromise().then(
         (response) => {
           this.ListAttrContent = response[CommonConstant.ReturnObj];
           let parentFormGroup = new Object();
 
-          this.httpClient.post<Array<RefAttr>>(URLConstant.GetListActiveRefAttrByListAttrGroup, { AttrGroups: this.attrGroups }).subscribe(
+          this.http.post<Array<RefAttr>>(this.UrlConstantNew.GetListActiveRefAttrByListAttrGroup, { AttrGroups: this.attrGroups }).subscribe(
             async (response: any) => {
               this.RefAttrList = response[CommonConstant.ReturnObj];
 
@@ -202,7 +203,7 @@ export class CustAttrListComponent implements OnInit {
     }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
-      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
+      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -219,7 +220,7 @@ export class CustAttrListComponent implements OnInit {
             RefMasterTypeCode: refAttr.AttrValue,
             MasterCode: refAttr.DefaultValue
           };
-          this.httpClient.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
+          this.http.post(this.UrlConstantNew.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
             (response: KeyValueObj) => {
               this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response.Value };
             });
@@ -290,7 +291,7 @@ export class CustAttrListComponent implements OnInit {
     }
     parentFormGroup[refAttr.AttrCode] = this.fb.group(formGroupObject);
     if (refAttr["AttrInputType"] == 'RM') {
-      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj();
+      this.tempLookup[refAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
       this.tempLookup[refAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
       this.tempLookup[refAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -307,7 +308,7 @@ export class CustAttrListComponent implements OnInit {
             RefMasterTypeCode: refAttr.AttrValue,
             MasterCode: refAttr.DefaultValue
           };
-          this.httpClient.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
+          this.http.post(this.UrlConstantNew.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).subscribe(
             (response: KeyValueObj) => {
               this.tempLookup[refAttr["AttrCode"]].jsonSelect = { Descr: response.Value };
             });
@@ -339,7 +340,7 @@ export class CustAttrListComponent implements OnInit {
   }
 
   SetSearchListInputType(attrCode: string, ProfessionCode: string) {
-    this.httpClient.post(URLConstant.GetRuleForAttrContent, { RuleSetName: this.dictRuleSetName[attrCode], Code: ProfessionCode }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRuleForAttrContent, { RuleSetName: this.dictRuleSetName[attrCode], Code: ProfessionCode }).subscribe(
       (response: GenericListObj) => {
         let tempList: Array<KeyValueObj> = response.ReturnObject;
         this.dictMultiOptions[attrCode] = new Array();

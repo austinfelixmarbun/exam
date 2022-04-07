@@ -5,9 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-journal-media-detail',
@@ -30,7 +30,7 @@ export class JournalMediaDetailComponent implements OnInit {
 
   SubsystemDesc = '';
 
-  ddlSubsystemObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlSubsystemObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   listEntityType = [];
   listHeaderFact = [];
   readonly CancelLink: string = NavigationConstant.JOURNAL_MEDIA_PAGING;
@@ -40,7 +40,8 @@ export class JournalMediaDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: NGXToastrService) { }
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
@@ -74,7 +75,7 @@ export class JournalMediaDetailComponent implements OnInit {
     }
 
     if (this.mode == 'edit' && this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.UrlConstantNew.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
@@ -84,7 +85,7 @@ export class JournalMediaDetailComponent implements OnInit {
         }
       )
     } else {
-      this.http.post<any>(URLConstant.AddJrMHeader, request, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.UrlConstantNew.AddJrMHeader, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
@@ -99,7 +100,7 @@ export class JournalMediaDetailComponent implements OnInit {
 
   getData() {
     if (this.mode == 'edit' && this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.JrMediaForm.patchValue({
             Subsystem: response.SubSystem,
@@ -128,8 +129,8 @@ export class JournalMediaDetailComponent implements OnInit {
         }
       )
     } else {
-      this.ddlSubsystemObj = new UcDropdownListObj;
-      this.ddlSubsystemObj.apiUrl = URLConstant.GetListRefModuleKeyValue;
+      this.ddlSubsystemObj = new UcDropdownListObj(this.UrlConstantNew);
+      this.ddlSubsystemObj.apiUrl = this.UrlConstantNew.GetListRefModuleKeyValue;
       this.ddlSubsystemObj.customKey = 'Value';
     }
   }

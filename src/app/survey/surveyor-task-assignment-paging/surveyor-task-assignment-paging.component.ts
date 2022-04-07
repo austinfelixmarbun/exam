@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
@@ -14,15 +14,15 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.SURVEYOR_PAGING;
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   AppId: number;
   AppNo: number;
 
-  constructor(private router: Router) { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    this.inputPagingObj = new UcPagingObj();
-    this.inputPagingObj.apiQryPaging = URLConstant.GetPagingObjectBySQL;
+    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
+    this.inputPagingObj.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
     this.inputPagingObj._url = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSurveyTaskAssignment.json";
     
@@ -30,7 +30,7 @@ export class SurveyorTaskAssignmentPagingComponent implements OnInit {
 
   viewApp(event: any) {
     this.AppNo = event['RowObj'].TransactionRefNo;
-    window.open(environment.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
+    window.open(this.UrlConstantNew.env.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
   }
 
 }

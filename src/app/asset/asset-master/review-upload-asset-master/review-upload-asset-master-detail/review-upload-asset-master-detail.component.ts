@@ -6,16 +6,15 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/upload-review-custom-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-review-upload-asset-master-detail',
@@ -23,14 +22,14 @@ import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 })
 export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   uploadNo: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit = new Array();
   taskListId: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
 
   readonly CancelLink: string = NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["UploadNo"] != null) {
         this.uploadNo = params["UploadNo"];
@@ -58,13 +57,12 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   }
   
   cancel() {
-    let CancelUrl = environment.isCore? URLConstant.CancelUploadV2 : URLConstant.CancelUpload;
     var wfObj = new WorkflowApiObj();
     wfObj.TransactionNo = this.uploadNo;
     wfObj.ListValue["Status"] = "RJC";
     wfObj.ListValue["WfCode"] = CommonConstant.WorkflowUploadAssetMaster;
     wfObj.ListValue["TaskId"] = this.taskListId;
-    this.http.post(CancelUrl, wfObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.CancelUploadV2, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -75,13 +73,11 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
   }
 
   uploadReview(status: string) {
-    let urlPost = environment.isCore ? URLConstant.UploadReviewV2 : URLConstant.UploadReview;
-
     var uploadObj = new UploadReviewCustomObj();
     uploadObj.MrUploadStatusCode = status;
     uploadObj.TaskListId = this.taskListId;
     uploadObj.UploadMonitoringNo = this.uploadNo;
-    this.http.post(urlPost, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.UploadReviewV2, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING],{});
@@ -90,12 +86,7 @@ export class ReviewUploadAssetMasterDetailComponent implements OnInit {
  }
 
   claimTask() {
-    if(environment.isCore){
-      this.claimTaskService.ClaimTaskV2(this.taskListId);
-    }
-    else{
-      this.claimTaskService.ClaimTask(this.taskListId);
-    }
+    this.claimTaskService.ClaimTaskV2(this.taskListId);
   }
   
 }

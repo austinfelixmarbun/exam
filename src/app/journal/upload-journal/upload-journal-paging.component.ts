@@ -1,18 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { String } from 'typescript-string-operations';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { saveAs } from 'file-saver'; 
 import { base64StringToBlob } from 'blob-util';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-upload-journal-paging',
@@ -21,11 +12,12 @@ import { base64StringToBlob } from 'blob-util';
 
 
 export class UploadJournalPagingComponent implements OnInit {
-    inputPagingObj: UcPagingObj = new UcPagingObj();
+    inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
     user: any;
     Id: number;
     constructor(
-      private http: HttpClient
+      private http: HttpClient, 
+      private UrlConstantNew: UrlConstantNew
     ){
       
     }
@@ -39,7 +31,7 @@ export class UploadJournalPagingComponent implements OnInit {
     getCallBack(event) {
       if (event.Key === "Download") {
         this.Id = event.RowObj.JrSourceFileId
-        this.http.post(URLConstant.DownloadJournalFile,{ Id: this.Id }).subscribe(
+        this.http.post(this.UrlConstantNew.DownloadJournalFile,{ Id: this.Id }).subscribe(
           response => {
             const b64Data = response['FileContents'];
             const contentType = response['ContentType'];

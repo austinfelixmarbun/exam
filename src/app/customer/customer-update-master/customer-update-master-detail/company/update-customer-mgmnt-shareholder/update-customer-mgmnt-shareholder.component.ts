@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustCompanyShareholderObj } from 'app/shared/model/update-master-cust/update-cust-company-shareholder-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -28,7 +28,8 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.ResponseTab = new EventEmitter<any>();
     this.MasterShareholder = new Array<UpdateCustCompanyShareholderObj>();
@@ -37,7 +38,7 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
 
   ngOnInit() {
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    this.http.post(URLConstant.GetShareholderForUpdateMasterCustCompanyShareholder, this.ReqCustDataTrxIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetShareholderForUpdateMasterCustCompanyShareholder, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         console.log("Response Shareholder: " + JSON.stringify(response));
         this.MasterShareholder = response["MasterCustShareholder"];
@@ -87,7 +88,7 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.UpdateMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyShareholder, { CustId: this.CustId, ShareholderList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

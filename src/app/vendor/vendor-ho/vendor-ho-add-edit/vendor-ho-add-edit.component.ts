@@ -11,7 +11,6 @@ import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { formatDate } from '@angular/common';
 import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -29,6 +28,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-ho-add-edit',
@@ -45,9 +45,9 @@ export class VendorHoAddEditComponent implements OnInit {
   result: any;
   resultAtpmMapping: Array<VendorAtpmMappingObj> = new Array();
   check: any;
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
-  inputLookupATPMObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupATPMObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
   arrCrit: any;
   mode: string = "add";
@@ -63,7 +63,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAtpmList = new Array();
   VatForPersonal: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -184,14 +184,14 @@ export class VendorHoAddEditComponent implements OnInit {
       this.checkType();
     }
 
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
         if (this.ListVendorAttrContent != null) {
           let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
           reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
           if (this.ListVendorAttrContent.length < 1) {
-            this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
+            this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
@@ -216,10 +216,10 @@ export class VendorHoAddEditComponent implements OnInit {
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
   
                     if (vendorAttr["AttrInputType"] == 'RM') {
-                      tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                      tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                      tempLookup[vendorAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                      tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                      tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                      tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
                       tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
@@ -242,7 +242,7 @@ export class VendorHoAddEditComponent implements OnInit {
             );
           }
           else {
-            this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
+            this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -265,10 +265,10 @@ export class VendorHoAddEditComponent implements OnInit {
                       parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
   
                       if (vendorAttr["AttrInputType"] == 'RM') {
-                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                        tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                        tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
@@ -299,10 +299,10 @@ export class VendorHoAddEditComponent implements OnInit {
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
                       else if (vendorAttr["AttrInputType"] == 'RM') {
-                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
-                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = URLConstant.GetPagingObjectBySQL;
-                        tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = environment.FoundationR3Url;
+                        tempLookup[vendorAttr["AttrCode"]].urlQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+                        tempLookup[vendorAttr["AttrCode"]].urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
                         tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
@@ -319,7 +319,7 @@ export class VendorHoAddEditComponent implements OnInit {
                           RefMasterTypeCode: vendorAttr.AttrValue,
                           MasterCode: item["AttrContent"]
                         };
-                        await this.http.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                        await this.http.post(this.UrlConstantNew.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
                           (response: KeyValueObj) => {
                             tempLookup[vendorAttr["AttrCode"]].jsonSelect = { Descr: response.Value }
                           });
@@ -346,7 +346,7 @@ export class VendorHoAddEditComponent implements OnInit {
   getData() {
     let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
     ReqGetVendorAndVendorAddr.Id = this.VendorId;
-    this.http.post(URLConstant.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
       (response) => {
         this.result = response;
         this.setDropdown();
@@ -394,7 +394,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
       (response: GenericListObj) => {
         this.resultAtpmMapping = response.ReturnObject;
 
@@ -407,7 +407,7 @@ export class VendorHoAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
       MasterCode: CommonConstant.HeadOffice
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -421,7 +421,7 @@ export class VendorHoAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
       (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
@@ -446,7 +446,7 @@ export class VendorHoAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+          this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -465,7 +465,7 @@ export class VendorHoAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -547,7 +547,7 @@ export class VendorHoAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -576,7 +576,7 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getInputtedValue(event: string) {
-    this.http.post(URLConstant.GetZipcodeDataByZipCode, { Zipcode: event }).subscribe(
+    this.http.post(this.UrlConstantNew.GetZipcodeDataByZipCode, { Zipcode: event }).subscribe(
       (response) => {
         this.VendorForm.patchValue(
           {
@@ -803,7 +803,7 @@ export class VendorHoAddEditComponent implements OnInit {
         this.vendorHoObj.VendorObj.RowVersion = this.result.VendorObj.RowVersion;
         this.vendorHoObj.VendorAddrObj.RowVersion = this.result.VendorAddrObj.RowVersion;
 
-        this.http.post<GenericObj>(URLConstant.EditVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post<GenericObj>(this.UrlConstantNew.EditVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -812,7 +812,7 @@ export class VendorHoAddEditComponent implements OnInit {
       else {
         this.vendorHoObj.VendorObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
 
-        this.http.post<GenericObj>(URLConstant.AddVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post<GenericObj>(this.UrlConstantNew.AddVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -835,7 +835,7 @@ export class VendorHoAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 
@@ -866,7 +866,7 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   GetGeneralSetting(){
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;

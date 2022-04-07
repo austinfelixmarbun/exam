@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import Stepper from 'bs-stepper';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/dms/dms-obj.model';
 import { DMSLabelValueObj } from 'app/shared/model/dms/dms-label-value-obj.model';
@@ -18,6 +17,7 @@ import { CustomerCompanyContactInformationComponent } from '../customer-company-
 import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin-data-tab.component';
 import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/customer-view-header-company/customer-view-header-company.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -48,7 +48,7 @@ export class CustomerCompanyPageComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -79,19 +79,19 @@ export class CustomerCompanyPageComponent implements OnInit {
     }
     else {
       var custObj = { CustId: this.IdCust };
-      this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+      this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
         (response: any) => {
           this.CustCompanyId = response['CustCompanyId'];
         }
       );
 
-      await this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).toPromise().then(
         (response: CustObj) => {
           this.CustNo = response.CustNo;
         }
       );
       //check DMS
-      await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+      await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
         });

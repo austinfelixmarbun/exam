@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { CustPersonalContactPersonObj } from 'app/shared/model/cust-personal-contact-person-obj.model';
@@ -16,7 +15,6 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
@@ -28,6 +26,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UcDropdownListCallbackObj, UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-emergency-contact',
@@ -63,9 +62,9 @@ export class CustomerEmergencyContactComponent implements OnInit {
   criteriaList: Array<CriteriaObj>;
   custPersonalContactPersonObj: CustPersonalContactPersonObj;
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
-  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj();
-  ddlIdType: UcDropdownListObj = new UcDropdownListObj();
-  ddlMrGenderCode : UcDropdownListObj = new UcDropdownListObj();
+  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlIdType: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlMrGenderCode : UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   IdCust: number;
   tempCustId: number;
@@ -97,7 +96,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
   criteriaCurrentCust: CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.KTP = RefMasterConstant.EKtp;
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
@@ -115,7 +114,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.businessDtMax.setDate(this.businessDtMax.getDate() + 1);
     this.BusinessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
-    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
@@ -123,7 +122,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.UcAddressObj = new UcAddressObj();
 
 
-    this.existingCustomerLookUpObj = new InputLookupObj();
+    this.existingCustomerLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.existingCustomerLookUpObj.isRequired = false;
     this.existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
     this.existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
@@ -150,8 +149,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.existingCustomerLookUpObj.addCritInput = this.criteriaExistingList;
     }
 
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputFieldObj.inputLookupObj.isRequired = false;
 
     this.initDropdownListObj();
@@ -162,7 +161,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj = new CustPersonalContactPersonObj();
       this.custPersonalContactPersonObj.CustId = this.custId;
       this.getInitPattern();
-      this.http.post<CustPersonalContactPersonObj>(URLConstant.GetCustPersonalEmergencyContactByCustId, { Id: this.custId }).toPromise().then(
+      this.http.post<CustPersonalContactPersonObj>(this.UrlConstantNew.GetCustPersonalEmergencyContactByCustId, { Id: this.custId }).toPromise().then(
         (response) => {
           var datePipe = new DatePipe("en-US");
           this.tempCustPersonalContactPerson = response;
@@ -213,7 +212,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         });
 
     }
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Customer Address";
     this.inputAddressObj.inputField = this.inputFieldObj;
@@ -222,7 +221,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.inputAddressObj.isRequired = false;
 
     this.tempCustAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, this.tempCustAddrObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustAddr, this.tempCustAddrObj).subscribe(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         if (this.listCustAddr.length > 0) {
@@ -237,7 +236,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     }
     var custAddrFromObj = new CustAddrObj();
     custAddrFromObj.CustAddrId = this.CustomerContactForm.controls["CopyFromContactPerson"].value;
-    this.http.post<CustAddrObj>(URLConstant.GetCustAddr, { Id: custAddrFromObj.CustAddrId }).subscribe(
+    this.http.post<CustAddrObj>(this.UrlConstantNew.GetCustAddr, { Id: custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         var copyCustomerAddrFrom = response;
 
@@ -260,8 +259,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
         this.UcAddressObj.FaxArea = copyCustomerAddrFrom.FaxArea;
         this.UcAddressObj.Fax = copyCustomerAddrFrom.Fax;
 
-        this.inputFieldObj = new InputFieldObj();
-        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldObj.inputLookupObj.nameSelect = copyCustomerAddrFrom.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: copyCustomerAddrFrom.Zipcode };
         this.inputAddressObj.default = this.UcAddressObj;
@@ -320,7 +319,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       this.custPersonalContactPersonObj.CustPersonalContactPersonId = this.tempCustPersonalContactPerson.CustPersonalContactPersonId;
 
       this.custPersonalContactPersonObj.RowVersion = this.tempCustPersonalContactPerson.RowVersion;
-      await this.http.post(URLConstant.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.EditCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           // this.wizard.goToNextStep();
@@ -330,7 +329,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
         }
       );
     } else {
-      await this.http.post(URLConstant.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddCustPersonalEmergencyContact, this.custPersonalContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.isAdd = false;
@@ -351,7 +350,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     this.custPersonalObj = new CustPersonalObj();
     this.custObj.CustId = this.tempCustId;
     this.custPersonalObj.CustId = this.tempCustId;
-    this.http.post(URLConstant.GetCustPersonalbyCustId, { Id: this.tempCustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.tempCustId }).subscribe(
       (response) => {
         this.tempCustPersonal = response;
         this.CustomerContactForm.patchValue({
@@ -366,7 +365,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
       }
       
     );
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.custObj.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.custObj.CustId }).subscribe(
       (response) => {
         this.tempCust = response;
         this.CustomerContactForm.patchValue({
@@ -380,7 +379,7 @@ export class CustomerEmergencyContactComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.tempCustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddress = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddress.AreaCode1;
@@ -516,8 +515,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     };
-    this.ddlIdType = new UcDropdownListObj;
-    this.ddlIdType.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlIdType = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlIdType.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlIdType.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlIdType.requestObj = refMasterObjMrIdTypeCode;
     this.ddlIdType.isObject = true;
@@ -528,8 +527,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
       MappingCode: null
     };
-    this.ddlMrCustRelationshipCode = new UcDropdownListObj;
-    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlMrCustRelationshipCode = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlMrCustRelationshipCode.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlMrCustRelationshipCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrCustRelationshipCode;
     this.ddlMrCustRelationshipCode.isObject = true;
@@ -539,8 +538,8 @@ export class CustomerEmergencyContactComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     };
-    this.ddlMrGenderCode = new UcDropdownListObj;
-    this.ddlMrGenderCode.apiPath = URLConstant.GetListActiveRefMasterOrderSeqNoDDL;
+    this.ddlMrGenderCode = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlMrGenderCode.apiPath = this.UrlConstantNew.GetListActiveRefMasterOrderSeqNoDDL;
     this.ddlMrGenderCode.ddlType = UcDropdownListConstant.DDL_TYPE_ONE;
     this.ddlMrGenderCode.requestObj = refMasterObjMrGenderCode;
     this.ddlMrGenderCode.isObject = true;
@@ -592,12 +591,12 @@ export class CustomerEmergencyContactComponent implements OnInit {
         });
 
       
-        this.inputFieldObj = new InputFieldObj();
-        this.inputFieldObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldObj.inputLookupObj.isRequired = false;
         this.inputFieldObj.inputLookupObj.isReadonly = false;
 
-        this.inputAddressObj = new InputAddressObj();
+        this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
         this.inputAddressObj.showSubsection = false;
         this.inputAddressObj.title = "Customer Address";
         this.inputAddressObj.default = new UcAddressObj;

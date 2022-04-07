@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-ucAddress',
   templateUrl: './ucAddress.component.html',
@@ -39,14 +38,14 @@ export class UcAddressComponent implements OnInit {
   zipcodeNumber: any;
   addrValid: boolean = false;
   
-  constructor() {
+  constructor(private UrlConstantNew: UrlConstantNew) {
   }
   
   ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.urlJson = "./assets/lookup/lookupZipcode.json";
-    this.inputLookupObj.urlQryPaging = URLConstant.GetRefZipcodePaging;
-    this.inputLookupObj.urlEnviPaging = environment.FoundationR3Url;
+    this.inputLookupObj.urlQryPaging = this.UrlConstantNew.GetRefZipcodePaging;
+    this.inputLookupObj.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/zipcodePaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/zipcodeGeneric.json";
   }

@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { RefPaymentAllocObj } from 'app/shared/model/common-setting/ref-payment-alloc-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -24,7 +24,8 @@ export class PaymentAllocDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private toastr: NGXToastrService) {
+    private toastr: NGXToastrService,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["RefPaymentAllocId"] != null) {
         this.RefPaymentAllocId = params["RefPaymentAllocId"];
@@ -46,7 +47,7 @@ export class PaymentAllocDetailComponent implements OnInit {
     if (this.mode === "edit") {
       this.PaymentAllocForm.controls['PaymentAllocCode'].disable();
       this.RefPaymentAllocObj.RefPaymentAllocId = this.RefPaymentAllocId;
-      this.http.post<RefPaymentAllocObj>(URLConstant.GetRefPaymentAllocByID, {Id : this.RefPaymentAllocId}).subscribe(
+      this.http.post<RefPaymentAllocObj>(this.UrlConstantNew.GetRefPaymentAllocByID, {Id : this.RefPaymentAllocId}).subscribe(
         (response) => {
           this.RefPaymentAllocObj = response;
           this.PaymentAllocForm.patchValue({
@@ -72,7 +73,7 @@ export class PaymentAllocDetailComponent implements OnInit {
 
     if (this.mode === "add") {
       this.RefPaymentAllocObj.RowVersion = "";
-      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);
@@ -83,7 +84,7 @@ export class PaymentAllocDetailComponent implements OnInit {
       )
     }
     else if (this.mode === "edit") {
-      this.http.post(URLConstant.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.SubmitRefPaymentAlloc, this.RefPaymentAllocObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           this.router.navigateByUrl(NavigationConstant.CS_PAYMENT_ALLOC_PAGING);

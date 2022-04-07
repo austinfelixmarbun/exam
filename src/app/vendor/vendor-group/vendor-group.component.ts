@@ -6,10 +6,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-group',
@@ -36,7 +36,7 @@ export class VendorGroupComponent implements OnInit {
   MrVendorCategoryCode: string;
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.pageType = params['mode'];
@@ -57,7 +57,7 @@ export class VendorGroupComponent implements OnInit {
     this.refMasterObj.RefMasterTypeCode = 'VENDOR_CATEGORY';
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
         (response) => {
           this.allVendorCategory = response[CommonConstant.ReturnObj];
           if (this.allVendorCategory.length > 0) {
@@ -72,7 +72,7 @@ export class VendorGroupComponent implements OnInit {
       this.vendorGrpObj = new VendorGroupObj();
       this.vendorGrpObj.VendorGrpId = this.VendorGrpId;
 
-      this.httpClient.post(URLConstant.GetVendorGrpByVendorGrpId, {Id : this.VendorGrpId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetVendorGrpByVendorGrpId, {Id : this.VendorGrpId}).subscribe(
         (response) => {
           this.resultData = response;
           this.MrVendorCategoryCode = this.resultData.MrVendorCategoryCode;
@@ -85,7 +85,7 @@ export class VendorGroupComponent implements OnInit {
             IsActive: this.resultData.IsActive
           })
 
-          this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, this.refMasterObj).subscribe(
             (response) => {
               this.allVendorCategory = response[CommonConstant.ReturnObj];
               if (this.allVendorCategory.length > 0) {
@@ -104,7 +104,7 @@ export class VendorGroupComponent implements OnInit {
     this.vendorGrpObj.RowVersion = "";
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });
@@ -115,7 +115,7 @@ export class VendorGroupComponent implements OnInit {
       this.vendorGrpObj.VendorGrpId = this.resultData.VendorGrpId;
       this.vendorGrpObj.RowVersion = this.resultData.RowVersion;
 
-      this.httpClient.post(URLConstant.EditVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "Type": "Group", "MrVendorCategoryCode": this.MrVendorCategoryCode });

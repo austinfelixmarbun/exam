@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
@@ -27,7 +27,7 @@ export class JobAddrSectionComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.AddControlFormJobAddr();
@@ -86,9 +86,9 @@ export class JobAddrSectionComponent implements OnInit {
   readonly PrevJobAddr: string = CommonConstant.CustAddrTypePreJob;
   readonly OthBizAddr: string = CommonConstant.CustAddrTypeOthBiz;
   BindJobAdd(addrType: string) {
-    this.dictJobAddr[addrType] = new InputAddressObj();
-    let inputAddressObj = new InputFieldObj();
-    inputAddressObj.inputLookupObj = new InputLookupObj();
+    this.dictJobAddr[addrType] = new InputAddressObj(this.UrlConstantNew);
+    let inputAddressObj = new InputFieldObj(this.UrlConstantNew);
+    inputAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     let title: string = "";
     switch (addrType) {
       case this.JobAddr:
@@ -114,15 +114,15 @@ export class JobAddrSectionComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.CustId;
     reqObj.Code = addrTypeCode;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         console.log(response);
         this.DictCustAddr[addrTypeCode] = new CustAddrObj();
         if (response || response.CustAddrId != 0) {
           this.DictCustAddr[addrTypeCode] = response;
 
-          let inputAddressObj = new InputFieldObj();
-          inputAddressObj.inputLookupObj = new InputLookupObj();
+          let inputAddressObj = new InputFieldObj(this.UrlConstantNew);
+          inputAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           if (addrTypeCode == this.OthBizAddr || addrTypeCode == this.PrevJobAddr) inputAddressObj.inputLookupObj.isRequired = false;
           inputAddressObj.inputLookupObj.nameSelect = response.Zipcode;
           inputAddressObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };

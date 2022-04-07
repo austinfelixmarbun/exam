@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ho-contact-person-info',
@@ -15,7 +14,7 @@ export class HoContactPersonInfoComponent implements OnInit {
   VendorId: any;
   resultData: any;
   
-  constructor(private route: ActivatedRoute,  private http: HttpClient) { 
+  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -29,7 +28,7 @@ export class HoContactPersonInfoComponent implements OnInit {
     this.VendorContactPerson = new VendorContactPersonObj;
     this.VendorContactPerson.VendorId = this.VendorId;
 
-    this.http.post(URLConstant.GetListVendorContactPersonByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorContactPersonByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.resultData = response[CommonConstant.ReturnObj];
       }

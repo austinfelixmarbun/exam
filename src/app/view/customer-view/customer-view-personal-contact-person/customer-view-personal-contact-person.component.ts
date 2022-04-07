@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcViewGenericObj, WhereValueObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { environment } from 'environments/environment';
 
@@ -9,9 +10,9 @@ import { environment } from 'environments/environment';
   templateUrl: './customer-view-personal-contact-person.component.html'
 })
 export class CustomerViewPersonalContactPersonComponent implements OnInit {
-  viewCustPersonalEmergencyContactPersonObj: UcViewGenericObj = new UcViewGenericObj();
+  viewCustPersonalEmergencyContactPersonObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(){
+  constructor(private UrlConstantNew: UrlConstantNew){
   }
 
   ngOnInit() {

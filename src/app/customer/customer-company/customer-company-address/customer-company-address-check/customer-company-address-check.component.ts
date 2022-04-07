@@ -3,11 +3,11 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -21,7 +21,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   custAddrObj: GenericObj = new GenericObj();
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   From: string;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -35,7 +35,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   ngOnInit() {
     this.GetListToBeEdit();
     this.custAddrObj.Id = this.IdCust;
-    this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustAddr, this.custAddrObj).subscribe(
       (response: ResGetListCustAddrObj) => {
         this.listCustAddr = response["ReturnObject"];
         let idxCompany = this.listCustAddr.findIndex(x => x.MrCustAddrTypeCode == CommonConstant.CustAddrTypeCompany);
@@ -47,7 +47,7 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
 
   listAddressType: Array<string> = new Array();
   GetListToBeEdit() {
-    this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GsValue) {
           let listAddrToFilter: Array<string> = result.GsValue.split(';');

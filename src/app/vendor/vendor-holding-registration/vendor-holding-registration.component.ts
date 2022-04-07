@@ -4,6 +4,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { VendorService } from '../vendor.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-holding-registration',
@@ -18,12 +19,12 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   HiddenState: boolean = true;
   show : boolean = false;
   ButtonText : string = "Back";
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   MrVendorCategoryCode: string = "";
   
   readonly EditLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private vendorService: VendorService) {
+  constructor(private route: ActivatedRoute, private vendorService: VendorService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
     });

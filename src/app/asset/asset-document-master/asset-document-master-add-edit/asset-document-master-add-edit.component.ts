@@ -5,9 +5,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefAssetDocObj } from 'app/shared/model/ref-asset-doc-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-document-master-add-edit',
@@ -27,7 +27,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.pageType = params["mode"];
@@ -41,7 +41,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.pageType == "edit") {
       this.RefAssetDocForm.controls.AssetDocCode.disable();
-      this.http.post(URLConstant.GetRefAssetDocByRefAssetDocId, {Id: this.RefAssetDocId }).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefAssetDocByRefAssetDocId, {Id: this.RefAssetDocId }).subscribe(
         (response: RefAssetDocObj) => {
           this.result = response;
           this.RefAssetDocForm.patchValue({
@@ -62,7 +62,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(URLConstant.AddNewRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddNewRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
@@ -75,7 +75,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.refAssetObj.AssetDocName = this.RefAssetDocForm.controls["AssetDocName"].value;
       this.refAssetObj.IsActive = this.RefAssetDocForm.controls["IsActive"].value;
 
-      this.http.post(URLConstant.EditRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
@@ -91,7 +91,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

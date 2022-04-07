@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { RefTaxOfficeObj } from 'app/shared/model/common-setting/ref-tax-office-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
@@ -20,7 +20,7 @@ export class TaxOfficeDetailComponent implements OnInit {
   type: string = "add";
   refTaxOfficeId: number = 0;
   refTaxOfficeObj: RefTaxOfficeObj = new RefTaxOfficeObj();
-  InputLookupBankObj: InputLookupObj = new InputLookupObj();
+  InputLookupBankObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   TaxOfficeForm = this.fb.group({
     TaxOfficeCode: ['', Validators.required],
     TaxOfficeName: ['', Validators.required],
@@ -36,7 +36,8 @@ export class TaxOfficeDetailComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private toastr: NGXToastrService) { 
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) { 
       this.route.queryParams.subscribe(params => {
         if (params["mode"] != null) {
         this.type = params["mode"];
@@ -56,7 +57,7 @@ export class TaxOfficeDetailComponent implements OnInit {
     if(this.type == "edit"){
       let ReqByIdObj = new GenericObj();
       ReqByIdObj.Id = this.refTaxOfficeId;
-      this.http.post(URLConstant.GetRefTaxOfficeDetailById, ReqByIdObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefTaxOfficeDetailById, ReqByIdObj).subscribe(
         (response: RefTaxOfficeObj) => {
           console.log(response);
           this.TaxOfficeForm.patchValue({
@@ -84,12 +85,12 @@ export class TaxOfficeDetailComponent implements OnInit {
   }
 
   SaveForm(){
-    let urlAddEdit = URLConstant.AddRefTaxOffice;
+    let urlAddEdit = this.UrlConstantNew.AddRefTaxOffice;
     this.refTaxOfficeObj = this.TaxOfficeForm.value;
     this.refTaxOfficeObj.BankBranchBiCode = this.TaxOfficeForm.controls.BankBranchBiCode.value;
 
     if(this.type == 'edit'){
-      urlAddEdit = URLConstant.EditRefTaxOffice;
+      urlAddEdit = this.UrlConstantNew.EditRefTaxOffice;
       this.refTaxOfficeObj.RefTaxOfficeId = this.refTaxOfficeId;
     }
 

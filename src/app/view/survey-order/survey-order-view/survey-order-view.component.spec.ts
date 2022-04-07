@@ -24,7 +24,7 @@ describe('SurveyOrderViewComponent', () => {
         withCredentials?: boolean;
       }) => {
         let response: Object;
-        if (url == URLConstant.GetListSrvyTaskBySrvyOrderId) {
+        if (url == ''/**URLConstant.GetListSrvyTaskBySrvyOrderId**/) {
           response = {
             ReturnObject: [
               {

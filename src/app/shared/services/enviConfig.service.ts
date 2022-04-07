@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { lastValueFrom } from "rxjs";
 
 
 @Injectable()
@@ -8,12 +9,10 @@ export class EnviConfigService {
     private appConfig: any;
     constructor(private _http: HttpClient){ }
 
-    loadConfig() {
-        return this._http.get('../../assets/enviConfig.json')
-        .toPromise()
-        .then(res => {
-            this.appConfig = res;
-        });
+    async loadConfig(){
+      const _getEnvi = this._http.get('assets/config/enviConfig.json');
+      this.appConfig = await lastValueFrom(_getEnvi);
+      return this.appConfig;
     }
 
     getConfig() {

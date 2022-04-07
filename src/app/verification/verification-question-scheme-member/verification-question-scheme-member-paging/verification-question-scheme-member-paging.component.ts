@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { VerfSchemeHObj } from 'app/shared/model/verf-scheme-h-obj.model';
 import { ToastrService } from 'ngx-toastr';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -27,14 +26,14 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
   constructor(private router: Router, private route: ActivatedRoute,
-    private http: HttpClient, public toastr: ToastrService) {
+    private http: HttpClient, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfSchemeHId = params["VerfSchemeHId"];
     })
   }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetVerfSchemeHById, {Id : this.VerfSchemeHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVerfSchemeHById, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
         this.verfQuestionScheme = response;
         this.VerfSchemeCode = this.verfQuestionScheme.VerfSchemeCode;
@@ -45,7 +44,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   GetListVerfSchmD() {
-    this.http.post(URLConstant.GetVerfSchemeDataByVerfSchemeHId, {Id : this.VerfSchemeHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVerfSchemeDataByVerfSchemeHId, {Id : this.VerfSchemeHId}).subscribe(
       (response) => {
         this.listQuestionGroupD = response[CommonConstant.ReturnObj];
       }
@@ -61,7 +60,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
       var VerfSchemeDObj = {
         Id: VerfSchemeDId
       };
-      this.http.post(URLConstant.DeleteVerfSchemeD, VerfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.DeleteVerfSchemeD, VerfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.success(response['message'], 'Success!');
           this.GetListVerfSchmD();

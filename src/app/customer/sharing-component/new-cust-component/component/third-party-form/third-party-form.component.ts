@@ -1,13 +1,10 @@
-import { UclookupgenericComponent } from '@adins/uclookupgeneric';
-import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
@@ -29,6 +26,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-file-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-third-party-form',
@@ -41,7 +40,9 @@ export class ThirdPartyFormComponent implements OnInit {
   constructor(private toastr: NGXToastrService,
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService, private modalService: NgbModal,
-    private thirdPartyUploadService: ThirdPartyUploadService) {
+    private thirdPartyUploadService: ThirdPartyUploadService, 
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) {
   }
 
   @Input() parentForm: FormGroup;
@@ -83,7 +84,7 @@ export class ThirdPartyFormComponent implements OnInit {
   }
 
   async getIsUseDigitalization() {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeIsUseDigitalization }).toPromise().then(
       (response) => {
         this.IsUseDigitalization = response["GsValue"];
       }
@@ -91,7 +92,7 @@ export class ThirdPartyFormComponent implements OnInit {
   }
 
   async getDigitalizationSvcType() {
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeDigitalizationSvcType }).toPromise().then(
       (response) => {
         this.sysConfigResultObj = response;
       });
@@ -117,7 +118,7 @@ export class ThirdPartyFormComponent implements OnInit {
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustDocType;
     tempReq.MappingCode = this.MrCustTypeCode;
-    await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
       async (response) => {
         this.ListDocumentKeyValueObj = response[CommonConstant.ReturnObj];
         for (let i = 0; i < this.ListDocumentKeyValueObj.length; i++) {
@@ -153,7 +154,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
   async getCustDocFiles() {
     var reqByIdObj = { Id: this.custObj.CustId };
-    await this.http.post(URLConstant.GetListCustDocFileByCustId, reqByIdObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListCustDocFileByCustId, reqByIdObj).toPromise().then(
       async (response) => {
         this.CustDocFileObjs = response[CommonConstant.ReturnObj];
       }
@@ -198,7 +199,7 @@ export class ThirdPartyFormComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = this.custObj.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           const modalRef = this.modalService.open(PefindoReqComponent);
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
@@ -216,7 +217,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
   ViewPefindo() {
     let TrxNo = this.thirdPartyTrxNo;
-    AdInsHelper.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+    this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
   }
 
   async ReqTrustingSocial() {
@@ -272,7 +273,7 @@ export class ThirdPartyFormComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = this.custObj.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
           modalRef.componentInstance.CustObj = custObj;
@@ -300,7 +301,7 @@ export class ThirdPartyFormComponent implements OnInit {
       reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
       reqGenerateTrxNoObj.OfficeCode = this.officeCode;
 
-      await this.http.post(URLConstant.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response: ResGenerateTrxNoObj) => {
           this.thirdPartyTrxNo = response.TrxNo;
           this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
@@ -314,7 +315,7 @@ export class ThirdPartyFormComponent implements OnInit {
     reqByIdAndCode.Id = this.custObj.CustId;
     reqByIdAndCode.Code = this.thirdPartyTrxNo;
 
-    await this.http.post(URLConstant.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
       response => {
 
       }

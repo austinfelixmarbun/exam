@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class MasterAddEditComponent implements OnInit {
   type: string = 'add';
   RefMasterId: any;
   resultData: any;
-  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   RefMasterForm = this.fb.group({
     RefMasterId: [0, [Validators.required]],
@@ -44,9 +44,10 @@ export class MasterAddEditComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private spinner: NgxSpinnerService,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
         this.type = params['mode'];
@@ -58,13 +59,13 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dropdownListObj.apiPath = URLConstant.GetListActiveRefMasterTypeForDdl;
+    this.dropdownListObj.apiPath = this.UrlConstantNew.GetListActiveRefMasterTypeForDdl;
     this.dropdownListObj.requestObj = {};
     this.GetListMasterType();
     if (this.type == 'edit') {
       this.refMasterObj.RefMasterId = this.RefMasterId;
       
-      this.httpClient.post(URLConstant.GetRefMasterByRefMasterId, {Id: this.RefMasterId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterId, {Id: this.RefMasterId}).subscribe(
         (response) => {
           this.resultData = response;
           this.RefMasterForm.patchValue({
@@ -94,7 +95,7 @@ export class MasterAddEditComponent implements OnInit {
     //MODE-ADD
     if (this.type != 'edit') {
 
-      this.httpClient.post(URLConstant.AddRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
@@ -109,7 +110,7 @@ export class MasterAddEditComponent implements OnInit {
     else {
 
       //SAVE
-      this.httpClient.post(URLConstant.EditRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefMaster, this.refMasterObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
@@ -125,7 +126,7 @@ export class MasterAddEditComponent implements OnInit {
   }
 
   GetListMasterType() {
-    this.httpClient.post(URLConstant.GetListActiveRefMasterType, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterType, null).subscribe(
       (response) => {
         this.refMasterTypeObj = response;
       }

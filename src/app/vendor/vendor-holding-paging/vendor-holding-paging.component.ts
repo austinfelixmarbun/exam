@@ -5,17 +5,18 @@ import { ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-holding-paging',
   templateUrl: './vendor-holding-paging.component.html'
 })
 export class VendorHoldingPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: any;
 
   readonly AddLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorHolding.json";

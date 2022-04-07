@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ScoreCategorySchmHObj } from 'app/shared/model/score-category/score-category-Schm-h-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-score-category-type',
@@ -38,9 +37,10 @@ export class ScoreCategoryTypeComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -56,7 +56,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
   ngOnInit() {   
     var refMasterObj = new RefMasterObj();
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeScoreTrxType;
-    this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterObj).subscribe(
       (response) => {
         this.ScoreTrxTypeObj = response[CommonConstant.ReturnObj];
       }
@@ -65,7 +65,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     if (this.type == 'edit') {
       this.title = "Score Category Type - Edit";
       this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
-      this.httpClient.post(URLConstant.GetScoreCategorySchmHById, {Id : this.scoreCategorySchmHId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetScoreCategorySchmHById, {Id : this.scoreCategorySchmHId}).subscribe(
         (response) => {
           this.ScoreCategorySchmHForm.patchValue({
             ScoreCategorySchmHCode: response["ScoreCategorySchmHCode"],
@@ -91,7 +91,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     this.scoreCategorySchmHObj.RowVersion = this.ScoreCategorySchmHForm.controls.RowVersion.value;
     //MODE-ADD
     if (this.type == 'add') {
-      this.httpClient.post(URLConstant.AddScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -105,7 +105,7 @@ export class ScoreCategoryTypeComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditScoreCategorySchmH, this.scoreCategorySchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});

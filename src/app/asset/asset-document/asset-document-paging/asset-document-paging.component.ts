@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-document-paging',
@@ -13,14 +13,14 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class AssetDocumentPagingComponent implements OnInit {
   AssetTypeId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
   critObj: CriteriaObj = new CriteriaObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
   readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -31,7 +31,7 @@ export class AssetDocumentPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetDocument.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetDocument.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetDocList;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetDocList;
 
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewAssetType.json";
 

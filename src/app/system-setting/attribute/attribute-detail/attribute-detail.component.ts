@@ -3,8 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -14,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-attribute-detail',
@@ -48,9 +48,10 @@ export class AttributeDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder,
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -68,31 +69,31 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupRefMasterType = new InputLookupObj();
+    this.inputLookupRefMasterType = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupRefMasterType.urlJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.pagingJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.genericJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.isRequired = false;
     var datePipe = new DatePipe("en-US");
-    let getAttrType = this.httpClient.post(URLConstant.GetListActiveRefAttrType, new Object()).pipe(first());
+    let getAttrType = this.http.post(this.UrlConstantNew.GetListActiveRefAttrType, new Object()).pipe(first());
     var RefMasterInputType = new RefMasterObj();
     RefMasterInputType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttrInputType;
-    let getRefMasterInputType = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
+    let getRefMasterInputType = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
 
     var RefMasterPatternCode = new RefMasterObj();
     RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
-    let getRefMasterPatternCode = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
+    let getRefMasterPatternCode = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
 
     var RefMasterAttributeGroup = new RefMasterObj();
     RefMasterAttributeGroup.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttributeGroup;
-    let getRefMasterAttributeGroup = this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterAttributeGroup);
+    let getRefMasterAttributeGroup = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterAttributeGroup);
 
 
 
 
     
     if (this.pageType == "edit") {
-      let getRefAttr = this.httpClient.post(URLConstant.GetRefAttrById, {Id: this.refAttrId }).pipe(first());
+      let getRefAttr = this.http.post(this.UrlConstantNew.GetRefAttrById, {Id: this.refAttrId }).pipe(first());
       forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           var refAttr = response[0];
@@ -209,7 +210,7 @@ export class AttributeDetailComponent implements OnInit {
 
   Save() {
     var formValue = this.RefAttrForm.value;
-    var url = this.pageType == "add" ? URLConstant.AddRefAttr : URLConstant.EditRefAttr;
+    var url = this.pageType == "add" ? this.UrlConstantNew.AddRefAttr : this.UrlConstantNew.EditRefAttr;
 
     if (formValue["AttrInputType"] == CommonConstant.AttrInputTypeList) {
       if (formValue["AttrValue"].length < 1) {
@@ -229,7 +230,7 @@ export class AttributeDetailComponent implements OnInit {
       formValue["AttrValue"] = formValue["AttrValue"].join(";");
     }
 
-    this.httpClient.post(url, formValue, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(url, formValue, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_PAGING],{ });
@@ -267,7 +268,7 @@ export class AttributeDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.httpClient.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

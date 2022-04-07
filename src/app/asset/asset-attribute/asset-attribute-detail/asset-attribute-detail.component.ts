@@ -5,7 +5,6 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AssetAttrObj } from 'app/shared/model/asset-attr-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
@@ -13,6 +12,7 @@ import { forkJoin } from 'rxjs';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -20,7 +20,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   styleUrls: ['./asset-attribute-detail.component.scss']
 })
 export class AssetAttributeDetailComponent implements OnInit {
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   AssetAttrForm = this.fb.group({
     IsEditableAfterGoLive: [false],
     RefAttrId: ['']
@@ -39,7 +39,7 @@ export class AssetAttributeDetailComponent implements OnInit {
   @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
         this.AssetTypeId = params["AssetTypeId"];
@@ -78,9 +78,9 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.reqGetListObj = new AssetAttrObj();
     this.reqGetListObj.AssetTypeId = this.AssetTypeId;
     let objList = {Id: this.AssetTypeId}
-    let getListAssetAttr = this.http.post(URLConstant.GetListAssetAttrByAssetTypeId, objList);
+    let getListAssetAttr = this.http.post(this.UrlConstantNew.GetListAssetAttrByAssetTypeId, objList);
     let obj = {Id: this.assetAttrObj.AssetAttrId}
-    let getAssetAttr = this.http.post(URLConstant.GetAssetAttrByAssetAttrId, obj);
+    let getAssetAttr = this.http.post(this.UrlConstantNew.GetAssetAttrByAssetAttrId, obj);
     if (this.pageType == "add") {
       getListAssetAttr.subscribe(
         response => {
@@ -132,7 +132,7 @@ export class AssetAttributeDetailComponent implements OnInit {
     this.assetAttrObj.RefAttrId = this.AssetAttrForm.controls["RefAttrId"].value;
 
     if (this.pageType == "add") {
-      this.http.post(URLConstant.AddAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
@@ -141,7 +141,7 @@ export class AssetAttributeDetailComponent implements OnInit {
     else if (this.pageType == "edit") {
       this.assetAttrObj.AssetAttrId = this.AssetAttrId;
       this.assetAttrObj.RowVersion = this.RowVersion;
-      this.http.post(URLConstant.EditAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm, ValidatorFn, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AttrContent } from 'app/shared/model/attr-content.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
@@ -45,7 +45,7 @@ export class CustAttrFormComponent implements OnInit {
   dictMultiOptions: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
   selectedMultiDDLItems: { [key: string]: Array<{ item_id: string, item_text: string }>; } = {};
 
-  constructor(private http: HttpClient, private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
     this.parentForm.addControl(this.identifier, this.fb.array([]));
@@ -95,9 +95,9 @@ export class CustAttrFormComponent implements OnInit {
 
   SetUrlApi(): string {
     let urlApi: string = "";
-    urlApi = URLConstant.GetListCustAttrContentByCustIdAndAttrGroup;
-    if (this.AttrCodes.length > 0) urlApi = URLConstant.GetListCustAttrContentByCustIdAndAttrGroupAndListAttrCodes;
-    if (this.AttrGrpCodes.length > 0) urlApi = URLConstant.GetListCustAttrContentByCustIdAndListAttrGroups;
+    urlApi = this.UrlConstantNew.GetListCustAttrContentByCustIdAndAttrGroup;
+    if (this.AttrCodes.length > 0) urlApi = this.UrlConstantNew.GetListCustAttrContentByCustIdAndAttrGroupAndListAttrCodes;
+    if (this.AttrGrpCodes.length > 0) urlApi = this.UrlConstantNew.GetListCustAttrContentByCustIdAndListAttrGroups;
     return urlApi;
   }
 
@@ -166,7 +166,7 @@ export class CustAttrFormComponent implements OnInit {
 
   dictRefMasterLookup: { [id: string]: InputLookupObj } = {};
   SetRefMasterInputType(attrCode: string, attrName: string, isMandatory: boolean, Descr: string, masterCode: string) {
-    this.dictRefMasterLookup[attrCode] = new InputLookupObj();
+    this.dictRefMasterLookup[attrCode] = new InputLookupObj(this.UrlConstantNew);
     this.dictRefMasterLookup[attrCode].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
     this.dictRefMasterLookup[attrCode].pagingJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
     this.dictRefMasterLookup[attrCode].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -198,7 +198,7 @@ export class CustAttrFormComponent implements OnInit {
   }
 
   SetSearchListInputType(attrCode: string, ProfessionCode: string) {
-    this.http.post(URLConstant.GetRuleForAttrContent, { RuleSetName: attrCode, Code: ProfessionCode }).subscribe(
+    this.http.post(this.UrlConstantNew.GetRuleForAttrContent, { RuleSetName: attrCode, Code: ProfessionCode }).subscribe(
       (response: GenericListObj) => {
         let tempList: Array<KeyValueObj> = response.ReturnObject;
         this.dictMultiOptions[attrCode] = new Array();

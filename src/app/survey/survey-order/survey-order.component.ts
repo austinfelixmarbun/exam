@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcpagingComponent } from '@adins/ucpaging';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-survey-order',
@@ -13,10 +15,11 @@ export class SurveyOrderComponent implements OnInit {
 
   @ViewChild(UcpagingComponent) ucPaging: UcpagingComponent;
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   SrvyOrderId: number;
 
-  constructor() {
+  constructor(private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) {
   }
 
   ngOnInit() {
@@ -26,6 +29,6 @@ export class SurveyOrderComponent implements OnInit {
 
   getCallback(event){
     this.SrvyOrderId = event['RowObj']['SrvyOrderId']
-    AdInsHelper.OpenSurveyOrderViewBySrvyOrderId(this.SrvyOrderId);
+    this.adInsHelperService.OpenSurveyOrderViewBySrvyOrderId(this.SrvyOrderId);
   }
 }

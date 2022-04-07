@@ -5,12 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-journal-header-fact',
@@ -32,7 +31,7 @@ export class JournalHeaderFactComponent implements OnInit {
 
   ddlFactTypeIsReady: boolean = false;
   ddlFactTypeGenericList: Array<KeyValueObj>;
-  ddlFactTypeObj: UcDropdownListObj = new UcDropdownListObj();
+  ddlFactTypeObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   readonly CancelLink: string = NavigationConstant.JOURNAL_MEDIA_PAGING;
 
   HeaderFactForm = this.fb.group({
@@ -47,7 +46,8 @@ export class JournalHeaderFactComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private toastr: NGXToastrService) { }
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
@@ -57,11 +57,11 @@ export class JournalHeaderFactComponent implements OnInit {
         }
       }
     );
-    this.http.post<any>(URLConstant.GetListActiveRefMasterByRefMasterTypeCode, {
+    this.http.post<any>(this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCode, {
       code: CommonConstant.RefMasterTypeCodeJournalHeaderFactType
     }).subscribe(
       (response) => {
-        this.ddlFactTypeObj = new UcDropdownListObj;
+        this.ddlFactTypeObj = new UcDropdownListObj(this.UrlConstantNew);
         this.ddlFactTypeGenericList = response["RefMasterObjs"].map(item => ({
           Key: item.MasterCode,
           Value: item.Descr,
@@ -129,7 +129,7 @@ export class JournalHeaderFactComponent implements OnInit {
 
   getData() {
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.GetJrMHeaderAndJrMHeaderFactAndJrMEntityByJrMHeaderId, { JrMHeaderId: this.JrMHeaderId }).subscribe(
         response => {
           this.SubsystemDesc = response.SubSystem
           this.TransactionTypeCode = response.TrxTypeCode
@@ -172,7 +172,7 @@ console.log(this.ddlFactTypeGenericList);
     }
 
     if (this.JrMHeaderId != null) {
-      this.http.post<any>(URLConstant.SaveJrMHeaderFact, request, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<any>(this.UrlConstantNew.SaveJrMHeaderFact, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})

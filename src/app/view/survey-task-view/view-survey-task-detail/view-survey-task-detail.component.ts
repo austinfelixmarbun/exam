@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ReqGetVerfResultHObj } from 'app/shared/model/request/verf-result-h/req-verf-result-h-obj.model';
 import { ResSrvyTaskObj } from 'app/shared/model/response/srvy-task/res-srvy-task.model';
@@ -22,7 +22,7 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
   ReqByIdObj: GenericObj = new GenericObj();
   ReqByCodeObj: GenericObj = new GenericObj();
   htmlCode: string;
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
     await this.getSrvyTask();
@@ -39,13 +39,13 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
   async getVerfResult(){
     this.ReqVerfResultHObj.MrAddrTypeCode = this.ResSrvyTaskObj.MrSrvyObjTypeCode;
     this.ReqVerfResultHObj.TrxRefNo = this.ResSrvyTaskObj.SrvyTaskNo;
-    await this.http.post(URLConstant.GetVerfResultHByTrxRefNoAndMrAddrTypeCode, this.ReqVerfResultHObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetVerfResultHByTrxRefNoAndMrAddrTypeCode, this.ReqVerfResultHObj).toPromise().then(
       (response)=>{
         if(response["VerfResultHId"] !=null || response["VerfResultId"] != 0){
           this.ReqByIdObj = new GenericObj();
           this.ReqByIdObj.Id = response["VerfResultHId"];
 
-          this.http.post(URLConstant.GetListVerfResultDInQuestionGrp, this.ReqByIdObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetListVerfResultDInQuestionGrp, this.ReqByIdObj).toPromise().then(
             (response)=>{
               if(response != null){
                 this.ListResVerfResultHCustomObj = response[CommonConstant.ReturnObj];
@@ -60,7 +60,7 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
 
   async getSrvyTask(){
     this.ReqByIdObj.Id = this.SrvyTaskId;
-    await this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, this.ReqByIdObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyTaskBySrvyTaskId, this.ReqByIdObj).toPromise().then(
       (response : ResSrvyTaskObj)=>{
         // this.MobileAssignmentId = response["MobileAssignmentId"];
         // this.Result = response["Result"];
@@ -72,7 +72,7 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
   }
 
   async getHtmlCodeFromMobile(){
-    await this.http.post(URLConstant.GetHtmlCodeFromMobile, this.ReqByIdObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetHtmlCodeFromMobile, this.ReqByIdObj).toPromise().then(
       (response) => {
         this.htmlCode = response["HtmlCode"];
       }

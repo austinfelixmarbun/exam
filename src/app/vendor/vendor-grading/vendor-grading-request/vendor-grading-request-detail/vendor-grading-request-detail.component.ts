@@ -4,9 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
-import { environment } from "environments/environment";
 import { RFAInfoObj } from 'app/shared/model/approval/rfa-info-obj.model'
 import { VendorObj } from "app/shared/model/vendor-obj.model";
 import { VendorGradingHistObj } from "app/shared/model/vendor-grading-hist-obj.model";
@@ -16,13 +14,15 @@ import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { AdInsConstant } from "app/shared/AdInstConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { EnviConfigService } from "app/shared/services/enviConfig.service";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
   providers: [NGXToastrService],
 })
 export class VendorGradingRequestDetailComponent implements OnInit {
-  inputLookupParentObj: InputLookupObj = new InputLookupObj();
+  inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   VendorId: number;
   mode: string;
   businessDt: Date;
@@ -53,7 +53,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     }
   }
   ApprovalCreateOutput: any;
-  InputObj: UcInputRFAObj = new UcInputRFAObj(this.cookieService);
+  InputObj: UcInputRFAObj = new UcInputRFAObj(this.cookieService, this.UrlConstantNew);
   IsReady: boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -61,7 +61,8 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe((params) => {
       if (params["VendorId"] != 0) {
@@ -74,6 +75,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
   currentUserContext: any;
   async ngOnInit() {
+    console.log(this.InputObj);
     this.currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     if (this.mode == "edit") { this.title = "Detail Supplier Grading Request" }
     else { this.title = "Add Supplier Grading Request" }
@@ -90,7 +92,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       this.getData();
       // var apvObj = { SchemeCode: "VENDOR_GRD_SUPPL_BRC" };
       // this.http
-      //   .post(URLConstant.GetApprovedBy, apvObj)
+      //   .post(this.UrlConstantNew.GetApprovedBy, apvObj)
       //   .subscribe((response) => {
       //     this.listApprover = response;
 
@@ -99,7 +101,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       //     });
       //   });
 
-      await this.http.post(URLConstant.GetListActiveRefReason, { RefReasonTypeCode: CommonConstant.VENDOR_GRADING_APV }).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetListActiveRefReason, { RefReasonTypeCode: CommonConstant.VENDOR_GRADING_APV }).toPromise().then(
         (response) => {
           this.listReason = response[CommonConstant.ReturnObj];
           this.VendorForm.patchValue({
@@ -120,7 +122,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     if (this.mode == "edit") { vendorId = this.VendorId }
     else { vendorId = ReqValue.VendorId }
 
-    this.http.post(URLConstant.GetVendorByVendorId, { Id: vendorId }).subscribe((response) => {
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, { Id: vendorId }).subscribe((response) => {
       this.result = response;
       this.ParentId = this.result.VendorParentId;
       this.oldVendorRating = this.result.VendorRating;
@@ -142,7 +144,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     let vendorId: number;
     // if(this.mode == "edit"){vendorId = this.VendorId}
     // else {vendorId = ReqValue.VendorId}
-    this.http.post(URLConstant.GetVendorGrade, { Id: this.VendorId }).subscribe((response) => {
+    this.http.post(this.UrlConstantNew.GetVendorGrade, { Id: this.VendorId }).subscribe((response) => {
       console.log(response);
       this.result = response;
       this.oldGradeCode = response["VendorGrade"];
@@ -159,7 +161,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
 
   async LoadGradingRule(vendorRating: number) {
-    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
+    await this.http.post(this.UrlConstantNew.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
       (response) => {
 
         this.gradeCode = response["VendorGrade"];
@@ -213,8 +215,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
       RequestRFAObj: rfaInfo
     }
     
-    let SubmitRequestVendorGradingUrl = environment.isCore ? URLConstant.SubmitRequestVendorGradingV2 : URLConstant.SubmitRequestVendorGrading;
-    this.http.post(SubmitRequestVendorGradingUrl, submitVendorGradingReqObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SubmitRequestVendorGradingV2, submitVendorGradingReqObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         this.router.navigate([NavigationConstant.VENDOR_GRD_REQ_PAGING]);

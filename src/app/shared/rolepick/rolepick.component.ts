@@ -12,6 +12,7 @@ import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
 import { UcDropdownSearchConstant, UcDropdownSearchObj } from '../model/library/uc-dropdown-search-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 @Component({
   selector: 'app-rolepick',
@@ -22,8 +23,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   listRole: any;
   refUser: any;
   cookieOptions: CookieOptions;
-  officeDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
-  rolesDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj();
+  officeDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj(this.UrlConstantNew);
+  rolesDropdownSearchObj: UcDropdownSearchObj = new UcDropdownSearchObj(this.UrlConstantNew);
   selectedOffice: number = -1;
   selectedRole: number= -1;
   tempList: Array<any> = new Array<any>();
@@ -34,7 +35,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder,
-    private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService, private strService: StorageService) {
+    private http: HttpClient, private router: Router, public dialog: MatDialog, private cookieService: CookieService, private strService: StorageService, private UrlConstantNew: UrlConstantNew) {
     this.refUser = data["response"];
     this.listRole = data["response"]["RefUserRoles"];
   }
@@ -113,7 +114,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     };
 
     if (this.data.pwd == null) {
-      this.http.post(AdInsConstant.UpdateTokenV2_1, roleObject, this.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.UpdateTokenV2_1, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
@@ -125,7 +126,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-          this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
+          this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               this.strService.set(AdInsConstant.WatchRoleState, true);
@@ -139,11 +140,11 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     }
     else {
-      this.http.post(AdInsConstant.LoginByRoleV2, roleObject, this.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.LoginByRoleV2, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
 
-          this.http.post(AdInsConstant.CheckUserSessionLog, roleObject, this.SpinnerOptions).subscribe(
+          this.http.post(this.UrlConstantNew.CheckUserSessionLog, roleObject, this.SpinnerOptions).subscribe(
             (response) => {});
           
           var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
@@ -155,7 +156,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-          this.http.post(AdInsConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
+          this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
               this.router.navigate([NavigationConstant.DASHBOARD]);

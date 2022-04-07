@@ -1,4 +1,3 @@
-import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -8,7 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ReqExchangeRateObj } from 'app/shared/model/request/exchange-rate/req-exchange-rate-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -20,7 +19,7 @@ import { CookieService } from 'ngx-cookie';
 })
 export class ExchangeRateDetailComponent implements OnInit {
   
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   RefCurrId: number = 0;
   MaxBack: number = 0;
   SetDtReady: boolean = false;
@@ -40,7 +39,8 @@ export class ExchangeRateDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["RefCurrId"] != null) {
         this.RefCurrId = params["RefCurrId"];
@@ -50,7 +50,7 @@ export class ExchangeRateDetailComponent implements OnInit {
 
   async ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefCurrAdd.json";
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: 'MAX_EXC_RATE_BACK_DT' }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: 'MAX_EXC_RATE_BACK_DT' }).toPromise().then(
       response => {
         this.MaxBack = parseInt(response['GsValue']);
       });
@@ -86,7 +86,7 @@ export class ExchangeRateDetailComponent implements OnInit {
       this.reqExchangeRateObj.ExchangeRateAmt = this.ExchangeRateForm.controls["ExchangeRateAmt"].value;
       this.reqExchangeRateObj.ValueDt = this.ExchangeRateForm.controls["CurrDt"].value;
       this.reqExchangeRateObj.PostingDt = this.setDateWithoutTimezone(this.BusinessDt);
-      this.http.post(URLConstant.AddExchangeRate, this.reqExchangeRateObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddExchangeRate, this.reqExchangeRateObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_EXCHANGE_RATE_PAGING],{"RefCurrId":this.RefCurrId});

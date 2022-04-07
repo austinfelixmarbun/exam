@@ -4,9 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -14,6 +12,7 @@ import { JobDataEmployeeComponent } from './job-data-employee/job-data-employee.
 import { JobDataProfessionalComponent } from './job-data-professional/job-data-professional.component';
 import { JobDataSmeComponent } from './job-data-small-medium-enterprise/job-data-small-medium-enterprise.component';
 import { JobDataNonProfessionalComponent } from './job-data-non-professional/job-data-non-professional.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -31,7 +30,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   IsReset: boolean = false;
   custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.tempCustModel = new Array<KeyValueObj>();
 
     this.route.queryParams.subscribe(params => {
@@ -44,7 +43,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   ngOnInit() {
     this.objCust = new CustObj();
     this.objCust.CustId = this.IdCust;
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.custObj = response;
         this.CustModel = this.custObj.MrCustModelCode;
@@ -52,7 +51,7 @@ export class CustomerPersonalJobDataComponent implements OnInit {
         this.custModelReqObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
         this.custModelReqObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustModel;
         this.custModelReqObj.MappingCode = CommonConstant.CustTypePersonal;
-        this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
+        this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, this.custModelReqObj).subscribe(
           (response: GenericKeyValueListObj) => {
             this.tempCustModel = response[CommonConstant.ReturnObj];
             if (!this.CustModel) {

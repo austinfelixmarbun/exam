@@ -4,9 +4,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { VendorGroupObj } from 'app/shared/model/vendor-group-obj.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -16,13 +16,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class VendorGroupViewComponent implements OnInit {
   VendorGrpId: any;
   vendorGrpObj: VendorGroupObj;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_GRP_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, ) {
+  constructor(private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {
         this.VendorGrpId = params['VendorGrpId'];
@@ -39,7 +39,7 @@ export class VendorGroupViewComponent implements OnInit {
     
     this.inputPagingObj._url = "./assets/ucpaging/searchVendor.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendor.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorGrpMemberById;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteVendorGrpMemberById;
 
     var critInput = new CriteriaObj();
     critInput.propName = "C.VENDOR_GRP_ID";

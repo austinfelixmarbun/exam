@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { AssetSchemeHObj } from 'app/shared/model/asset-scheme-h-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-scheme-member',
@@ -16,15 +16,15 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 export class AssetSchemeMemberComponent implements OnInit {
   AssetSchmHId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   assetSchmHObj: AssetSchemeHObj;
   AssetSchmHIsSystem: false;
   
   readonly CancelLink: string = NavigationConstant.ASSET_SCHM_PAGING;
   readonly AddLink: string = NavigationConstant.ASSET_SCHM_ADD_MBR;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetSchmHId"] != null) {
         this.AssetSchmHId = params["AssetSchmHId"];
@@ -37,7 +37,7 @@ export class AssetSchemeMemberComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchAssetSchemeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAssetSchemeMember.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetSchmD;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetSchmD;
 
     var critObj = new CriteriaObj();
     critObj.restriction = AdInsConstant.RestrictionEq;
@@ -49,7 +49,7 @@ export class AssetSchemeMemberComponent implements OnInit {
 
     this.assetSchmHObj = new AssetSchemeHObj();
     this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
-    this.http.post(URLConstant.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
       (response: AssetSchemeHObj) => {
         this.assetSchmHObj = response;
         this.AssetSchmHIsSystem = response.IsSystem;

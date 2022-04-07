@@ -8,7 +8,6 @@ import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
@@ -16,11 +15,11 @@ import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-ob
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UpdateCustEmergencyObj } from 'app/shared/model/update-master-cust/update-cust-emergency-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 import { forkJoin } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-update-customer-emergency-detail',
@@ -42,9 +41,9 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   appGender: string;
   MaxDate: Date;
   businessDtMin: Date;
-  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj();
-  ddlIdType: UcDropdownListObj = new UcDropdownListObj();
-  ddlGender: UcDropdownListObj = new UcDropdownListObj();
+  ddlMrCustRelationshipCode: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlIdType: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlGender: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
   customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
   GenderList: Array<any> = new Array<any>();
   CustRelationList: Array<any> = new Array<any>();
@@ -80,13 +79,14 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private cookieService: CookieService,
-    private regexService: RegexService
+    private regexService: RegexService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.IsAddressDifferent = false;
     this.ResponseTab = new EventEmitter<any>();
     this.AppEmergencyData = new UpdateCustEmergencyObj();
     this.lookupObj = {
-      Zipcode: new InputLookupObj()
+      Zipcode: new InputLookupObj(this.UrlConstantNew)
     };
     this.DisplayName = {
       Zipcode: ""
@@ -107,13 +107,13 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.getInitPattern();
     var datePipe = new DatePipe("en-US");
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetCustEmergencyDataForUpdateMasterCustEmergency, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetCustEmergencyDataForUpdateMasterCustEmergency, this.ReqCustDataTrxIdObj);
     let tempReqCustRelation: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship, MappingCode: null };
-    let getCustRelationship = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustRelation);
+    let getCustRelationship = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqCustRelation);
     let tempReqIdType: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType, MappingCode: null };
-    let getIdType = this.http.post(URLConstant.GetListActiveRefMaster, tempReqIdType);
+    let getIdType = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqIdType);
     let tempReqGender: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender, MappingCode: null };
-    let getGender = this.http.post(URLConstant.GetListActiveRefMaster, tempReqGender);
+    let getGender = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqGender);
     forkJoin([getDetail, getCustRelationship, getIdType, getGender]).pipe(
       map((response) => {
         this.AppEmergencyData = response[0]["AppCustEmergency"];
@@ -280,7 +280,7 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     if(this.checkEmergencyContact() == false){
       return;
     }
-    this.http.post(URLConstant.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }
@@ -318,8 +318,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustPersonalRelationship,
       MappingCode: null
     };
-    this.ddlMrCustRelationshipCode = new UcDropdownListObj;
-    this.ddlMrCustRelationshipCode.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlMrCustRelationshipCode = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlMrCustRelationshipCode.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlMrCustRelationshipCode.ddlType = "one";
     this.ddlMrCustRelationshipCode.requestObj = refMasterObjMrIdTypeCode;
     this.ddlMrCustRelationshipCode.isObject = true;
@@ -329,8 +329,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     };
-    this.ddlIdType = new UcDropdownListObj;
-    this.ddlIdType.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlIdType = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlIdType.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlIdType.ddlType = "one";
     this.ddlIdType.requestObj = refMasterObjIdType;
     this.ddlIdType.isObject = true;
@@ -341,8 +341,8 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     };
-    this.ddlGender = new UcDropdownListObj();
-    this.ddlGender.apiPath = URLConstant.GetListActiveRefMasterDDL;
+    this.ddlGender = new UcDropdownListObj(this.UrlConstantNew);
+    this.ddlGender.apiPath = this.UrlConstantNew.GetListActiveRefMasterDDL;
     this.ddlGender.ddlType = "one";
     this.ddlGender.requestObj = refMasterObjGender;
     this.ddlGender.isObject = true;

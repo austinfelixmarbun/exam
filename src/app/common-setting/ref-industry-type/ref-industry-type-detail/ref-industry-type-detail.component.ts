@@ -5,11 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { map, mergeMap } from 'rxjs/operators';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -37,10 +36,10 @@ export class RefIndustryTypeDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['mode'] != null) {
@@ -54,7 +53,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.urlJson = "./assets/lookup/lookupIndustryTypeCategory.json";
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupIndustryTypeCategory.json";
     this.inputLookupObj.genericJson = "./assets/lookup/lookupIndustryTypeCategory.json";
@@ -62,7 +61,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     if (this.type == 'edit') {
       this.refIndustryType = new RefIndustryTypeObj();
       this.refIndustryType.RefIndustryTypeId = this.RefIndustryTypeId;
-      await this.http.post(URLConstant.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, {Id: this.RefIndustryTypeId}).toPromise().then(
         response => {
           this.resultData = response;
           this.industryTypeCategoryObj = this.resultData;
@@ -76,7 +75,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
           });
         });
 
-        await this.http.post(URLConstant.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).toPromise().then(
+        await this.http.post(this.UrlConstantNew.GetIndustryTypeCategoryByIndustryTypeCategoryId, this.industryTypeCategoryObj).toPromise().then(
           response => {
             this.industryTypeCategoryObj = response;
            
@@ -109,7 +108,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
 
     //MODE-ADD
     if (this.type != 'edit') {
-      this.httpClient.post(URLConstant.AddRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
@@ -123,7 +122,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     //MODE-EDIT
     else {
       //SAVE
-      this.httpClient.post(URLConstant.EditRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
@@ -143,7 +142,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

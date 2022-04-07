@@ -1,5 +1,4 @@
-import { environment } from "environments/environment";
-import { URLConstant } from "../constant/URLConstant";
+import { UrlConstantNew } from "../constant/URLConstantNew";
 
 export class UcUploadObj {
     title: string;
@@ -29,20 +28,20 @@ export class UcUploadObj {
     ddlEnvironments: Array<EnviObj>;
     listEnvironments: Array<EnvisObj>;
 
-    constructor() {
+    constructor(private UrlConstantNew: UrlConstantNew) {
         this.title = "";
         this.subsectionId = "UcUploadFile";
         this.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
         this.UploadTypeCode = "";
         this.ErrorDownloadUrl = "";
-        this.TemplateUrl = URLConstant.DownloadTemplate;
+        this.TemplateUrl = this.UrlConstantNew.DownloadTemplate;
         this.TemplateName = "";
         this.FileErrorName = "";
-        this.environmentUrl = environment.isCore ? environment.FoundationR3Url + '/v2' : environment.FoundationR3Url + '/v1';
-        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
+        this.environmentUrl = this.UrlConstantNew.env.FoundationR3Url + '/v2';
+        this.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.SheetName = "";
-        this.url = URLConstant.UploadFileV2;
+        this.url = this.UrlConstantNew.UploadFileV2;
         this.hideProgressBar = false;
         this.hideResetBtn = false;
         this.hideSelectBtn = false;
@@ -53,8 +52,8 @@ export class UcUploadObj {
         this.isDownloadTmplt = true;
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: environment.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: environment.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
     }
 }
 

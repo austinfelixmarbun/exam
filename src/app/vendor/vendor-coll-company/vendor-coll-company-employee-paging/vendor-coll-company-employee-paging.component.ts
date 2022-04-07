@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-coll-company-employee-paging',
@@ -13,13 +13,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class VendorCollCompanyEmployeePagingComponent implements OnInit {
   VendorId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   arrCrit = new Array();
   MrVendorCategoryCode: string = "";
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_COLL_COMPANY_EMP_DETAIL;
-  constructor(private route: ActivatedRoute, private http : HttpClient) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
@@ -38,7 +38,7 @@ export class VendorCollCompanyEmployeePagingComponent implements OnInit {
     this.inputPagingObj.addCritInput.push(critObj);
 
     
-    this.http.post(URLConstant.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
       }

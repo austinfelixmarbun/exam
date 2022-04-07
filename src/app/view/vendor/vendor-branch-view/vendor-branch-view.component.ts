@@ -6,10 +6,10 @@ import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
 import { VendorBankAccObj } from 'app/shared/model/vendor-bank-acc-obj.model';
 import { VendorEmpObj } from 'app/shared/model/vendor-emp-obj.model';
 import { VendorOfficeMbrObj } from 'app/shared/model/vendor-office-mbr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-view',
@@ -39,20 +39,20 @@ export class VendorBranchViewComponent implements OnInit {
   listSelectedId: any[];
   MrVendorTypeObj: any;
 
-  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchMainPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoSuppObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoSurObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoAssetObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchInfoLifeObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj();
-  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchMainCObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchMainPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoSuppObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoSurObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoAssetObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchInfoLifeObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewBranchAgencyCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchMainCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewVendorBranchTaxObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchTaxAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchAddrObj: UcViewGenericObj = new UcViewGenericObj();
-  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj();
+  viewVendorBranchTaxObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchTaxAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchAddrObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewVendorBranchLtLgObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   VendorBankAccListObj: VendorBankAccObj;
   VendorBankAcc: any;
@@ -66,7 +66,7 @@ export class VendorBranchViewComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
@@ -77,7 +77,7 @@ export class VendorBranchViewComponent implements OnInit {
   }
   ngOnInit() {
     
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       response => {
         this.MrVendorTypeObj = response;
         this.MrVendorTypeCode = this.MrVendorTypeObj.MrVendorTypeCode;
@@ -100,39 +100,39 @@ export class VendorBranchViewComponent implements OnInit {
     this.viewVendorBranchTaxAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchTaxAddr.json";
     this.viewVendorBranchAddrObj.viewInput = "./assets/ucviewgeneric/viewVendorBranchAddr.json";
 
-    this.http.post(URLConstant.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorBankAccByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorBankAcc = response[CommonConstant.ReturnObj]
 
       }
     )
 
-    this.http.post(URLConstant.GetListVendorGrpByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorGrpByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorGrp = response[CommonConstant.ReturnObj]
 
       }
     )
 
-    this.http.post(URLConstant.GetListVendorEmpByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorEmpByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorEmp = response[CommonConstant.ReturnObj]
       }
     )
 
-    this.http.post(URLConstant.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorOfficeMbrByVendorId, { Id: this.VendorId }).subscribe(
       response => {
         this.VendorOfficeMbr = response[CommonConstant.ReturnObj]
       }
     )
 
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj];
         if (this.ListVendorAttrContent != null) {
           let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
           reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
-          this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe( 
+          this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe( 
             (res) => {
               this.VendorAttrList = res[CommonConstant.ReturnObj];
               this.VendorAttrList.forEach((x, index) => {

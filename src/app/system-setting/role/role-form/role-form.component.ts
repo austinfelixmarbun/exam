@@ -4,17 +4,14 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HttpClient } from "@angular/common/http";
 import { ExcelService } from "app/shared/excel-service/excel-service";
-import { environment } from "environments/environment";
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AuthFormObj } from "app/shared/model/auth-form-obj.model";
 import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/uc-view-generic-obj.model";
 import { FromValueObj, UcTempPagingObj } from "app/shared/model/temp-paging/uc-temp-paging-obj.model";
-import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: 'app-role-form',
@@ -27,12 +24,12 @@ export class RoleFormComponent implements OnInit {
   listAuthFormObj: ListAuthFormObj;
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefRoleId = params['RefRoleId'];
     });
@@ -71,7 +68,7 @@ export class RoleFormComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE_FORM],{ "RefRoleId": this.RefRoleId });

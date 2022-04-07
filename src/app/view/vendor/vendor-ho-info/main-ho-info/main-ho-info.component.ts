@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
-import { environment } from 'environments/environment';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-main-ho-info',
@@ -12,12 +10,12 @@ import { environment } from 'environments/environment';
   styleUrls: ['./main-ho-info.component.scss']
 })
 export class MainHoInfoComponent implements OnInit {
-  viewCObj: UcViewGenericObj = new UcViewGenericObj();
-  viewPObj: UcViewGenericObj = new UcViewGenericObj();
+  viewCObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewPObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   VendorId: any;
   MrVendorTypeCode: any;
   viewObj12345: any;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VendorId = params['VendorId'];
     });
@@ -25,7 +23,7 @@ export class MainHoInfoComponent implements OnInit {
 
   ngOnInit() {    
 
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.VendorId}).subscribe(
       (response) => {
         this.MrVendorTypeCode = response["MrVendorTypeCode"];
       }

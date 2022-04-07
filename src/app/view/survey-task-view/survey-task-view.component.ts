@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { DMSLabelValueObj } from 'app/shared/model/dms/dms-label-value-obj.model';
 import { DMSObj } from 'app/shared/model/dms/dms-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
@@ -21,14 +21,14 @@ export class SurveyTaskViewComponent implements OnInit {
   SrvyOrderId: number;
   SrvyTaskNo: string;
   SrvyOrderNo: string;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  viewGenericSbjctObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewGenericSbjctObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   isDmsReady: boolean = false;
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
   ReqGenericObj: GenericObj = new GenericObj();
   
-  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params["SrvyTaskId"] != null) {
         this.SrvyTaskId = params["SrvyTaskId"];
@@ -43,7 +43,7 @@ export class SurveyTaskViewComponent implements OnInit {
     await this.GetSrvyTaskNo();
     await this.GetSrvyOrderNo();
 
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
       (response) => {
         this.SysConfigResultObj = response;
     });
@@ -62,7 +62,7 @@ export class SurveyTaskViewComponent implements OnInit {
 
   async GetSrvyTaskNo(){
     this.ReqGenericObj.Id = this.SrvyTaskId;
-    await this.http.post(URLConstant.GetSrvyTaskBySrvyTaskId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyTaskBySrvyTaskId, this.ReqGenericObj).toPromise().then(
       (response) => {
         this.SrvyTaskNo = response["SrvyTaskNo"];
         this.SrvyOrderId = response["SrvyOrderId"];
@@ -71,7 +71,7 @@ export class SurveyTaskViewComponent implements OnInit {
 
   async GetSrvyOrderNo(){
     this.ReqGenericObj.Id = this.SrvyOrderId;
-    await this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetSrvyOrderBySrvyOrderId, this.ReqGenericObj).toPromise().then(
       (response) => {
         this.SrvyOrderNo = response["SrvyOrderNo"];
       });

@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { UpdateCustCompanyDetailObj } from 'app/shared/model/update-master-cust/update-cust-company-detail-obj.model';
@@ -43,11 +43,12 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
     private router: Router, 
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.AppCustCompanyDetail = new UpdateCustCompanyDetailObj();
     this.ResponseTab = new EventEmitter<any>();
-    this.IndustryLookupObj = new InputLookupObj();
+    this.IndustryLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.IndustryLookupObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.IndustryLookupObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.IndustryLookupObj.genericJson = "./assets/lookup/lookupIndustryType.json";
@@ -58,7 +59,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDtMax = new Date(context[CommonConstant.BUSINESS_DT]);
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    this.http.post(URLConstant.GetCustCompanyDataForUpdateMasterCustCompany, this.ReqCustDataTrxIdObj).pipe(
+    this.http.post(this.UrlConstantNew.GetCustCompanyDataForUpdateMasterCustCompany, this.ReqCustDataTrxIdObj).pipe(
       map((response) => {
         response["AppCustCompany"]["EstablishmentDt"] = datePipe.transform(response["AppCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
         response["MasterCustCompany"]["EstablishmentDt"] = datePipe.transform(response["MasterCustCompany"]["EstablishmentDt"], "yyyy-MM-dd");
@@ -67,8 +68,8 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
         return response;
       }),
       mergeMap((response) => {
-        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["MasterCustCompany"]["RefIndustryTypeId"] });
-        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["AppCustCompany"]["RefIndustryTypeId"] });
+        let getMasterIndustry = this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: response["MasterCustCompany"]["RefIndustryTypeId"] });
+        let getAppIndustry = this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: response["AppCustCompany"]["RefIndustryTypeId"] });
         return forkJoin([getMasterIndustry, getAppIndustry]);
       })
     ).toPromise().then(
@@ -128,7 +129,7 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
   }
 
   SaveValue(){
-    this.http.post(URLConstant.UpdateMasterCustCompanyDetail, this.CustomerDetailForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyDetail, this.CustomerDetailForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

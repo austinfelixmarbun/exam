@@ -6,15 +6,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UpdateCustAddrObj } from 'app/shared/model/update-master-cust/update-cust-addr-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
-import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-update-customer-address',
@@ -38,12 +36,13 @@ export class UpdateCustomerAddressComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.ResponseTab = new EventEmitter<any>();
     this.OwnershipList = new Array<any>();
     this.ZipcodeLookupList = new Array<InputLookupObj>();
-    this.ZipcodeLookupObj = new InputLookupObj();
+    this.ZipcodeLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.ZipcodeLookupObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.ZipcodeLookupObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -53,9 +52,9 @@ export class UpdateCustomerAddressComponent implements OnInit {
 
   ngOnInit() {
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeBuildingOwnership, MappingCode: null };
-    let getOwnershipList = this.http.post(URLConstant.GetListActiveRefMaster, tempReq);
+    let getOwnershipList = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReq);
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetCustAddrDataForUpdateMasterCustAddr, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetCustAddrDataForUpdateMasterCustAddr, this.ReqCustDataTrxIdObj);
     forkJoin([getDetail, getOwnershipList]).toPromise().then(
       (response) => {
         var responseAddr = response[0]["CustAddObjList"] as Array<any>;
@@ -143,7 +142,12 @@ export class UpdateCustomerAddressComponent implements OnInit {
           });
           formArray.push(formGroup);
 
-          var zipcodeObj = { ...this.ZipcodeLookupObj };
+          let zipcodeObj = new InputLookupObj(this.UrlConstantNew)
+          zipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+          zipcodeObj.isReady = false;
+
           zipcodeObj.nameSelect = responseAddr[key]["MasterCustAddr"]["Zipcode"];
           zipcodeObj.jsonSelect = { Zipcode: responseAddr[key]["MasterCustAddr"]["Zipcode"] };
           zipcodeObj.isReady = true;
@@ -308,7 +312,7 @@ export class UpdateCustomerAddressComponent implements OnInit {
       }
       requestList.push(masterData);
     }
-    this.http.post(URLConstant.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

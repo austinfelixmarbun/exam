@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-customer-group',
@@ -22,11 +19,12 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
-    this.custViewUrl = environment.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=";
+    this.custViewUrl = this.UrlConstantNew.env.FoundationR3Web + "/View/Customer/PersonalDetail?CustId=";
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
@@ -35,7 +33,7 @@ export class CustomerViewCustomerGroupComponent implements OnInit {
     
     let reqById: GenericObj = new GenericObj();
     reqById.Id = this.CustId;
-    this.http.post(URLConstant.GetListCustGrpForCustViewById, reqById).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustGrpForCustViewById, reqById).subscribe(
       response => {
         this.responseObj = response['ParentCustGrp'];
         this.responseMemberCustGrpObj = response['ChildCustGrp'];

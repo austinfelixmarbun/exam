@@ -8,11 +8,10 @@ import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
-import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-master-type-paging',
@@ -23,7 +22,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   @ViewChild(UCSearchComponent) searchComponent;
   @ViewChild(UcgridfooterComponent) ucgridFooter;
-  inputObj: UcPagingObj = new UcPagingObj();
+  inputObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   resultData: any;
   pageNow: any;
   totalData: any;
@@ -36,12 +35,12 @@ export class MasterTypePagingComponent implements OnInit {
   refRoleObj: RefRoleObj;
   orderByKey: any = null;
   orderByValue: boolean = true;
-  foundationUrl: any = environment.FoundationR3Url;
 
   readonly EditLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_DETAIL;
   constructor(
     private service: NGXToastrService,
-    private https: HttpClient
+    private https: HttpClient,
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
@@ -50,7 +49,7 @@ export class MasterTypePagingComponent implements OnInit {
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.foundationUrl + URLConstant.GetRefRolePaging;
+    this.apiUrl = this.UrlConstantNew.GetRefRolePaging;
     this.initiateForm()
   }
 
@@ -86,7 +85,7 @@ export class MasterTypePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = URLConstant.DeleteRefRole;
+      this.deleteUrl = this.UrlConstantNew.DeleteRefRole;
       this.refRoleObj = new RefRoleObj();
       this.refRoleObj.RefRoleId = +id;
       this.https.post(this.deleteUrl, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(

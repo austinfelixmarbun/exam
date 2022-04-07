@@ -4,7 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustAssetDetailComponent } from './cust-asset-detail/cust-asset-detail.component';
@@ -25,7 +25,8 @@ export class CustAssetComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private modalService: NgbModal,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.inputGridObj = new InputGridObj();
     this.inputGridObj.pagingJson = "./assets/ucgridview/gridAppCustAsset.json";
@@ -48,7 +49,7 @@ export class CustAssetComponent implements OnInit {
 
   GetCustAssetData(){
     this.spinner.show();
-    this.http.post(URLConstant.GetListCustAssetByCustId, { Id: this.CustId }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListCustAssetByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.inputGridObj.resultData = {
           Data: []
@@ -101,7 +102,7 @@ export class CustAssetComponent implements OnInit {
   DeleteCustAsset(custAssetId){
     var confirmation = confirm("Are you sure to delete this data ?");
     if(confirmation){
-      this.http.post(URLConstant.DeleteCustAsset, { Id: custAssetId }, AdInsConstant.SpinnerOptions).toPromise().then(
+      this.http.post(this.UrlConstantNew.DeleteCustAsset, { Id: custAssetId }, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           if(response["StatusCode"] == 200){
             this.toastr.successMessage(response["Message"]);

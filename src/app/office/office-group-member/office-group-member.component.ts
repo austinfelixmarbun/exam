@@ -2,11 +2,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
-import { environment } from "environments/environment";
 import { UcPagingObj } from "app/shared/model/uc-paging-obj.model";
-import { URLConstant } from "app/shared/constant/URLConstant";
 import { UcViewGenericObj } from "app/shared/model/uc-view-generic-obj.model";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: 'app-office-group-member',
@@ -16,12 +15,12 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   RefOfficeId: string;
   CenterGrpId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   readonly AddLink: string = NavigationConstant.OFFICE_GROUP_MEMBER_ADD;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefOfficeId = params["RefOfficeId"];
       this.CenterGrpId = params["CenterGrpId"];
@@ -33,7 +32,7 @@ export class OfficeGroupMemberComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchCenterGrpMbr.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCenterGrpMbr.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteCenterGrpOfficeMember;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteCenterGrpOfficeMember;
 
     var critInput = new CriteriaObj();
     critInput.propName = "RO.REF_OFFICE_ID";

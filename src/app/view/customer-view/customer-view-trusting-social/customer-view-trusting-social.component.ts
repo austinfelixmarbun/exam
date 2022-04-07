@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ThirdPartyTsObj } from 'app/shared/model/third-party-rslt/third-party-ts-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-trusting-social',
@@ -21,7 +21,7 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
@@ -52,21 +52,21 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
     var custObj = new CustObj();
     custObj.CustId = this.CustId;
 
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.CustId }).subscribe(
       responseCust => {
         this.getThirdPartyTsObj(responseCust["ThirdPartyTrxNo"]);
       });
   }
 
   getCustByCustNoAndThirdPartyTsObj() {
-    this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustNo, { CustNo: this.CustNo }).subscribe(
       responseCust => {
         this.getThirdPartyTsObj(responseCust["ThirdPartyTrxNo"]);
       });
   }
 
   getThirdPartyTsObj(thirdPartyTrxNo) {
-    this.http.post(URLConstant.GetListThirdPartyTrustingSocialByTrxNo, { TrxNo: thirdPartyTrxNo }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListThirdPartyTrustingSocialByTrxNo, { TrxNo: thirdPartyTrxNo }).subscribe(
       responseThirdParty => {
         this.ThirdPartyTsObjs = responseThirdParty["ReturnObject"];
       });

@@ -6,7 +6,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustFamilyObj } from 'app/shared/model/update-master-cust/update-cust-family-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -28,7 +28,8 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.ResponseTab = new EventEmitter<any>();
     this.ListAppFamily = new Array<UpdateCustFamilyObj>();
@@ -37,7 +38,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
 
   ngOnInit() {
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    this.http.post(URLConstant.GetCustFamilyDataForUpdateMasterCustFamily, this.ReqCustDataTrxIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetCustFamilyDataForUpdateMasterCustFamily, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         this.ListCustFamily = response["MasterCustFamilyList"];
         this.ListAppFamily = response["AppFamilyList"];
@@ -94,7 +95,7 @@ export class UpdateCustomerFamilyComponent implements OnInit {
         request.push(item);
       }
     }
-    this.http.post(URLConstant.UpdateMasterCustFamily, { CustFamilyList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustFamily, { CustFamilyList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfSchemeHObj } from 'app/shared/model/verf-scheme-h-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
@@ -25,7 +24,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   verfQuestionScheme: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfSchemeHId = params["VerfSchemeHId"];
       this.mode = params["mode"];
@@ -44,7 +43,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.mode == "edit") {
-      this.http.post(URLConstant.GetVerfSchemeHForUpdateById, {Id : this.VerfSchemeHId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetVerfSchemeHForUpdateById, {Id : this.VerfSchemeHId}).subscribe(
         (response) => {
           this.verfQuestionScheme = response;
           this.QuestionSchemeForm.patchValue({
@@ -64,7 +63,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     this.verfSchemeHObj = this.QuestionSchemeForm.value;
     if (this.mode == "edit") {
       this.verfSchemeHObj.RowVersion = this.verfSchemeHObj.RowVersion;
-      this.http.post(URLConstant.EditVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
@@ -72,7 +71,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
     }
     else {
       this.verfSchemeHObj.VerfSchemeHId = "0";
-      this.http.post(URLConstant.AddVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });

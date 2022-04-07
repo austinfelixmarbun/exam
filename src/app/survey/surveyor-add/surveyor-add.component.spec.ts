@@ -59,9 +59,9 @@ describe('SurveyorAddComponent', function () {
         withCredentials?: boolean;
       }) => {
         let response: Object;
-        if (url === URLConstant.GetListActiveRefMaster) {
+        if (url === ''/**URLConstant.GetListActiveRefMaster**/) {
             response = MockResponseRefMasterSurveyor;
-        } else if (url === URLConstant.GetSurveyorBySurveyorId) {
+        } else if (url === ''/**URLConstant.GetSurveyorBySurveyorId**/) {
           response = {
             SurveyorId: 1,
             SurveyorNo: 'SVY01',
@@ -73,7 +73,7 @@ describe('SurveyorAddComponent', function () {
             CurrWorkloadAmt: 5,
             IsActive: 1
           };
-        } else if (url === URLConstant.GetCenterGrpById) {
+        } else if (url === ''/**URLConstant.GetCenterGrpById**/) {
             response = {
                 CenterGrpId : 34,
                 CenterGrpCode : 'SURVEYORGRP1',
@@ -81,12 +81,12 @@ describe('SurveyorAddComponent', function () {
                 MrCenterGrpTypeCode : 'SRVY_GRP',
                 IsActive : 1
             }
-        } else if (url === URLConstant.GetVendorByVendorId) {
+        } else if (url === ''/**URLConstant.GetVendorByVendorId**/) {
             response = {
                 VendorId : 1,
                 VendorName : 'VENDOR1'
             };
-        } else if (url === URLConstant.GetRefUserById) {
+        } else if (url === ''/**URLConstant.GetRefUserById**/) {
           response = {
             RefUserId : 1,
             Username : 'user1',
@@ -106,11 +106,11 @@ describe('SurveyorAddComponent', function () {
             LockedUntil : null,
             RowVersion : null,
           };
-        } else if (url === URLConstant.AddSurveyor) {
+        } else if (url === ''/**URLConstant.AddSurveyor**/) {
             response = {
                 message: 'Success'
               };
-        }else if (url === URLConstant.EditSurveyor) {
+        }else if (url === ''/**URLConstant.EditSurveyor**/) {
             response = {
                 message: 'Success'
               };

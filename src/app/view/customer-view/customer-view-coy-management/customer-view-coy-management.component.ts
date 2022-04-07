@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ShareholderListingObj } from 'app/shared/model/new-cust/shareholder/shareholder-listing-obj.model';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-customer-view-coy-management',
@@ -27,7 +27,9 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   readonly dictNegCustType: {[id: string]: string}={};
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) { 
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) { 
   }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.CustId = params['CustId'];
       }
     });
-    this.http.post(URLConstant.GetListManagementShareholderForListPagingByCustId, {Id : this.CustId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListManagementShareholderForListPagingByCustId, {Id : this.CustId}).subscribe(
       (response: GenericListObj) => {
         this.responseObj = response.ReturnObject;
       },
@@ -49,10 +51,10 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   }
 
   openViewPersonal(custId: number){
-    AdInsHelper.OpenCustomerViewByCustId(custId);
+    this.adInsHelperService.OpenCustomerViewByCustId(custId);
   }
 
   openViewCoy(custId: number){
-    AdInsHelper.OpenCustomerCoyViewByCustId(custId);
+    this.adInsHelperService.OpenCustomerCoyViewByCustId(custId);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
@@ -9,9 +10,9 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 })
 export class SurveyTaskViewComponent implements OnInit {
   SrvyTaskId: string;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       if (params["SrvyTaskId"] != null) {
         this.SrvyTaskId = params["SrvyTaskId"];

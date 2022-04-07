@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
@@ -14,13 +14,13 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class VendorSchemeMemberPagingComponent implements OnInit {
 
   VendorSchmId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   MrVendorCategoryCode: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_SCHM_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
     this.route.queryParams.subscribe(params => {
       this.VendorSchmId = params["VendorSchmId"];
       this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -32,7 +32,7 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorSchemeMember.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorSchemeMember.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteVendorSchmMember;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteVendorSchmMember;
 
     var critInput = new CriteriaObj();
     critInput.propName = "vsm.VENDOR_SCHM_ID";

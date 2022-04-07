@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
@@ -7,9 +8,9 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
   styleUrls: ['./customer-view-personal-detail.component.scss']
 })
 export class CustomerViewPersonalDetailComponent implements OnInit {
-  viewCustMainDataMainInfo : UcViewGenericObj = new UcViewGenericObj();
-  viewCustMainDataContactInformation: UcViewGenericObj = new UcViewGenericObj();
-  constructor() {
+  viewCustMainDataMainInfo : UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewCustMainDataContactInformation: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  constructor(private UrlConstantNew: UrlConstantNew) {
   }
 
   ngOnInit() {

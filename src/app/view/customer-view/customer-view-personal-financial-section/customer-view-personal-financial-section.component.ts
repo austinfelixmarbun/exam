@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DatePipe } from '@angular/common';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
@@ -26,7 +26,8 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   custObj: CustObj = new CustObj();
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router) {
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.CustId = params["IdCust"];
@@ -40,14 +41,14 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   async ngOnInit() {
     this.custObj = new CustObj();
     this.custObj.CustId = this.CustId;
-    await this.http.post(URLConstant.GetListCustPersonalFinDataForCustViewByCustId, {custId : this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListCustPersonalFinDataForCustViewByCustId, {custId : this.CustId }).toPromise().then(
       (response) => {
         console.log(response)
         this.ListCustPersonalFinData = response["ListCustPersonalFinDataForCustView"];
       }
     );
 
-    await this.http.post(URLConstant.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).toPromise().then(
       (response) => {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
         console.log(this.responseCustAttr);

@@ -9,6 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-failed-journal-list-paging',
@@ -16,18 +17,18 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   styleUrls: ['./failed-journal-list-paging.component.css']
 })
 export class FailedJournalListPagingComponent implements OnInit {
-  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  ucTempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   user: any;
 
   listTemp = [];
 
   isSelected
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.ucTempPagingObj.urlJson = "./assets/ucpaging/journal/paging-failed-journal-result-list.json";
     this.ucTempPagingObj.pagingJson = "./assets/ucpaging/journal/paging-failed-journal-result-list.json";
-    this.ucTempPagingObj.apiQryPaging = URLConstant.GetJournalResultPagingObjectBySQL;
+    this.ucTempPagingObj.apiQryPaging = this.UrlConstantNew.GetJournalResultPagingObjectBySQL;
   }
 
   CallBack(ev: any) {
@@ -47,7 +48,7 @@ export class FailedJournalListPagingComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(environment.FoundationR3Url + URLConstant.RerunJournal, {
+    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
       ListTransactionNo: req
     }, AdInsConstant.SpinnerOptions).subscribe(
       res => {

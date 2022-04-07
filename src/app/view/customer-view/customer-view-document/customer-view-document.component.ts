@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from 'environments/environment';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DMSObj } from 'app/shared/model/dms/dms-obj.model';
 import { DMSLabelValueObj } from 'app/shared/model/dms/dms-label-value-obj.model';
 import { CookieService } from 'ngx-cookie';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-customer-view-document',
   templateUrl: './customer-view-document.component.html'
@@ -25,7 +23,8 @@ export class CustomerViewDocumentComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
@@ -36,7 +35,7 @@ export class CustomerViewDocumentComponent implements OnInit {
 
   async ngOnInit() {
     var custObj = { "CustId": this.CustId };
-    await this.http.post(URLConstant.GetCustByCustId, {Id : this.CustId}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustId, {Id : this.CustId}).toPromise().then(
       (response: any) => {
         let currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.dmsObj = new DMSObj();

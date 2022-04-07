@@ -1,8 +1,8 @@
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcpagingComponent } from '@adins/ucpaging';
 
@@ -13,14 +13,14 @@ import { UcpagingComponent } from '@adins/ucpaging';
 })
 export class CustomerShareholderMenuComponent implements OnInit {
   @ViewChild('ucPaging') ucPaging: UcpagingComponent;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchCustShareholder.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCustShareholder.json";
-    this.inputPagingObj.deleteUrl = URLConstant.DeleteAssetAccessory;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAssetAccessory;
   }
 
   getEvent(e: any){
@@ -28,7 +28,7 @@ export class CustomerShareholderMenuComponent implements OnInit {
       if(confirm("Update to Main Customer?")){
         var ReqByIdObj = new GenericObj();
         ReqByIdObj.Id = e.RowObj.ShareholderId;
-        this.http.post(URLConstant.UpdateToMainCustomer, ReqByIdObj).subscribe(
+        this.http.post(this.UrlConstantNew.UpdateToMainCustomer, ReqByIdObj).subscribe(
           (response) => {
             this.toastr.successMessage(response['message']);
             this.ucPaging.reset();

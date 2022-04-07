@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-highligt-comment',
@@ -16,7 +16,7 @@ export class CustomerViewHighligtCommentComponent implements OnInit {
   InputBy : any;
 
 
-  constructor(private http: HttpClient ,private route: ActivatedRoute  ) { }
+  constructor(private http: HttpClient ,private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
 
@@ -31,7 +31,7 @@ export class CustomerViewHighligtCommentComponent implements OnInit {
 
   GetListCustHighlightComment(CustId){
     var DealerCustNoObj = { Id: CustId };
-    this.http.post(URLConstant.GetCustHighlightCommentByCustId, DealerCustNoObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustHighlightCommentByCustId, DealerCustNoObj).subscribe(
       response => {
         this.listCustHighlightCommentObj = response["ReturnObject"];
       }

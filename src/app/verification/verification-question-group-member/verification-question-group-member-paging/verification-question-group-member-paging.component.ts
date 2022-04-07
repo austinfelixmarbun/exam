@@ -4,11 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfQuestionGrpHObj } from 'app/shared/model/verf-question-grp-h-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
@@ -25,7 +25,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
   readonly AddLink: string = NavigationConstant.VERIF_QA_GRP_MBR_ADD;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
    })
@@ -38,7 +38,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.http.post(URLConstant.GetQuestionGrpHForUpdateById, {Id : this.VerfQuestionGrpHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetQuestionGrpHForUpdateById, {Id : this.VerfQuestionGrpHId}).subscribe(
       (response) => {
         this.verfQuestionGroup = response[CommonConstant.ReturnObj];
           this.VerfQuestionGrpCode = this.verfQuestionGroup.VerfQuestionGrpCode,
@@ -57,7 +57,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   Delete(verfQuestionGrpDId){
     if (confirm("Are you sure to delete this record?")) {
       var verfGroupDIdObj = {Id: verfQuestionGrpDId};
-      this.http.post(URLConstant.DeleteVerfQuestionGroupDById, verfGroupDIdObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.DeleteVerfQuestionGroupDById, verfGroupDIdObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.GetVerfQuestionGrpDByGrpHId();
@@ -68,7 +68,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
 
 
   GetVerfQuestionGrpDByGrpHId(){
-    this.http.post(URLConstant.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVerfQuestionGrpDByGrpHId, {Id : this.VerfQuestionGrpHId}).subscribe(
       (response) => {
         this.listVerfQuestionGrpD = response[CommonConstant.ReturnObj];
       }

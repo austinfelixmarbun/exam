@@ -9,11 +9,11 @@ import { OrgJobTitleObj } from 'app/shared/model/org-job-title-obj.model';
 import { formatDate } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -55,7 +55,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
   arrCrit: any;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_EMP_POS;
-  constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['param'] != null) {
         this.pageType = params['param'];
@@ -91,16 +91,16 @@ export class OfficeEmpPosAddComponent implements OnInit {
     const getuserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.refOfficeId = getuserAccess.refOfficeId
     this.refOfficeObj = new RefOfficeObj()
-    this.httpClient.post(URLConstant.GetAllRefOffice, null).subscribe(
+    this.http.post(this.UrlConstantNew.GetAllRefOffice, null).subscribe(
       (response) => {
         this.allRefOffice = response['returnObject']
       })
     this.refOfficeObj.RefOfficeId = this.refOfficeId
-    this.httpClient.post(URLConstant.GetEmpListByOfficeIdAndIsActive, this.refOfficeObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetEmpListByOfficeIdAndIsActive, this.refOfficeObj).subscribe(
       (response) => {
         this.allSupervisor = response['returnObject']
       })
-    this.httpClient.post(URLConstant.GetRefBizUnitByOffice, this.refOfficeObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefBizUnitByOffice, this.refOfficeObj).subscribe(
       (response) => {
         this.allBiz = response['returnObject']
       })
@@ -108,7 +108,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.empPositionObj = new EmpPositionObj();
       this.empPositionObj.empPositionId = this.empPositionId
       this.onChangeBiz(this.refBizUnitId)
-      this.httpClient.post(URLConstant.GetEmpByEmpPositionId, this.empPositionObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetEmpByEmpPositionId, this.empPositionObj).subscribe(
         (response) => {
           this.resultData = response['returnObject'];
           this.refOfficeId = response['returnObject']['refOfficeId']
@@ -133,7 +133,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       bizValue = 0
     }
     this.orgJobTitleObj.orgMdlStrucId = bizValue
-    this.httpClient.post(URLConstant.GetOrgJobTitleByMdlStruc, this.orgJobTitleObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetOrgJobTitleByMdlStruc, this.orgJobTitleObj).subscribe(
       (response) => {
         this.allOrgJobTitle = response['returnObject']
       })
@@ -151,7 +151,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
 
-      this.httpClient.post(URLConstant.AddEmpPosition, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddEmpPosition, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
@@ -170,7 +170,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       else {
         this.empPositionObj.isActive = CommonConstant.TRUE_CONDITION;
       }
-      this.httpClient.post(URLConstant.EditEmpPosition, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditEmpPosition, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
           AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE], {});

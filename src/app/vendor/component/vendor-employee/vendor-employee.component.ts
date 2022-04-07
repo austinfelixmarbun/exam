@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { environment } from 'environments/environment';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
@@ -11,14 +10,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VendorEmpObj } from 'app/shared/model/vendor-emp-obj.model';
 import { formatDate } from '@angular/common';
 import { WizardComponent } from 'angular-archwizard';
-import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -36,9 +34,9 @@ export class VendorEmployeeComponent implements OnInit {
   VendorBranchEmpObj: VendorBranchEmpObj = new VendorBranchEmpObj();
   result: any;
   resultVendorEmpAndAddr: any;
-  inputLookupInternalEmpObj: InputLookupObj = new InputLookupObj();
-  inputLookupSpvObj: InputLookupObj = new InputLookupObj();
-  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj();
+  inputLookupInternalEmpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupSpvObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   VendorPositionList = new Array();
   IdTypeList = new Array();
   itemCalcMethodType: any;
@@ -75,7 +73,7 @@ export class VendorEmployeeComponent implements OnInit {
     IsNpwpExist: [false]
   });
 
-  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["mode"] != null) {
         this.mode = params["mode"];
@@ -128,7 +126,7 @@ export class VendorEmployeeComponent implements OnInit {
       }
     }
 
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterVendorPosition).subscribe(
       (response) => {
         this.VendorPositionList = response[CommonConstant.ReturnObj];
         if (this.VendorPositionList.length > 0) {
@@ -143,7 +141,7 @@ export class VendorEmployeeComponent implements OnInit {
     var RefMasterIdType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         this.IdTypeList = response[CommonConstant.ReturnObj];
         if (this.IdTypeList.length > 0) {
@@ -161,7 +159,7 @@ export class VendorEmployeeComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -175,7 +173,7 @@ export class VendorEmployeeComponent implements OnInit {
     );
 
    
-    this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -250,7 +248,7 @@ export class VendorEmployeeComponent implements OnInit {
     var vendorEmpObj = new VendorEmpObj();
     vendorEmpObj.VendorId = null;
     vendorEmpObj.VendorEmpId = this.objInput.VendorEmpId;
-    await this.http.post(URLConstant.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).toPromise().then(
       (response) => {
         this.resultVendorEmpAndAddr = response;
         console.log(this.resultVendorEmpAndAddr);
@@ -362,7 +360,7 @@ export class VendorEmployeeComponent implements OnInit {
     }
 
     if (this.mode == "add") {
-      this.http.post<GenericObj>(URLConstant.AddVendorBranchEmpV2, this.VendorBranchEmpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post<GenericObj>(this.UrlConstantNew.AddVendorBranchEmpV2, this.VendorBranchEmpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.mode = "edit";
           this.objInput.VendorEmpId = response.Id;
@@ -377,7 +375,7 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorBranchEmpObj.VendorAddrObj.RowVersion = this.resultVendorEmpAndAddr.VendorAddrObj.RowVersion;
       this.VendorBranchEmpObj.VendorEmpObj.TaxpayerNo = this.resultVendorEmpAndAddr.VendorEmpObj.TaxpayerNo;
 
-      this.http.post(URLConstant.EditVendorBranchEmpV2, this.VendorBranchEmpObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVendorBranchEmpV2, this.VendorBranchEmpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           this.wizard.goToNextStep();

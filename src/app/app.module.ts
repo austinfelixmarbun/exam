@@ -37,6 +37,7 @@ import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 import { AddressService } from './shared/services/custAddr.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
+import { AdInsHelperService } from './shared/services/AdInsHelper.service';
 import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -95,7 +96,6 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
     providers: [
         AuthService,
         AuthGuard,
-        ErrorDialogService,
         RolePickService,
         RolePickNewService,
         StorageService,
@@ -103,15 +103,17 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         ClaimTaskService,
         ApprovalTaskService,
         AddressService,
-        // UrlConstantNew,
-        // EnviConfigService,
-        // {
-        //     provide: APP_INITIALIZER, useFactory: appConfig, multi: true, deps: [EnviConfigService]
-        // },
-        // UrlConstantService,
-        // {
-        //     provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
-        // },
+        AdInsHelperService,
+        UrlConstantNew,
+        EnviConfigService,
+        {
+            provide: APP_INITIALIZER, useFactory: enviConfig, multi: true, deps: [EnviConfigService]
+        },
+        UrlConstantService,
+        {
+            provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
+        },
+        ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
 import { Validators, FormBuilder, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -8,9 +7,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ScoreCategorySchmHObj } from 'app/shared/model/score-category/score-category-Schm-h-obj.model';
 import { ScoreCategorySchmDObj } from 'app/shared/model/score-category/score-category-schm-d-obj.model';
 import { ListScoreCategorySchmDObj } from 'app/shared/model/score-category/list-score-category-schm-d-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-score-category-scoring',
@@ -34,9 +33,10 @@ export class ScoreCategoryScoringComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['ScoreCategorySchmHId'] != null) {
@@ -48,7 +48,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
 
   ngOnInit() {   
     this.scoreCategorySchmHObj.ScoreCategorySchmHId = this.scoreCategorySchmHId;
-    this.httpClient.post(URLConstant.GetRefScoreCategoryTypeWithDetailById, {Id : this.scoreCategorySchmHId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefScoreCategoryTypeWithDetailById, {Id : this.scoreCategorySchmHId}).subscribe(
       (response) => {
         this.scoreCategorySchmHObj.ScoreCategorySchmHCode = response["ScoreCategorySchmHCode"];
         this.scoreCategorySchmHObj.ScoreCategorySchmHName = response["ScoreCategorySchmHName"];
@@ -150,7 +150,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       }
     }
 
-    this.httpClient.post(URLConstant.AddRangeScoreCategorySchmD, this.listScoreCategorySchmDObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddRangeScoreCategorySchmD, this.listScoreCategorySchmDObj, AdInsConstant.SpinnerOptions).subscribe(
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);

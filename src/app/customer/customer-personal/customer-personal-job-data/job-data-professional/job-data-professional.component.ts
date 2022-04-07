@@ -19,6 +19,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AddressService } from 'app/shared/services/custAddr.service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
@@ -107,7 +108,7 @@ export class JobDataProfessionalComponent implements OnInit {
   listAddrRequiredOwnership: Array<string> = new Array();
   isReady: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private addressService: AddressService) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private addressService: AddressService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -139,13 +140,13 @@ export class JobDataProfessionalComponent implements OnInit {
     this.MaxDate.setDate(this.MaxDate.getDate() - 1);
     this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
-    this.inputFieldAddressObj = new InputFieldObj();
-    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
-    this.inputPreJobAddressObj = new InputFieldObj();
-    this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputPreJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
 
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = true;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -160,13 +161,13 @@ export class JobDataProfessionalComponent implements OnInit {
     this.professionLookUpObj.addCritInput = listCriteriaObj;
 
 
-    this.industryLookUpObj = new InputLookupObj();
+    this.industryLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.industryLookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.industryLookUpObj.isRequired = true;
 
-    this.companyLookupObj = new InputLookupObj();
+    this.companyLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.companyLookupObj.urlJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.pagingJson = "./assets/uclookup/Customer/lookupCompany.json";
     this.companyLookupObj.genericJson = "./assets/uclookup/Customer/lookupCompany.json";
@@ -189,7 +190,7 @@ export class JobDataProfessionalComponent implements OnInit {
     this.companyLookupObj.addCritInput = this.ArrAddCritCoy;
     this.companyLookupObj.isReady = true;
 
-    this.inputOthBizAddressObj = new InputAddressObj();
+    this.inputOthBizAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputOthBizAddressObj.showSubsection = false;
     this.inputOthBizAddressObj.isRequired = false;
     this.inputOthBizAddressObj.title = "Other Business Address";
@@ -197,12 +198,12 @@ export class JobDataProfessionalComponent implements OnInit {
     this.inputOthBizAddressObj.requiredOwnership = this.setOwnership(CommonConstant.CustAddrTypeOthBiz);
     
 
-    this.inputOtherAddressObj = new InputFieldObj();
-    this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
+    this.inputOtherAddressObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputOtherAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputOtherAddressObj.inputLookupObj.isRequired = false;
     this.inputOthBizAddressObj.inputField = this.inputOtherAddressObj;
 
-    this.http.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: this.IdCust }).toPromise().then(
       (response: any) => {
         this.returnCustJobDataObj = response;
 
@@ -228,7 +229,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
 
           if (!this.IsReset && this.returnCustJobDataObj.RefProfessionId) {
-            this.http.post(URLConstant.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetRefProfessionById, { Id: this.returnCustJobDataObj.RefProfessionId }).toPromise().then(
               (response) => {
                 this.returnRefProfessionObj = response;
                 this.professionLookUpObj.nameSelect = this.returnRefProfessionObj.ProfessionName;
@@ -239,7 +240,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
 
           if (this.returnCustJobDataObj.RefIndustryTypeId != null) {
-            this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: this.returnCustJobDataObj.RefIndustryTypeId }).toPromise().then(
               (response) => {
                 this.returnIndustryTypeObj = response;
 
@@ -253,7 +254,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.JobAddrId != null) {
             this.custAddrObj = new CustAddrObj();
             this.custAddrObj.CustAddrId = this.returnCustJobDataObj.JobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrObj.CustAddrId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getCustomerAddr = response;
                 this.JobDataProForm.patchValue({
@@ -280,8 +281,8 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.addressObj.Fax = this.getCustomerAddr.Fax;
                 this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
 
-                this.inputFieldAddressObj = new InputFieldObj();
-                this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputFieldAddressObj.inputLookupObj.nameSelect = this.getCustomerAddr.Zipcode;
                 this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getCustomerAddr.Zipcode };
                 this.inputAddressObj.default = this.addressObj;
@@ -291,7 +292,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.PrevJobAddrId != null) {
             this.preJobAddrObj = new CustAddrObj();
             this.preJobAddrObj.CustAddrId = this.returnCustJobDataObj.PrevJobAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.preJobAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getPreJobAddr = response;
                 this.JobDataProForm.patchValue({
@@ -318,8 +319,8 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.preJobAddrObj.Fax = this.getPreJobAddr.Fax;
                 this.preJobAddrObj.MrHouseOwnershipCode = this.getPreJobAddr.MrBuildingOwnershipCode;
 
-                this.inputPreJobAddressObj = new InputFieldObj();
-                this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputPreJobAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputPreJobAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputPreJobAddressObj.inputLookupObj.isRequired = false;
                 this.inputPreJobAddressObj.inputLookupObj.nameSelect = this.getPreJobAddr.Zipcode;
                 this.inputPreJobAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getPreJobAddr.Zipcode };
@@ -333,7 +334,7 @@ export class JobDataProfessionalComponent implements OnInit {
           if (this.returnCustJobDataObj.OthBizAddrId != null) {
             this.custOthBizAddrObj = new CustAddrObj();
             this.custOthBizAddrObj.CustAddrId = this.returnCustJobDataObj.OthBizAddrId;
-            this.http.post(URLConstant.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).toPromise().then(
+            this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custOthBizAddrObj.CustAddrId }).toPromise().then(
               (response) => {
                 this.getOthBizAddr = response;
                 this.JobDataProForm.patchValue({
@@ -360,8 +361,8 @@ export class JobDataProfessionalComponent implements OnInit {
                 this.otherAddrObj.Fax = this.getOthBizAddr.Fax;
                 this.otherAddrObj.MrHouseOwnershipCode = this.getOthBizAddr.MrBuildingOwnershipCode;
 
-                this.inputOtherAddressObj = new InputFieldObj();
-                this.inputOtherAddressObj.inputLookupObj = new InputLookupObj();
+                this.inputOtherAddressObj = new InputFieldObj(this.UrlConstantNew);
+                this.inputOtherAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
                 this.inputOtherAddressObj.inputLookupObj.isRequired = false;
                 this.inputOtherAddressObj.inputLookupObj.nameSelect = this.getOthBizAddr.Zipcode;
                 this.inputOtherAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.getOthBizAddr.Zipcode };
@@ -388,11 +389,11 @@ export class JobDataProfessionalComponent implements OnInit {
           this.typePage = "edit";
         }
       });
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.showSubsection = false;
     this.inputAddressObj.title = "Job Address";
 
-    this.inputPreviousAddressObj = new InputAddressObj();
+    this.inputPreviousAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputPreviousAddressObj.showSubsection = false;
     this.inputPreviousAddressObj.isRequired = false;
     this.inputPreviousAddressObj.title = "Previous Job Address";
@@ -551,7 +552,7 @@ export class JobDataProfessionalComponent implements OnInit {
         return false;
       }
 
-      await this.http.post(URLConstant.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
+      await this.http.post(this.UrlConstantNew.EditCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           if (!IsParent) this.outputTab.emit({ stepMode: "next" });
@@ -584,7 +585,7 @@ export class JobDataProfessionalComponent implements OnInit {
         return false;
       }
 
-      await this.http.post(URLConstant.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddCustPersonalJobData, this.reqCustPersonalJobDataObj).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["message"]);
           if (!IsParent) this.outputTab.emit({ stepMode: "next" });

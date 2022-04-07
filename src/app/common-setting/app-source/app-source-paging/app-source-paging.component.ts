@@ -5,6 +5,7 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { Router } from '@angular/router';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-app-source-paging',
@@ -12,9 +13,9 @@ import { Router } from '@angular/router';
 })
 export class AppSourcePagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchAppSource.json";

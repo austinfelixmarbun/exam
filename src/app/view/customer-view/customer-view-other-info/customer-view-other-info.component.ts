@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-other-info',
@@ -16,7 +16,7 @@ export class CustomerViewOtherInfoComponent implements OnInit {
   IsReady: boolean = false;
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
         this.CustId = params['CustId'];
@@ -28,11 +28,11 @@ export class CustomerViewOtherInfoComponent implements OnInit {
   readonly AttrInputTypeNum: string = CommonConstant.AttrInputTypeNum;
   readonly AttrInputTypeNumPerc: string = CommonConstant.AttrInputTypeNumPerc;
   ngOnInit() {
-    this.http.post(URLConstant.GetCustOtherInfoByCustId, { Id : this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustOtherInfoByCustId, { Id : this.CustId }).subscribe(
       (response: any) => { 
         this.CustOtherInfoObj = response;
 
-        this.http.post(URLConstant.GetCustAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
+        this.http.post(this.UrlConstantNew.GetCustAttrContentForCustViewByCustId, { Id : this.CustId }).subscribe(
           (response: any) => {
             this.CustAttrContentObj = response[CommonConstant.ReturnObj];
 

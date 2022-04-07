@@ -14,7 +14,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CookieService } from 'ngx-cookie';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { DatePipe } from '@angular/common';
@@ -24,6 +23,7 @@ import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-system-user-add',
@@ -72,7 +72,7 @@ export class SystemUserAddComponent implements OnInit {
     BankAccName: ['', [Validators.required]],
     APIKey:['']
   });
-  inputFieldAddr: InputFieldObj = new InputFieldObj();
+  inputFieldAddr: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
   
@@ -81,12 +81,12 @@ export class SystemUserAddComponent implements OnInit {
     private regexService: RegexService, 
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
-    private http: HttpClient, 
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["RefEmpId"] != null) {
@@ -99,7 +99,7 @@ export class SystemUserAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response: {GsValue}) => {
         this.passwordPattern = response.GsValue;
       }
@@ -176,7 +176,7 @@ export class SystemUserAddComponent implements OnInit {
     var RefMasterIdType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
-    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.IdTypeList = response[CommonConstant.ReturnObj];
@@ -193,7 +193,7 @@ export class SystemUserAddComponent implements OnInit {
       }
     );
 
-    this.inputLookupBankObj = new InputLookupObj();
+    this.inputLookupBankObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -203,7 +203,7 @@ export class SystemUserAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.http.post(URLConstant.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
         (response) => {
           this.refEmpObj = response['RefEmpObj'];
           this.refUserObj = response['RefUserObj'];
@@ -262,13 +262,13 @@ export class SystemUserAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.refEmpObj.PhnExt3;
           this.addressObj.FaxArea = this.refEmpObj.FaxArea;
           this.addressObj.Fax = this.refEmpObj.Fax;
-          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
         }
       );
     }
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.requiredPhn1 = true;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
@@ -340,7 +340,7 @@ export class SystemUserAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.httpClient.post(URLConstant.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
@@ -350,7 +350,7 @@ export class SystemUserAddComponent implements OnInit {
     else {
       refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
       refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(URLConstant.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
@@ -415,7 +415,7 @@ export class SystemUserAddComponent implements OnInit {
   regenetate(){
     var refEmpFormData = this.RefEmpForm.value;
     
-    this.httpClient.post(URLConstant.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();
@@ -425,7 +425,7 @@ export class SystemUserAddComponent implements OnInit {
 
   revoke(){
     var refEmpFormData = this.RefEmpForm.value;
-    this.httpClient.post(URLConstant.RevokeAPIKey, {UserName : refEmpFormData.Username}, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.RevokeAPIKey, {UserName : refEmpFormData.Username}, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();

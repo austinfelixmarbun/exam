@@ -7,6 +7,7 @@ import { AdInsHelper } from "app/shared/AdInsHelper";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { URLConstant } from "app/shared/constant/URLConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { GeneralSettingObj } from "app/shared/model/general-setting-obj.model";
 import { InputAddressObj } from "app/shared/model/input-address-obj.model";
@@ -21,14 +22,14 @@ import { AddressService } from "app/shared/services/custAddr.service";
 @Injectable()
 export class NewCustSetData {
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private addressService: AddressService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private router: Router, private addressService: AddressService, private UrlConstantNew: UrlConstantNew) { }
 
   public async BindSetLegalAddr(): Promise<InputAddressObj> {
     let listAddrRequiredOwnership: Array<string> = new Array();
     listAddrRequiredOwnership = await this.addressService.GetListAddrTypeOwnershipMandatory();
-    let inputFieldObj = new InputFieldObj();
-    inputFieldObj.inputLookupObj = new InputLookupObj();
-    let inputAddressObj = new InputAddressObj();
+    let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+    let inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     inputAddressObj.showSubsection = false;
     inputAddressObj.title = "Customer Address";
     inputAddressObj.inputField = inputFieldObj;
@@ -39,16 +40,16 @@ export class NewCustSetData {
     return inputAddressObj;
   }
 
-  public static BindLookupPositionSlik(): InputLookupObj {
-    let inputLookupObjName = new InputLookupObj();
+  public BindLookupPositionSlik(): InputLookupObj {
+    let inputLookupObjName = new InputLookupObj(this.UrlConstantNew);
     inputLookupObjName.urlJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
     inputLookupObjName.pagingJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
     inputLookupObjName.genericJson = "./assets/uclookup/Customer/lookupPositionSlik.json";
     return inputLookupObjName;
   }
 
-  public static BindLookupExistingCust(CustId: number, listCustNoToExclude: Array<string>, MrCustTypeCode: string): InputLookupObj {
-    let existingCustomerLookUpObj = new InputLookupObj();
+  public BindLookupExistingCust(CustId: number, listCustNoToExclude: Array<string>, MrCustTypeCode: string): InputLookupObj {
+    let existingCustomerLookUpObj = new InputLookupObj(this.UrlConstantNew);
     existingCustomerLookUpObj.isReadonly = false;
     existingCustomerLookUpObj.urlJson = "./assets/lookup/lookupExistingCustomer.json";
     existingCustomerLookUpObj.pagingJson = "./assets/lookup/lookupExistingCustomer.json";
@@ -59,7 +60,7 @@ export class NewCustSetData {
     return existingCustomerLookUpObj;
   }
 
-  public static ResetCriteriaExisting(CustId: number, listCustNoToExclude: Array<string>, MrCustTypeCode: string, IsMarried: boolean = false, ParentGenderCode: string = ""): Array<CriteriaObj> {
+  public ResetCriteriaExisting(CustId: number, listCustNoToExclude: Array<string>, MrCustTypeCode: string, IsMarried: boolean = false, ParentGenderCode: string = ""): Array<CriteriaObj> {
     let criteriaListCust = new Array();
     if (listCustNoToExclude.length > 0) {
 
@@ -105,8 +106,8 @@ export class NewCustSetData {
     return criteriaListCust;
   }
 
-  public static initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = URLConstant.GetListActiveRefMaster): UcDropdownListObj {
-    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj();
+  public initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = this.UrlConstantNew.GetListActiveRefMaster): UcDropdownListObj {
+    let tempDdlObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
     let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
       MappingCode: mappingCode
@@ -114,7 +115,7 @@ export class NewCustSetData {
     tempDdlObj.apiUrl = apiUrl;
     tempDdlObj.requestObj = ReqRefMasterObj;
     tempDdlObj.isSelectOutput = isSelectOutput;
-    if (apiUrl == URLConstant.GetListActiveRefMasterDetail) {
+    if (apiUrl == this.UrlConstantNew.GetListActiveRefMasterDetail) {
       tempDdlObj.customKey = "MasterCode";
       tempDdlObj.customValue = "Descr";
     }
@@ -123,7 +124,7 @@ export class NewCustSetData {
   }
 
   public async FilterAddr(listAddr: Array<KeyValueObj>): Promise<Array<KeyValueObj>> {
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeFilterAddr }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GsValue) {
           let listAddrToFilter: Array<string> = result.GsValue.split(';');
@@ -139,7 +140,7 @@ export class NewCustSetData {
   }
 
   public async SendCustomerDataToRabbitMq(CustNo: string, UrlBack: string = NavigationConstant.CUST_PAGING) {
-    await this.http.post(URLConstant.SendCustomerDataToRabbitMq, { CustNo: CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.SendCustomerDataToRabbitMq, { CustNo: CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");

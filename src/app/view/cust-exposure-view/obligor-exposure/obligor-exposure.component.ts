@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CrdExpsrAppAgrHistObj } from 'app/shared/model/credit-review/crd-expsr-app-agr-hist-obj.model';
 import { CustExpsrBucketObj } from 'app/shared/model/credit-review/cust-expsr-bucket-obj.model';
 import { CustExpsrDObj } from 'app/shared/model/credit-review/cust-expsr-d-obj.model';
@@ -33,7 +33,8 @@ export class ObligorExposureComponent implements OnInit {
 
   constructor(
     // private route: ActivatedRoute,
-    private http: HttpClient,
+    private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ExposureDObj: CustExpsrDObj = new CustExpsrDObj();
@@ -59,7 +60,7 @@ export class ObligorExposureComponent implements OnInit {
   ListCustExpsrBucketObj: Array<CustExpsrBucketObj> = new Array<CustExpsrBucketObj>();
   async GetListCustExpsrBucketByCustExpsrDId() {
     if (this.exposureHObj == null) return;
-    await this.http.post<{ ListCustExpsrBucketObj: Array<CustExpsrBucketObj> }>(URLConstant.GetListCustExpsrBucketByCustExpsrDId, { Id: this.ExposureDObj.CustExpsrDId }).toPromise().then(
+    await this.http.post<{ ListCustExpsrBucketObj: Array<CustExpsrBucketObj> }>(this.UrlConstantNew.GetListCustExpsrBucketByCustExpsrDId, { Id: this.ExposureDObj.CustExpsrDId }).toPromise().then(
       (response) => {
         console.log(response);
         this.ListCustExpsrBucketObj = response.ListCustExpsrBucketObj;
@@ -84,7 +85,7 @@ export class ObligorExposureComponent implements OnInit {
 
   async GetListCustExpsrAppAgrHistByCustExpsrHId() {
     if (this.exposureHObj == null) return;
-    await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(URLConstant.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.exposureHObj.CustExpsrHId }).toPromise().then(
+    await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(this.UrlConstantNew.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.exposureHObj.CustExpsrHId }).toPromise().then(
       (response) => {
         console.log(response);
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {

@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-view-coy-financial-section',
@@ -20,7 +20,8 @@ export class CustomerViewCoyFinancialSectionComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router) 
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew) 
   {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
@@ -36,7 +37,7 @@ export class CustomerViewCoyFinancialSectionComponent implements OnInit {
   async getListCustCoyFinData()
   {
     this.ListCustCoyFinData = [];
-    await this.http.post(URLConstant.GetListCustCompanyFinDataByCustId,  {Id: this.CustId}).toPromise().then((response) => {
+    await this.http.post(this.UrlConstantNew.GetListCustCompanyFinDataByCustId,  {Id: this.CustId}).toPromise().then((response) => {
       console.log(response)
       this.ListCustCoyFinData = response['ListCustCompanyFinData'];
     });

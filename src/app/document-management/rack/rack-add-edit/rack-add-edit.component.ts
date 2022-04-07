@@ -5,11 +5,10 @@ import { CabinetWithListRackObj } from 'app/shared/model/document-management/cab
 import { RackObj } from 'app/shared/model/document-management/rack-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { environment } from 'environments/environment';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CabinetObj } from 'app/shared/model/document-management/cabinet-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-rack-add-edit',
@@ -37,7 +36,8 @@ export class RackAddEditComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private http: HttpClient,
-    private toastr: NGXToastrService) { 
+    private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew) { 
     this.activeRoute.queryParams.subscribe(
       params => {
         if(params['RackCode'] !== null){
@@ -55,7 +55,7 @@ export class RackAddEditComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.CabinetCode);
-    this.http.post<CabinetObj>(URLConstant.GetCabinetByCode, {Code: this.CabinetCode}).subscribe(
+    this.http.post<CabinetObj>(this.UrlConstantNew.GetCabinetByCode, {Code: this.CabinetCode}).subscribe(
       (response) => {
         this.Cabinet = response;
         this.CabinetId = this.Cabinet.CabinetId;
@@ -65,7 +65,7 @@ export class RackAddEditComponent implements OnInit {
           this.RackForm.controls.RackCode.disable();
           this.rack.RackCode = this.RackCode;
           console.log(this.CabinetId);
-          this.http.post<CabinetWithListRackObj>(URLConstant.GetCabinetAndRackByRackCodeAndCabinetId, {RackCode: this.RackCode, CabinetId: this.CabinetId}).subscribe(
+          this.http.post<CabinetWithListRackObj>(this.UrlConstantNew.GetCabinetAndRackByRackCodeAndCabinetId, {RackCode: this.RackCode, CabinetId: this.CabinetId}).subscribe(
             (response) => {
               this.cabinetWithRackObj = response;
               this.RackForm.controls['RackCode'].patchValue(response.ListRack[0].RackCode);
@@ -94,7 +94,7 @@ export class RackAddEditComponent implements OnInit {
     if(this.Mode === 'Edit'){
       this.rack.CabinetId = this.cabinetWithRackObj.CabinetId;
       this.rack.CurrentRackCode = this.RackCode;
-      this.http.post(URLConstant.EditRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });
@@ -107,7 +107,7 @@ export class RackAddEditComponent implements OnInit {
     else {
       this.rack.CabinetCode = this.CabinetCode;
       this.rack.CabinetId = this.Cabinet.CabinetId;
-      this.http.post(URLConstant.AddRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRack, this.rack, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage("Success.");
           this.router.navigate([NavigationConstant.DOC_MNGMNT_RACK_PAGING], { queryParams: { CabinetCode: this.CabinetCode } });

@@ -3,11 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { PathConstant } from 'app/shared/PathConstant';
 
 @Component({
   selector: 'app-pefindo-view',
@@ -21,7 +20,7 @@ export class PefindoViewComponent implements OnInit {
   CustObj: CustObj = new CustObj();
   MrCustTypeCode: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["CustNo"] != null) {
         this.CustNo = params["CustNo"];
@@ -46,7 +45,7 @@ export class PefindoViewComponent implements OnInit {
     let reqByCustNo: GenericObj = new GenericObj();
     reqByCustNo.CustNo = this.CustNo;
     if(this.CustNo != null){
-      await this.http.post(URLConstant.GetCustByCustNo, reqByCustNo).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetCustByCustNo, reqByCustNo).toPromise().then(
         (response: CustObj) => {
           this.CustObj = response;
           this.Param = response.ThirdPartyTrxNo;

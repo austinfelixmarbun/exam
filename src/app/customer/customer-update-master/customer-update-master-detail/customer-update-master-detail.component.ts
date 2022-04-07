@@ -4,13 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 import Stepper from 'bs-stepper';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
@@ -23,7 +24,7 @@ import { CookieService } from 'ngx-cookie';
 export class CustomerUpdateMasterDetailComponent implements OnInit {
   private CompanyWizard: Stepper;
   private PersonalWizard: Stepper;
-  ViewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  ViewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   CustNoObj: GenericObj = new GenericObj();
   CustDataTrxId: number;
   CustNo: string;
@@ -59,7 +60,9 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private cookieService: CookieService,
-    private claimTaskService: ClaimTaskService
+    private claimTaskService: ClaimTaskService, 
+    private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["CustDataTrxId"] != null) {
@@ -85,7 +88,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     this.claimTask();
 
     this.CustNoObj.CustNo = this.CustNo;
-    await this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustNo, this.CustNoObj).toPromise().then(
       (response: CustObj) => {
         this.MrCustTypeCode = response.MrCustTypeCode;
         this.IdCust = response.CustId;
@@ -112,7 +115,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
       }
     )
 
-    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, {Id : this.IdCust}).toPromise().then(
       (response) => {
         if(response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried){
           this.isMarried = true;
@@ -122,11 +125,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   claimTask() {
-    if(environment.isCore){
-      this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
-    }else{
-      this.claimTaskService.ClaimTask(this.WfTaskListId);
-    }
+    this.claimTaskService.ClaimTaskV2(this.WfTaskListId);
   }
 
   EnterTab(step) {
@@ -204,6 +203,6 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
   }
 
   GetCallback(e) {
-    AdInsHelper.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
+    this.adInsHelperService.OpenProdOfferingViewByCodeAndVersion(e.ViewObj.ProdOfferingCode, e.ViewObj.ProdOfferingVersion);
   }
 }

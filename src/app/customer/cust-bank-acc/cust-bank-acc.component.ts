@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, NgForm, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustBankStmntObj } from 'app/shared/model/cust-bank-stmnt-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
@@ -13,6 +12,7 @@ import { CookieService } from 'ngx-cookie';
 import { CustBankAccObj } from 'app/shared/model/cust-bank-acc-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-bank-acc',
@@ -30,7 +30,7 @@ export class CustBankAccComponent implements OnInit {
   MonthObj: Array<KeyValueObj> = new Array();
   CustListBankStmntObj: Array<CustBankStmntObj> = new Array();
   BankStmntList: Array<CustBankStmntObj> = new Array();
-  InputLookupBankObj: InputLookupObj = new InputLookupObj();
+  InputLookupBankObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   CustBankAccList: Array<CustBankAccObj> = new Array<CustBankAccObj>();
 
   BankAccStmntForm = this.fb.group({
@@ -46,10 +46,11 @@ export class CustBankAccComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private toastr: NGXToastrService,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    this.http.post(URLConstant.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMonth }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMonth }).subscribe(
       (response) => {
         this.MonthObj = response[CommonConstant.ReturnObj];
         if (this.MonthObj.length > 0) {
@@ -68,7 +69,7 @@ export class CustBankAccComponent implements OnInit {
   }
 
   GetCustBankAccList() {
-    this.http.post(URLConstant.GetCBAForCustFinDataByCustId, {Id : this.CustId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetCBAForCustFinDataByCustId, {Id : this.CustId}).subscribe(
       (response: any) => {
         this.CustBankAccList = response.ListCBAForCustFinData;
       }
@@ -235,7 +236,7 @@ export class CustBankAccComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       let reqObj: GenericObj = new GenericObj();
       reqObj.Id = CustBankAccId;
-      this.http.post(URLConstant.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.DeleteCustBankAccAndStmnt, reqObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.GetCustBankAccList();
@@ -270,7 +271,7 @@ export class CustBankAccComponent implements OnInit {
     }
 
     if (this.Mode != "Edit") {
-      this.http.post(URLConstant.AddCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.OutputObj.emit({ Key: 'IsDetail', Value: false });
@@ -278,7 +279,7 @@ export class CustBankAccComponent implements OnInit {
           enjiForm.resetForm();
         });
     } else {
-      this.http.post(URLConstant.EditCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditCustBankAcc, this.BankAccObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.OutputObj.emit({ Key: 'IsDetail', Value: false });

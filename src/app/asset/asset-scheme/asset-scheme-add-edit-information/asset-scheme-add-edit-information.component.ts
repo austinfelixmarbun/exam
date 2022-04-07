@@ -6,10 +6,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AssetSchemeHObj } from 'app/shared/model/asset-scheme-h-obj.model';
 import { AssetTypeObj } from 'app/shared/model/asset-type-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-asset-scheme-add-edit-information',
@@ -31,7 +31,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
   AssetSchmCode: string;
 
   readonly CancelLink: string = NavigationConstant.ASSET_SCHM_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["param"] != null) {
         this.pageType = params["param"];
@@ -47,7 +47,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeAssetTypeId,
       RowVersion: ""
     }
-    this.http.post(URLConstant.GetListActiveAssetType, assetTypeObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveAssetType, assetTypeObj).subscribe(
       (response) => {
         this.ItemAssetType = response[CommonConstant.ReturnObj];
         if (this.pageType == "add") {
@@ -65,7 +65,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.AssetSchemeInfoForm.controls["AssetSchmCode"].disable();
 
-      this.http.post(URLConstant.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetAssetSchmHById, {Id: this.AssetSchmHId}).subscribe(
         (response: AssetSchemeHObj) => {
           this.resultData = response;
           this.RowVersion = this.resultData.RowVersion;
@@ -91,7 +91,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.assetSchmHObj.RowVersion = "";
-      this.http.post(URLConstant.AddAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});
@@ -102,7 +102,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       this.assetSchmHObj.AssetSchmHId = this.AssetSchmHId;
       this.assetSchmHObj.RowVersion = this.RowVersion;
       this.assetSchmHObj.AssetSchmCode = this.AssetSchmCode;
-      this.http.post(URLConstant.EditAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditAssetSchmH, this.assetSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_PAGING],{});
@@ -120,7 +120,7 @@ export class AssetSchemeAddEditInformationComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'environments/environment';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-app-source-office-member-add',
@@ -19,10 +17,10 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 export class AppSourceOfficeMemberAddComponent implements OnInit {
   listSelectedId: Array<number> = new Array<number>();
   RefAppSrcId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location,) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['RefAppSrcId'] != null) {
         this.RefAppSrcId = params['RefAppSrcId'];
@@ -57,7 +55,7 @@ export class AppSourceOfficeMemberAddComponent implements OnInit {
       RefAppSrcId : this.RefAppSrcId,
       RefOfficeIds: this.listSelectedId
     }
-    this.http.post(URLConstant.AddRefAppSrcOfficeMbr, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddRefAppSrcOfficeMbr, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/OfficeMember/Paging"],{ "RefAppSrcId": this.RefAppSrcId });

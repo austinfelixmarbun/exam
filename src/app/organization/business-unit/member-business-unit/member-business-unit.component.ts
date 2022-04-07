@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'member-app-business-unit',
@@ -13,11 +14,11 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class MemberBusinessUnitComponent implements OnInit {
   RefBizUnitId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly CancelLink: string = NavigationConstant.ORG_BZ_UNIT;
-  constructor(private route: ActivatedRoute){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
     this.route.queryParams.subscribe(params => {
       this.RefBizUnitId = params["RefBizUnitId"];
   })

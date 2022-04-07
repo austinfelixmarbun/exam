@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UpdateCustCompanyFinDataObj } from 'app/shared/model/update-master-cust/update-cust-company-fin-data-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -66,7 +66,8 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     private http: HttpClient, 
     private toastr: NGXToastrService, 
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.ResponseTab = new EventEmitter<any>();
     this.MainCustBankAcc = new Array<any>();
@@ -81,7 +82,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    this.http.post(URLConstant.GetFinDataForUpdateMasterCustCompanyFinData, this.ReqCustDataTrxIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetFinDataForUpdateMasterCustCompanyFinData, this.ReqCustDataTrxIdObj).toPromise().then(
       (response) => {
         response["AppCompanyFinData"]["DateAsOf"] = datePipe.transform(response["AppCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");
         response["MasterCompanyFinData"]["DateAsOf"] = datePipe.transform(response["MasterCompanyFinData"]["DateAsOf"], "yyyy-MM-dd");
@@ -261,7 +262,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     formValue["CustBankAccList"] = requestBankAcc;
     formValue["IsCopyAll"] = this.IsCopyAll;
     formValue["CustBankAccIdToDelete"] = this.CustBankAccToDelete;
-    this.http.post(URLConstant.UpdateMasterCustCompanyFinData, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyFinData, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

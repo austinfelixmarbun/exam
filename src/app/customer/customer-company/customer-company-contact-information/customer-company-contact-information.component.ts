@@ -9,7 +9,6 @@ import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CustCompanyContactPersonObj } from 'app/shared/model/cust-company-contact-person-obj.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { formatDate } from '@angular/common';
@@ -21,6 +20,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -75,7 +75,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
   });
   inputAddressObj: any;
 
-  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService) {
+  constructor(private regexService: RegexService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -88,13 +88,13 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = this.UserAccess[CommonConstant.BUSINESS_DT];
     this.UcAddressObj = new UcAddressObj();
-    this.inputFieldObj = new InputFieldObj();
-    this.inputFieldObj.inputLookupObj = new InputLookupObj();
+    this.inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    this.inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     var refMasterObjMrJobPositionCode: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrJobPositionCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrJobPositionCode = response[CommonConstant.ReturnObj];
@@ -104,7 +104,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeGender,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrGenderCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrGenderCode = response[CommonConstant.ReturnObj];
@@ -115,7 +115,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrIdTypeCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrIdTypeCode = response[CommonConstant.ReturnObj];
@@ -130,7 +130,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustRelationship,
       MappingCode: null
     }
-    this.http.post(URLConstant.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMaster, refMasterObjMrCustRelationshipCode).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0)
           this.tempMrCustRelationshipCode = response[CommonConstant.ReturnObj];
@@ -141,12 +141,12 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     this.custAddrObj = new CustAddrObj();
 
     var custObj = { CustId: this.IdCust };
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response: any) => {
         this.custCompanyId = response['CustCompanyId'];
 
         this.CustCompanyId.Id = this.custCompanyId;
-        this.http.post(URLConstant.GetCustCompanyContactPersonByCustCompanyId, this.CustCompanyId).subscribe(
+        this.http.post(this.UrlConstantNew.GetCustCompanyContactPersonByCustCompanyId, this.CustCompanyId).subscribe(
           (response) => {
             this.tempCustCompanyContactPersonObj = response;
             this.ContactInformationForm.patchValue({
@@ -199,7 +199,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.IdCust;
     reqObj.Code = CommonConstant.CustAddrTypeContact;
-    this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response) => {
         this.tempCustAddrObj = response;
         this.UcAddressObj.AreaCode1 = this.tempCustAddrObj.AreaCode1;
@@ -219,7 +219,7 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
         this.inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrObj.Zipcode;
         this.inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrObj.Zipcode };
       });
-    this.inputAddressObj = new InputAddressObj();
+    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
     this.inputAddressObj.default = this.UcAddressObj;
     this.inputAddressObj.inputField = this.inputFieldObj;
     this.inputAddressObj.showPhn3 = false;
@@ -311,14 +311,14 @@ export class CustomerCompanyContactInformationComponent implements OnInit {
       this.custCompanyContactPersonObj = this.tempCustCompanyContactPersonObj;
       this.custCompanyContactPersonObj.RowVersion = this.tempCustCompanyContactPersonObj.RowVersion;
 
-      await this.http.post(URLConstant.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.EditCustCompanyContactPersonByCustCompanyId, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if(!IsParent) this.outputTab.emit({ stepMode: 'next' });
         }
       );
     } else {
-      await this.http.post(URLConstant.AddCustCompanyContactPerson, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddCustCompanyContactPerson, this.custCompanyContactPersonObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
           if(!IsParent) this.outputTab.emit({ stepMode: 'next' });

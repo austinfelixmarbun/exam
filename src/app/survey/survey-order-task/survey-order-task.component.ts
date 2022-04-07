@@ -5,11 +5,11 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvyTaskObj } from 'app/shared/model/srvy-task-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -37,12 +37,12 @@ export class SurveyOrderTaskComponent implements OnInit {
   SrvyOrderObj: any;
   SrvyTaskObj: SrvyTaskObj = new SrvyTaskObj();
   VendorObj: any;
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   constructor(private fb: FormBuilder, private modalService: NgbModal,
-    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService) {
+    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["SrvyOrderId"] != null) {
         this.SrvyOrderId = params["SrvyOrderId"];
@@ -60,10 +60,10 @@ export class SurveyOrderTaskComponent implements OnInit {
     var SrvyObj = {
       SrvyOrderId: this.SrvyOrderId
     }
-    this.http.post(URLConstant.GetSrvyOrderBySrvyOrderId, {Id: this.SrvyOrderId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetSrvyOrderBySrvyOrderId, {Id: this.SrvyOrderId}).subscribe(
       response => {
         this.SrvyOrderObj = response;        
-        this.http.post(URLConstant.GetVendorByVendorId, {Id : this.SrvyOrderObj.VendorId}).subscribe(
+        this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.SrvyOrderObj.VendorId}).subscribe(
           response => {
             this.VendorObj = response;
             this.SurveyTaskForm.patchValue({
@@ -75,7 +75,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       }
     );
 
-    this.http.post(URLConstant.GetListAllSrvyFormSchm, {}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListAllSrvyFormSchm, {}).subscribe(
       response => {
         this.FormSchmList = response["ReturnObject"];
         this.SurveyTaskForm.patchValue({
@@ -86,7 +86,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   }
 
   SendSrvyOrder() {
-    this.http.post(URLConstant.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
@@ -148,7 +148,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       this.modal.close();
     });
 
-    // this.http.post<SrvyTaskObj>(URLConstant.GetSrvyTaskBySrvyTaskId, {Id : ev}).subscribe(
+    // this.http.post<SrvyTaskObj>(this.UrlConstantNew.GetSrvyTaskBySrvyTaskId, {Id : ev}).subscribe(
     //   response => {
     //     this.SrvyTaskObj = response;
     //     this.onChange(this.SrvyTaskObj.MrSrvySubjCode);
@@ -169,7 +169,7 @@ export class SurveyOrderTaskComponent implements OnInit {
       var TaskObj = {
         SrvyTaskId: ev
       }
-      this.http.post(URLConstant.DeleteSrvyTask, TaskObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.DeleteSrvyTask, TaskObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
           this.generateSurveyTaskList();
@@ -194,7 +194,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   //   if (this.SurveyTaskForm.controls["SrvyTaskId"].value == "") {
   //     this.SrvyTaskObj.SrvyTaskNo = "";
 
-  //     this.http.post(URLConstant.AddSrvyTask, this.SrvyTaskObj).subscribe(
+  //     this.http.post(this.UrlConstantNew.AddSrvyTask, this.SrvyTaskObj).subscribe(
   //       response => {
   //         this.toastr.successMessage(response["Message"]);
   //         this.generateSurveyTaskList();
@@ -206,7 +206,7 @@ export class SurveyOrderTaskComponent implements OnInit {
   //     this.SrvyTaskObj.SrvyTaskNo = this.SurveyTaskForm.controls["SrvyTaskNo"].value;
   //     this.SrvyTaskObj.RowVersion = this.SrvyTaskObj.RowVersion;
 
-  //     this.http.post(URLConstant.EditSrvyTask, this.SrvyTaskObj).subscribe(
+  //     this.http.post(this.UrlConstantNew.EditSrvyTask, this.SrvyTaskObj).subscribe(
   //       response => {
   //         this.toastr.successMessage(response["Message"]);
   //         this.generateSurveyTaskList();
@@ -236,7 +236,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     var obj = {
       SrvyOrderId: this.SrvyOrderId
     }
-    this.http.post(URLConstant.GetListSryvObject, obj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListSryvObject, obj).subscribe(
       (response) => {
         this.resultData = response;
         if (this.resultData.length != 0) {
@@ -254,7 +254,7 @@ export class SurveyOrderTaskComponent implements OnInit {
 
   generateSurveyTaskList() {
     
-    this.http.post(URLConstant.GetListSrvyTaskBySrvyOrderId, {Id : this.SrvyOrderId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetListSrvyTaskBySrvyOrderId, {Id : this.SrvyOrderId}).subscribe(
       response => {
         this.SurveyTaskList = response;
       }

@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -72,7 +72,8 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.IsAddrDifferent = false;
     this.AppJobData = new UpdateMasterCustJobDataObj();
@@ -82,19 +83,19 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.CompanyScaleList = new Array<any>();
     this.ResponseTab = new EventEmitter<any>();
 
-    this.lookupIndustryTypeObj = new InputLookupObj();
+    this.lookupIndustryTypeObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupIndustryTypeObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookupIndustryTypeObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     // this.lookupIndustryTypeObj.isRequired = false;
 
-    this.lookupProfessionObj = new InputLookupObj();
+    this.lookupProfessionObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupProfessionObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
     this.lookupProfessionObj.genericJson = "./assets/lookup/lookupCustomerProfession.json";
     // this.lookupProfessionObj.isRequired = false;
 
-    this.lookupZipcodeObj = new InputLookupObj();
+    this.lookupZipcodeObj = new InputLookupObj(this.UrlConstantNew);
     this.lookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.lookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -104,18 +105,18 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
     this.ReqCustDataTrxIdObj.Id = this.CustDataTrxId;
-    let getDetail = this.http.post(URLConstant.GetCustJobDataForUpdateMasterCustJobData, this.ReqCustDataTrxIdObj);
+    let getDetail = this.http.post(this.UrlConstantNew.GetCustJobDataForUpdateMasterCustJobData, this.ReqCustDataTrxIdObj);
     let tempReqCustModel: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCustModel, MappingCode: null };
-    let getCustModel = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCustModel);
+    let getCustModel = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqCustModel);
     
     let tempReqJobPos: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobPosition, MappingCode: null };
-    let getJobPosition = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobPos);
+    let getJobPosition = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqJobPos);
 
     let tempReqJobStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeJobStat, MappingCode: null };
-    let getJobStatus = this.http.post(URLConstant.GetListActiveRefMaster, tempReqJobStat);
+    let getJobStatus = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqJobStat);
 
     let tempReqCompanyScale: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeCoyScale, MappingCode: null };
-    let getCompanyScale = this.http.post(URLConstant.GetListActiveRefMaster, tempReqCompanyScale);
+    let getCompanyScale = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqCompanyScale);
     forkJoin([getDetail, getCustModel, getJobPosition, getJobStatus, getCompanyScale]).pipe(
       map((response) => {
         this.AppJobData = response[0]["AppCustJobData"];
@@ -145,10 +146,10 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         return response[0];
       }),
       mergeMap((response) => {
-        let getAppProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response["AppCustJobData"]["ProfessionId"] });
-        let getMasterProfession = this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response["MasterCustJobData"]["ProfessionId"] });
-        let getAppIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["AppCustJobData"]["IndustryTypeId"] });
-        let getMasterIndustry = this.http.post(URLConstant.GetRefIndustryTypeById, { Id: response["MasterCustJobData"]["IndustryTypeId"] });
+        let getAppProfession = this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response["AppCustJobData"]["ProfessionId"] });
+        let getMasterProfession = this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response["MasterCustJobData"]["ProfessionId"] });
+        let getAppIndustry = this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: response["AppCustJobData"]["IndustryTypeId"] });
+        let getMasterIndustry = this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: response["MasterCustJobData"]["IndustryTypeId"] });
         return forkJoin([getMasterProfession, getMasterIndustry, getAppProfession, getAppIndustry]);
       })
     ).toPromise().then(
@@ -361,7 +362,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
   }
 
   SaveValue() {
-    this.http.post(URLConstant.UpdateMasterCustJobData, this.CustomerJobForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
+    this.http.post(this.UrlConstantNew.UpdateMasterCustJobData, this.CustomerJobForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
       }

@@ -1,15 +1,13 @@
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-general-setting-add-edit',
@@ -34,9 +32,10 @@ export class GeneralSettingAddEditComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['generalSettingId'] != null) {
@@ -49,7 +48,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
     this.gsObj.GeneralSettingId = this.generalSettingId
-    this.httpClient.post(URLConstant.GetGeneralSettingById, {Id: this.generalSettingId}).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingById, {Id: this.generalSettingId}).subscribe(
       (response) => {
         this.resultData = response;
         this.GeneralSettingForm.patchValue({
@@ -68,7 +67,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING],{});

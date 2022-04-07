@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CustOtherInfoObj } from 'app/shared/model/cust-other-info-obj.model';
@@ -17,6 +16,7 @@ import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-
 import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.component';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -39,9 +39,10 @@ export class CustAttrSectionComponent implements OnInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private toastr: NGXToastrService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder, 
+    private UrlConstantNew: UrlConstantNew) {
     this.pageType = "add";
     this.isLookupReady = false;
     this.route.queryParams.subscribe(params => {
@@ -67,29 +68,29 @@ export class CustAttrSectionComponent implements OnInit {
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyOther : CommonConstant.AttrGroupCustPersonalOther;
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.CustId;
-    await this.httpClient.post(URLConstant.GetCustOtherInfoByCustId, reqObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustOtherInfoByCustId, reqObj).toPromise().then(
       (response: any) => {
         this.CustOtherInfo = response;
       });
-    this.inputDebitorGroupLookupObj = new InputLookupObj();
+    this.inputDebitorGroupLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputDebitorGroupLookupObj.urlJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.pagingJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.genericJson = "./assets/lookup/lookupDebitorGroup.json";
     this.inputDebitorGroupLookupObj.isReady = true;
 
-    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj();
+    this.inputDebitorBusinessScaleLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputDebitorBusinessScaleLookupObj.urlJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.pagingJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.genericJson = "./assets/lookup/lookupDebitorBusinessScale.json";
     this.inputDebitorBusinessScaleLookupObj.isReady = true;
 
-    this.inputCounterpartCategoryLookupObj = new InputLookupObj();
+    this.inputCounterpartCategoryLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputCounterpartCategoryLookupObj.urlJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.pagingJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.genericJson = "./assets/lookup/lookupCounterpartCategory.json";
     this.inputCounterpartCategoryLookupObj.isReady = true;
 
-    this.inputSustaianableFinancialBusinessLookupObj = new InputLookupObj();
+    this.inputSustaianableFinancialBusinessLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputSustaianableFinancialBusinessLookupObj.urlJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.pagingJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
     this.inputSustaianableFinancialBusinessLookupObj.genericJson = "./assets/lookup/lookupSustainableFinancialBusiness.json";
@@ -110,7 +111,7 @@ export class CustAttrSectionComponent implements OnInit {
     }
     this.isLookupReady = true;
     await this.GetExistingProfession();
-    // this.httpClient.post(URLConstant.GetListCustAttrContentByCustIdForCust, { CustId: this.CustId }).pipe(first()).subscribe(
+    // this.http.post(this.UrlConstantNew.GetListCustAttrContentByCustIdForCust, { CustId: this.CustId }).pipe(first()).subscribe(
     //   (response) => {
     //     var parentFormGroup = new Object();
     //     this.listCustAttrContent = response["NewCustAttrContentObjs"];
@@ -138,10 +139,10 @@ export class CustAttrSectionComponent implements OnInit {
 
   async GetExistingProfession(custId: number = this.CustId) {
     if (this.MrCustTypeCode != CommonConstant.CustTypePersonal || custId == 0) return;
-    await this.httpClient.post(URLConstant.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustPersonalJobDataByCustId, { Id: custId }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.RefProfessionId) return;
-        await this.httpClient.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+        await this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
             if (this.custAttrForm) this.custAttrForm.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
             if (this.custAttrFormOld) this.custAttrFormOld.SetSearchListInputType(CommonConstant.AttrCodeDeptAml, response.ProfessionCode);
@@ -167,7 +168,7 @@ export class CustAttrSectionComponent implements OnInit {
         RCustOtherInfoObj: custOtherInfo
       };
 
-      await this.httpClient.post(this.getUrlSave(), RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.getUrlSave(), RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
 
@@ -227,9 +228,9 @@ export class CustAttrSectionComponent implements OnInit {
 
   getUrlSave(): string {
     if (this.isExistData) {
-      return URLConstant.EditCustOtherInfo;
+      return this.UrlConstantNew.EditCustOtherInfo;
     }
-    return URLConstant.AddCustOtherInfo;
+    return this.UrlConstantNew.AddCustOtherInfo;
   }
 
   getLookupDebitorGroup(e) {

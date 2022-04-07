@@ -11,6 +11,7 @@ import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { environment } from 'environments/environment';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-atpm-select',
@@ -19,8 +20,8 @@ import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 })
 export class VendorAtpmSelectComponent implements OnInit {
 
-  inputLookupATPMObj: InputLookupObj = new InputLookupObj();
-  inputAddressObj: InputAddressObj = new InputAddressObj();
+  inputLookupATPMObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
   @Input() listExistingAtpmCode: Array<string> = new Array<string>();
   @Output() emitData: EventEmitter<object> = new EventEmitter();
 
@@ -34,7 +35,8 @@ export class VendorAtpmSelectComponent implements OnInit {
   constructor(private httpClient: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal,) { }
+    public activeModal: NgbActiveModal,
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.setLookup();

@@ -7,10 +7,8 @@ import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { RefIndustryTypeObj } from 'app/shared/model/ref-industry-type-obj.model';
 import { DatePipe } from '@angular/common';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { environment } from 'environments/environment';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
@@ -23,6 +21,7 @@ import { CustGrpObj } from 'app/shared/model/cust-grp-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -31,7 +30,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 })
 export class CustomerCompanyDetailComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
-  lookupCustGrpObj: InputLookupObj = new InputLookupObj();
+  lookupCustGrpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   lookUpObj: InputLookupObj;
   CustGrpObj: CustGrpObj = new CustGrpObj();
   criteriaObj: CriteriaObj;
@@ -66,7 +65,9 @@ export class CustomerCompanyDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private UrlConstantNew: UrlConstantNew,
+    private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -81,7 +82,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
   ngOnInit() {
     var datePipe = new DatePipe("en-US");
-    this.lookUpObj = new InputLookupObj();
+    this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.lookUpObj.urlJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
@@ -91,9 +92,9 @@ export class CustomerCompanyDetailComponent implements OnInit {
     this.MaxDate.setDate(this.MaxDate.getDate() - 1);
     this.MaxDtValidate = datePipe.transform(this.MaxDate, "yyyy-MM-dd");
 
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, URLConstant.GetListActiveRefMasterWithMappingCodeAll);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
 
-    this.http.post(URLConstant.GetCustByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
         this.tempCustObj = response
         this.CustomerDetailForm.patchValue({
@@ -106,7 +107,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         this.setLookupCustGrp();
       }
     );
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustCompanyByCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         this.tempCustCompanyObj = response;
         this.CustomerDetailForm.patchValue({
@@ -118,7 +119,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
         if (this.tempCustCompanyObj.RefIndustryTypeId != null) {
           this.refIndustryTypeObj = new RefIndustryTypeObj();
           this.refIndustryTypeObj.RefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
-          this.http.post(URLConstant.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
+          this.http.post(this.UrlConstantNew.GetRefIndustryTypeById, { Id: this.tempCustCompanyObj.RefIndustryTypeId }).subscribe(
               (response) => {
                 this.tempRefIndustryObj = response; 
                 this.tempRefIndustryTypeId = this.tempCustCompanyObj.RefIndustryTypeId;
@@ -127,12 +128,12 @@ export class CustomerCompanyDetailComponent implements OnInit {
               });
           }
         });
-    this.http.post(URLConstant.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListCustGrpByMemberCustId, { Id: this.IdCust }).subscribe(
       (response) => {
         if(response[CommonConstant.ReturnObj].length > 0){
           let reqById: GenericObj = new GenericObj();
           reqById.Id = response[CommonConstant.ReturnObj][0].CustId;
-          this.http.post(URLConstant.GetCustByCustId, reqById).subscribe(
+          this.http.post(this.UrlConstantNew.GetCustByCustId, reqById).subscribe(
             (responseCustGrp) => {
               this.lookupCustGrpObj.nameSelect = responseCustGrp["CustName"];
               this.lookupCustGrpObj.jsonSelect = { CustName: responseCustGrp["CustName"] };
@@ -201,7 +202,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
       this.custCompanyObj.RefIndustryTypeId = this.tempRefIndustryTypeId;
     }
 
-    await this.http.post(URLConstant.EditCustCompany, this.custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(this.UrlConstantNew.EditCustCompany, this.custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.toastr.successMessage(response["Message"]);
         if(!IsParent) this.outputTab.emit({ CustCompanyId: this.tempCustCompanyObj.CustCompanyId, stepMode: 'next' });

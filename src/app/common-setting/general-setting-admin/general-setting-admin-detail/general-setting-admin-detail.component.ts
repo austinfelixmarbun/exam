@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -32,9 +32,10 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private httpClient: HttpClient,
+    private http: HttpClient,
     private service: NGXToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private UrlConstantNew: UrlConstantNew
   ) { 
     this.route.queryParams.subscribe(params => {
       if (params['generalSettingId'] != null) {
@@ -46,7 +47,7 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
   ngOnInit() {
     this.gsObj = new GeneralSettingObj();
     this.gsObj.GeneralSettingId = this.generalSettingId;
-    this.httpClient.post(URLConstant.GetGeneralSettingById, this.gsObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetGeneralSettingById, this.gsObj).subscribe(
       (response) => {
         this.resultData = response;
         this.GeneralSettingForm.patchValue({
@@ -65,7 +66,7 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
     this.gsObj.GsName = this.GeneralSettingForm.controls["GsName"].value;
     this.gsObj.GsValue = this.GeneralSettingForm.controls["GsValue"].value;
     this.gsObj.GsDescr = this.GeneralSettingForm.controls["GsDescr"].value;
-    this.httpClient.post(URLConstant.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
         AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING_ADMIN],{});

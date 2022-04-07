@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-journal-media-paging',
   templateUrl: './journal-media-paging.component.html',
@@ -12,15 +13,16 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 export class JournalMediaPagingComponent implements OnInit {
 
   readonly JournalMediaDetailLink: string = NavigationConstant.JOURNAL_MEDIA_DETAIL;
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   constructor(
     private http: HttpClient,
-    private toastr: NGXToastrService) { }
+    private toastr: NGXToastrService,
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/journal/paging-journal-media.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/journal/paging-journal-media.json";
-    this.inputPagingObj.deleteUrl = environment.FoundationR3Url + "/v1" + "/Journal/DeleteJrMHeader";
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1" + "/Journal/DeleteJrMHeader";
   }
 
   onCallback(ev) {
@@ -28,7 +30,7 @@ export class JournalMediaPagingComponent implements OnInit {
     let row = ev.RowObj
 
     if (key == 'delete') {
-      this.http.post<any>(environment.FoundationR3Url + '/Journal/DeleteJrMHeader', { JrMHeaderId: row.JrMHeaderId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + '/Journal/DeleteJrMHeader', { JrMHeaderId: row.JrMHeaderId }).subscribe(
         response => {
           this.toastr.successMessage('Successfully remove TrxTypeCode: ' + response);
 

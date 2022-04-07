@@ -6,7 +6,6 @@ import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, V
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
@@ -19,6 +18,7 @@ import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -48,7 +48,7 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.ParentCustId = params["IdCust"];
@@ -63,7 +63,7 @@ export class ShareholderFormComponent implements OnInit {
   async ngOnInit() {
     this.InitData();
     await this.GetExistingShareholder();
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
@@ -71,7 +71,7 @@ export class ShareholderFormComponent implements OnInit {
     this.outputExisting.emit(this.tempExisting);
   }
 
-  positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
+  positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   InitData() {
     this.parentForm.addControl("MrPositionSlikCode", this.fb.control(''));
     this.parentForm.get("MrPositionSlikCode").setValidators([Validators.required]);
@@ -88,7 +88,7 @@ export class ShareholderFormComponent implements OnInit {
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
     }
-    this.positionSlikLookUpObj = NewCustSetData.BindLookupPositionSlik();
+    this.positionSlikLookUpObj = this.newCustService.BindLookupPositionSlik();
     this.BindLookupProfession();
     this.BindLookupJobPosition();
 
@@ -97,18 +97,18 @@ export class ShareholderFormComponent implements OnInit {
     this.MaxDate.setDate(this.MaxDate.getDate() - 1);
   }
 
-  jobPositionLookupObj: InputLookupObj = new InputLookupObj();
+  jobPositionLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupJobPosition() {
-    this.jobPositionLookupObj = new InputLookupObj();
+    this.jobPositionLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.jobPositionLookupObj.isRequired = true;
     this.jobPositionLookupObj.urlJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.pagingJson = "./assets/uclookup/Customer/lookupJobPosition.json";
     this.jobPositionLookupObj.genericJson = "./assets/uclookup/Customer/lookupJobPosition.json";
   }
 
-  professionLookUpObj: InputLookupObj = new InputLookupObj();
+  professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupProfession() {
-    this.professionLookUpObj = new InputLookupObj();
+    this.professionLookUpObj = new InputLookupObj(this.UrlConstantNew);
     this.professionLookUpObj.isRequired = false;
     this.professionLookUpObj.urlJson = "./assets/lookup/lookupCustomerProfession.json";
     this.professionLookUpObj.pagingJson = "./assets/lookup/lookupCustomerProfession.json";
@@ -126,7 +126,7 @@ export class ShareholderFormComponent implements OnInit {
 
   async GetExistingShareholder(custCompanyMgmntShrholderId: number = this.CustCompanyMgmntShrholderId) {
     if (custCompanyMgmntShrholderId == 0) return;
-    await this.http.post(URLConstant.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
       async (response: CustCompanyMgmntShrholderObj) => {
         this.parentForm.patchValue({
           MrPositionSlikCode: response.MrPositionSlikCode,
@@ -151,7 +151,7 @@ export class ShareholderFormComponent implements OnInit {
 
   async GetExistingJobData(shareholderId: number = this.CustId) {
     if (this.CustType != this.CustTypePersonal || shareholderId == 0) return;
-    await this.http.post(URLConstant.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Ids: [this.ParentCustId, shareholderId] }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId, { Ids: [this.ParentCustId, shareholderId] }).toPromise().then(
       async (response: CustPersonalJobDataObj) => {
         if (!response.CustId) return;
         this.tempExisting.CustPersonalJob = response;
@@ -163,7 +163,7 @@ export class ShareholderFormComponent implements OnInit {
         this.jobPositionLookupObj.nameSelect = tempDesc;
         this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
         if (!response.RefProfessionId) return;
-        await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
+        await this.http.post(this.UrlConstantNew.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
             this.outputChange.emit({ Key: CommonConstant.CUST_CHANGE_PROFESSION, Code: response.ProfessionCode });
             this.professionLookUpObj.nameSelect = response.ProfessionName;
@@ -179,7 +179,7 @@ export class ShareholderFormComponent implements OnInit {
       RefMasterTypeCode: refMasterTypeCode
     };
     let tempDesc: string = "";
-    await this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, reqMasterObj).toPromise().then(
       (response: RefMasterObj) => {
         tempDesc = response.Descr;
       }

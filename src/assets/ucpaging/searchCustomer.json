@@ -73,7 +73,8 @@
         {
             "type": "label",
             "position": "center",
-            "label": "EDIT  "
+            "label": "action",
+            "width": "width-10-per"
         }
     ],
     "querystring": {

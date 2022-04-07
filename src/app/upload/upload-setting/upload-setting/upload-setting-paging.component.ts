@@ -6,8 +6,8 @@ import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { Observable } from 'rxjs';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-upload-setting-paging',
@@ -33,21 +33,20 @@ export class UploadSettingPagingComponent implements OnInit {
   deleteUrl: any;
   orderByKey: any = null;
   orderByValue = true;
-  foundationUrl: any = environment.FoundationR3Url
   inputObj: any;
   verfTrxTypeId: any;
   exportData: any;
 
   readonly CancelLink: string = NavigationConstant.UPLOAD_SETTING_EDIT;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = './assets/search/searchUploadTypePaging.json';
-    this.inputObj.apiQryPaging = URLConstant.GetUploadTypePaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetUploadTypePaging;
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.foundationUrl + URLConstant.GetUploadTypePaging;
+    this.apiUrl = this.UrlConstantNew.GetUploadTypePaging;
     this.initiateForm()
   }
 

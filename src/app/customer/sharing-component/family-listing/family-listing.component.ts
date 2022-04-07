@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
 import { FamilyListingObj } from 'app/shared/model/new-cust/family/family-listing-obj.model';
 
@@ -24,7 +24,7 @@ export class FamilyListingComponent implements OnInit {
   readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
   readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
     this.BindGridViewObj();
@@ -36,7 +36,7 @@ export class FamilyListingComponent implements OnInit {
   IsSpouseInputed: boolean = false;
   async GetListPaging() {
     this.IsSpouseInputed = false;
-    await this.http.post(URLConstant.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetMainCustAndListCustPersonalFamilyByCustId, { Id: this.CustId }).toPromise().then(
       (response) => {
         this.tempFamilyListingObj = response["CustPersonalFamilyList"];
         for (const item of this.tempFamilyListingObj) {
@@ -58,7 +58,7 @@ export class FamilyListingComponent implements OnInit {
   BindGridViewObj() {
     this.inputGridObj = new InputGridObj();
     this.inputGridObj.pagingJson = "./assets/ucgridview/Customer/gridCustFamily.json";
-    this.inputGridObj.deleteUrl = URLConstant.DeleteCustPersonalFamily;
+    this.inputGridObj.deleteUrl = this.UrlConstantNew.DeleteCustPersonalFamily;
     this.inputGridObj.resultData = { Data: [] };
   }
 

@@ -1,7 +1,6 @@
 import { OrgMdlStrucObj } from "app/shared/model/org-mdl-struc-obj";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { ExcelService } from "app/shared/excel-service/excel-service";
-import { environment } from "environments/environment";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
@@ -13,7 +12,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
-import { URLConstant } from "app/shared/constant/URLConstant";
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -46,8 +45,9 @@ export class OrgJobTitlePagingComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: NGXToastrService,
-    private https: HttpClient,
-    private location: Location
+    private http: HttpClient,
+    private location: Location, 
+    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       if (params["orgMdlStrucId"] != null) {
@@ -63,13 +63,13 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj();
+    this.inputObj = new InputSearchObj(this.UrlConstantNew);
     this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
-    this.inputObj.apiQryPaging = URLConstant.GetOrgJobTitlePaging;
+    this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgJobTitlePaging;
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = environment.FoundationR3Url + URLConstant.GetOrgJobTitlePaging;
+    this.apiUrl = this.UrlConstantNew.GetOrgJobTitlePaging;
     this.initiateForm();
   }
 
@@ -117,11 +117,11 @@ export class OrgJobTitlePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = URLConstant.DeleteOrgJobTitle;
+      this.deleteUrl = this.UrlConstantNew.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;
 
-      this.https
+      this.http
         .post(this.deleteUrl, this.orgJobTitleObj, AdInsConstant.SpinnerOptions)
         .subscribe(response => {
           this.service.successMessage(response["message"]);

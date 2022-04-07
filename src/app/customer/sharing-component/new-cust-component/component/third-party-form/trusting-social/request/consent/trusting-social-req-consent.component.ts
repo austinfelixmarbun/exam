@@ -1,12 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqPersonalObj } from 'app/shared/model/new-cust/req-personal-obj.model';
-import { ReqCoyObj } from 'app/shared/model/new-cust/req-coy-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
@@ -14,10 +10,11 @@ import { ReqUploadConsentTsObj } from 'app/shared/model/third-party-rslt/req-upl
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ThirdPartyRsltHObj } from 'app/shared/model/third-party-rslt/third-party-rslt-h-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { String, StringBuilder } from 'typescript-string-operations';
+import { String } from 'typescript-string-operations';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 
@@ -49,7 +46,8 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     private http: HttpClient,
     public activeModal: NgbActiveModal,
     private toastr: NGXToastrService,
-    private cookieService: CookieService
+    private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
@@ -62,7 +60,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     var refMasterObj = new ReqRefMasterByTypeCodeAndMasterCodeObj();
     refMasterObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustType;
     refMasterObj.MasterCode = this.CustObj.MrCustTypeCode;
-    this.http.post(URLConstant.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetRefMasterByRefMasterTypeCodeAndMasterCode, refMasterObj).subscribe(
       (response) => {
         this.CustTypeName = response["Descr"];
       }
@@ -107,7 +105,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     reader.onload = () => {
         reqUploadConsentTsObj.ConsentBase64 = reader.result;
         reqUploadConsentTsObj.ConsentBase64 = reqUploadConsentTsObj.ConsentBase64.substring(reqUploadConsentTsObj.ConsentBase64.lastIndexOf(',') + 1)
-        this.http.post(URLConstant.UploadConsentTrustingSocialV2, reqUploadConsentTsObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(this.UrlConstantNew.UploadConsentTrustingSocialV2, reqUploadConsentTsObj, AdInsConstant.SpinnerOptions).subscribe(
           (response: ThirdPartyRsltHObj) => {
             this.toastr.successMessage(response["Message"]);
             this.outUpload.emit(response);

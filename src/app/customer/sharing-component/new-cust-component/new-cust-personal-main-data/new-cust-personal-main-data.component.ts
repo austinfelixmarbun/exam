@@ -8,7 +8,6 @@ import { RegexService } from 'app/customer/regex.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustAddrObj } from 'app/shared/model/cust-addr-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
@@ -39,11 +38,13 @@ import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
 import { ThirdPartyFormComponent } from '../component/third-party-form/third-party-form.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
   templateUrl: './new-cust-personal-main-data.component.html',
+  providers: [NewCustSetData]
 })
 export class NewCustPersonalMainDataComponent implements OnInit {
 
@@ -70,8 +71,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   custObj: CustObj = new CustObj();
   CustomerForm: FormGroup = this.fb.group({});
-  inputAddressObj: InputAddressObj = new InputAddressObj();
-  inputLookupObj: InputLookupObj = new InputLookupObj();
+  inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
+  inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
@@ -82,7 +83,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     private http: HttpClient, private fb: FormBuilder,
     private cookieService: CookieService,
     private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute, private newCustService: NewCustSetData) {
+    private route: ActivatedRoute, private newCustService: NewCustSetData, 
+    private UrlConstantNew: UrlConstantNew) {
       this.route.queryParams.subscribe(params => {
         if (params["From"] != null) {        
           this.pageFrom = params["From"];
@@ -119,11 +121,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.GetCustRelationship();
     this.ClearCustForm();
     this.getInitPattern();
-    this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
-    this.DictUcDDLObj[this.RefMasterTypeCodeGender] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeGender] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeGender);
+    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
@@ -167,7 +169,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   //#region UcLookup
   BindLookupSupplier() {
-    this.inputLookupObj = new InputLookupObj();
+    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     this.inputLookupObj.isReady = false;
     this.inputLookupObj.urlJson = "./assets/lookup/lookupSupplierPersonal.json";
     this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupplierPersonal.json";
@@ -176,10 +178,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.inputLookupObj.isRequired = false;
   }
 
-  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj();
+  existingCustomerLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   BindLookupExistingCust() {
     if (this.CustDataMode == this.CustDataModeMain) return;
-    this.existingCustomerLookUpObj = NewCustSetData.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
+    this.existingCustomerLookUpObj = this.newCustService.BindLookupExistingCust(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal);
     if (this.CustId != 0) this.existingCustomerLookUpObj.isDisable = true;
   }
   //#endregion
@@ -188,11 +190,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   MrCustRelationshipCodeObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   readonly RefMasterTypeCodeCustPersonalRelationship: string = CommonConstant.RefMasterTypeCodeCustPersonalRelationship;
   async GetCustRelationship() {
-    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship] = new UcDropdownListObj();
+    this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship] = new UcDropdownListObj(this.UrlConstantNew);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustPersonalRelationship].isSelectOutput = true;
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = this.RefMasterTypeCodeCustPersonalRelationship;
-    this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).subscribe(
+    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, tempReq).subscribe(
       async (response) => {
         this.MrCustRelationshipCodeObj = response[CommonConstant.ReturnObj];
         if (!this.isMarried) await this.removeSpouse();
@@ -293,7 +295,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   async GetCustData(custId: number = this.CustId) {
     let datePipe = new DatePipe("en-US");
-    await this.http.post(URLConstant.GetCustByCustId, { Id: custId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: custId }).toPromise().then(
       (response: CustObj) => {
         this.custObj = response;
         this.thirdPartyTrxNo = this.custObj.ThirdPartyTrxNo;
@@ -324,11 +326,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = custId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddr = response;
-        let inputFieldObj = new InputFieldObj();
-        inputFieldObj.inputLookupObj = new InputLookupObj();
+        let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
         let tempUcAddObj: UcAddressObj = new UcAddressObj();
@@ -355,7 +357,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let reqObj: GenericObj = new GenericObj();
     reqObj.Id = this.ParentCustId;
     reqObj.Code = CommonConstant.CustAddrTypeLegal;
-    await this.http.post(URLConstant.GetCustAddrByMrCustAddrType, reqObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetCustAddrByMrCustAddrType, reqObj).subscribe(
       (response: CustAddrObj) => {
         this.tempCustAddrToCopy = response;
       }
@@ -365,7 +367,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
   async GetCustPersonalData(custId: number = this.CustId) {
     let datePipe = new DatePipe("en-US");
-    await this.http.post<CustPersonalObj>(URLConstant.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
@@ -386,7 +388,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   tempCustPersonalFamilyObj: CustPersonalFamilyObj = new CustPersonalFamilyObj();
   GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
     if (this.CustDataMode != this.CustDataModeFamily) return;
-    this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
       (response: CustPersonalFamilyObj) => {
         this.tempCustPersonalFamilyObj = response;
         this.CustomerForm.patchValue({
@@ -463,7 +465,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplId: e.VendorId
     });
 
-    this.http.post(URLConstant.GetVendorByVendorCode, { Code: e.VendorCode }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorCode, { Code: e.VendorCode }).subscribe(
       (response: VendorObj) => {
         this.CustomerForm.patchValue({
           CustName: e.VendorName,
@@ -478,10 +480,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         }
       });
 
-    this.http.post(URLConstant.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
+    this.http.post(this.UrlConstantNew.GetVendorAddrByVendorCodeAndMrAddrTypeCode, { VendorCode: e.VendorCode, MrAddrTypeCode: CommonConstant.AddrTypeLegal }).subscribe(
       (response: VendorAddrObj) => {
-        let inputFieldObj = new InputFieldObj();
-        inputFieldObj.inputLookupObj = new InputLookupObj();
+        let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+        inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         inputFieldObj.inputLookupObj.isReadonly = false;
         inputFieldObj.inputLookupObj.nameSelect = response.Zipcode;
         inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: response.Zipcode };
@@ -504,8 +506,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   CopyLegalAddr() {
-    let inputFieldObj = new InputFieldObj();
-    inputFieldObj.inputLookupObj = new InputLookupObj();
+    let inputFieldObj = new InputFieldObj(this.UrlConstantNew);
+    inputFieldObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
     inputFieldObj.inputLookupObj.isReadonly = false;
     inputFieldObj.inputLookupObj.nameSelect = this.tempCustAddrToCopy.Zipcode;
     inputFieldObj.inputLookupObj.jsonSelect = { Zipcode: this.tempCustAddrToCopy.Zipcode };
@@ -571,7 +573,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempMaritalStat.patchValue(this.tempCustPersonalObj.MrMaritalStatCode);
       }
     }
-    this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
+    this.existingCustomerLookUpObj.addCritInput = this.newCustService.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
     this.ucLookupExistingCust.setAddCritInput();
   }
 
@@ -712,7 +714,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   async SetCustMgmntShareholder(): Promise<CustCompanyMgmntShrholderObj>  {
     let CustCompanyMgmntShrholder : ResCustCompanyMgmntShrholderObj = new ResCustCompanyMgmntShrholderObj();
-    await this.http.post<ResCustCompanyMgmntShrholderObj>(URLConstant.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
+    await this.http.post<ResCustCompanyMgmntShrholderObj>(this.UrlConstantNew.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
       async (response) => {
         CustCompanyMgmntShrholder = response;
       }

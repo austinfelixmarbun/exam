@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { VerfQuestionAnswerObj } from 'app/shared/model/verf-question-answer-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -14,6 +13,7 @@ import { RegexService } from 'app/customer/regex.service';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -28,10 +28,10 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   verfQuestionAnswer: any;
   answerTypeCode: string = "DDL";
   isHidden: boolean = true;
-  dropdownListObj: UcDropdownListObj = new UcDropdownListObj();
+  dropdownListObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private regexService: RegexService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private regexService: RegexService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.VerfQuestionAnswerId = params["VerfQuestionAnswerId"];
       this.mode = params["mode"];
@@ -54,7 +54,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   separator: string = ';';
 
   async ngOnInit() {
-    this.dropdownListObj.apiUrl = URLConstant.GetActiveRefVerfAnswerTypes;
+    this.dropdownListObj.apiUrl = this.UrlConstantNew.GetActiveRefVerfAnswerTypes;
     this.dropdownListObj.requestObj = {};
     this.dropdownListObj.customKey = "RefVerfAnswerTypeId";
     this.dropdownListObj.customValue = "VerfAnswerTypeDescr";
@@ -65,12 +65,12 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     
     var refAnswerObj = {}
     if (this.mode == "edit") {
-      this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
+      this.http.post(this.UrlConstantNew.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
       (response) => {
         this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
 
         refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
-        this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
+        this.http.post(this.UrlConstantNew.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
           (respond) => {
             this.answerTypeCode = respond["VerfAnswerTypeCode"];
           }
@@ -104,7 +104,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   }
 
   GetListActiveRefAnswerType() {
-    var url = URLConstant.GetActiveRefVerfAnswerTypes;
+    var url = this.UrlConstantNew.GetActiveRefVerfAnswerTypes;
     this.http.post(url, {}).subscribe(
       (response) => {
         this.itemVerfQuestionAnswer = response[CommonConstant.ReturnObj];
@@ -123,7 +123,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   async GetGsValue(){
     let reqByCode: GenericObj = new GenericObj();
     reqByCode.Code = CommonConstant.GSCodeDefSeparatorDDLVerfQuest;
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
       (response) => {
         if(response != null){
           this.separator = response["GsValue"];
@@ -132,7 +132,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     );
 
     reqByCode.Code = CommonConstant.GSCodeRegexDDLSeparator;
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
       (response) => {
         if(response != null){
           this.pattern = response["GsValue"];
@@ -171,7 +171,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     if (this.mode == "edit") {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = this.VerfQuestionAnswerId;
       this.verfQuestionAnswerObj.RowVersion = this.verfQuestionAnswerObj.RowVersion;
-      this.http.post(URLConstant.EditVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.EditVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
@@ -179,7 +179,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     }
     else {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = 0;
-      this.http.post(URLConstant.AddVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
