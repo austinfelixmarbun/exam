@@ -46,8 +46,15 @@
               </div>
 
               <div class="form-group row mt-3">
-                <div class=" col-md-12">
-                  <button type="submit" class="custom-button-adins">LOGIN</button>
+                <div class="col-md-12">
+                  <button type="submit" [disabled]="isEod" class="custom-button-adins">LOGIN</button>
+                </div>
+              </div>
+              <div class="form-group row mt-3">
+                <div class="col-md-12">
+                  <div *ngIf="isEod">
+                    <p style="font-size:15px;color: red; text-align: center;">Currently System Under Maintenance!</p>
+                  </div>
                 </div>
               </div>
             </form>
