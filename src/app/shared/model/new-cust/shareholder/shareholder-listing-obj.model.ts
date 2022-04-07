@@ -16,6 +16,7 @@ export class ShareholderListingObj{
     NegCustTypeCodeDesc: string;
     MrIdTypeCode: string;
     IdNo: string;
+    PublicIdentityNo: string;
     constructor(){
         
     }

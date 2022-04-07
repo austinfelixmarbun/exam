@@ -87,7 +87,7 @@ export class JobDataSmeComponent implements OnInit {
     ProfessionName: [''],
     JobPosition: [''],
     JobTitleName: [''],
-    IndustryName: ['', [Validators.required, Validators.minLength(2)]],
+    IndustryName: ['', [Validators.required]],
     CompanyScale: [''],
     NumberEmployee: [''],
     EmpEstablishmentDate: [''],

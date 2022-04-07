@@ -61,7 +61,7 @@ export class ShareholderListingComponent implements OnInit {
           if (element.CustNo) {
             this.listCustNoToExclude.push(element.CustNo);
           }
-          this.listUniqueIdNo.push(element["MrIdTypeCode"]+element["IdNo"]);
+          this.listUniqueIdNo.push(element["MrIdTypeCode"]+element["IdNo"]+element["PublicIdentityNo"]);
         }
         this.tempTotalSharePrct = tempTotalSharePrct;
         this.tempIsOwner = tempIsOwner;
