@@ -885,5 +885,8 @@
     "GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo": "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo",
     "GetPagingObjectBySQL": "/Generic/GetPagingObjectBySQL",
     "GetCustCompanyMgmntShrholderByCustIdAndShrholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId",
-    "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId"
+    "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId",
+    "GetNotificationTemplateByNotificationTemplateId": "/v1/PushNotification/GetNotificationTemplateByNotificationTemplateId",
+    "AddNotificationTemplate": "/v1/PushNotification/AddNotificationTemplate",
+    "EditNotificationTemplate": "/v1/PushNotification/EditNotificationTemplate"
 }

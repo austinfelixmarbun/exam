@@ -12,6 +12,7 @@ import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
 import { UrlConstantNew } from '../constant/URLConstantNew';
+import { ROUTES } from './sidebar-routes.config';
 
 declare var $: any;
 
@@ -45,10 +46,10 @@ export class SidebarComponent implements OnInit {
         //         this.menuItems = data;
         //     }
         //     );
-        // if (environment.production == false) {
-        //     this.menuItems = ROUTES.filter(menuItem => menuItem);
-        //     return;
-        // }
+        if (environment.production == false) {
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+            return;
+        }
         var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         if (currentUserContext) {
             this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(

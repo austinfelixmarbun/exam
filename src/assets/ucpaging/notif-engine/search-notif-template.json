@@ -1,0 +1,140 @@
+{
+    "title": "Notification Template",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "dropdown",
+            "name": "MR_NOTIFICATION_LEVEL_CODE", 
+            "id": "MrNotifLevelCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Notification Level Code",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "OFFICE_TYPE",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "dropdown",
+            "name": "MR_NOTIFICATION_SOURCE_CODE", 
+            "id": "MrNotifSourceCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Notification Source Code",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "OFFICE_TYPE",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "dropdown",
+            "name": "MR_NOTIFICATION_TYPE_CODE", 
+            "id": "MrNotifSourceCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Notification Type Code",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "OFFICE_TYPE",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "textbox",
+            "name": "SUBJECT",
+            "id": "SubjectId",
+            "value": "",
+            "label": "SUBJECT",
+            "placeholder": "Placeholder"
+        }
+    ],
+    "querystring": {
+        "name": "SearchNotifTemplate"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notification Level",
+            "name": "MrNotificationLevelCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notification Source",
+            "name": "MrNotificationSourceCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notification Type",
+            "name": "MrNotificationTypeCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Subject",
+            "name": "Subject"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrNotificationLevelCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrNotificationSourceCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrNotificationTypeCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Subject"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "NOTIF_ENGINE_TEMPLATE_ADD_EDIT",
+                    "param": [
+                        {
+                            "type": "NotificationTemplateId",
+                            "property": "NotificationTemplateId"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

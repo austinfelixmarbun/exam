@@ -1,9 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { BodyMessageTosendComponent } from '../shared-component/body-message-tosend/body-message-tosend.component';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -28,8 +33,7 @@ export class NotifTemplateFormComponent implements OnInit {
   readonly MrNotificationSourceCode: string = "MrNotificationSourceCode";
   readonly MrNotificationTypeCode: string = "MrNotificationTypeCode";
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
-
+  constructor(private fb: FormBuilder, private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationTemplateId"]) {
         this.NotificationTemplateId = params["NotificationTemplateId"];
@@ -37,10 +41,31 @@ export class NotifTemplateFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.GetNotificationTemplate();
     this.SetMrNotificationLevelCode();
     this.SetMrNotificationSourceCode();
     this.SetMrNotificationTypeCode();
+  }
+
+  NotificationTemplateSaveObj: NotificationTemplateObj = new NotificationTemplateObj();
+  async GetNotificationTemplate() {
+    if (this.NotificationTemplateId == 0) return;
+    await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
+      (response: NotificationTemplateObj) => {
+        this.NotificationTemplateSaveObj = response;
+        this.NotifTemplateForm.patchValue({
+          MrNotificationLevelCode: response.MrNotificationLevelCode,
+          MrNotificationSourceCode: response.MrNotificationSourceCode,
+          MrNotificationTypeCode: response.MrNotificationTypeCode,
+          Subject: response.Subject,
+          Body: response.Body
+        });
+        for (let index = 0; index < response.TotalParam; index++) {
+          this.AddParameter(true);
+        }
+      }
+    )
   }
 
   SetMrNotificationLevelCode() {
@@ -84,7 +109,7 @@ export class NotifTemplateFormComponent implements OnInit {
     keyValueObj2.Value = "Whats App";
     listKeyValueObj.push(keyValueObj2);
     const keyValueObj3: KeyValueObj = new KeyValueObj();
-    keyValueObj3.Key = "NOTIF";
+    keyValueObj3.Key = "PUSH_NOTIFICATION";
     keyValueObj3.Value = "Notification";
     listKeyValueObj.push(keyValueObj3);
     const keyValueObj4: KeyValueObj = new KeyValueObj();
@@ -95,18 +120,21 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
-  AddParameter() {
+  AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
     const LastIdx: number = ListParam.length;
     const ParamaterVar: string = "{" + LastIdx + "}";
-    const lenBody: number = BodyMessage.length;
-    if (lenBody > 0 && BodyMessage.charAt(lenBody) != " ") {
-      BodyMessage += " ";
+
+    if (!IsEdit) {
+      const lenBody: number = BodyMessage.length;
+      if (lenBody > 0 && BodyMessage.charAt(lenBody) != " ") {
+        BodyMessage += " ";
+      }
+      BodyMessage += ParamaterVar + " ";
+      this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
-    BodyMessage += ParamaterVar + " ";
-    this.NotifTemplateForm.get("Body").setValue(BodyMessage);
-    // this.ListParameterBodyMessage.push(ParamaterVar);
+
     ListParam.push(this.fb.group({
       Param: "",
       ParamIdxAt: ParamaterVar
@@ -119,7 +147,31 @@ export class NotifTemplateFormComponent implements OnInit {
     this.TempMessage.InputParamValue();
   }
 
-  SaveForm() {
-    console.dir(this.NotifTemplateForm);
+  async SaveForm() {
+    let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
+    if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
+    await this.http.post(urlSave, this.SetSaveObj()).toPromise().then(
+      (response: NotificationTemplateObj) => {
+        if (response["StatusCode"] == "200"){
+          this.toastr.successMessage(response['message']);
+          this.CancelButton();
+        } 
+      }
+    )
+  }
+
+  SetSaveObj(): NotificationTemplateObj {
+    const SaveObj = this.NotifTemplateForm.getRawValue();
+    this.NotificationTemplateSaveObj.Body = SaveObj.Body;
+    this.NotificationTemplateSaveObj.MrNotificationLevelCode = SaveObj.MrNotificationLevelCode;
+    this.NotificationTemplateSaveObj.MrNotificationSourceCode = SaveObj.MrNotificationSourceCode;
+    this.NotificationTemplateSaveObj.MrNotificationTypeCode = SaveObj.MrNotificationTypeCode;
+    this.NotificationTemplateSaveObj.Subject = SaveObj.Subject;
+
+    return this.NotificationTemplateSaveObj;
+  }
+
+  CancelButton() {
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_TEMPLATE_PAGING], {});
   }
 }

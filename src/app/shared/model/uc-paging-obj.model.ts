@@ -38,6 +38,7 @@ export class UcPagingObj {
         this.listEnvironments = new Array<EnvisObj>();
         this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
         this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
+        this.listEnvironments.push({ environment: "NOTIF_ENGINE", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
         this.whereValue = new Array<WhereValueObj>();
         this.isHideSearch = false;
         this.delay = 0;

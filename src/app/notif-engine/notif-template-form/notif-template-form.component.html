@@ -76,8 +76,7 @@
                 <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" #TempMessage></app-body-message-tosend>
               </div>
               <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1"
-                  [routerLink]="[CancelLink]" skipLocationChange>
+                <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                 </button>
                 <button type="submit" class="btn btn-raised btn-primary">

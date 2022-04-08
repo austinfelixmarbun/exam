@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { BodyMessageTosendComponent } from '../shared-component/body-message-tosend/body-message-tosend.component';
 
 @Component({
@@ -20,7 +21,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     ListPhone: [],
     Body: ['', Validators.required],
   });
-  InputLookupTemplateMessageObj: InputLookupObj = new InputLookupObj();
+  InputLookupTemplateMessageObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   readonly title: string = "Notification Broadcast";
   readonly IdentifierLookupTemplateMessage: string = "lookupTemplateMessage";
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
@@ -28,7 +29,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   readonly MrNotificationSourceCode: string = "MrNotificationSourceCode";
   readonly MrNotificationTypeCode: string = "MrNotificationTypeCode";
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       // if (params["NotificationTemplateId"]) {
       //   this.NotificationTemplateId = params["NotificationTemplateId"];
