@@ -31,14 +31,18 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     });
   }
 
-  RefetchData(){
+  ReInit(){
     this.IsReady = false;
     this.inputPagingObj = new UcPagingObj();
     this.Type = "Default";
+  }
+
+  RefetchData(){
+    this.ReInit();
     this.SubscribeParam();
     this.SelectPage();
     setTimeout (() => {
-      this.IsReady = true
+      this.IsReady = true;
     }, 10);
   }
 
@@ -50,7 +54,6 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
-      console.log("asfas")
     }
   }
 
@@ -133,7 +136,6 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
         }
         this.inputPagingObj.title = typeof (CommonConstant["TITLE_" + this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_" + this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g, ' ');
         this.inputPagingObj.addCritInput = new Array();
-        this.inputPagingObj
         var critObj = new CriteriaObj();
         critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
         critObj.restriction = AdInsConstant.RestrictionEq;
