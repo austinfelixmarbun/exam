@@ -28,7 +28,7 @@
                 <lib-uc-show-errors [control]="RefEmpForm.controls.APIKey" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>              
             </div>
-            <div class="form-group row  adins-required" *ngIf="pageType == 'edit'">
+            <!-- <div class="form-group row  adins-required" *ngIf="pageType == 'edit'">
               <div class="col-md-2"></div>
               <div class="col-md-9">
                 <button type="button" class="btn btn-raised btn-primary" (click)="regenetate()">
@@ -39,7 +39,7 @@
                   <span translate>Revoke</span>
                 </button>
               </div>              
-            </div>
+            </div> -->
             <div class="form-group row" *ngIf="pageType == 'edit'">
               <label class="col-md-2  adInsLabel" for="IsLockedOut">Locked</label>
               <div class="col-md-9">
@@ -196,6 +196,55 @@
               </div>
             </div>
           </div>
+
+          <lib-ucSubsection [id]="'EmployeeBusinessUnitId'" [title]="'BUSINESS UNIT-ADD'" [panel]="'EmployeeBusinessUnit'"></lib-ucSubsection>
+
+          <div class="form-body" id="EmployeeBusinessUnit">
+            <div class="form-group row adins-required">
+              <label class="col-md-2 adInsLabel">Business Unit </label>
+              <div class="col-md-9">
+                <div class="width-75-per">
+                  <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="inputPagingObjBusinessUnit" [parentForm]="RefEmpForm" [identifier]="'lookupValueBusinessUnit'" (lookup)="getBizUnitId($event)"></lib-uclookupgeneric>
+                </div>
+              </div>
+            </div> 
+
+            <div class="form-group row adins-required">
+              <label class="col-md-2 adInsLabel">Job Title </label>
+              <div class="col-md-9">
+                <div class="width-75-per">
+                  <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="inputPagingObjJobTitle" [parentForm]="RefEmpForm" [identifier]="'lookupValueJobTitle'" (lookup)="getJobTitleId($event)"></lib-uclookupgeneric>
+                </div>
+              </div>
+            </div> 
+
+            <div class="form-group row adins-required">
+              <label class="col-md-2 adInsLabel">Office</label>
+              <div class="col-md-9">
+                <div class="width-75-per">
+                  <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="inputPagingObjOffice" [parentForm]="RefEmpForm" [identifier]="'lookupValueOffice'" (lookup)="getOfficeId($event)"></lib-uclookupgeneric>
+                </div>
+              </div>
+            </div> 
+
+            <div class="form-group row adins-required">
+              <label class="col-md-2 adInsLabel">Role</label>
+              <div class="col-md-9">
+                <div class="width-75-per">
+                  <lib-uclookupgeneric [enjiForm]="enjiForm" [lookupInput]="inputPagingObjRole" [parentForm]="RefEmpForm" [identifier]="'lookupValueRole'" (lookup)="getRoleId($event)"></lib-uclookupgeneric>
+                </div>
+              </div>
+            </div> 
+
+            <div class="form-group row">
+              <label class="col-md-2 adInsLabel">Active Status </label>
+              <div class="col-md-9">
+                <input class="border-primary" type="checkbox" 
+                  formControlName="IsActiveEmpBusinessUnit">
+              </div>
+            </div>
+          </div>
+
           <div class="form-actions right">
             <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]">
               <i class="ft-arrow-left"></i>&nbsp;<span translate>Cancel</span>
