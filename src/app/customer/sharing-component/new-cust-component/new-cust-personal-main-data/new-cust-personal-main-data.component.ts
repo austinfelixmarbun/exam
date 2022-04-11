@@ -614,7 +614,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   async SaveForm() {
-    if(!this.validateCustPersonalAge()) return;
+    if(!this.validateCustPersonalAge()) return; 
 
     if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
@@ -795,6 +795,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     var businessDt:Date = new Date(context[CommonConstant.BUSINESS_DT]);
+    //Di FOU penjagaan via GenSet di skip
+    this.minCustPerAge = 0;
+    this.minCustPerAgeDt = new Date(businessDt);
+    return;
+
     // jika family & bukan spouse maka skip
     if(
       this.CustDataMode == this.CustDataModeFamily && 

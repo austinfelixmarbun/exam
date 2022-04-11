@@ -88,7 +88,7 @@ export class JobDataEmployeeComponent implements OnInit {
     JobPosition: [''],
     JobTitleName: [''],
     JobStatus: [''],
-    IndustryName: ['', [Validators.required, Validators.minLength(2)]],
+    IndustryName: ['', [Validators.required]],
     InternalEmployee: [false],
     IsWellknownCoy: [false],
     MrWellknownCoyCode: [''],
