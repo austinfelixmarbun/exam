@@ -23,6 +23,11 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { HttpClient } from '@angular/common/http';
+import { RefUserRole } from 'app/shared/model/ref-user-role-obj.model';
+import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
+import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
+import { OfficeObj } from 'app/shared/model/office-obj.model';
+import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 
 @Component({
   selector: 'app-system-user-add',
@@ -42,6 +47,13 @@ export class SystemUserAddComponent implements OnInit {
   refBankObj: RefBankObj;
   IdTypeList: any;
   businessDt: Date;
+
+  inputPagingObjBusinessUnit: InputLookupObj;
+  inputPagingObjJobTitle: InputLookupObj;
+  inputPagingObjOffice: InputLookupObj;
+  inputPagingObjRole: InputLookupObj;
+
+  userRole = new RefUserRole;
 
   RefEmpForm = this.fb.group({
     RefUserId: [0, [Validators.required]],
@@ -69,7 +81,8 @@ export class SystemUserAddComponent implements OnInit {
     BankBranchRegCode: [''],
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     BankAccName: ['', [Validators.required]],
-    APIKey:['']
+    APIKey:[''],
+    IsActiveEmpBusinessUnit :[true]
   });
   inputFieldAddr: InputFieldObj = new InputFieldObj();
   addressObj: UcAddressObj;
@@ -134,7 +147,8 @@ export class SystemUserAddComponent implements OnInit {
         BankBranchRegCode: [''],
         BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
         BankAccName: ['', [Validators.required]],
-        APIKey:['',[Validators.required]]
+        APIKey:['',[Validators.required]],
+        IsActiveEmpBusinessUnit : true
       });
     }else{
       this.RefEmpForm = this.fb.group({
@@ -163,7 +177,8 @@ export class SystemUserAddComponent implements OnInit {
         BankBranchRegCode: [''],
         BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
         BankAccName: ['', [Validators.required]],
-        APIKey:['']
+        APIKey:[''],
+        IsActiveEmpBusinessUnit : true
       });
     }
 
@@ -196,6 +211,7 @@ export class SystemUserAddComponent implements OnInit {
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
+    this.initLookUp();
 
     if (this.pageType == "edit") 
     {
@@ -208,6 +224,7 @@ export class SystemUserAddComponent implements OnInit {
           this.refUserObj = response['RefUserObj'];
           this.empBankAccObj = response['EmpBankAccObj'];
           this.refBankObj = response['RefBankObj'];
+          this.userRole = response['RefUserRoleObj'];
 
           var datePipe = new DatePipe("en-US");
           var joinDt = datePipe.transform(this.refEmpObj.JoinDt, 'yyyy-MM-dd');
@@ -237,7 +254,8 @@ export class SystemUserAddComponent implements OnInit {
             BankBranchRegCode: this.empBankAccObj.BankBranchRegCode,
             BankAccNo: this.empBankAccObj.BankAccNo,
             BankAccName: this.empBankAccObj.BankAccName,
-            APIKey : this.refUserObj.Token
+            APIKey : this.refUserObj.Token,
+            IsActiveEmpBusinessUnit : this.userRole.IsActive
           });
           this.inputLookupBankObj.jsonSelect = this.refBankObj;
           this.inputLookupBankObj.idSelect = this.refBankObj.RefBankId;
@@ -264,6 +282,45 @@ export class SystemUserAddComponent implements OnInit {
           this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
+
+          var BizUnit = new BusinessUnitObj();
+          
+          BizUnit.RefBizUnitId = this.userRole.RefBizUnitId;
+
+          this.http.post(URLConstant.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
+            (response) => {
+              this.inputPagingObjBusinessUnit.nameSelect = response["BizUnitName"];
+            }
+          )
+
+          var JobTitle = new RefJobTitleObj();
+          JobTitle.RefJobTitleId = this.userRole.RefJobTitleId;
+
+          this.http.post(URLConstant.GetRefJobTitleById, {Id: JobTitle.RefJobTitleId}).subscribe(
+            (response) => {
+              this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
+            }
+          )
+
+          var Office = new OfficeObj();
+          if(this.userRole.RefOfficeId != 0){
+            Office.RefOfficeId = this.userRole.RefOfficeId;
+            console.log("office",Office);
+            this.http.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
+              (response) => {
+                this.inputPagingObjOffice.nameSelect = response["OfficeName"];
+              }
+            )
+          }
+
+          var Role = new RefRoleObj();
+          Role.RefRoleId = this.userRole.RefRoleId;
+          this.http.post(URLConstant.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
+            (response) => {
+              this.inputPagingObjRole.nameSelect = response["RoleName"];
+            }
+          )
+
         }
       );
     }
@@ -327,6 +384,7 @@ export class SystemUserAddComponent implements OnInit {
     refEmpData.RefUserObj.LoggedInMethod = refEmpFormData.LoggedInMethod;
     refEmpData.RefUserObj.IsActive = refEmpFormData.IsActive;
     refEmpData.RefUserObj.Password = "-";
+    refEmpData.RefUserObj.APIKey = refEmpFormData.APIKey;
     refEmpData.RefUserObj.IsSystemUser = true;
 
     refEmpData.EmpBankAccObj = new EmpBankAccObj();
@@ -337,6 +395,16 @@ export class SystemUserAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.BankAccNo = refEmpFormData.BankAccNo;
     refEmpData.EmpBankAccObj.BankAccName = refEmpFormData.BankAccName;
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
+
+    this.userRole.IsActive = this.RefEmpForm.controls.IsActiveEmpBusinessUnit.value;
+    this.userRole.RowVersion = "";
+    if (this.pageType == "edit") {
+      this.userRole.RefUserId = refEmpFormData.RefUserId;
+    }else{
+      this.userRole.RefUserId = 1;
+    }
+    
+    refEmpData.RefUserRoleObj = this.userRole;
 
     if (this.pageType == "add") {
       this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
@@ -431,5 +499,47 @@ export class SystemUserAddComponent implements OnInit {
       }
     );
   }
+
+  initLookUp() {
+    this.inputPagingObjBusinessUnit = new InputLookupObj();
+    this.inputPagingObjBusinessUnit.urlJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
+    this.inputPagingObjBusinessUnit.pagingJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
+    this.inputPagingObjBusinessUnit.genericJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
+
+    this.inputPagingObjJobTitle = new InputLookupObj();
+    this.inputPagingObjJobTitle.urlJson = "./assets/lookup/lookupEmployeeJobTitle.json";
+    this.inputPagingObjJobTitle.pagingJson = "./assets/lookup/lookupEmployeeJobTitle.json";
+    this.inputPagingObjJobTitle.genericJson = "./assets/lookup/lookupEmployeeJobTitle.json";
+
+    this.inputPagingObjOffice = new InputLookupObj();
+    this.inputPagingObjOffice.urlJson = "./assets/lookup/lookupEmployeeOffice.json";
+    this.inputPagingObjOffice.pagingJson = "./assets/lookup/lookupEmployeeOffice.json";
+    this.inputPagingObjOffice.genericJson = "./assets/lookup/lookupEmployeeOffice.json";
+
+    this.inputPagingObjRole = new InputLookupObj();
+    this.inputPagingObjRole.urlJson = "./assets/lookup/lookupEmployeeRole.json";
+    this.inputPagingObjRole.pagingJson = "./assets/lookup/lookupEmployeeRole.json";
+    this.inputPagingObjRole.genericJson = "./assets/lookup/lookupEmployeeRole.json";
+
+  }
+
+  //#region getLookup
+  getBizUnitId(ev) {
+    this.userRole.RefBizUnitId = ev.RefBizUnitId;
+
+  }
+  getJobTitleId(ev) {
+    this.userRole.RefJobTitleId = ev.RefJobTitleId;
+
+  }
+  getOfficeId(ev) {
+    this.userRole.RefOfficeId = ev.RefOfficeId;
+
+  }
+  getRoleId(ev) {
+    this.userRole.RefRoleId = ev.RefRoleId;
+
+  }
+  //#endregion
 
 }
