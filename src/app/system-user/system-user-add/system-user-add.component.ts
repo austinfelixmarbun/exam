@@ -398,11 +398,7 @@ export class SystemUserAddComponent implements OnInit {
 
     this.userRole.IsActive = this.RefEmpForm.controls.IsActiveEmpBusinessUnit.value;
     this.userRole.RowVersion = "";
-    if (this.pageType == "edit") {
-      this.userRole.RefUserId = refEmpFormData.RefUserId;
-    }else{
-      this.userRole.RefUserId = 1;
-    }
+    this.userRole.RefUserId = refEmpFormData.RefUserId;
     
     refEmpData.RefUserRoleObj = this.userRole;
 
