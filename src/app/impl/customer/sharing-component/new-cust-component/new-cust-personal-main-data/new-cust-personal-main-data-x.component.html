@@ -155,7 +155,7 @@
                 <label class="col-md-4 adins-required-label" translate>Birth Date</label>
                 <div class="col-md-8">
                   <input type="date" class="form-control adInsInput" formControlName="BirthDt"
-                         [max]="businessDtMin | date: 'yyyy-MM-dd'"
+                         [max]="minCustPerAgeDt | date: 'yyyy-MM-dd'" [min]="maxCustPerAgeDt | date: 'yyyy-MM-dd'"
                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.BirthDt.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.BirthDt" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>

@@ -21,4 +21,5 @@ export class CommonConstantX {
 
     //GS Code
     public static GSCodePefindoBasicRole = "PEFINDO_BASIC_ROLE";
+    public static GSCodeShareholderJobPostIsOnwer = "SHAREHOLDER_JOB_POST_IS_OWNER";
 }

@@ -24,6 +24,8 @@ import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-mast
 import {GenericObj} from '../../../../shared/model/Generic/generic-obj.model';
 import {CustAddrObj} from 'app/shared/model/cust-addr-obj.model';
 import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { String } from 'typescript-string-operations';
 
 @Component({
   selector: 'app-edit-main-data-personal-x',
@@ -280,6 +282,7 @@ export class EditMainDataPersonalXComponent implements OnInit {
         }
       }
     );
+    await this.getMinMaxAgeCustPersonalFromGenSet();
     // await this.http.post<any>(URLConstant.CheckCustFraudTempRegByCustNo, { CustNo: this.CustNo }).subscribe(
     //   (response) => {
     //     this.tempFraud = response["ReturnObject"];
@@ -331,6 +334,8 @@ export class EditMainDataPersonalXComponent implements OnInit {
   SaveValue() {
     this.custPersonalObj = new CustPersonalObj();
     this.custPersonalObj = this.tempCustPersonalObj;
+
+    if(!this.validateCustPersonalAge()) return;
 
     this.custObj.CustName = this.CustomerPersonalForm.controls["CustName"].value;
     this.custObj.MrIdTypeCode = this.CustomerPersonalForm.controls["MrIdTypeCode"].value;
@@ -730,5 +735,50 @@ export class EditMainDataPersonalXComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  minCustPerAge: number;
+  maxCustPerAge: number;
+  minCustPerAgeDt: Date;
+  maxCustPerAgeDt: Date;
+  async getMinMaxAgeCustPersonalFromGenSet()
+  {
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    var businessDt:Date = new Date(context[CommonConstant.BUSINESS_DT]);
+
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeCustAgeLimit}).toPromise().then(
+      (response) => {
+        var listGsAge: Array<string> = response && response["GsValue"] ? response["GsValue"].split(';') : [17];
+        this.minCustPerAge = Number(listGsAge[0]);
+        this.maxCustPerAge = listGsAge && listGsAge.length > 1 ? Number(listGsAge[1]) : 0;
+
+        this.minCustPerAgeDt = new Date(businessDt);
+        this.minCustPerAgeDt.setFullYear(this.minCustPerAgeDt.getFullYear() - this.minCustPerAge);
+
+        if(this.maxCustPerAge > 0 && this.maxCustPerAge > this.minCustPerAge) {
+          this.maxCustPerAgeDt = new Date(businessDt);
+          this.maxCustPerAgeDt.setFullYear(this.maxCustPerAgeDt.getFullYear() - this.maxCustPerAge);
+        }
+      }
+    );
+  }
+
+  validateCustPersonalAge()
+  {
+    var birthDt:Date = new Date(this.CustomerPersonalForm.get('BirthDt').value);
+
+    if(this.maxCustPerAge > 0 && (birthDt > this.minCustPerAgeDt || birthDt < this.maxCustPerAgeDt))
+    {
+      this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_BETWEEN, this.minCustPerAge, this.maxCustPerAge));
+      return false;
+    }
+
+    if(birthDt > this.minCustPerAgeDt)
+    {
+      this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_MIN, this.minCustPerAge));
+      return false;
+    }
+
+    return true;
   }
 }

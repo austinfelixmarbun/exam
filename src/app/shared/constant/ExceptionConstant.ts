@@ -71,4 +71,9 @@ export class ExceptionConstant {
     public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2"; 
     public static EXP_PASSWORD = "Password has expired. Please change your password.";
     public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
+    
+    public static MANDATORY_LEGAL_DOC = "Legal Documents with following type are mandatory: {0}";
+    public static CUST_AGE_BETWEEN = "Customer age must be between {0} and {1} year old";
+    public static CUST_AGE_MIN = "Customer age must be at least {0} year old";
+    public static DUPLICATE_SHRHLDR_ID_NO = "Shareholder's Id No cannot duplicate";
 }

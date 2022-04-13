@@ -88,7 +88,7 @@ export class JobDataSmeXComponent implements OnInit {
     ProfessionName: [''],
     JobPosition: [''],
     JobTitleName: [''],
-    IndustryName: [''],
+    IndustryName: ['', [Validators.required, Validators.minLength(2)]],
     CompanyScale: [''],
     NumberEmployee: [0, Validators.min(1)],
     EmpEstablishmentDate: [''],

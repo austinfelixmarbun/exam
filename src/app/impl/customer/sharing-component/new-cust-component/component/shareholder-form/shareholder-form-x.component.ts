@@ -20,6 +20,8 @@ import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-mas
 import { CustPersonalJobDataObj } from 'app/shared/model/cust-personal-job-data-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 import { ActivatedRoute } from '@angular/router';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { CommonConstantX } from 'app/impl/shared/constant/CommonConstantX';
 
 @Component({
   selector: 'app-shareholder-form-x',
@@ -60,7 +62,9 @@ export class ShareholderFormXComponent implements OnInit {
   MaxDate: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
+  isShareholderReady : boolean = false;
   async ngOnInit() {
+    await this.getGsJobPostIsOwner();
     this.InitData();
     await this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
@@ -69,6 +73,10 @@ export class ShareholderFormXComponent implements OnInit {
     this.positionSlikLookUpObj.isReady = true;
     this.professionLookUpObj.isReady = true;
     this.outputExisting.emit(this.tempExisting);
+    if(this.CustType == CommonConstant.CustTypePersonal){
+      this.CheckJobPostionIsOwner();
+    }
+    this.isShareholderReady = true;
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj();
@@ -145,7 +153,7 @@ export class ShareholderFormXComponent implements OnInit {
           });
         }
         this.tempExisting.CustCompanyMgmntShrholder = response;
-        this.ChangeValidityShareOwner();
+        //this.ChangeValidityShareOwner();
       }
     )
   }
@@ -163,6 +171,7 @@ export class ShareholderFormXComponent implements OnInit {
         let tempDesc: string = await this.PatchValueDesc(response.MrJobPositionCode, CommonConstant.RefMasterTypeCodeJobPosition);
         this.jobPositionLookupObj.nameSelect = tempDesc;
         this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
+        
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
@@ -191,6 +200,7 @@ export class ShareholderFormXComponent implements OnInit {
   getLookUpSlik(ev: { Code: string, Jabatan: string }) {
     let tempMrPositionSlikCode = this.parentForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
+    this.CheckJobPostionIsOwner();
   }
 
   getLookUpProfession(event: RefProfessionObj) {
@@ -232,7 +242,7 @@ export class ShareholderFormXComponent implements OnInit {
     listCriteriaObj.push(criteriaCustObj);
 
     this.professionLookUpObj.addCritInput = listCriteriaObj;
-    this.ucLookupProfession.setAddCritInput();
+    //this.ucLookupProfession.setAddCritInput();
   }
 
   isShareOwnerMandatory: boolean = false;
@@ -251,5 +261,33 @@ export class ShareholderFormXComponent implements OnInit {
     }
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
     this.parentForm.get("IsOwner").updateValueAndValidity();
+  }
+
+  ListJobPostIsOwner : Array<string> = new Array<string>();
+  async getGsJobPostIsOwner(){
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstantX.GSCodeShareholderJobPostIsOnwer }).toPromise().then(
+      (response: GeneralSettingObj) => {
+        let x = response.GsValue;
+        this.ListJobPostIsOwner = x.split(';');
+      }
+    )
+  }
+
+  CheckJobPostionIsOwner(){
+    
+    let x = this.ListJobPostIsOwner.find(f=>f == this.parentForm.controls.MrPositionSlikCode.value);
+    console.log(x);
+    if(x!= null){
+      this.parentForm.patchValue({
+        IsOwner: true,
+      });
+      this.parentForm.get("IsOwner").enable();
+    }
+    else{
+      this.parentForm.patchValue({
+        IsOwner: false,
+      });
+      this.parentForm.get("IsOwner").disable();
+    }
   }
 }
