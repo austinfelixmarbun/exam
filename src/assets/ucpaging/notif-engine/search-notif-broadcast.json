@@ -1,26 +1,10 @@
 {
-    "title": "Notification Template",
+    "title": "Notification Broadcast Message",
     "exportExcel": false,
     "component": [
         {
-            "type": "textbox",
-            "name": "NOTIFICATION_TEMPLATE_CODE",
-            "id": "NotificationTemplateCodeId",
-            "value": "",
-            "label": "Template Code",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "textbox",
-            "name": "NOTIFICATION_TEMPLATE_DESCR",
-            "id": "NotificationTemplateDescrId",
-            "value": "",
-            "label": "Template Description",
-            "placeholder": "Placeholder"
-        },
-        {
             "type": "dropdown",
-            "name": "MR_NOTIFICATION_LEVEL_CODE", 
+            "name": "NHH.MR_NOTIFICATION_LEVEL_CODE", 
             "id": "MrNotifLevelCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -29,7 +13,7 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Level",
+            "label": "Notification Level Code",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NOTIFICATION_LEVEL",
             "items": [],
@@ -38,7 +22,7 @@
         },
         {
             "type": "dropdown",
-            "name": "MR_NOTIFICATION_SOURCE_CODE", 
+            "name": "NHH.MR_NOTIFICATION_SOURCE_CODE", 
             "id": "MrNotifSourceCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -47,7 +31,7 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Source",
+            "label": "Notification Source Code",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NOTIFICATION_SOURCE",
             "items": [],
@@ -56,7 +40,7 @@
         },
         {
             "type": "dropdown",
-            "name": "MR_NOTIFICATION_TYPE_CODE", 
+            "name": "NHH.MR_NOTIFICATION_TYPE_CODE", 
             "id": "MrNotifTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -65,47 +49,63 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Type",
+            "label": "Notification Type Code",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NOTIFICATION_TYPES",
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
+        },
+        {
+            "type": "textbox",
+            "name": "SEND_TO",
+            "id": "SendToId",
+            "value": "",
+            "label": "Send To",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "BODY",
+            "id": "BodyId",
+            "value": "",
+            "label": "Body",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "name": "SearchNotifTemplate"
+        "name": "SearchNotifBroadcast"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
-            "label": "Template Code",
-            "name": "NotificationTemplateCode"
+            "label": "Notification Level",
+            "name": "MrNotificationLevelCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Template Description",
-            "name": "NotificationTemplateDescr"
+            "label": "Notification Source",
+            "name": "MrNotificationSourceCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Level",
-            "name": "NotificationLevelDescr"
+            "label": "Notification Type",
+            "name": "MrNotificationTypeCode"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Source",
-            "name": "MrNotificationSourceDescr"
+            "label": "SendTo",
+            "name": "SendTo"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Type",
-            "name": "MrNotificationTypeDescr"
+            "label": "Message",
+            "name": "Message"
         },
         {
             "type": "label",
@@ -117,27 +117,27 @@
         {
             "type": "text",
             "position": "left",
-            "property": "NotificationTemplateCode"
+            "property": "MrNotificationLevelCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "NotificationTemplateDescr"
+            "property": "MrNotificationSourceCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "NotificationLevelDescr"
+            "property": "MrNotificationTypeCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationSourceDescr"
+            "property": "SendTo"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationTypeDescr"
+            "property": "Message"
         },
         {
             "type": "action",

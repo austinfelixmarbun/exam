@@ -886,7 +886,7 @@
     "GetPagingObjectBySQL": "/Generic/GetPagingObjectBySQL",
     "GetCustCompanyMgmntShrholderByCustIdAndShrholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderByCustIdAndShrholderId",
     "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId",
-    "GetNotificationTemplateByNotificationTemplateId": "/v1/PushNotification/GetNotificationTemplateByNotificationTemplateId",
-    "AddNotificationTemplate": "/v1/PushNotification/AddNotificationTemplate",
-    "EditNotificationTemplate": "/v1/PushNotification/EditNotificationTemplate"
+    "GetNotificationTemplateByNotificationTemplateId": "/v1/NotificationTemplate/GetNotificationTemplateByNotificationTemplateId",
+    "AddNotificationTemplate": "/v1/NotificationTemplate/AddNotificationTemplate",
+    "EditNotificationTemplate": "/v1/NotificationTemplate/EditNotificationTemplate"
 }

@@ -171,6 +171,9 @@ export class CommonConstant {
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";
     public static RefMasterTypeCodeMonth = "MONTH";
     public static RefMasterTypeCodeFormClass = "FORM_CLASS";
+    public static RefMasterTypeCodeNotificationLevel = "NOTIFICATION_LEVEL";
+    public static RefMasterTypeCodeNotificationTypes = "NOTIFICATION_TYPES";
+    public static RefMasterTypeCodeNotificationSource = "NOTIFICATION_SOURCE";
 
     public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
     public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";

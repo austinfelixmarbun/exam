@@ -16,7 +16,25 @@
               <lib-ucSubsection [id]="'NotifTemplateIdId'" [title]="title" [panel]="'NotifTemplate'"></lib-ucSubsection>
               <div class="form-body" id="NotifTemplate">
                 <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel" translate>NOTIF_LVL </label>
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_CODE</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per"
+                      formControlName="NotificationTemplateCode" [readonly]="NotificationTemplateId != 0">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.NotificationTemplateCode" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_DESCR</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per"
+                      formControlName="NotificationTemplateDescr">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.NotificationTemplateDescr" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_LVL</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationLevelCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.MrNotificationLevelCode.invalid }">
@@ -29,7 +47,7 @@
                   </div>
                 </div>
                 <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel" translate>NOTIF_SOURCE </label>
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_SOURCE</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationSourceCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.MrNotificationSourceCode.invalid }">
@@ -42,7 +60,7 @@
                   </div>
                 </div>
                 <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
+                  <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE</label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.MrNotificationTypeCode.invalid }">
@@ -54,17 +72,35 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label class="col-md-3 adInsLabel" translate>SUBJECT </label>
+                <div class="form-group row adins-required">
+                  <label class="col-md-3 adInsLabel" translate>START_DT</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput width-25-per"
+                    <input type="datetime-local" class="form-control adInsInput width-50-per"
+                      formControlName="StartDt" [min]="DateNow | date: 'yyyy-MM-ddTHH:mm'">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.StartDt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate>END_DT</label>
+                  <div class="col-md-9">
+                    <input type="datetime-local" class="form-control adInsInput width-50-per"
+                      formControlName="EndDt" [min]="GetStartDt | date: 'yyyy-MM-ddTHH:mm'">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.EndDt" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate>SUBJECT</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput width-50-per"
                       formControlName="Subject">
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Subject" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel" translate>BODY </label>
+                  <label class="col-md-3 adInsLabel" translate>BODY</label>
                   <div class="col-md-9">
                     <textarea class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Body" [submit]="enjiForm.submitted">
@@ -73,8 +109,8 @@
                     <!-- <button type="button" (click)="ClearParameter()">Clear Parameter</button> -->
                   </div>
                 </div>
-                <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" #TempMessage></app-body-message-tosend>
               </div>
+              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>

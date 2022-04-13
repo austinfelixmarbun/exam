@@ -9,6 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -17,9 +18,13 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 export class NotifTemplateFormComponent implements OnInit {
 
   NotifTemplateForm = this.fb.group({
+    NotificationTemplateCode: ['', Validators.required],
+    NotificationTemplateDescr: ['', Validators.required],
     MrNotificationLevelCode: ['', Validators.required],
     MrNotificationSourceCode: ['', Validators.required],
     MrNotificationTypeCode: ['', Validators.required],
+    StartDt: ['', Validators.required],
+    EndDt: '',
     Subject: '',
     Body: ['', Validators.required],
     BodyMessageParam: this.fb.array([])
@@ -29,9 +34,10 @@ export class NotifTemplateFormComponent implements OnInit {
   NotificationTemplateId: number = 0;
 
   readonly title: string = "Notification Template";
-  readonly MrNotificationLevelCode: string = "MrNotificationLevelCode";
-  readonly MrNotificationSourceCode: string = "MrNotificationSourceCode";
-  readonly MrNotificationTypeCode: string = "MrNotificationTypeCode";
+  readonly MrNotificationLevelCode: string = CommonConstant.RefMasterTypeCodeNotificationLevel;
+  readonly MrNotificationSourceCode: string = CommonConstant.RefMasterTypeCodeNotificationSource;
+  readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
+  readonly DateNow: Date = new Date();
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private fb: FormBuilder, private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
@@ -43,9 +49,13 @@ export class NotifTemplateFormComponent implements OnInit {
 
   async ngOnInit() {
     await this.GetNotificationTemplate();
-    this.SetMrNotificationLevelCode();
-    this.SetMrNotificationSourceCode();
-    this.SetMrNotificationTypeCode();
+    this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
+    this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
+    this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
+  }
+
+  get GetStartDt(): Date{
+    return this.NotifTemplateForm.get("StartDt").value;
   }
 
   NotificationTemplateSaveObj: NotificationTemplateObj = new NotificationTemplateObj();
@@ -53,11 +63,16 @@ export class NotifTemplateFormComponent implements OnInit {
     if (this.NotificationTemplateId == 0) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
       (response: NotificationTemplateObj) => {
+        console.log(response);
         this.NotificationTemplateSaveObj = response;
         this.NotifTemplateForm.patchValue({
+          NotificationTemplateCode: response.NotificationTemplateCode,
+          NotificationTemplateDescr: response.NotificationTemplateDescr,
           MrNotificationLevelCode: response.MrNotificationLevelCode,
           MrNotificationSourceCode: response.MrNotificationSourceCode,
           MrNotificationTypeCode: response.MrNotificationTypeCode,
+          StartDt: response.StartDt,
+          EndDt: response.EndDt,
           Subject: response.Subject,
           Body: response.Body
         });
@@ -68,55 +83,16 @@ export class NotifTemplateFormComponent implements OnInit {
     )
   }
 
-  SetMrNotificationLevelCode() {
-    const listKeyValueObj: Array<KeyValueObj> = new Array();
-    const keyValueObj1: KeyValueObj = new KeyValueObj();
-    keyValueObj1.Key = "WARN";
-    keyValueObj1.Value = "Warning";
-    listKeyValueObj.push(keyValueObj1);
-    const keyValueObj2: KeyValueObj = new KeyValueObj();
-    keyValueObj2.Key = "INFO";
-    keyValueObj2.Value = "Information";
-    listKeyValueObj.push(keyValueObj2);
-    this.DictListRefMaster[this.MrNotificationLevelCode] = listKeyValueObj;
+  GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
+    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: RefMasterTypeCode }).subscribe(
+      (response) => {
+        this.DictListRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
+      }
+    );
   }
 
-  SetMrNotificationSourceCode() {
-    const listKeyValueObj: Array<KeyValueObj> = new Array();
-    const keyValueObj1: KeyValueObj = new KeyValueObj();
-    keyValueObj1.Key = "NAP";
-    keyValueObj1.Value = "NAP";
-    listKeyValueObj.push(keyValueObj1);
-    const keyValueObj2: KeyValueObj = new KeyValueObj();
-    keyValueObj2.Key = "PO";
-    keyValueObj2.Value = "Purchase Order";
-    listKeyValueObj.push(keyValueObj2);
-    const keyValueObj3: KeyValueObj = new KeyValueObj();
-    keyValueObj3.Key = "CUST";
-    keyValueObj3.Value = "Customer";
-    listKeyValueObj.push(keyValueObj3);
-    this.DictListRefMaster[this.MrNotificationSourceCode] = listKeyValueObj;
-  }
-
-  SetMrNotificationTypeCode() {
-    const listKeyValueObj: Array<KeyValueObj> = new Array();
-    const keyValueObj1: KeyValueObj = new KeyValueObj();
-    keyValueObj1.Key = "SMS";
-    keyValueObj1.Value = "SMS";
-    listKeyValueObj.push(keyValueObj1);
-    const keyValueObj2: KeyValueObj = new KeyValueObj();
-    keyValueObj2.Key = "WHATSAPP";
-    keyValueObj2.Value = "Whats App";
-    listKeyValueObj.push(keyValueObj2);
-    const keyValueObj3: KeyValueObj = new KeyValueObj();
-    keyValueObj3.Key = "PUSH_NOTIFICATION";
-    keyValueObj3.Value = "Notification";
-    listKeyValueObj.push(keyValueObj3);
-    const keyValueObj4: KeyValueObj = new KeyValueObj();
-    keyValueObj4.Key = "EMAIL";
-    keyValueObj4.Value = "Email";
-    listKeyValueObj.push(keyValueObj4);
-    this.DictListRefMaster[this.MrNotificationTypeCode] = listKeyValueObj;
+  GetDescription(RefMasterTypeCode: string, MasterCode: string): string {
+    return this.DictListRefMaster[RefMasterTypeCode].find(x => x.Key == MasterCode).Value;
   }
 
   readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
@@ -150,23 +126,33 @@ export class NotifTemplateFormComponent implements OnInit {
   async SaveForm() {
     let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
     if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
+    console.dir(this.SetSaveObj());
     await this.http.post(urlSave, this.SetSaveObj()).toPromise().then(
       (response: NotificationTemplateObj) => {
-        if (response["StatusCode"] == "200"){
+        if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);
           this.CancelButton();
-        } 
+        }
       }
-    )
+    );
   }
 
   SetSaveObj(): NotificationTemplateObj {
     const SaveObj = this.NotifTemplateForm.getRawValue();
     this.NotificationTemplateSaveObj.Body = SaveObj.Body;
+    this.NotificationTemplateSaveObj.NotificationTemplateCode = SaveObj.NotificationTemplateCode;
+    this.NotificationTemplateSaveObj.NotificationTemplateDescr = SaveObj.NotificationTemplateDescr;
     this.NotificationTemplateSaveObj.MrNotificationLevelCode = SaveObj.MrNotificationLevelCode;
+    this.NotificationTemplateSaveObj.MrNotificationLevelDescr = this.GetDescription(this.MrNotificationLevelCode, SaveObj.MrNotificationLevelCode);
     this.NotificationTemplateSaveObj.MrNotificationSourceCode = SaveObj.MrNotificationSourceCode;
+    this.NotificationTemplateSaveObj.MrNotificationSourceDescr = this.GetDescription(this.MrNotificationSourceCode, SaveObj.MrNotificationSourceCode);
     this.NotificationTemplateSaveObj.MrNotificationTypeCode = SaveObj.MrNotificationTypeCode;
+    this.NotificationTemplateSaveObj.MrNotificationTypeDescr = this.GetDescription(this.MrNotificationTypeCode, SaveObj.MrNotificationTypeCode);
     this.NotificationTemplateSaveObj.Subject = SaveObj.Subject;
+    const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
+    this.NotificationTemplateSaveObj.TotalParam = ListParam.length;
+    this.NotificationTemplateSaveObj.StartDt = SaveObj.StartDt;
+    this.NotificationTemplateSaveObj.EndDt = SaveObj.EndDt;
 
     return this.NotificationTemplateSaveObj;
   }

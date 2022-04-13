@@ -1,17 +1,31 @@
 export class NotificationTemplateObj {
     NotificationTemplateId: number;
+    LastNotificationTemplateId: number;
+    NotificationTemplateCode: string;
+    NotificationTemplateDescr: string;
     MrNotificationLevelCode: string;
+    MrNotificationLevelDescr: string;
     MrNotificationSourceCode: string;
+    MrNotificationSourceDescr: string;
     MrNotificationTypeCode: string;
+    MrNotificationTypeDescr: string;
     Subject: string;
+    StartDt: Date;
+    EndDt: Date;
     Body: string;
     TotalParam: number;
-    
+
     constructor() {
         this.NotificationTemplateId = 0;
+        this.LastNotificationTemplateId = 0;
+        this.NotificationTemplateCode = "";
+        this.NotificationTemplateDescr = "";
         this.MrNotificationLevelCode = "";
+        this.MrNotificationLevelDescr = "";
         this.MrNotificationSourceCode = "";
+        this.MrNotificationSourceDescr = "";
         this.MrNotificationTypeCode = "";
+        this.MrNotificationTypeDescr = "";
         this.Subject = "";
         this.Body = "";
         this.TotalParam = 0;
