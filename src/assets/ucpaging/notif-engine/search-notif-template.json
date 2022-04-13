@@ -108,6 +108,12 @@
             "name": "MrNotificationTypeDescr"
         },
         {
+            "type": "sort",
+            "position": "center",
+            "label": "Version",
+            "name": "Version"
+        },
+        {
             "type": "label",
             "position": "center",
             "label": "Action"
@@ -138,6 +144,11 @@
             "type": "text",
             "position": "left",
             "property": "MrNotificationTypeDescr"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Version"
         },
         {
             "type": "action",

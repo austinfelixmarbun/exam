@@ -101,11 +101,13 @@
                 </div>
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" translate>BODY</label>
-                  <div class="col-md-9">
+                  <div class="col-md-9 input-group">
                     <textarea class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Body" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
-                    <button type="button" (click)="AddParameter()">Add Parameter</button>
+                    <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
+                      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
+                    </button>
                     <!-- <button type="button" (click)="ClearParameter()">Clear Parameter</button> -->
                   </div>
                 </div>
