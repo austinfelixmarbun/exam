@@ -200,6 +200,7 @@ export class ShareholderFormXComponent implements OnInit {
   getLookUpSlik(ev: { Code: string, Jabatan: string }) {
     let tempMrPositionSlikCode = this.parentForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
+    this.CheckJobPostionIsOwner();
   }
 
   getLookUpProfession(event: RefProfessionObj) {
@@ -213,7 +214,6 @@ export class ShareholderFormXComponent implements OnInit {
     this.parentForm.patchValue({
       MrJobPositionCode: ev.JobCode,
     });
-    this.CheckJobPostionIsOwner();
   }
 
   changeCustModel() {
@@ -275,7 +275,7 @@ export class ShareholderFormXComponent implements OnInit {
 
   CheckJobPostionIsOwner(){
     
-    let x = this.ListJobPostIsOwner.find(f=>f == this.parentForm.controls.MrJobPositionCode.value);
+    let x = this.ListJobPostIsOwner.find(f=>f == this.parentForm.controls.MrPositionSlikCode.value);
     console.log(x);
     if(x!= null){
       this.parentForm.patchValue({
