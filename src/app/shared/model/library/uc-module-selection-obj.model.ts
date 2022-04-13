@@ -1,5 +1,5 @@
 import { NavigationConstant } from "app/shared/NavigationConstant";
-import { environment } from "environments/environment.crbatch1";
+import { environment } from "environments/environment";
 
 export class UcModuleSelectionObj {
     urlJson: string;
