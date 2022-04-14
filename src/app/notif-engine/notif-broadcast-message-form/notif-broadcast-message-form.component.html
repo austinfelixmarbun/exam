@@ -19,7 +19,7 @@
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
                   <div class="col-md-9">
                     <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }">
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }" (change)="OnChangeType()">
                       <option value="">Select One</option>
                       <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
                         {{it.Value}}</option>
@@ -33,7 +33,7 @@
                     <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
                     <div class="col-md-9">
                       <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
-                        [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)">
+                        [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)" *ngIf="InputLookupTemplateMessageObj.isReady">
                       </lib-uclookupgeneric>
                     </div>
                   </div>
@@ -66,10 +66,10 @@
                   </div>
                 </div>
                 <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-email>
-                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypeNotif" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-notification >
+                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypePush" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-notification >
                 <app-broadcast-message-whatsapp *ngIf="GetMrNotificationTypeCodeValue == TypeWA" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-whatsapp>
                 <app-broadcast-message-sms *ngIf="GetMrNotificationTypeCodeValue == TypeSms" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-sms>
-                <app-body-message-tosend *ngIf="IsUsedTemplate" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" #TempMessage></app-body-message-tosend>
+                <!-- <app-body-message-tosend *ngIf="IsUsedTemplate" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" #TempMessage></app-body-message-tosend> -->
               </div>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1"
