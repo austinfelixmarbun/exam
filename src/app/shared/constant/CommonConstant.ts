@@ -204,7 +204,8 @@ export class CommonConstant {
     public static GSCodeMaxHierarchyLvlOffice = "MAX_HIERARCHY_LVL_OFFICE";
     public static GSCodeOwnershipMandatoryAddrType = "OWNERSHIP_MANDATORY_BY_ADDR_TYPE";
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
-
+    public static GSCodeIsUseNotification = "IS_USE_NOTIFICATION";
+    
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
 

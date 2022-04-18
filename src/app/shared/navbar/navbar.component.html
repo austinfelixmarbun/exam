@@ -70,6 +70,18 @@
                             </a>
                         </div>
                     </li>
+                    <li *ngIf="IsUseNotification == 1">
+                        <lib-ucnotification #appnotif class="nav-item" ngbDropdown [InputObj]="NotificationObj" (NeedLogOut)="notifLogoutHandler($event)"></lib-ucnotification>
+                        <!-- <app-notification-test #appnotif class="nav-item" ngbDropdown [placement]="placement" (NeedLogOut)="notifLogoutHandler($event)"></app-notification-test> -->
+                        <!-- <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
+                            <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
+                            <span class="notification badge badge-pill badge-danger">4</span>
+                            <p class="d-none">Notifications</p>
+                        </a> -->
+                        <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
+                            <app-notification-test></app-notification-test>
+                        </div> -->
+                    </li>
                     <!-- <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
