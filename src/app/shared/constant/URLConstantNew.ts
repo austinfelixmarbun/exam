@@ -1206,4 +1206,8 @@ export class UrlConstantNew{
 
     // THINGS TO DO
     public GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = this.url.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
+
+    public PushNotifSubscribe = this.url.PushNotifSubscribe;
+    public PushNotifUnsubscribe = this.url.PushNotifUnsubscribe;
+    public GetNotSentPushNotif = this.url.GetNotSentPushNotif;
 }

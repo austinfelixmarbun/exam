@@ -72,38 +72,7 @@
                     </li>
                     <li *ngIf="IsUseNotification == 1">
                         <lib-ucnotification #appnotif class="nav-item" ngbDropdown [InputObj]="NotificationObj" (NeedLogOut)="notifLogoutHandler($event)"></lib-ucnotification>
-                        <!-- <app-notification-test #appnotif class="nav-item" ngbDropdown [placement]="placement" (NeedLogOut)="notifLogoutHandler($event)"></app-notification-test> -->
-                        <!-- <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
-                            <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
-                            <span class="notification badge badge-pill badge-danger">4</span>
-                            <p class="d-none">Notifications</p>
-                        </a> -->
-                        <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
-                            <app-notification-test></app-notification-test>
-                        </div> -->
                     </li>
-                    <!-- <li class="nav-item" ngbDropdown [placement]="placement">
-                        <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
-                            <i class="ft-bell font-medium-3 blue-grey darken-4"></i>
-                            <span class="notification badge badge-pill badge-danger">{{TotalUnread}}</span>
-                            <p class="d-none">Notifications</p>
-                        </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown">
-                            <div class="noti-list">
-                                <a *ngFor="let item of NotificationHListObj"
-                                    class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4 " (click)="ClickNotification(item)">
-                                    <i class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i>
-                                    <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 info">{{item.Title}}</span>
-                                        <span class="noti-text">{{item.ShortDesc}}</span>
-                                    </span>
-                                </a>
-                            </div>
-                            <a
-                                class="noti-footer primary text-center d-block border-top border-top-blue-grey border-top-lighten-4 text-bold-400 py-1">Read
-                                All Notifications</a>
-                        </div>
-                    </li> -->
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
                             <i class="ft-user font-medium-3 blue-grey darken-4"></i>

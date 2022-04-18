@@ -45,7 +45,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     TotalUnread: number = 0;
     NotificationObj: UcNotificationObj = new UcNotificationObj(this.cookieService, this.UrlConstantNew);
     IsUseNotification: number = 0;
-    // @ViewChild('appnotif') appnotif: NotificationTestComponent;
     @ViewChild('appnotif') appnotif: UcnotificationComponent;
 
     notifications: object[] = [];
@@ -63,9 +62,6 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     ngOnInit() {
         this.checkUseNotification();
-        this.NotificationObj.PathUrlSubs = "/v1/PushNotification/Subscribe";
-        this.NotificationObj.PathUrlUnsubs = "/v1/PushNotification/Unsubscribe";
-        this.NotificationObj.PathUrlGetAllNotif = "/v1/PushNotification/GetAllNotSentPushNotification";
         this.GetListNotifH();
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
