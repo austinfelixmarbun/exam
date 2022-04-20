@@ -38,7 +38,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.TestTemplate();
+    // this.TestTemplate();
     this.SetLookupTemplate();
     this.SetMrNotificationLevelCode();
     this.SetMrNotificationSourceCode();
