@@ -175,6 +175,12 @@ export class CommonConstant {
     public static RefMasterTypeCodeNotificationTypes = "NOTIFICATION_TYPES";
     public static RefMasterTypeCodeNotificationSource = "NOTIFICATION_SOURCE";
 
+    public static RefMasterTypeCodeNotificationTypesSms = "SMS";
+    public static RefMasterTypeCodeNotificationTypesWA = "WHATSAPP";
+    public static RefMasterTypeCodeNotificationTypesEmail = "EMAIL";
+    public static RefMasterTypeCodeNotificationTypesPush = "PUSH_NOTIFICATION";
+
+
     public static RefMasterTypeCodeEntityType = "ENTITY_TYPE";
     public static RefMasterTypeCodeEntityTypePayAlloc = "PAY_ALLOC";
     public static RefMasterTypeCodeEntityTypeInsuranceCompany = "INSCOY";

@@ -13,7 +13,9 @@ export class BroadcastMessageWhatsappComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
-  readonly title: string = "Broadcast Whats App";
+  @Input() IsWa: boolean;
+  readonly titleWA: string = "Broadcast WhatsApp";
+  readonly titleSMS: string = "Broadcast SMS";
 	separateDialCode = false;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
@@ -21,16 +23,7 @@ export class BroadcastMessageWhatsappComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    const SendToControl = this.parentForm.get("SendTo");
-    if(!SendToControl){
-      this.parentForm.addControl("SendTo", this.fb.control(""));
-    }
-    const BodyControl = this.parentForm.get("Body");
-    if(!BodyControl){
-      this.parentForm.addControl("Body", this.fb.control(""));
-    }
-    console.log(this.CountryISO);
-    console.log(this.SearchCountryField);
+    console.log(this.IsUsedTemplate)
   }
 
   onTagEdited(ev) {
@@ -50,12 +43,8 @@ export class BroadcastMessageWhatsappComponent implements OnInit {
 
   // TagObj: {display: string, value: string} = new Object();
   AddSentTo(){
-    const PhnNum: string = this.parentForm.get("SendTo").value;
-    console.log(this.parentForm.get("ListPhone").value);
-    const ListPhnNum: Array<string> = this.parentForm.get("ListPhone").value;
-    ListPhnNum.push(PhnNum);
-    this.parentForm.get("ListPhone").setValue(PhnNum);
-    this.parentForm.get("SendTo").setValue("");
+    const PhnNum: Array<string> = this.parentForm.get("ListPhone").value;
+    this.parentForm.get("SendTo").setValue(PhnNum["internationalNumber"]);
   }
 
   ngOnDestroy(): void {

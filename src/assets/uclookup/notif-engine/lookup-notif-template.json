@@ -1,6 +1,6 @@
 {
     "title": "Notification Template",
-    "sectionTitle": "Test",
+    "sectionTitle": "Select Notification Template",
     "component": [
         {
             "type": "textbox",
@@ -156,11 +156,11 @@
           "action": [
             {
               "type": "select",
-              "property": "NotificationTemplateId"
+              "property": "NotificationTemplateCode"
             }
           ]
         }
     ],
     "propertyId": "NotificationTemplateId",
-    "propertyName": "NotificationTemplateDescr"
+    "propertyName": "NotificationTemplateCode"
 }

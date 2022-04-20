@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -11,6 +11,10 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { SendToNotificationEngineObj } from 'app/shared/model/notif-engine/send-to-notification-engine-obj.model';
+import { PushNotifSendToObj } from 'app/shared/model/notif-engine/push-notif-send-to-obj';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -22,30 +26,42 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     MrNotificationLevelCode: ['', Validators.required],
     MrNotificationSourceCode: ['', Validators.required],
     Subject: '',
+    SendTo: '',
     ListPhone: [],
     Body: ['', Validators.required],
+    UsedParamBody: [''],
+    ParamArr: this.fb.array([])
   });
+
   InputLookupTemplateMessageObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   readonly title: string = "Notification Broadcast";
   readonly IdentifierLookupTemplateMessage: string = "lookupTemplateMessage";
+  readonly IdentifierLookupSendToPush: string = "LookupSendToPush";
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   readonly MrNotificationLevelCode: string = CommonConstant.RefMasterTypeCodeNotificationLevel;
   readonly MrNotificationSourceCode: string = CommonConstant.RefMasterTypeCodeNotificationSource;
   readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient) {
+  NotificationHistHId: number;
+  NotificationTemplateId: number;
+  IsResend: boolean = false;
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
-      // if (params["NotificationTemplateId"]) {
-      //   this.NotificationTemplateId = params["NotificationTemplateId"];
-      // }
+      if (params["NotificationHistHId"]) {
+        this.NotificationHistHId = params["NotificationHistHId"];
+        this.IsResend = true;
+      }
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
+    if(this.IsResend) await this.PatchResendData();
     this.SetLookupTemplate();
+    this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
   }
 
   get GetMrNotificationTypeCodeValue(): string{
@@ -60,16 +76,79 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     );
   }
 
-  OnChangeType(){
-    this.SetLookupTemplate();
+  async PatchResendData(){
+    this.GetNotificationHistHByNotificationHistHId(this.NotificationHistHId);
+    await this.GetNotificationTemplate();
+    this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
   }
 
-  readonly TypeSms: string = "SMS";
-  readonly TypeWA: string = "WHATSAPP";
-  readonly TypeEmail: string = "EMAIL";
-  readonly TypePush: string = "PUSH_NOTIFICATION";
+  PatchDataUcLookupTemplate(NotificationTemplateId: number){
+    let objPatch = {
+      NotificationTemplateId : NotificationTemplateId,
+      OfficeName: this.UcLookupTempCode
+    }
+    this.InputLookupTemplateMessageObj.nameSelect = objPatch.OfficeName;
+    this.InputLookupTemplateMessageObj.jsonSelect = objPatch;
+  }
 
-  SetLookupTemplate() {    
+  GetNotificationHistHByNotificationHistHId(NotificationHistHId: number) {
+    this.http.post(this.UrlConstantNew.GetNotificationHistHByNotificationHistHId, { Id: NotificationHistHId }).subscribe(
+      (response: any) => {
+        this.NotificationTemplateId = response.NotificationTemplateId;
+        this.NotifBroadcastForm.patchValue({
+          MrNotificationTypeCode: response.MrNotificationTypeCode,
+          MrNotificationLevelCode: response.MrNotificationLevelCode,
+          MrNotificationSourceCode: response.MrNotificationSourceCode,
+          }
+        )
+      }
+    );
+  }
+
+  UcLookupTempCode: string;
+  async GetNotificationTemplate() {
+    if (this.NotificationTemplateId == 0) return;
+    await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
+      (response: NotificationTemplateObj) => {
+        this.UcLookupTempCode = response.NotificationTemplateCode,
+
+        this.NotifBroadcastForm.patchValue({
+          Subject: response.Subject,
+          Body: response.Body
+        });
+      }
+    )
+  }
+
+  OnChangeType(){
+    this.RefreshComponent();
+    this.SetLookupTemplate();
+    this.CheckIfWA();
+  }
+
+  ResetValidator() {
+    this.NotifBroadcastForm.get('UsedParamBody').clearValidators();;
+    this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
+  }
+
+  CheckIfWA() {
+    if (this.GetMrNotificationTypeCodeValue == this.TypeWA){
+      this.IsWa = true;
+    }
+    if (this.GetMrNotificationTypeCodeValue != this.TypeWA){
+      this.IsWa = false;
+    }
+  }
+
+  readonly TypeSms: string = CommonConstant.RefMasterTypeCodeNotificationTypesSms;
+  readonly TypeWA: string = CommonConstant.RefMasterTypeCodeNotificationTypesWA;
+  readonly TypeEmail: string = CommonConstant.RefMasterTypeCodeNotificationTypesEmail;
+  readonly TypePush: string = CommonConstant.RefMasterTypeCodeNotificationTypesPush;
+
+  SetLookupTemplate() {   
+    this.IsUsedTemplate = false;
+    this.ClassLookupTemplate = "col-md-9";
+    this.InputLookupTemplateMessageObj = new InputLookupObj(this.UrlConstantNew); 
     this.InputLookupTemplateMessageObj.isReady = false;
 
     this.InputLookupTemplateMessageObj.urlJson = "./assets/uclookup/notif-engine/lookup-notif-template.json";
@@ -95,15 +174,69 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     }, 10);
   }
 
-  NotifTemplateId: number;
+  IsUsedTemplate: boolean = false;
+  NotificationTemplateCode: string;
+  Version: number;
+  Param: Array<String>;
+  ParamListCount: number = 0;
+  IsWa: boolean = false;
+  ClassLookupTemplate: string = "col-md-9";
+
   getLookUp(ev){
-    this.NotifTemplateId = ev.NotificationTemplateId;
+    this.ParamListCount = ev.TotalParam;
+    if(this.ParamListCount>0){
+      this.NotifBroadcastForm.get('UsedParamBody').setValidators(Validators.required);
+      this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
+    }
+    this.NotificationTemplateCode = ev.NotificationTemplateCode;
+    this.Version = ev.Version;
+    if(this.GetMrNotificationTypeCodeValue == this.TypePush){
+      this.NotifBroadcastForm.patchValue({
+        UsedParamBody: "",
+        ParamArr: [],
+        Subject: ev.Subject,
+        Body: ev.Body,
+        MrNotificationLevelCode: ev.MrNotificationLevelCode,
+        MrNotificationSourceCode: ev.MrNotificationSourceCode,
+        }
+      )
+    }
+    this.IsUsedTemplate = true;
+    this.ClassLookupTemplate = "col-md-8";
+  }
+
+  IsReady: boolean = true;
+  ResetTemplate(){
+    this.SetLookupTemplate();
+    this.RefreshComponent();
+  }
+
+  RefreshComponent(){
+    this.ResetValidator();
+    this.NotifBroadcastForm.patchValue({
+      SendTo: "",
+      Subject: "",
+      Body: "",
+      UsedParamBody: "",
+      ListPhone: "",
+      ParamArr: []
+      }
+    )
+    this.RefreshReady();
+  }
+
+  RefreshReady() {
+    this.IsReady = false;
+    setTimeout (() => {
+      this.IsReady = true
+    }, 10);
   }
   
   @ViewChild("TempMessage") TempMessage: BodyMessageTosendComponent;
   InputParamValue() {
     this.TempMessage.InputParamValue();
   }
+
   getFormValidationErrors() {
     const invalid = [];
     const controls = this.NotifBroadcastForm.controls;
@@ -120,34 +253,94 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   GetDescrFromCode(RefMasterTypeCode: string, VariableForm: string): string{
     let Key: string;
     Key = this.NotifBroadcastForm.get(VariableForm).value;
-    let Value = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
+    let Value:string = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
     return Value;
   }
 
   SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
-  SetSaveObj(): SendToNotificationEngineObj{
-    this.SendToNotificationEngineSaveObj.NotificationTemplateId = this.NotifTemplateId;
+  Params: Array<string>;
+  SetSaveObj(){
+    this.SendToNotificationEngineSaveObj = new SendToNotificationEngineObj();
+    this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
     this.SendToNotificationEngineSaveObj.MrNotificationLevelCode = this.NotifBroadcastForm.get("MrNotificationLevelCode").value
-    this.SendToNotificationEngineSaveObj.MrNotificationLevelDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationLevelCode");
+    this.SendToNotificationEngineSaveObj.MrNotificationLevelDescr = this.GetDescrFromCode(this.MrNotificationLevelCode, "MrNotificationLevelCode");
     this.SendToNotificationEngineSaveObj.MrNotificationSourceCode = this.NotifBroadcastForm.get("MrNotificationSourceCode").value;
     this.SendToNotificationEngineSaveObj.MrNotificationSourceDescr = this.GetDescrFromCode(this.MrNotificationSourceCode, "MrNotificationSourceCode");
     this.SendToNotificationEngineSaveObj.MrNotificationTypeCode = this.GetMrNotificationTypeCodeValue;
-    this.SendToNotificationEngineSaveObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationLevelCode, "MrNotificationTypeCode");
+    this.SendToNotificationEngineSaveObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationTypeCode");
+    this.SendToNotificationEngineSaveObj.Version = this.Version;
+    if(this.ParamListCount>0){
+      let tempParam = this.NotifBroadcastForm.get("ParamArr").value;
+      this.Params = new Array<string>();
+      for(let i = 0; i < tempParam.length; i++){
+        this.Params.push(tempParam[i]["Param"])
+      }
+      this.SendToNotificationEngineSaveObj.Param = this.Params;
+    }
 
-    // this.SendToNotificationEngineSaveObj.Param = param;
-    // this.SendToNotificationEngineSaveObj.Version = version;
-
-    // belom nih kurang ngerti saya
-    // this.SendToNotificationEngineSaveObj.SendTo = ;
-    // this.SendToNotificationEngineSaveObj.EmailNotificationObj = ;
-    // this.SendToNotificationEngineSaveObj.SmsWaNotificationObj = ;
-    // this.SendToNotificationEngineSaveObj.PushNotificationObj = ;
-    
-    return this.SendToNotificationEngineSaveObj;
+    if(this.GetMrNotificationTypeCodeValue == this.TypePush){
+      this.SetPushNotifObj();
+    }
+    if(this.GetMrNotificationTypeCodeValue == this.TypeSms || this.GetMrNotificationTypeCodeValue == this.TypeWA){
+      this.SetSmsWaObj();
+    }
+    if(this.GetMrNotificationTypeCodeValue == this.TypeEmail){
+      this.SetEmailObj();
+    }
   }
 
-  SaveForm(){
-    console.dir(this.SetSaveObj);
-    console.log(this.SetSaveObj);
+  //#region PushNotif Logic
+  PushUrl: string;
+  PushKey: string;
+  PushSendTo: string;
+  GetPushFromChild(EventObj: PushNotifSendToObj) {
+    this.PushUrl = EventObj.Url;
+    this.PushKey = EventObj.Key;
+    this.PushSendTo = EventObj.SendTo;
+  }
+
+  SetPushNotifObj() {
+    if(this.IsUsedTemplate && this.ParamListCount>0){
+      this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = "";
+      this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = "";
+    }
+    this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = this.NotifBroadcastForm.get("Subject").value;
+    this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = this.NotifBroadcastForm.get("Body").value;
+    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.PushUrl;
+    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.PushKey;
+    this.SendToNotificationEngineSaveObj.SendTo = this.PushSendTo;
+  }
+
+  SetEmailObj() {
+    // Mekanisme save email obj
+  }
+
+  SetSmsWaObj() {
+    let ListPhone: Array<string> = this.NotifBroadcastForm.get("ListPhone").value;
+    let SendToSmsWa: string = ListPhone["e164Number"];
+    this.SendToNotificationEngineSaveObj.SendTo = SendToSmsWa;
+    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
+    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
+    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
+  }
+  //#endregion
+
+  async SaveForm(){
+    this.SetSaveObj();
+    let urlSave = this.UrlConstantNew.SendToNotificationEngine;
+    console.log(this.SendToNotificationEngineSaveObj);
+    await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
+      (response: SendToNotificationEngineObj) => {
+        if (response["StatusCode"] == "200") {
+          this.toastr.successMessage(response['message']);
+          this.CancelButton();
+        }
+      }
+    );
+  }
+  
+  CancelButton() {
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_BROADCAST_PAGING], {});
   }
 }
+

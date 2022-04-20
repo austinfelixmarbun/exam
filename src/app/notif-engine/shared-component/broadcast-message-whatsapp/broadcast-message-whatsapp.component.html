@@ -1,5 +1,6 @@
-<lib-ucSubsection [id]="'NotifBroadcastWAId'" [title]="title" [panel]="'NotifBroadcastWA'"></lib-ucSubsection>
-<div class="form-body" id="NotifBroadcastWA">
+<lib-ucSubsection *ngIf="IsWa" [id]="'NotifBroadcastSmsWaId'" [title]="titleWA" [panel]="'NotifBroadcastSmsWa'"></lib-ucSubsection>
+<lib-ucSubsection *ngIf="!IsWa" [id]="'NotifBroadcastSmsWaId'" [title]="titleSMS" [panel]="'NotifBroadcastSmsWa'"></lib-ucSubsection>
+<div class="form-body" id="NotifBroadcastSmsWa">
     <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
       <div class="col-md-9 input-group">
@@ -18,12 +19,12 @@
           [maxLength]="15"
           [phoneValidation]="true"
           name="phone"
-          formControlName="SendTo"
+          formControlName="ListPhone"
           ></ngx-intl-tel-input>
-        <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
-        </lib-uc-show-errors> -->
+          <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors> -->
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button" (click)="AddSentTo()">Add</button>
+            <button class="btn btn-primary btn-raised" type="button" (click)="AddSentTo()">Add</button>
           </div>
       </div>
     </div>

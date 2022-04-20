@@ -13,7 +13,7 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() Title: string = "Body Message Preview";
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
-  @Input() IdentifierBodyMessageParam: string = "BodyMessageParam";
+  @Input() IdentifierBodyMessageParam: string = "ParamArr";
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
   }
@@ -21,15 +21,17 @@ export class BodyMessageTosendComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    if (!this.GetListBodyMessageParam) {
-      this.parentForm.addControl(this.IdentifierBodyMessageParam, this.fb.array([]));
-    }
     this.GenerateParam();
   }
 
   GenerateParam() {
-    if(this.ParamListCount == 0) return;
+    console.log(this.ParamListCount)
     const ListParam: FormArray = this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
+    
+    if(this.ParamListCount == 0) return;
+    while (ListParam.length !== 0) {
+      ListParam.removeAt(0)
+    }
     for (let index = 0; index < this.ParamListCount; index++) {
       // const element = array[index];
       const ParamaterVar: string = "{" + index + "}";
@@ -38,23 +40,24 @@ export class BodyMessageTosendComponent implements OnInit {
         ParamIdxAt: ParamaterVar
       }));
     }
+    console.log(ListParam);
     this.InputParamValue();
   }
 
   TempBodyMessage: string = "";
 
-  DeleteParam(idx: number) {
-    let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
+  // DeleteParam(idx: number) {
+  //   let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
-    const element = this.GetListBodyMessageParam.at(idx);
-    const SearchedParam: string = element.get("ParamIdxAt").value;
+  //   const element = this.GetListBodyMessageParam.at(idx);
+  //   const SearchedParam: string = element.get("ParamIdxAt").value;
 
-    BodyMessage = BodyMessage.replace(SearchedParam, "");
-    this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
-    this.GetListBodyMessageParam.removeAt(idx);
-    this.RenameParam(idx);
-    this.InputParamValue();
-  }
+  //   BodyMessage = BodyMessage.replace(SearchedParam, "");
+  //   this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
+  //   this.GetListBodyMessageParam.removeAt(idx);
+  //   this.RenameParam(idx);
+  //   this.InputParamValue();
+  // }
 
   RenameParam(StartIdx: number) {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
@@ -79,6 +82,7 @@ export class BodyMessageTosendComponent implements OnInit {
       }
     }
     this.TempBodyMessage = BodyMessage;
+    this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
   }
 
 }

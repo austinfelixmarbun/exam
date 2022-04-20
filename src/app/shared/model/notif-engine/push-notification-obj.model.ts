@@ -1,13 +1,13 @@
 export class PushNotificationObj {
-    title: string;
-    message: string;
-    url: string;
-    key: string;
+    Title: string;
+    Message: string;
+    Url: string;
+    Key: string;
 
     constructor() {
-        this.title = "";
-        this.message = "";
-        this.url = "";
-        this.key = "";
+        this.Title = "";
+        this.Message = "";
+        this.Url = "";
+        this.Key = "";
     }
 }

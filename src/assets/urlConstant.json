@@ -888,5 +888,7 @@
     "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId",
     "GetNotificationTemplateByNotificationTemplateId": "/v1/NotificationTemplate/GetNotificationTemplateByNotificationTemplateId",
     "AddNotificationTemplate": "/v1/NotificationTemplate/AddNotificationTemplate",
-    "EditNotificationTemplate": "/v1/NotificationTemplate/EditNotificationTemplate"
+    "EditNotificationTemplate": "/v1/NotificationTemplate/EditNotificationTemplate",
+    "SendToNotificationEngine": "/v2/Notification/SendToNotificationEngine",
+    "GetNotificationHistHByNotificationHistHId": "/v1/NotificationHistH/GetNotificationHistHByNotificationHistHId"
 }
