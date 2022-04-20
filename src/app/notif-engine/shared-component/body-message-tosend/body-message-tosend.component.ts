@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-body-message-tosend',
@@ -11,6 +13,7 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() Title: string = "Body Message Preview";
+  @Input() NotifType: string = "";
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
@@ -18,7 +21,9 @@ export class BodyMessageTosendComponent implements OnInit {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
   }
 
-  constructor(private fb: FormBuilder) { }
+  readonly NotifTypeEmail: string = CommonConstant.NOTIF_TYPE_EMAIL;
+
+  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.GenerateParam();
@@ -85,4 +90,7 @@ export class BodyMessageTosendComponent implements OnInit {
     this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
   }
 
+  byPassHTML(html: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(html)
+  }
 }

@@ -2,17 +2,24 @@
 <div class="form-body" id="BodyPreview" formArrayName="{{IdentifierBodyMessageParam}}">
     <div class="form-group row">
         <label class="col-md-3 adInsLabel" translate>PREVIEW_BODY </label>
-        <label class="col-md-9 adInsLabel" style="text-transform:none !important" translate>{{TempBodyMessage}} </label>
+        <p class="col-md-9 adInsLabel" *ngIf="NotifType != NotifTypeEmail" style="text-transform:none !important; white-space:pre;" translate>{{TempBodyMessage}} </p>
+        <div class="ql-container ql-snow" *ngIf="NotifType == NotifTypeEmail" style="border-width: 0;">
+          <div style="width: 100%" style="text-transform:none !important;" class="ql-editor" [innerHTML]="byPassHTML(TempBodyMessage)"></div>
+        </div>
     </div>
     <div class="form-group row" *ngFor="let item of GetListBodyMessageParam.controls; let idx = index;">
         <label class="col-md-3 adInsLabel" translate>Parameter {{item.controls.ParamIdxAt.value}} </label>
-        <div class="col-md-7" [formGroupName]="idx">
-            <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per"
-                formControlName="Param" (change)="InputParamValue()">
+        <div class="col-md-5" [formGroupName]="idx">
+            <div class="input-group">
+                <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per"
+                    formControlName="Param" (change)="InputParamValue()">
+                <button type="button" (click)="DeleteParam(idx)" class="btn btn-raised"
+                    style="vertical-align: middle;">
+                    <i class="ft-trash-2 font-medium-2"></i>
+                </button>
+            </div>
+            <lib-uc-show-errors [control]="item.controls.Param" [submit]="enjiForm.submitted">
+            </lib-uc-show-errors>
         </div>
-        <!-- <button class="col-md-2" type="button" (click)="DeleteParam(idx)" class="btn btn-raised"
-            style="vertical-align: middle;">
-            <i class="ft-trash-2 font-medium-2"></i>
-        </button> -->
     </div>
 </div>
