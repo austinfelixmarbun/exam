@@ -21,6 +21,7 @@ import { RolePickNewService } from '../rolepick/rolepick-new.service';
 import { UcnotificationComponent } from '@adins/ucnotification';
 import { UcNotificationObj } from '../model/uc-notification-obj.model';
 import { GenericObj } from '../model/generic/generic-obj.model';
+import { GeneralSettingObj } from '../model/general-setting-obj.model';
 
 @Component({
     selector: 'app-navbar',
@@ -44,7 +45,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     NotificationHListObj = new Array<NotificationHObj>();
     TotalUnread: number = 0;
     NotificationObj: UcNotificationObj = new UcNotificationObj(this.cookieService, this.UrlConstantNew);
-    IsUseNotification: number = 0;
+    IsUseNotification: string = '';
     @ViewChild('appnotif') appnotif: UcnotificationComponent;
 
     notifications: object[] = [];
@@ -60,9 +61,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
 
-    ngOnInit() {
-        this.checkUseNotification();
-        this.GetListNotifH();
+    async ngOnInit() {
+        await this.checkUseNotification();
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
@@ -145,20 +145,28 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    checkUseNotification() {
+    async checkUseNotification() {
         let reqByCode: GenericObj = new GenericObj();
         reqByCode.Code = CommonConstant.GSCodeIsUseNotification;
-        this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).subscribe(
-            response => {
-                this.IsUseNotification = response['GsValue'];
+        await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+            (response: GeneralSettingObj) => {
+                this.IsUseNotification = response.GsValue;
+                AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, response.GsValue);
             }
         )
+    }
+
+    needUnsubscribe(){
+        let UseNotification: string = AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification);
+        if(UseNotification == '1'){
+            this.appnotif.UnsubNotification();
+        }
     }
 
     logout() {
         this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
         AdInsHelper.ClearAllLog(this.cookieService);
-        this.appnotif.UnsubNotification();
+        this.needUnsubscribe();
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
     }

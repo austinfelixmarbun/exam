@@ -59,7 +59,7 @@
     "@adins/ucgridview": "^2.2.3",
     "@adins/uclookupgeneric": "^2.3.3",
     "@adins/ucmoduleselection": "^1.0.5",
-    "@adins/ucnotification": "^1.0.4",
+    "@adins/ucnotification": "^1.0.6",
     "@adins/ucpaging": "^2.2.9",
     "@adins/ucreport": "^2.2.1",
     "@adins/ucsearch": "^2.9.7",

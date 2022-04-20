@@ -70,7 +70,7 @@
                             </a>
                         </div>
                     </li>
-                    <li *ngIf="IsUseNotification == 1">
+                    <li *ngIf="IsUseNotification == '1'">
                         <lib-ucnotification #appnotif class="nav-item" ngbDropdown [InputObj]="NotificationObj" (NeedLogOut)="notifLogoutHandler($event)"></lib-ucnotification>
                     </li>
                     <li class="nav-item" ngbDropdown [placement]="placement">
