@@ -157,16 +157,15 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     needUnsubscribe(){
-        let UseNotification: string = AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification);
-        if(UseNotification == '1'){
+        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1'){
             this.appnotif.UnsubNotification();
         }
     }
 
     logout() {
         this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
-        AdInsHelper.ClearAllLog(this.cookieService);
         this.needUnsubscribe();
+        AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
     }
