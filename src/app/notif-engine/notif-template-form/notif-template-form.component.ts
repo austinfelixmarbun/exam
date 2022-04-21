@@ -27,7 +27,7 @@ export class NotifTemplateFormComponent implements OnInit {
     EndDt: '',
     Subject: '',
     Body: ['', Validators.required],
-    BodyMessageParam: this.fb.array([])
+    ParamArr: this.fb.array([])
   });
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
@@ -39,6 +39,7 @@ export class NotifTemplateFormComponent implements OnInit {
   readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
   readonly DateNow: Date = new Date();
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
+  IsBroadcast: boolean = false;
   constructor(private fb: FormBuilder, private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationTemplateId"]) {

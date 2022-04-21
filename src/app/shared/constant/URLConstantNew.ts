@@ -1215,6 +1215,14 @@ export class UrlConstantNew{
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
 
+    // NotificationHistD
+    public GetNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistDByNotificationHistHId;
+    public GetListNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetListNotificationHistDByNotificationHistHId;
+
+    // PushNotificationHist
+    public GetPushNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetPushNotificationHistByNotificationHistHId;
+    public GetRefUserSubscriptionByUsername = this.env.NotifEngineURL + this.url.GetRefUserSubscriptionByUsername;
+
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
 }

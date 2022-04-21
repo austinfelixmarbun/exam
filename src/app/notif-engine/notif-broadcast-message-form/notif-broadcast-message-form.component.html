@@ -31,7 +31,7 @@
                 <div class="form-group" [hidden]="GetMrNotificationTypeCodeValue == ''">
                   <div class="form-group row">
                     <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
-                    <div class={{ClassLookupTemplate}}>
+                    <div [class]="IsUsedTemplate? ClassColMd8: ClassColMd9">
                       <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
                         [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)" *ngIf="InputLookupTemplateMessageObj.isReady">
                       </lib-uclookupgeneric>
@@ -70,19 +70,18 @@
                   </div>
                 </div>
                 <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-email>
-                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypePush && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" (GetPushNotificationObj)="GetPushFromChild($event)"></app-broadcast-message-notification >
-                <app-broadcast-message-whatsapp *ngIf="GetMrNotificationTypeCodeValue == TypeWA || GetMrNotificationTypeCodeValue == TypeSms && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" [IsWa]="IsWa"></app-broadcast-message-whatsapp>
-                <!-- <app-broadcast-message-sms *ngIf="GetMrNotificationTypeCodeValue == TypeSms" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-sms> -->
-                <app-body-message-tosend *ngIf="IsUsedTemplate && ParamListCount > 0" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" #TempMessage></app-body-message-tosend>
+                <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypePush && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" (GetPushNotificationObj)="GetPushFromChild($event)" [IsResend]="IsResend" [SendToUname]="PushSendTo"></app-broadcast-message-notification >
+                <app-broadcast-message-sms-wa *ngIf="GetMrNotificationTypeCodeValue == TypeWA || GetMrNotificationTypeCodeValue == TypeSms && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" [IsWa]="IsWa"></app-broadcast-message-sms-wa>
+                <app-body-message-tosend *ngIf="IsShowPreviewMessage" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" [IsBroadcast]="IsBroadcast" [ParamArrays]="[ParamArrFromGet]" #TempMessage></app-body-message-tosend>
               </div>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1"
                   (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                 </button>
-                <!-- <button type="button" class="btn btn-raised btn-primary" (click)="getFormValidationErrors()">
+                <button type="button" class="btn btn-raised btn-primary" (click)="getFormValidationErrors()">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Test</span>
-                </button> -->
+                </button>
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
                 </button>

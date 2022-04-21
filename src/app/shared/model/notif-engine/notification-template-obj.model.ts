@@ -14,6 +14,7 @@ export class NotificationTemplateObj {
     EndDt: Date;
     Body: string;
     TotalParam: number;
+    Version: number;
 
     constructor() {
         this.NotificationTemplateId = 0;
@@ -29,5 +30,6 @@ export class NotificationTemplateObj {
         this.Subject = "";
         this.Body = "";
         this.TotalParam = 0;
+        this.Version= 0;
     }
 }

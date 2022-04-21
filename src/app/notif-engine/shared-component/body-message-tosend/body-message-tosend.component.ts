@@ -14,6 +14,8 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
+  @Input() IsBroadcast: boolean;
+  @Input() ParamArrays: Array<string>;
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
   }
@@ -27,6 +29,8 @@ export class BodyMessageTosendComponent implements OnInit {
   GenerateParam() {
     console.log(this.ParamListCount)
     const ListParam: FormArray = this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
+
+    console.log(this.ParamArrays)
     
     if(this.ParamListCount == 0) return;
     while (ListParam.length !== 0) {
@@ -39,6 +43,16 @@ export class BodyMessageTosendComponent implements OnInit {
         Param: "",
         ParamIdxAt: ParamaterVar
       }));
+      console.log(ListParam);
+
+      if(this.ParamArrays != null){
+        let ParamStr: string;
+        ParamStr = this.ParamArrays[index];
+        ListParam.at(index).patchValue({
+          Param: ParamStr,
+          ParamIdxAt: ParamaterVar
+        });
+      }
     }
     console.log(ListParam);
     this.InputParamValue();
@@ -46,18 +60,18 @@ export class BodyMessageTosendComponent implements OnInit {
 
   TempBodyMessage: string = "";
 
-  // DeleteParam(idx: number) {
-  //   let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
+  DeleteParam(idx: number) {
+    let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
-  //   const element = this.GetListBodyMessageParam.at(idx);
-  //   const SearchedParam: string = element.get("ParamIdxAt").value;
+    const element = this.GetListBodyMessageParam.at(idx);
+    const SearchedParam: string = element.get("ParamIdxAt").value;
 
-  //   BodyMessage = BodyMessage.replace(SearchedParam, "");
-  //   this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
-  //   this.GetListBodyMessageParam.removeAt(idx);
-  //   this.RenameParam(idx);
-  //   this.InputParamValue();
-  // }
+    BodyMessage = BodyMessage.replace(SearchedParam, "");
+    this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
+    this.GetListBodyMessageParam.removeAt(idx);
+    this.RenameParam(idx);
+    this.InputParamValue();
+  }
 
   RenameParam(StartIdx: number) {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
@@ -82,7 +96,9 @@ export class BodyMessageTosendComponent implements OnInit {
       }
     }
     this.TempBodyMessage = BodyMessage;
-    this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
+    if(this.IsBroadcast){
+      this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
+    }
   }
 
 }

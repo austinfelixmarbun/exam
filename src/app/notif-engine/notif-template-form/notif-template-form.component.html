@@ -112,7 +112,7 @@
                   </div>
                 </div>
               </div>
-              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" #TempMessage></app-body-message-tosend>
+              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [IsBroadcast]="IsBroadcast" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
