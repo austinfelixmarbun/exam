@@ -2,28 +2,32 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { filter, Observable, of } from 'rxjs';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+import { UcSubsectionComponent, UcSubsectionModule } from '@adins/uc-subsection';
 
 @Component({
-  selector: 'app-broadcast-message-whatsapp',
-  templateUrl: './broadcast-message-whatsapp.component.html',
+  selector: 'app-broadcast-message-sms-wa',
+  templateUrl: './broadcast-message-sms-wa.component.html',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class BroadcastMessageWhatsappComponent implements OnInit {
+export class BroadcastMessageSmsWaComponent implements OnInit {
 
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
   @Input() IsWa: boolean;
-  readonly titleWA: string = "Broadcast WhatsApp";
-  readonly titleSMS: string = "Broadcast SMS";
+  readonly TitleWa: string = "Broadcast WhatsApp";
+  readonly TitleSms: string = "Broadcast SMS";
 	separateDialCode = false;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
+  Title: string;
   PhoneNumberFormat = PhoneNumberFormat;
+  NotifBroadcastSmsWaId: UcSubsectionModule = new UcSubsectionModule();
   constructor(private fb: FormBuilder) { }
 
+
   ngOnInit(): void {
-    console.log(this.IsUsedTemplate)
+
   }
 
   onTagEdited(ev) {
@@ -40,11 +44,10 @@ export class BroadcastMessageWhatsappComponent implements OnInit {
     return of(tag)
       .pipe(filter(() => confirm));
   }
-
-  // TagObj: {display: string, value: string} = new Object();
+  
   AddSentTo(){
-    const PhnNum: Array<string> = this.parentForm.get("ListPhone").value;
-    this.parentForm.get("SendTo").setValue(PhnNum["internationalNumber"]);
+    const PhnNum: Array<string> = this.parentForm.get("SendTo").value;
+    this.parentForm.get("SendTo").setValue(PhnNum["e164Number"]);
   }
 
   ngOnDestroy(): void {
