@@ -129,7 +129,7 @@ export class NotifTemplateFormComponent implements OnInit {
     if (notifType == CommonConstant.NOTIF_TYPE_EMAIL) this.subjectIsRequired = true;
   }
 
-  readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
+  readonly IdentifierBodyMessageParam: string = "ParamArr";
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
