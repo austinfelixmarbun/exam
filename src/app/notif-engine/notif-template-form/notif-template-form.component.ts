@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -29,6 +29,30 @@ export class NotifTemplateFormComponent implements OnInit {
     Body: ['', Validators.required],
     ParamArr: this.fb.array([])
   });
+
+  readonly QuilConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+  
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+  
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+  
+      ['clean'],                                         // remove formatting button
+  
+      ['link', 'image', 'video', 'doc']                         // link and image, video
+    ]
+  };
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationTemplateId: number = 0;
@@ -77,6 +101,7 @@ export class NotifTemplateFormComponent implements OnInit {
           Subject: response.Subject,
           Body: response.Body
         });
+        this.ChangeNotifType();
         for (let index = 0; index < response.TotalParam; index++) {
           this.AddParameter(true);
         }
@@ -96,6 +121,14 @@ export class NotifTemplateFormComponent implements OnInit {
     return this.DictListRefMaster[RefMasterTypeCode].find(x => x.Key == MasterCode).Value;
   }
 
+  subjectIsRequired: boolean = false;
+  ChangeNotifType() {
+    let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
+
+    this.subjectIsRequired = false;
+    if (notifType == CommonConstant.NOTIF_TYPE_EMAIL) this.subjectIsRequired = true;
+  }
+
   readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
@@ -105,7 +138,8 @@ export class NotifTemplateFormComponent implements OnInit {
 
     if (!IsEdit) {
       const lenBody: number = BodyMessage.length;
-      if (lenBody > 0 && BodyMessage.charAt(lenBody) != " ") {
+      let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
+      if (lenBody > 0 && BodyMessage.charAt(lenBody) != " " && notifType != CommonConstant.NOTIF_TYPE_EMAIL) {
         BodyMessage += " ";
       }
       BodyMessage += ParamaterVar + " ";
@@ -160,5 +194,18 @@ export class NotifTemplateFormComponent implements OnInit {
 
   CancelButton() {
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_TEMPLATE_PAGING], {});
+  }
+  
+  getFormValidationErrors() {
+    const invalid = [];
+    const controls = this.NotifTemplateForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+        console.log(name);
+      }
+    }
+    console.log(invalid);
+    console.dir(this.NotifTemplateForm.getRawValue());
   }
 }

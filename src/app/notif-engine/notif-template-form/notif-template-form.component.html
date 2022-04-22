@@ -62,7 +62,7 @@
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE</label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
+                    <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode" (change)="ChangeNotifType()"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.MrNotificationTypeCode.invalid }">
                       <option value="">Select One</option>
                       <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
@@ -90,33 +90,44 @@
                     </lib-uc-show-errors>
                   </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" [ngClass]="{ 'adins-required': subjectIsRequired }">
                   <label class="col-md-3 adInsLabel" translate>SUBJECT</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per"
-                      formControlName="Subject">
+                      formControlName="Subject" [required]="subjectIsRequired">
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Subject" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
                 </div>
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" translate>BODY</label>
-                  <div class="col-md-9 input-group">
-                    <textarea class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
+                  <div class="col-md-9">
+                    <div class="input-group">
+                      <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
+                      
+                      <div id="full-wrapper" *ngIf="subjectIsRequired">
+                        <div id="full-container">
+                          <quill-editor [modules]="QuilConfig" [styles]="{'text-transform': 'none !important' }" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
+                        </div>
+                      </div>
+                      <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
+                        <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
+                      </button>
+                    </div>
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Body" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
-                    <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
-                      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
-                    </button>
                     <!-- <button type="button" (click)="ClearParameter()">Clear Parameter</button> -->
                   </div>
                 </div>
               </div>
-              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [IsBroadcast]="IsBroadcast" #TempMessage></app-body-message-tosend>
+              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [IsBroadcast]="false" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                 </button>
+                <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="getFormValidationErrors()">
+                  <i class="far fa-window-close"></i>&nbsp;<span translate>Test</span>
+                </button> -->
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
                 </button>

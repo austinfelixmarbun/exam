@@ -15,20 +15,7 @@
               (ngSubmit)="NotifBroadcastForm.valid && SaveForm()">
               <lib-ucSubsection [id]="'NotifBroadcastId'" [title]="title" [panel]="'NotifBroadcast'"></lib-ucSubsection>
               <div class="form-body" id="NotifBroadcast">
-                <div class="form-group row adins-required">
-                  <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
-                  <div class="col-md-9">
-                    <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
-                    [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }" (change)="OnChangeType()">
-                      <option value="">Select One</option>
-                      <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
-                        {{it.Value}}</option>
-                    </select>
-                    <lib-uc-show-errors [control]="NotifBroadcastForm.controls.MrNotificationTypeCode" [submit]="enjiForm.submitted">
-                    </lib-uc-show-errors>
-                  </div>
-                </div>
-                <div class="form-group" [hidden]="GetMrNotificationTypeCodeValue == ''">
+                <div class="form-group">
                   <div class="form-group row">
                     <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
                     <div [class]="IsUsedTemplate? ClassColMd8: ClassColMd9">
@@ -40,6 +27,19 @@
                       <button type="button" class="btn btn-raised btn-warning" (click)="ResetTemplate()">
                         Clear
                       </button>
+                    </div>
+                  </div>
+                  <div class="form-group row adins-required">
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }" (change)="OnChangeType()">
+                        <option value="">Select One</option>
+                        <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
+                          {{it.Value}}</option>
+                      </select>
+                      <lib-uc-show-errors [control]="NotifBroadcastForm.controls.MrNotificationTypeCode" [submit]="enjiForm.submitted">
+                      </lib-uc-show-errors>
                     </div>
                   </div>
                   <div class="form-group row adins-required">

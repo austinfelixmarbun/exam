@@ -74,12 +74,13 @@ export class BroadcastMessageNotificationComponent implements OnInit {
 
   RefUserSubscriptionId: number;
   GetRefUserSubscriptionByUsername() {
-    console.log(this.SendToUname)
-    this.http.post(this.UrlConstantNew.GetRefUserSubscriptionByUsername, { username: this.SendToUname }).subscribe(
-      (response: any) => {
-        this.RefUserSubscriptionId = response.RefUserSubscriptionId;
-      }
-    );
+    if(this.SendToUname != null){
+      this.http.post(this.UrlConstantNew.GetRefUserSubscriptionByUsername, { username: this.SendToUname }).subscribe(
+        (response: any) => {
+          this.RefUserSubscriptionId = response.RefUserSubscriptionId;
+        }
+      );
+    }
   }
   
   ngOnDestroy(): void {

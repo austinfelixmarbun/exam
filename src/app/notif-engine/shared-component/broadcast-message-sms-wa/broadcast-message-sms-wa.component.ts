@@ -27,7 +27,7 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.IsUsedTemplate)
+    
   }
 
   onTagEdited(ev) {

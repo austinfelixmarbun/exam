@@ -90,12 +90,6 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Template Version",
-            "name": "Version"
-        },
-        {
-            "type": "sort",
-            "position": "left",
             "label": "Template Code",
             "name": "NotificationTemplateCode"
         },
@@ -104,6 +98,12 @@
             "position": "left",
             "label": "Template Description",
             "name": "NotificationTemplateDescr"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Template Version",
+            "name": "Version"
         },
         {
             "type": "label",
@@ -130,17 +130,17 @@
         {
             "type": "text",
             "position": "left",
-            "property": "Version"
-        },
-        {
-            "type": "text",
-            "position": "left",
             "property": "NotificationTemplateCode"
         },
         {
             "type": "text",
             "position": "left",
             "property": "NotificationTemplateDescr"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "Version"
         },
         {
             "type": "action",
