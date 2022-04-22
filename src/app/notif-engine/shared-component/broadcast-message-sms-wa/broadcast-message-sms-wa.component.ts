@@ -27,7 +27,7 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
   }
 
   onTagEdited(ev) {
@@ -44,11 +44,10 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
     return of(tag)
       .pipe(filter(() => confirm));
   }
-
-  // TagObj: {display: string, value: string} = new Object();
+  
   AddSentTo(){
-    const PhnNum: Array<string> = this.parentForm.get("ListPhone").value;
-    this.parentForm.get("SendTo").setValue(PhnNum["internationalNumber"]);
+    const PhnNum: Array<string> = this.parentForm.get("SendTo").value;
+    this.parentForm.get("SendTo").setValue(PhnNum["e164Number"]);
   }
 
   ngOnDestroy(): void {

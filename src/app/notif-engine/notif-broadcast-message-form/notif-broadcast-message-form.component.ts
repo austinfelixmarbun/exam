@@ -47,6 +47,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   NotificationHistHId: number;
   NotificationTemplateId: number;
   IsResend: boolean = false;
+  IsFirstGet: boolean = this.IsResend;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -113,18 +114,24 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     await this.PatchSubjectBody(this.GetMrNotificationTypeCodeValue);
     if(this.NotificationHistHId != null){
       await this.GetNotificationTemplate();
+      if(this.IsResend && this.IsShowPreviewMessage){
+        this.InputLookupTemplateMessageObj.isDisable = true;
+        this.InputLookupTemplateMessageObj.isReady = false;
+        this.InputLookupTemplateMessageObj.isReady = true;
+      }
     }
-    this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
-
+    if(this.NotificationTemplateId != null) this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
     if(this.IsShowPreviewMessage) await this.GetListNotificationHistDByNotificationHistHId(this.NotificationHistHId);
+    this.InputLookupTemplateMessageObj.isReady = false;
+    this.InputLookupTemplateMessageObj.isReady = true;
   }
 
   PatchDataUcLookupTemplate(NotificationTemplateId: number){
     let objPatch = {
       NotificationTemplateId : NotificationTemplateId,
-      OfficeName: this.NotificationTemplateCode
+      NotificationTemplateCode: this.NotificationTemplateCode
     }
-    this.InputLookupTemplateMessageObj.nameSelect = objPatch.OfficeName;
+    this.InputLookupTemplateMessageObj.nameSelect = objPatch.NotificationTemplateCode;
     this.InputLookupTemplateMessageObj.jsonSelect = objPatch;
   }
 
@@ -178,10 +185,29 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.RefreshReady();
   }
 
+  SmsWaSendTo: string;
+  async GetSmsWaNotificationHistByNotificationHistHId(NotificationHistHId: number) {
+    await this.http.post(this.UrlConstantNew.GetSmsWaNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
+      (response: any) => {
+        this.SmsWaSendTo = response.SendTo;
+        this.NotifBroadcastForm.patchValue({
+          Body: response.Body,
+          SendTo: this.SmsWaSendTo
+          }
+        )
+      }
+    );
+    this.RefreshReady();
+  }
+
   async PatchSubjectBody(TypeCode: string) {
     if(TypeCode == this.TypePush){
       await this.GetPushNotificationHistByNotificationHistHId(this.NotificationHistHId);
     }
+    if(TypeCode == this.TypeSms || TypeCode == this.TypeWA){
+      await this.GetSmsWaNotificationHistByNotificationHistHId(this.NotificationHistHId);
+    }
+    this.CheckIfWA();
   }
 
   async GetNotificationTemplate() {
@@ -230,11 +256,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.IsUsedTemplate = false;
     this.InputLookupTemplateMessageObj = new InputLookupObj(this.UrlConstantNew); 
     this.InputLookupTemplateMessageObj.isReady = false;
-
+    
     this.InputLookupTemplateMessageObj.urlJson = "./assets/uclookup/notif-engine/lookup-notif-template.json";
     this.InputLookupTemplateMessageObj.isRequired = false;
     this.InputLookupTemplateMessageObj.urlEnviPaging = this.UrlConstantNew.env.NotifEngineURL + '/v2.1';
-
+    
     this.SetUcLookupTemplateCrit();
   }
 
@@ -248,12 +274,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     critObj.propName = 'IS_ACTIVE';
     critObj.value = true;
     this.InputLookupTemplateMessageObj.addCritInput.push(critObj);
-
-    // let critTypeObj: CriteriaObj = new CriteriaObj();
-    // critTypeObj.restriction = AdInsConstant.RestrictionEq;
-    // critTypeObj.propName = 'MR_NOTIFICATION_TYPE_CODE';
-    // critTypeObj.value = this.GetMrNotificationTypeCodeValue;
-    // this.InputLookupTemplateMessageObj.addCritInput.push(critTypeObj);
 
     setTimeout (() => {
       this.InputLookupTemplateMessageObj.isReady = true;
@@ -270,6 +290,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   IsBroadcast: boolean = true;
 
   getLookUp(ev){
+    this.ParamArrFromGet = new Array<string>();
     this.ParamListCount = ev.TotalParam;
     if(this.ParamListCount>0){
       this.IsShowPreviewMessage = true;
@@ -364,10 +385,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if(this.ParamListCount>0){
       let tempParam = this.NotifBroadcastForm.get("ParamArr").value;
       this.Params = new Array<string>();
-
+      
       for(let i = 0; i < tempParam.length; i++){
         this.Params.push(tempParam[i]["Param"]);
       }
+
       this.SendToNotificationEngineSaveObj.Param = this.Params;
     }
 
@@ -408,12 +430,15 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   SetSmsWaObj() {
-    let ListPhone: Array<string> = this.NotifBroadcastForm.get("ListPhone").value;
+    let ListPhone: Array<string> = this.NotifBroadcastForm.get("SendTo").value;
     let SendToSmsWa: string = ListPhone["e164Number"];
     this.SendToNotificationEngineSaveObj.SendTo = SendToSmsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
+    if(this.IsShowPreviewMessage){
+      this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
+    }
   }
   //#endregion
 

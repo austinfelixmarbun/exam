@@ -1222,6 +1222,9 @@ export class UrlConstantNew{
     // PushNotificationHist
     public GetPushNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetPushNotificationHistByNotificationHistHId;
     public GetRefUserSubscriptionByUsername = this.env.NotifEngineURL + this.url.GetRefUserSubscriptionByUsername;
+    
+    // SmsWaNotificationHist
+    public GetSmsWaNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetSmsWaNotificationHistByNotificationHistHId;
 
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;

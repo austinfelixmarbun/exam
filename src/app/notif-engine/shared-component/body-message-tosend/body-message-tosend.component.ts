@@ -39,7 +39,6 @@ export class BodyMessageTosendComponent implements OnInit {
       ListParam.removeAt(0)
     }
     for (let index = 0; index < this.ParamListCount; index++) {
-      // const element = array[index];
       const ParamaterVar: string = "{" + index + "}";
       ListParam.push(this.fb.group({
         Param: "",
@@ -48,7 +47,7 @@ export class BodyMessageTosendComponent implements OnInit {
 
       if(this.ParamArrays != null && this.IsBroadcast){
         let ParamStr: string;
-        ParamStr = this.ParamArrays[index];
+        ParamStr = this.ParamArrays.at(index).at(index);
         ListParam.at(index).patchValue({
           Param: ParamStr,
           ParamIdxAt: ParamaterVar
