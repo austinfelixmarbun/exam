@@ -20,8 +20,22 @@
   <div class="form-group row adins-required">
     <label class="col-md-3 adInsLabel" translate>BODY</label>
     <div class="col-md-9">
-      <quill-editor formControlName="Body" [readOnly]="IsUsedTemplate"></quill-editor>
+      <div id="full-wrapper">
+        <div id="full-container">
+          <quill-editor [modules]="QuilConfig" formControlName="Body" [readOnly]="IsUsedTemplate"></quill-editor>
+        </div>
+      </div>
+      <!-- <quill-editor formControlName="Body" ></quill-editor> -->
       <lib-uc-show-errors [control]="parentForm.controls.Body" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 adInsLabel" translate>File Attachment</label>
+    <div class="col-md-9">
+      <input type="file" formControlName="FileAttachment" (change)="FileAttachmentChange($event)" title="Select file"
+      name="files[]" [accept]="'.jpg,.png,.pdf,.docx,.txt,.gif,.jpeg'" multiple>
+      <lib-uc-show-errors [control]="parentForm.controls.FileAttachment" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>

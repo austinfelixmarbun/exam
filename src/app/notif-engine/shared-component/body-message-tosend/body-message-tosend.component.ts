@@ -51,18 +51,18 @@ export class BodyMessageTosendComponent implements OnInit {
 
   TempBodyMessage: string = "";
 
-  // DeleteParam(idx: number) {
-  //   let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
+  DeleteParam(idx: number) {
+    let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
-  //   const element = this.GetListBodyMessageParam.at(idx);
-  //   const SearchedParam: string = element.get("ParamIdxAt").value;
+    const element = this.GetListBodyMessageParam.at(idx);
+    const SearchedParam: string = element.get("ParamIdxAt").value;
 
-  //   BodyMessage = BodyMessage.replace(SearchedParam, "");
-  //   this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
-  //   this.GetListBodyMessageParam.removeAt(idx);
-  //   this.RenameParam(idx);
-  //   this.InputParamValue();
-  // }
+    BodyMessage = BodyMessage.replace(SearchedParam, "");
+    this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
+    this.GetListBodyMessageParam.removeAt(idx);
+    this.RenameParam(idx);
+    this.InputParamValue();
+  }
 
   RenameParam(StartIdx: number) {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
@@ -87,7 +87,7 @@ export class BodyMessageTosendComponent implements OnInit {
       }
     }
     this.TempBodyMessage = BodyMessage;
-    this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
+    // this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
   }
 
   byPassHTML(html: string) {

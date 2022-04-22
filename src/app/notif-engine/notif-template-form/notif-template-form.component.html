@@ -107,7 +107,7 @@
                       
                       <div id="full-wrapper" *ngIf="subjectIsRequired">
                         <div id="full-container">
-                          <quill-editor [modules]="QuilConfig" [styles]="{'text-transform': 'none !important' }" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
+                          <quill-editor [modules]="QuilConfig" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
                         </div>
                       </div>
                       <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" #TempMessage></app-body-message-tosend>
+              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" [IdentifierBodyMessageParam]="'BodyMessageParam'" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
