@@ -32,12 +32,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
         NgxMaskModule.forRoot(),
         QuillModule.forRoot({
           modules: {
-            syntax: true,
+            syntax: false,
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-              ['blockquote', 'code-block'],
+              ['blockquote'],
           
-              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
               [{ 'list': 'ordered'}, { 'list': 'bullet' }],
               [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
               [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
@@ -52,9 +52,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
           
               ['clean'],                                         // remove formatting button
           
-              ['link', 'image', 'video']                         // link and image, video
+              ['image', 'video']                         // link and image, video
             ],
-            theme: 'snow'
+            theme: 'bubble'
           }
         }),
         TagInputModule,
