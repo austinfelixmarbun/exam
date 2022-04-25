@@ -17,7 +17,7 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
-  @Input() IsBroadcast: boolean;
+  @Input() IsBroadcast: boolean = false;
   @Input() ParamArrays: Array<string>;
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
