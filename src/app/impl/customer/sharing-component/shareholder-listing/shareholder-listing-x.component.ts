@@ -117,15 +117,15 @@ export class ShareholderListingXComponent implements OnInit {
       this.toastr.warningMessage(ExceptionConstant.Add_Min_1_Active_Signer);
       return;
     }
-    if(this.tempShareholderListingObj.length)
-    {
-      var uniqueSet = Array.from(new Set(this.listUniqueIdNo));
-      if(uniqueSet.length != this.tempShareholderListingObj.length)
-      {
-        this.toastr.warningMessage(ExceptionConstant.DUPLICATE_SHRHLDR_ID_NO);
-        return;
-      }
-    }
+    // if(this.tempShareholderListingObj.length)
+    // {
+    //   var uniqueSet = Array.from(new Set(this.listUniqueIdNo));
+    //   if(uniqueSet.length != this.tempShareholderListingObj.length)
+    //   {
+    //     this.toastr.warningMessage(ExceptionConstant.DUPLICATE_SHRHLDR_ID_NO);
+    //     return;
+    //   }
+    // }
 
     this.outputTab.emit({ stepMode: 'next' });
   }
