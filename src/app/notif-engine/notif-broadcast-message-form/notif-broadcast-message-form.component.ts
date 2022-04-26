@@ -15,6 +15,10 @@ import { PushNotifSendToObj } from 'app/shared/model/notif-engine/push-notif-sen
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
+import { NotificationHistHObj } from 'app/shared/model/notif-engine/notification-hist-h-obj.model';
+import { ResPushNotificationObj } from 'app/shared/model/notif-engine/res-push-notification-obj.model';
+import { ListNotificationHistDObj } from 'app/shared/model/notif-engine/list-notification-hist-d-obj';
+import { ResSmsWaNotificationObj } from 'app/shared/model/notif-engine/res-sms-wa-notification-obj.model';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -27,11 +31,14 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     MrNotificationSourceCode: ['', Validators.required],
     Subject: '',
     SendTo: ['', Validators.required],
-    BccEmail: '',
-    CcEmail: '',
+    BccEmail: ['', Validators.email],
+    CcEmail: ['', Validators.email],
     ListPhone: [],
     Body: ['', Validators.required],
-    UsedParamBody: [''],
+    UsedParamBody: '',
+    TemplateVersion: '',
+    PushUrl: '',
+    PushKey: '',
     ParamArr: this.fb.array([])
   });
 
@@ -43,13 +50,10 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   readonly MrNotificationLevelCode: string = CommonConstant.RefMasterTypeCodeNotificationLevel;
   readonly MrNotificationSourceCode: string = CommonConstant.RefMasterTypeCodeNotificationSource;
   readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
-  ClassColMd8: string = "col-md-8";
-  ClassColMd9: string = "col-md-9";
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationHistHId: number;
   NotificationTemplateId: number;
   IsResend: boolean = false;
-  IsFirstGet: boolean = this.IsResend;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
@@ -117,14 +121,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if(this.NotificationHistHId != null){
       await this.GetNotificationTemplate();
       if(this.IsResend && this.IsShowPreviewMessage){
+        this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
         this.InputLookupTemplateMessageObj.isDisable = true;
-        this.InputLookupTemplateMessageObj.isReady = false;
-        this.InputLookupTemplateMessageObj.isReady = true;
       }
     }
-    if(this.NotificationTemplateId != null) this.PatchDataUcLookupTemplate(this.NotificationTemplateId);
     if(this.IsShowPreviewMessage) await this.GetListNotificationHistDByNotificationHistHId(this.NotificationHistHId);
-    this.InputLookupTemplateMessageObj.isReady = false;
     this.InputLookupTemplateMessageObj.isReady = true;
   }
 
@@ -137,12 +138,10 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.InputLookupTemplateMessageObj.jsonSelect = objPatch;
   }
 
-  NotificationTypeCode: string;
   async GetNotificationHistHByNotificationHistHId(NotificationHistHId: number) {
     await this.http.post(this.UrlConstantNew.GetNotificationHistHByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
-      (response: any) => {
+      (response: NotificationHistHObj) => {
         this.NotificationTemplateId = response.NotificationTemplateId;
-        this.NotificationTypeCode = response.MrNotificationTypeCode;
         this.NotifBroadcastForm.patchValue({
           MrNotificationTypeCode: response.MrNotificationTypeCode,
           MrNotificationLevelCode: response.MrNotificationLevelCode,
@@ -157,10 +156,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   async GetListNotificationHistDByNotificationHistHId(NotificationHistHId: number) {
     if(this.IsResend){
       await this.http.post(this.UrlConstantNew.GetListNotificationHistDByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
-        (response: any) => {
+        (response: ListNotificationHistDObj) => {
+          console.log(response);
           this.ParamArrFromGet = new Array<string>();
           for (let index = 0; index < this.ParamListCount; index++) {
-            this.ParamArrFromGet.push(response.ReturnObject[index]["Param"]);
+            this.ParamArrFromGet.push(response.ReturnObject.at(index).Param);
           }
           this.IsShowPreviewMessage = false;
           setTimeout (() => {
@@ -174,7 +174,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   PushSendTo: string;
   async GetPushNotificationHistByNotificationHistHId(NotificationHistHId: number) {
     await this.http.post(this.UrlConstantNew.GetPushNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
-      (response: any) => {
+      (response: ResPushNotificationObj) => {
         this.PushSendTo = response.SendTo;
         let jsonMessagesObj = JSON.parse(response.JsonMessages);
         this.NotifBroadcastForm.patchValue({
@@ -187,14 +187,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.RefreshReady();
   }
 
-  SmsWaSendTo: string;
   async GetSmsWaNotificationHistByNotificationHistHId(NotificationHistHId: number) {
     await this.http.post(this.UrlConstantNew.GetSmsWaNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
-      (response: any) => {
-        this.SmsWaSendTo = response.SendTo;
+      (response: ResSmsWaNotificationObj) => {
         this.NotifBroadcastForm.patchValue({
           Body: response.Body,
-          SendTo: this.SmsWaSendTo
+          SendTo: response.SendTo
           }
         )
       }
@@ -209,18 +207,18 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if(TypeCode == this.TypeSms || TypeCode == this.TypeWA){
       await this.GetSmsWaNotificationHistByNotificationHistHId(this.NotificationHistHId);
     }
-    this.CheckIfWA();
+    this.CheckTypeMechanism();
   }
 
   async GetNotificationTemplate() {
-    if (this.NotificationTemplateId == 0 || this.NotificationTemplateId == null) return;
+    if (!this.NotificationTemplateId) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
       (response: NotificationTemplateObj) => {
         this.NotificationTemplateCode = response.NotificationTemplateCode;
         this.ParamListCount = response.TotalParam;
-        this.Version = response.Version;
         if(this.ParamListCount > 0) this.IsShowPreviewMessage = true;
         this.NotifBroadcastForm.patchValue({
+          TemplateVersion: response.Version,
           Subject: response.Subject,
           Body: response.Body
         });
@@ -232,20 +230,30 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   OnChangeType(){
     this.RefreshComponent();
     this.SetLookupTemplate();
-    this.CheckIfWA();
+    this.CheckTypeMechanism();
   }
 
-  ResetValidator() {
+  ResetValidatorUsedParamBody() {
     this.NotifBroadcastForm.get('UsedParamBody').clearValidators();
     this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
   }
 
-  CheckIfWA() {
-    if (this.GetMrNotificationTypeCodeValue == this.TypeWA){
-      this.IsWa = true;
+  CheckTypeMechanism() {
+    this.IsWa = false;
+    this.NotifBroadcastForm.get('SendTo').setValidators(Validators.required);
+    this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
+
+    if (this.GetMrNotificationTypeCodeValue == this.TypeWA || this.GetMrNotificationTypeCodeValue == this.TypeSms){
+      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(13)]);
+    this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
+      
+      if(this.GetMrNotificationTypeCodeValue == this.TypeWA){
+        this.IsWa = true;
+      }
     }
-    if (this.GetMrNotificationTypeCodeValue != this.TypeWA){
-      this.IsWa = false;
+    if (this.GetMrNotificationTypeCodeValue == this.TypeEmail){
+      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.email]);
+      this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
     }
   }
 
@@ -300,13 +308,13 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
     }
     this.NotificationTemplateCode = ev.NotificationTemplateCode;
-    this.Version = ev.Version;
     this.NotifBroadcastForm.patchValue({
       UsedParamBody: "",
       ListPhone: [],
       ParamArr: [],
       Subject: ev.Subject,
       Body: ev.Body,
+      TemplateVersion: ev.Version,
       MrNotificationTypeCode: ev.MrNotificationTypeCode,
       MrNotificationLevelCode: ev.MrNotificationLevelCode,
       MrNotificationSourceCode: ev.MrNotificationSourceCode,
@@ -327,7 +335,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   RefreshComponent(){
-    this.ResetValidator();
+    this.ResetValidatorUsedParamBody();
     this.NotifBroadcastForm.patchValue({
       SendTo: "",
       Subject: "",
@@ -366,14 +374,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   GetDescrFromCode(RefMasterTypeCode: string, VariableForm: string): string{
-    let Key: string;
-    Key = this.NotifBroadcastForm.get(VariableForm).value;
+    let Key: string = this.NotifBroadcastForm.get(VariableForm).value;
     let Value:string = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
     return Value;
   }
 
   SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
-  Params: Array<string>;
   SetSaveObj(){
     this.SendToNotificationEngineSaveObj = new SendToNotificationEngineObj();
     this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
@@ -383,16 +389,14 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.SendToNotificationEngineSaveObj.MrNotificationSourceDescr = this.GetDescrFromCode(this.MrNotificationSourceCode, "MrNotificationSourceCode");
     this.SendToNotificationEngineSaveObj.MrNotificationTypeCode = this.GetMrNotificationTypeCodeValue;
     this.SendToNotificationEngineSaveObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationTypeCode");
-    this.SendToNotificationEngineSaveObj.Version = this.Version;
+    this.SendToNotificationEngineSaveObj.Version = this.NotifBroadcastForm.get("TemplateVersion").value;
     if(this.ParamListCount>0){
-      let tempParam = this.NotifBroadcastForm.get("ParamArr").value;
-      this.Params = new Array<string>();
+      let tempParam = this.GetInputParamArr.value;
+      this.SendToNotificationEngineSaveObj.Param = new Array<string>();
       
       for(let i = 0; i < tempParam.length; i++){
-        this.Params.push(tempParam[i]["Param"]);
+        this.SendToNotificationEngineSaveObj.Param.push(tempParam[i]["Param"]);
       }
-
-      this.SendToNotificationEngineSaveObj.Param = this.Params;
     }
 
     if(this.GetMrNotificationTypeCodeValue == this.TypePush){
@@ -407,11 +411,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   //#region PushNotif Logic
-  PushUrl: string;
-  PushKey: string;
   GetPushFromChild(EventObj: PushNotifSendToObj) {
-    this.PushUrl = EventObj.Url;
-    this.PushKey = EventObj.Key;
+    this.NotifBroadcastForm.patchValue({
+      PushUrl: EventObj.Url,
+      PushKey: EventObj.Key,
+      }
+    )
     this.PushSendTo = EventObj.SendTo;
   }
 
@@ -422,13 +427,19 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = "";
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = "";
     }
-    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.PushUrl;
-    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.PushKey;
+    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.NotifBroadcastForm.get("PushUrl").value;
+    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.NotifBroadcastForm.get("PushKey").value;
     this.SendToNotificationEngineSaveObj.SendTo = this.PushSendTo;
   }
 
   SetEmailObj() {
-    // Mekanisme save email obj
+    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("Cc").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("Bcc").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.SendFrom = "";
+
+    // Set File attachment
   }
 
   SetSmsWaObj() {

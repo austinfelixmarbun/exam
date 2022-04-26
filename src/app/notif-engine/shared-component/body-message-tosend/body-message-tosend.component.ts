@@ -18,7 +18,7 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
   @Input() IsBroadcast: boolean = false;
-  @Input() ParamArrays: Array<string>;
+  @Input() ParamArrays: Array<string> = new Array<string>();
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
   }
@@ -45,9 +45,8 @@ export class BodyMessageTosendComponent implements OnInit {
         ParamIdxAt: ParamaterVar
       }));
 
-      if(this.ParamArrays != null && this.IsBroadcast){
-        let ParamStr: string;
-        ParamStr = this.ParamArrays.at(index).at(index);
+      if(this.ParamArrays && this.IsBroadcast){
+        let ParamStr: string = this.ParamArrays.at(index).at(index); 
         ListParam.at(index).patchValue({
           Param: ParamStr,
           ParamIdxAt: ParamaterVar

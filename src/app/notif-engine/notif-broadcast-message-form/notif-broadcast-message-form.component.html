@@ -5,7 +5,7 @@
           <div class="card-header header-title">
             <div class="row">
               <div class="col-md-8">
-                <h4 class="card-title" id="horz-layout-colored-controls" translate> NOTIF_BROADCAST_FORM</h4>
+                <h4 class="card-title" id="horz-layout-colored-controls" translate>NOTIF_BROADCAST_FORM</h4>
                 <br>
               </div>
             </div>
@@ -17,8 +17,8 @@
               <div class="form-body" id="NotifBroadcast">
                 <div class="form-group">
                   <div class="form-group row">
-                    <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE </label>
-                    <div [class]="IsUsedTemplate? ClassColMd8: ClassColMd9">
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE</label>
+                    <div [class]="IsUsedTemplate? 'col-md-8': 'col-md-9'">
                       <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
                         [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)" *ngIf="InputLookupTemplateMessageObj.isReady">
                       </lib-uclookupgeneric>
@@ -30,7 +30,7 @@
                     </div>
                   </div>
                   <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE </label>
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationTypeCode.invalid }" (change)="OnChangeType()">
@@ -43,7 +43,7 @@
                     </div>
                   </div>
                   <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel" translate>NOTIF_LVL </label>
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_LVL</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationLevelCode"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationLevelCode.invalid }">
@@ -56,7 +56,7 @@
                     </div>
                   </div>
                   <div class="form-group row adins-required">
-                    <label class="col-md-3 adInsLabel" translate>NOTIF_SOURCE </label>
+                    <label class="col-md-3 adInsLabel" translate>NOTIF_SOURCE</label>
                     <div class="col-md-9">
                       <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationSourceCode"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifBroadcastForm.controls.MrNotificationSourceCode.invalid }">

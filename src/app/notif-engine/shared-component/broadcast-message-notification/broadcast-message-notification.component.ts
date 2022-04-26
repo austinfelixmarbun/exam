@@ -64,7 +64,6 @@ export class BroadcastMessageNotificationComponent implements OnInit {
     this.SetLookupSendToPush();
     if(this.CheckAll){
       let objPatch = {
-        RefUserSubscriptionId : 1,
         Username: "All"
       }
       this.SendtoLookupObj.nameSelect = objPatch.Username;
