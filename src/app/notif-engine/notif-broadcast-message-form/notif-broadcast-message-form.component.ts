@@ -250,11 +250,10 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
 
     if(this.GetMrNotificationTypeCodeValue == this.TypeEmail){
-      // console.log(this.GetMrNotificationTypeCodeValue);
-      // this.NotifBroadcastForm.get('CcEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
-      // this.NotifBroadcastForm.get('CcEmail').updateValueAndValidity();
-      // this.NotifBroadcastForm.get('BccEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
-      // this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
+      this.NotifBroadcastForm.get('CcEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.NotifBroadcastForm.get('CcEmail').updateValueAndValidity();
+      this.NotifBroadcastForm.get('BccEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
     }
   }
 
@@ -364,7 +363,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       Body: "",
       UsedParamBody: "",
       ListPhone: [],
-      ParamArr: []
+      ParamArr: [],
+      CcEmail: "",
+      BccEmail: ""
       }
     )
     this.RefreshReady();
