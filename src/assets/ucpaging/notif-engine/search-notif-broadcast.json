@@ -72,20 +72,20 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Level",
-            "name": "MrNotificationLevelCode"
+            "label": "Type",
+            "name": "MrNotificationTypeDescr"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Source",
-            "name": "MrNotificationSourceCode"
+            "name": "MrNotificationSourceDescr"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Type",
-            "name": "MrNotificationTypeCode"
+            "label": "Level",
+            "name": "MrNotificationLevelDescr"
         },
         {
             "type": "sort",
@@ -115,17 +115,17 @@
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationLevelCode"
+            "property": "MrNotificationTypeDescr"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationSourceCode"
+            "property": "MrNotificationSourceDescr"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationTypeCode"
+            "property": "MrNotificationLevelDescr"
         },
         {
             "type": "text",

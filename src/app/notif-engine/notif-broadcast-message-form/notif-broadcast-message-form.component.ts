@@ -31,8 +31,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     MrNotificationSourceCode: ['', Validators.required],
     Subject: '',
     SendTo: ['', Validators.required],
-    BccEmail: ['', Validators.email],
-    CcEmail: ['', Validators.email],
+    BccEmail: '',
+    CcEmail: '',
     ListPhone: [],
     Body: ['', Validators.required],
     UsedParamBody: '',
@@ -157,7 +157,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if(this.IsResend){
       await this.http.post(this.UrlConstantNew.GetListNotificationHistDByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
         (response: ListNotificationHistDObj) => {
-          console.log(response);
           this.ParamArrFromGet = new Array<string>();
           for (let index = 0; index < this.ParamListCount; index++) {
             this.ParamArrFromGet.push(response.ReturnObject.at(index).Param);
@@ -240,19 +239,39 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   CheckTypeMechanism() {
     this.IsWa = false;
+    this.SetSendToValidators();
+    this.SetCcBccValidators();
+  }
+
+  SetCcBccValidators() {
+    this.NotifBroadcastForm.get('CcEmail').clearValidators();
+    this.NotifBroadcastForm.get('CcEmail').updateValueAndValidity();
+    this.NotifBroadcastForm.get('BccEmail').clearValidators();
+    this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
+
+    if(this.GetMrNotificationTypeCodeValue == this.TypeEmail){
+      // console.log(this.GetMrNotificationTypeCodeValue);
+      // this.NotifBroadcastForm.get('CcEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      // this.NotifBroadcastForm.get('CcEmail').updateValueAndValidity();
+      // this.NotifBroadcastForm.get('BccEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      // this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
+    }
+  }
+
+  SetSendToValidators() {
     this.NotifBroadcastForm.get('SendTo').setValidators(Validators.required);
     this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
 
     if (this.GetMrNotificationTypeCodeValue == this.TypeWA || this.GetMrNotificationTypeCodeValue == this.TypeSms){
       this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(13)]);
-    this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
+      this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
       
       if(this.GetMrNotificationTypeCodeValue == this.TypeWA){
         this.IsWa = true;
       }
     }
     if (this.GetMrNotificationTypeCodeValue == this.TypeEmail){
-      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.email]);
+      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.pattern(CommonConstant.regexEmail)]);
       this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
     }
   }
@@ -327,7 +346,10 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   IsReady: boolean = true;
   ResetTemplate(){
     this.IsShowPreviewMessage = false;
-    this.PushSendTo = "";
+    this.NotifBroadcastForm.patchValue({
+      SendTo: "",
+      }
+    )
     this.SetLookupTemplate();
     this.RefreshComponent();
     this.EnableSelectControl();
@@ -374,22 +396,26 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   GetDescrFromCode(RefMasterTypeCode: string, VariableForm: string): string{
-    let Key: string = this.NotifBroadcastForm.get(VariableForm).value;
-    let Value:string = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
-    return Value;
+    if(RefMasterTypeCode){
+      let Key: string = this.NotifBroadcastForm.get(VariableForm).value;
+      let Value:string = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
+      return Value;
+    }
   }
 
   SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
   SetSaveObj(){
     this.SendToNotificationEngineSaveObj = new SendToNotificationEngineObj();
-    this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
+    if(this.IsUsedTemplate){
+      this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
+      this.SendToNotificationEngineSaveObj.Version = this.NotifBroadcastForm.get("TemplateVersion").value;
+    }
     this.SendToNotificationEngineSaveObj.MrNotificationLevelCode = this.NotifBroadcastForm.get("MrNotificationLevelCode").value
     this.SendToNotificationEngineSaveObj.MrNotificationLevelDescr = this.GetDescrFromCode(this.MrNotificationLevelCode, "MrNotificationLevelCode");
     this.SendToNotificationEngineSaveObj.MrNotificationSourceCode = this.NotifBroadcastForm.get("MrNotificationSourceCode").value;
     this.SendToNotificationEngineSaveObj.MrNotificationSourceDescr = this.GetDescrFromCode(this.MrNotificationSourceCode, "MrNotificationSourceCode");
     this.SendToNotificationEngineSaveObj.MrNotificationTypeCode = this.GetMrNotificationTypeCodeValue;
     this.SendToNotificationEngineSaveObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationTypeCode");
-    this.SendToNotificationEngineSaveObj.Version = this.NotifBroadcastForm.get("TemplateVersion").value;
     if(this.ParamListCount>0){
       let tempParam = this.GetInputParamArr.value;
       this.SendToNotificationEngineSaveObj.Param = new Array<string>();
@@ -415,9 +441,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotifBroadcastForm.patchValue({
       PushUrl: EventObj.Url,
       PushKey: EventObj.Key,
+      SendTo: EventObj.SendTo
       }
     )
-    this.PushSendTo = EventObj.SendTo;
   }
 
   SetPushNotifObj() {
@@ -429,7 +455,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     }
     // this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.NotifBroadcastForm.get("PushUrl").value;
     // this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.NotifBroadcastForm.get("PushKey").value;
-    this.SendToNotificationEngineSaveObj.SendTo = this.PushSendTo;
+    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
   }
 
   SetEmailObj() {
@@ -444,8 +470,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   SetSmsWaObj() {
     let ListPhone: Array<string> = this.NotifBroadcastForm.get("SendTo").value;
-    let SendToSmsWa: string = ListPhone["e164Number"];
-    this.SendToNotificationEngineSaveObj.SendTo = SendToSmsWa;
+    this.NotifBroadcastForm.patchValue({
+        SendTo: ListPhone["e164Number"]
+      }
+    )
+    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
@@ -458,6 +487,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   async SaveForm(){
     this.SetSaveObj();
     let urlSave = this.UrlConstantNew.SendToNotificationEngine;
+    console.log(this.SendToNotificationEngineSaveObj);
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
       (response: SendToNotificationEngineObj) => {
         if (response["StatusCode"] == "200") {

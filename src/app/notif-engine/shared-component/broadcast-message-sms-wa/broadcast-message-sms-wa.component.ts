@@ -15,8 +15,6 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
   @Input() IsWa: boolean;
-  readonly TitleWa: string = "Broadcast WhatsApp";
-  readonly TitleSms: string = "Broadcast SMS";
 	separateDialCode = false;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;

@@ -60,8 +60,10 @@ export class BroadcastMessageNotificationComponent implements OnInit {
   
   CheckAll: boolean = false;
   SetSendToAll(){
-    this.CheckAll != this.CheckAll;
+    this.SendtoLookupObj.isReady = false;
+    this.CheckAll = !this.CheckAll;
     this.SetLookupSendToPush();
+
     if(this.CheckAll){
       let objPatch = {
         Username: "All"
@@ -69,6 +71,14 @@ export class BroadcastMessageNotificationComponent implements OnInit {
       this.SendtoLookupObj.nameSelect = objPatch.Username;
       this.SendtoLookupObj.jsonSelect = objPatch;
     }
+
+    this.PushNotifSendToObj = new PushNotifSendToObj();
+    this.PushNotifSendToObj.Url = "";
+    this.PushNotifSendToObj.Key = "";
+    this.PushNotifSendToObj.SendTo = this.SendtoLookupObj.nameSelect;
+
+    this.GetPushNotificationObj.emit(this.PushNotifSendToObj);
+    this.SendtoLookupObj.isReady = true;
   }
 
   RefUserSubscriptionId: number;
