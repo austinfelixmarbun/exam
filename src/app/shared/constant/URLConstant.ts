@@ -1114,8 +1114,10 @@ export class URLConstant {
     public static GetThirdPartyTrustsocRsltByThirdPartyRsltHId = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetThirdPartyTrustsocRsltByThirdPartyRsltHId";
     public static UploadConsentTrustingSocial = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
     public static UploadConsentTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
+    public static UploadConsentTrustingSocialV21 = environment.FoundationR3Url + "/v2.1" + "/ThirdPartyRslt/UploadConsentTrustingSocial";
     public static GetListThirdPartyTrustingSocialByTrxNo = environment.FoundationR3Url + "/v1" + "/ThirdPartyRslt/GetListThirdPartyTrustingSocialByTrxNo";
     public static SaveCustDocFile = environment.FoundationR3Url + "/v2" + "/Cust/SaveCustDocFile";
+    public static SaveCustDocFile21 = environment.FoundationR3Url + "/v2.1" + "/Cust/SaveCustDocFile";
 
     //DIGITALIZATION
     public static AddTrxSrcDataForTrustingSocial = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
