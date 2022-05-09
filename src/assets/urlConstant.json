@@ -888,5 +888,5 @@
     "GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId": "/v1CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId",
     "PushNotifSubscribe": "/v1/PushNotification/Subscribe",
     "PushNotifUnsubscribe": "/v1/PushNotification/Unsubscribe",
-    "GetNotSentPushNotif": "/v1/PushNotification/GetAllNotSentPushNotification"
+    "GetNotSentPushNotif": "/v2/Notification/WfGetAllNotSentPushNotification"
 }

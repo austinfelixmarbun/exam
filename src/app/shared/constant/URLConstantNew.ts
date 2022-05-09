@@ -1209,5 +1209,5 @@ export class UrlConstantNew{
 
     public PushNotifSubscribe = this.url.PushNotifSubscribe;
     public PushNotifUnsubscribe = this.url.PushNotifUnsubscribe;
-    public GetNotSentPushNotif = this.url.GetNotSentPushNotif;
+    public GetNotSentPushNotif = this.env.FoundationR3Url + this.url.GetNotSentPushNotif;
 }
