@@ -1,11 +1,27 @@
 {
-    "title": "Notification Broadcast Message",
-    "exportExcel": false,
+    "title": "Notification Template",
+    "sectionTitle": "Select Notification Template",
     "component": [
         {
+            "type": "textbox",
+            "name": "NOTIFICATION_TEMPLATE_CODE",
+            "id": "NotificationTemplateCodeId",
+            "value": "",
+            "label": "Template Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "NOTIFICATION_TEMPLATE_DESCR",
+            "id": "NotificationTemplateDescrId",
+            "value": "",
+            "label": "Template Description",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
-            "name": "NHH.MR_NOTIFICATION_TYPE_CODE", 
-            "id": "MrNotifTypeCodeId",
+            "name": "MR_NOTIFICATION_LEVEL_CODE", 
+            "id": "MrNotifLevelCodeId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
@@ -13,16 +29,16 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Type",
+            "label": "Level",
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NOTIFICATION_TYPES",
+            "criteriaPropValue" : "NOTIFICATION_LEVEL",
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
         },
         {
             "type": "dropdown",
-            "name": "NHH.MR_NOTIFICATION_SOURCE_CODE", 
+            "name": "MR_NOTIFICATION_SOURCE_CODE", 
             "id": "MrNotifSourceCodeId",
             "value": "",
             "placeholder": "Placeholder",
@@ -40,8 +56,8 @@
         },
         {
             "type": "dropdown",
-            "name": "NHH.MR_NOTIFICATION_LEVEL_CODE", 
-            "id": "MrNotifLevelCodeId",
+            "name": "MR_NOTIFICATION_TYPE_CODE", 
+            "id": "MrNotifTypeCodeId",
             "value": "",
             "placeholder": "Placeholder",
             "datatype": "text",
@@ -49,44 +65,18 @@
             "ddlType": "all",
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Level",
+            "label": "Type",
             "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NOTIFICATION_LEVEL",
+            "criteriaPropValue" : "NOTIFICATION_TYPES",
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
-        },
-        {
-            "type": "textbox",
-            "name": "NTT.NOTIFICATION_TEMPLATE_CODE",
-            "id": "NotificationTemplateCodeId",
-            "value": "",
-            "label": "Template Code",
-            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "name": "SearchNotifBroadcast"
+        "name": "LookupNotifTemplate"
     },
     "headerList": [
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Type",
-            "name": "MrNotificationTypeDescr"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Source",
-            "name": "MrNotificationSourceDescr"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Level",
-            "name": "MrNotificationLevelDescr"
-        },
         {
             "type": "sort",
             "position": "left",
@@ -101,8 +91,26 @@
         },
         {
             "type": "sort",
+            "position": "left",
+            "label": "Level",
+            "name": "NotificationLevelDescr"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Source",
+            "name": "MrNotificationSourceDescr"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Type",
+            "name": "MrNotificationTypeDescr"
+        },
+        {
+            "type": "sort",
             "position": "center",
-            "label": "Template Version",
+            "label": "Version",
             "name": "Version"
         },
         {
@@ -115,21 +123,6 @@
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationTypeDescr"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrNotificationSourceDescr"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrNotificationLevelDescr"
-        },
-        {
-            "type": "text",
-            "position": "left",
             "property": "NotificationTemplateCode"
         },
         {
@@ -139,24 +132,35 @@
         },
         {
             "type": "text",
+            "position": "left",
+            "property": "NotificationLevelDescr"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrNotificationSourceDescr"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MrNotificationTypeDescr"
+        },
+        {
+            "type": "text",
             "position": "center",
             "property": "Version"
         },
         {
-            "type": "action",
-            "position": "center",
-            "action": [
-                {
-                    "type": "edit",
-                    "path": "NOTIF_ENGINE_BROADCAST_ADD_EDIT",
-                    "param": [
-                        {
-                            "type": "NotificationHistHId",
-                            "property": "NotificationHId"
-                        }
-                    ]
-                }
-            ]
+          "type": "action",
+          "position": "center",
+          "action": [
+            {
+              "type": "select",
+              "property": "NotificationTemplateCode"
+            }
+          ]
         }
-    ]
+    ],
+    "propertyId": "NotificationTemplateId",
+    "propertyName": "NotificationTemplateCode"
 }

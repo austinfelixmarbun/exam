@@ -11,8 +11,7 @@ import { NotifBroadcastMessagePagingComponent } from './notif-broadcast-message-
 import { NotifBroadcastMessageFormComponent } from './notif-broadcast-message-form/notif-broadcast-message-form.component';
 import { BroadcastMessageNotificationComponent } from './shared-component/broadcast-message-notification/broadcast-message-notification.component';
 import { BroadcastMessageEmailComponent } from './shared-component/broadcast-message-email/broadcast-message-email.component';
-import { BroadcastMessageWhatsappComponent } from './shared-component/broadcast-message-whatsapp/broadcast-message-whatsapp.component';
-import { BroadcastMessageSmsComponent } from './shared-component/broadcast-message-sms/broadcast-message-sms.component';
+import { BroadcastMessageSmsWaComponent } from './shared-component/broadcast-message-sms-wa/broadcast-message-sms-wa.component';
 import { BodyMessageTosendComponent } from './shared-component/body-message-tosend/body-message-tosend.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { QuillModule } from 'ngx-quill';
@@ -32,12 +31,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
         NgxMaskModule.forRoot(),
         QuillModule.forRoot({
           modules: {
-            syntax: true,
+            syntax: false,
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-              ['blockquote', 'code-block'],
+              ['blockquote'],
           
-              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
               [{ 'list': 'ordered'}, { 'list': 'bullet' }],
               [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
               [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
@@ -52,9 +51,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
           
               ['clean'],                                         // remove formatting button
           
-              ['link', 'image', 'video']                         // link and image, video
+              ['image', 'video']                         // link and image, video
             ],
-            theme: 'snow'
+            theme: 'bubble'
           }
         }),
         TagInputModule,
@@ -67,8 +66,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
         NotifBroadcastMessageFormComponent,
         BroadcastMessageNotificationComponent,
         BroadcastMessageEmailComponent,
-        BroadcastMessageWhatsappComponent,
-        BroadcastMessageSmsComponent,
+        BroadcastMessageSmsWaComponent,
         BodyMessageTosendComponent
     ],
     providers: [

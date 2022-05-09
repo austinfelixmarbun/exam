@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
   selector: 'app-notif-broadcast-message-paging',
@@ -9,6 +10,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class NotifBroadcastMessagePagingComponent implements OnInit {
 
   inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  readonly AddLink: string = NavigationConstant.NOTIF_ENGINE_BROADCAST_ADD_EDIT;
 
   constructor(private UrlConstantNew: UrlConstantNew) { }
   ngOnInit() {

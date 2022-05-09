@@ -16,7 +16,9 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() NotifType: string = "";
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
-  @Input() IdentifierBodyMessageParam: string = "BodyMessageParam";
+  @Input() IdentifierBodyMessageParam: string = "ParamArr";
+  @Input() IsBroadcast: boolean = false;
+  @Input() ParamArrays: Array<string> = new Array<string>();
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
   }
@@ -26,22 +28,30 @@ export class BodyMessageTosendComponent implements OnInit {
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    if (!this.GetListBodyMessageParam) {
-      this.parentForm.addControl(this.IdentifierBodyMessageParam, this.fb.array([]));
-    }
     this.GenerateParam();
   }
 
   GenerateParam() {
-    if(this.ParamListCount == 0) return;
     const ListParam: FormArray = this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
+    
+    if(this.ParamListCount == 0) return;
+    while (ListParam.length !== 0) {
+      ListParam.removeAt(0)
+    }
     for (let index = 0; index < this.ParamListCount; index++) {
-      // const element = array[index];
       const ParamaterVar: string = "{" + index + "}";
       ListParam.push(this.fb.group({
         Param: "",
         ParamIdxAt: ParamaterVar
       }));
+
+      if(this.ParamArrays && this.IsBroadcast){
+        let ParamStr: string = this.ParamArrays.at(index).at(index); 
+        ListParam.at(index).patchValue({
+          Param: ParamStr,
+          ParamIdxAt: ParamaterVar
+        });
+      }
     }
     this.InputParamValue();
   }
@@ -84,6 +94,9 @@ export class BodyMessageTosendComponent implements OnInit {
       }
     }
     this.TempBodyMessage = BodyMessage;
+    if(this.IsBroadcast){
+      this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
+    }
   }
 
   byPassHTML(html: string) {

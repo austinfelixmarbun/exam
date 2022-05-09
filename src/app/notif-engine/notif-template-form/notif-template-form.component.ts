@@ -27,7 +27,7 @@ export class NotifTemplateFormComponent implements OnInit {
     EndDt: '',
     Subject: '',
     Body: ['', Validators.required],
-    BodyMessageParam: this.fb.array([])
+    ParamArr: this.fb.array([])
   });
 
   readonly QuilConfig = {
@@ -35,7 +35,7 @@ export class NotifTemplateFormComponent implements OnInit {
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
   
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      // [{ 'header': 1 }, { 'header': 2 }],               // custom button values
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
       [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
       [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
@@ -50,7 +50,7 @@ export class NotifTemplateFormComponent implements OnInit {
   
       ['clean'],                                         // remove formatting button
   
-      ['link', 'image', 'video', 'doc']                         // link and image, video
+      ['image', 'video']                         // link and image, video
     ]
   };
 
@@ -63,6 +63,7 @@ export class NotifTemplateFormComponent implements OnInit {
   readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
   readonly DateNow: Date = new Date();
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
+  IsBroadcast: boolean = false;
   constructor(private fb: FormBuilder, private router: Router, private toastr: NGXToastrService, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationTemplateId"]) {
@@ -128,7 +129,7 @@ export class NotifTemplateFormComponent implements OnInit {
     if (notifType == CommonConstant.NOTIF_TYPE_EMAIL) this.subjectIsRequired = true;
   }
 
-  readonly IdentifierBodyMessageParam: string = "BodyMessageParam";
+  readonly IdentifierBodyMessageParam: string = "ParamArr";
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;

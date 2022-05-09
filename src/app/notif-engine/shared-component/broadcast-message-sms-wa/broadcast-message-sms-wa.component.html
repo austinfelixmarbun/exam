@@ -1,6 +1,6 @@
-<lib-ucSubsection [id]="'NotifBroadcastWAId'" [title]="title" [panel]="'NotifBroadcastWA'"></lib-ucSubsection>
-<div class="form-body" id="NotifBroadcastWA">
-    <div class="form-group row">
+<lib-ucSubsection [id]="'NotifBroadcastSmsWaId'" [title]="IsWa ? 'Broadcast WhatsApp' : 'Broadcast SMS'" [panel]="'NotifBroadcastSmsWa'"></lib-ucSubsection>
+<div class="form-body" id="NotifBroadcastSmsWa">
+    <div class="form-group row adins-required">
       <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
       <div class="col-md-9 input-group">
         <!-- <input type="tel" class="form-control adInsInput width-50-per" multiple> -->
@@ -20,20 +20,20 @@
           name="phone"
           formControlName="SendTo"
           ></ngx-intl-tel-input>
-        <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
-        </lib-uc-show-errors> -->
+          <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
+          </lib-uc-show-errors> -->
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button" (click)="AddSentTo()">Add</button>
+            <button class="btn btn-primary btn-raised" type="button" (click)="AddSentTo()">Add</button>
           </div>
       </div>
     </div>
-    <div class="form-group row">
+    <!-- <div class="form-group row">
       <label class="col-md-3 adInsLabel" translate>test</label>
       <div class="col-md-9">
         <tag-input formControlName="ListPhone" [disable]="false" [editable]="true" (onTagEdited)="onTagEdited($event)" [onAdding]="transform" [separatorKeyCodes]="[32, 188]" [onRemoving]="onRemoving">
         </tag-input>
       </div>
-    </div>
+    </div> -->
     <div class="form-group row adins-required">
       <label class="col-md-3 adInsLabel" translate>BODY</label>
       <div class="col-md-9">

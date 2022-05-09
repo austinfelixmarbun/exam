@@ -1215,4 +1215,21 @@ export class UrlConstantNew{
     public PushNotifSubscribe = this.url.PushNotifSubscribe;
     public PushNotifUnsubscribe = this.url.PushNotifUnsubscribe;
     public GetNotSentPushNotif = this.env.FoundationR3Url + this.url.GetNotSentPushNotif;
+
+    // NotificationHistH
+    public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
+
+    // NotificationHistD
+    public GetNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistDByNotificationHistHId;
+    public GetListNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetListNotificationHistDByNotificationHistHId;
+
+    // PushNotificationHist
+    public GetPushNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetPushNotificationHistByNotificationHistHId;
+    public GetRefUserSubscriptionByUsername = this.env.NotifEngineURL + this.url.GetRefUserSubscriptionByUsername;
+    
+    // SmsWaNotificationHist
+    public GetSmsWaNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetSmsWaNotificationHistByNotificationHistHId;
+
+    // NotificationBroadcast
+    public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
 }

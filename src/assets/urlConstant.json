@@ -891,5 +891,12 @@
     "EditNotificationTemplate": "/v1/NotificationTemplate/EditNotificationTemplate",
     "PushNotifSubscribe": "/v1/PushNotification/Subscribe",
     "PushNotifUnsubscribe": "/v1/PushNotification/Unsubscribe",
-    "GetNotSentPushNotif": "/v2/Notification/WfGetAllNotSentPushNotification"
+    "GetNotSentPushNotif": "/v2/Notification/WfGetAllNotSentPushNotification",
+    "SendToNotificationEngine": "/v2/Notification/SendToNotificationEngine",
+    "GetNotificationHistHByNotificationHistHId": "/v1/NotificationHistH/GetNotificationHistHByNotificationHistHId",
+    "GetNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetNotificationHistDByNotificationHistHId",
+    "GetListNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetListNotificationHistDByNotificationHistHId",
+    "GetPushNotificationHistByNotificationHistHId": "/v1/PushNotification/GetPushNotificationHistByNotificationHistHId",
+    "GetSmsWaNotificationHistByNotificationHistHId": "/v1/SmsWaNotificationHist/GetSmsWaNotificationHistByNotificationHistHId",
+    "GetRefUserSubscriptionByUsername": "/v1/PushNotification/GetRefUserSubscriptionByUsername"
 }

@@ -2,35 +2,30 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { filter, Observable, of } from 'rxjs';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+import { UcSubsectionComponent, UcSubsectionModule } from '@adins/uc-subsection';
 
 @Component({
-  selector: 'app-broadcast-message-whatsapp',
-  templateUrl: './broadcast-message-whatsapp.component.html',
+  selector: 'app-broadcast-message-sms-wa',
+  templateUrl: './broadcast-message-sms-wa.component.html',
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class BroadcastMessageWhatsappComponent implements OnInit {
+export class BroadcastMessageSmsWaComponent implements OnInit {
 
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
-  readonly title: string = "Broadcast Whats App";
+  @Input() IsWa: boolean;
 	separateDialCode = false;
 	SearchCountryField = SearchCountryField;
 	CountryISO = CountryISO;
+  Title: string;
   PhoneNumberFormat = PhoneNumberFormat;
+  NotifBroadcastSmsWaId: UcSubsectionModule = new UcSubsectionModule();
   constructor(private fb: FormBuilder) { }
 
+
   ngOnInit(): void {
-    const SendToControl = this.parentForm.get("SendTo");
-    if(!SendToControl){
-      this.parentForm.addControl("SendTo", this.fb.control(""));
-    }
-    const BodyControl = this.parentForm.get("Body");
-    if(!BodyControl){
-      this.parentForm.addControl("Body", this.fb.control(""));
-    }
-    console.log(this.CountryISO);
-    console.log(this.SearchCountryField);
+
   }
 
   onTagEdited(ev) {
@@ -47,15 +42,10 @@ export class BroadcastMessageWhatsappComponent implements OnInit {
     return of(tag)
       .pipe(filter(() => confirm));
   }
-
-  // TagObj: {display: string, value: string} = new Object();
+  
   AddSentTo(){
-    const PhnNum: string = this.parentForm.get("SendTo").value;
-    console.log(this.parentForm.get("ListPhone").value);
-    const ListPhnNum: Array<string> = this.parentForm.get("ListPhone").value;
-    ListPhnNum.push(PhnNum);
-    this.parentForm.get("ListPhone").setValue(PhnNum);
-    this.parentForm.get("SendTo").setValue("");
+    const PhnNum: Array<string> = this.parentForm.get("SendTo").value;
+    this.parentForm.get("SendTo").setValue(PhnNum["e164Number"]);
   }
 
   ngOnDestroy(): void {
