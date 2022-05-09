@@ -29,5 +29,6 @@ export const environment = {
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
   Module: "FOU",
   isCore: true,
-  SpinnerOnHttpPost: false
+  SpinnerOnHttpPost: false,
+  NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE"
 };

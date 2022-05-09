@@ -178,7 +178,8 @@ datetime .form-group{
     padding: 0;
   }
 
-  width: 400px;
+  // width: 400px;
+  width: 21rem; // approx 250px base root 12
 
   .noti-text{
     color: $gray-600;

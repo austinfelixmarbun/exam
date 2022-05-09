@@ -15,6 +15,7 @@ import { SafePipe } from './pipe/safepipe';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { UcnotificationModule } from '@adins/ucnotification';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
         CommonModule,
         NgbModule,
         AdInsSharedModule,
+        UcnotificationModule,
         ContextMenuModule.forRoot(),
         NgMultiSelectDropDownModule
     ],

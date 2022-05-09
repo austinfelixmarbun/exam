@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked, OnInit } from '@angular/core';
+import { Component, AfterViewChecked, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +18,10 @@ import { HubConnectionBuilder } from '@microsoft/signalr';
 import { UrlConstantNew } from '../constant/URLConstantNew';
 import { AdInsHelperService } from '../services/AdInsHelper.service';
 import { RolePickNewService } from '../rolepick/rolepick-new.service';
+import { UcnotificationComponent } from '@adins/ucnotification';
+import { UcNotificationObj } from '../model/uc-notification-obj.model';
+import { GenericObj } from '../model/generic/generic-obj.model';
+import { GeneralSettingObj } from '../model/general-setting-obj.model';
 
 @Component({
     selector: 'app-navbar',
@@ -40,6 +44,9 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     backgroundColor = environment.navbarColor;
     NotificationHListObj = new Array<NotificationHObj>();
     TotalUnread: number = 0;
+    NotificationObj: UcNotificationObj = new UcNotificationObj(this.cookieService, this.UrlConstantNew);
+    IsUseNotification: string = '';
+    @ViewChild('appnotif') appnotif: UcnotificationComponent;
 
     notifications: object[] = [];
 
@@ -54,45 +61,45 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
 
-    ngOnInit() {
-        this.GetListNotifH();
+    async ngOnInit() {
+        await this.checkUseNotification();
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
         this.setUser();
         console.log(this.userAccess.UserName);
-        var _hubConnection = new HubConnectionBuilder()
-            .withUrl(this.UrlConstantNew.WebSocketUrl)
-            .withAutomaticReconnect()
-            .build();
+        // var _hubConnection = new HubConnectionBuilder()
+        //     .withUrl(this.UrlConstantNew.WebSocketUrl)
+        //     .withAutomaticReconnect()
+        //     .build();
 
-        _hubConnection.start()
-            .then(() => console.log("Connection Started !"))
-            .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
-            .catch((e) => console.log("Exception : " + e));
+        // _hubConnection.start()
+        //     .then(() => console.log("Connection Started !"))
+        //     .then(() => _hubConnection.invoke("SubscribeNotification", this.userAccess.UserName, this.userAccess.RoleCode))
+        //     .catch((e) => console.log("Exception : " + e));
 
-        _hubConnection.on("ReceiveNotification", (response) => {
-            console.log("Response API : " + response);
-            if (response.type == "SUCCESS") {
-                this.toastr.successMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "ERROR") {
-                this.toastr.errorMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "INFO") {
-                this.toastr.infoMessageTitle(response.title, response.message);
-            }
-            else if (response.type == "INFO" && response.removeLocalCookie == true) {
-                this.toastr.infoMessageTitleTimeout(response.title, response.message, 8000);
-            }
+        // _hubConnection.on("ReceiveNotification", (response) => {
+        //     console.log("Response API : " + response);
+        //     if (response.type == "SUCCESS") {
+        //         this.toastr.successMessageTitle(response.title, response.message);
+        //     }
+        //     else if (response.type == "ERROR") {
+        //         this.toastr.errorMessageTitle(response.title, response.message);
+        //     }
+        //     else if (response.type == "INFO") {
+        //         this.toastr.infoMessageTitle(response.title, response.message);
+        //     }
+        //     else if (response.type == "INFO" && response.removeLocalCookie == true) {
+        //         this.toastr.infoMessageTitleTimeout(response.title, response.message, 8000);
+        //     }
 
-            //this.GetListNotifH();
-            if (response.isNeedLogout == true) {
-                this.adInsHelperService.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
-            }
-            //this.notifications.push({ title: response, desc: "User " + response });
-        });
-        this.connectWebSocket();
+        //     //this.GetListNotifH();
+        //     if (response.isNeedLogout == true) {
+        //         this.adInsHelperService.ForceLogOut(this.cookieService, response.timeLogOut, this.toastr, this.http);
+        //     }
+        //     //this.notifications.push({ title: response, desc: "User " + response });
+        // });
+        // this.connectWebSocket();
     }
     
     setUser(){
@@ -132,8 +139,32 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
     }
 
+    notifLogoutHandler(event){
+        if(event) {
+            this.logout();
+        }
+    }
+
+    async checkUseNotification() {
+        let reqByCode: GenericObj = new GenericObj();
+        reqByCode.Code = CommonConstant.GSCodeIsUseNotification;
+        await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
+            (response: GeneralSettingObj) => {
+                this.IsUseNotification = response.GsValue;
+                AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, response.GsValue);
+            }
+        )
+    }
+
+    needUnsubscribe(){
+        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1'){
+            this.appnotif.UnsubNotification();
+        }
+    }
+
     logout() {
         this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
+        this.needUnsubscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
