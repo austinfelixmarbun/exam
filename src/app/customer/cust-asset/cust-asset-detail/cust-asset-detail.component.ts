@@ -21,6 +21,7 @@ export class CustAssetDetailComponent implements OnInit {
   @Input() CustId: number;
   CustAssetTypeList: Array<KeyValueObj>;
   Mode: string;
+  gsValueMaxAssetQty: number;
 
   CustAssetForm = this.fb.group({
     CustAssetId: [0],
@@ -44,6 +45,16 @@ export class CustAssetDetailComponent implements OnInit {
    }
 
   ngOnInit() {
+    let generalSettingCode = {
+      Code: CommonConstant.GsCodeMaxAssetQtyValue
+    }
+
+    this.httpClient.post(URLConstant.GetGeneralSettingByCode, generalSettingCode).toPromise().then(
+      (response) => {
+        this.gsValueMaxAssetQty = parseInt(response['GsValue']);
+      }
+    );
+    
     this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCustAsset }).toPromise().then(
       (response) => {
         this.CustAssetTypeList = response[CommonConstant.ReturnObj];
@@ -85,6 +96,12 @@ export class CustAssetDetailComponent implements OnInit {
     var formValue = this.CustAssetForm.value;
     formValue.AssetTotalValue = formValue.AssetValue * formValue.AssetQty;
     var url = "";
+
+    if(formValue.AssetQty > this.gsValueMaxAssetQty){
+      this.toastr.warningMessage("Asset Quantity cannot more than " + this.gsValueMaxAssetQty)
+      return;
+    }
+
     if(this.CustAssetId && this.CustAssetId > 0){
       url = URLConstant.EditCustAsset;
     }

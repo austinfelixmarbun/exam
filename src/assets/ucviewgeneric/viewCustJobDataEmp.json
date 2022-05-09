@@ -33,7 +33,7 @@
           },
           {
             "type": "text",
-            "label": "Nama Perusahaan / Usaha",
+            "label": "Company Name",
             "property": "CoyName"
           },
           {
@@ -60,6 +60,11 @@
             "type": "date",
             "label": "Employment Establishment Date",
             "property": "EmploymentEstablishmentDt"
+          },
+          {
+            "type": "text",
+            "label": "Number Of Employee",
+            "property": "NoOfEmp"
           }
         ],
         "querystring": {

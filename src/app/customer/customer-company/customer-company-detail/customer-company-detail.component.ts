@@ -54,7 +54,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   CustomerDetailForm = this.fb.group({
     NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
-    MrCustModelCode: [''],
+    MrCustModelCode: ['', [Validators.required]],
     IsSkt: [false],
     IsVip: [false],
     VipNotes: [''],

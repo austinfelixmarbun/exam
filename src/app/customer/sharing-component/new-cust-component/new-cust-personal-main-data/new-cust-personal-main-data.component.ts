@@ -127,6 +127,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.GetExistingData();
     this.GetCustAddrToCopy();
     this.existingCustomerLookUpObj.isReady = true;
+    await this.getMinMaxAgeCustPersonalFromGenSet();
   }
 
   //#region Set Data
@@ -283,7 +284,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     await this.GetCustData();
     this.GetCustAddr();
     await this.GetCustPersonalData();
-    this.GetMrRelationship();
+    await this.GetMrRelationship();
 
     if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.IsLockEdit();
@@ -384,9 +385,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   tempCustPersonalFamilyObj: CustPersonalFamilyObj = new CustPersonalFamilyObj();
-  GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
+  async GetMrRelationship(custPersonalFamilyId: number = this.CustPersonalFamilyId) {
     if (this.CustDataMode != this.CustDataModeFamily) return;
-    this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).subscribe(
+    await this.http.post(URLConstant.GetCustPersonalFamilyByCustPersonalFamilyId, { Id: custPersonalFamilyId }).toPromise().then(
       (response: CustPersonalFamilyObj) => {
         this.tempCustPersonalFamilyObj = response;
         this.CustomerForm.patchValue({
@@ -557,7 +558,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.IsLockCopyAddrBtn = true;
   }
 
-  RelationshipChange(ev: string) {
+  async RelationshipChange(ev: string) {
     let tempMaritalStat = this.CustomerForm.get("MrMaritalStatCode");
     let isMarried: boolean = false;
     if (ev == CommonConstant.MasteCodeRelationshipSpouse) {
@@ -573,6 +574,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     }
     this.existingCustomerLookUpObj.addCritInput = NewCustSetData.ResetCriteriaExisting(this.ParentCustId, this.listCustNoToExclude, CommonConstant.CustomerPersonal, isMarried);
     this.ucLookupExistingCust.setAddCritInput();
+    await this.getMinMaxAgeCustPersonalFromGenSet();
   }
 
   outputChangeReceived(ev: { Key: string, Code: string }) {
@@ -584,7 +586,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   changeCustModel() {
-    console.log("meong");
     if (this.CustDataMode == this.CustDataModeShareholder) {
       this.shareholderForm.ResetLookupProfession();
     }
@@ -613,6 +614,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
 
   async SaveForm() {
+    if(!this.validateCustPersonalAge()) return; 
+
     if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
     }
@@ -783,4 +786,67 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }
+  
+  minCustPerAge: number;
+  maxCustPerAge: number;
+  minCustPerAgeDt: Date;
+  maxCustPerAgeDt: Date;
+  async getMinMaxAgeCustPersonalFromGenSet()
+  {
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    var businessDt:Date = new Date(context[CommonConstant.BUSINESS_DT]);
+    //Di FOU penjagaan via GenSet di skip
+    this.minCustPerAge = 0;
+    this.minCustPerAgeDt = new Date(businessDt);
+    return;
+
+    // jika family & bukan spouse maka skip
+    if(
+      this.CustDataMode == this.CustDataModeFamily && 
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer
+    )
+    {
+      this.minCustPerAge = 0;
+      this.minCustPerAgeDt = new Date(businessDt);
+      return;
+    }
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeCustAgeLimit}).toPromise().then(
+      (response) => {
+        var listGsAge: Array<string> = response && response["GsValue"] ? response["GsValue"].split(';') : [17];
+        this.minCustPerAge = Number(listGsAge[0]);
+        this.maxCustPerAge = listGsAge && listGsAge.length > 1 ? Number(listGsAge[1]) : 0;
+        this.minCustPerAgeDt = new Date(businessDt);
+        this.minCustPerAgeDt.setFullYear(this.minCustPerAgeDt.getFullYear() - this.minCustPerAge);
+        if(this.maxCustPerAge > 0 && this.maxCustPerAge > this.minCustPerAge) {
+          this.maxCustPerAgeDt = new Date(businessDt);
+          this.maxCustPerAgeDt.setFullYear(this.maxCustPerAgeDt.getFullYear() - this.maxCustPerAge);
+        }
+      }
+    );
+  }
+
+  validateCustPersonalAge()
+  {
+    // jika family & bukan spouse maka skip
+    if(
+      this.CustDataMode == this.CustDataModeFamily && 
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer
+    ) return true;
+
+    var birthDt:Date = new Date(this.CustomerForm.get('BirthDt').value);
+    if(this.maxCustPerAge > 0 && (birthDt > this.minCustPerAgeDt || birthDt < this.maxCustPerAgeDt))
+    {
+      this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_BETWEEN, this.minCustPerAge, this.maxCustPerAge));
+      return false;
+    }
+    if(birthDt > this.minCustPerAgeDt)
+    {
+      this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_MIN, this.minCustPerAge));
+      return false;
+    }
+    return true;
+  }
+
 }

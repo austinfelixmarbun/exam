@@ -204,6 +204,9 @@ export class CommonConstant {
     public static GSCodeMaxHierarchyLvlOffice = "MAX_HIERARCHY_LVL_OFFICE";
     public static GSCodeOwnershipMandatoryAddrType = "OWNERSHIP_MANDATORY_BY_ADDR_TYPE";
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
+    public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
+    public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
+    public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
@@ -252,6 +255,7 @@ export class CommonConstant {
 
     //Relationship Code
     public static MasteCodeRelationshipSpouse = "SPOUSE";
+    public static MasteCodeRelationshipSelfCustomer = "SELF";
 
     // ID TYPE
     public static MrIdTypeCodeEKTP = "EKTP";

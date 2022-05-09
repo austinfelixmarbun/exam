@@ -14,6 +14,9 @@ export class ShareholderListingObj{
     IsActive: boolean;
     NegCustTypeCode: string;
     NegCustTypeCodeDesc: string;
+    MrIdTypeCode: string;
+    IdNo: string;
+    PublicIdentityNo: string;
     constructor(){
         
     }

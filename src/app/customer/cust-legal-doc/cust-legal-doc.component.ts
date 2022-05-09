@@ -12,6 +12,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
 
 @Component({
@@ -162,7 +163,8 @@ export class CustLegalDocComponent implements OnInit {
           }
         }
       }
-
+    
+    if(!await this.validateMandatoryLegalDoc()) return;
     this.outputTab.emit({ stepMode: 'next'});
   }
 
@@ -176,5 +178,59 @@ export class CustLegalDocComponent implements OnInit {
     return Object.keys(groups).map(function (group) {
       return groups[group];
     })
+  }
+
+  async validateMandatoryLegalDoc()
+  {
+    var listMandatoryDocsCode: Array<string> = [];
+    var listMandatoryDocsName: Array<string> = [];
+    var listMissingDocsName: Array<string> = [];
+    var isLegalDocsValid = false;
+    await this.httpClient.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeCoyMandatoryLegalDocs}).toPromise().then(
+      (response) => {
+        if (response["GsValue"] == undefined || response["GsValue"] == "") {
+          isLegalDocsValid = true;
+          return;
+        }
+        listMandatoryDocsCode = response["GsValue"].split(';');
+        if(!listMandatoryDocsCode || listMandatoryDocsCode.length <= 0)
+        {
+          isLegalDocsValid = true;
+          return;
+        }
+      }
+    );
+
+    await this.httpClient.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeLegalDocType }).toPromise().then(
+      (response) => {
+        var listLegalDocTypeObj:Array<KeyValueObj> = response[CommonConstant.ReturnObj];
+        listMandatoryDocsCode.forEach((docCode) => {
+          var foundIndex = listLegalDocTypeObj.findIndex(x => x.Key == docCode);
+          listMandatoryDocsName.push(foundIndex >= 0 ? listLegalDocTypeObj[foundIndex].Value : docCode)
+        })
+      }
+    );
+
+    var listExistingDocsName: Array<string> = this.custLegalDocs
+      .filter(x => x.DocNo.trim() != '' && x.DocDt)
+      .map(x => x.MrLegalDocTypeCode);
+
+    listMandatoryDocsName.forEach(x => {
+      if (!listExistingDocsName.find(z => z == x)) listMissingDocsName.push(x);
+    })
+
+    if(listMissingDocsName.length <= 0)
+    {
+      isLegalDocsValid = true;
+      return isLegalDocsValid;
+    }
+
+    if(!isLegalDocsValid) 
+    {
+      this.toastr.warningMessage(String.Format(ExceptionConstant.MANDATORY_LEGAL_DOC, listMissingDocsName.join(', ')));
+      return isLegalDocsValid;
+    }
+
+    return isLegalDocsValid;
   }
 }
