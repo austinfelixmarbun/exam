@@ -17,6 +17,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { QuillModule } from 'ngx-quill';
 import { TagInputModule } from 'ngx-chips';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { MatRadioModule } from '@angular/material/radio';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
@@ -26,6 +27,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
         CommonModule,
         FormsModule,
         NgbModule,
+        MatRadioModule,
         AdInsSharedModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(),

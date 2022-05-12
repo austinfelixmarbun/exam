@@ -30,6 +30,8 @@ export class NotifTemplateFormComponent implements OnInit {
     ParamArr: this.fb.array([])
   });
 
+  readonly notifTypePushNotif: string =CommonConstant.RefMasterTypeCodeNotificationTypesPush;
+
   readonly QuilConfig = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

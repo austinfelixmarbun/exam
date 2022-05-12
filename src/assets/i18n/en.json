@@ -155,5 +155,9 @@
   "SUBJECT": "Subject",
   "PREVIEW_BODY": "Preview Body",
   "BODY": "Body",
-  "NOTIF_BROADCAST_FORM": "Notification Broadcast Form"
+  "NOTIF_BROADCAST_FORM": "Notification Broadcast Form",
+  "USERNAME": "Username",
+  "TELP_NO": "Telephone Number",
+  "TITLE": "Title",
+  "SEND_TYPE": "Send Type"
 }

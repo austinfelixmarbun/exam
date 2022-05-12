@@ -1,20 +1,41 @@
 <lib-ucSubsection [id]="'NotifBroadcastNotifId'" [title]="title" [panel]="'NotifBroadcastNotif'"></lib-ucSubsection>
 <div class="form-body" id="NotifBroadcastNotif">
   <div class="form-group row">
-    <label class="col-md-3 adins-required-label" translate>SEND_TO</label>
-    <div class="col-md-7">
-      <lib-uclookupgeneric [lookupInput]="SendtoLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
-        [identifier]="IdentifierLookupSendTo" (lookup)="getLookUp($event)">
-      </lib-uclookupgeneric>
-    </div>
-    <div class="col-md-2">
-      <div class="checkbox">
-        <label><input type="checkbox" name="InputCheck" (change)="SetSendToAll()">Send to All</label>
-      </div>
+    <label class="col-md-3 adInsLabel" translate>SEND_TYPE</label>
+    <div class="col-md-9">
+      <mat-radio-group formControlName="SendType" (change)="ChangeSendType($event.value)">
+        <mat-radio-button class="custom-control custom-radio display-inline-block"
+          *ngFor="let item of ListSendType" [value]="item.Key">
+          {{item.Value}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <lib-uc-show-errors [control]="parentForm.controls.SendType" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-md-3 adInsLabel" translate>SUBJECT</label>
+  <div class="form-group row" [hidden]="GetSendType == SendTypeAll">
+    <label class="col-md-3" translate>USERNAME</label>
+    <div class="col-md-9 input-group">
+      <lib-uclookupgeneric *ngIf="SendtoLookupObj.isReady" [lookupInput]="SendtoLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
+        [identifier]="IdentifierLookupSendTo">
+      </lib-uclookupgeneric>
+      <button type="button" [hidden]="MaxSpecificUser == SendToLength" (click)="AddSendTo()" class="btn btn-primary btn-raised"
+          style="vertical-align: middle;">
+          <i class="ft-plus-circle font-medium-2"></i>
+      </button>
+    </div>
+  </div>
+  <div class="form-group row adins-required">
+    <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
+    <div class="col-md-9">
+      <tag-input formControlName="SendTo" [disable]="IsSendToReadonly" [editable]="false" [maxItems]="0" [required]="true" [separatorKeyCodes]="[32, 188]" [onRemoving]="onRemoving">
+      </tag-input>
+      <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row adins-required">
+    <label class="col-md-3 adInsLabel" translate>TITLE</label>
     <div class="col-md-9">
       <input type="text" class="form-control adInsInput"
         formControlName="Subject" [readonly]="IsUsedTemplate">
@@ -25,7 +46,7 @@
   <div class="form-group row adins-required">
     <label class="col-md-3 adInsLabel" translate>BODY</label>
     <div class="col-md-9">
-      <textarea class="form-control adInsInput width-50-per" [readonly]="IsUsedTemplate" formControlName="Body" cols="50" rows="5"></textarea>
+      <textarea class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.Body.invalid }" [readonly]="IsUsedTemplate" formControlName="Body" cols="50" rows="5"></textarea>
       <lib-uc-show-errors [control]="parentForm.controls.Body" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>

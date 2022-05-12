@@ -4,24 +4,33 @@
   <div class="form-group row adins-required">
     <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
     <div class="col-md-9">
-      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="SendTo">
-      <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
+      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.SendTo.invalid }" formControlName="SendTo">
+      <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted" [customPattern]="EmailCustomPattern">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-3 adInsLabel" translate>CC</label>
     <div class="col-md-9">
-      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="CcEmail">
-      <lib-uc-show-errors [control]="parentForm.controls.CcEmail" [submit]="enjiForm.submitted">
+      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.CcEmail.invalid }" formControlName="CcEmail">
+      <lib-uc-show-errors [control]="parentForm.controls.CcEmail" [submit]="enjiForm.submitted" [customPattern]="EmailCustomPattern">
       </lib-uc-show-errors>
     </div>
   </div>
   <div class="form-group row">
     <label class="col-md-3 adInsLabel" translate>BCC</label>
     <div class="col-md-9">
-      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="BccEmail">
-      <lib-uc-show-errors [control]="parentForm.controls.BccEmail" [submit]="enjiForm.submitted">
+      <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.BccEmail.invalid }" formControlName="BccEmail">
+      <lib-uc-show-errors [control]="parentForm.controls.BccEmail" [submit]="enjiForm.submitted" [customPattern]="EmailCustomPattern">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row adins-required">
+    <label class="col-md-3 adInsLabel" translate>SUBJECT</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control adInsInput"
+        formControlName="Subject" [readonly]="IsUsedTemplate">
+      <lib-uc-show-errors [control]="parentForm.controls.Subject" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>

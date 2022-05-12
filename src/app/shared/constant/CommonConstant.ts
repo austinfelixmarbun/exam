@@ -4,6 +4,7 @@ export class CommonConstant {
     // REGEX
     public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
     public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+    public static regexMultipleEmail = "^(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)(\s*;\\s*|\\s*$))+$";
 
     // MODULE
     public static MODULE_FOU = "FOU";
@@ -450,4 +451,6 @@ export class CommonConstant {
     public static IS_USE_NEW_ROLEPICK = "IS_USE_NEW_ROLEPICK";
 
     public static NOTIF_TYPE_EMAIL = "EMAIL";
+    public static SEND_TYPE_ALL = "ALL";
+    public static SEND_TYPE_SPECIFIC_USER = "SPECIFIC_USER";
 }
