@@ -33,7 +33,7 @@
         }
     ],
     "querystring": {
-        "name": "LookupRefUserSubscription"
+        "name": "LookupRefUser"
     },
     "headerList": [
         {
@@ -71,11 +71,11 @@
           "action": [
             {
               "type": "select",
-              "property": "RefUserSubscriptionId"
+              "property": "Username"
             }
           ]
         }
     ],
-    "propertyId": "RefUserSubscriptionId",
+    "propertyId": "Username",
     "propertyName": "Username"
 }

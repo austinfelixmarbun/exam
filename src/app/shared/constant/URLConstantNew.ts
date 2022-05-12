@@ -1218,6 +1218,7 @@ export class UrlConstantNew{
 
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
+    public GetMaxSpecificUser = this.env.NotifEngineURL + this.url.GetMaxSpecificUser;
 
     // NotificationHistD
     public GetNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistDByNotificationHistHId;
@@ -1232,4 +1233,5 @@ export class UrlConstantNew{
 
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
+    public MultipleSendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngine;
 }

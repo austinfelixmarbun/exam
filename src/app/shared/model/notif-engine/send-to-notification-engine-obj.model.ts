@@ -11,6 +11,7 @@ export class SendToNotificationEngineObj {
     MrNotificationTypeCode: string;
     MrNotificationTypeDescr: string;
     SendTo: string;
+    SendTos: Array<string>;
     Param: Array<string>;
     Version: number;
     EmailNotificationObj: EmailNotificationObj;
