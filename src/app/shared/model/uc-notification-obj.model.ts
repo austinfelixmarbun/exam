@@ -15,7 +15,7 @@ export class UcNotificationObj {
     constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.Username = context[CommonConstant.USER_NAME];
-        this.EnvUrl = this.UrlConstantNew.env.NotificationUrl;
+        this.EnvUrl = this.UrlConstantNew.env.NotifEngineURL;
         this.PathUrlSubs = this.UrlConstantNew.PushNotifSubscribe;
         this.PathUrlUnsubs = this.UrlConstantNew.PushNotifUnsubscribe;
         this.PathUrlGetAllNotif = this.UrlConstantNew.GetNotSentPushNotif;

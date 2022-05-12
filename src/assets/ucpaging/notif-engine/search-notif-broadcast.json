@@ -108,7 +108,7 @@
         {
             "type": "label",
             "position": "center",
-            "label": "Action"
+            "label": "Resend"
         }
     ],
     "bodyList": [
@@ -147,16 +147,31 @@
             "position": "center",
             "action": [
                 {
-                    "type": "edit",
-                    "path": "NOTIF_ENGINE_BROADCAST_ADD_EDIT",
-                    "param": [
+                    "type": "switch",
+                    "case": [
                         {
-                            "type": "NotificationHistHId",
-                            "property": "NotificationHId"
+                            "conditions":[
+                                {
+                                    "property": "SendDt",
+                                    "value": null,
+                                    "restriction": "EQ"
+                                }
+                            ],
+                            "result" : {
+                                "type": "callback",
+                                "key": "resend",
+                                "property": [
+                                    {
+                                        "type": "NotificationHistHId",
+                                        "property": "NotificationHId"
+                                    }
+                                ]
+                              }
                         }
                     ]
                 }
             ]
         }
+        
     ]
 }

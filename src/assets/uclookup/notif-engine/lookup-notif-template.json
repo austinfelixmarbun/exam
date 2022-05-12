@@ -162,5 +162,5 @@
         }
     ],
     "propertyId": "NotificationTemplateId",
-    "propertyName": "NotificationTemplateCode"
+    "propertyName": "NotificationTemplateDescr"
 }

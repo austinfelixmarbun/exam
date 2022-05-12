@@ -132,9 +132,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   PatchDataUcLookupTemplate(NotificationTemplateId: number){
     let objPatch = {
       NotificationTemplateId : NotificationTemplateId,
-      NotificationTemplateCode: this.NotificationTemplateCode
+      NotificationTemplateDescr: this.NotificationTemplateDescr
     }
-    this.InputLookupTemplateMessageObj.nameSelect = objPatch.NotificationTemplateCode;
+    this.InputLookupTemplateMessageObj.nameSelect = objPatch.NotificationTemplateDescr;
     this.InputLookupTemplateMessageObj.jsonSelect = objPatch;
   }
 
@@ -214,6 +214,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
       (response: NotificationTemplateObj) => {
         this.NotificationTemplateCode = response.NotificationTemplateCode;
+        this.NotificationTemplateDescr = response.NotificationTemplateDescr;
         this.ParamListCount = response.TotalParam;
         if(this.ParamListCount > 0) this.IsShowPreviewMessage = true;
         this.NotifBroadcastForm.patchValue({
@@ -310,6 +311,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   IsUsedTemplate: boolean = false;
   NotificationTemplateCode: string;
+  NotificationTemplateDescr: string;
   Version: number;
   Param: Array<String>;
   ParamListCount: number = 0;
@@ -326,6 +328,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
     }
     this.NotificationTemplateCode = ev.NotificationTemplateCode;
+    this.NotificationTemplateDescr = ev.NotificationTemplateDescr;
     this.NotifBroadcastForm.patchValue({
       UsedParamBody: "",
       ListPhone: [],
