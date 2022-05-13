@@ -1,7 +1,7 @@
 <lib-ucSubsection [id]="'NotifBroadcastSmsWaId'" [title]="IsWa ? 'Broadcast WhatsApp' : 'Broadcast SMS'" [panel]="'NotifBroadcastSmsWa'"></lib-ucSubsection>
 <div class="form-body" id="NotifBroadcastSmsWa">
-    <div class="form-group row">
-      <label class="col-md-3 adInsLabel" translate>TELP_NO</label>
+    <div class="form-group row" [ngClass]="{ 'adins-required': IsResend }">
+      <label class="col-md-3 adInsLabel" translate>{{!IsResend ? "TELP_NO" : "SEND_TO"}}</label>
       <div class="col-md-9 input-group">
         <!-- <input type="tel" class="form-control adInsInput width-50-per" multiple> -->
         <!-- <tag-input formControlName="SendTo" [editable]="true" (onTagEdited)="onTagEdited($event)" [onAdding]="transform" [separatorKeyCodes]="[32, 188]" [onRemoving]="onRemoving">
@@ -22,7 +22,7 @@
           ></ngx-intl-tel-input>
           <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
           </lib-uc-show-errors> -->
-          <div class="input-group-append">
+          <div class="input-group-append" [hidden]="IsResend">
             <button type="button" [hidden]="MaxSpecificUser == SendToLength" (click)="AddSentTo()" class="btn btn-primary btn-raised"
                 style="vertical-align: middle;">
                 <i class="ft-plus-circle font-medium-2"></i>
@@ -30,7 +30,7 @@
           </div>
       </div>
     </div>
-    <div class="form-group row adins-required">
+    <div class="form-group row adins-required" [hidden]="IsResend">
       <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
       <div class="col-md-9">
         <!-- <tag-input formControlName="SendTo" [disable]="true" [editable]="true" (onTagEdited)="onTagEdited($event)" [onAdding]="transform" [separatorKeyCodes]="[32, 188]" [onRemoving]="onRemoving">

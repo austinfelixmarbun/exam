@@ -18,13 +18,14 @@
                 <div class="form-group">
                   <div class="form-group row">
                     <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE</label>
-                    <div [class]="IsUsedTemplate? 'col-md-8': 'col-md-9'">
+                    <div class="col-md-9 input-group">
                       <lib-uclookupgeneric [lookupInput]="InputLookupTemplateMessageObj" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm"
                         [identifier]="IdentifierLookupTemplateMessage" (lookup)="getLookUp($event)" *ngIf="InputLookupTemplateMessageObj.isReady">
                       </lib-uclookupgeneric>
-                    </div>
-                    <div class="col-md-1 right" *ngIf="IsUsedTemplate">
-                      <button type="button" class="btn btn-raised btn-warning" (click)="ResetTemplate()">
+                      <button [hidden]="IsTemplateLatestVersion" *ngIf="IsUsedTemplate" type="button" class="btn btn-raised btn-primary" (click)="RefreshTemplate()">
+                        Refresh
+                      </button>
+                      <button [hidden]="IsResend" *ngIf="IsUsedTemplate" type="button" class="btn btn-raised btn-warning" (click)="ResetTemplate()">
                         Clear
                       </button>
                     </div>
@@ -72,7 +73,7 @@
                 <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-email>
                 <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypePush && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" (GetPushNotificationObj)="GetPushFromChild($event)" [IsResend]="IsResend" [SendToUname]="PushSendTo"></app-broadcast-message-notification >
                 <app-broadcast-message-sms-wa *ngIf="GetMrNotificationTypeCodeValue == TypeWA || GetMrNotificationTypeCodeValue == TypeSms && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" [IsWa]="IsWa"></app-broadcast-message-sms-wa>
-                <app-body-message-tosend *ngIf="IsShowPreviewMessage" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" [IsBroadcast]="IsBroadcast" [ParamArrays]="[ParamArrFromGet]" #TempMessage></app-body-message-tosend>
+                <app-body-message-tosend *ngIf="IsReady && ParamListCount > 0" [parentForm]="NotifBroadcastForm" [enjiForm]="enjiForm" [Title]="'Preview Message'" [ParamListCount]="ParamListCount" [IsBroadcast]="IsBroadcast" [ParamArrays]="ParamArrFromGet" [IsResend]="IsResend" [NotifType]="GetMrNotificationTypeCodeValue" #TempMessage></app-body-message-tosend>
               </div>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1"
