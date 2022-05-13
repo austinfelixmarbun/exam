@@ -900,5 +900,6 @@
     "GetListNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetListNotificationHistDByNotificationHistHId",
     "GetPushNotificationHistByNotificationHistHId": "/v1/PushNotification/GetPushNotificationHistByNotificationHistHId",
     "GetSmsWaNotificationHistByNotificationHistHId": "/v1/SmsWaNotificationHist/GetSmsWaNotificationHistByNotificationHistHId",
+    "GetEmailNotificationHistByNotificationHistHId": "/v1/EmailNotificationHist/GetEmailNotificationHistByNotificationHistHId",
     "GetRefUserSubscriptionByUsername": "/v1/PushNotification/GetRefUserSubscriptionByUsername"
 }

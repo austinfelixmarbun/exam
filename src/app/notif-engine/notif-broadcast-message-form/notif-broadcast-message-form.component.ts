@@ -20,6 +20,7 @@ import { ResPushNotificationObj } from 'app/shared/model/notif-engine/res-push-n
 import { ListNotificationHistDObj } from 'app/shared/model/notif-engine/list-notification-hist-d-obj';
 import { ResSmsWaNotificationObj } from 'app/shared/model/notif-engine/res-sms-wa-notification-obj.model';
 import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
+import { ResEmailNotificationObj } from 'app/shared/model/notif-engine/res-email-notification-obj.model';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -189,6 +190,22 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.RefreshReady();
   }
 
+  async GetEmailNotificationHistByNotificationHistHId(NotificationHistHId: number) {
+    await this.http.post(this.UrlConstantNew.GetEmailNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
+      (response: ResEmailNotificationObj) => {
+        this.NotifBroadcastForm.patchValue({
+          SendTo: response.SendTo,
+          CcEmail: response.Cc,
+          BccEmail: response.Bcc,
+          Subject: response.Subject,
+          Body: response.Body,
+          }
+        )
+      }
+    );
+    this.RefreshReady();
+  }
+
   async GetSmsWaNotificationHistByNotificationHistHId(NotificationHistHId: number) {
     await this.http.post(this.UrlConstantNew.GetSmsWaNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       (response: ResSmsWaNotificationObj) => {
@@ -208,6 +225,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     }
     if(TypeCode == this.TypeSms || TypeCode == this.TypeWA){
       await this.GetSmsWaNotificationHistByNotificationHistHId(this.NotificationHistHId);
+    }
+    if(TypeCode == this.TypeEmail){
+      await this.GetEmailNotificationHistByNotificationHistHId(this.NotificationHistHId);
     }
     this.CheckTypeMechanism();
   }
@@ -326,12 +346,15 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   IsBroadcast: boolean = true;
 
   getLookUp(ev){
+    this.IsShowPreviewMessage = false;
     this.ParamArrFromGet = new Array<string>();
     this.ParamListCount = ev.TotalParam;
     if(this.ParamListCount>0){
-      this.IsShowPreviewMessage = true;
       this.NotifBroadcastForm.get('UsedParamBody').setValidators(Validators.required);
       this.NotifBroadcastForm.get('UsedParamBody').updateValueAndValidity();
+      setTimeout (() => {
+        this.IsShowPreviewMessage = true
+      }, 10);
     }
     this.NotificationTemplateCode = ev.NotificationTemplateCode;
     this.NotificationTemplateDescr = ev.NotificationTemplateDescr;
@@ -477,8 +500,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   SetEmailObj() {
     this.SendToNotificationEngineSaveObj.SendTos = [this.NotifBroadcastForm.get("SendTo").value];
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Subject = this.NotifBroadcastForm.get("Subject").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("Cc").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("Bcc").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("CcEmail").value;
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("BccEmail").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.SendFrom = "";
 

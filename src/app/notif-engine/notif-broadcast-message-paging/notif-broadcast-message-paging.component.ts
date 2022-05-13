@@ -51,6 +51,7 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
   }
 
   ResendFromList(){
-    console.log(this.ListNotificationJobId);
+    let StrListIdObj: string = this.ListNotificationJobId.toString();
+    console.log(StrListIdObj);
   }
 }
