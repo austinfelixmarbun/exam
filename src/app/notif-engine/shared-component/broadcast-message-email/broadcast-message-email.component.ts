@@ -1,6 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import Quill from 'quill';
 import QuillImageDropAndPaste, { ImageData as QuillImageData } from 'quill-image-drop-and-paste';
 
@@ -55,6 +57,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
+    this.CustomPatternEmailShowErrorMessage();
     const SendToControl = this.parentForm.get("SendTo");
     if (!SendToControl) {
       this.parentForm.addControl("SendTo", this.fb.control(""));
@@ -67,6 +70,11 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     if (!FileAttachmentControl) {
       this.parentForm.addControl("FileAttachment", this.fb.control(""));
     }
+  }
+
+  EmailCustomPattern: Array<CustomPatternObj> = new Array();
+  CustomPatternEmailShowErrorMessage(){
+    this.EmailCustomPattern.push({ pattern: CommonConstant.regexMultipleEmail, invalidMsg: "Please enter a valid email" });
   }
 
   ngOnDestroy(): void {

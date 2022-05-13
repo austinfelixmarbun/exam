@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { filter, Observable, of } from 'rxjs';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { UcSubsectionComponent, UcSubsectionModule } from '@adins/uc-subsection';
+import { HttpClient } from '@angular/common/http';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
 
 @Component({
   selector: 'app-broadcast-message-sms-wa',
@@ -20,12 +22,26 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
 	CountryISO = CountryISO;
   Title: string;
   PhoneNumberFormat = PhoneNumberFormat;
-  NotifBroadcastSmsWaId: UcSubsectionModule = new UcSubsectionModule();
-  constructor(private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
 
   ngOnInit(): void {
+    this.GetMaxSpecifirUser();
 
+  }
+
+  MaxSpecificUser: number = 5;
+  GetMaxSpecifirUser() {
+    this.http.post(this.UrlConstantNew.GetMaxSpecificUser, {}).subscribe(
+      (response: number) => {
+        this.MaxSpecificUser = response;
+      }
+    );
+  }
+  
+  get SendToLength(){
+    let listSendTo: Array<TagInputObj> = this.parentForm.get("SendTo").value == "" ? new Array() : this.parentForm.get("SendTo").value;
+    return listSendTo.length;
   }
 
   onTagEdited(ev) {
@@ -44,11 +60,16 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   }
   
   AddSentTo(){
-    const PhnNum: Array<string> = this.parentForm.get("SendTo").value;
-    this.parentForm.get("SendTo").setValue(PhnNum["e164Number"]);
+    const PhnNum = this.parentForm.get("PhoneNum").value;
+    const item = { display: PhnNum["internationalNumber"], value: PhnNum["internationalNumber"] };
+    
+    let listSendTo: Array<TagInputObj> = this.parentForm.get("SendTo").value == "" ? new Array() : this.parentForm.get("SendTo").value;
+    listSendTo.push(item);
+    this.parentForm.get("SendTo").setValue(listSendTo);
+    this.parentForm.get("PhoneNum").setValue("");
   }
 
   ngOnDestroy(): void {
-    
+    this.parentForm.get("SendTo").setValue("");
   }
 }

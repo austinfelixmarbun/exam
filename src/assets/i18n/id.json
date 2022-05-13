@@ -232,5 +232,9 @@
   "SUBJECT": "Subyek",
   "PREVIEW_BODY": "Pratinjau Bodi",
   "BODY": "Bodi Message",
-  "NOTIF_BROADCAST_FORM": "Notifikasi Broadcast Form"
+  "NOTIF_BROADCAST_FORM": "Notifikasi Broadcast Form",
+  "USERNAME": "Nama User",
+  "TELP_NO": "Telepone Nomor",
+  "TITLE": "Judul",
+  "SEND_TYPE": "Tipe Kirim"
 }

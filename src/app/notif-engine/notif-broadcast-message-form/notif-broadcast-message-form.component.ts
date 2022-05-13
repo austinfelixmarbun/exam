@@ -19,6 +19,7 @@ import { NotificationHistHObj } from 'app/shared/model/notif-engine/notification
 import { ResPushNotificationObj } from 'app/shared/model/notif-engine/res-push-notification-obj.model';
 import { ListNotificationHistDObj } from 'app/shared/model/notif-engine/list-notification-hist-d-obj';
 import { ResSmsWaNotificationObj } from 'app/shared/model/notif-engine/res-sms-wa-notification-obj.model';
+import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -37,9 +38,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     ListPhone: [],
     Body: ['', Validators.required],
     UsedParamBody: '',
+    PhoneNum: '',    
+    SendType: CommonConstant.SEND_TYPE_SPECIFIC_USER,
     TemplateVersion: '',
-    PushUrl: '',
-    PushKey: '',
     ParamArr: this.fb.array([])
   });
 
@@ -243,6 +244,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   CheckTypeMechanism() {
     this.IsWa = false;
     this.SetSendToValidators();
+    this.SetSubjectValidators();
     this.SetCcBccValidators();
   }
 
@@ -253,29 +255,31 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
 
     if(this.GetMrNotificationTypeCodeValue == this.TypeEmail){
-      this.NotifBroadcastForm.get('CcEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.NotifBroadcastForm.get('CcEmail').setValidators(Validators.pattern(CommonConstant.regexMultipleEmail));
       this.NotifBroadcastForm.get('CcEmail').updateValueAndValidity();
-      this.NotifBroadcastForm.get('BccEmail').setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.NotifBroadcastForm.get('BccEmail').setValidators(Validators.pattern(CommonConstant.regexMultipleEmail));
       this.NotifBroadcastForm.get('BccEmail').updateValueAndValidity();
     }
   }
 
   SetSendToValidators() {
     this.NotifBroadcastForm.get('SendTo').setValidators(Validators.required);
-    this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
 
-    if (this.GetMrNotificationTypeCodeValue == this.TypeWA || this.GetMrNotificationTypeCodeValue == this.TypeSms){
-      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.minLength(10), Validators.maxLength(13)]);
-      this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
-      
-      if(this.GetMrNotificationTypeCodeValue == this.TypeWA){
-        this.IsWa = true;
-      }
+    if(this.GetMrNotificationTypeCodeValue == this.TypeWA){
+      this.IsWa = true;
     }
     if (this.GetMrNotificationTypeCodeValue == this.TypeEmail){
-      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.pattern(CommonConstant.regexEmail)]);
-      this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
+      this.NotifBroadcastForm.get('SendTo').setValidators([Validators.required, Validators.pattern(CommonConstant.regexMultipleEmail)]);
     }
+    this.NotifBroadcastForm.get('SendTo').updateValueAndValidity();
+  }
+
+  SetSubjectValidators() {
+    this.NotifBroadcastForm.get('Subject').clearValidators();
+    if (this.GetMrNotificationTypeCodeValue == this.TypeEmail || this.GetMrNotificationTypeCodeValue == this.TypePush) {
+      this.NotifBroadcastForm.get('Subject').setValidators(Validators.required);
+    }
+    this.NotifBroadcastForm.get('Subject').updateValueAndValidity();
   }
 
   readonly TypeSms: string = CommonConstant.RefMasterTypeCodeNotificationTypesSms;
@@ -445,11 +449,19 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   //#region PushNotif Logic
   GetPushFromChild(EventObj: PushNotifSendToObj) {
     this.NotifBroadcastForm.patchValue({
-      PushUrl: EventObj.Url,
-      PushKey: EventObj.Key,
       SendTo: EventObj.SendTo
       }
     )
+  }
+
+  SetSendToMultipleUser(): Array<string> {
+    const listSendToTemp: Array<TagInputObj> = this.NotifBroadcastForm.get("SendTo").value;
+    let listSendTo: Array<string> = new Array();
+    for (let index = 0; index < listSendToTemp.length; index++) {
+      const element = listSendToTemp[index];
+      listSendTo.push(element.value);
+    }
+    return listSendTo;
   }
 
   SetPushNotifObj() {
@@ -459,13 +471,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = "";
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = "";
     }
-    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.NotifBroadcastForm.get("PushUrl").value;
-    // this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.NotifBroadcastForm.get("PushKey").value;
-    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
+    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
   }
 
   SetEmailObj() {
-    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
+    this.SendToNotificationEngineSaveObj.SendTos = [this.NotifBroadcastForm.get("SendTo").value];
+    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Subject = this.NotifBroadcastForm.get("Subject").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("Cc").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("Bcc").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
@@ -475,12 +486,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   SetSmsWaObj() {
-    let ListPhone: Array<string> = this.NotifBroadcastForm.get("SendTo").value;
-    this.NotifBroadcastForm.patchValue({
-        SendTo: ListPhone["e164Number"]
-      }
-    )
-    this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get("SendTo").value;
+    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
@@ -492,10 +498,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   async SaveForm(){
     this.SetSaveObj();
-    let urlSave = this.UrlConstantNew.SendToNotificationEngine;
+    let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
+    if (this.IsResend) urlSave = "";
     console.log(this.SendToNotificationEngineSaveObj);
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
-      (response: SendToNotificationEngineObj) => {
+      (response) => {
         if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);
           this.CancelButton();
