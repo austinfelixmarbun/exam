@@ -13,8 +13,8 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -46,8 +46,9 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     private http: HttpClient,
     public activeModal: NgbActiveModal,
     private toastr: NGXToastrService,
-    private cookieService: CookieService, 
-    private UrlConstantNew: UrlConstantNew
+    private UrlConstantNew: UrlConstantNew,
+    private cookieService: CookieService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -103,14 +104,9 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(this.FileToUpload);
     reader.onload = () => {
-        reqUploadConsentTsObj.ConsentBase64 = reader.result;
-        reqUploadConsentTsObj.ConsentBase64 = reqUploadConsentTsObj.ConsentBase64.substring(reqUploadConsentTsObj.ConsentBase64.lastIndexOf(',') + 1)
-        this.http.post(this.UrlConstantNew.UploadConsentTrustingSocialV2, reqUploadConsentTsObj, AdInsConstant.SpinnerOptions).subscribe(
-          (response: ThirdPartyRsltHObj) => {
-            this.toastr.successMessage(response["Message"]);
-            this.outUpload.emit(response);
-          }
-        );
+      reqUploadConsentTsObj.ConsentBase64 = reader.result;
+      reqUploadConsentTsObj.ConsentBase64 = reqUploadConsentTsObj.ConsentBase64.substring(reqUploadConsentTsObj.ConsentBase64.lastIndexOf(',') + 1)
+      this.uploadDocFileMultipart(reqUploadConsentTsObj);
     }
   }
 
@@ -122,5 +118,62 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     return fileSize < 1024000
       ? (fileSize / 1024).toFixed(2) + ' KB'
       : (fileSize / 1024000).toFixed(2) + ' MB';
+  }
+
+  uploadDocFileMultipart(objDoc: ReqUploadConsentTsObj)
+  {
+    if (this.UrlConstantNew.env.SpinnerOnHttpPost) this.spinner.show();
+
+    var formData: any = new FormData();
+
+    Object.keys(objDoc).forEach(key => {
+      formData.append(key, objDoc[key]);
+    });
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = evnt => {
+      if (xhr.readyState !== 4) return;
+
+      if (this.UrlConstantNew.env.SpinnerOnHttpPost) this.spinner.hide();
+      if (xhr.status !== 200 && xhr.status !== 201) {
+        this.toastr.errorMessage('Upload Failed !');
+        return;
+      }
+      else {
+        var response = JSON.parse(xhr.response);
+        if (response.HeaderObj.StatusCode != '200') {
+          this.toastr.errorMessage('Upload Failed ! '+  + response.HeaderObj.Message);
+          return
+        }
+      }
+
+      if (xhr.status === 200) {
+        this.toastr.successMessage(response["Message"]);
+        this.outUpload.emit(response);
+        return;
+      }
+    };
+
+    xhr.onerror = evnt => {
+      this.toastr.errorMessage('Upload Failed !');
+      return;
+    };
+    xhr.open('POST', this.UrlConstantNew.UploadConsentTrustingSocialV21, true);
+    let value = this.cookieService.get('XSRF-TOKEN');
+    let token = this.DecryptString(value, this.UrlConstantNew.env.ChipperKeyCookie);
+    xhr.setRequestHeader('AdInsKey', `${token}`);
+    xhr.send(formData);
+  }
+
+  private DecryptString(chipperText: string, chipperKey: string) {
+    if (
+      chipperKey == undefined || chipperKey.trim() == '' ||
+      chipperText == undefined || chipperText.trim() == ''
+    ) return chipperText;
+    var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+    var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
+    var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, { iv: iv });
+    var plainText = decrypted.toString(CryptoJS.enc.Utf8);
+    return plainText;
   }
 }

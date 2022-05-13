@@ -1104,8 +1104,10 @@ export class UrlConstantNew{
     public GetThirdPartyTrustsocRsltByThirdPartyRsltHId = this.env.FoundationR3Url + this.url.GetThirdPartyTrustsocRsltByThirdPartyRsltHId;
     public UploadConsentTrustingSocial = this.env.FoundationR3Url + this.url.UploadConsentTrustingSocial;
     public UploadConsentTrustingSocialV2 = this.env.FoundationR3Url + this.url.UploadConsentTrustingSocialV2;
+    public UploadConsentTrustingSocialV21 = this.env.FoundationR3Url + this.url.UploadConsentTrustingSocialV21;
     public GetListThirdPartyTrustingSocialByTrxNo = this.env.FoundationR3Url + this.url.GetListThirdPartyTrustingSocialByTrxNo;
     public SaveCustDocFile = this.env.FoundationR3Url + this.url.SaveCustDocFile;
+    public SaveCustDocFile21 = this.env.FoundationR3Url + this.url.SaveCustDocFile21;
 
     //DIGITALIZATION
     public AddTrxSrcDataForTrustingSocial = this.env.FoundationR3Url + this.url.AddTrxSrcDataForTrustingSocial;
