@@ -115,6 +115,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
     this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: RefMasterTypeCode }).subscribe(
       (response) => {
+        console.log(response);
         this.DictListRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
       }
     );
