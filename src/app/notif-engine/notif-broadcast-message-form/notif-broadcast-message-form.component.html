@@ -69,6 +69,14 @@
                     </div>
                   </div>
                 </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate>Ref No</label>
+                  <div class="col-md-9">
+                    <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per" formControlName="RefNo">
+                    <lib-uc-show-errors [control]="NotifBroadcastForm.controls.RefNo" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
                 <app-broadcast-message-email *ngIf="GetMrNotificationTypeCodeValue == TypeEmail" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm"></app-broadcast-message-email>
                 <app-broadcast-message-notification *ngIf="GetMrNotificationTypeCodeValue == TypePush && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" (GetPushNotificationObj)="GetPushFromChild($event)" [IsResend]="IsResend" [SendToUname]="PushSendTo"></app-broadcast-message-notification >
                 <app-broadcast-message-sms-wa *ngIf="GetMrNotificationTypeCodeValue == TypeWA || GetMrNotificationTypeCodeValue == TypeSms && IsReady" [parentForm]="NotifBroadcastForm" [IsUsedTemplate]="IsUsedTemplate" [enjiForm]="enjiForm" [IsWa]="IsWa"></app-broadcast-message-sms-wa>
@@ -79,9 +87,9 @@
                   (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                 </button>
-                <button type="button" class="btn btn-raised btn-primary" (click)="getFormValidationErrors()">
+                <!-- <button type="button" class="btn btn-raised btn-primary" (click)="getFormValidationErrors()">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Test</span>
-                </button>
+                </button> -->
                 <button type="submit" class="btn btn-raised btn-primary">
                   <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
                 </button>

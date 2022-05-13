@@ -7,6 +7,8 @@ export class NotificationHistHObj {
     MrNotificationSourceCode : string;
     MrNotificationSourceDescr : string;
     Version : number;
+    RefNo: string;
+    NotificationJobId: string;
 
     constructor(){
         this.NotificationTemplateId = 0;
@@ -17,5 +19,7 @@ export class NotificationHistHObj {
         this.MrNotificationSourceCode = "";
         this.MrNotificationSourceDescr = "";
         this.Version = 0;
+        this.RefNo = "";
+        this.NotificationJobId = "";
     }
 }

@@ -29,6 +29,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     MrNotificationTypeCode: ['', Validators.required],
     MrNotificationLevelCode: ['', Validators.required],
     MrNotificationSourceCode: ['', Validators.required],
+    RefNo: '',
     Subject: '',
     SendTo: ['', Validators.required],
     BccEmail: '',
@@ -146,6 +147,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           MrNotificationTypeCode: response.MrNotificationTypeCode,
           MrNotificationLevelCode: response.MrNotificationLevelCode,
           MrNotificationSourceCode: response.MrNotificationSourceCode,
+          RefNo: response.RefNo
           }
         )
       }

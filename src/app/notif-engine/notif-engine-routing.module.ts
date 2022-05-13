@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NotifBroadcastMessageFormComponent } from './notif-broadcast-message-form/notif-broadcast-message-form.component';
+import { NotifBroadcastMessageInquiryComponent } from './notif-broadcast-message-inquiry/notif-broadcast-message-inquiry.component';
 import { NotifBroadcastMessagePagingComponent } from './notif-broadcast-message-paging/notif-broadcast-message-paging.component';
 import { NotifTemplateFormComponent } from './notif-template-form/notif-template-form.component';
 import { NotifTemplatePagingComponent } from './notif-template-paging/notif-template-paging.component';
@@ -44,6 +45,13 @@ const routes: Routes = [
             component: NotifBroadcastMessageFormComponent,
             data: {
               title: 'Notif Broadcast Message Form'
+            },
+          },
+          {
+            path: PathConstant.INQUIRY,
+            component: NotifBroadcastMessageInquiryComponent,
+            data: {
+              title: 'Notif Broadcast Message Inquiry'
             },
           }
         ]
