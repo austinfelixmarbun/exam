@@ -16,6 +16,7 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
+  @Input() IsResend: boolean = false;
   @Input() IsWa: boolean;
 	separateDialCode = false;
 	SearchCountryField = SearchCountryField;

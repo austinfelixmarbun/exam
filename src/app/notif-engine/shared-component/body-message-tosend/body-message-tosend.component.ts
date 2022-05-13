@@ -18,6 +18,7 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
   @Input() IsBroadcast: boolean = false;
+  @Input() IsResend: boolean = false;
   @Input() ParamArrays: Array<string> = new Array<string>();
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
@@ -38,20 +39,18 @@ export class BodyMessageTosendComponent implements OnInit {
     while (ListParam.length !== 0) {
       ListParam.removeAt(0)
     }
+    console.log(this.ParamArrays);
     for (let index = 0; index < this.ParamListCount; index++) {
       const ParamaterVar: string = "{" + index + "}";
+      let ParamStr: string = "";
+      if (this.ParamArrays.length > 0 && this.IsResend) {
+        ParamStr = this.ParamArrays.at(index);
+      }
+      console.log(ParamStr);
       ListParam.push(this.fb.group({
-        Param: "",
+        Param: ParamStr,
         ParamIdxAt: ParamaterVar
       }));
-
-      if(this.ParamArrays && this.IsBroadcast){
-        let ParamStr: string = this.ParamArrays.at(index).at(index); 
-        ListParam.at(index).patchValue({
-          Param: ParamStr,
-          ParamIdxAt: ParamaterVar
-        });
-      }
     }
     this.InputParamValue();
   }

@@ -15,6 +15,7 @@ export class NotificationTemplateObj {
     Body: string;
     TotalParam: number;
     Version: number;
+    IsLatestVersion: boolean;
 
     constructor() {
         this.NotificationTemplateId = 0;

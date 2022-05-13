@@ -1,6 +1,6 @@
 <lib-ucSubsection [id]="'NotifBroadcastNotifId'" [title]="title" [panel]="'NotifBroadcastNotif'"></lib-ucSubsection>
 <div class="form-body" id="NotifBroadcastNotif">
-  <div class="form-group row">
+  <div class="form-group row" [hidden]="IsResend">
     <label class="col-md-3 adInsLabel" translate>SEND_TYPE</label>
     <div class="col-md-9">
       <mat-radio-group formControlName="SendType" (change)="ChangeSendType($event.value)">
@@ -13,19 +13,19 @@
       </lib-uc-show-errors>
     </div>
   </div>
-  <div class="form-group row" [hidden]="GetSendType == SendTypeAll">
-    <label class="col-md-3" translate>USERNAME</label>
+  <div class="form-group row" [ngClass]="{ 'adins-required': IsResend }" [hidden]="GetSendType == SendTypeAll">
+    <label class="col-md-3" translate>{{!IsResend ? "USERNAME" : "SEND_TO"}}</label>
     <div class="col-md-9 input-group">
       <lib-uclookupgeneric *ngIf="SendtoLookupObj.isReady" [lookupInput]="SendtoLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
         [identifier]="IdentifierLookupSendTo">
       </lib-uclookupgeneric>
-      <button type="button" [hidden]="MaxSpecificUser == SendToLength" (click)="AddSendTo()" class="btn btn-primary btn-raised"
+      <button type="button" [hidden]="IsResend || MaxSpecificUser == SendToLength" (click)="AddSendTo()" class="btn btn-primary btn-raised"
           style="vertical-align: middle;">
           <i class="ft-plus-circle font-medium-2"></i>
       </button>
     </div>
   </div>
-  <div class="form-group row adins-required">
+  <div class="form-group row adins-required" [hidden]="IsResend">
     <label class="col-md-3 adInsLabel" translate>SEND_TO</label>
     <div class="col-md-9">
       <tag-input formControlName="SendTo" [disable]="IsSendToReadonly" [editable]="false" [maxItems]="0" [required]="true" [separatorKeyCodes]="[32, 188]" [onRemoving]="onRemoving">

@@ -37,6 +37,7 @@ export class BroadcastMessageNotificationComponent implements OnInit {
     if(this.IsResend) {
       this.PatchDataUcSendTo()
     }
+    this.SendtoLookupObj.isReady = true;
   }
 
   MaxSpecificUser: number = 5;
@@ -58,6 +59,9 @@ export class BroadcastMessageNotificationComponent implements OnInit {
     this.SendtoLookupObj.isReady = false;  
     this.SendtoLookupObj.urlJson = "./assets/uclookup/notif-engine/lookup-ref-user-subscription.json";
     this.SendtoLookupObj.isRequired = false;
+    if (this.IsResend) {
+      this.SendtoLookupObj.isRequired = true;
+    }
     this.SendtoLookupObj.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url + '/v2.1';
     this.SendtoLookupObj.addCritInput = new Array();
 
@@ -70,7 +74,7 @@ export class BroadcastMessageNotificationComponent implements OnInit {
       this.SendtoLookupObj.addCritInput.push(AddCrit);
     }
     setTimeout(() => {
-      this.SendtoLookupObj.isReady = true;  
+      this.SendtoLookupObj.isReady = true;
     }, 1);
   }
 
