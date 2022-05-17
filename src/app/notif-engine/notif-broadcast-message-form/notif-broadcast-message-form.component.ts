@@ -17,7 +17,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
 import { NotificationHistHObj } from 'app/shared/model/notif-engine/notification-hist-h-obj.model';
 import { ResPushNotificationObj } from 'app/shared/model/notif-engine/res-push-notification-obj.model';
-import { ListNotificationHistDObj } from 'app/shared/model/notif-engine/list-notification-hist-d-obj';
 import { ResSmsWaNotificationObj } from 'app/shared/model/notif-engine/res-sms-wa-notification-obj.model';
 import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
 import { ResEmailNotificationObj } from 'app/shared/model/notif-engine/res-email-notification-obj.model';
@@ -79,7 +78,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.DisableSelectControl();
     }
     this.RefreshReady();
-    console.log(this.IsResend);
     this.InputLookupTemplateMessageObj.isReady = true;
   }
 
@@ -115,7 +113,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
     this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: RefMasterTypeCode }).subscribe(
       (response) => {
-        console.log(response);
         this.DictListRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
       }
     );
@@ -142,7 +139,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if (this.NotificationHistHId == null) return;
     await this.http.post(this.UrlConstantNew.GetNotificationHistHByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       async (response: NotificationHistHObj) => {
-        console.log(response);
         await this.GetNotificationTemplate(response.NotificationTemplateId);
         this.NotifBroadcastForm.patchValue({
           MrNotificationTypeCode: response.MrNotificationTypeCode,
@@ -168,12 +164,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if (!NotificationHistHId) return;
     await this.http.post(this.UrlConstantNew.GetNotificationHistDByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       (response: NotificationHistDObj) => {
-        console.log(response);
         this.ParamArrFromGet = new Array<string>();
         const ListParamValue: Array<string> = response.Param.split("|");
         for (let index = 0; index < this.ParamListCount; index++) {
-          console.log(index);
-          console.log(ListParamValue.at(index));
           this.ParamArrFromGet.push(ListParamValue.at(index));
         }
       }
@@ -203,10 +196,14 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           SendTo: response.SendTo,
           CcEmail: response.Cc,
           BccEmail: response.Bcc,
-          Subject: response.Subject,
-          Body: response.Body,
           }
         )
+        if (!this.IsUsedTemplate) {
+          this.NotifBroadcastForm.patchValue({
+            Subject: response.Subject,
+            Body: response.Body,
+          });
+        }
       }
     );
     this.RefreshReady();
@@ -242,7 +239,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if (!NotificationTemplateId) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: NotificationTemplateId }).toPromise().then(
       async (response: NotificationTemplateObj) => {
-        console.log(response);
         this.SetDataTemplate(response);
       }
     );
@@ -397,7 +393,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   RefreshTemplate() {
-    console.log("refresh Template");
     this.http.post(this.UrlConstantNew.GetLatestNotificationTemplateByNotificationTemplateCode, { Code: this.NotificationTemplateCode }).toPromise().then(
       async (response: NotificationTemplateObj) => {
         this.SetDataTemplate(response, true);
@@ -541,7 +536,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.SetSaveObj();
     let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
     if (this.IsResend) urlSave = "";
-    console.log(this.SendToNotificationEngineSaveObj);
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {
