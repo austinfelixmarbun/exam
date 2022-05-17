@@ -350,6 +350,7 @@ export class NavigationConstant {
     //#region System User
     public static SYS_USER = "/" + PathConstant.LR_SYS_USER; //'SystemUser/
     public static SYS_USER_PAGING =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.PAGING;
+    public static SYS_USER_DETAIL =  "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL;
     public static SYS_DETAIL = "/" + PathConstant.LR_SYS_USER + "/" + PathConstant.DETAIL; //'/Employee/Detail'
     //#endregion
 
