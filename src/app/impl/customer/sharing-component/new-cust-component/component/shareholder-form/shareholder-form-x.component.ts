@@ -242,7 +242,7 @@ export class ShareholderFormXComponent implements OnInit {
     listCriteriaObj.push(criteriaCustObj);
 
     this.professionLookUpObj.addCritInput = listCriteriaObj;
-    //this.ucLookupProfession.setAddCritInput();
+    this.ucLookupProfession.setAddCritInput();
   }
 
   isShareOwnerMandatory: boolean = false;
