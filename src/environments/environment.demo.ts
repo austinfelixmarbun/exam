@@ -10,7 +10,7 @@ export const environment = {
   //FoundationR3Url: 'http://localhost:5000',
   LosURL: 'https://r3app-server.ad-ins.com:8443/LOS',
   FoundationR3Url: 'https://r3app-server.ad-ins.com:8443/FOUNDATION',
-  DMSUrl: "http://sky/LITEDMS_POC/Integration/ViewDoc.aspx",
+  DMSUrl: "https://sky.ad-ins.com/LiteDMS_POC/Integration/ViewDoc.aspx",
   AMSUrl: "http://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "http://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
   lmsWeb: "http://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
