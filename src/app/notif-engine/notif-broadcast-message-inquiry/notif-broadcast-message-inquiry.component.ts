@@ -19,7 +19,6 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
   }
 
   GetCallbackPaging(ev){
-    console.log(ev);
     if(ev.Key == "resend"){
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_BROADCAST_ADD_EDIT], {NotificationHistHId: ev.RowObj.NotificationHId});
     }
