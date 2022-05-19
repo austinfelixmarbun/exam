@@ -4,7 +4,7 @@
     </button>
 </div>
 <lib-ucaddtotemp *ngIf="TempPagingObj.isReady" [tempPagingObj]="TempPagingObj" (callback)="getListTemp($event)" (getSelected)="ResendNotif($event)"></lib-ucaddtotemp>
-<div class="form-actions right">
+<div class="form-actions text-right">
     <button type="button" class="btn btn-raised btn-primary mt-2" (click)="ResendFromList()" *ngIf="ShowButton">
         <i class="far fa-check-square"></i>&nbsp;<span translate>Resend From List</span>
     </button>

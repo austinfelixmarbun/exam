@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { ResendAllNotificationObj } from 'app/shared/model/notif-engine/resend-all-notification-obj';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ReqResendAllNotificationObj } from 'app/shared/model/notif-engine/req-resend-all-notification-obj';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 @Component({
   selector: 'app-notif-broadcast-message-paging',
@@ -26,7 +28,7 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
   readonly TypeEmail: string = CommonConstant.RefMasterTypeCodeNotificationTypesEmail;
   readonly TypePush: string = CommonConstant.RefMasterTypeCodeNotificationTypesPush;
 
-  constructor(private UrlConstantNew: UrlConstantNew, private router: Router) { }
+  constructor(private UrlConstantNew: UrlConstantNew, private router: Router, private http: HttpClient, private toastr: NGXToastrService) { }
   ngOnInit() {
     this.TempPagingObj.urlJson = "./assets/ucpaging/notif-engine/add-to-temp-notif-broadcast-resend.json";
     this.TempPagingObj.pagingJson = "./assets/ucpaging/notif-engine/add-to-temp-notif-broadcast-resend.json";
@@ -56,16 +58,16 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
   AppendResendAllObj(ev){
     for(let i = 0; i<ev.TempListObj.length; i++){
       if(ev.TempListObj.at(i).MrNotificationTypeCode == this.TypeSms){
-        this.ResendAllObj.ListStrIdSms.push(ev.TempListObj.at(i).NotificationHId);
+        this.ResendAllObj.ListIdSms.push(ev.TempListObj.at(i).NotificationHId.toString());
       }
       if(ev.TempListObj.at(i).MrNotificationTypeCode == this.TypeWA){
-        this.ResendAllObj.ListStrIdWa.push(ev.TempListObj.at(i).NotificationHId);
+        this.ResendAllObj.ListIdWa.push(ev.TempListObj.at(i).NotificationHId.toString());
       }
       if(ev.TempListObj.at(i).MrNotificationTypeCode == this.TypePush){
-        this.ResendAllObj.ListStrIdPushNotif.push(ev.TempListObj.at(i).NotificationHId);
+        this.ResendAllObj.ListIdPushNotif.push(ev.TempListObj.at(i).NotificationHId.toString());
       }
       if(ev.TempListObj.at(i).MrNotificationTypeCode == this.TypeEmail){
-        this.ResendAllObj.ListStrIdEmail.push(ev.TempListObj.at(i).NotificationHId);
+        this.ResendAllObj.ListIdEmail.push(ev.TempListObj.at(i).NotificationHId.toString());
       }
     }
   }
@@ -76,20 +78,15 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router, [this.AddLink], {NotificationHistHId: ev.RowObj.NotificationHId});
     }
   }
-  ReqResendAllNotification: Array<ReqResendAllNotificationObj> = new Array<ReqResendAllNotificationObj>();
-  ResendFromList(){
-    let StrListIdObj: string = this.ListNotificationJobId.toString();
-    console.log(StrListIdObj);
-    let strSms: Array<string> = this.ResendAllObj.ListStrIdSms;
-    let strEmail: Array<string> = this.ResendAllObj.ListStrIdEmail;
-    let strPush: Array<string> = this.ResendAllObj.ListStrIdPushNotif;
-    let strWa: Array<string> = this.ResendAllObj.ListStrIdWa;
-    
-    this.ReqResendAllNotification.push({NotificationType : this.TypeSms, ListStrId : strSms});
-    this.ReqResendAllNotification.push({NotificationType : this.TypeWA, ListStrId : strWa});
-    this.ReqResendAllNotification.push({NotificationType : this.TypeEmail, ListStrId : strEmail});
-    this.ReqResendAllNotification.push({NotificationType : this.TypePush, ListStrId : strPush});
-
-    console.log(this.ReqResendAllNotification);
+  async ResendFromList(){
+    console.log(this.ResendAllObj);
+    let urlResendMultiple = this.UrlConstantNew.MultipleResendToNotificationEngine;
+    await this.http.post(urlResendMultiple, this.ResendAllObj).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == "200") {
+          this.toastr.successMessage(response['message']);
+        }
+      }
+    );
   }
 }

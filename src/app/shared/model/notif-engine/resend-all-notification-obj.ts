@@ -1,13 +1,13 @@
 export class ResendAllNotificationObj {
-    ListStrIdSms: Array<string> = new Array<string>();
-    ListStrIdWa: Array<string> = new Array<string>();
-    ListStrIdPushNotif: Array<string> = new Array<string>();
-    ListStrIdEmail: Array<string> = new Array<string>();
+    ListIdSms: Array<string> = new Array<string>();
+    ListIdWa: Array<string> = new Array<string>();
+    ListIdPushNotif: Array<string> = new Array<string>();
+    ListIdEmail: Array<string> = new Array<string>();
 
     constructor(){
-        this.ListStrIdSms = new Array<string>();
-        this.ListStrIdWa = new Array<string>();
-        this.ListStrIdPushNotif = new Array<string>();
-        this.ListStrIdEmail = new Array<string>();
+        this.ListIdSms = new Array<string>();
+        this.ListIdWa = new Array<string>();
+        this.ListIdPushNotif = new Array<string>();
+        this.ListIdEmail = new Array<string>();
     }
 }
