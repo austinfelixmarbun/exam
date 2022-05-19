@@ -200,6 +200,7 @@ export class CommonConstant {
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
     public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
+    public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
