@@ -725,9 +725,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
 
   async SaveForm() {
-    if(!this.validateCustPersonalAge()) return; 
-
-    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
       return;
     }
 
@@ -925,14 +923,14 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
   //#endregion
 
-  SetThirdPartyTrxNo(e){
+  SetThirdPartyTrxNo(e) {
     this.thirdPartyTrxNo = e;
   }
 
-  SetCustFileFormObjs(e){
+  SetCustFileFormObjs(e) {
     this.CustDocFileFormObjs = e;
   }
-  
+
   minCustPerAge: number;
   maxCustPerAge: number;
   minCustPerAgeDt: Date;
