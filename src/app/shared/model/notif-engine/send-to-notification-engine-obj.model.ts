@@ -17,6 +17,7 @@ export class SendToNotificationEngineObj {
     EmailNotificationObj: EmailNotificationObj;
     PushNotificationObj: PushNotificationObj;
     SmsWaNotificationObj: SmsWaNotificationObj;
+    RefNo: string;
 
     constructor() {
         this.NotificationTemplateCode = "";
@@ -32,5 +33,6 @@ export class SendToNotificationEngineObj {
         this.EmailNotificationObj = new EmailNotificationObj();
         this.PushNotificationObj = new PushNotificationObj();
         this.SmsWaNotificationObj = new SmsWaNotificationObj();
+        this.RefNo = "";
     }
 }

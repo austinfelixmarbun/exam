@@ -1,7 +1,23 @@
 {
-    "title": "Notification Broadcast Message",
+    "title": "Notification Broadcast Message Inquiry",
     "exportExcel": false,
     "component": [
+        {
+            "type": "textbox",
+            "name": "NHH.REF_NO",
+            "id": "RefNo",
+            "value": "",
+            "label": "Ref No",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "NHH.NOTIFICATION_JOB_ID",
+            "id": "NotificationJobId",
+            "value": "",
+            "label": "Job Id",
+            "placeholder": "Placeholder"
+        },
         {
             "type": "dropdown",
             "name": "NHH.MR_NOTIFICATION_TYPE_CODE", 
@@ -63,12 +79,46 @@
             "value": "",
             "label": "Template Code",
             "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "name": "NHH.SEND_DT",
+            "id": "SendDt",
+            "datatype": "date",
+            "value": "",
+            "restriction": "gte",
+            "label": "Send Date From",
+            "datepickerPair": "string",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "datepicker",
+            "name": "NHH.SEND_DT",
+            "id": "SendDt",
+            "datatype": "date",
+            "value": "",
+            "restriction": "lte",
+            "label": "Send Date To",
+            "datepickerPair": "string",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
         "name": "SearchNotifBroadcast"
     },
     "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Ref No",
+            "name": "RefNo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Job Id",
+            "name": "NotificationJobId"
+        },
         {
             "type": "sort",
             "position": "left",
@@ -106,12 +156,22 @@
             "name": "Version"
         },
         {
-            "type": "label",
+            "type": "sort",
             "position": "center",
-            "label": "Resend"
+            "label": "Send Date"
         }
     ],
     "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "RefNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "NotificationJobId"
+        },
         {
             "type": "text",
             "position": "left",
@@ -143,35 +203,9 @@
             "property": "Version"
         },
         {
-            "type": "action",
+            "type": "date",
             "position": "center",
-            "action": [
-                {
-                    "type": "switch",
-                    "case": [
-                        {
-                            "conditions":[
-                                {
-                                    "property": "SendDt",
-                                    "value": null,
-                                    "restriction": "EQ"
-                                }
-                            ],
-                            "result" : {
-                                "type": "callback",
-                                "key": "resend",
-                                "property": [
-                                    {
-                                        "type": "NotificationHistHId",
-                                        "property": "NotificationHId"
-                                    }
-                                ]
-                              }
-                        }
-                    ]
-                }
-            ]
-        }
-        
+            "property": "SendDt"
+        }        
     ]
 }

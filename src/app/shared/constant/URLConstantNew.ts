@@ -1234,7 +1234,11 @@ export class UrlConstantNew{
     // SmsWaNotificationHist
     public GetSmsWaNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetSmsWaNotificationHistByNotificationHistHId;
 
+    // EmailNotificationHist
+    public GetEmailNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetEmailNotificationHistByNotificationHistHId;
+
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
     public MultipleSendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngine;
+    public MultipleResendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleResendToNotificationEngine;
 }

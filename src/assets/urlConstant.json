@@ -897,11 +897,13 @@
     "GetNotSentPushNotif": "/v2/Notification/WfGetAllNotSentPushNotification",
     "SendToNotificationEngine": "/v2/Notification/SendToNotificationEngine",
     "MultipleSendToNotificationEngine": "/v2/Notification/MultipleSendToNotificationEngine",
+    "MultipleResendToNotificationEngine": "/v1/Notification/MultipleResendToNotificationEngine",
     "GetMaxSpecificUser": "/v1/NotificationHistH/GetMaxSpecificUser",
     "GetNotificationHistHByNotificationHistHId": "/v1/NotificationHistH/GetNotificationHistHByNotificationHistHId",
     "GetNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetNotificationHistDByNotificationHistHId",
     "GetListNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetListNotificationHistDByNotificationHistHId",
     "GetPushNotificationHistByNotificationHistHId": "/v1/PushNotification/GetPushNotificationHistByNotificationHistHId",
     "GetSmsWaNotificationHistByNotificationHistHId": "/v1/SmsWaNotificationHist/GetSmsWaNotificationHistByNotificationHistHId",
+    "GetEmailNotificationHistByNotificationHistHId": "/v1/EmailNotificationHist/GetEmailNotificationHistByNotificationHistHId",
     "GetRefUserSubscriptionByUsername": "/v1/PushNotification/GetRefUserSubscriptionByUsername"
 }
