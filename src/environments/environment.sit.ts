@@ -30,6 +30,6 @@ export const environment = {
     Module: "FOU",
     isCore: true,
     SpinnerOnHttpPost: false,
-    NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE"
+    NotificationPublicKey: "BNrodi9AsTlBkNYm_PT-JdpdG549ZLrHc4Emn8sUXSZ-0pncCyoZynVzCvAF7NXtRadF731-aHXIhSv0YupHcjc"
   };
   
