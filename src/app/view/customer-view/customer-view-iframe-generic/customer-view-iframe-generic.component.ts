@@ -1,3 +1,4 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
 
@@ -13,13 +14,13 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   IsReady: boolean = false;
   urlLink: string = '';
 
-  constructor() { }
+  constructor(
+    private locationStrategy: LocationStrategy) { }
 
   ngOnInit() {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
-    // this.rootServer = this.UrlConstantNew.env.losR3Web;
-    this.urlLink = this.iframeObj.Url + queryParam;
+    this.urlLink = location.origin + this.locationStrategy.getBaseHref() + this.iframeObj.Url + queryParam;
     this.IsReady = true;
 
   }
