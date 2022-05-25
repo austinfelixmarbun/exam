@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
     public menu: any[];
     private url: string;
     version: string;
+    jsFunc: any = import('../../../assets/js/auto-scroll.js');
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
@@ -39,7 +40,6 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        $.getScript('./assets/js/app-sidebar.js');
         // this.url = "./assets/menu.json";
         // this.getJSON(this.url).subscribe
         //     (data => {
@@ -56,6 +56,10 @@ export class SidebarComponent implements OnInit {
                 (response) => {
                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+                    $.getScript('./assets/js/app-sidebar.js');
+                    setTimeout(() => {
+                        this.jsFunc.then(v => v.clickRoute());
+                    }, 10);
                 });
         }
         else
