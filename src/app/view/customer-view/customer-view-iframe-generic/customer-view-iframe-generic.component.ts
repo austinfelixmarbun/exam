@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-iframe-generic',
@@ -19,7 +20,7 @@ export class CustomerViewIframeGenericComponent implements OnInit {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
     // this.rootServer = environment.losR3Web;
-    this.urlLink = this.iframeObj.Url + queryParam;
+    this.urlLink = environment.losR3Web + this.iframeObj.Url + queryParam;
     this.IsReady = true;
 
   }
