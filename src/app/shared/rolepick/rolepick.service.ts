@@ -38,7 +38,7 @@ export class RolePickService {
                 });
 
         } else {
-            if (data.response.RefUserRoles.length == 1 && type == "") {
+            if (data.response.RefUserRoles.length == 1 && type == "" && data.response.RefUserRoles[0].Roles.length == 1) {
                 var item = data.response;
                 var UserIdentityObj = {
                     RefUserId: item.RefUserId,

@@ -61,13 +61,17 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
     }
 
+    needUnsubscribe(){
+        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1'){
+            this.appnotif.UnsubNotification();
+        }
+    }
+
     async ngOnInit() {
-        await this.checkUseNotification();
+        this.checkUseNotification();
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
-        this.setUser();
-        console.log(this.userAccess.UserName);
         // var _hubConnection = new HubConnectionBuilder()
         //     .withUrl(this.UrlConstantNew.WebSocketUrl)
         //     .withAutomaticReconnect()
@@ -145,21 +149,9 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    async checkUseNotification() {
-        let reqByCode: GenericObj = new GenericObj();
-        reqByCode.Code = CommonConstant.GSCodeIsUseNotification;
-        await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, reqByCode).toPromise().then(
-            (response: GeneralSettingObj) => {
-                this.IsUseNotification = response.GsValue;
-                AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, response.GsValue);
-            }
-        )
-    }
-
-    needUnsubscribe(){
-        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1'){
-            this.appnotif.UnsubNotification();
-        }
+    checkUseNotification() {
+        this.IsUseNotification = this.UrlConstantNew.env.IseUseNotification;
+        AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, this.UrlConstantNew.env.IseUseNotification);
     }
 
     logout() {
