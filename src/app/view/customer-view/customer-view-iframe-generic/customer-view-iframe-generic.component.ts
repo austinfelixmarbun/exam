@@ -1,5 +1,5 @@
-import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
 
 @Component({
@@ -15,12 +15,12 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   urlLink: string = '';
 
   constructor(
-    private locationStrategy: LocationStrategy) { }
+    private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
-    this.urlLink = location.origin + this.locationStrategy.getBaseHref() + this.iframeObj.Url + queryParam;
+    this.urlLink = this.UrlConstantNew.env.losR3Web + this.iframeObj.Url + queryParam;
     this.IsReady = true;
 
   }
