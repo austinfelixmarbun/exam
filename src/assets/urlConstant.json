@@ -116,7 +116,7 @@
     "GetRefUserByResetCode": "/v1/RefUser/GetRefUserByResetCode",
     "ResetPasswordByUsername": "/v1/RefUser/ResetPasswordByUsername",
     "GetRefRolePaging": "/v1/UserManagement/GetRefRolePaging",
-    "AddRefRole": "/v1/RefRole/AddRefRole",
+    "AddRefRole": "/v2/RefRole/AddRefRoleV2",
     "EditRefRole": "/v1/RefRole/EditRefRole",
     "DeleteRefRole": "/v1/RefRole/DeleteRefRole",
     "GetRefRoleByRefRoleId": "/v1/RefRole/GetRefRoleById",
