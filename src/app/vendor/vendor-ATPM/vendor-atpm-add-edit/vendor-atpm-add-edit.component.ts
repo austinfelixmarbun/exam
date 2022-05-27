@@ -321,8 +321,8 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorATPMObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorATPMObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
         this.vendorATPMObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
-        this.vendorATPMObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
-        this.vendorATPMObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
+        this.vendorATPMObj.VendorAddrObj.AreaCode3 = this.result.VendorAddrObj.AreaCode3;
+        this.vendorATPMObj.VendorAddrObj.AreaCode4 = this.result.VendorAddrObj.AreaCode4;
         this.vendorATPMObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorATPMObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }

@@ -758,8 +758,8 @@ export class VendorHoAddEditComponent implements OnInit {
         this.vendorHoObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorHoObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
         this.vendorHoObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
-        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
-        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.result.VendorAddrObj.AreaCode3;
+        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.result.VendorAddrObj.AreaCode4;
         this.vendorHoObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorHoObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
