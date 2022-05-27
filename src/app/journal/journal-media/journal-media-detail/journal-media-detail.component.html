@@ -27,7 +27,7 @@
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Transaction Type Code</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="TransactionTypeCode"
+                  <input type="text" class="form-control" formControlName="TransactionTypeCode" [IsUpperCase]="false"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.TransactionTypeCode.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.TransactionTypeCode"
                     [submit]="enjiForm.submitted">
@@ -37,7 +37,7 @@
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Transaction Description</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="TransactionDescription"
+                  <input type="text" class="form-control" formControlName="TransactionDescription" [IsUpperCase]="false"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.TransactionDescription.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.TransactionDescription"
                     [submit]="enjiForm.submitted">
@@ -74,7 +74,7 @@
               <div class="form-group row">
                 <label class="col-md-2" translate>Entity Type</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="EntityType"
+                  <input type="text" class="form-control" formControlName="EntityType" [IsUpperCase]="false"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.EntityType.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.EntityType" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
@@ -120,8 +120,8 @@
 
             </div>
             <div class="form-actions right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]">
-                <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Cancel</span>
+              <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" translate>
+                <i class="fa fa-arrow-circle-left"></i> Cancel
               </button>
               <button type="submit" class="btn btn-raised btn-primary" translate>
                 Submit

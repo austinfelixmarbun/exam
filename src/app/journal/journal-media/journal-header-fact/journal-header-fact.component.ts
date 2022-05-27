@@ -66,8 +66,6 @@ export class JournalHeaderFactComponent implements OnInit {
           Key: item.MasterCode,
           Value: item.Descr,
         }));
-        console.log("ngonint");
-        console.log(this.ddlFactTypeGenericList);
         this.getData();
         this.ddlFactTypeIsReady = true;
       }
@@ -134,8 +132,6 @@ export class JournalHeaderFactComponent implements OnInit {
           this.SubsystemDesc = response.SubSystem
           this.TransactionTypeCode = response.TrxTypeCode
           this.TransactionDescription = response.TrxDesc
-          console.log('Print ddlGeneric');
-console.log(this.ddlFactTypeGenericList);
           let list = response.ListJrMHeaderFact;
           list.forEach(x => {
             this.listHeaderFact.push({

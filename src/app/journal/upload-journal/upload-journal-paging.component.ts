@@ -37,9 +37,6 @@ export class UploadJournalPagingComponent implements OnInit {
             const contentType = response['ContentType'];
             const fileName = response['FileDownloadName'];
             const blob = base64StringToBlob(b64Data.toString(), contentType);
-
-            console.log("response dr BE")
-            console.log(response)
             saveAs(blob, fileName);
           }
         );

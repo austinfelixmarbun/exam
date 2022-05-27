@@ -1058,6 +1058,7 @@ export class UrlConstantNew{
 
     // JOURNAL
     public RerunJournal = this.url.RerunJournal;
+    public RerunJournalLog = this.url.RerunJournalLog;
     public DownloadJournalFile = this.env.FoundationR3Url + this.url.DownloadJournalFile;
     public GetJrSourceFileByJrSourceFileId = this.env.FoundationR3Url + this.url.GetJrSourceFileByJrSourceFileId;
     public GetJrMHeaderAndJrMGroupByJrMHeaderId = this.env.FoundationR3Url + this.url.GetJrMHeaderAndJrMGroupByJrMHeaderId;
@@ -1072,6 +1073,7 @@ export class UrlConstantNew{
     public AddJrMHeader = this.env.FoundationR3Url + this.url.AddJrMHeader;
     public GetJournalResultByJrMsgHId = this.env.FoundationR3Url + this.url.GetJournalResultByJrMsgHId;
     public UploadJournalFile = this.env.FoundationR3Url + this.url.UploadJournalFile;
+    public GetJournalLogFailedByJournalLogId = this.env.FoundationR3Url + this.url.GetJournalLogFailedByJournalLogId;
 
     // Industry Type Category
     public AddEditIndustryTypeCategory = this.env.FoundationR3Url + this.url.AddEditIndustryTypeCategory;

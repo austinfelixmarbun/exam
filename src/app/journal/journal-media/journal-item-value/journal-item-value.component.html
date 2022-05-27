@@ -45,14 +45,14 @@
               <div class="form-group row">
                 <label class="col-md-2" translate>Item Value Alias</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="ItemAlias"
+                  <input type="text" class="form-control" formControlName="ItemAlias" [IsUpperCase]="false"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ItemValueForm.controls.ItemAlias.invalid }">
                   <lib-uc-show-errors [control]="ItemValueForm.controls.ItemAlias" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
                 <label class="col-md-2" translate>Item Value Property</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="ItemProperty"
+                  <input type="text" class="form-control" formControlName="ItemProperty" [IsUpperCase]="false"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && ItemValueForm.controls.ItemProperty.invalid }">
                   <lib-uc-show-errors [control]="ItemValueForm.controls.ItemProperty" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
@@ -105,8 +105,8 @@
 
             <div class="form-actions right">
               <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]"
-                [queryParams]="{JrMHeaderId: JrMHeaderId}">
-                <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Cancel</span>
+                [queryParams]="{JrMHeaderId: JrMHeaderId}" translate>
+                <i class="fa fa-arrow-circle-left"></i> Cancel
               </button>
               <button type="button" (click)="onSubmit()" class="btn btn-raised btn-primary" translate>
                 Submit

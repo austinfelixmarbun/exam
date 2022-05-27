@@ -9,34 +9,62 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class JournalResultComponent implements OnInit {
   JrMsgHId: number = null;
-  IsReady: boolean = false;
+  JournalLogFailedHId: number = null;
+  IsReadyJrMsgH: boolean = false;
+  IsReadyJournalLogFailedH: boolean = false;
 
   JrMsgH: any = {};
+  JournalLogFailedH: any = {};
+  JournalLogFailedD = [];
   ErrMsg = [];
   JrResult = [];
   constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.JrMsgHId = params['JrMsgHId']
-    })
-
-
-    this.http.post<any>(this.UrlConstantNew.GetJournalResultByJrMsgHId, {
-      Id: this.JrMsgHId
-    }).subscribe(res => {
-      this.JrMsgH = res.JrMsgH[0]
-      this.JrResult = res.JrResult
-
-      if ((this.JrMsgH.Status == 'ERROR' || this.JrMsgH.Status == 'NOT BALANCE') && this.JrMsgH.ErrMsg != null) {
-        this.ErrMsg = this.JrMsgH.ErrMsg.split(';')
+      if (params['JrMsgHId'] != null) {
+        this.JrMsgHId = params['JrMsgHId'];
+      }
+      if (params['JournalLogFailedHId'] != null) {
+        this.JournalLogFailedHId = params['JournalLogFailedHId'];
       }
 
-      this.IsReady = true;
-    },
-      error => {
+    })
 
-      })
+    if (this.JrMsgHId != null) {
+      this.http.post<any>(this.UrlConstantNew.GetJournalResultByJrMsgHId, {
+        Id: this.JrMsgHId
+      }).subscribe(res => {
+        this.JrMsgH = res.JrMsgH[0]
+        this.JrResult = res.JrResult
+
+        if ((this.JrMsgH.Status == 'ERROR' || this.JrMsgH.Status == 'NOT BALANCE') && this.JrMsgH.ErrMsg != null) {
+          this.ErrMsg = this.JrMsgH.ErrMsg.split(';')
+        }
+        this.IsReadyJrMsgH = true;
+      },
+        error => {
+
+        })
+    }
+    if (this.JournalLogFailedHId != null) {
+      this.http.post<any>(this.UrlConstantNew.GetJournalLogFailedByJournalLogId, {
+        Id: this.JournalLogFailedHId
+      }).subscribe(res => {
+        this.JrMsgH = res.JrMsgH
+        this.JrResult = res.JrResult
+        this.JrMsgH.JrTypeText = "JrNormal"
+
+        if ((this.JrMsgH.Status == 'ERROR' || this.JrMsgH.Status == 'NOT BALANCE') && this.JrMsgH.ErrMsg != null) {
+          this.ErrMsg = this.JrMsgH.ErrMsg.split(';')
+        }
+
+        this.IsReadyJournalLogFailedH = true;
+      },
+        error => {
+
+        })
+    }
   }
 
 }
