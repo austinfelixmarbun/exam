@@ -8,6 +8,11 @@
         "mainInfo": [
           {
             "type": "text",
+            "label": "Id Type:",
+            "property": "IdType"
+          },
+          {
+            "type": "text",
             "label": "Registration Number:",
             "property": "RegistrationNo"
           },
@@ -45,6 +50,16 @@
             "type": "text",
             "label": "Mobile Phone 2:",
             "property": "Mp2"
+          },
+          {
+            "type": "boolean",
+            "label": "Activity Status :",
+            "property": "IsActive"
+          },
+          {
+            "type": "boolean",
+            "label": "Is One Affiliate :",
+            "property": "IsOneAffiliate"
           },
           {
             "type": "text",
