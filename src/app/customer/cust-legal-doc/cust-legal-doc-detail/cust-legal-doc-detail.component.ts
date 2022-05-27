@@ -71,7 +71,6 @@ export class CustLegalDocDetailComponent implements OnInit {
     );
 
     if(this.Mode == "Edit"){
-      this.CustCompanyLegalDocForm.controls.MrLegalDocTypeCode.disable();
       this.httpClient.post(URLConstant.GetCustCompanyLegalDocByCustCompanyLegalDocId, {Id : this.CustCompanyLegalDocId}).subscribe(
         (response: CustCompanyLegalDocObj) => {
           this.CustCompanyLegalDocForm.patchValue({
