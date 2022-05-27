@@ -264,103 +264,19 @@
                       "property": "edit"
                     }
                   ]
-                }
               }
-          ]
-        },
-        {
-          "type" : "switch", 
-          "case" : [ 
+            },
             {
               "conditions" : [ 
                 {
                   "property" : "HierarchyLvl", 
                   "value" : "2",
-                  "restriction": "EQ"
-                }
-              ],
-                "result" : {
-                  "type": "url",
-                  "path" : "ASSET_MASTER_CHILD",
-                  "param" : [
-                    {
-                      "type": "AssetMasterId",
-                      "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "param",
-                      "property": "edit"
-                    }
-                  ]
-                }
-              }
-          ]
-        },
-        {
-          "type" : "switch", 
-          "case" : [ 
-            {
-              "conditions" : [ 
-                {
-                  "property" : "HierarchyLvl", 
-                  "value" : "3",
-                  "restriction": "EQ"
-                }
-              ],
-                "result" : {
-                  "type": "url",
-                  "path" : "ASSET_MASTER_CHILD",
-                  "param" : [
-                    {
-                      "type": "AssetMasterId",
-                      "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "param",
-                      "property": "edit"
-                    }
-                  ]
-                }
-              }
-          ]
-        },
-        {
-          "type" : "switch", 
-          "case" : [ 
-            {
-              "conditions" : [ 
-                {
-                  "property" : "HierarchyLvl", 
-                  "value" : "4",
-                  "restriction": "EQ"
-                }
-              ],
-                "result" : {
-                  "type": "url",
-                  "path" : "ASSET_MASTER_CHILD",
-                  "param" : [
-                    {
-                      "type": "AssetMasterId",
-                      "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "param",
-                      "property": "edit"
-                    }
-                  ]
-                }
-              }
-          ]
-        },
-        {
-          "type" : "switch", 
-          "case" : [ 
-            {
-              "conditions" : [ 
+                  "restriction": "GTE"
+                },
                 {
                   "property" : "HierarchyLvl", 
                   "value" : "5",
-                  "restriction": "EQ"
+                  "restriction": "LTE"
                 }
               ],
                 "result" : {
@@ -377,7 +293,7 @@
                     }
                   ]
                 }
-              }
+            }
           ]
         }
       ]
