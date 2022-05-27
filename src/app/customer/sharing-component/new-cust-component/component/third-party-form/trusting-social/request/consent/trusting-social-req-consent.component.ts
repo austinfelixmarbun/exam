@@ -15,6 +15,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from 'environments/environment';
 
 
 
@@ -160,7 +161,7 @@ export class TrustingSocialReqConsentComponent implements OnInit {
     };
     xhr.open('POST', this.UrlConstantNew.UploadConsentTrustingSocialV21, true);
     let value = this.cookieService.get('XSRF-TOKEN');
-    let token = this.DecryptString(value, this.UrlConstantNew.env.ChipperKeyCookie);
+    let token = this.DecryptString(value, environment.ChipperKeyCookie);
     xhr.setRequestHeader('AdInsKey', `${token}`);
     xhr.send(formData);
   }
