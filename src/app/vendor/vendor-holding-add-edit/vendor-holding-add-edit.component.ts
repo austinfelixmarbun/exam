@@ -97,7 +97,6 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
       this.getData();
-      console.log(this.VendorForm.controls.VendorCode.value);
       this.VendorForm.controls.VendorCode.disable();
     } else {
       if(this.MrVendorCategoryCode == 'SUPPLIER_HOLDING'){
