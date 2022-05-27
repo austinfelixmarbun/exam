@@ -96,8 +96,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
-      this.VendorForm.controls.VendorCode.disable();
       this.getData();
+      this.VendorForm.controls.VendorCode.disable();
     } else {
       if(this.MrVendorCategoryCode == 'SUPPLIER_HOLDING'){
         this.checkIsAutoFormNoFromSetting('SH');
@@ -323,8 +323,10 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorHoldingObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorHoldingObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
         this.vendorHoldingObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
-        this.vendorHoldingObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
-        this.vendorHoldingObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
+        if(this.result.controls != null){
+          this.vendorHoldingObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
+          this.vendorHoldingObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
+        }
         this.vendorHoldingObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorHoldingObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
