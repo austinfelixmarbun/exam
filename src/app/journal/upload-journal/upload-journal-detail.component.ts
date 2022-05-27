@@ -154,9 +154,6 @@ export class UploadJournalDetailComponent implements OnInit {
   }
 
   isEffectImmediately(event: any) {
-    console.log(event)
-    console.log('masuk checkbox')
-    console.log(this.businessDt)
     if (event) {
       this.UploadJournalFileForm.patchValue({
         Date: formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US')
@@ -165,7 +162,6 @@ export class UploadJournalDetailComponent implements OnInit {
     } else {
       this.UploadJournalFileForm.controls["Date"].enable();
     }
-    console.log(this.UploadJournalFileForm)
   }
 
   onChange(event: any) {
@@ -299,7 +295,7 @@ export class UploadJournalDetailComponent implements OnInit {
     xhr.onreadystatechange = evnt => {
       // console.log("onready");
       if (xhr.readyState === 4) {
-        if (xhr.status !== 200 && xhr.status !== 201) {
+        if (xhr.status !== 200 && xhr.status !== 201 || xhr.responseText.indexOf("Error:") >= 0) {
           isError = true;
           this.progressBarShow = false;
           this.uploadBtn = false;
@@ -388,6 +384,7 @@ export class UploadJournalDetailComponent implements OnInit {
       if (xhr.responseText.indexOf("Error:") >= 0) {
         var errMessage = JSON.parse(xhr.responseText)
         this.toastr.errorMessage(errMessage)
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
       }
       else if (xhr.responseText.indexOf("Success") >= 0) {
         this.toastr.successMessage('File was uploaded successfully');

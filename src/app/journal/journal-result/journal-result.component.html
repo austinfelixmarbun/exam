@@ -1,4 +1,4 @@
-<div class="col-md-12" *ngIf="IsReady">
+<div class="col-md-12">
   <div class="card">
     <div class="card-body">
       <div class="card-header header-title">
@@ -21,18 +21,31 @@
             <label class="col-md-4" translate>{{ JrMsgH.OfficeCode }}</label>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row" *ngIf="IsReadyJrMsgH">
             <label class="col-md-2" translate>Journal No</label>
             <label class="col-md-4" translate>{{ JrMsgH.JrNo }}</label>
             <label class="col-md-2" translate>Trasaction No</label>
             <label class="col-md-4" translate>{{ JrMsgH.TrxNo }}</label>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row" *ngIf="IsReadyJournalLogFailedH">
+            <label class="col-md-2" translate>Journal No</label>
+            <label class="col-md-4" translate>{{ JrMsgH.JrNo }}</label>
+            <label class="col-md-2" translate>Trasaction No</label>
+            <label class="col-md-4" translate>{{ JrMsgH.RefNo }}</label>
+          </div>
+
+          <div class="form-group row" *ngIf="IsReadyJrMsgH">
             <label class="col-md-2" translate>Posting Date</label>
             <label class="col-md-4" translate>{{ JrMsgH.PostingDate | date: 'dd-MMM-yyyy'}}</label>
             <label class="col-md-2" translate>Value Date</label>
             <label class="col-md-4" translate>{{ JrMsgH.ValueDate | date: 'dd-MMM-yyyy'}}</label>
+          </div>
+          <div class="form-group row" *ngIf="IsReadyJournalLogFailedH">
+            <label class="col-md-2" translate>Posting Date</label>
+            <label class="col-md-4" translate>{{ JrMsgH.PostingDt | date: 'dd-MMM-yyyy'}}</label>
+            <label class="col-md-2" translate>Value Date</label>
+            <label class="col-md-4" translate>{{ JrMsgH.ValueDt | date: 'dd-MMM-yyyy'}}</label>
           </div>
 
           <div class="form-group row">
@@ -102,7 +115,7 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngIf="IsReadyJrMsgH">
                 <tr *ngFor="let item of JrResult;let i = index">
                   <td class="text-left">{{ item.LineDescription }}</td>
                   <td class="text-center">{{ item.PayAllocCode }}</td>
@@ -112,6 +125,21 @@
                   <td class="text-right">{{ item.OriginAmount | number:'1.2-2' }}</td>
                   <td class="text-right"><span *ngIf="item.DC == 'D'">{{ item.Amount | number:'1.2-2' }}</span></td>
                   <td class="text-right"><span *ngIf="item.DC == 'C'">{{ item.Amount | number:'1.2-2' }}</span></td>
+                </tr>
+                <tr *ngIf="JrResult.length == 0">
+                  <td colspan="100%" translate>No Data Available</td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="IsReadyJournalLogFailedH">
+                <tr *ngFor="let item of JrResult;let i = index">
+                  <td class="text-left">{{ item.LineDescription }}</td>
+                  <td class="text-center">{{ item.PayAllocCode }}</td>
+                  <td class="text-center">{{ item.CoaBranch }}</td>
+                  <td class="text-center">{{ item.Coa }}</td>
+                  <td class="text-left">{{ item.OriginCurrCode }} - {{ item.CurrRate | number:'1.2-2'}}</td>
+                  <td class="text-right">{{ item.OriginAmt | number:'1.2-2' }}</td>
+                  <td class="text-right"><span *ngIf="item.Dc == 'D'">{{ item.Amount | number:'1.2-2' }}</span></td>
+                  <td class="text-right"><span *ngIf="item.Dc == 'C'">{{ item.Amount | number:'1.2-2' }}</span></td>
                 </tr>
                 <tr *ngIf="JrResult.length == 0">
                   <td colspan="100%" translate>No Data Available</td>

@@ -28,7 +28,6 @@ export class FailedJournalListPagingComponent implements OnInit {
   ngOnInit() {
     this.ucTempPagingObj.urlJson = "./assets/ucpaging/journal/paging-failed-journal-result-list.json";
     this.ucTempPagingObj.pagingJson = "./assets/ucpaging/journal/paging-failed-journal-result-list.json";
-    this.ucTempPagingObj.apiQryPaging = this.UrlConstantNew.GetJournalResultPagingObjectBySQL;
   }
 
   CallBack(ev: any) {
@@ -37,18 +36,17 @@ export class FailedJournalListPagingComponent implements OnInit {
 
   RerunJournal() {
     var req = [];
-    if(this.listTemp.length == 0)
-    {
+    if(this.listTemp.length == 0) {
       this.toastr.warningMessage(ExceptionConstant.SELECT_ONE_JOURNAL);
       return
     }
     for (let i = 0; i < this.listTemp.length; i++) {
       if (!req.some(x => x == this.listTemp[i].JrNo)) {
-        req.push(this.listTemp[i].JrNo)
+        req.push(this.listTemp[i].JournalLogFailedHId)
       }
     }
 
-    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
+    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournalLog, {
       ListTransactionNo: req
     }, AdInsConstant.SpinnerOptions).subscribe(
       res => {

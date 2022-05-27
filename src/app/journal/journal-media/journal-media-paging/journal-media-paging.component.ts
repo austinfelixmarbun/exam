@@ -30,7 +30,7 @@ export class JournalMediaPagingComponent implements OnInit {
     let row = ev.RowObj
 
     if (key == 'delete') {
-      this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + '/Journal/DeleteJrMHeader', { JrMHeaderId: row.JrMHeaderId }).subscribe(
+      this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + '/v1' + '/Journal/DeleteJrMHeader', { JrMHeaderId: row.JrMHeaderId }).subscribe(
         response => {
           this.toastr.successMessage('Successfully remove TrxTypeCode: ' + response);
 

@@ -1,8 +1,8 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="addButton" (click)="RerunJournal()" translate>
+    <!-- <button type="button" visible ="false" class="addButton" (click)="RerunJournal()" translate>
       Rerun Journal
-    </button>
+    </button> -->
   </span>
 </div>
-<lib-ucaddtotemp [tempPagingObj]="ucTempPagingObj" (callback)="CallBack($event)"></lib-ucaddtotemp>
+<lib-ucpaging *ngIf="isReady" [searchObj]="inputPagingObj"></lib-ucpaging>

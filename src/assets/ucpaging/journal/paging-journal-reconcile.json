@@ -20,9 +20,10 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": true,
+            "ddlType": "all",
             "isSelectOne": false,
             "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
-            "label": "Office Code",
+            "label": "Office Name",
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
@@ -84,6 +85,14 @@
             "datatype": "date"
         },
         {
+            "type": "textbox",
+            "name": "IIF(JMH.ARGMNT_NO = '','-',ISNULL(JMH.ARGMNT_NO,'-'))",
+            "id": "AgrmntNo",
+            "value": "",
+            "label": "Agreement No",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "dropdown",
             "name": "JMH.STATUS",
             "id": "StatusId",
@@ -91,7 +100,7 @@
             "placeholder": "Placeholder",
             "datatype": "text",
             "isFromURL": false,
-            "isSelectOne": false,
+            "ddlType": "all",
             "label": "Status",
             "items": [
                 {
@@ -139,6 +148,12 @@
         {
             "type": "sort",
             "position": "center",
+            "label": "Agreement No",
+            "name": "AgrmntNo"
+        },
+        {
+            "type": "sort",
+            "position": "center",
             "label": "Journal No",
             "name": "JMH.Jr_No"
         },
@@ -169,11 +184,6 @@
         {
             "type": "label",
             "position": "center",
-            "label": "Has Been Rerun"
-        },
-        {
-            "type": "label",
-            "position": "center",
             "label": "Detail"
         }
     ],
@@ -187,6 +197,11 @@
             "type": "text",
             "position": "center",
             "property": "OfficeCode"
+        },
+        {
+            "type": "text",
+            "position": "center",
+            "property": "AgrmntNo"
         },
         {
             "type": "text",
@@ -214,16 +229,11 @@
             "property": "Status"
         },
         {
-            "type": "text",
-            "position": "center",
-            "property": "HasBeenRerun"
-        },
-        {
             "type": "link",
             "position": "center",
             "property": "Detail",
             "target": "_blank",
-            "path": "/journal/journalresult",
+            "path": "/journalview/journalresult",
             "param": [
                 {
                     "type": "JrMsgHId",
