@@ -346,7 +346,9 @@ export class SystemUserAddComponent implements OnInit {
       this.RefEmpForm.patchValue({
         JoinDt: ''
       });
+      return false;
     }
+    return true;
   }
 
   convertToMMddyyyy(dt: Date) {
@@ -354,6 +356,9 @@ export class SystemUserAddComponent implements OnInit {
   }
 
   SaveForm() {
+    if(!this.validateDate()) {
+      return;
+    }
     this.spinner.show();
     var refEmpFormData = this.RefEmpForm.value;
 
