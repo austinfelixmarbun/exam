@@ -287,12 +287,27 @@ export class VendorEmployeeComponent implements OnInit {
 
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
+      this.SetValidatorsIfNpwpCheck(true);
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
     } else {
+      this.SetValidatorsIfNpwpCheck(false);
       this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.isHidden = true;
+    }
+  }
+
+  SetValidatorsIfNpwpCheck(isNpwp: boolean){
+    this.VendorEmpForm.get("TaxIdNo").setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+    this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
+    this.VendorEmpForm.get("TaxpayerName").clearValidators();
+    this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
+    if(isNpwp){
+      this.VendorEmpForm.get("TaxIdNo").setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15), Validators.required]);
+      this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
+      this.VendorEmpForm.get("TaxpayerName").setValidators(Validators.required);
+      this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
     }
   }
 
