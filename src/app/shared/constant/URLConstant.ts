@@ -161,6 +161,7 @@ export class URLConstant {
     //REF-ROLE
     public static GetRefRolePaging = environment.FoundationR3Url + "/v1" + "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/AddRefRole";
+    public static AddRefRoleV2 = environment.FoundationR3Url + "/v2" + "/RefRole/AddRefRoleV2";
     public static EditRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/EditRefRole";
     public static DeleteRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/DeleteRefRole";
     public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/v1" + "/RefRole/GetRefRoleById";

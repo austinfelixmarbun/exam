@@ -72,7 +72,7 @@ export class RoleAddEditComponent implements OnInit {
       this.refRoleObj.RoleCode = this.RefRoleForm.controls["RoleCode"].value
       this.refRoleObj.RoleName = this.RefRoleForm.controls["RoleName"].value;
       this.refRoleObj.IsActive = this.RefRoleForm.controls["IsActive"].value;
-      this.http.post(this.UrlConstantNew.AddRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddRefRoleV2, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });

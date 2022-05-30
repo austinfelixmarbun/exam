@@ -160,6 +160,7 @@ export class UrlConstantNew{
     //REF-ROLE
     public GetRefRolePaging = this.env.FoundationR3Url + this.url.GetRefRolePaging;
     public AddRefRole = this.env.FoundationR3Url + this.url.AddRefRole;
+    public AddRefRoleV2 = this.env.FoundationR3Url + this.url.AddRefRoleV2;
     public EditRefRole = this.env.FoundationR3Url + this.url.EditRefRole;
     public DeleteRefRole = this.env.FoundationR3Url + this.url.DeleteRefRole;
     public GetRefRoleByRefRoleId = this.env.FoundationR3Url + this.url.GetRefRoleByRefRoleId;
