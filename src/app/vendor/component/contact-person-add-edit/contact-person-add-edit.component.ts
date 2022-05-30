@@ -156,7 +156,9 @@ export class ContactPersonAddEditComponent implements OnInit {
       this.ContactPersonForm.patchValue({
         JoinDt: ''
       });
+      return false;
     }
+    return true;
   }
 
   convertToMMddyyyy(dt: Date) {
@@ -164,6 +166,9 @@ export class ContactPersonAddEditComponent implements OnInit {
   }
 
   SaveForm() {
+    if(!this.validateDate()) {
+      return;
+    }
     if (this.mode == "edit") {
       this.contactPersonObj = new VendorContactPersonObj();
       this.contactPersonObj.VendorContactPersonId = this.VendorContactPersonId;
