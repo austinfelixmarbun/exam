@@ -834,7 +834,7 @@
     "GetListActiveRefMasterDDL": "/RefMaster/GetListKeyValueActiveByCode",
     "GetListActiveRefMasterOrderSeqNoDDL": "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo",
     "GetListKeyValueActiveByCodeOrderBySeqNoDDL": "/RefMaster/GetListKeyValueActiveByCodeOrderBySeqNo",
-    "DeleteRefForm": "/MenuManagement/DeleteRefForm",
+    "DeleteRefForm": "/v1/RefForm/DeleteRefForm",
     "DeleteRefProfession": "/RefProfession/DeleteRefProfession",
     "GetListUploadSettingDByUploadSettingHId": "/UploadSetting/GetListUploadSettingDByUploadSettingHId",
     "DeleteRangeVendorAttrContentByIds": "/VendorAttrContent/DeleteRangeVendorAttrContentByIds",

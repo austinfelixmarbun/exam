@@ -18,7 +18,7 @@ export class RefFormPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefForm.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefForm.json";
-    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteRefFormData;
+    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteRefForm;
     
   }
 }

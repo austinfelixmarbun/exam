@@ -284,7 +284,7 @@ export class UrlConstantNew{
     public GetRefFormByRefFormId = this.env.FoundationR3Url + this.url.GetRefFormByRefFormId;
     public EditRefForm = this.env.FoundationR3Url + this.url.EditRefForm;
     public AddRefForm = this.env.FoundationR3Url + this.url.AddRefForm;
-    public DeleteRefForm = this.url.DeleteRefForm;
+    public DeleteRefForm = this.env.FoundationR3Url + this.url.DeleteRefForm;
     public AssignRoleToForms = this.env.FoundationR3Url + this.url.AssignRoleToForms;
     public GetAllAuthFormsByRefRoleId = this.env.FoundationR3Url + this.url.GetAllAuthFormsByRefRoleId;
     public GetAuthByRefFormIdAndRefRoleId = this.env.FoundationR3Url + this.url.GetAuthByRefFormIdAndRefRoleId;
@@ -911,7 +911,7 @@ export class UrlConstantNew{
     public AddRefFormData = this.env.FoundationR3Url + this.url.AddRefFormData;
     public GetRefFormDataByRefFormId = this.env.FoundationR3Url + this.url.GetRefFormDataByRefFormId;
     public GetTemplateIcon = this.env.FoundationR3Url + this.url.GetTemplateIcon;
-    public DeleteRefFormData = this.url.DeleteRefFormData;
+    public DeleteRefFormData = this.env.FoundationR3Url + this.url.DeleteRefFormData;
 
     // AUTH FORM
     public AddListAuthForm = this.env.FoundationR3Url + this.url.AddListAuthForm;
