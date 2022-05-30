@@ -841,7 +841,7 @@
     "DeleteCustAddr": "/CustAddr/DeleteCustAddr",
     "DeleteCustPersonalContactPerson": "/CustPersonalContactPerson/DeleteCustPersonalContactPerson",
     "DeleteSrvyTask": "/SrvyTask/DeleteSrvyTask",
-    "DeleteRefFormData": "/RefForm/DeleteRefForm",
+    "DeleteRefFormData": "/v1/RefForm/DeleteRefForm",
     "GetSchemesByCategoryId": "/Approval/GetSchemesByCategoryId",
     "ReturnLevel": "/Approval/ReturnLevel",
     "ContinueToLevel": "/Approval/ContinueToLevel",
