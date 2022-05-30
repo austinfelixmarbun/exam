@@ -326,7 +326,9 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorEmpForm.patchValue({
         JoinDt: ''
       });
+      return false;
     }
+    return true;
   }
 
   convertToMMddyyyy(dt: Date) {
@@ -334,14 +336,8 @@ export class VendorEmployeeComponent implements OnInit {
   }
 
   SaveForm() {
-    var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
-    joinDt.setHours(0, 0, 0, 0);
-    var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    var businessDt = new Date(currentUserContext[CommonConstant.BUSINESS_DT]);
-    businessDt.setHours(0, 0, 0, 0);
-    if (joinDt > businessDt) {
-      this.toastr.warningMessage("Join Date Cannot Exceed Business Date");
-      return false;
+    if(!this.validateDate()) {
+      return;
     }
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpNo = this.VendorEmpForm.controls.VendorEmpCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpName = this.VendorEmpForm.controls.VendorEmpName.value;
