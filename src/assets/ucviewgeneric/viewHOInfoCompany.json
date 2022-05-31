@@ -51,9 +51,9 @@
             "property": "MobilePhnNo2"
           },
           {
-            "type": "text",
-            "label": "Supplier Bad Status",
-            "property": "SupplierBadStatus"
+            "type": "boolean",
+            "label": "Is One Affiliate",
+            "property": "IsOneAffiliate"
           }
         ],
         "querystring": {
