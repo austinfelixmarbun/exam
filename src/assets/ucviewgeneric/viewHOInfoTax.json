@@ -11,7 +11,7 @@
             "property": "TaxCalcMethod"
           },
           {
-            "type": "text",
+            "type": "boolean",
             "label": "VAT",
             "property": "Vat"
           },
@@ -39,6 +39,11 @@
             "type": "text",
             "label": "Tax Address",
             "property": "Addr"
+          },
+          {
+            "type": "text",
+            "label": "RT / RW",
+            "property": "RtRw"
           },
           {
             "type": "text",
