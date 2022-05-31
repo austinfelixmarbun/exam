@@ -12,6 +12,11 @@
                 },
                 {
                     "type": "text",
+                    "label": "RT / RW",
+                    "property": "RtRw"
+                },
+                {
+                    "type": "text",
                     "label": "Zipcode",
                     "property": "Zipcode"
                 },
