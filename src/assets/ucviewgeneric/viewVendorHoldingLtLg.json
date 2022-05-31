@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "LatLongId",
-        "subSectionTitle": "Lat Long Info",
+        "subSectionTitle": "Latitude Longitude Info",
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {

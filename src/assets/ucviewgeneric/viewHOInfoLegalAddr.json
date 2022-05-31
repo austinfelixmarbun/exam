@@ -42,7 +42,7 @@
         },
         {
             "subSectionId": "HOLatLongId",
-            "subSectionTitle": "Lat Long Info",
+            "subSectionTitle": "Latitude Longitude Info",
             "mainInfoPath": "/Generic/GetDataViewBySQL",
             "mainInfo": [
                 {
