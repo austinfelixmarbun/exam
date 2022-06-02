@@ -1,12 +1,12 @@
 {
-  "title": "Supplier Grading Inquiry",
+  "title": "Vendor Grading Inquiry",
   "component": [
     {
       "type": "textbox",
       "name": "vdr.VENDOR_CODE",
       "id": "VendorCodeId",
       "value": "",
-      "label": "Supplier Code",
+      "label": "Vendor Code",
       "placeholder": "Placeholder"
     },
     {
@@ -14,7 +14,7 @@
       "name": "vdr.VENDOR_NAME",
       "id": "VendorNameId",
       "value": "",
-      "label": "Supplier Name",
+      "label": "Vendor Name",
       "placeholder": "Placeholder"
     },
     {
@@ -98,13 +98,13 @@
     {
       "type": "sort",
       "position": "center",
-      "label": "SUPPLIER CODE",
+      "label": "VENDOR CODE",
       "name": "vdr.VENDOR_CODE"
     },
     {
       "type": "sort",
       "position": "center",
-      "label": "SUPPLIER NAME",
+      "label": "VENDOR NAME",
       "name": "vdr.VENDOR_NAME"
     },
     {
