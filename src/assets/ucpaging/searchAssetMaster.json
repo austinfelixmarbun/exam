@@ -264,7 +264,7 @@
                       "property": "edit"
                     }
                   ]
-              }
+                }
             },
             {
               "conditions" : [ 
@@ -280,19 +280,19 @@
                 }
               ],
                 "result" : {
-                  "type": "url",
-                  "path" : "ASSET_MASTER_CHILD",
-                  "param" : [
-                    {
-                      "type": "AssetMasterId",
-                      "property": "AssetMasterId"
-                    },
-                    {
-                      "type": "param",
-                      "property": "edit"
-                    }
-                  ]
-                }
+                "type": "url",
+                "path" : "ASSET_MASTER_CHILD",
+                "param" : [
+                  {
+                    "type": "AssetMasterId",
+                    "property": "AssetMasterId"
+                  },
+                  {
+                    "type": "param",
+                    "property": "edit"
+                  }
+                ]
+              }
             }
           ]
         }

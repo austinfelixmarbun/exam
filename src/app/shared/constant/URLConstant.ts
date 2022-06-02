@@ -906,7 +906,7 @@ export class URLConstant {
     public static AddRefFormData = environment.FoundationR3Url + "/v1" + "/RefForm/AddRefForm";
     public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/v1" + "/RefForm/GetRefFormByRefFormId"
     public static GetTemplateIcon = environment.FoundationR3Url + "/v1" + "/RefForm/GetTemplateIcon";
-    public static DeleteRefFormData = "/RefForm/DeleteRefForm";
+    public static DeleteRefFormData = environment.FoundationR3Url + "/v1" + "/RefForm/DeleteRefForm";
 
     // AUTH FORM
     public static AddListAuthForm = environment.FoundationR3Url + "/v1" + "/AuthForm/AddListAuthForm";

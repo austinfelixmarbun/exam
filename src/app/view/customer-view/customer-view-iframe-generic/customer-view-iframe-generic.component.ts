@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-customer-view-iframe-generic',
