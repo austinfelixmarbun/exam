@@ -1,5 +1,5 @@
 {
-    "title": "Supplier Grading Approval",
+    "title": "Vendor Grading Approval",
     "exportExcel": false,
     "component": [
       {
@@ -16,7 +16,7 @@
         "name": "V.VENDOR_CODE",
         "id": "VendorCode",
         "value": "",
-        "label": "Supplier Code",
+        "label": "Vendor Code",
         "placeholder": "Placeholder"
       },
       {
@@ -24,7 +24,7 @@
         "name": "V.VENDOR_NAME",
         "id": "VendorName",
         "value": "",
-        "label": "Supplier Name",
+        "label": "Vendor Name",
         "placeholder": "Placeholder"
       }
     ],
@@ -41,13 +41,13 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "Supplier Code",
+        "label": "Vendor Code",
         "name": "V.VENDOR_CODE"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Supplier Name",
+        "label": "Vendor Name",
         "name": "V.VENDOR_NAME"
       },
       {
