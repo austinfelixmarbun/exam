@@ -39,8 +39,8 @@
     },
     {
       "type": "dropdown",
-      "name": "rm.DESCR",
-      "id": "MrVendorCategoryCode",
+      "name": "rm.MASTER_CODE",
+      "id": "MrVendorCategoryDescr",
       "value": "",
       "placeholder": "Placeholder",
       "datatype": "text",
@@ -112,7 +112,7 @@
     {
       "type": "text",
       "position": "center",
-      "property": "MrVendorCategoryCode"
+      "property": "MrVendorCategoryDescr"
     },
     {
       "type": "text",
