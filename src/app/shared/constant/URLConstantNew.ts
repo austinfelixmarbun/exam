@@ -554,6 +554,7 @@ export class UrlConstantNew{
     public SubmitRequestVendorGrading = this.env.FoundationR3Url + this.url.SubmitRequestVendorGrading;
     public SubmitRequestVendorGradingV2 = this.env.FoundationR3Url + this.url.SubmitRequestVendorGradingV2;
     public GetRuleVendorGrading = this.env.FoundationR3Url + this.url.GetRuleVendorGrading;
+    public GetRuleVendorGradingV2 = this.env.FoundationR3Url + this.url.GetRuleVendorGradingV2;
     public GetVendorGrade = this.env.FoundationR3Url + this.url.GetVendorGrade;
 
     // VENDOR OFFICE MEMBER

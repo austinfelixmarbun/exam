@@ -16,6 +16,7 @@ import { NavigationConstant } from "app/shared/NavigationConstant";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { EnviConfigService } from "app/shared/services/enviConfig.service";
+import { ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj } from "app/shared/model/request/req-get-vendor-grading.model";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
@@ -123,6 +124,7 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     else { vendorId = ReqValue.VendorId }
 
     this.http.post(this.UrlConstantNew.GetVendorByVendorId, { Id: vendorId }).subscribe((response) => {
+      console.log(response);
       this.result = response;
       this.ParentId = this.result.VendorParentId;
       this.oldVendorRating = this.result.VendorRating;
@@ -161,9 +163,11 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
 
   async LoadGradingRule(vendorRating: number) {
-    await this.http.post(this.UrlConstantNew.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
+    let reqObj = new ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj();
+    reqObj.VendorRating = vendorRating;
+    reqObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
+    await this.http.post(this.UrlConstantNew.GetRuleVendorGradingV2, reqObj).toPromise().then(
       (response) => {
-
         this.gradeCode = response["VendorGrade"];
       }
     );

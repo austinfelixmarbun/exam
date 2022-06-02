@@ -399,6 +399,7 @@
     "SubmitRequestVendorGrading": "/v1/VendorGrading/SubmitRequestVendorGrading",
     "SubmitRequestVendorGradingV2": "/v2/VendorGrading/SubmitRequestVendorGrading",
     "GetRuleVendorGrading": "/v1/VendorGrading/GetRuleVendorGrading",
+    "GetRuleVendorGradingV2": "/v2/VendorGrading/GetRuleVendorGrading",
     "GetVendorGrade": "/v1/VendorGrading/GetVendorGrade",
     "AddListVendorOfficeMember": "/v1/VendorOfficeMbr/AddListVendorOfficeMember",
     "GetListVendorOfficeMbrByVendorId": "/v1/VendorOfficeMbr/GetListVendorOfficeMbrByVendorId",
