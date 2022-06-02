@@ -48,7 +48,7 @@
       "ddlType": "all",
       "url": "",
       "path": "/RefMaster/GetListKeyValueActiveByCode",
-      "label": "Type",
+      "label": "Vendor Category",
       "criteriaPropName": "RefMasterTypeCode",
       "criteriaPropValue": "VENDOR_CATEGORY",
       "items": [],
