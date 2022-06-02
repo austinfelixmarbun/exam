@@ -39,6 +39,7 @@
       "name": "hist.REQ_DT",
       "id": "ReqDtGte",
       "value": "1999-01-01",
+      "maxDate" : "31-Dec-9999",
       "restriction": "gte",
       "placeholder": "",
       "datatype": "date"
@@ -49,6 +50,7 @@
       "name": "hist.REQ_DT",
       "id": "ReqDtLte",
       "value": "2100-01-01",
+      "maxDate" : "31-Dec-9999",
       "restriction": "lte",
       "placeholder": "",
       "datatype": "date"
