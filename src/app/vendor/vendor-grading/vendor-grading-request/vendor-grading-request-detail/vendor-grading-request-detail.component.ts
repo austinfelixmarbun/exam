@@ -15,6 +15,7 @@ import { UcInputRFAObj } from "app/shared/model/uc-input-rfa-obj.model";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
+import { ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj } from "app/shared/model/request/req-get-vendor-grading.model";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
@@ -158,9 +159,11 @@ export class VendorGradingRequestDetailComponent implements OnInit {
   }
 
   async LoadGradingRule(vendorRating: number) {
-    await this.http.post(URLConstant.GetRuleVendorGrading, { VendorRating: vendorRating }).subscribe(
+    let reqObj = new ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj();
+    reqObj.VendorRating = vendorRating;
+    reqObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
+    await this.http.post(URLConstant.GetRuleVendorGradingV2, reqObj).toPromise().then(
       (response) => {
-
         this.gradeCode = response["VendorGrade"];
       }
     );
