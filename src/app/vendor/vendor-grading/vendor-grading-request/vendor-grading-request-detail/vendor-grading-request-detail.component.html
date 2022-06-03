@@ -19,14 +19,14 @@
             </lib-ucSubsection>
             <div class="form-body" id="VendorInformation">
               <div [hidden]="mode === 'add'" class="form-group row">
-                <label class="col-md-3 adInsLabel">Supplier Code</label>
+                <label class="col-md-3 adInsLabel">Vendor Code</label>
                 <div class="col-md-9">
                   <label class="adInsLabel" translate>{{vendorCode}}</label>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 adInsLabel">Supplier Name</label>
+                <label class="col-md-3 adInsLabel">Vendor Name</label>
                 <div [hidden]="mode === 'edit'" class="col-md-3" *ngIf="inputLookupParentObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="inputLookupParentObj" [parentForm]="VendorForm"
                     [enjiForm]="enjiForm" [identifier]="'lookupVendor'" (lookup)="getLookupParent($event)">
