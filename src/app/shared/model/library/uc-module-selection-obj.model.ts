@@ -1,6 +1,5 @@
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NavigationConstant } from "app/shared/NavigationConstant";
-import { environment } from "environments/environment";
 
 export class UcModuleSelectionObj {
     urlJson: string;
@@ -15,6 +14,7 @@ export class UcModuleSelectionObj {
         this.listApis['FOU_WEB'] = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.PAGES_LOGIN;
         this.listApis['LOS_WEB'] = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN;
         this.listApis['CMS_WEB'] = this.UrlConstantNew.env.cmsR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['AMS_WEB'] = this.UrlConstantNew.env.amsR3Web + NavigationConstant.PAGES_LOGIN;
         this.target = '_self';
     }
 }

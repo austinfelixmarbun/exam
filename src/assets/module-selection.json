@@ -26,6 +26,15 @@
             "desc": "Collection Management System",
             "module": "CMS_WEB",
             "baseColor": "#d24349"
+        },
+        {
+            "id": "AMS",
+            "title": "AMS",
+            "imgSrc": "",
+            "imgSrcUrl": "./assets/img/svg/icon-lms-module.svg",
+            "desc": "Asset Management System",
+            "module": "CMS_WEB",
+            "baseColor": "#12c66f"
         }
     ]
 }
