@@ -229,7 +229,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: ['', [Validators.required]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', Validators.pattern(CommonConstant.regexEmail)]
+      Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
+      
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {
@@ -244,6 +245,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       this.CustomerForm.get("MrCustModelCode").updateValueAndValidity();
     }
     if (this.CustDataMode == this.CustDataModeFamily) {
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").updateValueAndValidity();
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
     }
