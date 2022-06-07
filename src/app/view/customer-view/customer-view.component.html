@@ -6,7 +6,7 @@
 					<h4 class="form-section card-title" *ngIf="custType == 'PERSONAL'" translate>CUSTOMER PERSONAL</h4>
 					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
 					<div *ngIf="custType == 'PERSONAL'">
-						<app-customer-view-header-personal></app-customer-view-header-personal>
+						<app-customer-view-header-personal [CustNo]="CustNo"></app-customer-view-header-personal>
 						<mat-tab-group (selectedIndexChange)="mencuba($event)">
 							<mat-tab label="Main Data">
 							</mat-tab>
