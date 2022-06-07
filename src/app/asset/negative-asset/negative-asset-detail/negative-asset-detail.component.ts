@@ -251,7 +251,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   Back() {
-    this.location.back();
+    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
   }
 
   Save() {
