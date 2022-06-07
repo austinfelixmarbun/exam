@@ -75,7 +75,7 @@
         "name": "RM.DESCR"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Request By",
         "name": "RequestBy"
