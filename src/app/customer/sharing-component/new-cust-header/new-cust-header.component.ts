@@ -142,7 +142,7 @@ export class NewCustHeaderComponent implements OnInit {
     if (ev.CustObj.CustId != 0) {
       var reqPayload = this.separateFileUpload(ev);
       var resSave;
-      await this.http.post(this.SetUrlEditPersonal(), reqPayload.forApi).toPromise().then(
+      await this.http.post(this.SetUrlEditPersonal(), reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           resSave = response;
         }
@@ -159,7 +159,7 @@ export class NewCustHeaderComponent implements OnInit {
     if (ev.CustObj.CustId != 0) {
       var reqPayload = this.separateFileUpload(ev);
       var resSave;
-      await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi).toPromise().then(
+      await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           resSave = response;
         }
@@ -229,7 +229,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddCoy();
     var reqPayload = this.separateFileUpload(this.DupCheckCoyObj);
     var resSave: GenericObj;
-    await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
+    await this.http.post(urlAdd, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
       (response: GenericObj) => {
         resSave = response;
       }
@@ -241,7 +241,7 @@ export class NewCustHeaderComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddPersonal();
     var reqPayload = this.separateFileUpload(this.DupCheckPersonalObj);
     var resSave: GenericObj;
-    await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
+    await this.http.post(urlAdd, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
       (response: GenericObj) => {
         resSave = response
       }
@@ -335,7 +335,7 @@ export class NewCustHeaderComponent implements OnInit {
     if(environment.isCore){
       var reqPayload = this.separateFileUpload(reqEditDupCheck);
       var resSave: GenericObj;
-      await this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqPayload.forApi).toPromise().then(
+      await this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
         (response: GenericObj) => {
           resSave = response;
         }
@@ -364,7 +364,7 @@ export class NewCustHeaderComponent implements OnInit {
     if(environment.isCore){
       var reqPayload = this.separateFileUpload(reqEditDupCheck);
       var resSave: GenericObj;
-      await this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqPayload.forApi).toPromise().then(
+      await this.http.post(this.UrlConstantNew.NewEditDuplicateCustV2, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
         (response: GenericObj) => {
           resSave = response;
         }

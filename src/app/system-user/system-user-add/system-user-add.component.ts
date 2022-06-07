@@ -22,6 +22,7 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { HttpClient } from '@angular/common/http';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefUserRole } from 'app/shared/model/ref-user-role-obj.model';
 import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
 import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
