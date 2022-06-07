@@ -108,6 +108,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
+  readonly CustFromCustFamily: string = CommonConstant.CustFromCustFamily;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
