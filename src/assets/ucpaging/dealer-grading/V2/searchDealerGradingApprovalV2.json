@@ -54,7 +54,7 @@
         "type": "sort",
         "position": "center",
         "label": "Transaction No",
-        "name": "VendorGradingHistNo"
+        "name": "P.VENDOR_GRADING_HIST_NO"
       },
       {
         "type": "sort",
@@ -75,25 +75,25 @@
         "name": "RM.DESCR"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Request By",
         "name": "RequestBy"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Request Date",
         "name": "RequestDate"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Main User Id",
         "name": "MainUser"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Current User Id",
         "name": "CurrentUser"
