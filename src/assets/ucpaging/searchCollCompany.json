@@ -23,7 +23,7 @@
             "id": "VendorRatingGteId",
             "value": 0,
             "label": "Rating >=",
-            "restriction": "gte",
+            "restriction": "GTE",
             "datatype": "numeric",
             "placeholder": "Placeholder"
         },
@@ -33,7 +33,7 @@
             "id": "VendorRatingLteId",
             "value": 100,
             "label": "Rating <=",
-            "restriction": "lte",
+            "restriction": "LTE",
             "datatype": "numeric",
             "placeholder": "Placeholder"
         },
