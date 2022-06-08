@@ -243,11 +243,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       this.CustomerForm.get("MrCustModelCode").clearValidators();
       this.CustomerForm.get("MrCustModelCode").updateValueAndValidity();
     }
-    if (this.CustDataMode == this.CustDataModeFamily || this.pageFrom == CommonConstant.CustFromCustFamily) {
-      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
-      this.CustomerForm.get("Email1").updateValueAndValidity();
+    if (this.CustDataMode == this.CustDataModeFamily) {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
+    }
+    if(this.pageFrom == CommonConstant.CustFromCustFamily){
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").updateValueAndValidity();
     }
   }
   //#endregion
