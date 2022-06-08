@@ -245,11 +245,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       this.CustomerForm.get("MrCustModelCode").clearValidators();
       this.CustomerForm.get("MrCustModelCode").updateValueAndValidity();
     }
-    if (this.CustDataMode == this.CustDataModeFamily || this.pageFrom == CommonConstant.CustFromCustFamily) {
-      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
-      this.CustomerForm.get("Email1").updateValueAndValidity();
+    if (this.CustDataMode == this.CustDataModeFamily) {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
+    }
+    if(this.pageFrom == CommonConstant.CustFromCustFamily){
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").updateValueAndValidity();
     }
   }
   //#endregion
@@ -633,7 +635,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
-
+    
     reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
     reqSubmitObj.CustPersonalObj.MrGenderCode = tempForm["MrGenderCode"];
