@@ -14,10 +14,11 @@ export class UcInputApprovalObj {
     RequestId: number;
     PathUrlGetHistory: string;
     TrxNo: string;
+    EnableRequiredNotes: boolean;
     constructor(private UrlConstantNew: UrlConstantNew) { 
         this.TaskId = 0;
         this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
-        this.PathUrlGetLevelVoting = this.UrlConstantNew.GetLevelVoting; //pindah ke adins.constant
+        this.PathUrlGetLevelVoting = this.UrlConstantNew.GetLevelVoting;
         this.PathUrlGetPossibleResult = this.UrlConstantNew.GetPossibleResult;
         this.PathUrlSubmitApproval = this.UrlConstantNew.SubmitApproval;
         this.PathUrlGetNextNodeMember = this.UrlConstantNew.GetNextNodeMember;
@@ -28,5 +29,6 @@ export class UcInputApprovalObj {
         this.TrxNo = "";
         this.RequestId = 0;
         this.PathUrlGetHistory = this.UrlConstantNew.GetTaskHistory;
+        this.EnableRequiredNotes = true;
     }
 }  
