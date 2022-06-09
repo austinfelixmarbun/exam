@@ -15,6 +15,7 @@ export class UcInputApprovalObj {
     RequestId: number;
     PathUrlGetHistory: string;
     TrxNo: string;
+    EnableRequiredNotes: boolean;
     constructor() { 
         this.TaskId = 0;
         this.EnvUrl = environment.FoundationR3Url + "/v1";
@@ -29,5 +30,6 @@ export class UcInputApprovalObj {
         this.TrxNo = "";
         this.RequestId = 0;
         this.PathUrlGetHistory = URLConstant.GetTaskHistory;
+        this.EnableRequiredNotes = true;
     }
 }  
