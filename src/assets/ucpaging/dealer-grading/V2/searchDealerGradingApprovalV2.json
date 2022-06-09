@@ -75,12 +75,6 @@
         "name": "RM.DESCR"
       },
       {
-        "type": "sort",
-        "position": "center",
-        "label": "VENDOR CATEGORY",
-        "name": "RM.DESCR"
-      },
-      {
         "type": "label",
         "position": "center",
         "label": "Request By",
