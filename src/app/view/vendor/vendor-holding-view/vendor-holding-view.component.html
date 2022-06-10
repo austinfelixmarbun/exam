@@ -90,34 +90,6 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab label="Group Info">
-    <ng-template matTabContent>
-      <div style="overflow-x: auto;">
-        <table class="table table-responsive-md text-center table-hover">
-          <thead>
-            <tr class="table-header">
-              <th class="text-left" translate>GROUP CODE</th>
-              <th class="text-left" translate>GROUP NAME</th>
-              <th class="text-left" translate>ACTIVE STATUS</th>
-            </tr>
-          </thead>
-          <tbody *ngIf = "VendorGrp?.length == 0">
-            <tr>
-              <td colspan="100%">No Data Available</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr *ngFor="let item of VendorGrp">
-              <td class="text-left">{{item.VendorGrpCode}}</td>
-              <td class="text-left">{{item.VendorGrpName}}</td>
-              <td class="text-left" *ngIf="item.IsActive == true">Yes</td>
-              <td class="text-left" *ngIf="item.IsActive == false">No</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </ng-template>
-  </mat-tab>
   <mat-tab label="HO Info">
     <ng-template matTabContent>
       <div style="overflow-x: auto;">
