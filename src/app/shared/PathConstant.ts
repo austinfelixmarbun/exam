@@ -439,6 +439,7 @@ export class PathConstant {
 
     //#region View-Module
     public static VIEW_CUST = "Customer";
+    public static VIEW_CUST_X = "Customer/X";
     public static VIEW_VENDOR = "Vendor";
     public static VIEW_NEG_CUST = "NegativeCustomer";
     public static VIEW_SRVY = "Survey";

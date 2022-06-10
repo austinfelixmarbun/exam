@@ -136,7 +136,7 @@ export class NavigationConstant {
     public static VIEW_APP = "/" + PathConstant.VIEW + "/" + PathConstant.VIEW_APP;
     public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
-    public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
+    public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST+"/"+PathConstantX.VIEW_CUST_X; //'View/Customer/X'
     public static VIEW_CUST_ADDR = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
     public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'

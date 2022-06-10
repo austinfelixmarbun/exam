@@ -15,7 +15,9 @@ import { UcviewgenericComponent, UcviewgenericModule } from "@adins/ucviewgeneri
 import { UcgridviewModule, UcgridviewComponent } from "@adins/ucgridview";
 import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewComponent } from "./customer-view.component";
+import { CustomerViewXComponent } from "app/impl/view/customer-view/customer-view-x.component";
 import { CustomerViewHeaderPersonalComponent } from "./customer-view-header-personal/customer-view-header-personal.component";
+import { CustomerViewHeaderPersonalXComponent } from "app/impl/view/customer-view/customer-view-header-personal/customer-view-header-personal-x.component";
 import { CustomerViewHeaderCompanyComponent } from "./customer-view-header-company/customer-view-header-company.component";
 import { CustomerViewRoutingModule } from "./customer-view-routing.module";
 import { CustomerViewIframeGenericComponent } from "./customer-view-iframe-generic/customer-view-iframe-generic.component";
@@ -48,7 +50,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
   ],
   declarations: [
    CustomerViewComponent,
+   CustomerViewXComponent,
    CustomerViewHeaderPersonalComponent,
+   CustomerViewHeaderPersonalXComponent,
    CustomerViewHeaderCompanyComponent,
    CustomerViewIframeGenericComponent
   ],
