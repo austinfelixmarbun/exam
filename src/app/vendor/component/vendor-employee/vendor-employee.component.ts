@@ -104,6 +104,9 @@ export class VendorEmployeeComponent implements OnInit {
     if (this.mode == "edit") {
       this.VendorEmpForm.controls["VendorEmpCode"].disable();
       await this.getData();
+      if(this.VendorBranchEmpObj.VendorEmpObj.IsInternalEmployee){
+        this.VendorEmpForm.controls["VendorEmpName"].disable();
+      }
       this.setLookup();
     } else {
       this.mode = "add";
@@ -223,6 +226,7 @@ export class VendorEmployeeComponent implements OnInit {
         VendorEmpCode: ev.EmpNo,
         VendorEmpName: ev.EmpName,
       });
+    this.VendorBranchEmpObj.VendorEmpObj.IsInternalEmployee = true;
     this.VendorEmpForm.controls["VendorEmpCode"].disable();
     this.VendorEmpForm.controls["VendorEmpName"].disable();
   }
@@ -257,6 +261,7 @@ export class VendorEmployeeComponent implements OnInit {
         this.inputLookupSpvObj.isReady = true;
         this.inputLookupZipcodeObj.isReady = true;
         this.VendorBranchEmpObj.VendorEmpObj.SupervisorId = this.resultVendorEmpAndAddr.VendorEmpObj.SupervisorId;
+        this.VendorBranchEmpObj.VendorEmpObj.IsInternalEmployee = this.resultVendorEmpAndAddr.VendorEmpObj.IsInternalEmployee;
         this.VendorBranchEmpObj.VendorAddrObj.Zipcode = this.resultVendorEmpAndAddr.VendorAddrObj.Zipcode;
         this.VendorEmpForm.patchValue({
           VendorEmpCode: this.resultVendorEmpAndAddr.VendorEmpObj.VendorEmpNo,
