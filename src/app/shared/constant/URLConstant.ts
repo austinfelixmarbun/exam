@@ -1172,6 +1172,6 @@ export class URLConstant {
   public static GetListRefTaxOfficeActive = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetListRefTaxOfficeActive";
 
   // APP_X - GET CUST STATUS
-  public static GetAppCustStatusXByCustNo = environment.losUrl + "/v1" + "/AppX/GetCustStatusByCustNo";
+  public static GetAppCustStatusXByCustNo = environment.LosURL + "/v1" + "/AppX/GetCustStatusByCustNo";
 }
 
