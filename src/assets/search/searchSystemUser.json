@@ -85,12 +85,12 @@
         {
             "type": "label",
             "position": "center",
-            "label": "Business Unit"
+            "label": "Edit"
         },
         {
             "type": "label",
             "position": "center",
-            "label": "Action"
+            "label": "Action API Key"
         }
     ],
     "bodyList": [
@@ -125,26 +125,6 @@
             "action": [
                 {
                     "type": "edit",
-                    "path": "/Employee/EmployeeBusinessUnit/Paging",
-                    "param": [
-                        {
-                            "type": "RefUserId",
-                            "property": "RefUserId"
-                        },
-                        {
-                            "type":"mode",
-                            "property":"systemUser"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "action",
-            "position": "center",
-            "action": [
-                {
-                    "type": "edit",
                     "path": "/SystemUser/Detail",
                     "param": [
                         {
@@ -156,6 +136,26 @@
                             "property": "edit"
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "callback",
+                    "key":"generate",
+                    "property":"username",
+                    "icon" : "ft-settings",
+                    "tooltip":"Regenerate"
+                },
+                {
+                    "type":"callback",
+                    "key":"revoke",
+                    "property":"username",
+                    "icon" : "ft-x",
+                    "tooltip":"Revoke"
                 }
             ]
         }

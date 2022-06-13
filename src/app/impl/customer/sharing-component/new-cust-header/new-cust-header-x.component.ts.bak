@@ -19,9 +19,6 @@ import {ReqDupObj} from 'app/shared/model/new-cust/req-dup-obj.model';
 import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
 import {ReqNegDupObj} from 'app/shared/model/new-cust/req-neg-dup-obj.model';
 import {DupCheckOutputSaveObj} from 'app/shared/model/new-cust/dup-check-output-save-obj.model';
-import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj.model';
-import { CookieService } from 'ngx-cookie';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-new-cust-header-x',
@@ -56,7 +53,6 @@ export class NewCustHeaderXComponent implements OnInit {
   @Input() isShareholder: boolean =false;
 
   constructor(
-    private cookieService: CookieService, private spinner: NgxSpinnerService,
     private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
       if (params["CustId"] != null) {
@@ -151,16 +147,14 @@ export class NewCustHeaderXComponent implements OnInit {
 
   //#region Save
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
-  async ClickSavePersonal(ev: ReqPersonalObj) {
+  ClickSavePersonal(ev: ReqPersonalObj) {
     if (ev.CustObj.CustId != 0) {
-      var reqPayload = this.separateFileUpload(ev);
-      var resSave;
-      await this.http.post(this.SetUrlEditPersonal(), reqPayload.forApi).toPromise().then(
+      this.http.post(this.SetUrlEditPersonal(), ev).subscribe(
         (response) => {
-          resSave = response;
+          this.toastr.successMessage(response["Message"]);
+          this.redirectSaveEditMainData(ev.CustObj.CustId);
         }
       );
-      this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], ev.CustObj.CustId)
       return;
     }
     this.DupCheckPersonalObj = ev;
@@ -168,16 +162,14 @@ export class NewCustHeaderXComponent implements OnInit {
   }
 
   DupCheckCoyObj: ReqCoyObj = new ReqCoyObj();
-  async ClickSaveCoy(ev: ReqCoyObj) {
+  ClickSaveCoy(ev: ReqCoyObj) {
     if (ev.CustObj.CustId != 0) {
-      var reqPayload = this.separateFileUpload(ev);
-      var resSave;
-      await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi).toPromise().then(
+      this.http.post(this.SetUrlEditCoy(), ev).subscribe(
         (response) => {
-          resSave = response;
+          this.toastr.successMessage(response["Message"]);
+          this.redirectSaveEditMainData(ev.CustObj.CustId);
         }
       );
-      this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], ev.CustObj.CustId)
       return;
     }
     this.DupCheckCoyObj = ev;
@@ -238,28 +230,22 @@ export class NewCustHeaderXComponent implements OnInit {
     this.SaveCoyData();
   }
 
-  async SaveCoyData() {
+  SaveCoyData() {
     let urlAdd: string = this.SetUrlAddCoy();
-    var reqPayload = this.separateFileUpload(this.DupCheckCoyObj);
-    var resSave: GenericObj;
-    await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
+    this.http.post(urlAdd, this.DupCheckCoyObj).subscribe(
       (response: GenericObj) => {
-        resSave = response;
+        this.redirectSaveEditMainData(response.Id);
       }
     );
-    this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
   }
 
-  async SavePersonalData() {
+  SavePersonalData() {
     let urlAdd: string = this.SetUrlAddPersonal();
-    var reqPayload = this.separateFileUpload(this.DupCheckPersonalObj);
-    var resSave: GenericObj;
-    await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
+    this.http.post(urlAdd, this.DupCheckPersonalObj).subscribe(
       (response: GenericObj) => {
-        resSave = response
+        this.redirectSaveEditMainData(response.Id);
       }
     );
-    this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
   }
 
   SetUrlAddCoy(): string {
@@ -380,7 +366,7 @@ export class NewCustHeaderXComponent implements OnInit {
     this.EditCustCoy(item);
   }
 
-  async EditCustPersonal(item: CustDuplicateObj) {
+  EditCustPersonal(item: CustDuplicateObj) {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
@@ -396,14 +382,11 @@ export class NewCustHeaderXComponent implements OnInit {
     reqEditDupCheck.CustAttrContentObjs = this.DupCheckPersonalObj.CustAttrContentObjs;
     reqEditDupCheck.CustDocFileObjs = this.DupCheckPersonalObj.CustDocFileObjs;
     if(environment.isCore){
-      var reqPayload = this.separateFileUpload(reqEditDupCheck);
-      var resSave: GenericObj;
-      await this.http.post(URLConstant.NewEditDuplicateCustV2, reqPayload.forApi).toPromise().then(
+      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck).subscribe(
         (response: GenericObj) => {
-          resSave = response;
+          this.redirectSaveEditMainData(response.Id);
         }
       );
-      this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
     }else{
       this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
         (response: GenericObj) => {
@@ -413,7 +396,7 @@ export class NewCustHeaderXComponent implements OnInit {
     }
   }
 
-  async EditCustCoy(item: CustDuplicateObj) {
+  EditCustCoy(item: CustDuplicateObj) {
     let reqEditDupCheck: ReqDupObj = new ReqDupObj();
     reqEditDupCheck.CustNo = item.CustNo;
     reqEditDupCheck.CustDataMode = this.CustDataMode;
@@ -425,14 +408,11 @@ export class NewCustHeaderXComponent implements OnInit {
     reqEditDupCheck.CustDocFileObjs = this.DupCheckCoyObj.CustDocFileObjs;
 
     if(environment.isCore){
-      var reqPayload = this.separateFileUpload(reqEditDupCheck);
-      var resSave: GenericObj;
-      await this.http.post(URLConstant.NewEditDuplicateCustV2, reqPayload.forApi).toPromise().then(
+      this.http.post(URLConstant.NewEditDuplicateCustV2, reqEditDupCheck).subscribe(
         (response: GenericObj) => {
-          resSave = response;
+          this.redirectSaveEditMainData(response.Id);
         }
       );
-      this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
     }else{
       this.http.post(URLConstant.NewEditDuplicateCust, reqEditDupCheck).subscribe(
         (response: GenericObj) => {
@@ -522,77 +502,5 @@ export class NewCustHeaderXComponent implements OnInit {
         this.EditNegativeCust(ev.DuplicateNegativeObj);
         break;
     }
-  }
-
-  separateFileUpload(obj:any, prop:string='CustDocFileObjs')
-  {
-    var reqCustDocFileListObj: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>} = {CustId: 0, CustDocFileObjs:[]};
-    if(obj[prop])
-    {
-      reqCustDocFileListObj.CustDocFileObjs = obj[prop];
-      obj[prop] = []
-    }
-    return {forApi: obj, forUpload: reqCustDocFileListObj};
-  }
-
-  uploadDocFileMultipart(objDoc: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>} , successMsg:string, custId:number)
-  {
-    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId) 
-    {
-      this.toastr.successMessage(successMsg);
-      this.redirectSaveEditMainData(custId);
-      return;
-    }
-
-    if (environment.SpinnerOnHttpPost) this.spinner.show();
-
-    objDoc.CustId = custId;
-    var formData: any = new FormData();
-    formData.append('reqPayload', JSON.stringify(objDoc));
-    const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = evnt => {
-      if (xhr.readyState !== 4) return;
-
-      if (environment.SpinnerOnHttpPost) this.spinner.hide();
-      if (xhr.status !== 200 && xhr.status !== 201) {
-        this.toastr.errorMessage('Upload Failed !');
-        return;
-      }
-      else {
-        var response = JSON.parse(xhr.response);
-        if (response.HeaderObj.StatusCode != '200') {
-          this.toastr.errorMessage('Upload Failed ! '+  + response.HeaderObj.Message);
-          return
-        }
-      }
-
-      if (xhr.status === 200) {
-        this.toastr.successMessage(successMsg);
-        this.redirectSaveEditMainData(custId);
-        return;
-      }
-    };
-
-    xhr.onerror = evnt => {
-      this.toastr.errorMessage('Upload Failed !');
-      return;
-    };
-    xhr.open('POST', URLConstant.SaveCustDocFile21, true);
-    let value = this.cookieService.get('XSRF-TOKEN');
-    let token = this.DecryptString(value, environment.ChipperKeyCookie);
-    xhr.setRequestHeader('AdInsKey', `${token}`);
-    xhr.send(formData);
-  }
-
-  private DecryptString(chipperText: string, chipperKey: string) {
-    if (
-      chipperKey == undefined || chipperKey.trim() == '' ||
-      chipperText == undefined || chipperText.trim() == ''
-    ) return chipperText;
-    var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
-    var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
-    var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, { iv: iv });
-    var plainText = decrypted.toString(CryptoJS.enc.Utf8);
-    return plainText;
   }
 }

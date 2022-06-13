@@ -1,40 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
-import { environment } from 'environments/environment';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { VendorHoObj } from 'app/shared/model/vendor-ho-obj.model';
-import { VendorObj } from 'app/shared/model/vendor-obj.model';
-import { formatDate } from '@angular/common';
-import { VendorAddrObj } from 'app/shared/model/vendor-addr-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { VendorAtpmMappingObj } from "app/shared/model/vendor-atpm-mapping-obj.model";
-import { CookieService } from 'ngx-cookie';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
-import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
-import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
-import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
+import {environment} from 'environments/environment';
+import {AdInsConstant} from 'app/shared/AdInstConstant';
+import {formatDate} from '@angular/common';
+import {URLConstant} from 'app/shared/constant/URLConstant';
+import {CommonConstant} from 'app/shared/constant/CommonConstant';
+import {AdInsHelper} from 'app/shared/AdInsHelper';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {VendorAtpmSelectComponent} from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
+import {CookieService} from 'ngx-cookie';
+import {NavigationConstant} from 'app/shared/NavigationConstant';
+import {VendorAtpmMappingObj} from 'app/shared/model/vendor-atpm-mapping-obj.model';
+import {InputLookupObj} from 'app/shared/model/input-lookup-obj.model';
+import {VendorAttrContentObj} from 'app/shared/model/vendor-attr-content-obj.model';
+import {ReqRefAttrByAttrGroupObj} from 'app/shared/model/Request/ref-attr/req-ref-attr-by-attr-group-obj.model';
+import {CriteriaObj} from 'app/shared/model/criteria-obj.model';
+import {ReqRefMasterByTypeCodeAndMasterCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
+import {GenericObj} from 'app/shared/model/Generic/generic-obj.model';
+import {GenericListObj} from 'app/shared/model/Generic/generic-list-obj.model';
+import {VendorObj} from 'app/shared/model/vendor-obj.model';
+import {VendorAddrObj} from 'app/shared/model/vendor-addr-obj.model';
+import {KeyValueObj} from 'app/shared/model/key-value/key-value-obj.model';
+import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import {VendorHoObj} from 'app/shared/model/vendor-ho-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
-  selector: 'app-vendor-ho-add-edit',
-  templateUrl: './vendor-ho-add-edit.component.html'
+  selector: 'app-vendor-ho-add-edit-x',
+  templateUrl: './vendor-ho-add-edit-x.component.html'
 })
-export class VendorHoAddEditComponent implements OnInit {
+export class VendorHoAddEditXComponent implements OnInit {
   itemCategoryType: any;
   itemType: any;
   itemIdType: any;
@@ -63,10 +63,10 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAtpmList = new Array();
   VatForPersonal: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal, private spinner: NgxSpinnerService) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
       }
 
       this.VendorId = params['VendorId'];
@@ -176,7 +176,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.VendorForm.controls.VendorCode.disable();
       this.getData();
     } else {
-      if (this.MrVendorCategoryCode == "SUPPLIER_HO") {
+      if(this.MrVendorCategoryCode == "SUPPLIER_HO"){
         this.checkIsAutoFormNoFromSetting("SU");
       }
       this.setDropdown();
@@ -197,22 +197,22 @@ export class VendorHoAddEditComponent implements OnInit {
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
 
                 let tempLookup = {};
-                if (this.VendorAttrList != null) {
-                  for (const vendorAttr of this.VendorAttrList) {
-                    var formGroupObject = new Object();
-                    formGroupObject["VendorAttrContentId"] = [0];
+                if(this.VendorAttrList != null){
+                for (const vendorAttr of this.VendorAttrList) {
+                  var formGroupObject = new Object();
+                  formGroupObject["VendorAttrContentId"] = [0];
                     formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
                     if (vendorAttr["AttrInputType"] == 'T') {
-                      formGroupObject["VendorAttrValue"] = [''];
-                    }
+                    formGroupObject["VendorAttrValue"] = [''];
+                  }
                     else if (vendorAttr["AttrInputType"] == 'L') {
                       var temp = vendorAttr["AttrValue"].split(";");
                       this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;
-                      formGroupObject["VendorAttrValue"] = [temp[0]];
-                    }
-                    else {
-                      formGroupObject["VendorAttrValue"] = [''];
-                    }
+                    formGroupObject["VendorAttrValue"] = [temp[0]];
+                  }
+                  else {
+                    formGroupObject["VendorAttrValue"] = [''];
+                  }
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
 
                     if (vendorAttr["AttrInputType"] == 'RM') {
@@ -224,20 +224,20 @@ export class VendorHoAddEditComponent implements OnInit {
                       tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                       tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                       tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                      var arrAddCrit = new Array();
-                      var critAssetObj = new CriteriaObj();
-                      critAssetObj.DataType = 'text';
-                      critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                      critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                    var arrAddCrit = new Array();
+                    var critAssetObj = new CriteriaObj();
+                    critAssetObj.DataType = 'text';
+                    critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                    critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
                       critAssetObj.value = vendorAttr.AttrValue;
-                      arrAddCrit.push(critAssetObj);
+                    arrAddCrit.push(critAssetObj);
                       tempLookup[vendorAttr["AttrCode"]].addCritInput = arrAddCrit;
-                    }
                   }
-                  this.ListInputLookUpObj.push(tempLookup);
-                  this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-                  this.isFormReady = true;
                 }
+                this.ListInputLookUpObj.push(tempLookup);
+                this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
+                this.isFormReady = true;
+              }
               }
             );
           }
@@ -247,21 +247,21 @@ export class VendorHoAddEditComponent implements OnInit {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
-                if (this.VendorAttrList != null) {
-                  for (const vendorAttr of this.VendorAttrList) {
+                if(this.VendorAttrList != null){
+                for (const vendorAttr of this.VendorAttrList) {
                     var item = this.ListVendorAttrContent.find(x => x.AttrCode == vendorAttr.AttrCode);
-                    if (item == undefined) {
-                      var formGroupObject = new Object();
-                      formGroupObject["VendorAttrContentId"] = [0];
+                  if (item == undefined) {
+                    var formGroupObject = new Object();
+                    formGroupObject["VendorAttrContentId"] = [0];
                       formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
 
                       if (vendorAttr["AttrInputType"] == 'L') {
                         var temp = vendorAttr["AttrValue"].split(";");
                         this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;
-                        formGroupObject["VendorAttrValue"] = [temp[0]];
-                      } else {
-                        formGroupObject["VendorAttrValue"] = [''];
-                      }
+                      formGroupObject["VendorAttrValue"] = [temp[0]];
+                    } else {
+                      formGroupObject["VendorAttrValue"] = [''];
+                    }
                       parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
 
                       if (vendorAttr["AttrInputType"] == 'RM') {
@@ -275,29 +275,29 @@ export class VendorHoAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
                         tempLookup[vendorAttr["AttrCode"]].jsonSelect = vendorAttr["AttrCode"];
 
-                        var arrAddCrit = new Array();
-                        var critAssetObj = new CriteriaObj();
-                        critAssetObj.DataType = 'text';
-                        critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                        critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                      var arrAddCrit = new Array();
+                      var critAssetObj = new CriteriaObj();
+                      critAssetObj.DataType = 'text';
+                      critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                      critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
                         critAssetObj.value = vendorAttr.AttrValue;
-                        arrAddCrit.push(critAssetObj);
+                      arrAddCrit.push(critAssetObj);
                         tempLookup[vendorAttr["AttrCode"]].addCritInput = arrAddCrit;
-                      }
                     }
-                    else {
-                      var formGroupObject = new Object();
-                      formGroupObject["VendorAttrContentId"] = [0];
+                  }
+                  else {
+                    var formGroupObject = new Object();
+                    formGroupObject["VendorAttrContentId"] = [0];
                       formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
 
                       if (vendorAttr["AttrInputType"] == 'T') {
-                        formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                      }
+                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                    }
                       else if (vendorAttr["AttrInputType"] == 'L') {
                         var temp = vendorAttr["AttrValue"].split(";");
                         this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;
-                        formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                      }
+                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                    }
                       else if (vendorAttr["AttrInputType"] == 'RM') {
                         tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
                         tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
@@ -307,34 +307,34 @@ export class VendorHoAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/RefMaster/lookupRefMaster.json";
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                        var arrAddCrit = new Array();
-                        var critAssetObj = new CriteriaObj();
-                        critAssetObj.DataType = 'text';
-                        critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                        critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
+                      var arrAddCrit = new Array();
+                      var critAssetObj = new CriteriaObj();
+                      critAssetObj.DataType = 'text';
+                      critAssetObj.restriction = AdInsConstant.RestrictionEq;
+                      critAssetObj.propName = 'REF_MASTER_TYPE_CODE';
                         critAssetObj.value = vendorAttr.AttrValue;
-                        arrAddCrit.push(critAssetObj);
+                      arrAddCrit.push(critAssetObj);
                         tempLookup[vendorAttr["AttrCode"]].addCritInput = arrAddCrit;
-                        let refMaster: ReqRefMasterByTypeCodeAndMasterCodeObj = {
+                      let refMaster: ReqRefMasterByTypeCodeAndMasterCodeObj = {
                           RefMasterTypeCode: vendorAttr.AttrValue,
-                          MasterCode: item["AttrContent"]
-                        };
-                        await this.http.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
-                          (response: KeyValueObj) => {
+                        MasterCode: item["AttrContent"]
+                      };
+                      await this.http.post(URLConstant.GetKvpRefMasterByRefMasterTypeCodeAndMasterCode, refMaster).toPromise().then(
+                        (response: KeyValueObj) => {
                             tempLookup[vendorAttr["AttrCode"]].jsonSelect = { Descr: response.Value }
-                          });
-                        formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                      }
-                      else {
-                        formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
-                      }
-                      parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
+                        });
+                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                     }
+                    else {
+                      formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                    }
+                      parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
                   }
+                }
 
-                  this.ListInputLookUpObj.push(tempLookup);
-                  this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
-                  this.isFormReady = true;
+                this.ListInputLookUpObj.push(tempLookup);
+                this.VendorForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
+                this.isFormReady = true;
                 }
               });
           }
@@ -344,7 +344,7 @@ export class VendorHoAddEditComponent implements OnInit {
   }
 
   getData() {
-    let ReqGetVendorAndVendorAddr: GenericObj = new GenericObj();
+    let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
     ReqGetVendorAndVendorAddr.Id = this.VendorId;
     this.http.post(URLConstant.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
       (response) => {
@@ -482,9 +482,11 @@ export class VendorHoAddEditComponent implements OnInit {
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
+      this.inputLookupZipcodeObj.isRequired = true;
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.setValidators(Validators.required);
     } else {
+      this.inputLookupZipcodeObj.isRequired = false;
       if (!isGetData) this.VendorForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
       this.VendorForm.controls.TaxIdNo.setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
       this.VendorForm.controls.TaxpayerName.clearValidators();
@@ -575,21 +577,21 @@ export class VendorHoAddEditComponent implements OnInit {
     }
   }
 
-  getInputtedValue(event: string) {
-    this.http.post(URLConstant.GetZipcodeDataByZipCode, { Zipcode: event }).subscribe(
-      (response) => {
-        this.VendorForm.patchValue(
-          {
-            AreaCode2: response["AreaCode2"],
-            AreaCode1: response["AreaCode1"],
-            City: response["City"],
-            Province: response["ProvDistrictName"]
-          });
-        this.inputLookupZipcodeObj.nameSelect = response["Zipcode"];
-        this.inputLookupZipcodeObj.idSelect = response["Zipcode"];
-      }
-    );
-  }
+	getInputtedValue(event: string) {
+	    this.http.post(URLConstant.GetZipcodeDataByZipCode, { Zipcode: event }).subscribe(
+	      (response) => {
+	        this.VendorForm.patchValue(
+	          {
+	            AreaCode2: response["AreaCode2"],
+	            AreaCode1: response["AreaCode1"],
+	            City: response["City"],
+	            Province: response["ProvDistrictName"]
+	          });
+	        this.inputLookupZipcodeObj.nameSelect = response["Zipcode"];
+	        this.inputLookupZipcodeObj.idSelect = response["Zipcode"];
+	      }
+	    );
+	  }
 
   setLookup() {
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -597,7 +599,6 @@ export class VendorHoAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.isReadonly = false;
     this.inputLookupZipcodeObj.isRequired = false;
-
 
     this.inputLookupParentObj.urlJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
     this.inputLookupParentObj.pagingJson = "./assets/uclookup/vendor/lookupSupplierHolding.json";
@@ -654,10 +655,11 @@ export class VendorHoAddEditComponent implements OnInit {
     this.NpwpCheck(true);
   }
 
-  AddAtpmClick() {
+  AddAtpmClick()
+  {
     const modalAddAtpm = this.modalService.open(VendorAtpmSelectComponent);
 
-    if (this.vendorAtpmList.length > 0)
+    if(this.vendorAtpmList.length > 0)
       modalAddAtpm.componentInstance.listExistingAtpmCode = this.vendorAtpmList.map(a => a.VendorAtpmCode);
 
     modalAddAtpm.result.then(
@@ -669,7 +671,7 @@ export class VendorHoAddEditComponent implements OnInit {
       }
     ).catch(
       (error) => {
-        if (error != 0) {
+        if(error != 0){
           console.log(error);
         }
       }
@@ -688,10 +690,12 @@ export class VendorHoAddEditComponent implements OnInit {
     })
   }
 
-  deleteAtpm(item) {
-    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      let index = this.vendorAtpmList.map(function (e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
-      this.vendorAtpmList.splice(index, 1);
+  deleteAtpm(item)
+  {
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION))
+    {
+      let index = this.vendorAtpmList.map(function(e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
+      this.vendorAtpmList.splice(index,1);
     }
   }
 
@@ -729,7 +733,7 @@ export class VendorHoAddEditComponent implements OnInit {
       this.vendorHoObj.VendorObj.MrIdTypeCode = this.VendorForm.controls.MrIdTypeCode.value;
       this.vendorHoObj.VendorObj.IsOneAffiliate = this.VendorForm.controls.IsOneAffiliate.value;
 
-      this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "";
+	  this.vendorHoObj.VendorAddrObj.MrAddrTypeCode = "";
       this.vendorHoObj.VendorAddrObj.Addr = "";
       this.vendorHoObj.VendorAddrObj.Zipcode = "";
       this.vendorHoObj.VendorAddrObj.AreaCode2 = "";
@@ -755,12 +759,12 @@ export class VendorHoAddEditComponent implements OnInit {
         this.vendorHoObj.VendorAddrObj.Zipcode = this.result.VendorAddrObj.Zipcode;
         this.vendorHoObj.VendorAddrObj.AreaCode2 = this.result.VendorAddrObj.AreaCode2;
         this.vendorHoObj.VendorAddrObj.AreaCode1 = this.result.VendorAddrObj.AreaCode1;
-        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.result.VendorAddrObj.AreaCode3;
-        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.result.VendorAddrObj.AreaCode4;
+        this.vendorHoObj.VendorAddrObj.AreaCode3 = this.result.controls.AreaCode3.value;
+        this.vendorHoObj.VendorAddrObj.AreaCode4 = this.result.controls.AreaCode4.value;
         this.vendorHoObj.VendorAddrObj.City = this.result.VendorAddrObj.City;
         this.vendorHoObj.VendorAddrObj.Province = this.result.VendorAddrObj.Province;
       }
-
+      this.vendorAttrRequest = new Array<VendorAttrContentObj>();
       if (this.VendorForm['controls']['VendorAttrList'] != undefined) {
         var formValue = this.VendorForm['controls']['VendorAttrList'].value;
 
@@ -779,7 +783,8 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
 
-      if (this.vendorAtpmList.length > 0) {
+      if(this.vendorAtpmList.length > 0)
+      {
         this.vendorHoObj.VendorAtpmMappingObjs = new Array<VendorAtpmMappingObj>();
 
         for (let i = 0; i < this.vendorAtpmList.length; i++) {
@@ -869,16 +874,5 @@ export class VendorHoAddEditComponent implements OnInit {
         }
       }
     );
-  }
-
-  public findInvalidControls() {
-    const invalid = [];
-    const controls = this.VendorForm.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-      }
-    }
-    console.log(invalid);
   }
 }
