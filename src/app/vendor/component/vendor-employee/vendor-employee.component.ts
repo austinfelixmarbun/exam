@@ -208,16 +208,23 @@ export class VendorEmployeeComponent implements OnInit {
       critObj.restriction = AdInsConstant.RestrictionNeq;
       critObj.value = this.VendorEmpId + '';
       this.inputLookupSpvObj.addCritInput.push(critObj);
+      this.PatchDataLookupInternal();
     }
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
-    console.log(this.resultVendorEmpAndAddr);
     if (this.resultVendorEmpAndAddr != null) {
       this.inputLookupZipcodeObj.jsonSelect = { Zipcode: this.resultVendorEmpAndAddr["VendorAddrObj"].Zipcode };
       this.inputLookupSpvObj.jsonSelect = { VendorEmpName: this.resultVendorEmpAndAddr["VendorEmpObj"].SupervisorName };
     }
     this.NpwpCheck(true);
+  }
+  PatchDataLookupInternal() {
+    let objPatch = {
+      EmpName: this.VendorEmpForm.controls.VendorEmpName.value
+    }
+    this.inputLookupInternalEmpObj.nameSelect = objPatch.EmpName;
+    this.inputLookupInternalEmpObj.jsonSelect = objPatch;
   }
 
   getLookupInternal(ev) {
@@ -255,7 +262,6 @@ export class VendorEmployeeComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetVendorEmpAndVendorTaxAddrByVendorEmpId, {Id : this.objInput.VendorEmpId}).toPromise().then(
       (response) => {
         this.resultVendorEmpAndAddr = response;
-        console.log(this.resultVendorEmpAndAddr);
         this.setDropdown();
         this.inputLookupInternalEmpObj.isReady = true;
         this.inputLookupSpvObj.isReady = true;
@@ -293,12 +299,12 @@ export class VendorEmployeeComponent implements OnInit {
           IsNpwpExist: this.resultVendorEmpAndAddr.VendorEmpObj.IsNpwpExist
         });
       }
-    );
-  }
-
-  NpwpCheck(isGetData: boolean = false) {
-    if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
-      this.SetValidatorsIfNpwpCheck(true);
+      );
+    }
+    
+    NpwpCheck(isGetData: boolean = false) {
+      if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
+        this.SetValidatorsIfNpwpCheck(true);
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
     } else {

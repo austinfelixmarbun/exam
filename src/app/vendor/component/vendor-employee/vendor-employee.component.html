@@ -8,13 +8,12 @@
           </lib-ucSubsection>
           <div class="form-body" id="VendorEmpInfoId">
             <div class="form-group row"
-              *ngIf="MrVendorCategoryCode=='SURVEYOR_BRANCH' && inputLookupInternalEmpObj.isReady">
+              *ngIf="MrVendorCategoryCode=='SURVEYOR_BRANCH' && inputLookupInternalEmpObj.isReady && (mode != 'edit' || (mode == 'edit' && VendorBranchEmpObj.VendorEmpObj.IsInternalEmployee))">
               <label class="col-md-3" translate>Internal Employee</label>
               <div class="col-md-9">
                 <lib-uclookupgeneric [lookupInput]="inputLookupInternalEmpObj" [parentForm]='VendorEmpForm'
-                  [enjiForm]='enjiForm' [identifier]="'InteralEmployee'" (lookup)="getLookupInternal($event)"
-                  *ngIf="!(mode == 'edit' && VendorBranchEmpObj.VendorEmpObj.IsInternalEmployee)">
-                </lib-uclookupgeneric>
+                [enjiForm]='enjiForm' [identifier]="'InteralEmployee'" (lookup)="getLookupInternal($event)">
+              </lib-uclookupgeneric>
               </div>
             </div>
             <div class="form-group row">
