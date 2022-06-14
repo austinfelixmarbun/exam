@@ -28,6 +28,18 @@
       </div>
     </ng-template>
   </mat-tab>
+  <mat-tab label="Tax">
+    <ng-template matTabContent>
+      <div class="card">
+        <div class="card-body">
+          <div>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingTaxObj"></lib-ucviewgeneric>
+            <lib-ucviewgeneric [viewGenericObj]="viewVendorHoldingTaxAddrObj"></lib-ucviewgeneric>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
   <mat-tab label="Address">
     <ng-template matTabContent>
       <div class="card">

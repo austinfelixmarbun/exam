@@ -17,6 +17,7 @@ import {VendorObj} from 'app/shared/model/vendor-obj.model';
 import {RFAInfoObj} from 'app/shared/model/Approval/rfa-info-obj.model';
 import {VendorGradingHistObj} from 'app/shared/model/vendor-grading-hist-obj.model';
 import {UcInputRFAObj} from 'app/shared/model/uc-input-rfa-obj.model';
+import { ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj } from "app/shared/model/request/req-get-vendor-grading.model";
 
 @Component({
   selector: 'app-vendor-grading-request-detail-x',
@@ -178,9 +179,11 @@ export class VendorGradingRequestDetailXComponent implements OnInit {
   }
 
   async LoadGradingRule(vendorRating: number) {
-    await this.http.post(URLConstantX.GetRuleVendorGrading, { VendorRating: vendorRating, SupplierType: this.supplierType }).subscribe(
+    let reqObj = new ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj();
+    reqObj.VendorRating = vendorRating;
+    reqObj.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
+    await this.http.post(URLConstant.GetRuleVendorGradingV2, reqObj).toPromise().then(
       (response) => {
-
         this.gradeCode = response["VendorGrade"];
       }
     );

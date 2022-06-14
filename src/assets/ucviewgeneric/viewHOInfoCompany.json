@@ -7,6 +7,11 @@
         "mainInfo": [
           {
             "type": "text",
+            "label": "ID Type",
+            "property": "IdType"
+          },
+          {
+            "type": "text",
             "label": "Registration Number",
             "property": "RegistrationNo"
           },
@@ -44,6 +49,11 @@
             "type": "text",
             "label": "Mobile Phone 2",
             "property": "MobilePhnNo2"
+          },
+          {
+            "type": "boolean",
+            "label": "Is One Affiliate",
+            "property": "IsOneAffiliate"
           }
         ],
         "querystring": {

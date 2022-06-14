@@ -1,5 +1,5 @@
 {
-    "title": "Supplier Grading Approval",
+    "title": "Vendor Grading Approval",
     "exportExcel": false,
     "component": [
       {
@@ -16,7 +16,7 @@
         "name": "V.VENDOR_CODE",
         "id": "VendorCode",
         "value": "",
-        "label": "Supplier Code",
+        "label": "Vendor Code",
         "placeholder": "Placeholder"
       },
       {
@@ -24,8 +24,26 @@
         "name": "V.VENDOR_NAME",
         "id": "VendorName",
         "value": "",
-        "label": "Supplier Name",
+        "label": "Vendor Name",
         "placeholder": "Placeholder"
+      },
+      {
+        "type": "dropdown",
+        "name": "RM.MASTER_CODE",
+        "id": "MrVendorCategoryDescr",
+        "value": "",
+        "placeholder": "Placeholder",
+        "datatype": "text",
+        "isFromURL": true,
+        "ddlType": "all",
+        "url": "",
+        "path": "/RefMaster/GetListKeyValueActiveByCode",
+        "label": "Vendor Category",
+        "criteriaPropName": "RefMasterTypeCode",
+        "criteriaPropValue": "VENDOR_CATEGORY",
+        "items": [],
+        "itemsUrl": [],
+        "environment": "FOU"
       }
     ],
     "querystring": {
@@ -41,14 +59,20 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "Supplier Code",
+        "label": "Vendor Code",
         "name": "V.VENDOR_CODE"
       },
       {
         "type": "sort",
         "position": "center",
-        "label": "Supplier Name",
+        "label": "Vendor Name",
         "name": "V.VENDOR_NAME"
+      },
+      {
+        "type": "sort",
+        "position": "center",
+        "label": "VENDOR CATEGORY",
+        "name": "RM.DESCR"
       },
       {
         "type": "sort",
@@ -110,6 +134,11 @@
         "type": "text",
         "position": "center",
         "property": "VendorName"
+      },
+      {
+        "type": "text",
+        "position": "center",
+        "property": "MrVendorCategoryDescr"
       },
       {
         "type": "text",
