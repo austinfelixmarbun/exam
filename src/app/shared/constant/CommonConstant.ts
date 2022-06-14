@@ -317,11 +317,11 @@ export class CommonConstant {
     public static DmsMouId = "Mou Id";
     public static DmsLeadId = "Lead Id";
     public static DmsOverideSecurity = "OverideSecurity";
-    public static DmsOverideUpload = "Upload";
+    public static DmsOverideUpload = "Upload,Delete";
     public static DmsOverideView = "View";
-    public static DmsOverideUploadView = "Upload,View";
+    public static DmsOverideUploadView = "Upload,Delete,View,";
     public static DmsOverideViewDownload = "View,Download";
-    public static DmsOverideUploadDownloadView = "Upload,Download,View";
+    public static DmsOverideUploadDownloadView = "Upload,Delete,Download,View";
     public static DmsViewCodeCust = "ConfinsCust";
     public static DmsViewCodeApp = "ConfinsApp";
     public static DmsViewCodeAgr = "ConfinsAgr";
