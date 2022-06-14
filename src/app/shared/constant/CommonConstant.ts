@@ -319,7 +319,7 @@ export class CommonConstant {
     public static DmsOverideSecurity = "OverideSecurity";
     public static DmsOverideUpload = "Upload,Delete";
     public static DmsOverideView = "View";
-    public static DmsOverideUploadView = "Upload,Delete,View,";
+    public static DmsOverideUploadView = "Upload,Delete,View";
     public static DmsOverideViewDownload = "View,Download";
     public static DmsOverideUploadDownloadView = "Upload,Delete,Download,View";
     public static DmsViewCodeCust = "ConfinsCust";
