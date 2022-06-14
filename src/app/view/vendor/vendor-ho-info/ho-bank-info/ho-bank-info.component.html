@@ -12,13 +12,17 @@
                   <thead>
                     <tr class="table-header">
                       <th class="text-left"><span translate class="thead-header">Bank</span></th>
+                      <th class="text-left"><span translate class="thead-header" name='BankBranch'>Bank Branch</span>
+                      </th>
                       <th class="text-left"><span translate class="thead-header" name='AccountNo'>Account No</span>
                       </th>
                       <th class="text-left"><span translate class="thead-header" name='AccountName'>Account Name</span>
                       </th>
+                      <th class="text-left"><span translate class="thead-header" name='Notes'>Notes</span>
+                      </th>
                       <th class="text-center"><span translate class="thead-header" name='IsDefault'>Default</span>
                       </th>
-                      <th class="text-center"><span translate class="thead-header" name='IsActive'>Active</span>
+                      <th class="text-center"><span translate class="thead-header" name='IsActive'>Is Active</span>
                       </th>
                     </tr>
                   </thead>
@@ -30,8 +34,10 @@
                   <tbody>
                     <tr *ngFor="let item of ListData; let i = index">
                       <td class="text-left">{{item.BankName}}</td>
+                      <td class="text-left">{{item.BankBranch}}</td>
                       <td class="text-left">{{item.BankAccountNo}}</td>
                       <td class="text-left">{{item.BankAccountName}}</td>
+                      <td class="text-left">{{item.Notes}}</td>
                       <td class="text-center" *ngIf="item.IsDefault">Yes</td>
                       <td class="text-center" *ngIf="!item.IsDefault">No</td>
                       <td class="text-center" *ngIf="item.IsActive">Yes</td>

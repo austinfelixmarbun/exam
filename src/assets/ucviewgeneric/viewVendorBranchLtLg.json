@@ -3,7 +3,7 @@
     "subsection": [
       {
         "subSectionId": "LatLongId",
-        "subSectionTitle": "Lat Long Info",
+        "subSectionTitle": "Latitude Longitude Info",
         "mainInfoUrl": "http://r3app-server.ad-ins.com/FOUNDATION_R3/Generic/GetDataViewBySQL",
         "mainInfo": [
           {

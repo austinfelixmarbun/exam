@@ -285,10 +285,12 @@ export class VendorEmployeeXComponent implements OnInit {
 
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
+      this.SetValidatorsIfNpwpCheck(true);
       this.isHidden = false;
       this.inputLookupZipcodeObj.isRequired = true;
       this.VendorEmpForm.controls.TaxIdNo.setValidators([Validators.required]);
     } else {
+      this.SetValidatorsIfNpwpCheck(false);
       this.inputLookupZipcodeObj.isRequired = false;
       this.VendorEmpForm.controls.TaxIdNo.clearValidators();
       if (!isGetData) this.VendorEmpForm.controls['Zipcode']['controls'].value.updateValueAndValidity();
@@ -297,7 +299,42 @@ export class VendorEmployeeXComponent implements OnInit {
     this.VendorEmpForm.controls.TaxIdNo.updateValueAndValidity();
   }
 
+  SetValidatorsIfNpwpCheck(isNpwp: boolean){
+    this.VendorEmpForm.get("TaxIdNo").setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]);
+    this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
+    this.VendorEmpForm.get("TaxpayerName").clearValidators();
+    this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
+    if(isNpwp){
+      this.VendorEmpForm.get("TaxIdNo").setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15), Validators.required]);
+      this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
+      this.VendorEmpForm.get("TaxpayerName").setValidators(Validators.required);
+      this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
+    }
+  }
+
+  validateDate() {
+    let date = new Date(this.VendorEmpForm.controls.JoinDt.value);
+    let localDt = this.convertToMMddyyyy(date);
+    let localBizDt = this.convertToMMddyyyy(this.businessDtMin)
+    if(localDt > localBizDt) {
+      this.toastr.warningMessage("Join Date Cannot Exceed Business Date");
+      this.VendorEmpForm.patchValue({
+        JoinDt: ''
+      });
+      return false;
+    }
+    return true;
+  }
+
+  convertToMMddyyyy(dt: Date) {
+    return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+  }
+
   SaveForm() {
+    if(!this.validateDate()) {
+      return;
+    }
+    
     var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
     joinDt.setHours(0, 0, 0, 0);
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -307,6 +344,7 @@ export class VendorEmployeeXComponent implements OnInit {
       this.toastr.warningMessage("Join Date Cannot Exceed Business Date");
       return false;
     }
+  
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpNo = this.VendorEmpForm.controls.VendorEmpCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpName = this.VendorEmpForm.controls.VendorEmpName.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorId = this.objInput.VendorId;

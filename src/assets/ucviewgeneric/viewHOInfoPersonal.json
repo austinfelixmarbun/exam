@@ -44,6 +44,11 @@
             "type": "text",
             "label": "Mobile Phone 2",
             "property": "MobilePhnNo2"
+          },
+          {
+            "type": "boolean",
+            "label": "Is One Affiliate",
+            "property": "IsOneAffiliate"
           }
         ],
         "querystring": {

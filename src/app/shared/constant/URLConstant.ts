@@ -161,6 +161,7 @@ export class URLConstant {
     //REF-ROLE
     public static GetRefRolePaging = environment.FoundationR3Url + "/v1" + "/UserManagement/GetRefRolePaging";
     public static AddRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/AddRefRole";
+    public static AddRefRoleV2 = environment.FoundationR3Url + "/v2" + "/RefRole/AddRefRole";
     public static EditRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/EditRefRole";
     public static DeleteRefRole = environment.FoundationR3Url + "/v1" + "/RefRole/DeleteRefRole";
     public static GetRefRoleByRefRoleId = environment.FoundationR3Url + "/v1" + "/RefRole/GetRefRoleById";
@@ -550,6 +551,7 @@ export class URLConstant {
     public static SubmitRequestVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGrading/SubmitRequestVendorGrading";
     public static SubmitRequestVendorGradingV2 = environment.FoundationR3Url + "/v2" + "/VendorGrading/SubmitRequestVendorGrading";
     public static GetRuleVendorGrading = environment.FoundationR3Url + "/v1" + "/VendorGrading/GetRuleVendorGrading";
+    public static GetRuleVendorGradingV2 = environment.FoundationR3Url + "/v2" + "/VendorGrading/GetRuleVendorGrading";
     public static GetVendorGrade = environment.FoundationR3Url + "/v1" + "/VendorGrading/GetVendorGrade";
 
     // VENDOR OFFICE MEMBER
@@ -905,7 +907,7 @@ export class URLConstant {
     public static AddRefFormData = environment.FoundationR3Url + "/v1" + "/RefForm/AddRefForm";
     public static GetRefFormDataByRefFormId = environment.FoundationR3Url + "/v1" + "/RefForm/GetRefFormByRefFormId"
     public static GetTemplateIcon = environment.FoundationR3Url + "/v1" + "/RefForm/GetTemplateIcon";
-    public static DeleteRefFormData = "/RefForm/DeleteRefForm";
+    public static DeleteRefFormData = environment.FoundationR3Url + "/v1" + "/RefForm/DeleteRefForm";
 
     // AUTH FORM
     public static AddListAuthForm = environment.FoundationR3Url + "/v1" + "/AuthForm/AddListAuthForm";
