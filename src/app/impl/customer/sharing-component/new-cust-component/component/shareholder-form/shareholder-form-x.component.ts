@@ -64,11 +64,11 @@ export class ShareholderFormXComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   isShareholderReady : boolean = false;
   async ngOnInit() {
-    await this.getGsJobPostIsOwner();
-    this.InitData();
-    await this.GetExistingShareholder();
+    this.getGsJobPostIsOwner();  
+    this.InitData();  
+    this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
-    await this.GetExistingJobData();
+    this.GetExistingJobData();
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
     this.professionLookUpObj.isReady = true;
@@ -76,6 +76,7 @@ export class ShareholderFormXComponent implements OnInit {
     if(this.CustType == CommonConstant.CustTypePersonal){
       this.CheckJobPostionIsOwner();
     }
+
     this.isShareholderReady = true;
   }
 
