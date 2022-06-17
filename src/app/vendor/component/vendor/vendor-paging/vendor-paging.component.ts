@@ -29,7 +29,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     if (this.navigationSubscription) {
-    this.navigationSubscription.unsubscribe();
+      this.navigationSubscription.unsubscribe();
     }
   }
 
@@ -38,13 +38,13 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
   }
 
   isReady: boolean = false
-  selectPage(){
+  selectPage() {
     this.isReady = false;
     if (this.Type == "Scheme") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
 
-      switch(this.MrVendorCategoryCode){
+      switch (this.MrVendorCategoryCode) {
         case CommonConstant.SUPPLIER:
           this.inputPagingObj.title = "Supplier Scheme";
           break;
@@ -75,7 +75,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
 
-      switch(this.MrVendorCategoryCode){
+      switch (this.MrVendorCategoryCode) {
         case CommonConstant.SUPPLIER:
           this.inputPagingObj.title = "Supplier Group";
           break;
@@ -103,9 +103,10 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
       this.inputPagingObj.addCritInput.push(critObj);
     }
     else if (this.Type == "Default") {
-      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH 
-        || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
-        switch(this.MrVendorCategoryCode){
+      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH
+        || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
+        || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL) {
+        switch (this.MrVendorCategoryCode) {
           case CommonConstant.SUPPLIER:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
             this.inputPagingObj._url = "./assets/ucpaging/searchSupplier.json";
@@ -117,6 +118,14 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
           case CommonConstant.AGENCY_COMPANY:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAgencyCompany.json";
             this.inputPagingObj._url = "./assets/ucpaging/searchAgencyCompany.json";
+            break;
+          case CommonConstant.NOTARY_COMPANY:
+            this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchNotaryCompany.json";
+            this.inputPagingObj._url = "./assets/ucpaging/verification/searchNotaryCompany.json";
+            break;
+          case CommonConstant.NOTARY_PERSONAL:
+            this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchNotaryPersonal.json";
+            this.inputPagingObj._url = "./assets/ucpaging/verification/searchNotaryPersonal.json";
             break;
           default:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
@@ -132,7 +141,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
 
         this.inputPagingObj.addCritInput.push(critObj);
 
-        if(this.MrVendorCategoryCode != CommonConstant.SUPPLIER){
+        if (this.MrVendorCategoryCode != CommonConstant.SUPPLIER) {
           var WVendorClassObj = new WhereValueObj();
           WVendorClassObj.property = "VendorClass";
           WVendorClassObj.value = "BRANCH";
@@ -145,7 +154,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
 
-        switch(this.MrVendorCategoryCode){
+        switch (this.MrVendorCategoryCode) {
           case CommonConstant.ASSET_INSCO_HO:
             this.inputPagingObj.title = "Insurance HO";
             break;
@@ -197,7 +206,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
-        
+
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplierATPM.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchSupplierATPM.json";
         this.inputPagingObj.title = "Supplier ATPM";
@@ -213,7 +222,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
         WVendorClassObj.property = "VendorClass";
         WVendorClassObj.value = CommonConstant.ATPM;
         this.inputPagingObj.whereValue.push(WVendorClassObj);
-      }else if(this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY){
+      } else if (this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY) {
         this.inputPagingObj.pagingJson = "./assets/ucpaging/searchCollCompany.json";
         this.inputPagingObj._url = "./assets/ucpaging/searchCollCompany.json";
 
@@ -227,12 +236,12 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
         this.inputPagingObj.addCritInput.push(critObj);
       }
     }
-    setTimeout (() => {
+    setTimeout(() => {
       this.isReady = true
     }, 10);
   }
 
-  subscribeParam(){
+  subscribeParam() {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -244,19 +253,20 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     });
   }
 
-  ReInit(){
-  this.Type = "Default";
-  this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
+  ReInit() {
+    this.Type = "Default";
+    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
   }
 
-  RefetchData(){
-  this.ReInit();
-  this.subscribeParam();
-  this.selectPage();
+  RefetchData() {
+    this.ReInit();
+    this.subscribeParam();
+    this.selectPage();
   }
 
   navigate() {
-    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
+      || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL) {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_ADD], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
@@ -267,9 +277,11 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_DETAIL], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
-    }else if(this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY){
+    } 
+    else if (this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY) {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_COLL_COMPANY_ADD], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
+    
     if (this.Type == "Scheme") {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_SCHM_DETAIL], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }

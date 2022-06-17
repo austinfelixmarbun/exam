@@ -39,6 +39,8 @@ import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/
 import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
 import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
+import { NotaryCompanyComponent } from './notary-master/notary-company/notary-company.component';
+import { NotaryPersonalComponent } from './notary-master/notary-personal/notary-personal.component';
 
 const routes: Routes = [
   {
@@ -308,6 +310,20 @@ const routes: Routes = [
         component: VendorCollCompanyRegistrationComponent,
         data: {
           title: 'Vendor Collection Company Registration'
+        },
+      },
+      {
+        path: PathConstant.NOTARY_COMPANY,
+        component: NotaryCompanyComponent,
+        data: {
+          title: 'Notary Company'
+        },
+      },
+      {
+        path: PathConstant.NOTARY_PERSONAL,
+        component: NotaryPersonalComponent,
+        data: {
+          title: 'Notary Personal'
         },
       }
     ]

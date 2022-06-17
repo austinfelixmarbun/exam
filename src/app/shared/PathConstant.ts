@@ -525,4 +525,8 @@ export class PathConstant {
     public static NOTIF_BROADCAST = "NotifBroadcast";
 
     //#endregion
+    
+    //#region Notary
+    public static NOTARY_COMPANY = "NotaryCompany";
+    public static NOTARY_PERSONAL = "NotaryPersonal";
 }
