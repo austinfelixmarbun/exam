@@ -67,8 +67,6 @@ import { VendorCollCompanyEmployeeAddEditComponent } from './vendor-coll-company
 import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/vendor-coll-company-employee-paging/vendor-coll-company-employee-paging.component';
 import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
 import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
-import { NotaryPersonalComponent } from './notary-master/notary-personal/notary-personal.component';
-import { NotaryCompanyComponent } from './notary-master/notary-company/notary-company.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -154,9 +152,7 @@ export const customCurrencyMaskConfig = {
         VendorCollCompanyEmployeeAddEditComponent,
         VendorCollCompanyEmployeePagingComponent,
         VendorCollCompanyOfficeMemberComponent,
-        VendorCollCompanyOfficeMemberAddComponent,
-        NotaryPersonalComponent,
-        NotaryCompanyComponent
+        VendorCollCompanyOfficeMemberAddComponent
     ],
     providers: [
         VendorService,

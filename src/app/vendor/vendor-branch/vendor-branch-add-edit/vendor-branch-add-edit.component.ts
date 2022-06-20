@@ -369,7 +369,6 @@ export class VendorBranchAddEditComponent implements OnInit {
   async getData() {
     await this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).toPromise().then(
       async (response) => {
-        console.log(response)
         this.result = response;
         this.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
         this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
@@ -428,7 +427,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
     await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
       (response) => {
-        console.log(response)
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
           this.VendorForm.patchValue({
@@ -489,7 +487,6 @@ export class VendorBranchAddEditComponent implements OnInit {
     }
     await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).toPromise().then(
       async (response) => {
-        console.log(response)
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.MrVendorCategoryCode == "AGENCY_PERSONAL") {
