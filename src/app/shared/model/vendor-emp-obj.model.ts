@@ -19,10 +19,14 @@ export class VendorEmpObj {
     MrVendorEmpPositionCode: string;
     IsContactPerson: boolean;
     IsOwner: boolean;
+    IsInternalEmployee: boolean;
     VendorEmpRating: string;
     RowVersion: string;
     MrTaxCalcMethodCode: string;
     IsNpwpExist : boolean;
 
-    constructor() { this.RowVersion = ""; }
+    constructor() { 
+        this.RowVersion = "";
+        this.IsInternalEmployee = false;
+     }
 }
