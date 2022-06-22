@@ -99,7 +99,7 @@ export class VendorBranchAddEditComponent implements OnInit {
     IdNo: [''],
     MobilePhnNo1: ['', Validators.pattern("^[0-9]+$")],
     MobilePhnNo2: ['', Validators.pattern("^[0-9]+$")],
-    Email: ['', [Validators.required, Validators.pattern('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')]],
+    Email: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
     VendorRating: [{ value: '', disabled: false }],
     EstablishmentDt: ['', Validators.required],
     PartnershipDt: ['', Validators.required],
