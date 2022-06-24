@@ -309,7 +309,7 @@ const routes: Routes = [
         data: {
           title: 'Vendor Collection Company Registration'
         },
-      }
+      },
     ]
 
   }
