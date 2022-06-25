@@ -33,7 +33,9 @@ export class CustExposureComponent implements OnInit {
 
   ExposureDObj: CustExpsrDObj = new CustExpsrDObj();
   IsReady: boolean = false;
+  IsCustGrpExposureView: boolean = false;
   async ngOnInit() {
+    this.IsCustGrpExposureView = this.exposureType == CommonConstant.ExposureCustGroupTypeCode;
     this.SetExposureDObj();
     await this.GetListCustExpsrBucketByCustExpsrDId();
     await this.GetListCustExpsrAppAgrHistByCustExpsrHId();
@@ -55,7 +57,6 @@ export class CustExposureComponent implements OnInit {
     if (this.exposureHObj == null) return;
     await this.http.post<{ ListCustExpsrBucketObj: Array<CustExpsrBucketObj> }>(URLConstant.GetListCustExpsrBucketByCustExpsrDId, { Id: this.ExposureDObj.CustExpsrDId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.ListCustExpsrBucketObj = response.ListCustExpsrBucketObj;
       }
     );
@@ -66,12 +67,11 @@ export class CustExposureComponent implements OnInit {
     if (this.exposureHObj == null) return;
     await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(URLConstant.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.exposureHObj.CustExpsrHId }).toPromise().then(
       (response) => {
-        // console.log(response);
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {
           const element = response.ListCrdExpsrAppAgrHistObj[index];
           if (
             element.RoleCust == this.RoleCust || 
-            (this.exposureType == CommonConstant.ExposureCustGroupTypeCode && element.RoleCust == this.RoleCustGrp)
+            (this.IsCustGrpExposureView && element.RoleCust == this.RoleCustGrp)
           ) {
             this.ListCrdExpsrAppAgrHistObj.push(element);
           }
