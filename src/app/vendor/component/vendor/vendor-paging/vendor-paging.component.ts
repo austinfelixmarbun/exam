@@ -33,22 +33,6 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     }
   }
 
-  ReInit(){
-    this.IsReady = false;
-    this.inputPagingObj = new UcPagingObj();
-    this.Type = "Default";
-  }
-
-  RefetchData(){
-    this.ReInit();
-    this.SubscribeParam();
-    this.SelectPage();
-    setTimeout (() => {
-      this.IsReady = true;
-    }, 10);
-  }
-
-  
   ngOnInit() {
     this.selectPage();
   }
