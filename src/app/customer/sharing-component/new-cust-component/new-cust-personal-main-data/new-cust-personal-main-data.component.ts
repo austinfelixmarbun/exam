@@ -231,7 +231,6 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       MrCustModelCode: ['', [Validators.required]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
       Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
-      
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {
