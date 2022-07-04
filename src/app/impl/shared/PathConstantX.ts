@@ -59,6 +59,7 @@ export class PathConstantX{
     public static VIEW_CUST_PERSONAL_DETAIL_X = "PersonalDetailX";
     public static PERSONAL_X = "PersonalX";
     public static CUST_FAMILY_X = "CustFamily";
+    public static VIEW_CUST_PERSONAL_FINANCIAL_DATA_X = "PersonalFinancialData/X";
 
     //public static CUST_PERSONAL_PAGE = PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
     public static VENDOR_BRANCH_ADD_X = PathConstantX.VENDOR_BRANCH + "/" + PathConstantX.ADD;

@@ -17,8 +17,8 @@ import { CustomerViewPersonalFinancialDataComponent } from "./customer-view-pers
 import { CustomerViewPersonalFinancialDataRoutingModule } from "./customer-view-personal-financial-data-routing.module";
 import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-personal-financial-section/customer-view-personal-financial-section.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
-
-
+import { CustomerViewPersonalFinancialDataXComponent } from "app/impl/view/customer-view/customer-view-personal-financial-data/customer-view-personal-financial-data-x.component";
+import { CustomerViewPersonalFinancialSectionXComponent } from "app/impl/view/customer-view/customer-view-personal-financial-section/customer-view-personal-financial-section-x.component";
 
 @NgModule({
   imports: [
@@ -43,8 +43,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
   declarations: [
     ///customer
     CustomerViewPersonalFinancialDataComponent,
-    CustomerViewPersonalFinancialSectionComponent
-
+    CustomerViewPersonalFinancialSectionComponent,
+    CustomerViewPersonalFinancialDataXComponent,
+    CustomerViewPersonalFinancialSectionXComponent,
   ],
   entryComponents: [
     UcviewgenericComponent,

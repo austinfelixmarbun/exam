@@ -20,6 +20,17 @@ export class URLConstantX{
     public static GetCBAForCustFinDataEditModeByCustBankAccId = environment.FoundationR3Url + "/v1" + "/CustBankAccX/GetCBAForCustFinDataEditModeByCustBankAccIdX";
     public static EditCustBankAcc = environment.FoundationR3Url + "/v1" + "/CustBankAccX/EditCustBankAccX";
     public static DeleteCustBankAccAndStmnt = environment.FoundationR3Url + "/v1" + "/CustBankAccX/DeleteCustBankAccAndStmntX";
+    public static AddCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinDataX/AddCustPersonalFinDataX";
+    public static EditCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinDataX/EditCustPersonalFinDataX";
+    public static AddCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinDataX/AddCustCompanyFinDataX";
+    public static EditCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinDataX/EditCustCompanyFinDataX";
+    public static GetCustCompanyFinDataXByCustCompanyFinDataId = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinDataX/GetCustCompanyFinDataXByCustCompanyFinDataId";
+    public static GetCustPersonalFinDataXByCustPersonalFinDataId = environment.FoundationR3Url + "/v1" + "/CustPersonalFinDataX/GetCustPersonalFinDataXByCustPersonalFinDataId";
+    public static DeleteCustCompanyFinData = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinDataX/DeleteCustCompanyFinDataX";
+    public static DeleteCustPersonalFinData = environment.FoundationR3Url + "/v1" + "/CustPersonalFinDataX/DeleteCustPersonalFinDataX";
+    public static GetTotalInstAmtFromR2AndR3ByCustNo = environment.LosURL + "/v1" + "/AppFinDataX/GetTotalInstAmtFromR2AndR3ByCustNo";
+    public static GetListCustPersonalFinDataForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalFinDataX/GetListCustPersonalFinDataXForCustViewByCustId";
+    public static GetListCustCompanyFinDataXForCustViewByCustId = environment.FoundationR3Url + "/v1" + "/CustomerCompanyFinDataX/GetListCustCompanyFinDataXForCustViewByCustId";
 
     //VENDOR
     public static GetAttrContentByVendorCodeAndVendorAttrCode = environment.FoundationR3Url + "/v1" + "/VendorAttrContentX/GetAttrContentByVendorCodeAndVendorAttrCode";
