@@ -69,7 +69,7 @@
                 <label class="col-md-4 adins-required-label" translate>ID Type </label>
                 <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeIdType]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeIdType]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrIdTypeCode'"
+                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="identifierMrIdTypeCode"
                     (callback)="onOptionsSelected()"></lib-ucdropdownlist>
                 </div>
               </div>
@@ -86,12 +86,10 @@
               </div>
 
               <div class="form-group row">
-                <label class="col-md-4 adInsLabel" [ngClass]="{'adins-required-label' : !IsKTPCheck}" translate>ID
+                <label class="col-md-4 adInsLabel" [ngClass]="{'adins-required-label' : IsExpDtRequired && !IsExpDtReadonly}" translate>ID
                   Expired Date</label>
                 <div class="col-md-8">
-                  <input *ngIf="noExpDate.includes(CustomerForm.controls.MrIdTypeCode.value)" readonly type="date"
-                    class="form-control" id="idExpDt" formControlName="IdExpiredDt">
-                  <input *ngIf="!noExpDate.includes(CustomerForm.controls.MrIdTypeCode.value)" type="date"
+                  <input [readonly]="IsExpDtReadonly" type="date"
                     class="form-control adInsInput" formControlName="IdExpiredDt"
                     [min]="businessDtMax | date: 'yyyy-MM-dd'"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdExpiredDt.invalid } ">

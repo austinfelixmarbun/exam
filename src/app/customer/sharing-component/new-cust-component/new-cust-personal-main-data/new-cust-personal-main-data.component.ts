@@ -111,11 +111,16 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
   readonly CustFromCustFamily: string = CommonConstant.CustFromCustFamily;
+
+  readonly GsCodeIdTypeExpDtRequired: string = CommonConstant.GsCodeIdTypeExpDtRequired;
+  readonly GsCodeIdTypeExpDtReadonly: string = CommonConstant.GsCodeIdTypeExpDtReadonly;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
+    this.GetGeneralSetting(this.GsCodeIdTypeExpDtRequired);
+    this.GetGeneralSetting(this.GsCodeIdTypeExpDtReadonly);
     this.InitCustMainDataMode();
     this.BindLookupSupplier();
     this.BindLookupExistingCust();
@@ -277,6 +282,28 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     )
   }
 
+  dictListGsValue: { [GsCode: string]: Array<string> } = {};
+  GetGeneralSetting(Code: string) {
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { code: Code }).subscribe(
+      (response: { GsValue: string }) => {
+        let listStringSplit: Array<string> = response.GsValue.split(";");
+        this.dictListGsValue[Code] = listStringSplit;
+      });
+  }
+
+  readonly identifierMrIdTypeCode: string ="MrIdTypeCode";
+  get GetIdTypeValue(): string {
+    return this.CustomerForm.get(this.identifierMrIdTypeCode).value;
+  }
+  get IsExpDtRequired(){
+    let IdType: string = this.GetIdTypeValue;
+    return this.dictListGsValue[this.GsCodeIdTypeExpDtRequired].includes(IdType);
+  }
+
+  get IsExpDtReadonly(){
+    let IdType: string = this.GetIdTypeValue;
+    return this.dictListGsValue[this.GsCodeIdTypeExpDtReadonly].includes(IdType);
+  }
 
   //#region GetExisting / mode edit
   IsLockCopyAddrBtn: boolean = false;
@@ -406,23 +433,23 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   //#endregion
 
   //#region Change Data
-  IsKTPCheck: boolean = false;
-  noExpDate = [CommonConstant.MrIdTypeCodeEKTP, CommonConstant.MrIdTypeCodeNPWP, CommonConstant.MrIdTypeCodeAKTA];
   onOptionsSelected() {
-    let tempMrIdTypeCode: string = this.CustomerForm.get("MrIdTypeCode").value;
+    this.CheckIdExpDt();
+    this.onChangeIdType();
+  }
+
+  private CheckIdExpDt(){
     let tempIdExpiredDt = this.CustomerForm.get("IdExpiredDt");
-    if (this.noExpDate.includes(tempMrIdTypeCode)) {
-      tempIdExpiredDt.clearValidators();
-      this.CustomerForm.patchValue({
-        IdExpiredDt: ''
-      })
-      this.IsKTPCheck = true;
-    } else {
+    tempIdExpiredDt.clearValidators();
+    if (this.IsExpDtReadonly) {
+      tempIdExpiredDt.setValue("");
+      tempIdExpiredDt.updateValueAndValidity();
+      return;
+    } 
+    if (this.IsExpDtRequired) {
       tempIdExpiredDt.setValidators(Validators.required);
-      this.IsKTPCheck = false;
     }
     tempIdExpiredDt.updateValueAndValidity();
-    this.onChangeIdType();
   }
 
   onChangeIdType() {
