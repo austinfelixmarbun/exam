@@ -105,7 +105,7 @@
       "path": "/RefMaster/GetListKeyValueActiveByCode",
       "label": "Vendor Category",
       "criteriaPropName": "RefMasterTypeCode",
-      "criteriaPropValue": "VENDOR_CATEGORY",
+      "criteriaPropValue": "VENDOR_GRADING_CATEGORY",
       "items": [],
       "itemsUrl": [],
       "environment": "FOU"

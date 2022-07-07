@@ -344,6 +344,7 @@ export class CommonConstant {
 
     // Role Type
     public static RoleCustData = "CUST";
+    public static RoleCustGrpData = "CUST_GRP";
     public static RoleFamilyData = "SPOUSE";
     public static RoleGuarantorData = "GUARANTOR";
     public static RoleShareholder = "SHAREHOLDER";

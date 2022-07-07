@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UcPagingObj, WhereValueObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,25 +13,51 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   selector: 'app-vendor-paging',
   templateUrl: './vendor-paging.component.html'
 })
-export class VendorPagingComponent implements OnInit {
+export class VendorPagingComponent implements OnInit, OnDestroy {
   inputPagingObj: UcPagingObj = new UcPagingObj();
   MrVendorCategoryCode: string;
   Type: string = "Default";
   mode: string;
+  navigationSubscription;
+  IsReady: boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-
-      }
-      if (params["Type"] != null) {
-        this.Type = params["Type"];
+    this.SubscribeParam();
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.RefetchData();
       }
     });
   }
 
+  ReInit(){
+    this.IsReady = false;
+    this.inputPagingObj = new UcPagingObj();
+    this.Type = "Default";
+  }
+
+  RefetchData(){
+    this.ReInit();
+    this.SubscribeParam();
+    this.SelectPage();
+    setTimeout (() => {
+      this.IsReady = true;
+    }, 10);
+  }
+
+  
   ngOnInit() {
+    this.SelectPage();
+  }
+  
+  ngOnDestroy(): void {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  SelectPage(){
     if (this.Type == "Scheme") {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorScheme.json";
       this.inputPagingObj._url = "./assets/ucpaging/searchVendorScheme.json";
@@ -110,7 +136,6 @@ export class VendorPagingComponent implements OnInit {
         }
         this.inputPagingObj.title = typeof (CommonConstant["TITLE_" + this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_" + this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g, ' ');
         this.inputPagingObj.addCritInput = new Array();
-        this.inputPagingObj
         var critObj = new CriteriaObj();
         critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
         critObj.restriction = AdInsConstant.RestrictionEq;
@@ -199,7 +224,17 @@ export class VendorPagingComponent implements OnInit {
         this.inputPagingObj.whereValue.push(WVendorClassObj);
       }
     }
+  }
 
+  SubscribeParam(){
+    this.route.queryParams.subscribe(params => {
+      if (params["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
+      if (params["Type"] != null) {
+        this.Type = params["Type"];
+      }
+    });
   }
 
   navigate() {
