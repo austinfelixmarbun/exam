@@ -16,13 +16,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class NotifBroadcastMessageInquiryComponent implements OnInit {
   inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  readonly MrNotificationTypeCode: string = CommonConstant.RefMasterTypeCodeNotificationTypes;
-  readonly TypeSms: string = CommonConstant.RefMasterTypeCodeNotificationTypesSms;
-  readonly TypeWA: string = CommonConstant.RefMasterTypeCodeNotificationTypesWA;
-  readonly TypeEmail: string = CommonConstant.RefMasterTypeCodeNotificationTypesEmail;
-  readonly TypePush: string = CommonConstant.RefMasterTypeCodeNotificationTypesPush;
   ListNotifTypeKvp : Array<KeyValueObj> = new Array<KeyValueObj>();
   IsShowPaging: boolean = false;
+  critObj: CriteriaObj = new CriteriaObj();
+  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
 
   NotifInquiryType = this.fb.group({
     MrNotificationTypeCode: [''],
@@ -30,7 +27,7 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private router: Router, private http: HttpClient) { }
   ngOnInit() {
-    this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
+    this.GetRefMasterListKeyValueActiveByCode(CommonConstant.RefMasterTypeCodeNotificationTypes);
 
     this.inputPagingObj.enviromentUrl = this.UrlConstantNew.env.NotifEngineURL + '/v2.1';
   }
@@ -48,8 +45,6 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_BROADCAST_ADD_EDIT], {NotificationHistHId: ev.RowObj.NotificationHId});
     }
   }
-  critObj: CriteriaObj = new CriteriaObj();
-  arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
 
   OnChangeType(){
     this.IsShowPaging = false;
@@ -68,22 +63,21 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
     setTimeout(() => {
       this.IsShowPaging = true
     }, 10);
-    console.log(this.NotifInquiryType);
   }
 
   SetPagingObj(TypeCode: string){
     switch(TypeCode){
-      case this.TypePush:{
+      case CommonConstant.RefMasterTypeCodeNotificationTypesPush:{
         this.inputPagingObj._url = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-push.json";
         this.inputPagingObj.pagingJson = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-push.json";
         break;
       }
-      case this.TypeSms || this.TypeWA:{
+      case CommonConstant.RefMasterTypeCodeNotificationTypesSms || CommonConstant.RefMasterTypeCodeNotificationTypesWA:{
         this.inputPagingObj._url = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-sms-wa.json";
         this.inputPagingObj.pagingJson = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-sms-wa.json";
         break;
       }
-      case this.TypeEmail:{
+      case CommonConstant.RefMasterTypeCodeNotificationTypesEmail:{
         this.inputPagingObj._url = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-email.json";
         this.inputPagingObj.pagingJson = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-email.json";
         break;
