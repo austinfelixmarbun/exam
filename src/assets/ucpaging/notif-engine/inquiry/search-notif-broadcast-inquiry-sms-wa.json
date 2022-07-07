@@ -76,7 +76,7 @@
             "datatype": "date",
             "value": "",
             "restriction": "gte",
-            "label": "Send Date From",
+            "label": "Send Date >=",
             "datepickerPair": "string",
             "placeholder": "Placeholder"
         },
@@ -87,7 +87,7 @@
             "datatype": "date",
             "value": "",
             "restriction": "lte",
-            "label": "Send Date",
+            "label": "Send Date <=",
             "datepickerPair": "string",
             "placeholder": "Placeholder"
         },
@@ -109,7 +109,7 @@
         }
     ],
     "querystring": {
-        "name": "SearchNotifBroadcast"
+        "name": "SearchNotifInquirySmsWa"
     },
     "headerList": [
         {

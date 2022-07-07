@@ -48,12 +48,15 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
 
     this.SetPagingObj(TypeCode);
     this.critObj = new CriteriaObj();
-    this.critObj.restriction = AdInsConstant.RestrictionLike;
-    this.critObj.propName = 'NHH.MR_NOTIFICATION_TYPE_CODE';
-    this.critObj.value = TypeCode;
-
     this.arrCrit = new Array<CriteriaObj>();
-    this.arrCrit.push(this.critObj);
+
+    if(TypeCode == CommonConstant.RefMasterTypeCodeNotificationTypesSms || TypeCode == CommonConstant.RefMasterTypeCodeNotificationTypesWA){
+      this.critObj.restriction = AdInsConstant.RestrictionLike;
+      this.critObj.propName = 'NHH.MR_NOTIFICATION_TYPE_CODE';
+      this.critObj.value = TypeCode;
+      
+      this.arrCrit.push(this.critObj);
+    }
     this.inputPagingObj.addCritInput = this.arrCrit;
 
     if(TypeCode){
