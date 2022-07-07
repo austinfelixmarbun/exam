@@ -23,6 +23,7 @@ import { CustomerViewRoutingModule } from "./customer-view-routing.module";
 import { CustomerViewIframeGenericComponent } from "./customer-view-iframe-generic/customer-view-iframe-generic.component";
 import { SharedModule } from "app/shared/shared.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomerViewHeaderCompanyXComponent } from "app/impl/view/customer-view/customer-view-header-company-x/customer-view-header-company-x.component";
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
    CustomerViewHeaderPersonalComponent,
    CustomerViewHeaderPersonalXComponent,
    CustomerViewHeaderCompanyComponent,
+   CustomerViewHeaderCompanyXComponent,
    CustomerViewIframeGenericComponent
   ],
   entryComponents: [

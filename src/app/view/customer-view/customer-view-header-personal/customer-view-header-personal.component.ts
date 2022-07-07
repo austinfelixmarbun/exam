@@ -13,11 +13,6 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 export class CustomerViewHeaderPersonalComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   IdCust: number;
-  CustStatus: string = '-';
-  urlGetAppCustStatusXByCustNo = URLConstant.GetAppCustStatusXByCustNo;
-  
-  // Input CustNo didapat dari value CustNo yang dikirim dari component customer-view
-  @Input('CustNo') CustNo: string;
 
   constructor(public Translate: TranslateService, private route: ActivatedRoute, private http: HttpClient) {
     this.route.queryParams.subscribe(params => {
@@ -33,20 +28,9 @@ export class CustomerViewHeaderPersonalComponent implements OnInit {
 
   async ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustPersonalHeader.json";
-    await this.getCustomerStatus();
   }
 
   ClickLinkViewCustExposure() {
     AdInsHelper.OpenCustExposure(this.IdCust);
-  }
-
-  async getCustomerStatus(){
-    // get cust status ke api di LOS menggunakan variable custNo.
-    // set cust status ke variable custStatus.
-    await this.http.post(this.urlGetAppCustStatusXByCustNo, { CustNo: this.CustNo }).toPromise().then(
-      (response) => {
-        this.CustStatus = response['CustStatus'];
-      }
-    );
   }
 }
