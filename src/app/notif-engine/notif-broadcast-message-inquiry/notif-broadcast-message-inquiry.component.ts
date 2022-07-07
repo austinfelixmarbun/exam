@@ -20,10 +20,7 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
   IsShowPaging: boolean = false;
   critObj: CriteriaObj = new CriteriaObj();
   arrCrit: Array<CriteriaObj> = new Array<CriteriaObj>();
-
-  NotifInquiryType = this.fb.group({
-    MrNotificationTypeCode: [''],
-  });
+  MrNotificationTypeCode: string = "";
 
   constructor(private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private router: Router, private http: HttpClient) { }
   ngOnInit() {
@@ -46,9 +43,8 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
     }
   }
 
-  OnChangeType(){
+  OnChangeType(TypeCode){
     this.IsShowPaging = false;
-    let TypeCode: string = this.NotifInquiryType.value.MrNotificationTypeCode;
 
     this.SetPagingObj(TypeCode);
     this.critObj = new CriteriaObj();
@@ -60,9 +56,11 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
     this.arrCrit.push(this.critObj);
     this.inputPagingObj.addCritInput = this.arrCrit;
 
-    setTimeout(() => {
-      this.IsShowPaging = true
-    }, 10);
+    if(TypeCode){
+      setTimeout(() => {
+        this.IsShowPaging = true
+      }, 10);
+    }
   }
 
   SetPagingObj(TypeCode: string){
