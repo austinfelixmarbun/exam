@@ -10,8 +10,8 @@
         </div>
         <div class="px-3">
           <div class="form-group row">
-            <label class="col-md-3 adInsLabel" translate> Select Notification Type</label>
-            <div class="col-md-9">
+            <label class="col-md-2 px-3 adInsLabel" translate> Select Notification Type</label>
+            <div class="col-md-9 px-5">
               <select class="form-control adInsInput" style="width: auto" (change)="OnChangeType($event.target.value)">
                 <option value="">Select One</option>
                 <option *ngFor="let it of ListNotifTypeKvp" value="{{it.Key}}">
@@ -20,7 +20,8 @@
             </div>
           </div>
         </div>
+        <br>
+        <lib-ucpaging *ngIf="IsShowPaging" [searchObj]="inputPagingObj" (callback)="GetCallbackPaging($event)"></lib-ucpaging>
       </div>
     </div>
-    <lib-ucpaging *ngIf="IsShowPaging" [searchObj]="inputPagingObj" (callback)="GetCallbackPaging($event)"></lib-ucpaging>
 </div>
