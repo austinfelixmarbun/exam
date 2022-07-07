@@ -1,1 +1,26 @@
-<lib-ucpaging [searchObj]="inputPagingObj" (callback)="GetCallbackPaging($event)"></lib-ucpaging>
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="form-section card-title ml-2" translate>Notification Inquiry</h4>
+            </div>
+          </div>
+        </div>
+        <div class="px-3">
+            <div class="form-group row" [formGroup]="NotifInquiryType">
+                <label class="col-md-3 adInsLabel" translate>Select Notification Type</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" formControlName="MrNotificationTypeCode" (change)="OnChangeType()">
+                    <option value="">Select One</option>
+                    <option *ngFor="let it of ListNotifTypeKvp" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <lib-ucpaging *ngIf="IsShowPaging" [searchObj]="inputPagingObj" (callback)="GetCallbackPaging($event)"></lib-ucpaging>
+</div>
