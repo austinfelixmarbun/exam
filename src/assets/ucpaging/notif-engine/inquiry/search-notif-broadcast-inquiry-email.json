@@ -77,7 +77,6 @@
             "value": "",
             "restriction": "gte",
             "label": "Send Date >=",
-            "datepickerPair": "string",
             "placeholder": "Placeholder"
         },
         {
@@ -88,7 +87,6 @@
             "value": "",
             "restriction": "lte",
             "label": "Send Date <=",
-            "datepickerPair": "string",
             "placeholder": "Placeholder"
         },
         {
