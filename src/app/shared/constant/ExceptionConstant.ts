@@ -75,4 +75,5 @@ export class ExceptionConstant {
     public static CUST_AGE_BETWEEN = "Customer age must be between {0} and {1} year old";
     public static CUST_AGE_MIN = "Customer age must be at least {0} year old";
     public static DUPLICATE_SHRHLDR_ID_NO = "Shareholder's Id No cannot duplicate";
+    public static REF_SECTOR_ECONOMY_SLIK_NOT_ACTIVE = "Economic Sector Slik Is Not Active";
 }
