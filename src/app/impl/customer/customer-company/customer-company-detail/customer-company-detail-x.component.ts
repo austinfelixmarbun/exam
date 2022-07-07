@@ -202,9 +202,16 @@ export class CustomerCompanyDetailXComponent implements OnInit {
           this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).subscribe(
             (response) => {
               this.returnSectorEconomySlikObj = response;
-              this.lookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
-              this.lookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
-              this.tempRefIndustryTypeId = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+
+              if (this.returnSectorEconomySlikObj.IsActive == false)
+              {
+                this.toastr.warningMessage(ExceptionConstant.REF_SECTOR_ECONOMY_SLIK_NOT_ACTIVE);
+              }
+              else{
+                this.lookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
+                this.lookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
+                this.tempRefIndustryTypeId = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+              }    
             }
           );
         }
