@@ -1,5 +1,4 @@
 {
-    "title": "Notification Broadcast Message Inquiry",
     "exportExcel": false,
     "component": [
         {
@@ -17,24 +16,6 @@
             "value": "",
             "label": "Job Id",
             "placeholder": "Placeholder"
-        },
-        {
-            "type": "dropdown",
-            "name": "NHH.MR_NOTIFICATION_TYPE_CODE", 
-            "id": "MrNotifTypeCodeId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "ddlType": "all",
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NOTIFICATION_TYPES",
-            "items": [],
-            "itemsUrl": [],
-            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -81,14 +62,21 @@
             "placeholder": "Placeholder"
         },
         {
+            "type": "textbox",
+            "name": "NTT.NOTIFICATION_TEMPLATE_DESCR",
+            "id": "NotificationTemplateDescrId",
+            "value": "",
+            "label": "Template Descr",
+            "placeholder": "Placeholder"
+        },
+        {
             "type": "datepicker",
             "name": "NHH.SEND_DT",
             "id": "SendDt",
             "datatype": "date",
             "value": "",
             "restriction": "gte",
-            "label": "Send Date From",
-            "datepickerPair": "string",
+            "label": "Send Date >=",
             "placeholder": "Placeholder"
         },
         {
@@ -98,13 +86,28 @@
             "datatype": "date",
             "value": "",
             "restriction": "lte",
-            "label": "Send Date To",
-            "datepickerPair": "string",
+            "label": "Send Date <=",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SWNH.SEND_FROM",
+            "id": "SendFromId",
+            "value": "",
+            "label": "From",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "SWNH.SEND_TO",
+            "id": "SendToId",
+            "value": "",
+            "label": "To",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "name": "SearchNotifBroadcast"
+        "name": "SearchNotifInquirySmsWa"
     },
     "headerList": [
         {
@@ -118,12 +121,6 @@
             "position": "left",
             "label": "Job Id",
             "name": "NotificationJobId"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Type",
-            "name": "MrNotificationTypeDescr"
         },
         {
             "type": "sort",
@@ -158,7 +155,20 @@
         {
             "type": "sort",
             "position": "center",
-            "label": "Send Date"
+            "label": "Send Date",
+            "name": "SendDt"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "From",
+            "name": "SendFrom"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "To",
+            "name": "SendTo"
         }
     ],
     "bodyList": [
@@ -171,11 +181,6 @@
             "type": "text",
             "position": "left",
             "property": "NotificationJobId"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrNotificationTypeDescr"
         },
         {
             "type": "text",
@@ -206,6 +211,16 @@
             "type": "date",
             "position": "center",
             "property": "SendDt"
-        }        
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "SendFrom"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "SendTo"
+        }  
     ]
 }
