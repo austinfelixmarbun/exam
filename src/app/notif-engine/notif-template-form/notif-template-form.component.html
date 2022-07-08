@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="!isHideSubject" [ngClass]="{ 'adins-required': subjectIsRequired }">
-                  <label class="col-md-3 adInsLabel" translate>{{NotifTemplateForm.get("MrNotificationTypeCode").value == notifTypePushNotif ? "TITLE" : "SUBJECT"}}</label>
+                  <label class="col-md-3 adInsLabel" translate>{{subjectValue}}</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per"
                       formControlName="Subject" [required]="subjectIsRequired">

@@ -214,6 +214,10 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   get isHideSubject(){
-    return this.NotifTemplateForm.get("MrNotificationTypeCode").value == this.notifTypeSms || this.NotifTemplateForm.get("MrNotificationTypeCode").value == this.notifTypeWa
+    return [this.notifTypeSms,this.notifTypeWa].includes(this.NotifTemplateForm.get("MrNotificationTypeCode").value);
+  }
+
+  get subjectValue(){
+    return this.NotifTemplateForm.get("MrNotificationTypeCode").value == this.notifTypePushNotif ? "TITLE" : "SUBJECT"
   }
 }
