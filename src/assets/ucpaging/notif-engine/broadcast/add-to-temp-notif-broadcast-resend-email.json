@@ -1,5 +1,7 @@
 {
-    "exportExcel": false,
+    "keyProperty": "NotificationHId",
+    "keyPropCriteria": "NHH.NOTIFICATION_HIST_H_ID",
+    "sectionTitle" : "List Notification Not Sent",
     "component": [
         {
             "type": "textbox",
@@ -70,28 +72,16 @@
             "placeholder": "Placeholder"
         },
         {
-            "type": "datepicker",
-            "name": "NHH.SEND_DT",
-            "id": "SendDt",
-            "datatype": "date",
+            "type": "textbox",
+            "name": "ENH.SEND_FROM",
+            "id": "SendFromId",
             "value": "",
-            "restriction": "gte",
-            "label": "Send Date >=",
-            "placeholder": "Placeholder"
-        },
-        {
-            "type": "datepicker",
-            "name": "NHH.SEND_DT",
-            "id": "SendDt",
-            "datatype": "date",
-            "value": "",
-            "restriction": "lte",
-            "label": "Send Date <=",
+            "label": "From",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "PNH.SEND_TO",
+            "name": "ENH.SEND_TO",
             "id": "SendToId",
             "value": "",
             "label": "To",
@@ -99,15 +89,15 @@
         },
         {
             "type": "textbox",
-            "name": "PNH.TITLE",
-            "id": "PushNotifTitleId",
+            "name": "ENH.SUBJECT",
+            "id": "EmailSubjectId",
             "value": "",
-            "label": "Title",
+            "label": "Subject",
             "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "name": "SearchNotifPush"
+        "name": "SearchNotifEmail"
     },
     "headerList": [
         {
@@ -154,9 +144,9 @@
         },
         {
             "type": "sort",
-            "position": "center",
-            "label": "Send Date",
-            "name": "SendDt"
+            "position": "left",
+            "label": "From",
+            "name": "SendFrom"
         },
         {
             "type": "sort",
@@ -167,8 +157,13 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Title",
+            "label": "Subject",
             "name": "Subject"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Resend"
         }
     ],
     "bodyList": [
@@ -208,9 +203,9 @@
             "property": "Version"
         },
         {
-            "type": "date",
-            "position": "center",
-            "property": "SendDt"
+            "type": "text",
+            "position": "left",
+            "property": "SendFrom"
         },
         {
             "type": "text",
@@ -221,6 +216,22 @@
             "type": "text",
             "position": "left",
             "property": "Subject"
-        }         
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "callback",
+                    "key": "resend",
+                    "property": [
+                        {
+                            "type": "NotificationHistHId",
+                            "property": "NotificationHId"
+                        }
+                    ]
+                }
+            ]
+        }        
     ]
 }

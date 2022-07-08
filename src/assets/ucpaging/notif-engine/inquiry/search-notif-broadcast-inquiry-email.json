@@ -115,7 +115,7 @@
         }
     ],
     "querystring": {
-        "name": "SearchNotifInquiryEmail"
+        "name": "SearchNotifEmail"
     },
     "headerList": [
         {

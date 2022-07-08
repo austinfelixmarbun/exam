@@ -107,7 +107,7 @@
         }
     ],
     "querystring": {
-        "name": "SearchNotifInquirySmsWa"
+        "name": "SearchNotifSmsWa"
     },
     "headerList": [
         {

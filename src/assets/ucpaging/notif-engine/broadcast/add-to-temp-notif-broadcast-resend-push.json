@@ -1,7 +1,6 @@
 {
     "keyProperty": "NotificationHId",
     "keyPropCriteria": "NHH.NOTIFICATION_HIST_H_ID",
-    "title": "Notification Broadcast Message",
     "sectionTitle" : "List Notification Not Sent",
     "component": [
         {
@@ -19,24 +18,6 @@
             "value": "",
             "label": "Job Id",
             "placeholder": "Placeholder"
-        },
-        {
-            "type": "dropdown",
-            "name": "NHH.MR_NOTIFICATION_TYPE_CODE", 
-            "id": "MrNotifTypeCodeId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "ddlType": "all",
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Type",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NOTIFICATION_TYPES",
-            "items": [],
-            "itemsUrl": [],
-            "environment": "FOU"
         },
         {
             "type": "dropdown",
@@ -81,10 +62,34 @@
             "value": "",
             "label": "Template Code",
             "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "NTT.NOTIFICATION_TEMPLATE_DESCR",
+            "id": "NotificationTemplateDescrId",
+            "value": "",
+            "label": "Template Descr",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "PNH.SEND_TO",
+            "id": "SendToId",
+            "value": "",
+            "label": "To",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "PNH.TITLE",
+            "id": "PushNotifTitleId",
+            "value": "",
+            "label": "Title",
+            "placeholder": "Placeholder"
         }
     ],
     "querystring": {
-        "name": "SearchNotifBroadcast"
+        "name": "SearchNotifPush"
     },
     "headerList": [
         {
@@ -98,12 +103,6 @@
             "position": "left",
             "label": "Job Id",
             "name": "NotificationJobId"
-        },
-        {
-            "type": "sort",
-            "position": "left",
-            "label": "Type",
-            "name": "MrNotificationTypeDescr"
         },
         {
             "type": "sort",
@@ -136,6 +135,18 @@
             "name": "Version"
         },
         {
+            "type": "sort",
+            "position": "left",
+            "label": "To",
+            "name": "SendTo"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Title",
+            "name": "Subject"
+        },
+        {
             "type": "label",
             "position": "center",
             "label": "Resend"
@@ -151,11 +162,6 @@
             "type": "text",
             "position": "left",
             "property": "NotificationJobId"
-        },
-        {
-            "type": "text",
-            "position": "left",
-            "property": "MrNotificationTypeDescr"
         },
         {
             "type": "text",
@@ -181,6 +187,16 @@
             "type": "text",
             "position": "center",
             "property": "Version"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "SendTo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Subject"
         },
         {
             "type": "action",
