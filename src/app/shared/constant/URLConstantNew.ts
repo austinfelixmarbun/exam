@@ -1209,6 +1209,7 @@ export class UrlConstantNew{
 
     //UPLOAD
     public UploadFileV2 = this.env.FoundationR3Url + this.url.UploadFileV2;
+    public UploadMultipleFiles = this.env.FoundationR3Url + this.url.UploadMultipleFiles;
     
     // THINGS TO DO
     public GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = this.url.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
