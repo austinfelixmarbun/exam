@@ -101,9 +101,26 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
     this.ShowTempPaging = false;
     this.ShowButton = false;
     this.SetPagingObj(TypeCode);
-    setTimeout(() => {
-      this.ShowTempPaging = true
-    }, 10);
+
+    if(this.TempPagingObj.addCritInput.length > 1){
+      this.TempPagingObj.addCritInput.splice(1,1);
+    }
+
+    let critObj = new CriteriaObj();
+
+    if(TypeCode == CommonConstant.RefMasterTypeCodeNotificationTypesSms || TypeCode == CommonConstant.RefMasterTypeCodeNotificationTypesWA){
+      critObj.restriction = AdInsConstant.RestrictionLike;
+      critObj.propName = 'NHH.MR_NOTIFICATION_TYPE_CODE';
+      critObj.value = TypeCode;
+      
+      this.TempPagingObj.addCritInput.push(critObj);
+    }
+
+    if(TypeCode){
+      setTimeout(() => {
+        this.ShowTempPaging = true
+      }, 10);
+    }
   }
 
   SetPagingObj(TypeCode: string) {
