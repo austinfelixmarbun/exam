@@ -66,5 +66,5 @@ export class URLConstantX{
     public static GetR2CustGroupExposureByCustNo = environment.FoundationR3Url + "/v1" + "/CustX/GetR2CustGroupExposureByCustNo";
 
     // APP_X - GET CUST STATUS
-    public static GetAppCustStatusXByCustNo = environment.losUrl + "/v1" + "/AppX/GetCustStatusByCustNo";
+    public static GetAppCustStatusXByCustNo = environment.LosURL + "/v1" + "/AppX/GetCustStatusByCustNo";
 }
