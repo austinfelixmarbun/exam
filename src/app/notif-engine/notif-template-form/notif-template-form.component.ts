@@ -31,6 +31,8 @@ export class NotifTemplateFormComponent implements OnInit {
   });
 
   readonly notifTypePushNotif: string =CommonConstant.RefMasterTypeCodeNotificationTypesPush;
+  readonly notifTypeSms: string =CommonConstant.RefMasterTypeCodeNotificationTypesSms;
+  readonly notifTypeWa: string =CommonConstant.RefMasterTypeCodeNotificationTypesWA;
 
   readonly QuilConfig = {
     toolbar: [
@@ -209,5 +211,13 @@ export class NotifTemplateFormComponent implements OnInit {
     }
     console.log(invalid);
     console.dir(this.NotifTemplateForm.getRawValue());
+  }
+
+  get isHideSubject(){
+    return [this.notifTypeSms,this.notifTypeWa].includes(this.NotifTemplateForm.get("MrNotificationTypeCode").value);
+  }
+
+  get subjectValue(){
+    return this.NotifTemplateForm.get("MrNotificationTypeCode").value == this.notifTypePushNotif ? "TITLE" : "SUBJECT"
   }
 }
