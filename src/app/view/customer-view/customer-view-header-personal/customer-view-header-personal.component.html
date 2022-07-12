@@ -2,27 +2,13 @@
   <div class="card-body">
     <div class="px-3">
       <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-md-6 adInsLabel" style="padding-left: 36px;" translate>View</label>
-            <div class="col-md-6" style="padding-left: 25px;">
-              <label>
-                <a class="font-weight-bold" (click)="ClickLinkViewCustExposure()"> View Exposure </a>
-              </label>
-            </div>
+      <div class="form-group row">
+        <label class="col-md-3 adInsLabel" style="padding-left: 36px;" translate>View</label>
+          <div class="col-md-2" style="padding-left: 25px;">
+            <label>
+              <a class="font-weight-bold" (click)="ClickLinkViewCustExposure()"> View Exposure </a>
+            </label>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control" translate>Customer Status</label>
-            </div>
-            <div class="col-md-6">
-              <label class="label-control" style="margin-left: -10px;" translate>{{CustStatus}}</label>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
