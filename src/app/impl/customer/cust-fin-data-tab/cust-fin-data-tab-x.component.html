@@ -111,13 +111,24 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-2 adInsLabel" for="MonthlyInstallmentAmt" translate>Monthly Installment Amount</label>
+            <label class="col-md-2 adInsLabel" for="OtherMonthlyInstallmentDsf" translate>Total Monthly Installment DSF</label>
             <div class="col-md-6">
-              <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyInstallmentAmt"
+              <input type="" currencyMask class="form-control adInsInput" formControlName="OtherMonthlyInstallmentDsf"
                      (ngModelChange)="onChangeCustFinInput()"
-                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyInstallmentAmt.invalid }"
+                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.OtherMonthlyInstallmentDsf.invalid }"
+                     [options]="{align: 'right', allowNegative: false}" [attr.disabled]="true" />
+              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.OtherMonthlyInstallmentDsf"
+                                  [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" for="OtherMonthlyInstAmt" translate>Total Monthly Installment Other</label>
+            <div class="col-md-6">
+              <input type="" currencyMask class="form-control adInsInput" formControlName="OtherMonthlyInstAmt"
+                     (ngModelChange)="onChangeCustFinInput()"
+                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.OtherMonthlyInstAmt.invalid }"
                      [options]="{align: 'right', allowNegative: false}" />
-              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyInstallmentAmt"
+              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.OtherMonthlyInstAmt"
                                   [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
           </div>
@@ -156,7 +167,10 @@
           </div>
           <div class="form-group row">
             <div class="col-md-12" style="text-align: right">
-              <button class="btn btn-raised btn-primary" type="button" (click)="calculatePersonalFinData()">
+              <button *ngIf="!IsAddFinData" class="btn btn-raised btn-warning mr-1" type="button" (click)="ReCalculatePersonalFinData()">
+                Re-Calculate
+              </button>
+              <button class="btn btn-raised btn-primary mr-1" type="button" (click)="calculatePersonalFinData()">
                 Calculate
               </button>
             </div>
@@ -329,7 +343,17 @@
           <!--            </div>-->
           <!--          </div>-->
           <div class="form-group row">
-            <label class="col-md-2 adInsLabel" for="OthMonthlyInstAmt" translate>Other Monthly Installment Amount</label>
+            <label class="col-md-2 adInsLabel" for="OtherMonthlyInstallmentDsf" translate>Total Monthly Installment DSF</label>
+            <div class="col-md-6">
+              <input type="" currencyMask class="form-control adInsInput" formControlName="OtherMonthlyInstallmentDsf"
+                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OtherMonthlyInstallmentDsf.invalid }"
+                     (ngModelChange)="onChangeCustFinInput()" [attr.disabled]="true"/>
+              <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OtherMonthlyInstallmentDsf"
+                                  [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" for="OthMonthlyInstAmt" translate>Total Monthly Installment Other</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OthMonthlyInstAmt"
                      [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OthMonthlyInstAmt.invalid }"
@@ -458,7 +482,10 @@
 
           <div class="form-group row">
             <div class="col-md-12" style="text-align: right">
-              <button class="btn btn-raised btn-primary" type="button" (click)="calculateCompanyFinData()">
+              <button *ngIf="!IsAddFinData" class="btn btn-raised btn-warning mr-1" type="button" (click)="ReCalculateCompanyFinData()">
+                Re-Calculate
+              </button>
+              <button class="btn btn-raised btn-primary mr-1" type="button" (click)="calculateCompanyFinData()">
                 Calculate
               </button>
             </div>

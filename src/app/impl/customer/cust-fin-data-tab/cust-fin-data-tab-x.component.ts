@@ -1,22 +1,27 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
-import {FormBuilder, Validators} from '@angular/forms';
-import {CustPersonalFinDataObj} from 'app/shared/model/cust-personal-fin-data-obj.model';
-import {CustCompanyFinDataObj} from 'app/shared/model/cust-company-fin-data-obj.model';
-import {CustPersonalObj} from 'app/shared/model/cust-personal-obj.model';
-import {map, mergeMap} from 'rxjs/operators';
-import {forkJoin} from 'rxjs';
-import {CustCompanyObj} from 'app/shared/model/cust-company-obj.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DatePipe, formatDate} from '@angular/common';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {ExceptionConstant} from 'app/shared/constant/ExceptionConstant';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ReqRefMasterByTypeCodeAndMappingCodeObj} from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
-import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CustPersonalFinDataObj } from 'app/shared/model/cust-personal-fin-data-obj.model';
+import { CustCompanyFinDataObj } from 'app/shared/model/cust-company-fin-data-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe, formatDate } from '@angular/common';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { UcDropdownListCallbackObj, UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { CustPersonalFinDataObjX } from 'app/impl/shared/model/CustPersonalFinDataObjX';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { CustCompanyFinDataObjX } from 'app/impl/shared/model/CustCompanyFinDataObjX';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-cust-fin-data-tab-x',
@@ -41,13 +46,15 @@ export class CustFinDataTabXComponent implements OnInit {
   Page: string;
   attrGroup: string;
   attrGroups: Array<string> = new Array<string>();
-  IncomeList: Array<{Index: number, Amount: number}> = new Array<{Index: number, Amount: number}>();
+  IncomeList: Array<{ Index: number, Amount: number }> = new Array<{ Index: number, Amount: number }>();
   TotalIncomeListAmt: number = 0;
-  ExpenseList: Array<{Index: number, Amount: number}> = new Array<{Index: number, Amount: number}>();
+  ExpenseList: Array<{ Index: number, Amount: number }> = new Array<{ Index: number, Amount: number }>();
   TotalExpenseListAmt: number = 0;
+  CustNo: string = "";
 
   CustPersonalFinDataForm = this.fb.group({
     CustPersonalFinDataId: [0, [Validators.required]],
+    CustPersonalFinDataXId: [0, [Validators.required]],
     CustPersonalId: [0, [Validators.required]],
     MonthlyIncomeAmt: ['', Validators.required],
     MonthlyExpenseAmt: [''],
@@ -60,12 +67,14 @@ export class CustFinDataTabXComponent implements OnInit {
     NettProfitMonthlyAmt: [0],
     OtherIncomeAmt: [''],
     OtherMonthlyInstAmt: [0],
+    OtherMonthlyInstallmentDsf: [0],
     DateAsOf: [''],
     RowVersion: ['']
   });
 
   CustCompanyFinDataForm = this.fb.group({
     CustCompanyFinDataId: [0, [Validators.required]],
+    CustCompanyFinDataXId: [0, [Validators.required]],
     CustCompanyId: [0, [Validators.required]],
     GrossMonthlyIncomeAmt: [''],
     GrossProfitAmt: [''],
@@ -80,6 +89,7 @@ export class CustFinDataTabXComponent implements OnInit {
     GrowthPrcnt: ['', [Validators.pattern('^[0-9]+([,.][0-9]+)?$'), Validators.max(100)]],
     WorkingCapitalAmt: [''],
     OthMonthlyInstAmt: [''],
+    OtherMonthlyInstallmentDsf: [''],
     DateAsOf: [''],
     Revenue: [''],
     OprCost: [''],
@@ -129,6 +139,13 @@ export class CustFinDataTabXComponent implements OnInit {
     this.BusinessDt = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
     this.attrGroup = this.MrCustTypeCode == CommonConstant.CustTypeCompany ? CommonConstant.AttrGroupCustCompanyFinData : CommonConstant.AttrGroupCustPersonalFinData;
 
+    //getCustNo
+    this.httpClient.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
+      (response: CustObj) => {
+        this.CustNo = response.CustNo;
+      }
+    );
+
     var datePipe = new DatePipe("en-US");
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       this.attrGroups = [
@@ -155,7 +172,7 @@ export class CustFinDataTabXComponent implements OnInit {
         mergeMap((response: CustPersonalObj) => {
           var custPersonalFinData = new CustPersonalFinDataObj();
           custPersonalFinData.CustPersonalId = response.CustPersonalId;
-          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id : response.CustPersonalId});
+          let custFinData = this.httpClient.post(URLConstant.GetCustPersonalFinDataByCustPersonalId, {Id: response.CustPersonalId });
           let refMasterSourceIncome: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
           refMasterSourceIncome.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeSourceIncome;
           let sourceIncomeList = this.httpClient.post(URLConstant.GetListActiveRefMaster, refMasterSourceIncome);
@@ -197,7 +214,7 @@ export class CustFinDataTabXComponent implements OnInit {
       var custCompanyData;
       var custCompany = new CustCompanyObj();
       custCompany.CustId = this.CustId;
-      this.httpClient.post(URLConstant.GetCustCompanyByCustId, {Id : this.CustId}).pipe(
+      this.httpClient.post(URLConstant.GetCustCompanyByCustId, { Id: this.CustId }).pipe(
         map((response: CustCompanyObj) => {
           custCompanyData = response;
           return response;
@@ -205,7 +222,7 @@ export class CustFinDataTabXComponent implements OnInit {
         mergeMap((response: CustCompanyObj) => {
           var custCompanyFinData = new CustCompanyFinDataObj();
           custCompanyFinData.CustCompanyId = response.CustCompanyId;
-          return this.httpClient.post(URLConstant.GetCustCompanyFinDataByCustCompanyId, {Id : response.CustCompanyId});
+          return this.httpClient.post(URLConstant.GetCustCompanyFinDataByCustCompanyId, { Id: response.CustCompanyId });
         })
       ).subscribe(
         (response: any) => {
@@ -242,6 +259,8 @@ export class CustFinDataTabXComponent implements OnInit {
         }
       );
       //  this.bindFinancialAttribute();
+
+
     }
   }
 
@@ -315,7 +334,7 @@ export class CustFinDataTabXComponent implements OnInit {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
         var CustPersonalFinDataCustomObj = { Id: this.ListCustPersonalFinData[FinDataIndex].CustPersonalFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj).toPromise().then(
+        await this.httpClient.post(URLConstantX.DeleteCustPersonalFinData, CustPersonalFinDataCustomObj).toPromise().then(
           (response) => {
             this.ListCustPersonalFinData.splice(FinDataIndex, 1);
           }
@@ -323,7 +342,7 @@ export class CustFinDataTabXComponent implements OnInit {
       }
       else if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) {
         var CustCoyFinDataCustomObj = { Id: this.ListCustCoyFinData[FinDataIndex].CustCompanyFinDataId };
-        await this.httpClient.post(URLConstant.DeleteCustCompanyFinData, CustCoyFinDataCustomObj).toPromise().then(
+        await this.httpClient.post(URLConstantX.DeleteCustCompanyFinData, CustCoyFinDataCustomObj).toPromise().then(
           (response) => {
             this.ListCustCoyFinData.splice(FinDataIndex, 1);
           }
@@ -358,6 +377,34 @@ export class CustFinDataTabXComponent implements OnInit {
       DateAsOf: custFinData.DateAsOf ? datePipe.transform(custFinData.DateAsOf, 'yyyy-MM-dd') : '',
       RowVersion: custFinData.RowVersion
     });
+
+    if (!this.IsAddFinData) {
+      this.httpClient.post(URLConstantX.GetCustPersonalFinDataXByCustPersonalFinDataId, { Id: custFinData.CustPersonalFinDataId }).subscribe(
+        (response: any) => {
+          //jika sudah ada di x
+          if (response.CustPersonalFinDataXId != 0) {
+            this.CustPersonalFinDataForm.patchValue({
+              CustPersonalFinDataXId: response.CustPersonalFinDataXId,
+              OtherMonthlyInstallmentDsf: response.OtherMonthlyInstallmentDsf
+            });
+          }else{
+            this.CustCompanyFinDataForm.patchValue({
+              CustCompanyFinDataXId: 0,
+              OtherMonthlyInstallmentDsf: 0
+            });
+          }
+        }
+      );
+    }else{
+      this.httpClient.post(URLConstantX.GetTotalInstAmtFromR2AndR3ByCustNo, { TrxNo: this.CustNo }).subscribe(
+        (response: any) => {
+          this.CustPersonalFinDataForm.patchValue({
+            CustPersonalFinDataXId: 0,
+            OtherMonthlyInstallmentDsf: response.TotalInstAmt
+          });
+        }
+      );
+    }
 
     if (this.IsAddFinData) this.CustPersonalFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     else this.CustPersonalFinDataForm.controls['DateAsOf'].clearValidators();
@@ -406,6 +453,37 @@ export class CustFinDataTabXComponent implements OnInit {
     if (this.IsAddFinData) this.CustCompanyFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     else this.CustCompanyFinDataForm.controls['DateAsOf'].clearValidators();
     this.CustCompanyFinDataForm.controls['DateAsOf'].updateValueAndValidity();
+
+    let reqByTrxNo: GenericObj = new GenericObj();
+    reqByTrxNo.TrxNo = this.CustNo;
+   
+
+    if (!this.IsAddFinData) {
+      this.httpClient.post(URLConstantX.GetCustCompanyFinDataXByCustCompanyFinDataId, { Id: custFinData.CustCompanyFinDataId }).subscribe(
+        (response: any) => {
+          if (response.CustCompanyFinDataXId != 0) {
+            this.CustCompanyFinDataForm.patchValue({
+              CustCompanyFinDataXId: response.CustCompanyFinDataXId,
+              OtherMonthlyInstallmentDsf: response.OtherMonthlyInstallmentDsf
+            });
+          }else{
+              this.CustCompanyFinDataForm.patchValue({
+                CustCompanyFinDataXId: 0,
+                OtherMonthlyInstallmentDsf: 0
+              });
+          }
+        }
+      );
+    }else{
+      this.httpClient.post(URLConstantX.GetTotalInstAmtFromR2AndR3ByCustNo, { TrxNo: this.CustNo }).subscribe(
+        (response: any) => {
+          this.CustCompanyFinDataForm.patchValue({
+            CustCompanyFinDataXId: 0,
+            OtherMonthlyInstallmentDsf: response.TotalInstAmt
+          });
+        }
+      );
+    }
   }
 
   onChangeCustFinInput() {
@@ -425,8 +503,9 @@ export class CustFinDataTabXComponent implements OnInit {
       var nettProfitMonthlyAmt = formData.NettProfitMonthlyAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.NettProfitMonthlyAmt.toString()));
       var otherIncomeAmt = formData.OtherIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherIncomeAmt.toString()));
       var monthlyExpenseAmt = formData.MonthlyExpenseAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyExpenseAmt.toString()));
-      var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyInstallmentAmt.toString()));
+      // var monthlyInstallmentAmt = formData.MonthlyInstallmentAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyInstallmentAmt.toString()));
       var otherMonthlyInstAmt = formData.OtherMonthlyInstAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstAmt.toString()));
+      var otherMonthlyInstallmentDsf = formData.OtherMonthlyInstallmentDsf == "" ? 0 : parseInt(this.currencyToNumber(formData.OtherMonthlyInstallmentDsf.toString()));
       var totalAmt = 0;
 
       if (formData.IsJoinIncome) {
@@ -435,7 +514,7 @@ export class CustFinDataTabXComponent implements OnInit {
       else {
         totalAmt = monthlyIncomeAmt + totalIncomeAmt + nettIncomeAmt + nettProfitMonthlyAmt + otherIncomeAmt;
       }
-      var netIncomeAmt = totalAmt - (monthlyExpenseAmt + monthlyInstallmentAmt + otherMonthlyInstAmt);
+      var netIncomeAmt = totalAmt - (monthlyExpenseAmt + otherMonthlyInstAmt + otherMonthlyInstallmentDsf);
 
       this.CustPersonalFinDataForm.patchValue({
         TotalIncomeAmt: totalAmt,
@@ -446,13 +525,38 @@ export class CustFinDataTabXComponent implements OnInit {
     }
   }
 
-  calculateCompanyFinData(){
-    this.NettIncomeAmtCoy = this.CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.value - 
-                            this.CustCompanyFinDataForm.controls.OthMonthlyInstAmt.value - 
-                            this.CustCompanyFinDataForm.controls.OprCost.value;
+  calculateCompanyFinData() {
+    this.NettIncomeAmtCoy = this.CustCompanyFinDataForm.controls.GrossMonthlyIncomeAmt.value -
+      this.CustCompanyFinDataForm.controls.OthMonthlyInstAmt.value -
+      this.CustCompanyFinDataForm.controls.OprCost.value -
+      this.CustCompanyFinDataForm.controls.OtherMonthlyInstallmentDsf.value
+      ;
     this.isCalculated = true;
   }
 
+  async ReCalculateCompanyFinData() {
+      await this.httpClient.post(URLConstantX.GetTotalInstAmtFromR2AndR3ByCustNo, { TrxNo: this.CustNo }).subscribe(
+        (response: any) => {
+          this.CustCompanyFinDataForm.patchValue({
+            OtherMonthlyInstallmentDsf: response.TotalInstAmt
+          });
+        }
+      );
+    this.isCalculated = false;
+  }
+
+  async ReCalculatePersonalFinData() {
+    await this.httpClient.post(URLConstantX.GetTotalInstAmtFromR2AndR3ByCustNo, { TrxNo: this.CustNo }).subscribe(
+      (response: any) => {
+        this.CustPersonalFinDataForm.patchValue({
+          OtherMonthlyInstallmentDsf: response.TotalInstAmt
+        });
+      }
+    );
+    this.isCalculated = false;
+  }
+
+  
   calculateFinData() {
     var formData = this.CustPersonalFinDataForm.value;
     var monthlyIncomeAmt = formData.MonthlyIncomeAmt == "" ? 0 : parseInt(this.currencyToNumber(formData.MonthlyIncomeAmt.toString()));
@@ -501,7 +605,7 @@ export class CustFinDataTabXComponent implements OnInit {
       DateAsOf: this.CustPersonalFinDataForm.controls['DateAsOf'].value,
       MonthlyIncomeAmt: this.CustPersonalFinDataForm.controls['MonthlyIncomeAmt'].value,
       MonthlyExpenseAmt: this.CustPersonalFinDataForm.controls['MonthlyExpenseAmt'].value,
-      MonthlyInstallmentAmt: this.CustPersonalFinDataForm.controls['MonthlyInstallmentAmt'].value,
+      MonthlyInstallmentAmt: this.CustPersonalFinDataForm.controls['OtherMonthlyInstallmentDsf'].value + this.CustPersonalFinDataForm.controls['OtherMonthlyInstAmt'].value,
       MrSourceOfIncomeCode: this.CustPersonalFinDataForm.controls['MrSourceOfIncomeCode'].value,
       SpouseMonthlyIncomeAmt: this.CustPersonalFinDataForm.controls['SpouseMonthlyIncomeAmt'].value,
       IsJoinIncome: this.CustPersonalFinDataForm.controls['IsJoinIncome'].value,
@@ -513,9 +617,17 @@ export class CustFinDataTabXComponent implements OnInit {
       RowVersion: this.CustPersonalFinDataForm.controls['RowVersion'].value,
     };
 
-    var url = this.IsAddFinData ? URLConstant.AddCustPersonalFinData : URLConstant.EditCustPersonalFinData
+    //kalo digabung diwrap dalam objek x
+    let custFinDataX: CustPersonalFinDataObjX = {
+      CustPersonalFinDataXId: this.CustPersonalFinDataForm.controls['CustPersonalFinDataXId'].value,
+      CustPersonalFinDataId: this.CustPersonalFinDataForm.controls['CustPersonalFinDataId'].value,
+      OtherMonthlyInstallmentDsf: this.CustPersonalFinDataForm.controls['OtherMonthlyInstallmentDsf'].value,
+    };
+
+    var url = this.IsAddFinData ? URLConstantX.AddCustPersonalFinData : URLConstantX.EditCustPersonalFinData
     var CustFinDataCustomObj = {
-      CustFinDataObj: custFinData
+      CustFinDataObj: custFinData,
+      CustFinDataObjX: custFinDataX
     }
 
     await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(
@@ -528,6 +640,8 @@ export class CustFinDataTabXComponent implements OnInit {
   }
 
   async saveCustCoyFinData() {
+    console.log(this.CustCompanyFinDataForm)
+
     if (!this.CustCompanyFinDataForm.valid) return;
 
     if (!this.isCalculated) {
@@ -565,9 +679,16 @@ export class CustFinDataTabXComponent implements OnInit {
       RowVersion: this.CustCompanyFinDataForm.controls['RowVersion'].value,
     };
 
-    var url = this.IsAddFinData ? URLConstant.AddCustCompanyFinData : URLConstant.EditCustCompanyFinData
+    let custFinDataX: CustCompanyFinDataObjX = {
+      CustCompanyFinDataXId: this.CustCompanyFinDataForm.controls['CustCompanyFinDataXId'].value,
+      CustCompanyFinDataId: this.CustCompanyFinDataForm.controls['CustCompanyFinDataId'].value,
+      OtherMonthlyInstallmentDsf: this.CustCompanyFinDataForm.controls['OtherMonthlyInstallmentDsf'].value,
+    };
+
+    var url = this.IsAddFinData ? URLConstantX.AddCustCompanyFinData : URLConstantX.EditCustCompanyFinData
     var CustFinDataCustomObj = {
-      CustFinDataObj: custFinData
+      CustFinDataObj: custFinData,
+      CustFinDataObjX: custFinDataX
     }
 
     await this.httpClient.post(url, CustFinDataCustomObj).toPromise().then(

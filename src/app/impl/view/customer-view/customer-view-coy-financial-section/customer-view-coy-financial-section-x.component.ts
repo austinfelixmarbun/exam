@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
@@ -36,9 +37,9 @@ export class CustomerViewCoyFinancialSectionXComponent implements OnInit {
   async getListCustCoyFinData()
   {
     this.ListCustCoyFinData = [];
-    await this.http.post(URLConstant.GetListCustCompanyFinDataByCustId,  {Id: this.CustId}).toPromise().then((response) => {
+    await this.http.post(URLConstantX.GetListCustCompanyFinDataXForCustViewByCustId,  {Id: this.CustId}).toPromise().then((response) => {
       console.log(response)
-      this.ListCustCoyFinData = response['ListCustCompanyFinData'];
+      this.ListCustCoyFinData = response['ListCustCompanyFinDataX'];
     });
 
   }
