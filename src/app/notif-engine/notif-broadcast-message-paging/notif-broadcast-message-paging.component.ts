@@ -8,7 +8,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { Router } from '@angular/router';
 import { ResendAllNotificationObj } from 'app/shared/model/notif-engine/resend-all-notification-obj';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { ReqResendAllNotificationObj } from 'app/shared/model/notif-engine/req-resend-all-notification-obj';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
@@ -35,15 +34,6 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
   ngOnInit() {
     this.GetRefMasterListKeyValueActiveByCode(CommonConstant.RefMasterTypeCodeNotificationTypes);
     this.TempPagingObj.enviromentUrl = this.UrlConstantNew.env.NotifEngineURL + '/v2.1';
-
-    let criteriaListTempPagingObj = new Array();
-    let criteriaTempPagingObj = new CriteriaObj();
-    criteriaTempPagingObj.DataType = "date";
-    criteriaTempPagingObj.propName = 'NHH.SEND_DT';
-    criteriaTempPagingObj.restriction = AdInsConstant.RestrictionIsNull;
-    criteriaListTempPagingObj.push(criteriaTempPagingObj);
-
-    this.TempPagingObj.addCritInput = criteriaListTempPagingObj;
   }
 
   GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
@@ -102,9 +92,8 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
     this.ShowButton = false;
     this.SetPagingObj(TypeCode);
 
-    if(this.TempPagingObj.addCritInput.length > 1){
-      this.TempPagingObj.addCritInput.splice(1,1);
-    }
+    this.TempPagingObj.addCritInput = new Array<CriteriaObj>();
+    this.SetCritIsNullSendDt();
 
     let critObj = new CriteriaObj();
 
@@ -121,6 +110,14 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
         this.ShowTempPaging = true
       }, 10);
     }
+  }
+
+  SetCritIsNullSendDt(){
+    let criteriaTempPagingObj = new CriteriaObj();
+    criteriaTempPagingObj.DataType = "date";
+    criteriaTempPagingObj.propName = 'NHH.SEND_DT';
+    criteriaTempPagingObj.restriction = AdInsConstant.RestrictionIsNull;
+    this.TempPagingObj.addCritInput.push(criteriaTempPagingObj);
   }
 
   SetPagingObj(TypeCode: string) {
