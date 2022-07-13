@@ -1244,5 +1244,6 @@ export class UrlConstantNew{
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
     public MultipleSendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngine;
+    public MultipleSendToNotificationEngineEmail = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngineEmail;
     public MultipleResendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleResendToNotificationEngine;
 }

@@ -223,6 +223,8 @@ export class CommonConstant {
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
     public static GsCodeIdTypeExpDtRequired = "ID_TYPE_EXP_DT_REQUIRED";
     public static GsCodeIdTypeExpDtReadonly = "ID_TYPE_EXP_DT_READONLY";
+    public static GsCodeEmailAttachmentFormat = "EMAIL_ATTCHMNT_FORMAT";
+    public static GsCodeEmailAttachmentMaxSize = "EMAIL_ATTCHMNT_MAX_SIZE";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
