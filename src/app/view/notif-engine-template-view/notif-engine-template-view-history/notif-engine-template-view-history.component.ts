@@ -28,7 +28,7 @@ export class NotifEngineTemplateViewHistoryComponent implements OnInit {
   async GetListTemplateHist(listTemplateHist: Array<NotificationTemplateObj>) {
     await this.http.post(this.UrlConstantNew.GetListNotificationTemplateByNotificationTemplateCode, { Code: this.TemplateCode }).toPromise().then(
       (response: Array<NotificationTemplateObj>) => {
-        listTemplateHist = response;
+        listTemplateHist = response["ReturnObject"];
       }
     );
     return listTemplateHist;
