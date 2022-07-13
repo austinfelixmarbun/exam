@@ -9,6 +9,8 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { HttpClient } from '@angular/common/http';
+import { SendToNotificationEngineObj } from 'app/shared/model/notif-engine/send-to-notification-engine-obj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 
 interface IImageMeta {
   type: string;
@@ -27,7 +29,8 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
-  @Output() FileUploadSuccess: EventEmitter<any> = new EventEmitter;
+  @Input() SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
+  @Output() SendEmailSuccess: EventEmitter<boolean> = new EventEmitter();
   readonly title: string = "Broadcast Email";
 
   readonly QuilConfig = {
@@ -49,17 +52,12 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
       [{ 'align': [] }],
 
       ['clean'],                                         // remove formatting button
-
-      ['image', 'video']                         // link and image, video
     ],
-    imageDropAndPaste: {
-      handler: this.imageHandler.bind(this),
-    },
     // placeholder: 'Input Message...',
     // theme: 'snow',
   };
 
-  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit(): void {
     Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
@@ -74,10 +72,6 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     if (!BodyControl) {
       this.parentForm.addControl("Body", this.fb.control(""));
     }
-    // const FileAttachmentControl = this.parentForm.get("FileAttachment");
-    // if (!FileAttachmentControl) {
-    //   this.parentForm.addControl("FileAttachment", this.fb.control(""));
-    // }
   }
 
   formatsAllowed: string = '.jpg,.png,.pdf,.docx,.txt,.gif,.jpeg';
@@ -103,18 +97,15 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    const FileAttachmentControl = this.parentForm.get("FileAttachment");
-    if (FileAttachmentControl) {
-      this.parentForm.removeControl("FileAttachment");
-    }
+    this.selectedFiles = [];
+    this.notAllowedList = [];
+    this.maxSize = 10;
+    this.formatsAllowed = '.jpg,.png,.pdf,.docx,.txt,.gif,.jpeg';
   }
 
   selectedFiles: File[] = [];
   notAllowedList: File[] = [];
   FileAttachmentChange(event: Event) {
-    console.log(event);
-    console.dir(event);
-
     // ITERATE SELECTED FILES
     let target: HTMLInputElement = event.target as HTMLInputElement;
     let srcElement: HTMLInputElement = event.srcElement as HTMLInputElement;
@@ -124,7 +115,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     //   file = event.dataTransfer.files;
     //   // console.log("type: drop");
     // }
-    console.log(file);
+    // console.log(file);
     let reg: RegExp = /(?:\.([^.]+))?$/;
     
     //#region Init for CheckFileFormat
@@ -141,12 +132,6 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
       let frmtAllowed = this.CheckFileFormat(currentFileExt, listFormatsAllowed);
       this.SetSelectedFiles(frmtAllowed, fileData);
     }
-
-    console.log(this.selectedFiles);
-    console.log(this.notAllowedList);
-    console.log(this.convertSize(this.GetTotalSizeFile));
-    console.log(this.convertSize(this.MaxSizeFile));
-    console.log(this.CheckTotalSizeFileIsValid);
   }
 
   // true => Total Size Valid 
@@ -173,7 +158,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
   private SetSelectedFiles(frmtAllowed: boolean, fileData: File){
     if (!frmtAllowed) {
-      // console.log("FORMAT NOT ALLOWED");
+      // FORMAT NOT ALLOWED
       this.notAllowedList.push(fileData);
       return;
     } 
@@ -187,52 +172,31 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     return size;
   }
 
-  private uploadFiles() {
-    let i: number = 0;
+  async SendEmail() {
+    this.ValidateUploadFileAttachment();
 
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
     let selectedFiles: File[] = this.selectedFiles;
-    let listFileToUpload: Array<{ FileType: string, File: File }> = new Array();
-    for (i = 0; i < selectedFiles.length; i++) {
+    for (let i = 0; i < selectedFiles.length; i++) {
       // Add DATA TO BE SENT
-      formData.append(
-        "Files",
-        selectedFiles[i] as Blob /*, this.selectedFiles[i].name*/
-      );
-      listFileToUpload.push({ FileType: "", File: selectedFiles[i] });
+      formData.append("Files", selectedFiles[i] as Blob);
     }
 
-    xhr.onreadystatechange = evnt => {
-      // console.log("onready");
+    // #region xhr response api
+    xhr.onreadystatechange = async evnt => {
+      // Api Response ready
       if (xhr.readyState === 4) {
-        console.log(xhr.status);
-        console.log(xhr.response);
-        console.log(evnt);
+        var response = JSON.parse(xhr.response);
         if (xhr.status !== 200 && xhr.status !== 201) {
-          // isError = true;
-          // this.progressBarShow = false;
-          // this.uploadBtn = false;
-          // this.uploadMsg = true;
-          // this.afterUpload = true;
-          // this.uploadMsgText = this.replaceTexts.afterUploadMsg_error;
-          // this.uploadMsgClass = 'text-danger lead';
-          // console.log(this.uploadMsgText);
+          throw this.toastr.warningMessage(response['message']);
         }
-        else {
-          var response = JSON.parse(xhr.response);
-          if (response.HeaderObj.StatusCode != '200') {
-            // isError = true;
-            // this.progressBarShow = false;
-            // this.uploadBtn = false;
-            // this.uploadMsg = true;
-            // this.afterUpload = true;
-            // this.uploadMsgText = this.replaceTexts.afterUploadMsg_error + response.HeaderObj.Message;
-            // this.uploadMsgClass = 'text-danger lead';
-          }
+        
+        if (response.HeaderObj.StatusCode == '200') {
+          this.toastr.successMessage(response['message']);
+          this.SendEmailSuccess.emit();
         }
-        // this.ApiResponse.emit(xhr);
       }
     };
 
@@ -245,31 +209,42 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     };
 
     xhr.onload = evnt => {
-      // console.log("onload");
-      // console.log(evnt);
-      // this.progressBarShow = false;
-      // this.uploadBtn = false;
-      // this.uploadMsg = true;
-      // this.afterUpload = true;
-      // if (!isError) {
-      //   this.uploadMsgText = this.replaceTexts.afterUploadMsg_success;
-      //   this.uploadMsgClass = 'text-success lead';
-      //   // console.log(this.uploadMsgText + " " + this.selectedFiles.length + " file");
-      // }
     };
 
     xhr.onerror = evnt => {
       console.log("onerror");
       console.log(evnt);
     };
+    // #endregion
 
-    xhr.open('POST', this.UrlConstantNew.UploadMultipleFiles, true);
+    xhr.open('POST', this.UrlConstantNew.MultipleSendToNotificationEngineEmail, true);
     let token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
     xhr.setRequestHeader('AdInsKey', `${token}`);
-    xhr.send(formData);
+
+    //#region set object request
+    Object.keys(this.SendToNotificationEngineSaveObj).forEach(key => {
+      formData.append(key, this.SendToNotificationEngineSaveObj[key]);
+    });
+    // set to EmailNotificationObj
+    Object.keys(this.SendToNotificationEngineSaveObj.EmailNotificationObj).forEach(key => {
+      formData.append("EmailNotificationObj." + key, this.SendToNotificationEngineSaveObj.EmailNotificationObj[key]);
+    });
+    //#endregion
+
+    await xhr.send(formData);
   }
 
-  private get MaxSizeFile(): number {
+  private ValidateUploadFileAttachment(): void {
+    if (this.notAllowedList.length > 0) {
+      throw this.toastr.warningMessage("Delete All Invalid File");
+    }
+    if (!this.CheckTotalSizeFileIsValid) {
+      let maxSize: string = this.convertSize(this.MaxSizeFile);
+      throw this.toastr.warningMessage("Total Attachments' size can not be more than " + maxSize);
+    }
+  }
+
+  get MaxSizeFile(): number {
     return this.maxSize * 1024000;
   }
 
@@ -279,47 +254,16 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
       : (fileSize / 1024000).toFixed(2) + ' MB';
   }
 
-  removeFile(idx: number, sf_na: string) {
-    switch(sf_na){
-      case 'sf':
+  readonly removeFileSelected: string = "sf";
+  readonly removeFileNotSelected: string = "na";
+  removeFile(idx: number, type: string) {
+    switch(type){
+      case this.removeFileSelected:
         this.selectedFiles.splice(idx, 1);
         break;
-      case 'na':
+      case this.removeFileNotSelected:
         this.notAllowedList.splice(idx, 1);
         break;
     }
-  }
-
-  image: IImageMeta = {
-    type: '',
-    dataUrl: '',
-    blobUrl: '',
-    file: null,
-  };
-  imageHandler(dataUrl: string, type: string, imageData: QuillImageData) {
-    imageData
-      .minify({
-        maxWidth: 320,
-        maxHeight: 320,
-        quality: 0.7,
-      })
-      .then((miniImageData) => {
-        if (miniImageData instanceof QuillImageData) {
-          const blob = miniImageData.toBlob();
-          const file = miniImageData.toFile('my_cool_image.png');
-
-          console.log(`type: ${type}`);
-          console.log(`dataUrl: ${dataUrl}`);
-          console.log(`blob: ${blob}`);
-          console.log(`file: ${file}`);
-
-          this.image = {
-            type,
-            dataUrl,
-            blobUrl: this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)),
-            file,
-          };
-        }
-      });
   }
 }

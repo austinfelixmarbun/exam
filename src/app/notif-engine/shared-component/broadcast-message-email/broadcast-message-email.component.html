@@ -53,32 +53,31 @@
       <label for="uploadBtn" class="btn btn-primary btn-sm afu-select-btn">CHOOSE FILE</label>
       <input type="file" id="uploadBtn" style="display: none" (change)="FileAttachmentChange($event)"
         title="Select file" name="files[]" [accept]=formatsAllowed [attr.multiple]="true" />
-      <!-- <span class="px-1">{{GetTotalSizeFile}}</span> -->
-      <label class="px-1 adInsLabel" [ngClass]="{ 'text-danger': !CheckTotalSizeFileIsValid }">{{convertSize(GetTotalSizeFile)}}</label>
-      <!--Selected file list-->
-      <div style="padding-left: 15px" class="row afu-valid-file" *ngFor="let sf of selectedFiles;let i=index">
-        <p class="col-xs-3 textOverflow"><span class="text-primary">{{sf.name}}</span></p>
-        <p class="col-xs-3 padMarg sizeC">
-          <strong>({{convertSize(sf.size)}})</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
-        <!--  <input class="col-xs-3 progress caption" type="text"  placeholder="Caption.."  [(ngModel)]="Caption[i]"  *ngIf="uploadClick"/> -->
-        <!-- <div class="progress col-xs-3 padMarg afu-progress-bar"
-          *ngIf="singleFile && progressBarShow && !hideProgressBar">
-          <span class="progress-bar progress-bar-success" role="progressbar"
-            [ngStyle]="{'width':percentComplete+'%'}">{{percentComplete}}%</span>
-        </div> -->
-        <a class="col-xs-1" role="button" (click)="removeFile(i,'sf')"><i
-            class="fa fa-times"></i></a>
-      </div>
-      <!--Invalid file list-->
-      <div style="padding-left: 15px" class="row text-danger afu-invalid-file" *ngFor="let na of notAllowedList;let j=index">
-        <p class="col-xs-3 textOverflow"><span class="text-primary">{{na.name}}</span></p>
-        <p class="col-xs-3 padMarg sizeC">
-          <strong>({{convertSize(na.size)}})</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </p>
-        <p class="col-xs-3 ">Invalid Format</p>
-        <a class="col-xs-1 delFileIcon" role="button" (click)="removeFile(j,'na')">&nbsp;<i
-            class="fa fa-times"></i></a>
+      <span class="px-1">
+        <label class="adInsLabel">Total File Size: </label>
+        <label class="adInsLabel" [ngClass]="{ 'text-danger': !CheckTotalSizeFileIsValid }">{{convertSize(GetTotalSizeFile)}} </label>
+        <label class="adInsLabel">&nbsp;/ {{convertSize(MaxSizeFile)}}</label>
+      </span>
+      <div style="overflow: auto; overflow-y: auto; overflow-x: hidden; overflow-wrap: break-word; height: auto; max-height: 150px; padding: 10px;" *ngIf="GetTotalSizeFile > 0">
+        <!--Selected file list-->
+        <div style="padding-left: 15px;" class="row afu-valid-file" *ngFor="let sf of selectedFiles;let i=index">
+          <p class="col-xs-3 textOverflow"><span class="text-primary">{{sf.name}}</span></p>
+          <p class="col-xs-3 padMarg sizeC">
+            <strong>&nbsp;({{convertSize(sf.size)}})</strong>&nbsp;&nbsp;&nbsp;
+          </p>
+          <a class="col-xs-1" role="button" (click)="removeFile(i, removeFileSelected)"><i
+              class="fa fa-times"></i></a>
+        </div>
+        <!--Invalid file list-->
+        <div style="padding-left: 15px; overflow: scroll"  class="row text-danger afu-invalid-file" *ngFor="let na of notAllowedList;let j=index">
+          <p class="col-xs-3 textOverflow"><span class="text-primary">{{na.name}}</span></p>
+          <p class="col-xs-3 padMarg sizeC">
+            <strong>&nbsp;({{convertSize(na.size)}})</strong>&nbsp;&nbsp;&nbsp;
+          </p>
+          <p class="col-xs-3 ">Invalid Format</p>
+          <a class="col-xs-1 delFileIcon" role="button" (click)="removeFile(j, removeFileNotSelected)">&nbsp;<i
+              class="fa fa-times"></i></a>
+        </div>
       </div>
     </div>
   </div>

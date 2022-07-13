@@ -21,6 +21,7 @@ import { ResSmsWaNotificationObj } from 'app/shared/model/notif-engine/res-sms-w
 import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
 import { ResEmailNotificationObj } from 'app/shared/model/notif-engine/res-email-notification-obj.model';
 import { NotificationHistDObj } from 'app/shared/model/notif-engine/notification-hist-d-obj';
+import { BroadcastMessageEmailComponent } from '../shared-component/broadcast-message-email/broadcast-message-email.component';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -179,7 +180,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       (response: ResPushNotificationObj) => {
         this.PushSendTo = response.SendTo;
         let jsonMessagesObj = JSON.parse(response.JsonMessages);
-        if(!this.IsUsedTemplate){
+        if (!this.IsUsedTemplate) {
           this.NotifBroadcastForm.patchValue({
             Subject: jsonMessagesObj["Title"],
             Body: jsonMessagesObj["Message"],
@@ -196,7 +197,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           SendTo: response.SendTo,
           CcEmail: response.Cc,
           BccEmail: response.Bcc,
-          }
+        }
         )
         if (!this.IsUsedTemplate) {
           this.NotifBroadcastForm.patchValue({
@@ -228,7 +229,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     if (TypeCode == this.TypeSms || TypeCode == this.TypeWA) {
       await this.GetSmsWaNotificationHistByNotificationHistHId(this.NotificationHistHId);
     }
-    if(TypeCode == this.TypeEmail){
+    if (TypeCode == this.TypeEmail) {
       await this.GetEmailNotificationHistByNotificationHistHId(this.NotificationHistHId);
     }
     this.CheckTypeMechanism();
@@ -244,7 +245,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     );
   }
 
-  SetDataTemplate(response: NotificationTemplateObj, IsRefresh: boolean = false){
+  SetDataTemplate(response: NotificationTemplateObj, IsRefresh: boolean = false) {
     this.NotificationTemplateCode = response.NotificationTemplateCode;
     this.NotificationTemplateDescr = response.NotificationTemplateDescr;
     this.ParamListCount = response.TotalParam;
@@ -471,14 +472,17 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       }
     }
 
-    if (this.GetMrNotificationTypeCodeValue == this.TypePush) {
-      this.SetPushNotifObj();
-    }
-    if (this.GetMrNotificationTypeCodeValue == this.TypeSms || this.GetMrNotificationTypeCodeValue == this.TypeWA) {
-      this.SetSmsWaObj();
-    }
-    if (this.GetMrNotificationTypeCodeValue == this.TypeEmail) {
-      this.SetEmailObj();
+    switch (this.GetMrNotificationTypeCodeValue) {
+      case this.TypePush:
+        this.SetPushNotifObj();
+        break;
+      case this.TypeEmail:
+        this.SetEmailObj();
+        break;
+      case this.TypeSms:
+      case this.TypeWA:
+        this.SetSmsWaObj();
+        break;
     }
   }
 
@@ -490,7 +494,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     )
   }
 
-  SetSendToMultipleUser(): Array<string> {
+  private SetSendToMultipleUser(): Array<string> {
     const listSendToTemp: Array<TagInputObj> = this.NotifBroadcastForm.get("SendTo").value;
     let listSendTo: Array<string> = new Array();
     for (let index = 0; index < listSendToTemp.length; index++) {
@@ -500,7 +504,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     return listSendTo;
   }
 
-  SetPushNotifObj() {
+  private SetPushNotifObj() {
     this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = this.NotifBroadcastForm.get("Subject").value;
     this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = this.NotifBroadcastForm.get("Body").value;
     if (this.IsUsedTemplate && this.ParamListCount > 0) {
@@ -510,7 +514,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
   }
 
-  SetEmailObj() {
+  private SetEmailObj() {
     this.SendToNotificationEngineSaveObj.SendTos = [this.NotifBroadcastForm.get("SendTo").value];
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Subject = this.NotifBroadcastForm.get("Subject").value;
     this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("CcEmail").value;
@@ -521,7 +525,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     // Set File attachment
   }
 
-  SetSmsWaObj() {
+  private SetSmsWaObj() {
     this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
@@ -532,8 +536,15 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
   //#endregion
 
+  @ViewChild("EmailForm") EmailForm: BroadcastMessageEmailComponent;
   async SaveForm() {
     this.SetSaveObj();
+    if (this.GetMrNotificationTypeCodeValue == this.TypeEmail) {
+      setTimeout(() => {
+        this.EmailForm.SendEmail();
+      }, 100);
+      return
+    };
     let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
     if (this.IsResend) urlSave = "";
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
