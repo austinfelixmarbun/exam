@@ -51,6 +51,7 @@ export class PathConstant {
     public static EDIT = "Edit";
     public static ADD_EDIT = "AddEdit";
     public static DETAIL = "Detail";
+    public static HISTORY = "History";
     public static ADD_DETAIL = PathConstant.ADD + "/" + PathConstant.DETAIL;
     public static UPLOAD = "Upload";
     public static VERIF = "Verif";
@@ -522,6 +523,7 @@ export class PathConstant {
     
     //#region Notif-Engine
     public static NOTIF_TEMPLATE = "NotifTemplate";
+    public static VIEW_NOTIF_TEMPLATE = "ViewNotifTemplate";
     public static NOTIF_BROADCAST = "NotifBroadcast";
 
     //#endregion

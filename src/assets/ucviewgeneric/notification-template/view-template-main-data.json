@@ -1,0 +1,49 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "TemplateDataId",
+        "subSectionTitle": "Notification Template Data",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Notification Type",
+            "property": "NotificationType"
+          },
+          {
+            "type": "text",
+            "label": "Notification Source",
+            "property": "NotificationSource"
+          },
+          {
+            "type": "text",
+            "label": "Notification Level",
+            "property": "NotificationLevel"
+          },
+          {
+            "type": "text",
+            "label": "Subject",
+            "property": "Subject"
+          },
+          {
+            "type": "date",
+            "label": "Start Date",
+            "property": "StartDt"
+          },
+          {
+            "type": "date",
+            "label": "End Date",
+            "property": "EndDt"
+          },
+          {
+            "type": "text",
+            "label": "Body",
+            "property": "Body"
+          }
+        ],
+        "querystring": {
+            "name": "viewNotifTemplateMainData"
+        }
+      }
+    ]
+}

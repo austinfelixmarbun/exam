@@ -203,9 +203,21 @@
             "property": "NotificationTemplateDescr"
         },
         {
-            "type": "text",
+            "type": "link",
             "position": "center",
-            "property": "Version"
+            "property": "Version",
+            "path": "VIEW_NOTIF_TEMPLATE",
+            "target": "_blank",
+            "param":[
+                {
+                    "type": "TemplateCode",
+                    "property": "NotificationTemplateCode"
+                },
+                {
+                    "type": "TemplateVersion",
+                    "property": "Version"
+                }
+            ]
         },
         {
             "type": "date",

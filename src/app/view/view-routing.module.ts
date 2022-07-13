@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_PEFINDO,
         loadChildren: () => import('./pefindo-view/pefindo-view.module').then(m => m.PefindoViewModule)
+      },
+      {
+        path: PathConstant.VIEW_NOTIF_TEMPLATE,
+        loadChildren: () => import('./notif-engine-template-view/notif-engine-template-view.module').then(m => m.NotifEngineTemplateViewModule)
       }
     ]
   }
