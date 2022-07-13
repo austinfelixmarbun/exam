@@ -27,19 +27,5 @@ export class NotifEngineTemplateViewComponent implements OnInit {
   ngOnInit(): void {
     this.viewGenericObj.viewEnvironment = this.UrlConstantNew.env.NotifEngineURL + '/v1';
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/notification-template/view-template-header.json";
-
-    let linkUrl = NavigationConstant.VIEW_NOTIF_TEMPLATE_MAIN;
-    AdInsHelper.RedirectUrlView(this.router, [linkUrl], { "TemplateCode": this.TemplateCode, "TemplateVersion": this.TemplateVersion }, true);
-  }
-
-  ChangeTab(ev: number) {
-    let linkUrl: string = "";
-    if (ev == 0) { 
-      linkUrl = NavigationConstant.VIEW_NOTIF_TEMPLATE_MAIN;
-    }
-    else if (ev == 1) { 
-      linkUrl = NavigationConstant.VIEW_NOTIF_TEMPLATE_HISTORY;
-    }
-    AdInsHelper.RedirectUrlView(this.router, [linkUrl], { "TemplateCode": this.TemplateCode, "TemplateVersion": this.TemplateVersion }, true);
   }
 }

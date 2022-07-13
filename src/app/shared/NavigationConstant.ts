@@ -156,8 +156,6 @@ export class NavigationConstant {
     public static VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST_EXPOSURE; //'/View/CustExposureView'
     public static VIEW_NOTIF_TEMPLATE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NOTIF_TEMPLATE; //'/View/ViewNotifTemplate'
-    public static VIEW_NOTIF_TEMPLATE_MAIN = NavigationConstant.VIEW_NOTIF_TEMPLATE + "/" + PathConstant.MAIN; //'/View/ViewNotifTemplate/Main'
-    public static VIEW_NOTIF_TEMPLATE_HISTORY = NavigationConstant.VIEW_NOTIF_TEMPLATE + "/" + PathConstant.HISTORY; //'/View/ViewNotifTemplate/History'
     //#endregion
 
     //#region Upload
