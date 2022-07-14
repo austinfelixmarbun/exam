@@ -111,6 +111,17 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-md-2 adInsLabel" for="MonthlyExpenseAmt" translate>Monthly Expense Amount</label>
+            <div class="col-md-6">
+              <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
+                     (ngModelChange)="onChangeCustFinInput()"
+                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyExpenseAmt.invalid }"
+                     [options]="{align: 'right', allowNegative: false}" />
+              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt"
+                                  [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="OtherMonthlyInstallmentDsf" translate>Total Monthly Installment DSF</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OtherMonthlyInstallmentDsf"
@@ -131,18 +142,7 @@
               <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.OtherMonthlyInstAmt"
                                   [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-2 adInsLabel" for="MonthlyExpenseAmt" translate>Monthly Expense Amount</label>
-            <div class="col-md-6">
-              <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyExpenseAmt"
-                     (ngModelChange)="onChangeCustFinInput()"
-                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.MonthlyExpenseAmt.invalid }"
-                     [options]="{align: 'right', allowNegative: false}" />
-              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.MonthlyExpenseAmt"
-                                  [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
-            </div>
-          </div>
+          </div>    
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="NettIncomeAmt" translate>Net Income Amount</label>
             <div class="col-md-6">
@@ -343,6 +343,18 @@
           <!--            </div>-->
           <!--          </div>-->
           <div class="form-group row">
+            <label class="col-md-2 adInsLabel" for="OprCost" translate>Operational Cost</label>
+            <div class="col-md-6">
+              <input type="" currencyMask class="form-control adInsInput" formControlName="OprCost"
+                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OprCost.invalid }"
+                     [options]="{align: 'right', allowNegative: false}"
+                     (ngModelChange)="onChangeCustFinInput()"/>
+              <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OprCost"
+                                  [submit]="CustFinDataForm.submitted">
+              </lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-md-2 adInsLabel" for="OtherMonthlyInstallmentDsf" translate>Total Monthly Installment DSF</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="OtherMonthlyInstallmentDsf"
@@ -372,19 +384,7 @@
           <!--                [submit]="CustFinDataForm.submitted">-->
           <!--              </lib-uc-show-errors>-->
           <!--            </div>-->
-          <!--          </div>-->
-          <div class="form-group row">
-            <label class="col-md-2 adInsLabel" for="OprCost" translate>Operational Cost</label>
-            <div class="col-md-6">
-              <input type="" currencyMask class="form-control adInsInput" formControlName="OprCost"
-                     [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustCompanyFinDataForm.controls.OprCost.invalid }"
-                     [options]="{align: 'right', allowNegative: false}"
-                     (ngModelChange)="onChangeCustFinInput()"/>
-              <lib-uc-show-errors [control]="CustCompanyFinDataForm.controls.OprCost"
-                                  [submit]="CustFinDataForm.submitted">
-              </lib-uc-show-errors>
-            </div>
-          </div>
+          <!--          </div>-->    
           <!--          <div class="form-group row">-->
           <!--            <label class="col-md-2 adInsLabel" for="ProfitBeforeTax" translate>Profit Before Tax</label>-->
           <!--            <div class="col-md-6">-->
