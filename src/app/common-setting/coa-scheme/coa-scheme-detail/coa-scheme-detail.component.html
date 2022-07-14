@@ -46,7 +46,7 @@
             </lib-ucSubsection>
             <div id='CoaSchemeDetailInfo'>
 
-              <div class="form-group row">
+              <div class="form-group row" *ngIf="mode != 'Edit'">
                 <label class="col-md-3" translate>Copy</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
@@ -110,9 +110,9 @@
                       <td class="text-left">{{item.Value}}</td>
                       <ng-container formArrayName = "DataCOA" *ngIf="this.isTableReady">
                         <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
-                          <input type="text" class="form-control" formControlName="COA"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"
-                          >
+                          <input type="text" class="form-control adInsInput" formControlName="COA">
+                        <lib-uc-show-errors [control]="CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA" [submit]="enjiForm.submitted">
+                        </lib-uc-show-errors>
                         </td>
                       </ng-container>
                     </ng-container>
