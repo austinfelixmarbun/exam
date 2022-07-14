@@ -2,6 +2,7 @@ export class RefCoaObj {
     RefCoaId: number
     RefAcctBookId: number
     CoaSchmId: number
+    CoaScheme: string
     MrEntityType: string
     MrEntityCode: string
     EntityTypeName: string
@@ -13,6 +14,7 @@ export class RefCoaObj {
         this.RefCoaId = 0
         this.RefAcctBookId = 0
         this.CoaSchmId = 0
+        this.CoaScheme = ''
         this.MrEntityType = ''
         this.MrEntityCode = ''
         this.EntityTypeName = ''

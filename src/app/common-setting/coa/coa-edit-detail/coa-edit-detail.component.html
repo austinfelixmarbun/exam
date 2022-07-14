@@ -18,6 +18,11 @@
                 <label class="col-md-3  adins-label" translate>Entity Type</label>
                 <label class="col-md-3  adins-label" translate>{{this.refCoaObj.EntityTypeName}}</label>
               </div>
+              
+              <div class="form-group row" *ngIf="this.refCoaObj.CoaScheme != '-'">
+                <label class="col-md-3  adins-label" translate>COA Scheme</label>
+                <label class="col-md-3  adins-label" translate>{{this.refCoaObj.CoaScheme}}</label>
+              </div>
 
               <div class="form-group row">
                 <label class="col-md-3  adins-label" translate>Payment Allocation Code</label>

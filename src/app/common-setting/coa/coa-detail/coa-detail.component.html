@@ -101,7 +101,7 @@
                           <td class="text-left">{{item.coa[0].EntityType}}</td>
                           <td class="text-left">{{item.coa[0].PaymentAllocCode}}</td>
                           <td class="text-left">{{item.coa[0].EntityCode}}</td>
-                          <ng-container formArrayName="DataCOA">
+                          <ng-container formArrayName="DataCOA" *ngIf="ListCurr.length > 0">
                             <td class="text-center" *ngFor="let currs of ListCurr; let x = index" [formGroupName]="x">
                               <input type="text" class="form-control" formControlName="COA">
                             </td>

@@ -6,7 +6,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
-import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { Router } from '@angular/router';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
@@ -78,14 +78,12 @@ export class CoaDetailComponent implements OnInit {
     }
     else {
       var ListCurrBeforeAdd = [...this.ListCurr];
-      var test = ListCurrBeforeAdd.indexOf(ev.value);
       if ((ListCurrBeforeAdd.findIndex(x => x.newCurr === ev.value)) === -1) {
         this.colHeadTable.push({ newHead: 'COA ' + ev.value });
         this.ListCurr.push({ newCurr: ev.value });
-        var ListCoa = this.CoaForm.get('ListCoa') as FormArray;
         for (let i = 0; i < this.ListCOA.length; i++) {
-          var ListDataCOA = this.ListCoa().get(i.toString()).get("DataCOA") as FormArray;
-          ListDataCOA.push(this.createDetailItem());
+          var ListDataCOA = this.GetListCoaFormArray().get(i.toString()).get("DataCOA") as FormArray;
+          ListDataCOA.push(this.AddListCoaDetailItemFormGroup());
         }
       }
       else {
@@ -94,26 +92,26 @@ export class CoaDetailComponent implements OnInit {
     }
   }
 
-  newCoa(): FormGroup {
+  AddNewDataCoaFormGroup(): FormGroup {
     return this.fb.group({
       DataCOA: this.fb.array([])
     })
   }
 
-  createDetailItem(): FormGroup {
+  AddListCoaDetailItemFormGroup(): FormGroup {
     return new FormGroup({
-      COA: new FormControl('')
+      COA: new FormControl('', Validators.required)
     });
   }
 
-  // newCoa(): FormGroup {
-  //   return this.fb.group({
-  //     COA: ''
-  //   })
-  // }
-
-  ListCoa(): FormArray {
+  GetListCoaFormArray(): FormArray {
     return this.CoaForm.get("ListCoa") as FormArray
+  }
+
+  GetListCoaInfoDataCOA(idx: number): FormControl{
+    let ListCoaInfo: FormArray = this.CoaForm.get("ListCoa") as FormArray;
+    let ListCoaInfoIdxAt = ListCoaInfo.get(idx.toString()) as FormGroup;
+    return ListCoaInfoIdxAt.get("DataCOA") as FormControl;
   }
 
   GetListCoa() {
@@ -121,15 +119,14 @@ export class CoaDetailComponent implements OnInit {
     for (let i = 0; i < this.ListCOA.length; i++) {
       for (let j = 0; j < this.ListCurr.length; j++) {
         var coaValue = new Array<any>();
+        var DataCoa = this.GetListCoaInfoDataCOA(i);
         coaValue = [
           {
             EntityType: this.ListCOA[i].coa[0].EntityType,
             PaymentAllocCode: this.ListCOA[i].coa[0].PaymentAllocCode,
             EntityCode: this.ListCOA[i].coa[0].EntityCode,
             CurrCode: this.ListCurr[j].newCurr,
-            Coa: this.CoaForm.get("ListCoa").get(i.toString()).get("DataCOA").value[j].COA
-            // Coa: this.ListCoa().get(i.toString()).get('COA')[j].value
-            // Coa: this.ListCoa().get(i.toString()).value.COA
+            Coa: DataCoa.value[j].COA
           }
         ];
         this.ListOfCOA.push(coaValue);
@@ -139,30 +136,16 @@ export class CoaDetailComponent implements OnInit {
 
   Submit() {
     this.ListRefCoaObj = new Array<RefCoaObj>();
-    // for (let i = 0; i < this.ListCurr.length; i++) {
-    //   for (let j = 0; j < this.ListCOA.length; j++) {
-    //     this.refCoaObj = new RefCoaObj();
-    //     this.refCoaObj.RefAcctBookId = 1;
-    //     this.refCoaObj.MrEntityCode = this.ListPaymentAlloc[j].Key;
-    //     this.refCoaObj.MrEntityType = "PAY_ALLOC";
-    //     this.refCoaObj.CurrCode = this.ListCurr[i].newCurr;
-    //     this.refCoaObj.PaymentAllocCode = this.ListPaymentAlloc[j].Key;
-    //     this.refCoaObj.Coa = this.CoaForm.controls["ListCoa"].value[j].COA;
-    //     this.ListRefCoaObj.push(this.refCoaObj);
-    //   }
-    // }
     this.GetListCoa();
     for (let i = 0; i < this.ListOfCOA.length; i++) {
       this.refCoaObj = new RefCoaObj();
       this.refCoaObj.RefAcctBookId = 1;
       this.refCoaObj.MrEntityCode = this.ListOfCOA[i][0].EntityCode;
-      this.refCoaObj.MrEntityType = "PAY_ALLOC";
+      this.refCoaObj.MrEntityType = this.ListOfCOA[i][0].EntityCode;
       this.refCoaObj.CurrCode = this.ListOfCOA[i][0].CurrCode;
       this.refCoaObj.PaymentAllocCode = this.ListOfCOA[i][0].PaymentAllocCode;
       this.refCoaObj.Coa = this.ListOfCOA[i][0].Coa;
       this.ListRefCoaObj.push(this.refCoaObj);
-      console.log(this.ListOfCOA[i])
-      console.log(this.ListRefCoaObj)
     }
 
     var RequestListRefCoa = {
@@ -188,6 +171,10 @@ export class CoaDetailComponent implements OnInit {
       this.ListCOA = new Array<any>();
       this.entityTypeSelect = this.entityTypeList.filter(
         comp => comp.Key == this.entitySelect);
+
+      this.colHeadTable = [];	
+      this.ListPaymentAlloc = new Array<any>();	
+      this.ListCurr = new Array<any>();
 
       if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypePayAlloc) {
         await this.http.post<any>(this.UrlConstantNew.GetListKeyValueRefPaymentAllocActive, {}).toPromise().then(
@@ -258,11 +245,11 @@ export class CoaDetailComponent implements OnInit {
         {
           EntityType: this.entityTypeSelect[0].Value,
           PaymentAllocCode: this.ListPaymentAlloc[j].Key,
-          EntityCode: this.ListPaymentAlloc[j].Key,
+          EntityCode: this.entityTypeSelect[0].Key
         }
       ];
       this.ListCOA.push({ coa });
-      this.ListCoa().push(this.newCoa());
+      this.GetListCoaFormArray().push(this.AddNewDataCoaFormGroup());
     }
   }
 }

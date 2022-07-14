@@ -22,12 +22,5 @@ export class CoaSchemeViewComponent implements OnInit {
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/common-setting/view-coa-scheme-information.json";
-
-    // this.ListProd = [{
-    //   ProdCode: "ProdCode1",
-    //   ProdName: "Product 1",
-    //   StartDt:"20-Sept-2020",
-    //   ExpDt: "20-Oct-2020"
-    // }];
   }
 }
