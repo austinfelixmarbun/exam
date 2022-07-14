@@ -17,18 +17,18 @@ export class NotifEngineTemplateViewHistoryComponent implements OnInit {
 
   async ngOnInit() {
     this.InputGridTemplateHistObj.pagingJson = "./assets/ucgridview/notif-engine/grid-notif-template-history-view.json";
-    let listTemplateHist: Array<NotificationTemplateObj> = new Array<NotificationTemplateObj>();
     this.InputGridTemplateHistObj.resultData = {
       Data: ""
     }
     this.InputGridTemplateHistObj.resultData["Data"] = new Array();
-    this.InputGridTemplateHistObj.resultData.Data = await this.GetListTemplateHist(listTemplateHist);
+    this.InputGridTemplateHistObj.resultData.Data = await this.GetListTemplateHist();
   }
-
-  async GetListTemplateHist(listTemplateHist: Array<NotificationTemplateObj>) {
+  
+  async GetListTemplateHist() {
+    let listTemplateHist: Array<NotificationTemplateObj> = new Array<NotificationTemplateObj>();
     await this.http.post(this.UrlConstantNew.GetListNotificationTemplateByNotificationTemplateCode, { Code: this.TemplateCode }).toPromise().then(
-      (response: Array<NotificationTemplateObj>) => {
-        listTemplateHist = response["ReturnObject"];
+      (response: { ReturnObject: Array<NotificationTemplateObj> }) => {
+        listTemplateHist = response.ReturnObject;
       }
     );
     return listTemplateHist;
