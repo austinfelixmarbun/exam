@@ -1,4 +1,5 @@
 {
+    "isSeq": false,
     "headerList": [
         {
             "type": "sort",
@@ -83,11 +84,13 @@
         },
         {
             "type": "date",
+            "dateFormat": "medium",
             "position": "center",
             "property": "StartDt"
         },
         {
             "type": "date",
+            "dateFormat": "medium",
             "position": "center",
             "property": "EndDt"
         }
