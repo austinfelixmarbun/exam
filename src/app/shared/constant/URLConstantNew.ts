@@ -1216,6 +1216,7 @@ export class UrlConstantNew{
     // NotificationTemplate
     public GetNotificationTemplateByNotificationTemplateId = this.env.NotifEngineURL + this.url.GetNotificationTemplateByNotificationTemplateId;
     public GetLatestNotificationTemplateByNotificationTemplateCode = this.env.NotifEngineURL + this.url.GetLatestNotificationTemplateByNotificationTemplateCode;
+    public GetNotificationTemplateByNotificationTemplateCodeAndVersion = this.env.NotifEngineURL + this.url.GetNotificationTemplateByNotificationTemplateCodeAndVersion;
     public AddNotificationTemplate = this.env.NotifEngineURL + this.url.AddNotificationTemplate;
     public EditNotificationTemplate = this.env.NotifEngineURL + this.url.EditNotificationTemplate;
     public GetListNotificationTemplateByNotificationTemplateCode = this.env.NotifEngineURL + this.url.GetListNotificationTemplateByNotificationTemplateCode

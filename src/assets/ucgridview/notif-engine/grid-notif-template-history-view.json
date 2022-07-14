@@ -29,6 +29,18 @@
             "position": "center",
             "label": "VERSION",
             "name": "Version"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "START DATE",
+            "name": "StartDt"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "END DATE",
+            "name": "EndDt"
         }
     ],
     "bodyList": [
@@ -68,6 +80,16 @@
                     "property": "Version"
                 }
             ]
+        },
+        {
+            "type": "date",
+            "position": "center",
+            "property": "StartDt"
+        },
+        {
+            "type": "date",
+            "position": "center",
+            "property": "EndDt"
         }
     ]
 }

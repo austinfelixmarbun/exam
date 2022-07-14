@@ -10,10 +10,14 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 export class NotifEngineTemplateViewComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   TemplateCode: string = "";
+  TemplateVersion: number;
   constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["TemplateCode"] != null) {
         this.TemplateCode = params["TemplateCode"];
+      }
+      if (params["TemplateVersion"] != null) {
+        this.TemplateVersion = params["TemplateVersion"];
       }
     });
    }
