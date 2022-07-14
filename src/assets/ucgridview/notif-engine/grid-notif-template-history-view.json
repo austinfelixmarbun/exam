@@ -1,4 +1,5 @@
 {
+    "isSeq": false,
     "headerList": [
         {
             "type": "sort",
@@ -29,6 +30,18 @@
             "position": "center",
             "label": "VERSION",
             "name": "Version"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "START DATE",
+            "name": "StartDt"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "END DATE",
+            "name": "EndDt"
         }
     ],
     "bodyList": [
@@ -68,6 +81,18 @@
                     "property": "Version"
                 }
             ]
+        },
+        {
+            "type": "date",
+            "dateFormat": "medium",
+            "position": "center",
+            "property": "StartDt"
+        },
+        {
+            "type": "date",
+            "dateFormat": "medium",
+            "position": "center",
+            "property": "EndDt"
         }
     ]
 }

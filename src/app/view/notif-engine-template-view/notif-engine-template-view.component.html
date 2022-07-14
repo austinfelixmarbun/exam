@@ -6,14 +6,17 @@
                     <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"></lib-ucviewgeneric>
                     <mat-tab-group>
                         <mat-tab label="Notification Template Data">
-                            <app-notif-engine-template-view-main></app-notif-engine-template-view-main>
+                            <ng-template matTabContent>
+                                <app-notif-engine-template-view-main [TemplateCode]="TemplateCode" [TemplateVersion]="TemplateVersion"></app-notif-engine-template-view-main>
+                            </ng-template>
                         </mat-tab>
                         <mat-tab label="History">
-                            <app-notif-engine-template-view-history [TemplateCode]="TemplateCode"></app-notif-engine-template-view-history>
+                            <ng-template matTabContent>
+                                <app-notif-engine-template-view-history [TemplateCode]="TemplateCode"></app-notif-engine-template-view-history>
+                            </ng-template>
                         </mat-tab>
                     </mat-tab-group>
                 </div>
-				<router-outlet></router-outlet>
             </div>
         </div>
     </div>
