@@ -155,6 +155,7 @@ export class NavigationConstant {
     public static VIEW_NEG_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
     public static VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST_EXPOSURE; //'/View/CustExposureView'
+    public static VIEW_NOTIF_TEMPLATE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NOTIF_TEMPLATE; //'/View/ViewNotifTemplate'
     //#endregion
 
     //#region Upload

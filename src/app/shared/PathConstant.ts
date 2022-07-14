@@ -522,6 +522,7 @@ export class PathConstant {
     
     //#region Notif-Engine
     public static NOTIF_TEMPLATE = "NotifTemplate";
+    public static VIEW_NOTIF_TEMPLATE = "ViewNotifTemplate";
     public static NOTIF_BROADCAST = "NotifBroadcast";
 
     //#endregion
