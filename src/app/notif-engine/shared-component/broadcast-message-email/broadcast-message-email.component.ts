@@ -190,11 +190,11 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
       if (xhr.readyState === 4) {
         var response = JSON.parse(xhr.response);
         if (xhr.status !== 200 && xhr.status !== 201) {
-          throw this.toastr.warningMessage(response['message']);
+          throw this.toastr.warningMessage(response['Message']);
         }
         
         if (response.HeaderObj.StatusCode == '200') {
-          this.toastr.successMessage(response['message']);
+          this.toastr.successMessage(response['Message']);
           this.SendEmailSuccess.emit();
         }
       }
