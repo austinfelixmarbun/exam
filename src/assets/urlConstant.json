@@ -900,6 +900,7 @@
     "GetNotSentPushNotif": "/v2/Notification/WfGetAllNotSentPushNotification",
     "SendToNotificationEngine": "/v2/Notification/SendToNotificationEngine",
     "MultipleSendToNotificationEngine": "/v2/Notification/MultipleSendToNotificationEngine",
+    "MultipleSendToNotificationEngineEmail": "/v2/Notification/MultipleSendToNotificationEngineEmail",
     "MultipleResendToNotificationEngine": "/v1/Notification/MultipleResendToNotificationEngine",
     "GetMaxSpecificUser": "/v1/NotificationHistH/GetMaxSpecificUser",
     "GetNotificationHistHByNotificationHistHId": "/v1/NotificationHistH/GetNotificationHistHByNotificationHistHId",
