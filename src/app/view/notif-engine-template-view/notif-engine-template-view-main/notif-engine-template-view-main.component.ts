@@ -18,9 +18,9 @@ export class NotifEngineTemplateViewMainComponent implements OnInit {
   constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
-    await this.GetListTemplateHist();
     this.viewGenericObj.viewEnvironment = this.UrlConstantNew.env.NotifEngineURL + '/v1';
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/notification-template/view-template-main-data.json";
+    await this.GetListTemplateHist();
   }
 
   async GetListTemplateHist() {
