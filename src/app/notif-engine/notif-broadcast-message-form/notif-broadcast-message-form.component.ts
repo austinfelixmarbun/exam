@@ -253,8 +253,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.PatchDataUcLookupTemplate();
     this.InputLookupTemplateMessageObj.isDisable = true;
     this.IsTemplateLatestVersion = true;
-    if (!response.IsLatestVersion && !IsRefresh) {
-      this.IsTemplateLatestVersion = response.IsLatestVersion;
+    if (!response.IsActive && !IsRefresh) {
+      this.IsTemplateLatestVersion = response.IsActive;
       this.toastr.warningMessage("Please refresh template version.");
     }
     this.NotifBroadcastForm.patchValue({
@@ -538,6 +538,13 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   @ViewChild("EmailForm") EmailForm: BroadcastMessageEmailComponent;
   async SaveForm() {
+    if (!this.IsTemplateLatestVersion) {
+      let confirmMsg: string = "This Template Version is not latest, Are You Sure to Save This Data?";
+      let confirmation = confirm(confirmMsg);
+      if (!confirmation) {
+        return;
+      }
+    }
     this.SetSaveObj();
     if (this.GetMrNotificationTypeCodeValue == this.TypeEmail) {
       setTimeout(() => {

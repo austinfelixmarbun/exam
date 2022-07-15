@@ -15,6 +15,7 @@ export class NotificationTemplateObj {
     Body: string;
     TotalParam: number;
     Version: number;
+    IsActive: boolean;
     IsLatestVersion: boolean;
 
     constructor() {
