@@ -55,11 +55,13 @@
           },
           {
             "type": "date",
+            "dateFormat": "medium",
             "label": "Start Date",
             "property": "StartDt"
           },
           {
             "type": "date",
+            "dateFormat": "medium",
             "label": "End Date",
             "property": "EndDt"
           },
