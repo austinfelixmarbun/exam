@@ -19,8 +19,24 @@ import { TagInputModule } from 'ngx-chips';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { NotifBroadcastMessageInquiryComponent } from './notif-broadcast-message-inquiry/notif-broadcast-message-inquiry.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { NotifTemplateAttrPagingComponent } from './notif-template-attr-paging/notif-template-attr-paging.component';
+import { NotifTemplateAttrFormComponent } from './notif-template-attr-form/notif-template-attr-form.component';
+import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
+export const customCurrencyMaskConfig = {     
+  align: "right",     
+  allowNegative: true,     
+  allowZero: true,     
+  decimal: ".",        
+  precision: 0,
+  prefix: "",     
+  suffix: "",     
+  thousands: ",",     
+  nullable: false,
+  inputMode: CurrencyMaskInputMode.NATURAL
+};
+
 @NgModule({
     imports: [
         AdInsModule,
@@ -59,12 +75,15 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
             theme: 'bubble'
           }
         }),
+        NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         TagInputModule,
         NgxIntlTelInputModule
     ],
     declarations: [
         NotifTemplatePagingComponent,
         NotifTemplateFormComponent,
+        NotifTemplateAttrPagingComponent,
+        NotifTemplateAttrFormComponent,
         NotifBroadcastMessagePagingComponent,
         NotifBroadcastMessageFormComponent,
         BroadcastMessageNotificationComponent,

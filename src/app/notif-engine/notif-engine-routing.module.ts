@@ -4,6 +4,8 @@ import { PathConstant } from 'app/shared/PathConstant';
 import { NotifBroadcastMessageFormComponent } from './notif-broadcast-message-form/notif-broadcast-message-form.component';
 import { NotifBroadcastMessageInquiryComponent } from './notif-broadcast-message-inquiry/notif-broadcast-message-inquiry.component';
 import { NotifBroadcastMessagePagingComponent } from './notif-broadcast-message-paging/notif-broadcast-message-paging.component';
+import { NotifTemplateAttrFormComponent } from './notif-template-attr-form/notif-template-attr-form.component';
+import { NotifTemplateAttrPagingComponent } from './notif-template-attr-paging/notif-template-attr-paging.component';
 import { NotifTemplateFormComponent } from './notif-template-form/notif-template-form.component';
 import { NotifTemplatePagingComponent } from './notif-template-paging/notif-template-paging.component';
 
@@ -55,7 +57,26 @@ const routes: Routes = [
             },
           }
         ]
-      }
+      },
+      {
+        path: PathConstant.NOTIF_ATTR_TEMPLATE,
+        children: [
+          {
+            path: PathConstant.PAGING,
+            component: NotifTemplateAttrPagingComponent,
+            data: {
+              title: 'Notif Attribute Template Paging'
+            },
+          },
+          {
+            path: PathConstant.ADD_EDIT,
+            component: NotifTemplateAttrFormComponent,
+            data: {
+              title: 'Notif Attribute Template Form'
+            },
+          }
+        ]
+      },
     ]
   }
 ];

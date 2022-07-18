@@ -1248,4 +1248,9 @@ export class UrlConstantNew{
     public MultipleSendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngine;
     public MultipleSendToNotificationEngineEmail = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngineEmail;
     public MultipleResendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleResendToNotificationEngine;
+    
+    // RefNotifAttrTemplate
+    public AddRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.AddRefNotifAttrTemplate;
+    public EditRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.EditRefNotifAttrTemplate;
+    public GetRefNotifAttrTemplateByRefNotifAttrTemplateId = this.env.NotifEngineURL + this.url.GetRefNotifAttrTemplateByRefNotifAttrTemplateId;
 }

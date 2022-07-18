@@ -1,0 +1,93 @@
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-header header-title">
+          <div class="row">
+            <div class="col-md-8">
+              <h4 class="card-title" id="horz-layout-colored-controls" translate>NOTIF_TEMPLATE_ATTR_FORM</h4>
+              <br>
+            </div>
+          </div>
+        </div>
+        <div class="px-3">
+          <form class="form form-horizontal" [formGroup]="NotifTemplateAttrForm" #enjiForm="ngForm"
+            (ngSubmit)="NotifTemplateAttrForm.valid && SaveForm()">
+            <lib-ucSubsection [id]="'NotifTemplateIdId'" [title]="title" [panel]="'NotifTemplate'"></lib-ucSubsection>
+            <div class="form-body" id="NotifTemplate">
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_ATTR_CODE</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormNotifAttrTemplateCode).invalid }"
+                    [formControlName]="identifierFormNotifAttrTemplateCode" [readonly]="RefNotifAttrTemplateId != 0">
+                  <lib-uc-show-errors [control]="getFormControl(identifierFormNotifAttrTemplateCode)" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_ATTR_DESCR</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormNotifAttrTemplateDescr).invalid }"
+                    [formControlName]="identifierFormNotifAttrTemplateDescr">
+                  <lib-uc-show-errors [control]="getFormControl(identifierFormNotifAttrTemplateDescr)" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row adins-required">
+                <label class="col-md-3 adInsLabel" translate>INPUT_TYPE</label>
+                <div class="col-md-9">
+                  <select class="form-control adInsInput" style="width: auto" [formControlName]="identifierFormAttrInputTypeCode"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormAttrInputTypeCode).invalid }">
+                    <option value="">Select One</option>
+                    <option *ngFor="let it of DictListRefMaster[MrNotificationTemplAttrInputType]" value="{{it.Key}}">
+                      {{it.Value}}</option>
+                  </select>
+                  <lib-uc-show-errors [control]="getFormControl(identifierFormAttrInputTypeCode)" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" translate>ACTIVE STATUS</label>
+                <div class="col-md-9">
+                  <input class="border-primary" type="checkbox" data-md-icheck [formControlName]="identifierFormIsActive" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 adInsLabel" translate>DEFAULT_VALUE</label>
+                <div class="col-md-9" [ngSwitch]="getFormControl(identifierFormAttrInputTypeCode).value">
+                  <input type="text" *ngSwitchCase="AttrInputType.Text" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormDefaultValue).invalid }"
+                    [formControlName]="identifierFormDefaultValue">
+
+                  <input type="date" *ngSwitchCase="AttrInputType.Date" class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormDefaultValue).invalid }"
+                    [formControlName]="identifierFormDefaultValue">
+
+                  <input *ngSwitchCase="AttrInputType.Num" currencyMask class="form-control adInsInput width-50-per"
+                    [formControlName]="identifierFormDefaultValue" [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormDefaultValue).invalid}">
+
+                  <input *ngSwitchCase="AttrInputType.NumPerc" currencyMask class="form-control adInsInput width-50-per"
+                    [formControlName]="identifierFormDefaultValue"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormDefaultValue).invalid}"
+                    [options]="CurrencyMaskPrct">
+
+                  <lib-uc-show-errors [control]="getFormControl(identifierFormDefaultValue)" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions right">
+              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
+                <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+              </button>
+              <!-- <button type="button" class="btn btn-raised btn-warning mr-1" (click)="getFormValidationErrors()">
+                <i class="far fa-window-close"></i>&nbsp;<span translate>Test</span>
+              </button> -->
+              <button type="submit" class="btn btn-raised btn-primary">
+                <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

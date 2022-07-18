@@ -143,12 +143,16 @@
   "Debtor Business Scale Name": "Debtor Business Scale Name",
   "Debtor Business Scale Description": "Debtor Business Scale Description",
   "NOTIF_TEMPLATE_FORM": "Notification Template Form",
+  "NOTIF_TEMPLATE_ATTR_FORM": "Notification Template Attribute Form",
   "NOTIF_TYPE": "Type",
   "NOTIF_SOURCE": "Source",
   "NOTIF_LVL": "Level",
+  "INPUT_TYPE": "Input Type",
   "NOTIF_TEMPLATE": "Notification Template",
   "NOTIF_TEMPLATE_CODE": "Template Code",
+  "NOTIF_TEMPLATE_ATTR_CODE": "Template Attribute Code",
   "NOTIF_TEMPLATE_DESCR": "Template Description",
+  "NOTIF_TEMPLATE_ATTR_DESCR": "Template Attribute Description",
   "START_DT": "Start Date",
   "END_DT": "End Date",
   "SEND_TO": "Send To",
@@ -159,5 +163,6 @@
   "USERNAME": "Username",
   "TELP_NO": "Telephone Number",
   "TITLE": "Title",
-  "SEND_TYPE": "Send Type"
+  "SEND_TYPE": "Send Type",
+  "DEFAULT_VALUE": "Default Value"
 }

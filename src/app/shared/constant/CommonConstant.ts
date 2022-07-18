@@ -169,6 +169,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";
+    public static RefMasterTypeCodeNotifTemplAttrInputType = "NOTIF_TEMPL_ATTR_INPUT_TYPE";
     public static RefMasterTypeCodeRegularExpression = "REGULAR_EXPRESSION";
     public static RefMasterTypeCodeAttributeGroup = "ATTRIBUTE_GROUP";
     public static RefMasterTypeCodeBuildingOwnership = "BUILDING_OWNERSHIP";

@@ -92,7 +92,6 @@ export class NotifTemplateFormComponent implements OnInit {
     if (this.NotificationTemplateId == 0) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
       (response: NotificationTemplateObj) => {
-        console.log(response);
         this.NotificationTemplateSaveObj = response;
         this.NotifTemplateForm.patchValue({
           NotificationTemplateCode: response.NotificationTemplateCode,
@@ -165,7 +164,6 @@ export class NotifTemplateFormComponent implements OnInit {
   async SaveForm() {
     let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
     if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
-    console.dir(this.SetSaveObj());
     await this.http.post(urlSave, this.SetSaveObj()).toPromise().then(
       (response: NotificationTemplateObj) => {
         if (response["StatusCode"] == "200") {

@@ -220,12 +220,16 @@
   "Debtor Business Scale Name": "Nama Skala Bisnis Debitor",
   "Debtor Business Scale Description": "Deskripsi Skala Bisnis Debitor",
   "NOTIF_TEMPLATE_FORM": "Notifikasi Template Form",
+  "NOTIF_TEMPLATE_ATTR_FORM": "Notifikasi Template Attribute Form",
   "NOTIF_TYPE": "Tipe",
   "NOTIF_SOURCE": "Sumber",
   "NOTIF_LVL": "Level",
+  "INPUT_TYPE": "Tipe Input",
   "NOTIF_TEMPLATE": "Notifikasi Template",
   "NOTIF_TEMPLATE_CODE": "Template Kode",
+  "NOTIF_TEMPLATE_ATTR_CODE": "Template Attribute Kode",
   "NOTIF_TEMPLATE_DESCR": "Template Deskripsi",
+  "NOTIF_TEMPLATE_ATTR_DESCR": "Template Attribute Deskripsi",
   "START_DT": "Tanggal Mulai",
   "END_DT": "Tanggal Selesai",
   "SEND_TO": "Kirim",
@@ -236,5 +240,6 @@
   "USERNAME": "Nama User",
   "TELP_NO": "Telepone Nomor",
   "TITLE": "Judul",
-  "SEND_TYPE": "Tipe Kirim"
+  "SEND_TYPE": "Tipe Kirim",
+  "DEFAULT_VALUE": "Nilai Default"
 }

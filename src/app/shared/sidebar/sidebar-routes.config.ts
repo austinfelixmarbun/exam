@@ -208,6 +208,8 @@ export const ROUTES: RouteInfo[] = [
     Submenu: [
       { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_PAGING, Title: 'Notification Engine Template Engine Paging', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_ADD_EDIT, Title: 'Notification Engine Template Engine Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_ATTR_PAGING, Title: 'Notification Engine Attribute Template Engine Paging', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.NOTIF_ENGINE_TEMPLATE_ATTR_ADD_EDIT, Title: 'Notification Engine Attribute Template Engine Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.NOTIF_ENGINE_BROADCAST_PAGING, Title: 'Notification Engine Broadcast Message Engine Paging', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.NOTIF_ENGINE_BROADCAST_ADD_EDIT, Title: 'Notification Engine Broadcast Message Engine Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] }
     ], Params: []

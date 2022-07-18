@@ -358,6 +358,8 @@ export class NavigationConstant {
     //#region Notif Engine
     public static NOTIF_ENGINE_TEMPLATE_PAGING =  "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_TEMPLATE + "/" + PathConstant.PAGING;
     public static NOTIF_ENGINE_TEMPLATE_ADD_EDIT = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_TEMPLATE + "/" + PathConstant.ADD_EDIT;
+    public static NOTIF_ENGINE_TEMPLATE_ATTR_PAGING =  "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE + "/" + PathConstant.PAGING;
+    public static NOTIF_ENGINE_TEMPLATE_ATTR_ADD_EDIT = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE + "/" + PathConstant.ADD_EDIT;
     public static NOTIF_ENGINE_BROADCAST_PAGING =  "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_BROADCAST + "/" + PathConstant.PAGING;
     public static NOTIF_ENGINE_BROADCAST_ADD_EDIT = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_BROADCAST + "/" + PathConstant.ADD_EDIT;
     //#endregion
