@@ -524,6 +524,7 @@ export class PathConstant {
     public static NOTIF_TEMPLATE = "NotifTemplate";
     public static VIEW_NOTIF_TEMPLATE = "ViewNotifTemplate";
     public static NOTIF_BROADCAST = "NotifBroadcast";
+    public static NOTIF_ATTR_TEMPLATE = "NotifAtrrTemplate";
 
     //#endregion
     

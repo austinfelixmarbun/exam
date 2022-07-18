@@ -911,6 +911,9 @@
     "GetSmsWaNotificationHistByNotificationHistHId": "/v1/SmsWaNotificationHist/GetSmsWaNotificationHistByNotificationHistHId",
     "GetEmailNotificationHistByNotificationHistHId": "/v1/EmailNotificationHist/GetEmailNotificationHistByNotificationHistHId",
     "GetRefUserSubscriptionByUsername": "/v1/PushNotification/GetRefUserSubscriptionByUsername",
+    "GetRefNotifAttrTemplateByRefNotifAttrTemplateId": "/v1/RefNotifAttrTemplate/GetRefNotifAttrTemplateByRefNotifAttrTemplateId",
+    "AddRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/AddRefNotifAttrTemplate",
+    "EditRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/EditRefNotifAttrTemplate",
     "RerunJournalLog": "/v1/Journal/RerunJournalLog",
     "GetJournalLogFailedByJournalLogId": "/v1/Journal/GetJournalLogFailedByJournalLogId"
 }
