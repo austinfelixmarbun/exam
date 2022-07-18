@@ -35,6 +35,11 @@ import { ThirdPartyFormComponent } from './new-cust-component/component/third-pa
 import { ThirdPartyUploadService } from './new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { NewCustSetData } from './new-cust-component/NewCustSetData.Service';
+import { AsliRiReqComponent } from './new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req/asli-ri-req.component';
+import { AsliRiReqConfirmationComponent } from './new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req-confirmation/asli-ri-req-confirmation.component';
+import { AsliRiReqHeaderComponent } from './new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req-header.component';
+import { AsliRiViewComponent } from './new-cust-component/component/third-party-form/asli-ri/view/asli-ri-view/asli-ri-view.component';
+import { CustomerViewAsliRiModule } from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.module';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -70,7 +75,11 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
         PefindoReqComponent,
-        ThirdPartyFormComponent
+        ThirdPartyFormComponent,
+        AsliRiReqHeaderComponent,
+        AsliRiReqComponent,
+        AsliRiReqConfirmationComponent,
+        AsliRiViewComponent
     ],
     imports: [
         CommonModule,
@@ -85,7 +94,8 @@ export const customCurrencyMaskConfig = {
         AdInsModule,        
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-        CustomerViewTrustingSocialModule
+        CustomerViewTrustingSocialModule,
+        CustomerViewAsliRiModule
     ],
     declarations: [
         NewCustPersonalMainDataComponent,
@@ -107,7 +117,11 @@ export const customCurrencyMaskConfig = {
         TrustingSocialReqDetailComponent,
         TrustingSocialViewHeaderComponent,
         PefindoReqComponent,
-        ThirdPartyFormComponent
+        ThirdPartyFormComponent,
+        AsliRiReqHeaderComponent,
+        AsliRiReqComponent,
+        AsliRiReqConfirmationComponent,
+        AsliRiViewComponent
     ],
 
     providers: [
@@ -116,7 +130,7 @@ export const customCurrencyMaskConfig = {
         NewCustSetData,
         ThirdPartyUploadService
     ],
-    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent]
+    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent,AsliRiReqHeaderComponent, AsliRiReqComponent, AsliRiReqConfirmationComponent, AsliRiViewComponent]
 })
 export class NewCustomerSharingModule {
     constructor() {

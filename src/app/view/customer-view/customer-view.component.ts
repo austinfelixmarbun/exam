@@ -39,6 +39,7 @@ export class CustomerViewComponent implements OnInit {
   IsIframe: boolean = false;
   IsUseDigitalization: boolean = false;
   IsUseTs: boolean = false;
+  IsUseAsliRi: boolean = false;
   listIframe: Array<ResCustListIframeViewObj> = new Array<ResCustListIframeViewObj>();
 
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
@@ -124,9 +125,12 @@ export class CustomerViewComponent implements OnInit {
     let idxAt: number = 8;
     if (this.IsUseDms) this.dictIdxAt["DMS"] = ++idxAt;
     if (this.custType == 'PERSONAL') {
+
       if (this.IsUseDigitalization && this.IsUseTs) this.dictIdxAt["TrustSocial"] = ++idxAt;
+      if (this.IsUseDigitalization && this.IsUseAsliRi) this.dictIdxAt["AsliRi"] = ++idxAt;
     } else {
       if (this.IsUseDigitalization) this.dictIdxAt["TrustSocial"] = ++idxAt;
+      if (this.IsUseDigitalization && this.IsUseAsliRi) this.dictIdxAt["AsliRi"] = ++idxAt;
     }
     if (this.IsIframe) {
       let totalListIframe: number = this.listIframe.length;
@@ -146,6 +150,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   mencuba(ev: number) {
+    alert(ev)
     let linkUrl: string = "";
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { 
@@ -192,6 +197,7 @@ export class CustomerViewComponent implements OnInit {
         linkUrl = NavigationConstant.VIEW_CUST;
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
+        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_ASLI_RI;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
@@ -223,10 +229,11 @@ export class CustomerViewComponent implements OnInit {
       else if (ev == 8) { // Highlight Comment
         linkUrl = NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT;
       }
-      else {
+      else{
         linkUrl = NavigationConstant.VIEW_CUST;
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
+        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_ASLI_RI;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
@@ -261,6 +268,8 @@ export class CustomerViewComponent implements OnInit {
       if (svcTypeTs != null) {
         this.IsUseTs = true;
       }
+
+      this.IsUseAsliRi = true;
     }
   }
 }

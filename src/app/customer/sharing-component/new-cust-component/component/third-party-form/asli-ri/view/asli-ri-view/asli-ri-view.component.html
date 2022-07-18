@@ -1,0 +1,208 @@
+<div class="modal-header">
+  <h4 class="modal-title" translate>View Asli RI Checking</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" translate>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="isReady">
+  <div *ngIf="DataAsliRi.RequestDate == null">
+    <div class="col-md-12 text-center">
+      <label class="adInsLabel">No Data Available</label>
+    </div> 
+  </div>
+
+  <div *ngIf="DataAsliRi.RequestDate != null">
+    <div id="mainInformation">
+      <div class="row">
+        <label class="col-md-2  adInsLabel" translate>Customer Type</label>
+        <label class="col-md-4  adinslabel" translate>{{ MrCustTypeCode }}</label>
+        <label class="col-md-2  adInsLabel" translate>Customer Model</label>
+        <label class="col-md-4  adinslabel" translate>{{ MrCustModelName }}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-2  adInsLabel" translate>Customer Name</label>
+        <label class="col-md-4  adinslabel" translate>{{ custObj.CustName }}</label>
+        <label class="col-md-2  adInsLabel" translate>ID Type / ID No</label>
+        <label class="col-md-4  adinslabel" translate>{{ IDType }} / {{ custObj.IdNo }}</label>
+      </div>
+      <div class="row">
+        <label class="col-md-2  adInsLabel" translate>Request Date</label>
+        <label class="col-md-4  adinslabel" translate>{{ DataAsliRi.RequestDate | date: 'dd-MMM-yyyy HH:mm'}}</label>
+        <label class="col-md-2  adInsLabel" translate>Checked Date</label>
+        <label class="col-md-4  adinslabel" translate>{{ DataAsliRi.CheckedDate != null? (DataAsliRi.CheckedDate | date: 'dd-MMM-yyyy HH:mm') : "-"}}</label>
+      </div>
+    </div>
+
+    <div *ngIf="DataAsliRi.CheckedDate == null">
+      <div class="col-md-12 text-center">
+        <label class="adInsLabel"><br>Please wait until the checking process finished</label>
+      </div> 
+    </div>
+
+    <div *ngIf="DataAsliRi.CheckedDate != null">
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_PROF')">
+        <lib-ucSubsection [id]="'professionalVerificationId'" [title]="'Professional Verification'" [panel]="'professionalVerification'">
+        </lib-ucSubsection>
+        <div id="professionalVerification">
+          <div class="px-3">
+            <div class="text-center">
+              <img [src]="img" style="height: 150px; margin-top: 10px;"><br>
+              <label class="adInsLabel mt-2">Selfie Photo</label>
+            </div> 
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.CustName }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfName == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfName == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfName == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Birth Place - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.BirthPlace }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthPlace == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthPlace == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthPlace == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Birth Date - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.BirthDt | date: 'dd MMM yyyy'}}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthDt == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthDt == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfBirthDt == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.Address }}</label>
+              <label class="col-md-8  adInsLabel" translate>{{ DataAsliRi.resAsliRiObj.ProfAddr != null? DataAsliRi.resAsliRiObj.ProfAddr : "-" }}</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Selfie Photo</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfSelfiePhoto != null">{{ DataAsliRi.resAsliRiObj.ProfSelfiePhoto | number}} %</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.ProfSelfiePhoto == null">-</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_PHN_AGE')">
+        <lib-ucSubsection [id]="'phoneAgeVerificationId'" [title]="'Phone Age Verification'" [panel]="'phoneAgeVerification'">
+        </lib-ucSubsection>
+        <div id="phoneAgeVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.Phone }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.PhnAgePhn == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.PhnAgePhn == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.PhnAgePhn == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Phone Age</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.resAsliRiObj.PhnAgeAge != null">{{ DataAsliRi.resAsliRiObj.PhnAgeAge }}</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.resAsliRiObj.PhnAgeAge == null">-</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_HOME_ADDR')">
+        <lib-ucSubsection [id]="'homeAddressPercentageVerificationId'" [title]="'Home Address Percentage Verification'" [panel]="'homeAddressPercentageVerification'">
+        </lib-ucSubsection>
+        <div id="homeAddressPercentageVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.Address }}</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.resAsliRiObj.HomeAddrPrcntgLocationPrcntg != null">{{ DataAsliRi.resAsliRiObj.HomeAddrPrcntgLocationPrcntg }} %</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.resAsliRiObj.HomeAddrPrcntgLocationPrcntg == null">-</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_TAX_EXTRA')">
+        <lib-ucSubsection [id]="'taxExtraVerificationId'" [title]="'Tax Extra Verification'" [panel]="'taxExtraVerification'">
+        </lib-ucSubsection>
+        <div id="taxExtraVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>NPWP Personal - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.NpwpPersonal }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNpwpPersonal == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNpwpPersonal == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNpwpPersonal == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>NIK - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.Nik }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNik == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNik == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraNik == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Match Result</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraMatchResult == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraMatchResult == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraMatchResult == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Monthly Income - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.MonthlyIncome | currency}}</label>
+              <label class="col-md-8  adInsLabel">{{ DataAsliRi.resAsliRiObj.TaxExtraIncome != null? DataAsliRi.resAsliRiObj.TaxExtraIncome : "-" }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_TAX_COY')">
+        <lib-ucSubsection [id]="'taxCompanyVerificationId'" [title]="'Tax Company Verification'" [panel]="'taxCompanyVerification'">
+        </lib-ucSubsection>
+        <div id="taxCompanyVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>NPWP Company - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.NpwpCompany }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxCompanyNpwpCompany == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxCompanyNpwpCompany == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxCompanyNpwpCompany == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>Annual Revenue - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.AnnualRevenue | currency}}</label>
+              <label class="col-md-8  adinslabel" translate>{{ DataAsliRi.resAsliRiObj.TaxCompanyIncome != null? DataAsliRi.resAsliRiObj.TaxCompanyIncome : "-" }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="DataAsliRi.reqAddTrxSrcDataForAsliRiObj.ListReqVerificationType.includes('ASLIRI_WORKPLACE')">
+        <lib-ucSubsection [id]="'workplaceVerificationId'" [title]="'Workplace Verification'" [panel]="'workplaceVerification'">
+        </lib-ucSubsection>
+        <div id="workplaceVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>NIK - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.Nik }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceNik == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceNik == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceNik == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.CustName }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceName == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceName == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceName == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>{{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.CompanyName }}</label>
+              <label class="col-md-8  adinslabel" translate>{{ DataAsliRi.resAsliRiObj.WorkPlaceCompany != null? DataAsliRi.resAsliRiObj.WorkPlaceCompany : "-" }}</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>Company Phone - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.CompanyPhone }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceCompanyPhone == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceCompanyPhone == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.WorkPlaceCompanyPhone == null">-</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="button-right">
+    <span class="mr-1">
+        <button type="button" class="btn btn-warning btn-raised mr-1" (click)="close()">
+            <i class="far fa-window-close"></i>&nbsp;<span translate>close</span>
+        </button>
+    </span>
+  </div>
+</div>

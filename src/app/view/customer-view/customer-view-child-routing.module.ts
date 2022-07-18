@@ -145,6 +145,10 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_TRUSTING_SOCIAL,
         loadChildren: './customer-view-trusting-social/customer-view-trusting-social.module#CustomerViewTrustingSocialModule'
+      },
+      {
+        path: PathConstant.VIEW_CUST_ASLI_RI,
+        loadChildren: './customer-view-asli-ri/customer-view-asli-ri.module#CustomerViewAsliRiModule'
       }
     ]
   }
