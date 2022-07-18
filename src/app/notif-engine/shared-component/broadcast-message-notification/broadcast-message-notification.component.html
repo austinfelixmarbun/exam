@@ -16,7 +16,7 @@
   <div class="form-group row" [ngClass]="{ 'adins-required': IsResend }" [hidden]="GetSendType == SendTypeAll">
     <label class="col-md-3" translate>{{!IsResend ? "USERNAME" : "SEND_TO"}}</label>
     <div class="col-md-9 input-group">
-      <lib-uclookupgeneric *ngIf="SendtoLookupObj.isReady" [lookupInput]="SendtoLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
+      <lib-uclookupgeneric *ngIf="SendtoLookupObj.isReady" [lookupInput]="SendtoLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm" (lookup)="getLookUp($event)"
         [identifier]="IdentifierLookupSendTo">
       </lib-uclookupgeneric>
       <button type="button" [hidden]="IsResend || MaxSpecificUser == SendToLength" (click)="AddSendTo()" class="btn btn-primary btn-raised"
@@ -48,6 +48,24 @@
     <div class="col-md-9">
       <textarea class="form-control adInsInput width-50-per" [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.Body.invalid }" [readonly]="IsUsedTemplate" formControlName="Body" cols="50" rows="5"></textarea>
       <lib-uc-show-errors [control]="parentForm.controls.Body" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 adInsLabel" translate>BASE URL</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control adInsInput"
+        formControlName="BaseUrl">
+      <lib-uc-show-errors [control]="parentForm.controls.BaseUrl" [submit]="enjiForm.submitted">
+      </lib-uc-show-errors>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-3 adInsLabel" translate>PATH</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control adInsInput"
+        formControlName="Path">
+      <lib-uc-show-errors [control]="parentForm.controls.Path" [submit]="enjiForm.submitted">
       </lib-uc-show-errors>
     </div>
   </div>

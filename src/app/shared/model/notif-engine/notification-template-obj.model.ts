@@ -13,6 +13,8 @@ export class NotificationTemplateObj {
     StartDt: Date;
     EndDt: Date;
     Body: string;
+    BaseUrl: string;
+    Path: string;
     TotalParam: number;
     Version: number;
     IsLatestVersion: boolean;
@@ -30,6 +32,8 @@ export class NotificationTemplateObj {
         this.MrNotificationTypeDescr = "";
         this.Subject = "";
         this.Body = "";
+        this.BaseUrl = "";
+        this.Path = "";
         this.TotalParam = 0;
         this.Version= 0;
     }

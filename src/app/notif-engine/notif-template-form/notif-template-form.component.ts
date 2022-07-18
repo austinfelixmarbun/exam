@@ -26,6 +26,8 @@ export class NotifTemplateFormComponent implements OnInit {
     StartDt: ['', Validators.required],
     EndDt: '',
     Subject: '',
+    BaseUrl: '',
+    Path: '',
     Body: ['', Validators.required],
     ParamArr: this.fb.array([])
   });
@@ -103,7 +105,9 @@ export class NotifTemplateFormComponent implements OnInit {
           StartDt: response.StartDt,
           EndDt: response.EndDt,
           Subject: response.Subject,
-          Body: response.Body
+          Body: response.Body,
+          BaseUrl: response.BaseUrl,
+          Path: response.Path
         });
         this.ChangeNotifType();
         for (let index = 0; index < response.TotalParam; index++) {
@@ -192,6 +196,11 @@ export class NotifTemplateFormComponent implements OnInit {
     this.NotificationTemplateSaveObj.TotalParam = ListParam.length;
     this.NotificationTemplateSaveObj.StartDt = SaveObj.StartDt;
     this.NotificationTemplateSaveObj.EndDt = SaveObj.EndDt;
+
+    if(SaveObj.MrNotificationTypeCode == this.notifTypePushNotif){
+      this.NotificationTemplateSaveObj.BaseUrl = SaveObj.BaseUrl;
+      this.NotificationTemplateSaveObj.Path = SaveObj.Path;
+    }
 
     return this.NotificationTemplateSaveObj;
   }
