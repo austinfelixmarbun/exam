@@ -63,7 +63,7 @@ export class AsliRiReqComponent implements OnInit {
 
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
     {
-      this.key = "ASLIRI-" + this.custObj.IdNo
+      this.key = "ASLIRI-" + this.parent.IdNo
     }
     else
     {
@@ -141,6 +141,7 @@ export class AsliRiReqComponent implements OnInit {
     if(this.custDocFileFormObj == null || this.custDocFileFormObj.File == null)
     {
       this.isSelfieValid = true;
+      this.isSelfieAvailable = false;
       return
     }
     
@@ -170,7 +171,7 @@ export class AsliRiReqComponent implements OnInit {
       this.reqAddTrxSrcDataForAsliRIObj.Phone = this.parent.MobilePhnNo1;
       if(this.parent.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP)
       {
-        this.reqAddTrxSrcDataForAsliRIObj.Nik = this.custObj.IdNo,
+        this.reqAddTrxSrcDataForAsliRIObj.Nik = this.parent.IdNo,
         this.reqAddTrxSrcDataForAsliRIObj.NpwpPersonal = this.parent.TaxIdNo;
       }
     }
