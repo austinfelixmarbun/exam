@@ -24,7 +24,7 @@ export class BroadcastMessageNotificationComponent implements OnInit {
   @Input() IsResend: boolean = false;
   @Input() SendToUname: string;
   SendtoLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
-  readonly title: string = "Broadcast Notification";
+  readonly title: string = "Broadcast Push Notification";
   readonly IdentifierLookupSendTo: string = "LookupSendTo";
   constructor(private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private http: HttpClient) {}
   @Output() GetPushNotificationObj: EventEmitter<PushNotifSendToObj> = new EventEmitter();
@@ -79,9 +79,8 @@ export class BroadcastMessageNotificationComponent implements OnInit {
   }
 
   getLookUp(ev){
+    if(!this.IsResend) return;
     this.PushNotifSendToObj = new PushNotifSendToObj();
-    // this.PushNotifSendToObj.Url = ev.SubscriptionEndpoint;
-    // this.PushNotifSendToObj.Key = ev.SubscriptionKey;
     this.PushNotifSendToObj.SendTo = ev.Username;
     this.GetPushNotificationObj.emit(this.PushNotifSendToObj);
   }
@@ -115,10 +114,6 @@ export class BroadcastMessageNotificationComponent implements OnInit {
 
     this.GetPushNotificationObj.emit(this.PushNotifSendToObj);
     this.SendtoLookupObj.isReady = true;
-  }
-  
-  ngOnDestroy(): void {
-    this.parentForm.get("SendTo").setValue("");
   }
 
   AddSendTo(){

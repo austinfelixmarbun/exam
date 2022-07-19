@@ -119,6 +119,26 @@
                     <!-- <button type="button" (click)="ClearParameter()">Clear Parameter</button> -->
                   </div>
                 </div>
+                <div *ngIf="subjectValue == 'TITLE'">
+                  <div class="form-group row">
+                    <label class="col-md-3 adInsLabel" translate>BASE URL</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per"
+                      formControlName="BaseUrl">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.BaseUrl" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-md-3 adInsLabel" translate>PATH</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control adInsInput width-50-per"
+                      formControlName="Path">
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.Path" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                    </div>
+                  </div>
+                </div>
               </div>
               <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" [IdentifierBodyMessageParam]="IdentifierBodyMessageParam" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">

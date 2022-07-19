@@ -83,6 +83,44 @@
                 }
               }
             ]
+          },
+          {
+            "type": "switch",
+            "case": [
+              {
+                "conditions": [
+                  {
+                    "property": "NotificationType",
+                    "value": "Push Notification",
+                    "restriction": "EQ"
+                  }
+                ],
+                "result": {
+                    "type": "text",
+                    "label": "Base Url",
+                    "property": "BaseUrl"
+                }
+              }
+            ]
+          },
+          {
+            "type": "switch",
+            "case": [
+              {
+                "conditions": [
+                  {
+                    "property": "NotificationType",
+                    "value": "Push Notification",
+                    "restriction": "EQ"
+                  }
+                ],
+                "result": {
+                    "type": "text",
+                    "label": "Path",
+                    "property": "Path"
+                }
+              }
+            ]
           }
         ],
         "querystring": {
