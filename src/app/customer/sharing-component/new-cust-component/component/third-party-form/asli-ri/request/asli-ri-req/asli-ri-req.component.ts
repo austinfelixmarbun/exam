@@ -60,9 +60,6 @@ export class AsliRiReqComponent implements OnInit {
     this.parent = this.parentForm.value;
     this.Addr = this.parentForm.controls.UcAddress.value;
     this.address = this.Addr.Addr +  " RT/RW " + this.Addr.AreaCode4 + "/" + this.Addr.AreaCode3 + " " + this.Addr.AreaCode2 + " " + this.Addr.AreaCode1 + " " + this.Addr.City;
-    console.log(parent)
-    console.log(this.address)
-    console.log(this.custObj)
 
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
     {
@@ -76,7 +73,6 @@ export class AsliRiReqComponent implements OnInit {
     if(localStorage.getItem(this.key) != null)
     {
       this.reqAddTrxSrcDataForAsliRIObj = JSON.parse(AdInsHelper.GetLocalStorage(this.key))
-      console.log(this.reqAddTrxSrcDataForAsliRIObj)
     }
 
     this.CheckValidationSubsection()
@@ -100,7 +96,6 @@ export class AsliRiReqComponent implements OnInit {
 
   CheckValidationSubsection()
   {
-    console.log(this.width, this.height)
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal && this.parent.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP)
     {
       this.isProfessionalVerification = true;
@@ -212,7 +207,6 @@ export class AsliRiReqComponent implements OnInit {
   {
     this.patchObj()
     AdInsHelper.SetLocalStorage(this.key, JSON.stringify(this.reqAddTrxSrcDataForAsliRIObj));
-    console.log(this.reqAddTrxSrcDataForAsliRIObj)
     this.nextConfirm.emit(true)
     this.reqAddTrxSrcDataForAsliRIObjOutput.emit(this.reqAddTrxSrcDataForAsliRIObj)
   }

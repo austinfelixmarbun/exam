@@ -35,7 +35,6 @@ export class AsliRiReqHeaderComponent implements OnInit {
   outputForm(ev: ReqAddTrxSrcDataForAsliRIObj)
   {
     this.reqAddTrxSrcDataForAsliRIObj = ev;
-    console.log(this.reqAddTrxSrcDataForAsliRIObj)
   }
 
 }

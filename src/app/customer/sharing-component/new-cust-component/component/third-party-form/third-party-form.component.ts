@@ -132,7 +132,6 @@ export class ThirdPartyFormComponent implements OnInit {
     await this.http.post(URLConstant.GetListActiveRefMasterWithMappingCodeAll, tempReq).toPromise().then(
       async (response) => {
         this.ListDocumentKeyValueObj = response[CommonConstant.ReturnObj];
-        console.log(this.ListDocumentKeyValueObj)
         for (let i = 0; i < this.ListDocumentKeyValueObj.length; i++) {
           var custDocFileFormObj = new CustDocFileFormObj();
 
@@ -190,7 +189,6 @@ export class ThirdPartyFormComponent implements OnInit {
 
     await this.checkThirdPartyTrxNo();
     await this.saveThirdPartyTrxNo();
-    console.log(this.thirdPartyTrxNo);
 
 
     let tempForm = this.parentForm.getRawValue();
@@ -315,8 +313,6 @@ export class ThirdPartyFormComponent implements OnInit {
   async ReqASLIRI()
   {
     this.markFormGroupTouched(this.parentForm);
-
-    console.log(this.CustDocFileFormObjs)
 
     if (!this.thirdPartyUploadService.ValidateFileUploadAsliRI(this.CustDocFileFormObjs)) {
       return;

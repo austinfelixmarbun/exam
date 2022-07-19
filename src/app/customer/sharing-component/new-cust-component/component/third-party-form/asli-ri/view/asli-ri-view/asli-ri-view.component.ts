@@ -66,7 +66,6 @@ export class AsliRiViewComponent implements OnInit {
   {
     await this.http.post(URLConstant.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
       (res: any) => {
-        console.log(res)
         this.DataAsliRi = res;
         this.isReady = true;
       })

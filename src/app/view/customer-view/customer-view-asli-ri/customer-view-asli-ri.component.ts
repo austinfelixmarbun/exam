@@ -37,8 +37,6 @@ export class CustomerViewAsliRiComponent implements OnInit {
   url: string;
 
   async ngOnInit() {
-    console.log(this.CustId)
-    console.log(this.CustNo)
 
     await this.GetDataCustObj()
 
@@ -90,15 +88,12 @@ export class CustomerViewAsliRiComponent implements OnInit {
         }
       );
     }
-
-    console.log(this.custObj)
   }
 
   async GetData()
   {
     await this.http.post(URLConstant.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
       (res: any) => {
-        console.log(res)
         this.DataAsliRi = res;
         this.isReady = true;
       })

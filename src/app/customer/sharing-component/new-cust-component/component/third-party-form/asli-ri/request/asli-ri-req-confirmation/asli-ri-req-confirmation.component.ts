@@ -36,11 +36,9 @@ export class AsliRiReqConfirmationComponent implements OnInit {
   isReady: boolean = true;
 
   async ngOnInit() {
-    console.log(this.custDocFileFormObj)
     if(this.custDocFileFormObj != undefined)
     {
       await this.ConvertToCustDocFileObj(this.custDocFileFormObj)
-      console.log(this.reqAddTrxSrcDataForAsliRIObjInput)
     }
   }
 
@@ -52,7 +50,6 @@ export class AsliRiReqConfirmationComponent implements OnInit {
       custDocFileObj.ByteBase64 = await this.readFileAsDataURL(custDocFileFormObj.File);
       custDocFileObj.ByteBase64 = custDocFileObj.ByteBase64.substring(custDocFileObj.ByteBase64.lastIndexOf(',') + 1)
       this.reqAddTrxSrcDataForAsliRIObjInput.SelfiePhoto = custDocFileObj.ByteBase64
-      console.log(custDocFileObj)
     }
   }
 
@@ -67,7 +64,6 @@ export class AsliRiReqConfirmationComponent implements OnInit {
 
   save()
   {
-    console.log(this.reqAddTrxSrcDataForAsliRIObjInput)
     this.uploadDocFileMultipart(this.reqAddTrxSrcDataForAsliRIObjInput)
 
   }
