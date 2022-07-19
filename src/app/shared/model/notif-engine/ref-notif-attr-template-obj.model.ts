@@ -5,6 +5,8 @@ export class RefNotifAttrTemplateObj {
     AttrInputTypeCode: string = "";
     AttrInputTypeDescr: string = "";
     DefaultValue: string = "";
+    PatternCode: string = "";
+    PatternValue: string = "";
     IsActive: boolean = true;
     RowVersion: string = "";
 
@@ -15,6 +17,8 @@ export class RefNotifAttrTemplateObj {
         this.AttrInputTypeCode = "";
         this.AttrInputTypeDescr = "";
         this.DefaultValue = "";
+        this.PatternCode = "";
+        this.PatternValue = "";
         this.IsActive = true;
         this.RowVersion = "";
     }

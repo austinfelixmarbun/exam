@@ -39,7 +39,7 @@
                   <select class="form-control adInsInput" style="width: auto" [formControlName]="identifierFormAttrInputTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormAttrInputTypeCode).invalid }">
                     <option value="">Select One</option>
-                    <option *ngFor="let it of DictListRefMaster[MrNotificationTemplAttrInputType]" value="{{it.Key}}">
+                    <option *ngFor="let it of DictListRefMaster[RefMasterTypeCodeAttrInputType]" value="{{it.Key}}">
                       {{it.Value}}</option>
                   </select>
                   <lib-uc-show-errors [control]="getFormControl(identifierFormAttrInputTypeCode)" [submit]="enjiForm.submitted">
@@ -71,6 +71,28 @@
 
                   <lib-uc-show-errors [control]="getFormControl(identifierFormDefaultValue)" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
+                </div>
+              </div>
+              <div *ngIf="IsInputTypeText">
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="PatternCode" translate>Pattern Code</label>
+                  <div class="col-md-9">
+                    <select [formControlName]="identifierFormPatternCode" class="form-control"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && getFormControl(identifierFormPatternCode).invalid }">
+                      <option value="">-Select One-</option>
+                      <option *ngFor="let inputType of DictListRefMaster[RefMasterTypeCodeRegularExpression]" [value]="inputType.Key">
+                        {{inputType.Key}}
+                      </option>
+                    </select>
+                    <lib-uc-show-errors [control]="getFormControl(identifierFormPatternCode)" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" for="PatternValue" translate>Pattern Value</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control adInsInput" [value]="ChangePatternCode" disabled />
+                  </div>
                 </div>
               </div>
             </div>

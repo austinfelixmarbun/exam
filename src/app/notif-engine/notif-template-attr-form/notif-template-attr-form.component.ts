@@ -25,7 +25,8 @@ export class NotifTemplateAttrFormComponent implements OnInit {
     NotifAttrTemplateDescr: ['', Validators.required],
     AttrInputTypeCode: ['', Validators.required],
     IsActive: [true, Validators.required],
-    DefaultValue: ['']
+    DefaultValue: [''],
+    PatternCode: ['']
   });
 
   readonly identifierFormNotifAttrTemplateCode: string = "NotifAttrTemplateCode";
@@ -33,9 +34,11 @@ export class NotifTemplateAttrFormComponent implements OnInit {
   readonly identifierFormAttrInputTypeCode: string = "AttrInputTypeCode";
   readonly identifierFormIsActive: string = "IsActive";
   readonly identifierFormDefaultValue: string = "DefaultValue";
+  readonly identifierFormPatternCode: string = "PatternCode";
   
   readonly title: string = "Notification Template Attribute";
-  readonly MrNotificationTemplAttrInputType: string = CommonConstant.RefMasterTypeCodeNotifTemplAttrInputType;
+  readonly RefMasterTypeCodeAttrInputType: string = CommonConstant.RefMasterTypeCodeNotifTemplAttrInputType;
+  readonly RefMasterTypeCodeRegularExpression: string = CommonConstant.RefMasterTypeCodeRegularExpression;
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   readonly AttrInputType = {
     Text: CommonConstant.AttrInputTypeText,
@@ -54,7 +57,8 @@ export class NotifTemplateAttrFormComponent implements OnInit {
 
   async ngOnInit() {
     await this.GetExistingData();
-    this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTemplAttrInputType);
+    this.GetRefMasterListKeyValueActiveByCode(this.RefMasterTypeCodeAttrInputType);
+    this.GetRefMasterListKeyValueActiveByCode(this.RefMasterTypeCodeRegularExpression);
   }
 
   existingRefNotifAttrTemplateObj: RefNotifAttrTemplateObj = new RefNotifAttrTemplateObj();
@@ -66,20 +70,38 @@ export class NotifTemplateAttrFormComponent implements OnInit {
         this.NotifTemplateAttrForm.patchValue({
           NotifAttrTemplateCode: this.existingRefNotifAttrTemplateObj.NotifAttrTemplaceCode,
           NotifAttrTemplateDescr: this.existingRefNotifAttrTemplateObj.NotifAttrTemplaceDescr,
-          AttrInputTypeCode: this.existingRefNotifAttrTemplateObj.AttrInputTypeCode,
+          AttrInputTypeCode: this.SetNullValueDDL(this.existingRefNotifAttrTemplateObj.AttrInputTypeCode),
           IsActive: this.existingRefNotifAttrTemplateObj.IsActive,
           DefaultValue: this.existingRefNotifAttrTemplateObj.DefaultValue,
+          PatternCode: this.SetNullValueDDL(this.existingRefNotifAttrTemplateObj.PatternCode)
         });
       }
-    )
+    );
+  }
 
+  private SetNullValueDDL(value: string) {
+    if (!value) return "";
+    return value;
+  }
+
+  get IsInputTypeText(): boolean {
+    let inputTypeCode: string = this.getFormControl(this.identifierFormAttrInputTypeCode).value;
+    return inputTypeCode == this.AttrInputType.Text;
   }
 
   getFormControl(identifier: string): FormControl{
     return this.NotifTemplateAttrForm.get(identifier) as FormControl;
   }
 
-  GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
+  get ChangePatternCode(): string {
+    let patternCode: string = this.getFormControl(this.identifierFormPatternCode).value;
+    if (!patternCode) return "";
+    let patternDescr: string = this.GetDescription(this.RefMasterTypeCodeRegularExpression, patternCode);
+    if (!patternDescr) return "";
+    return patternDescr;
+  }
+
+  private GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
     this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: RefMasterTypeCode }).subscribe(
       (response) => {
         this.DictListRefMaster[RefMasterTypeCode] = response[CommonConstant.ReturnObj];
@@ -101,7 +123,7 @@ export class NotifTemplateAttrFormComponent implements OnInit {
     );
   }
 
-  SetSaveObj(): RefNotifAttrTemplateObj {
+  private SetSaveObj(): RefNotifAttrTemplateObj {
     let reqObj: RefNotifAttrTemplateObj = new RefNotifAttrTemplateObj();
     let form = this.NotifTemplateAttrForm.getRawValue();
     if (this.RefNotifAttrTemplateId != 0){
@@ -111,15 +133,29 @@ export class NotifTemplateAttrFormComponent implements OnInit {
     reqObj.NotifAttrTemplaceCode = form[this.identifierFormNotifAttrTemplateCode];
     reqObj.NotifAttrTemplaceDescr = form[this.identifierFormNotifAttrTemplateDescr];
     reqObj.AttrInputTypeCode = form[this.identifierFormAttrInputTypeCode];
-    reqObj.AttrInputTypeDescr = this.GetDescription(this.MrNotificationTemplAttrInputType, reqObj.AttrInputTypeCode);
+    reqObj.AttrInputTypeDescr = this.GetDescription(this.RefMasterTypeCodeAttrInputType, reqObj.AttrInputTypeCode);
     reqObj.DefaultValue = form[this.identifierFormDefaultValue];
     reqObj.IsActive = form[this.identifierFormIsActive];
+    return this.SetInputType(reqObj, form);
+  }
+
+  private GetDescription(RefMasterTypeCode: string, MasterCode: string): string {
+    let listValue: Array<KeyValueObj> = this.DictListRefMaster[RefMasterTypeCode];
+    if (!MasterCode || !listValue) return "";
+    return listValue.find(x => x.Key == MasterCode).Value;
+  }
+
+  private SetInputType(reqObj: RefNotifAttrTemplateObj, form: Object): RefNotifAttrTemplateObj {
+    reqObj.PatternCode = "";
+    reqObj.PatternValue = "";
+
+    if (this.IsInputTypeText) {
+      reqObj.PatternCode = form[this.identifierFormPatternCode];
+      reqObj.PatternValue = this.GetDescription(this.RefMasterTypeCodeRegularExpression, reqObj.PatternCode);
+    }
     return reqObj;
   }
 
-  GetDescription(RefMasterTypeCode: string, MasterCode: string): string {
-    return this.DictListRefMaster[RefMasterTypeCode].find(x => x.Key == MasterCode).Value;
-  }
   CancelButton() {
     AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_TEMPLATE_ATTR_PAGING], {});
   }
