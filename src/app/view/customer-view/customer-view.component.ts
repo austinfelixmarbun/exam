@@ -137,7 +137,6 @@ export class CustomerViewComponent implements OnInit {
       idxAt += totalListIframe;
     }
     this.dictIdxAt["OTH"] = ++idxAt;
-    console.log(this.dictIdxAt);
   }
 
   async GetCustListIframeView() {
@@ -150,7 +149,6 @@ export class CustomerViewComponent implements OnInit {
   }
 
   mencuba(ev: number) {
-    alert(ev)
     let linkUrl: string = "";
     if (this.custType == CommonConstant.CustomerPersonal) {
       if (ev == 0) { 
@@ -197,7 +195,7 @@ export class CustomerViewComponent implements OnInit {
         linkUrl = NavigationConstant.VIEW_CUST;
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
-        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_ASLI_RI;
+        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_CUST_ASLI_RI;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
@@ -233,7 +231,7 @@ export class CustomerViewComponent implements OnInit {
         linkUrl = NavigationConstant.VIEW_CUST;
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
-        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_ASLI_RI;
+        else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_CUST_ASLI_RI;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
