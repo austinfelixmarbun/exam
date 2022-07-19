@@ -295,13 +295,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   get GetIdTypeValue(): string {
     return this.CustomerForm.get(this.identifierMrIdTypeCode).value;
   }
-  get IsExpDtRequired(){
+  get IsExpDtRequired(): Boolean {
     let IdType: string = this.GetIdTypeValue;
+    if (!this.dictListGsValue[this.GsCodeIdTypeExpDtRequired]) return false;
     return this.dictListGsValue[this.GsCodeIdTypeExpDtRequired].includes(IdType);
   }
 
-  get IsExpDtReadonly(){
+  get IsExpDtReadonly(): Boolean {
     let IdType: string = this.GetIdTypeValue;
+    if (!this.dictListGsValue[this.GsCodeIdTypeExpDtReadonly]) return false;
     return this.dictListGsValue[this.GsCodeIdTypeExpDtReadonly].includes(IdType);
   }
 
