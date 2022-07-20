@@ -571,7 +571,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     };
     let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
     if (this.IsResend) urlSave = "";
-    await this.http.post(urlSave, this.SendToNotificationEngineSaveObj).toPromise().then(
+    await this.http.post(urlSave, this.SendToNotificationEngineSaveObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);

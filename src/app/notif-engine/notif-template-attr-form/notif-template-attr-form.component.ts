@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { BodyMessageTosendComponent } from '../shared-component/body-message-tosend/body-message-tosend.component';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
-import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notification-template-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 @Component({
   selector: 'app-notif-template-attr-form',
@@ -113,7 +112,7 @@ export class NotifTemplateAttrFormComponent implements OnInit {
     let urlSave: string = this.UrlConstantNew.AddRefNotifAttrTemplate;
     if (this.RefNotifAttrTemplateId != 0) urlSave = this.UrlConstantNew.EditRefNotifAttrTemplate;
     console.dir(this.SetSaveObj());
-    await this.http.post(urlSave, this.SetSaveObj()).toPromise().then(
+    await this.http.post(urlSave, this.SetSaveObj(), AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);
