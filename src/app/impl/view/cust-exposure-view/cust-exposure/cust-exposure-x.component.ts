@@ -20,6 +20,7 @@ export class CustExposureXComponent implements OnInit {
 
   //#region Role Type
   readonly RoleCust: string = CommonConstant.RoleCustData;
+  readonly RoleCustGrp: string = CommonConstant.RoleCustGrpData;
   readonly RoleFam: string = CommonConstant.RoleFamilyData;
   readonly RoleGuarantor: string = CommonConstant.RoleGuarantorData;
   readonly RoleShareholder: string = CommonConstant.RoleShareholder;
@@ -70,7 +71,10 @@ export class CustExposureXComponent implements OnInit {
       (response) => {
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {
           const element = response.ListCrdExpsrAppAgrHistObj[index];
-          if (element.RoleCust == this.RoleCust) {
+          if (
+            element.RoleCust == this.RoleCust || 
+            (this.exposureType == CommonConstant.ExposureCustGroupTypeCode && element.RoleCust == this.RoleCustGrp)
+          ) {
             this.ListCrdExpsrAppAgrHistObj.push(element);
           }
         }

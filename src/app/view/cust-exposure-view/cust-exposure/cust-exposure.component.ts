@@ -20,6 +20,7 @@ export class CustExposureComponent implements OnInit {
 
   //#region Role Type
   readonly RoleCust: string = CommonConstant.RoleCustData;
+  readonly RoleCustGrp: string = CommonConstant.RoleCustGrpData;
   readonly RoleFam: string = CommonConstant.RoleFamilyData;
   readonly RoleGuarantor: string = CommonConstant.RoleGuarantorData;
   readonly RoleShareholder: string = CommonConstant.RoleShareholder;
@@ -35,7 +36,9 @@ export class CustExposureComponent implements OnInit {
 
   ExposureDObj: CustExpsrDObj = new CustExpsrDObj();
   IsReady: boolean = false;
+  IsCustGrpExposureView: boolean = false;
   async ngOnInit() {
+    this.IsCustGrpExposureView = this.exposureType == CommonConstant.ExposureCustGroupTypeCode;
     this.SetExposureDObj();
     this.GetTotalMonthlyInstallmentDSF();
     await this.GetListCustExpsrBucketByCustExpsrDId();
@@ -58,22 +61,26 @@ export class CustExposureComponent implements OnInit {
     if (this.exposureHObj == null) return;
     await this.http.post<{ ListCustExpsrBucketObj: Array<CustExpsrBucketObj> }>(URLConstant.GetListCustExpsrBucketByCustExpsrDId, { Id: this.ExposureDObj.CustExpsrDId }).toPromise().then(
       (response) => {
-        console.log(response);
         this.ListCustExpsrBucketObj = response.ListCustExpsrBucketObj;
       }
     );
   }
 
-  ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> = new Array<CrdExpsrAppAgrHistObj>();
+  ListCrdExpsrAppAgrHistCustObj: Array<CrdExpsrAppAgrHistObj> = new Array<CrdExpsrAppAgrHistObj>();
+  ListCrdExpsrAppAgrHistCustGrpObj: Array<CrdExpsrAppAgrHistObj> = new Array<CrdExpsrAppAgrHistObj>();
   async GetListCustExpsrAppAgrHistByCustExpsrHId() {
     if (this.exposureHObj == null) return;
     await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(URLConstant.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.exposureHObj.CustExpsrHId }).toPromise().then(
       (response) => {
-        // console.log(response);
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {
           const element = response.ListCrdExpsrAppAgrHistObj[index];
-          if (element.RoleCust == this.RoleCust) {
-            this.ListCrdExpsrAppAgrHistObj.push(element);
+          if (element.RoleCust == this.RoleCust) 
+          {
+            this.ListCrdExpsrAppAgrHistCustObj.push(element);
+          }
+          else if (this.IsCustGrpExposureView && element.RoleCust == this.RoleCustGrp)
+          {
+            this.ListCrdExpsrAppAgrHistCustGrpObj.push(element);
           }
         }
       }

@@ -111,6 +111,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
   readonly CustFromEditMainData: string = CommonConstant.CustFromEditMainData;
   readonly CustFromCustShareholder: string = CommonConstant.CustFromCustShareholder;
+  readonly CustFromCustFamily: string = CommonConstant.CustFromCustFamily;
   //#endregion
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
@@ -299,7 +300,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: ['', this.CustDataMode == this.CustDataModeMain ? [Validators.required] : []],
       MobilePhnNo1: ['', this.isFamily ? [Validators.required, Validators.pattern("^[0-9]+$")] : this.isShareholder ? [Validators.pattern("^[0-9]+$")] : [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', Validators.pattern(CommonConstant.regexEmail)],
+      Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
       UcAddress: this.fb.group({
         Addr: [''],
         AreaCode1: [''],
@@ -325,6 +326,10 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     if (this.CustDataMode == this.CustDataModeFamily) {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
+    }
+    if(this.pageFrom == CommonConstant.CustFromCustFamily){
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").updateValueAndValidity();
     }
   }
   //#endregion
