@@ -915,5 +915,7 @@
     "AddRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/AddRefNotifAttrTemplate",
     "EditRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/EditRefNotifAttrTemplate",
     "RerunJournalLog": "/v1/Journal/RerunJournalLog",
-    "GetJournalLogFailedByJournalLogId": "/v1/Journal/GetJournalLogFailedByJournalLogId"
+    "GetJournalLogFailedByJournalLogId": "/v1/Journal/GetJournalLogFailedByJournalLogId",
+    "GetNotReadPushNotif": "/v1/PushNotification/GetAllNotReadPushNotification",
+    "UpdateReadPushNotif": "/v1/PushNotification/UpdatePushNotificationHistIsReadByListJobId"
 }

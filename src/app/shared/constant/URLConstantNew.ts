@@ -1224,6 +1224,8 @@ export class UrlConstantNew{
     public PushNotifSubscribe = this.url.PushNotifSubscribe;
     public PushNotifUnsubscribe = this.url.PushNotifUnsubscribe;
     public GetNotSentPushNotif = this.env.FoundationR3Url + this.url.GetNotSentPushNotif;
+    public GetNotReadPushNotif = this.env.NotifEngineURL + this.url.GetNotReadPushNotif;
+    public UpdateReadPushNotif = this.env.NotifEngineURL + this.url.UpdateReadPushNotif;
 
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;

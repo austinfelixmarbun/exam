@@ -152,6 +152,9 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     checkUseNotification() {
         this.IsUseNotification = this.UrlConstantNew.env.IseUseNotification;
         AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, this.UrlConstantNew.env.IseUseNotification);
+        if(this.IsUseNotification == "1") {
+            this.NotificationObj.IsClickable = true;
+        }
     }
 
     logout() {

@@ -10,7 +10,11 @@ export class UcNotificationObj {
     PathUrlSubs: string;
     PathUrlUnsubs: string;
     PathUrlGetAllNotif: string;
+    PathUrlUpdateReadNotif: string;
     PublicKey: string;
+    ListEnvironments: Array<EnvisObj>;
+    IsClickable: boolean;
+    TakeTop: number;
 
     constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -18,7 +22,23 @@ export class UcNotificationObj {
         this.EnvUrl = this.UrlConstantNew.env.NotifEngineURL;
         this.PathUrlSubs = this.UrlConstantNew.PushNotifSubscribe;
         this.PathUrlUnsubs = this.UrlConstantNew.PushNotifUnsubscribe;
-        this.PathUrlGetAllNotif = this.UrlConstantNew.GetNotSentPushNotif;
+        this.PathUrlGetAllNotif = this.UrlConstantNew.GetNotReadPushNotif;
+        this.PathUrlUpdateReadNotif = this.UrlConstantNew.UpdateReadPushNotif;
         this.PublicKey = environment.NotificationPublicKey;
+        this.ListEnvironments = new Array<EnvisObj>();
+        this.ListEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Web});
+        this.ListEnvironments.push({ environment: "LOS", url: this.UrlConstantNew.env.losR3Web});
+        this.IsClickable = false;
+        this.TakeTop = 20;
+    }
+}
+
+export class EnvisObj {
+    environment: string;
+    url: string;
+
+    constructor() {
+        this.environment = "";
+        this.url = "";
     }
 }
