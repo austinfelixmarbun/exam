@@ -19,17 +19,12 @@ export class BodyMessageTosendComponent implements OnInit {
   @Input() ParamListCount: number = 0;
   @Input() IdentifierBody: string = "Body";
   @Input() IdentifierBodyMessageParam: string = "ParamArr";
-  @Input() IdentifierBodyMessageParamDummy: string = "ParamArrDummy";
   @Input() IsBroadcast: boolean = false;
   @Input() IsResend: boolean = false;
   @Input() ParamArrays: Array<string> = new Array<string>();
   @Output() DeletedParam = new EventEmitter<string>();
   get GetListBodyMessageParam(): FormArray {
     return this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
-  }
-
-  get GetListBodyMessageParamDummy(): FormArray {
-    return this.parentForm.get(this.IdentifierBodyMessageParamDummy) as FormArray;
   }
 
   readonly NotifTypeEmail: string = CommonConstant.NOTIF_TYPE_EMAIL;
@@ -69,29 +64,11 @@ export class BodyMessageTosendComponent implements OnInit {
     const element = this.GetListBodyMessageParam.at(idx);
     const SearchedParam: string = element.get("ParamIdxAt").value;
 
-    let DummyLength = this.GetListBodyMessageParamDummy.length;
-    let idxtoRemove: Array<number> = new Array<number>();
-    for( let idxremove = 0; idxremove < DummyLength; idxremove++ ){
-      const elementdummy = this.GetListBodyMessageParamDummy.at(idxremove);
-      const SearchedParamdummy: string = elementdummy.get("ParamIdxAt").value;
-      BodyMessage = BodyMessage.replace(SearchedParam, "");
-      this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
-      if(SearchedParam == SearchedParamdummy){
-        idxtoRemove.push(idxremove);
-      }
-    }
-    this.removeFromDummy(idxtoRemove);
+    BodyMessage = BodyMessage.replaceAll(SearchedParam, "");
+    this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
     this.GetListBodyMessageParam.removeAt(idx);
     this.InputParamValue();
     this.DeletedParam.emit(SearchedParam);
-  }
-  
-  removeFromDummy(idxtoRemove: Array<number>) {
-    let length = idxtoRemove.length
-    let reversedArr = idxtoRemove.reverse()
-    for ( let i = 0 ; i < length; i++ ){
-      this.GetListBodyMessageParamDummy.removeAt(reversedArr[i]);
-    }
   }
 
   RenameParam(StartIdx: number) {
@@ -115,30 +92,14 @@ export class BodyMessageTosendComponent implements OnInit {
       const ParamValue: string = element.get("Param").value;
       const ParamIdxAt: string = element.get("ParamIdxAt").value;
       if(ParamValue){
-        const dummylist = this.GetListBodyMessageParamDummy.value;
-        const searchedlist = this.filterDummy(dummylist, ParamIdxAt);
-        for(let idxx = 0; idxx< searchedlist.length; idxx++){
-          BodyMessage = BodyMessage.replace(ParamIdxAt, ParamValue);
-        }
+        BodyMessage = BodyMessage.replaceAll(ParamIdxAt, ParamValue);
       }
     }
     this.TempBodyMessage = BodyMessage;
     if(this.IsBroadcast){
       this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
     }
-  }
-
-  filterDummy(array, value: string){
-    let filtered = [];
-
-    for(let i = 0; i < array.length; i++){
-      let obj = array[i];
-      if(obj["ParamIdxAt"] == value){
-          filtered.push(obj);
-      }
-    }
-    return filtered;
-  }    
+  }   
 
   byPassHTML(html: string) {
     return this.sanitizer.bypassSecurityTrustHtml(html)

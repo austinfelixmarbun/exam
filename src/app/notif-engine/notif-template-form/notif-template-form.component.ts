@@ -156,11 +156,9 @@ export class NotifTemplateFormComponent implements OnInit {
 
   ParamArr: Array<string> = new Array<string>();
   readonly IdentifierBodyMessageParam: string = "ParamArr";
-  readonly IdentifierBodyMessageParamDummy: string = "ParamArrDummy";
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
-    const ListParamDummy: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParamDummy) as FormArray;
     const ParamAttr: string = this.GetDescrAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
     const ParamaterVar: string = "{" + ParamAttr + "}";
     if (!IsEdit) {
@@ -179,10 +177,6 @@ export class NotifTemplateFormComponent implements OnInit {
         ParamIdxAt: ParamaterVar
       }));
     }
-    ListParamDummy.push(this.fb.group({
-      Param: "",
-      ParamIdxAt: ParamaterVar
-    }));
     this.InputParamValue();
   }
   
