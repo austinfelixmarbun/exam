@@ -116,6 +116,7 @@
     "intl": "1.2.5",
     "intl-tel-input": "^17.0.3",
     "jquery": "^3.6.0",
+    "material-icons": "^1.11.5",
     "moment": "^2.29.1",
     "ng-multiselect-dropdown": "^0.2.14",
     "ng2-charts": "1.6.0",
