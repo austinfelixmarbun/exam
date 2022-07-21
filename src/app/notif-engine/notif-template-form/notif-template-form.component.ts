@@ -10,7 +10,11 @@ import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notificat
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+<<<<<<< HEAD
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj';
+=======
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+>>>>>>> da3498ebbc67327272115b34ff7039ee8b593a03
 
 @Component({
   selector: 'app-notif-template-form',
@@ -197,7 +201,7 @@ export class NotifTemplateFormComponent implements OnInit {
   async SaveForm() {
     let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
     if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
-    await this.http.post(urlSave, this.SetSaveObj()).toPromise().then(
+    await this.http.post(urlSave, this.SetSaveObj(), AdInsConstant.SpinnerOptions).toPromise().then(
       (response: NotificationTemplateObj) => {
         if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);

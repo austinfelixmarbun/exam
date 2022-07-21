@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SafeUrl } from '@angular/platform-browser';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import Quill from 'quill';
@@ -11,6 +11,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { HttpClient } from '@angular/common/http';
 import { SendToNotificationEngineObj } from 'app/shared/model/notif-engine/send-to-notification-engine-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface IImageMeta {
   type: string;
@@ -57,7 +58,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     // theme: 'snow',
   };
 
-  constructor(private fb: FormBuilder, private sanitizer: DomSanitizer, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private fb: FormBuilder, private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit(): void {
     Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
@@ -175,6 +176,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   async SendEmail() {
     this.ValidateUploadFileAttachment();
 
+    this.spinner.show();
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
@@ -188,6 +190,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     xhr.onreadystatechange = async evnt => {
       // Api Response ready
       if (xhr.readyState === 4) {
+        this.spinner.hide();
         var response = JSON.parse(xhr.response);
         if (xhr.status !== 200 && xhr.status !== 201) {
           throw this.toastr.warningMessage(response['Message']);
@@ -223,8 +226,12 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
     //#region set object request
     Object.keys(this.SendToNotificationEngineSaveObj).forEach(key => {
-      formData.append(key, this.SendToNotificationEngineSaveObj[key]);
+      if (key != "Param") formData.append(key, this.SendToNotificationEngineSaveObj[key]);
     });
+    for (let index = 0; index < this.SendToNotificationEngineSaveObj.Param.length; index++) {
+      const element = this.SendToNotificationEngineSaveObj.Param[index];
+      formData.append("Param", element);
+    }
     // set to EmailNotificationObj
     Object.keys(this.SendToNotificationEngineSaveObj.EmailNotificationObj).forEach(key => {
       formData.append("EmailNotificationObj." + key, this.SendToNotificationEngineSaveObj.EmailNotificationObj[key]);
