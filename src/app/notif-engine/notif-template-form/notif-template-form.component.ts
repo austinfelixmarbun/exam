@@ -10,11 +10,8 @@ import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notificat
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-<<<<<<< HEAD
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj';
-=======
 import { AdInsConstant } from 'app/shared/AdInstConstant';
->>>>>>> da3498ebbc67327272115b34ff7039ee8b593a03
 
 @Component({
   selector: 'app-notif-template-form',
