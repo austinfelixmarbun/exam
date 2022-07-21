@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -10,6 +10,7 @@ import { NotificationTemplateObj } from 'app/shared/model/notif-engine/notificat
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -29,7 +30,9 @@ export class NotifTemplateFormComponent implements OnInit {
     BaseUrl: '',
     Path: '',
     Body: ['', Validators.required],
-    ParamArr: this.fb.array([])
+    RefAttrTemplateParam: '',
+    ParamArr: this.fb.array([]),
+    ParamArrDummy: this.fb.array([])
   });
 
   readonly notifTypePushNotif: string =CommonConstant.RefMasterTypeCodeNotificationTypesPush;
@@ -62,6 +65,7 @@ export class NotifTemplateFormComponent implements OnInit {
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationTemplateId: number = 0;
+  ListRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
 
   readonly title: string = "Notification Template";
   readonly MrNotificationLevelCode: string = CommonConstant.RefMasterTypeCodeNotificationLevel;
@@ -83,6 +87,7 @@ export class NotifTemplateFormComponent implements OnInit {
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
+    this.GetListActiveRefNotifAttrTemplate();
   }
 
   get GetStartDt(): Date{
@@ -116,6 +121,14 @@ export class NotifTemplateFormComponent implements OnInit {
     )
   }
 
+  GetListActiveRefNotifAttrTemplate() {
+    this.http.post(this.UrlConstantNew.GetListActiveRefNotifAttrTemplate, {}).subscribe(
+      (response) => {
+        this.ListRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
+      }
+    );
+  }
+
   GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
     this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: RefMasterTypeCode }).subscribe(
       (response) => {
@@ -128,6 +141,10 @@ export class NotifTemplateFormComponent implements OnInit {
     return this.DictListRefMaster[RefMasterTypeCode].find(x => x.Key == MasterCode).Value;
   }
 
+  GetDescrAttrParam(Code: string): string {
+    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).NotifAttrTemplaceDescr;
+  }
+
   subjectIsRequired: boolean = false;
   ChangeNotifType() {
     let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
@@ -136,13 +153,15 @@ export class NotifTemplateFormComponent implements OnInit {
     if (notifType == CommonConstant.NOTIF_TYPE_EMAIL) this.subjectIsRequired = true;
   }
 
+  ParamArr: Array<string> = new Array<string>();
   readonly IdentifierBodyMessageParam: string = "ParamArr";
+  readonly IdentifierBodyMessageParamDummy: string = "ParamArrDummy";
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
-    const LastIdx: number = ListParam.length;
-    const ParamaterVar: string = "{" + LastIdx + "}";
-
+    const ListParamDummy: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParamDummy) as FormArray;
+    const ParamAttr: string = this.GetDescrAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
+    const ParamaterVar: string = "{" + ParamAttr + "}";
     if (!IsEdit) {
       const lenBody: number = BodyMessage.length;
       let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
@@ -152,12 +171,22 @@ export class NotifTemplateFormComponent implements OnInit {
       BodyMessage += ParamaterVar + " ";
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
-
-    ListParam.push(this.fb.group({
+    if(!this.ParamArr.includes(ParamaterVar)){
+      this.ParamArr.push(ParamaterVar);
+      ListParam.push(this.fb.group({
+        Param: "",
+        ParamIdxAt: ParamaterVar
+      }));
+    }
+    ListParamDummy.push(this.fb.group({
       Param: "",
       ParamIdxAt: ParamaterVar
     }));
     this.InputParamValue();
+  }
+  
+  getDeletedParam(param: string){
+    this.ParamArr.splice(this.ParamArr.indexOf(param), 1);
   }
 
   @ViewChild("TempMessage") TempMessage: BodyMessageTosendComponent;

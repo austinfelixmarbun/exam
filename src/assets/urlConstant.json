@@ -917,5 +917,6 @@
     "RerunJournalLog": "/v1/Journal/RerunJournalLog",
     "GetJournalLogFailedByJournalLogId": "/v1/Journal/GetJournalLogFailedByJournalLogId",
     "GetNotReadPushNotif": "/v1/PushNotification/GetAllNotReadPushNotification",
-    "UpdateReadPushNotif": "/v1/PushNotification/UpdatePushNotificationHistIsReadByListJobId"
+    "UpdateReadPushNotif": "/v1/PushNotification/UpdatePushNotificationHistIsReadByListJobId",
+    "GetListActiveRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/GetListActiveRefNotifAttrTemplate"
 }

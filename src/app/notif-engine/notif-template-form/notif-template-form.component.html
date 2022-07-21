@@ -104,19 +104,33 @@
                   <div class="col-md-9">
                     <div class="input-group">
                       <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
-                      
                       <div id="full-wrapper" *ngIf="subjectIsRequired">
                         <div id="full-container">
                           <quill-editor [modules]="QuilConfig" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
                         </div>
-                      </div>
-                      <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
-                        <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
-                      </button>
+                      </div>                      
                     </div>
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Body" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                     <!-- <button type="button" (click)="ClearParameter()">Clear Parameter</button> -->
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-md-3 adInsLabel" translate>Parameter Attribute</label>
+                  <div class="col-md-3">
+                    <select class="form-control adInsInput" style="width: auto" formControlName="RefAttrTemplateParam"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.RefAttrTemplateParam.invalid }">
+                      <option value="">Select One</option>
+                      <option *ngFor="let item of ListRefNotifAttrTemplateObj" value="{{item.NotifAttrTemplaceCode}}">
+                        {{item.NotifAttrTemplaceDescr}}</option>
+                    </select>
+                    <lib-uc-show-errors [control]="NotifTemplateForm.controls.RefAttrTemplateParam" [submit]="enjiForm.submitted">
+                    </lib-uc-show-errors>
+                  </div>
+                  <div class="col-md-3 ml-auto">
+                    <button class="input-group-append btn btn-raised btn-primary float-right" style="height: fit-content;" type="button" (click)="AddParameter()">
+                      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
+                    </button>
                   </div>
                 </div>
                 <div *ngIf="subjectValue == 'TITLE'">
@@ -140,7 +154,7 @@
                   </div>
                 </div>
               </div>
-              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" [IdentifierBodyMessageParam]="IdentifierBodyMessageParam" #TempMessage></app-body-message-tosend>
+              <app-body-message-tosend [parentForm]="NotifTemplateForm" [enjiForm]="enjiForm" [NotifType]="NotifTemplateForm.get('MrNotificationTypeCode').value" [IdentifierBodyMessageParam]="IdentifierBodyMessageParam" [ParamArrays]="ParamArr" (DeletedParam)="getDeletedParam($event)" #TempMessage></app-body-message-tosend>
               <div class="form-actions right">
                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="CancelButton()">
                   <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
