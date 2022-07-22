@@ -201,6 +201,7 @@ export class VendorEmployeeComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.objInput.VendorId;
     this.inputLookupSpvObj.addCritInput.push(critObj);
+    this.PatchDataLookupInternal();
 
     if (this.mode == "edit") {
       var critObj = new CriteriaObj();
@@ -219,6 +220,14 @@ export class VendorEmployeeComponent implements OnInit {
     }
     this.NpwpCheck(true);
   }
+  PatchDataLookupInternal() {
+    let objPatch = {
+      EmpName: this.VendorEmpForm.controls.VendorEmpName.value
+    }
+    this.inputLookupInternalEmpObj.nameSelect = objPatch.EmpName;
+    this.inputLookupInternalEmpObj.jsonSelect = objPatch;
+  }
+
   PatchDataLookupInternal() {
     let objPatch = {
       EmpName: this.VendorEmpForm.controls.VendorEmpName.value
