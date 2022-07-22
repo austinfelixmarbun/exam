@@ -228,14 +228,6 @@ export class VendorEmployeeComponent implements OnInit {
     this.inputLookupInternalEmpObj.jsonSelect = objPatch;
   }
 
-  PatchDataLookupInternal() {
-    let objPatch = {
-      EmpName: this.VendorEmpForm.controls.VendorEmpName.value
-    }
-    this.inputLookupInternalEmpObj.nameSelect = objPatch.EmpName;
-    this.inputLookupInternalEmpObj.jsonSelect = objPatch;
-  }
-
   getLookupInternal(ev) {
     this.VendorEmpForm.patchValue(
       {
