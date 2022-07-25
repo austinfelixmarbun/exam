@@ -105,7 +105,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH
         || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
-        || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL) {
+        || this.MrVendorCategoryCode == CommonConstant.NOTARY) {
         switch (this.MrVendorCategoryCode) {
           case CommonConstant.SUPPLIER:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
@@ -119,13 +119,9 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchAgencyCompany.json";
             this.inputPagingObj._url = "./assets/ucpaging/searchAgencyCompany.json";
             break;
-          case CommonConstant.NOTARY_COMPANY:
+          case CommonConstant.NOTARY: 
             this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchNotaryCompany.json";
             this.inputPagingObj._url = "./assets/ucpaging/verification/searchNotaryCompany.json";
-            break;
-          case CommonConstant.NOTARY_PERSONAL:
-            this.inputPagingObj.pagingJson = "./assets/ucpaging/verification/searchNotaryPersonal.json";
-            this.inputPagingObj._url = "./assets/ucpaging/verification/searchNotaryPersonal.json";
             break;
           default:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
@@ -266,7 +262,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
 
   navigate() {
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
-      || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL) {
+      || this.MrVendorCategoryCode == CommonConstant.NOTARY) {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_ADD], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {

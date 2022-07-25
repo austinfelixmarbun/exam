@@ -175,8 +175,8 @@ export const ROUTES: RouteInfo[] = [
         Path: '', Title: 'Notary', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
         Submenu: [
 
-          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Notary Personal', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_PERSONAL }] },
-          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Notary Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_COMPANY }] },
+          // { Path: NavigationConstant.VENDOR_PAGING, Title: 'Notary Personal', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.AGENCY_PERSONAL }] },
+          { Path: NavigationConstant.VENDOR_PAGING, Title: 'Notary', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.NOTARY }] },
         ], Params: []
       },
       // { Path: NavigationConstant.VENDOR_AUCTION_COY_PAGING, Title: 'Auction Company', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
