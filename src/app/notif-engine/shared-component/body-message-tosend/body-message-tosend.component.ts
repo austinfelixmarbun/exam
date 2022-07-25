@@ -28,6 +28,7 @@ export class BodyMessageTosendComponent implements OnInit {
   }
 
   readonly NotifTypeEmail: string = CommonConstant.NOTIF_TYPE_EMAIL;
+  readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
 
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) { }
 
@@ -86,12 +87,13 @@ export class BodyMessageTosendComponent implements OnInit {
   
   InputParamValue() {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
-    
     for (let idx = 0; idx < this.GetListBodyMessageParam.length; idx++){
       const element = this.GetListBodyMessageParam.at(idx);
-      const ParamValue: string = element.get("Param").value;
+      let ParamValue: string = element.get("Param").value;
       const ParamIdxAt: string = element.get("ParamIdxAt").value;
+      const InputType: string = element.get("InputType").value;
       if(ParamValue){
+        ParamValue = this.transformParamValue(InputType, ParamValue);
         BodyMessage = BodyMessage.replaceAll(ParamIdxAt, ParamValue);
       }
     }
@@ -101,7 +103,25 @@ export class BodyMessageTosendComponent implements OnInit {
     }
   }   
 
+  transformParamValue(InputType: string, ParamValue: string): string {
+    if(InputType == "P"){
+      ParamValue = ParamValue + '%';
+    }
+    if(InputType == "N"){
+      ParamValue = ParamValue.toLocaleString();
+    }
+    return ParamValue;
+  }
+
   byPassHTML(html: string) {
     return this.sanitizer.bypassSecurityTrustHtml(html)
+  }
+
+  getParameterName(name: string): string{
+    name = name.replace(name.at(0), "");
+    name = name.replace(name.at(name.length), "");
+    name = "Parameter " + name
+
+    return name;
   }
 }

@@ -32,8 +32,7 @@ export class NotifTemplateFormComponent implements OnInit {
     Path: '',
     Body: ['', Validators.required],
     RefAttrTemplateParam: '',
-    ParamArr: this.fb.array([]),
-    ParamArrDummy: this.fb.array([])
+    ParamArr: this.fb.array([])
   });
 
   readonly notifTypePushNotif: string =CommonConstant.RefMasterTypeCodeNotificationTypesPush;
@@ -146,6 +145,13 @@ export class NotifTemplateFormComponent implements OnInit {
     return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).NotifAttrTemplaceDescr;
   }
 
+  GetInputTypeAttrParam(Code: string): string {
+    let InputType: string = this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).AttrInputTypeCode;
+    if(InputType == "T") InputType = "text";
+    if(InputType == "D") InputType = "date";
+    return InputType;
+  }
+
   subjectIsRequired: boolean = false;
   ChangeNotifType() {
     let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
@@ -159,7 +165,10 @@ export class NotifTemplateFormComponent implements OnInit {
   AddParameter(IsEdit: boolean = false) {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
+
     const ParamAttr: string = this.GetDescrAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
+    const InputType: string = this.GetInputTypeAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
+
     const ParamaterVar: string = "{" + ParamAttr + "}";
     if (!IsEdit) {
       const lenBody: number = BodyMessage.length;
@@ -174,7 +183,8 @@ export class NotifTemplateFormComponent implements OnInit {
       this.ParamArr.push(ParamaterVar);
       ListParam.push(this.fb.group({
         Param: "",
-        ParamIdxAt: ParamaterVar
+        ParamIdxAt: ParamaterVar,
+        InputType: InputType
       }));
     }
     this.InputParamValue();
