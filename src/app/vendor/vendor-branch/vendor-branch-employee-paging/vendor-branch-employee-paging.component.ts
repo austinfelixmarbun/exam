@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
@@ -42,6 +43,10 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
     this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"];
+
+        if(this.MrVendorCategoryCode == CommonConstant.NOTARY){
+          this.MrVendorCategoryCode = response["VendorObj"]["MrVendorTypeCode"] == 'P' ? CommonConstant.NOTARY_PERSONAL : CommonConstant.NOTARY_COMPANY;
+        }
       }
     );
   }
