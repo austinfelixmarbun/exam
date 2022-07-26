@@ -146,10 +146,7 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   GetInputTypeAttrParam(Code: string): string {
-    let InputType: string = this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).AttrInputTypeCode;
-    if(InputType == "T") InputType = "text";
-    if(InputType == "D") InputType = "date";
-    return InputType;
+    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).AttrInputTypeCode;
   }
 
   subjectIsRequired: boolean = false;

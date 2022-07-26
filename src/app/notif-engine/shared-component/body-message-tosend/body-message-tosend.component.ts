@@ -3,6 +3,7 @@ import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { indexOf } from 'core-js/core/array';
+import { stringify } from 'querystring';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -29,6 +30,11 @@ export class BodyMessageTosendComponent implements OnInit {
 
   readonly NotifTypeEmail: string = CommonConstant.NOTIF_TYPE_EMAIL;
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
+
+  readonly InputTypeText = CommonConstant.INPUT_TYPE_TEXT;
+  readonly InputTypeDate = CommonConstant.INPUT_TYPE_DATE;
+  readonly InputTypePercnt = CommonConstant.INPUT_TYPE_PERCNT;
+  readonly InputTypeNum = CommonConstant.INPUT_TYPE_NUM;
 
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) { }
 
@@ -71,19 +77,6 @@ export class BodyMessageTosendComponent implements OnInit {
     this.InputParamValue();
     this.DeletedParam.emit(SearchedParam);
   }
-
-  RenameParam(StartIdx: number) {
-    let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
-    for (let index = StartIdx; index < this.GetListBodyMessageParam.length; index++) {
-      const element = this.GetListBodyMessageParam.at(index);
-      const SearchedParam: string = element.get("ParamIdxAt").value;
-      const NewIdx: string = "{" + (index) + "}";
-      BodyMessage = BodyMessage.replace(SearchedParam, NewIdx);
-      element.get("ParamIdxAt").setValue(NewIdx);
-    }
-    this.parentForm.get(this.IdentifierBody).setValue(BodyMessage);
-  }
-
   
   InputParamValue() {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
@@ -119,9 +112,23 @@ export class BodyMessageTosendComponent implements OnInit {
 
   getParameterName(name: string): string{
     name = name.replace(name.at(0), "");
-    name = name.replace(name.at(name.length), "");
+    name = name.replace(name.at(name.length-1), "");
     name = "Parameter " + name
 
     return name;
+  }
+
+  GetInputTypeforHtml(value : string): string{
+    switch(value){
+      case this.InputTypeText: {
+        value = 'text'
+        break;
+      }
+      case this.InputTypeDate: {
+        value = 'date'
+        break;
+      }
+    }
+    return value;
   }
 }
