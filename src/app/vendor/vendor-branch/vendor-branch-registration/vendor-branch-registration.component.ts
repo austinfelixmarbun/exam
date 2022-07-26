@@ -32,6 +32,11 @@ export class VendorBranchRegistrationComponent implements OnInit {
     this.http.post(this.UrlConstantNew.GetVendorBranchAndVendorTaxAddrByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.MrVendorCategoryCode = response["VendorObj"]["MrVendorCategoryCode"]; 
+
+        if(this.MrVendorCategoryCode == CommonConstant.NOTARY){
+          this.MrVendorCategoryCode = response["VendorObj"]["MrVendorTypeCode"] == 'P' ? CommonConstant.NOTARY_PERSONAL : CommonConstant.NOTARY_COMPANY;
+        }
+
         if(this.MrVendorCategoryCode == CommonConstant.SUPPLIER){
           this.Registration = "Supplier Registration"
         }else{
