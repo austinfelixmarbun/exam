@@ -71,4 +71,8 @@ export class ExceptionConstant {
     public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2"; 
     public static EXP_PASSWORD = "Password has expired. Please change your password.";
     public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
+
+    // NotifEngine
+    public static PARAM_ATTR_INACTIVE = "There are some inactive Parameter Attribute. Do you still want to continue?";
+
 }

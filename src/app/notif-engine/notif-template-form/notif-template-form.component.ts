@@ -12,6 +12,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -84,11 +85,11 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.GetListActiveRefNotifAttrTemplate();
     await this.GetNotificationTemplate();
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
-    this.GetListActiveRefNotifAttrTemplate();
   }
 
   get GetStartDt(): Date{
@@ -139,8 +140,8 @@ export class NotifTemplateFormComponent implements OnInit {
     );
   }
 
-  GetListActiveRefNotifAttrTemplate() {
-    this.http.post(this.UrlConstantNew.GetListActiveRefNotifAttrTemplate, {}).subscribe(
+  async GetListActiveRefNotifAttrTemplate() {
+    await this.http.post(this.UrlConstantNew.GetListActiveRefNotifAttrTemplate, {}).toPromise().then(
       (response) => {
         this.ListActiveRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
       }
@@ -179,6 +180,12 @@ export class NotifTemplateFormComponent implements OnInit {
     return attrTemplateObj.AttrInputTypeCode;
   }
 
+  private GetIsActiveAttrParam(Code: string): boolean {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return false;
+    return attrTemplateObj.IsActive;
+  }
+
   subjectIsRequired: boolean = false;
   ChangeNotifType() {
     let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
@@ -198,6 +205,7 @@ export class NotifTemplateFormComponent implements OnInit {
     
     const ParamAttrDesc: string = this.GetDescrAttrParam(ParamAttrCode);
     const InputType: string = this.GetInputTypeAttrParam(ParamAttrCode);
+    const IsActive: boolean = this.GetIsActiveAttrParam(ParamAttrCode);
 
     const ParamaterVar: string = "{" + ParamAttrCode + "}";
 
@@ -211,13 +219,14 @@ export class NotifTemplateFormComponent implements OnInit {
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
 
-    if(!this.ParamArr.includes(ParamaterVar)){
-      this.ParamArr.push(ParamaterVar);
+    if(!this.ParamArr.includes(ParamAttrCode)){
+      this.ParamArr.push(ParamAttrCode);
       ListParam.push(this.fb.group({
         Param: "",
         ParamIdxAt: ParamaterVar,
         ParamAttrDesc: ParamAttrDesc,
-        InputType: InputType
+        InputType: InputType,
+        IsActive: IsActive
       }));
     }
     this.InputParamValue();
@@ -269,7 +278,22 @@ export class NotifTemplateFormComponent implements OnInit {
       this.NotificationTemplateSaveObj.Path = SaveObj.Path;
     }
 
+    if (this.CheckParamAttrActivity() && !confirm(ExceptionConstant.PARAM_ATTR_INACTIVE)){
+      throw false;
+    }
     return this.NotificationTemplateSaveObj;
+  }
+
+  CheckParamAttrActivity(): boolean {
+    let FlagInactive: boolean = false;
+    let ActiveAttrCodes: Array<string> = this.ListActiveRefNotifAttrTemplateObj.map(Code => Code.NotifAttrTemplaceCode);
+    for (let idx = 0; idx < this.ParamArr.length; idx++){
+      let IdxValue = this.ParamArr.at(idx);
+      if(!ActiveAttrCodes.includes(IdxValue)){
+        FlagInactive = true;
+      }
+    }
+    return FlagInactive;
   }
 
   CancelButton() {

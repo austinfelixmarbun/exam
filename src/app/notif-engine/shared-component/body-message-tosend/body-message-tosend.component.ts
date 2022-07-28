@@ -2,13 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { indexOf } from 'core-js/core/array';
-import { stringify } from 'querystring';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-body-message-tosend',
   templateUrl: './body-message-tosend.component.html',
+  styleUrls: ['./body-message-tosend.css'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class BodyMessageTosendComponent implements OnInit {
@@ -69,12 +67,15 @@ export class BodyMessageTosendComponent implements OnInit {
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
     const element = this.GetListBodyMessageParam.at(idx);
-    const SearchedParam: string = element.get("ParamIdxAt").value;
+    let SearchedParam: string = element.get("ParamIdxAt").value;
 
     BodyMessage = BodyMessage.replaceAll(SearchedParam, "");
     this.parentForm.get(this.IdentifierBody).setValue(BodyMessage.replace(/\s+/g, ' ').trim());
     this.GetListBodyMessageParam.removeAt(idx);
     this.InputParamValue();
+
+    SearchedParam = SearchedParam.replace(SearchedParam.at(0), "");
+    SearchedParam = SearchedParam.replace(SearchedParam.at(SearchedParam.length-1), "");
     this.DeletedParam.emit(SearchedParam);
   }
   
