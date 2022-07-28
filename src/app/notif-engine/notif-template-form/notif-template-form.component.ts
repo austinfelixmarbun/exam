@@ -23,7 +23,7 @@ export class NotifTemplateFormComponent implements OnInit {
     NotificationTemplateCode: ['', Validators.required],
     NotificationTemplateDescr: ['', Validators.required],
     MrNotificationLevelCode: ['', Validators.required],
-    MrNotificationSourceCode: ['', Validators.required],
+    MrNotificationSourceCode: [''],
     MrNotificationTypeCode: ['', Validators.required],
     StartDt: ['', Validators.required],
     EndDt: '',
@@ -137,16 +137,28 @@ export class NotifTemplateFormComponent implements OnInit {
     );
   }
 
-  GetDescription(RefMasterTypeCode: string, MasterCode: string): string {
-    return this.DictListRefMaster[RefMasterTypeCode].find(x => x.Key == MasterCode).Value;
+  private GetDescription(RefMasterTypeCode: string, MasterCode: string): string {
+    let list: Array<KeyValueObj> = this.DictListRefMaster[RefMasterTypeCode];
+    if (!list) return "";
+    let obj: KeyValueObj = list.find(x => x.Key == MasterCode);
+    if (!obj) return "";
+    return obj.Value;
   }
 
-  GetDescrAttrParam(Code: string): string {
-    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).NotifAttrTemplaceDescr;
+  private GetRefNotifAttrTemplateObj(Code: string): RefNotifAttrTemplateObj {
+    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code);;
   }
 
-  GetInputTypeAttrParam(Code: string): string {
-    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code).AttrInputTypeCode;
+  private GetDescrAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.NotifAttrTemplaceDescr;
+  }
+
+  private GetInputTypeAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.AttrInputTypeCode;
   }
 
   subjectIsRequired: boolean = false;
@@ -209,7 +221,7 @@ export class NotifTemplateFormComponent implements OnInit {
     );
   }
 
-  SetSaveObj(): NotificationTemplateObj {
+  private SetSaveObj(): NotificationTemplateObj {
     const SaveObj = this.NotifTemplateForm.getRawValue();
     this.NotificationTemplateSaveObj.Body = SaveObj.Body;
     this.NotificationTemplateSaveObj.NotificationTemplateCode = SaveObj.NotificationTemplateCode;

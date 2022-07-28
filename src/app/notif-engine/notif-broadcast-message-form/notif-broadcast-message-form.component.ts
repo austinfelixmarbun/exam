@@ -31,7 +31,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   NotifBroadcastForm = this.fb.group({
     MrNotificationTypeCode: ['', Validators.required],
     MrNotificationLevelCode: ['', Validators.required],
-    MrNotificationSourceCode: ['', Validators.required],
+    MrNotificationSourceCode: [''],
     RefNo: '',
     Subject: '',
     SendTo: ['', Validators.required],
@@ -460,16 +460,18 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     console.log(invalid);
   }
 
-  GetDescrFromCode(RefMasterTypeCode: string, VariableForm: string): string {
-    if (RefMasterTypeCode) {
-      let Key: string = this.NotifBroadcastForm.get(VariableForm).value;
-      let Value: string = this.DictListRefMaster[RefMasterTypeCode].find(i => i.Key === Key).Value;
-      return Value;
-    }
+  private GetDescrFromCode(RefMasterTypeCode: string, VariableForm: string): string {
+    if (!RefMasterTypeCode) return "";
+    let Key: string = this.NotifBroadcastForm.get(VariableForm).value;
+    let list: Array<KeyValueObj> = this.DictListRefMaster[RefMasterTypeCode];
+    if (!list) return "";
+    let obj: KeyValueObj = list.find(x => x.Key == Key);
+    if (!obj) return "";
+    return obj.Value;
   }
 
   SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
-  SetSaveObj() {
+  private SetSaveObj() {
     this.SendToNotificationEngineSaveObj = new SendToNotificationEngineObj();
     if (this.IsUsedTemplate) {
       this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
