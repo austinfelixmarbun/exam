@@ -228,13 +228,13 @@
             </th>
           </tr>
         </thead>
-        <tbody *ngIf="ListCrdExpsrAppAgrHistObj.length == 0">
+        <tbody *ngIf="ListCrdExpsrAppAgrHistCustObj.length == 0">
           <tr>
             <td colspan="100%">No Data Available</td>
           </tr>
         </tbody>
         <tbody>
-          <ng-container *ngFor="let item of ListCrdExpsrAppAgrHistObj; let i = index">
+          <ng-container *ngFor="let item of ListCrdExpsrAppAgrHistCustObj; let i = index">
             <tr *ngIf="item.RoleCust == 'CUST'">
               <td style="text-align: center;">{{i+1}}</td>
               <td style="text-align: center;">{{item.AppNo}}</td>
@@ -286,13 +286,13 @@
               </th>
             </tr>
           </thead>
-          <tbody *ngIf="ListCrdExpsrAppAgrHistObj.length == 0">
+          <tbody *ngIf="ListCrdExpsrAppAgrHistCustGrpObj.length == 0">
             <tr>
               <td colspan="100%">No Data Available</td>
             </tr>
           </tbody>
           <tbody>
-            <ng-container *ngFor="let item of ListCrdExpsrAppAgrHistObj; let i = index">
+            <ng-container *ngFor="let item of ListCrdExpsrAppAgrHistCustGrpObj; let i = index">
               <tr *ngIf="item.RoleCust == 'CUST_GRP'">
                 <td style="text-align: center;">{{i+1}}</td>
                 <td style="text-align: center;">{{item.AppNo}}</td>

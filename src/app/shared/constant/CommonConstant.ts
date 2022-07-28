@@ -85,6 +85,7 @@ export class CommonConstant {
     public static COLL_COMPANY = "COLL_COMPANY";
     public static NOTARY_COMPANY = "NOTARY_COMPANY";
     public static NOTARY_PERSONAL = "NOTARY_PERSONAL";
+    public static NOTARY = "NOTARY";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
     public static TITLE_SUPPLIER_BRANCH = "Supplier";
@@ -465,4 +466,11 @@ export class CommonConstant {
     public static NOTIF_TYPE_EMAIL = "EMAIL";
     public static SEND_TYPE_ALL = "ALL";
     public static SEND_TYPE_SPECIFIC_USER = "SPECIFIC_USER";
+
+    // RefAttrNotifTemplateInputType
+
+    public static INPUT_TYPE_TEXT = "T";
+    public static INPUT_TYPE_DATE = "D";
+    public static INPUT_TYPE_PERCNT = "P";
+    public static INPUT_TYPE_NUM = "N";
 }

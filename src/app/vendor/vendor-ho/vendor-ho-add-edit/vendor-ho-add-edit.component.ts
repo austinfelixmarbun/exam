@@ -169,7 +169,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.SetTitleHoInfo();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
-    this.VendorForm.controls.VendorRating.disable();
+    // this.VendorForm.controls.VendorRating.disable();
     this.VendorForm.controls.MrVendorCategoryCode.disable();
 
     if (this.mode == "edit") {

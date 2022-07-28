@@ -201,6 +201,7 @@ export class VendorEmployeeComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.objInput.VendorId;
     this.inputLookupSpvObj.addCritInput.push(critObj);
+    this.PatchDataLookupInternal();
 
     if (this.mode == "edit") {
       var critObj = new CriteriaObj();

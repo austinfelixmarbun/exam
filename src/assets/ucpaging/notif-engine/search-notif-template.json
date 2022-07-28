@@ -20,24 +20,6 @@
         },
         {
             "type": "dropdown",
-            "name": "MR_NOTIFICATION_LEVEL_CODE", 
-            "id": "MrNotifLevelCodeId",
-            "value": "",
-            "placeholder": "Placeholder",
-            "datatype": "text",
-            "isFromURL": true,
-            "ddlType": "all",
-            "url": "",
-            "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "label": "Level",
-            "criteriaPropName" : "RefMasterTypeCode",
-            "criteriaPropValue" : "NOTIFICATION_LEVEL",
-            "items": [],
-            "itemsUrl": [],
-            "environment": "FOU"
-        },
-        {
-            "type": "dropdown",
             "name": "MR_NOTIFICATION_SOURCE_CODE", 
             "id": "MrNotifSourceCodeId",
             "value": "",
@@ -50,6 +32,24 @@
             "label": "Source",
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NOTIFICATION_SOURCE",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
+        },
+        {
+            "type": "dropdown",
+            "name": "MR_NOTIFICATION_LEVEL_CODE", 
+            "id": "MrNotifLevelCodeId",
+            "value": "",
+            "placeholder": "Placeholder",
+            "datatype": "text",
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/RefMaster/GetListKeyValueActiveByCode",
+            "label": "Level",
+            "criteriaPropName" : "RefMasterTypeCode",
+            "criteriaPropValue" : "NOTIFICATION_LEVEL",
             "items": [],
             "itemsUrl": [],
             "environment": "FOU"
@@ -92,14 +92,14 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Level",
-            "name": "NotificationLevelDescr"
+            "label": "Source",
+            "name": "MrNotificationSourceDescr"
         },
         {
             "type": "sort",
             "position": "left",
-            "label": "Source",
-            "name": "MrNotificationSourceDescr"
+            "label": "Level",
+            "name": "NotificationLevelDescr"
         },
         {
             "type": "sort",
@@ -133,12 +133,12 @@
         {
             "type": "text",
             "position": "left",
-            "property": "NotificationLevelDescr"
+            "property": "MrNotificationSourceDescr"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "MrNotificationSourceDescr"
+            "property": "NotificationLevelDescr"
         },
         {
             "type": "text",

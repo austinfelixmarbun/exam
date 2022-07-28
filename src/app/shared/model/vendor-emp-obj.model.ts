@@ -28,5 +28,5 @@ export class VendorEmpObj {
     constructor() { 
         this.RowVersion = "";
         this.IsInternalEmployee = false;
-     }
+    }
 }
