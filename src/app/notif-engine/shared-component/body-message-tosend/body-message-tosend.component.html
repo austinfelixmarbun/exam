@@ -8,11 +8,19 @@
         </div>
     </div>
     <div class="form-group row" *ngFor="let item of GetListBodyMessageParam.controls; let idx = index;">
-        <label class="col-md-3 adInsLabel" translate>Parameter {{item.controls.ParamIdxAt.value}} </label>
+        <label class="col-md-3 adInsLabel" translate>{{ getParameterName(item.controls.ParamIdxAt.value) }}</label>
+        
         <div class="col-md-5" [formGroupName]="idx">
             <div class="input-group">
-                <input type="text" [IsUpperCase]="false" class="form-control adInsInput width-50-per"
-                    formControlName="Param" (change)="InputParamValue()">
+                <input [type]="GetInputTypeforHtml(item.controls.InputType.value)" *ngIf="item.controls.InputType.value == InputTypeText || item.controls.InputType.value == InputTypeDate" [IsUpperCase]="false" class="form-control adInsInput width-50-per"
+                formControlName="Param" (change)="InputParamValue()" [ngClass]="{ 'is-invalid': enjiForm.submitted && item.controls.Param.invalid}">
+
+                <input *ngIf="item.controls.InputType.value == InputTypeNum" currencyMask class="form-control adInsInput width-50-per" (keyup)="InputParamValue()"
+                formControlName="Param" [ngClass]="{ 'is-invalid': enjiForm.submitted && item.controls.Param.invalid}">
+
+                <input *ngIf="item.controls.InputType.value == InputTypePercnt" currencyMask class="form-control adInsInput width-50-per"
+                formControlName="Param" [ngClass]="{ 'is-invalid': enjiForm.submitted && item.controls.Param.invalid}" (keyup)="InputParamValue()" [options]="CurrencyMaskPrct">
+
                 <button type="button" *ngIf="!IsBroadcast" (click)="DeleteParam(idx)" class="btn btn-raised"
                     style="vertical-align: middle;">
                     <i class="ft-trash-2 font-medium-2"></i>

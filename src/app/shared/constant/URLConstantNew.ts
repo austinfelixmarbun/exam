@@ -1227,6 +1227,9 @@ export class UrlConstantNew{
     public GetNotReadPushNotif = this.env.NotifEngineURL + this.url.GetNotReadPushNotif;
     public UpdateReadPushNotif = this.env.NotifEngineURL + this.url.UpdateReadPushNotif;
 
+    // RefNotifAttrTemplate
+    public GetListActiveRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.GetListActiveRefNotifAttrTemplate;
+
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
     public GetMaxSpecificUser = this.env.NotifEngineURL + this.url.GetMaxSpecificUser;
