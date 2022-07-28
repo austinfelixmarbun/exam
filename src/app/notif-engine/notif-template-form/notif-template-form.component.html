@@ -121,7 +121,7 @@
                     <select class="form-control adInsInput" style="min-width: 50%; max-width: auto;" formControlName="RefAttrTemplateParam"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.RefAttrTemplateParam.invalid }">
                       <option value="">Select One</option>
-                      <option *ngFor="let item of ListRefNotifAttrTemplateObj" value="{{item.NotifAttrTemplaceCode}}">
+                      <option *ngFor="let item of ListActiveRefNotifAttrTemplateObj" value="{{item.NotifAttrTemplaceCode}}">
                         {{item.NotifAttrTemplaceDescr}}</option>
                     </select>
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.RefAttrTemplateParam" [submit]="enjiForm.submitted">

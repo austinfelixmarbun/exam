@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="form-group row" *ngFor="let item of GetListBodyMessageParam.controls; let idx = index;">
-        <label class="col-md-3 adInsLabel" translate>{{ getParameterName(item.controls.ParamIdxAt.value) }}</label>
+        <label class="col-md-3 adInsLabel" translate> Parameter {{ item.controls.ParamAttrDesc.value }}</label>
         
         <div class="col-md-5" [formGroupName]="idx">
             <div class="input-group">

@@ -110,14 +110,6 @@ export class BodyMessageTosendComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(html)
   }
 
-  getParameterName(name: string): string{
-    name = name.replace(name.at(0), "");
-    name = name.replace(name.at(name.length-1), "");
-    name = "Parameter " + name
-
-    return name;
-  }
-
   GetInputTypeforHtml(value : string): string{
     switch(value){
       case this.InputTypeText: {

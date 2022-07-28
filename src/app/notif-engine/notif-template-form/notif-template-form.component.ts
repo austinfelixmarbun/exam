@@ -65,7 +65,8 @@ export class NotifTemplateFormComponent implements OnInit {
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationTemplateId: number = 0;
-  ListRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
+  ListActiveRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
+  ListAllRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
 
   readonly title: string = "Notification Template";
   readonly MrNotificationLevelCode: string = CommonConstant.RefMasterTypeCodeNotificationLevel;
@@ -98,7 +99,7 @@ export class NotifTemplateFormComponent implements OnInit {
   async GetNotificationTemplate() {
     if (this.NotificationTemplateId == 0) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
-      (response: NotificationTemplateObj) => {
+      async (response: NotificationTemplateObj) => {
         this.NotificationTemplateSaveObj = response;
         this.NotifTemplateForm.patchValue({
           NotificationTemplateCode: response.NotificationTemplateCode,
@@ -114,17 +115,34 @@ export class NotifTemplateFormComponent implements OnInit {
           Path: response.Path
         });
         this.ChangeNotifType();
-        for (let index = 0; index < response.TotalParam; index++) {
-          this.AddParameter(true);
-        }
+        await this.CheckExistingParamAttr(response.Body);
       }
     )
+  }
+
+  async CheckExistingParamAttr(bodyValue : string) {
+    await this.GetListAllRefNotifAttrTemplate();
+
+    for ( let idx = 0; idx < this.ListAllRefNotifAttrTemplateObj.length; idx++ ){
+      let AttrCode = this.ListAllRefNotifAttrTemplateObj.at(idx).NotifAttrTemplaceCode;
+      if(bodyValue.includes(AttrCode)){
+        this.AddParameter(true, AttrCode);
+      }
+    }
+  }
+
+  async GetListAllRefNotifAttrTemplate() {
+    await this.http.post(this.UrlConstantNew.GetListRefNotifAttrTemplate, {}).toPromise().then(
+      (response) => {
+        this.ListAllRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
+      }
+    );
   }
 
   GetListActiveRefNotifAttrTemplate() {
     this.http.post(this.UrlConstantNew.GetListActiveRefNotifAttrTemplate, {}).subscribe(
       (response) => {
-        this.ListRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
+        this.ListActiveRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
       }
     );
   }
@@ -146,7 +164,7 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   private GetRefNotifAttrTemplateObj(Code: string): RefNotifAttrTemplateObj {
-    return this.ListRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code);;
+    return this.ListAllRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code);
   }
 
   private GetDescrAttrParam(Code: string): string {
@@ -171,14 +189,18 @@ export class NotifTemplateFormComponent implements OnInit {
 
   ParamArr: Array<string> = new Array<string>();
   readonly IdentifierBodyMessageParam: string = "ParamArr";
-  AddParameter(IsEdit: boolean = false) {
+  AddParameter(IsEdit: boolean = false, ParamAttrValue: string = "") {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
 
-    const ParamAttr: string = this.GetDescrAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
-    const InputType: string = this.GetInputTypeAttrParam(this.NotifTemplateForm.get("RefAttrTemplateParam").value);
+    let ParamAttrCode = this.NotifTemplateForm.get("RefAttrTemplateParam").value;
+    if(IsEdit) ParamAttrCode = ParamAttrValue;
+    
+    const ParamAttrDesc: string = this.GetDescrAttrParam(ParamAttrCode);
+    const InputType: string = this.GetInputTypeAttrParam(ParamAttrCode);
 
-    const ParamaterVar: string = "{" + ParamAttr + "}";
+    const ParamaterVar: string = "{" + ParamAttrCode + "}";
+
     if (!IsEdit) {
       const lenBody: number = BodyMessage.length;
       let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
@@ -188,11 +210,13 @@ export class NotifTemplateFormComponent implements OnInit {
       BodyMessage += ParamaterVar + " ";
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
+
     if(!this.ParamArr.includes(ParamaterVar)){
       this.ParamArr.push(ParamaterVar);
       ListParam.push(this.fb.group({
         Param: "",
         ParamIdxAt: ParamaterVar,
+        ParamAttrDesc: ParamAttrDesc,
         InputType: InputType
       }));
     }
@@ -237,6 +261,8 @@ export class NotifTemplateFormComponent implements OnInit {
     this.NotificationTemplateSaveObj.TotalParam = ListParam.length;
     this.NotificationTemplateSaveObj.StartDt = SaveObj.StartDt;
     this.NotificationTemplateSaveObj.EndDt = SaveObj.EndDt;
+    this.NotificationTemplateSaveObj.BaseUrl = "";
+    this.NotificationTemplateSaveObj.Path = "";
 
     if(SaveObj.MrNotificationTypeCode == this.notifTypePushNotif){
       this.NotificationTemplateSaveObj.BaseUrl = SaveObj.BaseUrl;

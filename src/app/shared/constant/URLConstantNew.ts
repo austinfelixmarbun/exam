@@ -1229,6 +1229,7 @@ export class UrlConstantNew{
 
     // RefNotifAttrTemplate
     public GetListActiveRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.GetListActiveRefNotifAttrTemplate;
+    public GetListRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.GetListRefNotifAttrTemplate;
 
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
