@@ -85,6 +85,7 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.GetListAllRefNotifAttrTemplate();
     await this.GetListActiveRefNotifAttrTemplate();
     await this.GetNotificationTemplate();
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
@@ -100,7 +101,7 @@ export class NotifTemplateFormComponent implements OnInit {
   async GetNotificationTemplate() {
     if (this.NotificationTemplateId == 0) return;
     await this.http.post(this.UrlConstantNew.GetNotificationTemplateByNotificationTemplateId, { Id: this.NotificationTemplateId }).toPromise().then(
-      async (response: NotificationTemplateObj) => {
+      (response: NotificationTemplateObj) => {
         this.NotificationTemplateSaveObj = response;
         this.NotifTemplateForm.patchValue({
           NotificationTemplateCode: response.NotificationTemplateCode,
@@ -116,14 +117,12 @@ export class NotifTemplateFormComponent implements OnInit {
           Path: response.Path
         });
         this.ChangeNotifType();
-        await this.CheckExistingParamAttr(response.Body);
+        this.CheckExistingParamAttr(response.Body);
       }
     )
   }
 
-  async CheckExistingParamAttr(bodyValue : string) {
-    await this.GetListAllRefNotifAttrTemplate();
-
+  CheckExistingParamAttr(bodyValue : string) {
     for ( let idx = 0; idx < this.ListAllRefNotifAttrTemplateObj.length; idx++ ){
       let AttrCode = this.ListAllRefNotifAttrTemplateObj.at(idx).NotifAttrTemplaceCode;
       if(bodyValue.includes(AttrCode)){
