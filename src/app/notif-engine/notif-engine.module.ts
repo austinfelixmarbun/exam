@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { NotifTemplateAttrPagingComponent } from './notif-template-attr-paging/notif-template-attr-paging.component';
 import { NotifTemplateAttrFormComponent } from './notif-template-attr-form/notif-template-attr-form.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
+import { MatIconModule } from '@angular/material/icon';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 export const customCurrencyMaskConfig = {     
@@ -47,6 +48,7 @@ export const customCurrencyMaskConfig = {
         MatRadioModule,
         AdInsSharedModule,
         ReactiveFormsModule,
+        MatIconModule,
         NgxMaskModule.forRoot(),
         QuillModule.forRoot({
           modules: {

@@ -13,6 +13,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -109,8 +110,8 @@ export class NotifTemplateFormComponent implements OnInit {
           MrNotificationLevelCode: response.MrNotificationLevelCode,
           MrNotificationSourceCode: response.MrNotificationSourceCode,
           MrNotificationTypeCode: response.MrNotificationTypeCode,
-          StartDt: response.StartDt,
-          EndDt: response.EndDt,
+          StartDt: this.toDateString(response.StartDt),
+          EndDt: this.toDateString(response.EndDt),
           Subject: response.Subject,
           Body: response.Body,
           BaseUrl: response.BaseUrl,
@@ -120,6 +121,14 @@ export class NotifTemplateFormComponent implements OnInit {
         this.CheckExistingParamAttr(response.Body);
       }
     )
+  }
+
+  private toDateString(dt: Date): string {
+    let date = new Date(dt);
+    return (date.getFullYear().toString() + '-'
+      + ("0" + (date.getMonth() + 1)).slice(-2) + '-'
+      + ("0" + (date.getDate())).slice(-2))
+      + 'T' + date.toTimeString().slice(0, 5);
   }
 
   CheckExistingParamAttr(bodyValue : string) {
@@ -240,7 +249,17 @@ export class NotifTemplateFormComponent implements OnInit {
     this.TempMessage.InputParamValue();
   }
 
+  private CheckValidatorEndDt() {
+    let datePipe = new DatePipe("en-US");
+    let startDt = this.GetStartDt;
+    let endDt = this.NotifTemplateForm.get("EndDt").value;
+    if (startDt > endDt) {
+      throw this.toastr.warningMessage(ExceptionConstant.END_DATE_MUST_EQUAL_OR_MORE_THAN + " " + datePipe.transform(startDt, 'MMMM d, y'));
+    }
+  }
+
   async SaveForm() {
+    this.CheckValidatorEndDt();
     let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
     if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
     await this.http.post(urlSave, this.SetSaveObj(), AdInsConstant.SpinnerOptions).toPromise().then(
