@@ -12,8 +12,8 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
-import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { DatePipe } from '@angular/common';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-notif-template-form',
