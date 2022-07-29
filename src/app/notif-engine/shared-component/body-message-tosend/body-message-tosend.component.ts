@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-body-message-tosend',
@@ -64,6 +65,7 @@ export class BodyMessageTosendComponent implements OnInit {
   TempBodyMessage: string = "";
 
   DeleteParam(idx: number) {
+    if (!confirm(ExceptionConstant.DELETE_CONFIRMATION)) return;
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
     const element = this.GetListBodyMessageParam.at(idx);
