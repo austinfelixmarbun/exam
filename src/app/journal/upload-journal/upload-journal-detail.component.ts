@@ -92,7 +92,8 @@ export class UploadJournalDetailComponent implements OnInit {
 
     this.http.post(this.UrlConstantNew.GetJrSourceFileByJrSourceFileId, { Id: this.JrSourceFileId }).subscribe(
       (response: any) => {
-        this.businessDt = formatDate(response['StartDate'], 'yyyy-MM-dd', 'en-US')
+        let startDt = response['StartDate'];
+        this.SetbusinessDt(startDt);
       }
     );
     //this.businessDt = new Date(this.userAccess[CommonConstant.BUSINESS_DT]);
@@ -110,13 +111,22 @@ export class UploadJournalDetailComponent implements OnInit {
       environmentUrl: this.UrlConstantNew.env.FoundationR3Url,
       apiQryPaging: this.UrlConstantNew.GetPagingObjectBySQL,
       // pagingJson: "./assets/ucpaging/accmnt/billing/general/upload-billing-vat-no/search-upload-billing-vat-no.json",
-      url: this.UrlConstantNew.UploadJournalFile,
+      url: this.UrlConstantNew.UploadJournalFileV2,
       isDownloadTmplt: false,
       ddlEnvironments: []
     }
     this.ngOnChanges();
     this.hideSize = false;
     this.resetUpload = false;
+  }
+
+  private SetbusinessDt(startDt: Date) {
+    let newStartDt = new Date(startDt);
+    let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    let bzDt = new Date(context[CommonConstant.BUSINESS_DT]);
+    if (!newStartDt) newStartDt = bzDt;
+    if (newStartDt < bzDt) newStartDt = bzDt;
+    this.businessDt = formatDate(newStartDt, 'yyyy-MM-dd', 'en-US');
   }
 
   ngOnChanges() {
@@ -153,14 +163,13 @@ export class UploadJournalDetailComponent implements OnInit {
     }
   }
 
-  isEffectImmediately(event: any) {
+  isEffectImmediately(event: boolean) {
+    this.UploadJournalFileForm.controls["Date"].enable();
     if (event) {
       this.UploadJournalFileForm.patchValue({
         Date: formatDate(this.businessDt, 'yyyy-MM-dd', 'en-US')
       })
       this.UploadJournalFileForm.controls["Date"].disable();
-    } else {
-      this.UploadJournalFileForm.controls["Date"].enable();
     }
   }
 
@@ -363,6 +372,7 @@ export class UploadJournalDetailComponent implements OnInit {
     xhr.setRequestHeader('AdInsKey', `${token}`);
     formData.append('UploadTypeCode', this.uploadObj['UploadTypeCode'])
     formData.append('JrSourceFileId', this.JrSourceFileId.toString())
+    formData.append('JrSourceFileCode', this.FileCode)
     formData.append('StartDate', this.UploadJournalFileForm.controls['Date'].value)
     //formData.append('OfficeBankAccId', this.UploadForm.controls['OfficeBankAccBalanceId'].value)
 

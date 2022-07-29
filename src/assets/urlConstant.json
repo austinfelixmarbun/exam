@@ -865,6 +865,7 @@
     "AddJrMHeader": "/v1/Journal/AddJrMHeader",
     "GetJournalResultByJrMsgHId": "/v1/Journal/GetJournalResultByJrMsgHId",
     "UploadJournalFile": "/v1/Journal/UploadJournalFile",
+    "UploadJournalFileV2": "/v2/Journal/UploadJournalFile",
     "GetListApvTaskListByUsernameAndRoleCodeForThingsToDo": "/Generic/GetListApvTaskListByUsernameAndRoleCodeForThingsToDo",
     "UpdateToMainCustomer": "/v1/Cust/UpdateToMainCustomer",
     "LogoutAuth": "/v1/Authenticate/Logout",

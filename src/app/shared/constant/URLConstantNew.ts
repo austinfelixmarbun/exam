@@ -1075,6 +1075,7 @@ export class UrlConstantNew{
     public AddJrMHeader = this.env.FoundationR3Url + this.url.AddJrMHeader;
     public GetJournalResultByJrMsgHId = this.env.FoundationR3Url + this.url.GetJournalResultByJrMsgHId;
     public UploadJournalFile = this.env.FoundationR3Url + this.url.UploadJournalFile;
+    public UploadJournalFileV2 = this.env.FoundationR3Url + this.url.UploadJournalFileV2;
     public GetJournalLogFailedByJournalLogId = this.env.FoundationR3Url + this.url.GetJournalLogFailedByJournalLogId;
 
     // Industry Type Category
