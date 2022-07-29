@@ -236,7 +236,9 @@ export class NotifTemplateFormComponent implements OnInit {
   }
   
   getDeletedParam(param: string){
-    this.ParamArr.splice(this.ParamArr.indexOf(param), 1);
+    // remove { }
+    let searchParamToDel = param.substring(1, param.length - 1);
+    this.ParamArr.splice(this.ParamArr.indexOf(searchParamToDel), 1);
   }
 
   @ViewChild("TempMessage") TempMessage: BodyMessageTosendComponent;

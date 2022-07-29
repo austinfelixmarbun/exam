@@ -76,8 +76,6 @@ export class BodyMessageTosendComponent implements OnInit {
     this.GetListBodyMessageParam.removeAt(idx);
     this.InputParamValue();
 
-    SearchedParam = SearchedParam.replace(SearchedParam.at(0), "");
-    SearchedParam = SearchedParam.replace(SearchedParam.at(SearchedParam.length-1), "");
     this.DeletedParam.emit(SearchedParam);
   }
   
