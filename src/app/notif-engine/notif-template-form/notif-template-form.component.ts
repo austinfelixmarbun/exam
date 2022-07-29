@@ -87,7 +87,6 @@ export class NotifTemplateFormComponent implements OnInit {
 
   async ngOnInit() {
     await this.GetListAllRefNotifAttrTemplate();
-    await this.GetListActiveRefNotifAttrTemplate();
     await this.GetNotificationTemplate();
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
@@ -144,14 +143,9 @@ export class NotifTemplateFormComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetListRefNotifAttrTemplate, {}).toPromise().then(
       (response) => {
         this.ListAllRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
-      }
-    );
-  }
-
-  async GetListActiveRefNotifAttrTemplate() {
-    await this.http.post(this.UrlConstantNew.GetListActiveRefNotifAttrTemplate, {}).toPromise().then(
-      (response) => {
-        this.ListActiveRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
+        this.ListActiveRefNotifAttrTemplateObj = this.ListAllRefNotifAttrTemplateObj.filter(obj => {
+          return obj.IsActive === true;
+        });
       }
     );
   }
@@ -218,6 +212,7 @@ export class NotifTemplateFormComponent implements OnInit {
     const ParamaterVar: string = "{" + ParamAttrCode + "}";
 
     if (!IsEdit) {
+      if(!ParamAttrCode) return;
       const lenBody: number = BodyMessage.length;
       let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
       if (lenBody > 0 && BodyMessage.charAt(lenBody) != " " && notifType != CommonConstant.NOTIF_TYPE_EMAIL) {
