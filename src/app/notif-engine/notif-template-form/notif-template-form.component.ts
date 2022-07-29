@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -116,6 +116,7 @@ export class NotifTemplateFormComponent implements OnInit {
           BaseUrl: response.BaseUrl,
           Path: response.Path
         });
+        this.DisableNotifType();
         this.ChangeNotifType();
         this.CheckExistingParamAttr(response.Body);
       }
@@ -188,9 +189,17 @@ export class NotifTemplateFormComponent implements OnInit {
     return attrTemplateObj.IsActive;
   }
 
+  private get GetMrNotificationTypeCodeFormControl(): FormControl {
+    return this.NotifTemplateForm.get("MrNotificationTypeCode") as FormControl;
+  }
+
+  private DisableNotifType(){
+    this.GetMrNotificationTypeCodeFormControl.disable();
+  }
+
   subjectIsRequired: boolean = false;
   ChangeNotifType() {
-    let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
+    let notifType: string = this.GetMrNotificationTypeCodeFormControl.value;
 
     this.subjectIsRequired = false;
     if (notifType == CommonConstant.NOTIF_TYPE_EMAIL) this.subjectIsRequired = true;
@@ -214,7 +223,7 @@ export class NotifTemplateFormComponent implements OnInit {
     if (!IsEdit) {
       if(!ParamAttrCode) return;
       const lenBody: number = BodyMessage.length;
-      let notifType: string = this.NotifTemplateForm.get("MrNotificationTypeCode").value;
+      let notifType: string = this.GetMrNotificationTypeCodeFormControl.value;
       if (lenBody > 0 && BodyMessage.charAt(lenBody) != " " && notifType != CommonConstant.NOTIF_TYPE_EMAIL) {
         BodyMessage += " ";
       }
@@ -329,10 +338,10 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   get isHideSubject(){
-    return [this.notifTypeSms,this.notifTypeWa].includes(this.NotifTemplateForm.get("MrNotificationTypeCode").value);
+    return [this.notifTypeSms,this.notifTypeWa].includes(this.GetMrNotificationTypeCodeFormControl.value);
   }
 
   get subjectValue(){
-    return this.NotifTemplateForm.get("MrNotificationTypeCode").value == this.notifTypePushNotif ? "TITLE" : "SUBJECT"
+    return this.GetMrNotificationTypeCodeFormControl.value == this.notifTypePushNotif ? "TITLE" : "SUBJECT"
   }
 }
