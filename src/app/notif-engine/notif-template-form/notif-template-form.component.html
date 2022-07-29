@@ -36,7 +36,7 @@
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TYPE</label>
                   <div class="col-md-9">
-                    <select class="form-control adInsInput" style="min-width: 50%; max-width: auto;" formControlName="MrNotificationTypeCode" (change)="ChangeNotifType()"
+                    <select class="form-control adInsInput" style="min-width: 50%; max-width: auto;" formControlName="MrNotificationTypeCode" disabled="NotificationTemplateId != 0" (change)="ChangeNotifType()"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.MrNotificationTypeCode.invalid }">
                       <option value="">Select One</option>
                       <option *ngFor="let it of DictListRefMaster[MrNotificationTypeCode]" value="{{it.Key}}">
