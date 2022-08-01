@@ -1235,6 +1235,8 @@ export class UrlConstantNew{
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
     public GetMaxSpecificUser = this.env.NotifEngineURL + this.url.GetMaxSpecificUser;
+    public GetEmailAttachmentAllowedFileFormat = this.env.NotifEngineURL + this.url.GetEmailAttachmentAllowedFileFormat;
+    public GetEmailAttachmentMaxFileSize = this.env.NotifEngineURL + this.url.GetEmailAttachmentMaxFileSize;
 
     // NotificationHistD
     public GetNotificationHistDByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistDByNotificationHistHId;

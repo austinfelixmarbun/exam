@@ -905,6 +905,8 @@
     "MultipleSendToNotificationEngineEmail": "/v2/Notification/MultipleSendToNotificationEngineEmail",
     "MultipleResendToNotificationEngine": "/v1/Notification/MultipleResendToNotificationEngine",
     "GetMaxSpecificUser": "/v1/NotificationHistH/GetMaxSpecificUser",
+    "GetEmailAttachmentAllowedFileFormat": "/v1/NotificationHistH/GetEmailAttachmentAllowedFileFormat",
+    "GetEmailAttachmentMaxFileSize": "/v1/NotificationHistH/GetEmailAttachmentMaxFileSize",
     "GetNotificationHistHByNotificationHistHId": "/v1/NotificationHistH/GetNotificationHistHByNotificationHistHId",
     "GetNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetNotificationHistDByNotificationHistHId",
     "GetListNotificationHistDByNotificationHistHId": "/v1/NotificationHistD/GetListNotificationHistDByNotificationHistHId",
