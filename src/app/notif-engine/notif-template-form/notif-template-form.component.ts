@@ -259,6 +259,7 @@ export class NotifTemplateFormComponent implements OnInit {
     let datePipe = new DatePipe("en-US");
     let startDt = this.GetStartDt;
     let endDt = this.NotifTemplateForm.get("EndDt").value;
+    if (!endDt) return;
     if (startDt > endDt) {
       throw this.toastr.warningMessage(ExceptionConstant.END_DATE_MUST_EQUAL_OR_MORE_THAN + " " + datePipe.transform(startDt, 'MMMM d, y'));
     }
