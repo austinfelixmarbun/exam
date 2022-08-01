@@ -79,7 +79,6 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   GetGeneralSettingFileFormat() {
     this.http.post(this.UrlConstantNew.GetEmailAttachmentAllowedFileFormat, { code: CommonConstant.GsCodeEmailAttachmentFormat }).subscribe(
       (response: string) => {
-        console.log(response);
         this.formatsAllowed = response;
       });
   }
@@ -89,7 +88,6 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   GetGeneralSettingFileMaxSize() {
     this.http.post(this.UrlConstantNew.GetEmailAttachmentMaxFileSize, { code: CommonConstant.GsCodeEmailAttachmentMaxSize }).subscribe(
       (response: string) => {
-        console.log(response);
         this.maxSize = +response;
       });
   }
