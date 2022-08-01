@@ -226,11 +226,11 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
     //#region set object request
     Object.keys(this.SendToNotificationEngineSaveObj).forEach(key => {
-      if (key != "Param") formData.append(key, this.SendToNotificationEngineSaveObj[key]);
+      if (key != "KeyValParam") formData.append(key, this.SendToNotificationEngineSaveObj[key]);
     });
-    for (let index = 0; index < this.SendToNotificationEngineSaveObj.Param.length; index++) {
-      const element = this.SendToNotificationEngineSaveObj.Param[index];
-      formData.append("Param", element);
+    for (let key in this.SendToNotificationEngineSaveObj.KeyValParam) {
+      let KeyValParam = this.SendToNotificationEngineSaveObj.KeyValParam[key];
+      formData.append("KeyValParam[" + key + "]", KeyValParam);
     }
     // set to EmailNotificationObj
     Object.keys(this.SendToNotificationEngineSaveObj.EmailNotificationObj).forEach(key => {

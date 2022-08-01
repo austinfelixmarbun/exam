@@ -22,6 +22,7 @@ import { TagInputObj } from 'app/shared/model/generic/tag-input-obj.model';
 import { ResEmailNotificationObj } from 'app/shared/model/notif-engine/res-email-notification-obj.model';
 import { NotificationHistDObj } from 'app/shared/model/notif-engine/notification-hist-d-obj';
 import { BroadcastMessageEmailComponent } from '../shared-component/broadcast-message-email/broadcast-message-email.component';
+import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
 
 @Component({
   selector: 'app-notif-broadcast-message-form',
@@ -59,7 +60,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationHistHId: number;
   IsResend: boolean = false;
+  ListActiveRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
+  ListAllRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
+  KeyValParam = {};
 
+  
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
       if (params["NotificationHistHId"]) {
@@ -70,6 +75,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   async ngOnInit() {
+    await this.GetListAllRefNotifAttrTemplate();
+
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationTypeCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationLevelCode);
     this.GetRefMasterListKeyValueActiveByCode(this.MrNotificationSourceCode);
@@ -111,6 +118,17 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
 
   get GetInputParamArr() {
     return this.NotifBroadcastForm.get('ParamArr') as FormArray;
+  }
+
+  async GetListAllRefNotifAttrTemplate() {
+    await this.http.post(this.UrlConstantNew.GetListRefNotifAttrTemplate, {}).toPromise().then(
+      (response) => {
+        this.ListAllRefNotifAttrTemplateObj = response[CommonConstant.ReturnObj];
+        this.ListActiveRefNotifAttrTemplateObj = this.ListAllRefNotifAttrTemplateObj.filter(obj => {
+          return obj.IsActive === true;
+        });
+      }
+    );
   }
 
   GetRefMasterListKeyValueActiveByCode(RefMasterTypeCode: string) {
@@ -162,15 +180,20 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     );
   }
 
-  ParamArrFromGet: Array<string> = new Array<string>();
   async GetNotificationHistDByNotificationHistHId(NotificationHistHId: number) {
     if (!NotificationHistHId) return;
+    let ListParam: FormArray = this.GetInputParamArr;
     await this.http.post(this.UrlConstantNew.GetNotificationHistDByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       (response: NotificationHistDObj) => {
-        this.ParamArrFromGet = new Array<string>();
-        const ListParamValue: Array<string> = response.Param.split("|");
-        for (let index = 0; index < this.ParamListCount; index++) {
-          this.ParamArrFromGet.push(ListParamValue.at(index));
+        const ListParamValue: Array<string> = response.Param.split(";");
+        for (let index = 0; index < ListParamValue.length; index++) {
+          let ParamValueIdx = ListParamValue.at(index).split('|');
+          let ParamKey = ParamValueIdx.shift();
+          let ParamValue = ParamValueIdx.pop();
+          ListParam.at(index).patchValue({
+            Param: ParamValue
+          })
+          this.InputParamValue();
         }
       }
     );
@@ -230,7 +253,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
         if (!this.IsUsedTemplate) {
           this.NotifBroadcastForm.get("Body").setValue(response.Body);
         }
-        this.NotifBroadcastForm.get("SendTo").setValue(response.SendTo);
+        this.setSendToFormValueResend(response.SendTo);
       }
     );
   }
@@ -276,6 +299,70 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       Subject: response.Subject,
       Body: response.Body
     });
+    this.CheckExistingParamAttr(response.Body);
+  }
+
+  CheckExistingParamAttr(bodyValue : string) {
+    for ( let idx = 0; idx < this.ListAllRefNotifAttrTemplateObj.length; idx++ ){
+      let AttrCode = this.ListAllRefNotifAttrTemplateObj.at(idx).NotifAttrTemplaceCode;
+      if(bodyValue.includes(AttrCode)){
+        this.AddParameter(AttrCode);
+      }
+    }
+  }
+
+  private GetRefNotifAttrTemplateObj(Code: string): RefNotifAttrTemplateObj {
+    return this.ListAllRefNotifAttrTemplateObj.find(x => x.NotifAttrTemplaceCode == Code);
+  }
+
+  private GetDescrAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.NotifAttrTemplaceDescr;
+  }
+
+  private GetInputTypeAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.AttrInputTypeCode;
+  }
+
+  private GetRegexAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.PatternValue;
+  }
+
+  private GetIsActiveAttrParam(Code: string): boolean {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return false;
+    return attrTemplateObj.IsActive;
+  }
+
+  ParamArr: Array<string> = new Array<string>();
+  readonly IdentifierBodyMessageParam: string = "ParamArr";
+  AddParameter(ParamAttrValue: string = "") {
+    const ListParam: FormArray = this.NotifBroadcastForm.get(this.IdentifierBodyMessageParam) as FormArray;
+    
+    const ParamAttrDesc: string = this.GetDescrAttrParam(ParamAttrValue);
+    const InputType: string = this.GetInputTypeAttrParam(ParamAttrValue);
+    const IsActive: boolean = this.GetIsActiveAttrParam(ParamAttrValue);
+    const Validation: string = this.GetRegexAttrParam(ParamAttrValue);
+
+    const ParamaterVar: string = "{" + ParamAttrValue + "}";
+
+    if(!this.ParamArr.includes(ParamAttrValue)){
+      this.ParamArr.push(ParamAttrValue);
+      ListParam.push(this.fb.group({
+        Param: ["", Validators.pattern(Validation)],
+        ParamIdxAt: ParamaterVar,
+        ParamAttrDesc: ParamAttrDesc,
+        ParamAttrCode: ParamAttrValue,
+        InputType: InputType,
+        IsActive: IsActive
+      }));
+    }
+    this.InputParamValue();
   }
 
   OnChangeType() {
@@ -368,7 +455,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   IsBroadcast: boolean = true;
 
   getLookUp(ev) {
-    this.ParamArrFromGet = new Array<string>();
+    this.RemoveInputParamArr();
     this.ParamListCount = ev.TotalParam;
     if (this.ParamListCount > 0) {
       this.NotifBroadcastForm.get('UsedParamBody').setValidators(Validators.required);
@@ -380,7 +467,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotifBroadcastForm.patchValue({
       UsedParamBody: "",
       ListPhone: [],
-      ParamArr: [],
       Subject: ev.Subject,
       Body: ev.Body,
       TemplateVersion: ev.Version,
@@ -389,8 +475,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       MrNotificationSourceCode: ev.MrNotificationSourceCode,
       BaseUrl: ev.BaseUrl,
       Path: ev.Path
-    }
-    )
+    });
+    this.CheckTypeMechanism();
+    this.CheckExistingParamAttr(ev.Body);
     this.IsUsedTemplate = true;
     this.DisableSelectControl();
   }
@@ -404,6 +491,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     });
     this.SetLookupTemplate();
     this.RefreshComponent();
+    this.InputParamValue();
     this.EnableSelectControl();
     this.ResetValueSelectControl();
     this.InputLookupTemplateMessageObj.isReady = true;
@@ -425,14 +513,20 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       Body: "",
       UsedParamBody: "",
       ListPhone: [],
-      ParamArr: [],
       CcEmail: "",
       BccEmail: "",
       BaseUrl: "",
       Path: ""
-    }
-    )
+    });
+    this.RemoveInputParamArr();
     this.RefreshReady();
+  }
+
+  RemoveInputParamArr(){
+    this.ParamArr = new Array<string>();
+    while(this.GetInputParamArr.length > 0){
+      this.GetInputParamArr.removeAt(0)
+    }
   }
 
   RefreshReady() {
@@ -489,7 +583,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.Param = new Array<string>();
 
       for (let i = 0; i < tempParam.length; i++) {
+        // TODO Ilangin field Param, udh gakepake.
         this.SendToNotificationEngineSaveObj.Param.push(tempParam[i]["Param"]);
+        this.SendToNotificationEngineSaveObj.KeyValParam[tempParam.at(i).ParamAttrCode] = tempParam.at(i).Param;
       }
     }
 
