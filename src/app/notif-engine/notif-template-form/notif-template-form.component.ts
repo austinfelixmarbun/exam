@@ -189,6 +189,12 @@ export class NotifTemplateFormComponent implements OnInit {
     return attrTemplateObj.IsActive;
   }
 
+  private GetRegexAttrParam(Code: string): string {
+    let attrTemplateObj: RefNotifAttrTemplateObj = this.GetRefNotifAttrTemplateObj(Code);
+    if (!attrTemplateObj) return "";
+    return attrTemplateObj.PatternValue;
+  }
+
   private get GetMrNotificationTypeCodeFormControl(): FormControl {
     return this.NotifTemplateForm.get("MrNotificationTypeCode") as FormControl;
   }
@@ -217,6 +223,7 @@ export class NotifTemplateFormComponent implements OnInit {
     const ParamAttrDesc: string = this.GetDescrAttrParam(ParamAttrCode);
     const InputType: string = this.GetInputTypeAttrParam(ParamAttrCode);
     const IsActive: boolean = this.GetIsActiveAttrParam(ParamAttrCode);
+    const Validation: string = this.GetRegexAttrParam(ParamAttrCode);
 
     const ParamaterVar: string = "{" + ParamAttrCode + "}";
 
@@ -234,7 +241,7 @@ export class NotifTemplateFormComponent implements OnInit {
     if(!this.ParamArr.includes(ParamAttrCode)){
       this.ParamArr.push(ParamAttrCode);
       ListParam.push(this.fb.group({
-        Param: "",
+        Param: ["", Validators.pattern(Validation)],
         ParamIdxAt: ParamaterVar,
         ParamAttrDesc: ParamAttrDesc,
         InputType: InputType,
@@ -266,6 +273,7 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   async SaveForm() {
+    if (this.CheckFormValidity) return;
     this.CheckValidatorEndDt();
     let urlSave: string = this.UrlConstantNew.AddNotificationTemplate;
     if (this.NotificationTemplateSaveObj.NotificationTemplateId != 0) urlSave = this.UrlConstantNew.EditNotificationTemplate;
@@ -277,6 +285,18 @@ export class NotifTemplateFormComponent implements OnInit {
         }
       }
     );
+  }
+
+  get CheckFormValidity() : boolean {
+    const invalid = [];
+    const controls = this.NotifTemplateForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+    if(invalid.length == 1 && invalid.at(0) == this.IdentifierBodyMessageParam) return false;
+    return true;
   }
 
   private SetSaveObj(): NotificationTemplateObj {

@@ -12,14 +12,14 @@
           </div>
           <div class="px-3">
             <form class="form form-horizontal" [formGroup]="NotifTemplateForm" #enjiForm="ngForm"
-              (ngSubmit)="NotifTemplateForm.valid && SaveForm()">
+              (ngSubmit)="SaveForm()">
               <lib-ucSubsection [id]="'NotifTemplateIdId'" [title]="title" [panel]="'NotifTemplate'"></lib-ucSubsection>
               <div class="form-body" id="NotifTemplate">
                 <div class="form-group row adins-required">
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_CODE</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per"
-                      formControlName="NotificationTemplateCode" [readonly]="NotificationTemplateId != 0">
+                      formControlName="NotificationTemplateCode" [readonly]="NotificationTemplateId != 0" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.NotificationTemplateCode.invalid }">
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.NotificationTemplateCode" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -28,7 +28,7 @@
                   <label class="col-md-3 adInsLabel" translate>NOTIF_TEMPLATE_DESCR</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per"
-                      formControlName="NotificationTemplateDescr">
+                      formControlName="NotificationTemplateDescr" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.NotificationTemplateDescr.invalid }">
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.NotificationTemplateDescr" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -76,7 +76,7 @@
                   <label class="col-md-3 adInsLabel" translate>START_DT</label>
                   <div class="col-md-9">
                     <input type="datetime-local" class="form-control adInsInput width-50-per"
-                      formControlName="StartDt" [min]="DateNow | date: 'yyyy-MM-ddTHH:mm'">
+                      formControlName="StartDt" [min]="DateNow | date: 'yyyy-MM-ddTHH:mm'" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.StartDt.invalid }" >
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.StartDt" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
@@ -103,7 +103,7 @@
                   <label class="col-md-3 adInsLabel" translate>BODY</label>
                   <div class="col-md-9">
                     <div class="input-group">
-                      <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()"></textarea>
+                      <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.Body.invalid }"></textarea>
                       <div id="full-wrapper" *ngIf="subjectIsRequired">
                         <div id="full-container">
                           <quill-editor [modules]="QuilConfig" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
@@ -117,8 +117,8 @@
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 adInsLabel" translate>Parameter Attribute</label>
-                  <div class="col-md-3">
-                    <select class="form-control adInsInput" style="min-width: 50%; max-width: auto;" formControlName="RefAttrTemplateParam"
+                  <div class="col-md-5">
+                    <select class="form-control adInsInput" style="min-width: 93%; max-width: 100%;" formControlName="RefAttrTemplateParam"
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.RefAttrTemplateParam.invalid }">
                       <option value="">Select One</option>
                       <option *ngFor="let item of ListActiveRefNotifAttrTemplateObj" value="{{item.NotifAttrTemplaceCode}}">
@@ -127,7 +127,7 @@
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.RefAttrTemplateParam" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>
-                  <div class="col-md-3 ml-auto">
+                  <div class="col-md-3">
                     <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
                       <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
                     </button>

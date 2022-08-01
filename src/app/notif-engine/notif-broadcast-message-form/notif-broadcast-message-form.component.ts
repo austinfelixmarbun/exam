@@ -98,18 +98,17 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   EnableSelectControl() {
-    this.NotifBroadcastForm.controls['MrNotificationTypeCode'].enable();
     this.NotifBroadcastForm.controls['MrNotificationSourceCode'].enable();
     this.NotifBroadcastForm.controls['MrNotificationLevelCode'].enable();
+    if(!this.IsResend) this.NotifBroadcastForm.controls['MrNotificationTypeCode'].enable();
   }
 
   ResetValueSelectControl() {
     this.NotifBroadcastForm.patchValue({
-      MrNotificationTypeCode: "",
       MrNotificationLevelCode: "",
       MrNotificationSourceCode: "",
-    }
-    )
+    });
+    if(!this.IsResend) this.NotifBroadcastForm.get("MrNotificationTypeCode").setValue("");
   }
 
   get GetMrNotificationTypeCodeValue(): string {
@@ -190,9 +189,13 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           let ParamValueIdx = ListParamValue.at(index).split('|');
           let ParamKey = ParamValueIdx.shift();
           let ParamValue = ParamValueIdx.pop();
-          ListParam.at(index).patchValue({
-            Param: ParamValue
-          })
+          for(let i = 0; i<ListParam.length; i++){
+            if(ListParam.at(i).get("ParamAttrCode").value == ParamKey){
+              ListParam.at(i).patchValue({
+                Param: ParamValue
+              })
+            }
+          }
           this.InputParamValue();
         }
       }
@@ -288,7 +291,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.ParamListCount = response.TotalParam;
     this.IsUsedTemplate = true;
     this.PatchDataUcLookupTemplate();
-    this.InputLookupTemplateMessageObj.isDisable = true;
     this.IsTemplateLatestVersion = true;
     if (!response.IsActive && !IsRefresh) {
       this.IsTemplateLatestVersion = response.IsActive;
@@ -486,9 +488,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   ResetTemplate() {
     this.ParamListCount = 0;
     this.IsUsedTemplate = false;
-    this.NotifBroadcastForm.patchValue({
-      SendTo: ""
-    });
     this.SetLookupTemplate();
     this.RefreshComponent();
     this.InputParamValue();
@@ -596,7 +595,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       case this.TypeEmail:
         this.SetEmailObj();
         break;
-      case this.TypeSms||this.TypeWA:
+      case this.TypeSms:
+      case this.TypeWA:
         this.SetSmsWaObj();
         break;
     }
