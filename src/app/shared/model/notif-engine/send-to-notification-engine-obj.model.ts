@@ -13,6 +13,7 @@ export class SendToNotificationEngineObj {
     SendTo: string;
     SendTos: Array<string>;
     Param: Array<string>;
+    KeyValParam: Map<string,string>;
     Version: number;
     EmailNotificationObj: EmailNotificationObj;
     PushNotificationObj: PushNotificationObj;
@@ -28,6 +29,7 @@ export class SendToNotificationEngineObj {
         this.MrNotificationTypeCode = "";
         this.MrNotificationTypeDescr = "";
         this.SendTo = "";
+        this.KeyValParam = new Map<string,string>();
         this.Param = new Array<string>();
         this.Version = 0;
         this.EmailNotificationObj = new EmailNotificationObj();

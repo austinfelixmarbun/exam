@@ -38,28 +38,7 @@ export class BodyMessageTosendComponent implements OnInit {
   constructor(private fb: FormBuilder, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.GenerateParam();
-  }
-
-  GenerateParam() {
-    const ListParam: FormArray = this.parentForm.get(this.IdentifierBodyMessageParam) as FormArray;
     
-    if(this.ParamListCount == 0) return;
-    while (ListParam.length !== 0) {
-      ListParam.removeAt(0)
-    }
-    for (let index = 0; index < this.ParamListCount; index++) {
-      const ParamaterVar: string = "{" + index + "}";
-      let ParamStr: string = "";
-      if (this.ParamArrays.length > 0 && this.IsResend) {
-        ParamStr = this.ParamArrays.at(index);
-      }
-      ListParam.push(this.fb.group({
-        Param: ParamStr,
-        ParamIdxAt: ParamaterVar
-      }));
-    }
-    this.InputParamValue();
   }
 
   TempBodyMessage: string = "";
