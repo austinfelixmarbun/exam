@@ -77,18 +77,18 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
   formatsAllowed: string = '.jpg,.png,.pdf,.docx,.txt,.gif,.jpeg';
   GetGeneralSettingFileFormat() {
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { code: CommonConstant.GsCodeEmailAttachmentFormat }).subscribe(
-      (response: { GsValue: string }) => {
-        this.formatsAllowed = response.GsValue;
+    this.http.post(this.UrlConstantNew.GetEmailAttachmentAllowedFileFormat, { code: CommonConstant.GsCodeEmailAttachmentFormat }).subscribe(
+      (response: string) => {
+        this.formatsAllowed = response;
       });
   }
 
   // maxSize in MB
   maxSize: number = 10;
   GetGeneralSettingFileMaxSize() {
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { code: CommonConstant.GsCodeEmailAttachmentMaxSize }).subscribe(
-      (response: { GsValue: string }) => {
-        this.maxSize = +response.GsValue;
+    this.http.post(this.UrlConstantNew.GetEmailAttachmentMaxFileSize, { code: CommonConstant.GsCodeEmailAttachmentMaxSize }).subscribe(
+      (response: string) => {
+        this.maxSize = +response;
       });
   }
 
