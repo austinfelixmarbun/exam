@@ -247,13 +247,19 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.RefreshReady();
   }
 
+  SelectedPhoneNum: string = "";
   async GetSmsWaNotificationHistByNotificationHistHId(NotificationHistHId: number) {
     await this.http.post(this.UrlConstantNew.GetSmsWaNotificationHistByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       (response: ResSmsWaNotificationObj) => {
         if (!this.IsUsedTemplate) {
           this.NotifBroadcastForm.get("Body").setValue(response.Body);
         }
-        this.setSendToFormValueResend(response.SendTo);
+        let splitNum = response.SendTo.split(" ");
+        //regionPhoneNum = splitNum[0];
+        let patchPhoneNum = splitNum[1];
+        this.SelectedPhoneNum = patchPhoneNum;
+        this.NotifBroadcastForm.get("SendTo").setValue(patchPhoneNum);
+        this.NotifBroadcastForm.get("PhoneNum").setValue(response.SendTo);
       }
     );
   }
@@ -596,7 +602,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       case this.TypeEmail:
         this.SetEmailObj();
         break;
-      case this.TypeSms||this.TypeWA:
+      case this.TypeSms:
+      case this.TypeWA:
         this.SetSmsWaObj();
         break;
     }
@@ -626,6 +633,11 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = "";
       this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = "";
     }
+    if (this.IsResend) {
+      let lookupValue = this.NotifBroadcastForm.get('LookupSendTo').value;
+      this.SendToNotificationEngineSaveObj.SendTo = lookupValue.value;
+      return;
+    }
     this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
   }
 
@@ -641,13 +653,17 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   private SetSmsWaObj() {
-    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
     this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
     if (this.ParamListCount > 0) {
       this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
     }
+    if (this.IsResend) {
+      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value;
+      return;
+    }
+    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
   }
   //#endregion
 
@@ -669,6 +685,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     };
     let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
     if (this.IsResend) urlSave = "";
+    console.log(this.SendToNotificationEngineSaveObj);
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {

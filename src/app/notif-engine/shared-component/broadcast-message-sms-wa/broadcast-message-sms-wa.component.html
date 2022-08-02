@@ -8,19 +8,18 @@
         </tag-input> -->
         
           <ngx-intl-tel-input
-          [preferredCountries]="[CountryISO.Indonesia]"
-          [enableAutoCountrySelect]="false"
+          [enableAutoCountrySelect]="true"
           [enablePlaceholder]="true"
           [searchCountryFlag]="true"
           [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
           [selectFirstCountry]="false"
           [selectedCountryISO]="CountryISO.Indonesia"
           [maxLength]="15"
-          [phoneValidation]="true"
+          [phoneValidation]="phoneValidation"
           name="phone"
           formControlName="PhoneNum"
           ></ngx-intl-tel-input>
-          <!-- <lib-uc-show-errors [control]="parentForm.controls.SendTo" [submit]="enjiForm.submitted">
+          <!-- <lib-uc-show-errors [control]="parentForm.controls.PhoneNum" [submit]="enjiForm.submitted">
           </lib-uc-show-errors> -->
           <div class="input-group-append" [hidden]="IsResend">
             <button type="button" [hidden]="MaxSpecificUser == SendToLength" (click)="AddSentTo()" class="btn btn-primary btn-raised"

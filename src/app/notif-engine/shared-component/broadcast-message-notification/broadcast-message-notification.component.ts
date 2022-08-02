@@ -120,11 +120,12 @@ export class BroadcastMessageNotificationComponent implements OnInit {
     let valueUsername = this.parentForm.get(this.IdentifierLookupSendTo).value;
     const item = { display: valueUsername.value, value: valueUsername.value };
     
-    let listSendTo: Array<TagInputObj> = this.parentForm.get("SendTo").value == "" ? new Array() : this.parentForm.get("SendTo").value;
+    let sendToVal = this.parentForm.get("SendTo").value
+    let listSendTo: Array<TagInputObj> = sendToVal == "" ? new Array() : sendToVal;
     listSendTo.push(item);
     this.parentForm.get("SendTo").setValue(listSendTo);
 
-    //#region reset
+    //#region reset lookup
     let ListUserName: Array<string> = new Array();
     for (let index = 0; index < listSendTo.length; index++) {
       const element = listSendTo[index];
