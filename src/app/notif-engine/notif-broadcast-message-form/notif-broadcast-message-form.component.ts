@@ -38,7 +38,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     SendTo: ['', Validators.required],
     BccEmail: '',
     CcEmail: '',
-    ListPhone: [],
     Body: ['', Validators.required],
     UsedParamBody: '',
     PhoneNum: '',
@@ -474,7 +473,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotificationTemplateDescr = ev.NotificationTemplateDescr;
     this.NotifBroadcastForm.patchValue({
       UsedParamBody: "",
-      ListPhone: [],
       Subject: ev.Subject,
       Body: ev.Body,
       TemplateVersion: ev.Version,
@@ -513,16 +511,30 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   RefreshComponent() {
     this.ResetValidatorUsedParamBody();
     this.NotifBroadcastForm.patchValue({
-      SendTo: "",
       Subject: "",
       Body: "",
       UsedParamBody: "",
-      ListPhone: [],
-      CcEmail: "",
-      BccEmail: "",
-      BaseUrl: "",
-      Path: ""
     });
+    if(!this.IsResend){
+      this.NotifBroadcastForm.get("SendTo").setValue("");
+      if(this.GetMrNotificationTypeCodeValue != this.TypePush){
+        this.NotifBroadcastForm.patchValue({
+          BaseUrl: "",
+          Path: ""
+        });
+      }
+      if(this.GetMrNotificationTypeCodeValue != this.TypeEmail){
+        this.NotifBroadcastForm.patchValue({
+          CcEmail: "",
+          BccEmail: ""
+        });
+      }
+      if(this.GetMrNotificationTypeCodeValue != this.TypeSms && this.GetMrNotificationTypeCodeValue != this.TypeWA ){
+        this.NotifBroadcastForm.patchValue({
+          PhoneNum: "",
+        });
+      }
+    }
     this.RemoveInputParamArr();
     this.RefreshReady();
   }
