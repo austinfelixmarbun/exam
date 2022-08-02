@@ -18,17 +18,28 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   @Input() IsUsedTemplate: boolean = false;
   @Input() IsResend: boolean = false;
   @Input() IsWa: boolean;
-	separateDialCode = false;
-	SearchCountryField = SearchCountryField;
-	CountryISO = CountryISO;
+  @Input() SelectedPhoneNum: string = "";
+  // sementara di false karena tidak bisa save jika input sembarang.
+	phoneValidation = false;
+	readonly SearchCountryField = SearchCountryField;
+	readonly CountryISO = CountryISO;
+  readonly PhoneNumberFormat = PhoneNumberFormat;
   Title: string;
-  PhoneNumberFormat = PhoneNumberFormat;
   constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
 
   ngOnInit(): void {
     this.GetMaxSpecifirUser();
+  }
 
+  ngAfterViewInit() {
+    if (!this.IsResend) return;
+
+    // Update Value SendTo WA/SMS
+    if (!this.SelectedPhoneNum) return;
+    setTimeout(() => {
+      this.parentForm.get('PhoneNum')?.setValue(this.SelectedPhoneNum);
+    }, 1);
   }
 
   MaxSpecificUser: number = 5;
@@ -41,7 +52,8 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   }
   
   get SendToLength(){
-    let listSendTo: Array<TagInputObj> = this.parentForm.get("SendTo").value == "" ? new Array() : this.parentForm.get("SendTo").value;
+    let sendToVal = this.parentForm.get("SendTo").value;
+    let listSendTo: Array<TagInputObj> = sendToVal == "" ? new Array() : sendToVal;
     return listSendTo.length;
   }
 
@@ -62,9 +74,11 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   
   AddSentTo(){
     const PhnNum = this.parentForm.get("PhoneNum").value;
+    console.log(PhnNum);
     const item = { display: PhnNum["internationalNumber"], value: PhnNum["internationalNumber"] };
     
-    let listSendTo: Array<TagInputObj> = this.parentForm.get("SendTo").value == "" ? new Array() : this.parentForm.get("SendTo").value;
+    let sendToVal = this.parentForm.get("SendTo").value;
+    let listSendTo: Array<TagInputObj> = sendToVal == "" ? new Array() : sendToVal;
     listSendTo.push(item);
     this.parentForm.get("SendTo").setValue(listSendTo);
     this.parentForm.get("PhoneNum").setValue("");

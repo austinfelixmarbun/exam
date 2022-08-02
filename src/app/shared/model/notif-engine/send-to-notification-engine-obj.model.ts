@@ -29,6 +29,7 @@ export class SendToNotificationEngineObj {
         this.MrNotificationTypeCode = "";
         this.MrNotificationTypeDescr = "";
         this.SendTo = "";
+        this.SendTos = new Array();
         this.KeyValParam = new Map<string,string>();
         this.Param = new Array<string>();
         this.Version = 0;
