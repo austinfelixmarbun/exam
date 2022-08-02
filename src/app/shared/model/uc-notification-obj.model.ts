@@ -14,7 +14,8 @@ export class UcNotificationObj {
     PublicKey: string;
     ListEnvironments: Array<EnvisObj>;
     IsClickable: boolean;
-    TakeTop: number;
+    ClickMethodLink: string;
+    IsReady: boolean;
 
     constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -29,7 +30,8 @@ export class UcNotificationObj {
         this.ListEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Web});
         this.ListEnvironments.push({ environment: "LOS", url: this.UrlConstantNew.env.losR3Web});
         this.IsClickable = false;
-        this.TakeTop = 20;
+        this.ClickMethodLink = CommonConstant.NOTIF_METHOD_INT_LINK;
+        this.IsReady = false;
     }
 }
 

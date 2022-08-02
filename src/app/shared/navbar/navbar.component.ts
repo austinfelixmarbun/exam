@@ -9,7 +9,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { formatDate } from '@angular/common';
 import { NotificationHObj } from '../model/notification-h/notification-h-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { URLConstant } from '../constant/URLConstant';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
@@ -20,8 +19,6 @@ import { AdInsHelperService } from '../services/AdInsHelper.service';
 import { RolePickNewService } from '../rolepick/rolepick-new.service';
 import { UcnotificationComponent } from '@adins/ucnotification';
 import { UcNotificationObj } from '../model/uc-notification-obj.model';
-import { GenericObj } from '../model/generic/generic-obj.model';
-import { GeneralSettingObj } from '../model/general-setting-obj.model';
 
 @Component({
     selector: 'app-navbar',
@@ -135,10 +132,10 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         this.http.post(this.UrlConstantNew.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
             (response) => {
             });
-        if (item.MrNotificationMethodCode == CommonConstant.NotificationMethodExtLink) {
+        if (item.MrNotificationMethodCode == CommonConstant.NOTIF_METHOD_EXT_LINK) {
             window.open(item.Url, "_blank");
         }
-        else if (item.MrNotificationMethodCode = CommonConstant.NotificationMethodIntLink) {
+        else if (item.MrNotificationMethodCode = CommonConstant.NOTIF_METHOD_INT_LINK) {
             window.open(item.Url);
         }
     }

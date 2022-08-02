@@ -108,8 +108,8 @@ export class CommonConstant {
     public static VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
 
     // NOTIFICATION METHOD
-    public static NotificationMethodIntLink = "INT_LINK";
-    public static NotificationMethodExtLink = "EXT_LINK";
+    public static NOTIF_METHOD_INT_LINK = "INT_LINK";
+    public static NOTIF_METHOD_EXT_LINK = "EXT_LINK";
 
     //OFFICE TYPE
     public static HeadOffice = "HO";
@@ -219,6 +219,7 @@ export class CommonConstant {
     public static GSCodeOwnershipMandatoryAddrType = "OWNERSHIP_MANDATORY_BY_ADDR_TYPE";
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
     public static GSCodeIsUseNotification = "IS_USE_NOTIFICATION";
+    public static GSCodeTakeTopXNotification = "TAKE_TOP_X_NOTIFICATION";
     
     public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
