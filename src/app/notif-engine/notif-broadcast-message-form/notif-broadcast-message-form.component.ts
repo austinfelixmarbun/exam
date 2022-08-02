@@ -258,7 +258,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
         }
         let splitNum = response.SendTo.split(" ");
         let patchPhoneNum = splitNum[1];
-        if(!patchPhoneNum) patchPhoneNum = splitNum[0];
+        if(!patchPhoneNum) patchPhoneNum = response.SendTo;
         this.SelectedPhoneNum = patchPhoneNum;
         this.NotifBroadcastForm.get("SendTo").setValue(patchPhoneNum);
         this.NotifBroadcastForm.get("PhoneNum").setValue(response.SendTo);
