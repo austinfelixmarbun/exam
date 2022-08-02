@@ -21,7 +21,7 @@
           ></ngx-intl-tel-input>
           <!-- <lib-uc-show-errors [control]="parentForm.controls.PhoneNum" [submit]="enjiForm.submitted">
           </lib-uc-show-errors> -->
-          <div class="input-group-append" [hidden]="IsResend">
+          <div class="input-group-append" *ngIf="!IsResend">
             <button type="button" [hidden]="MaxSpecificUser == SendToLength" (click)="AddSentTo()" class="btn btn-primary btn-raised"
                 style="vertical-align: middle;">
                 <i class="ft-plus-circle font-medium-2"></i>

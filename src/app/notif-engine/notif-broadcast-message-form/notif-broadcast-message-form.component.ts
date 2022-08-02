@@ -258,8 +258,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           this.NotifBroadcastForm.get("Body").setValue(response.Body);
         }
         let splitNum = response.SendTo.split(" ");
-        //regionPhoneNum = splitNum[0];
         let patchPhoneNum = splitNum[1];
+        if(!patchPhoneNum) patchPhoneNum = splitNum[0];
         this.SelectedPhoneNum = patchPhoneNum;
         this.NotifBroadcastForm.get("SendTo").setValue(patchPhoneNum);
         this.NotifBroadcastForm.get("PhoneNum").setValue(response.SendTo);
@@ -659,7 +659,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
     }
     if (this.IsResend) {
-      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value;
+      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value["internationalNumber"];
       return;
     }
     this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();

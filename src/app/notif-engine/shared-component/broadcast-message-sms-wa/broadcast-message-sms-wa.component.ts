@@ -74,6 +74,7 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   
   AddSentTo(){
     const PhnNum = this.parentForm.get("PhoneNum").value;
+    if(!PhnNum) return;
     console.log(PhnNum);
     const item = { display: PhnNum["internationalNumber"], value: PhnNum["internationalNumber"] };
     
@@ -85,6 +86,7 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    if (this.IsResend) return;
     this.parentForm.get("SendTo").setValue("");
   }
 }
