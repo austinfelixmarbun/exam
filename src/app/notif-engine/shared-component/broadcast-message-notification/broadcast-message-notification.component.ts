@@ -118,6 +118,7 @@ export class BroadcastMessageNotificationComponent implements OnInit {
 
   AddSendTo(){
     let valueUsername = this.parentForm.get(this.IdentifierLookupSendTo).value;
+    if(!valueUsername) return;
     const item = { display: valueUsername.value, value: valueUsername.value };
     
     let sendToVal = this.parentForm.get("SendTo").value

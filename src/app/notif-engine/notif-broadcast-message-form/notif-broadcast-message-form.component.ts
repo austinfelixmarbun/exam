@@ -38,7 +38,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     SendTo: ['', Validators.required],
     BccEmail: '',
     CcEmail: '',
-    ListPhone: [],
     Body: ['', Validators.required],
     UsedParamBody: '',
     PhoneNum: '',
@@ -258,8 +257,8 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
           this.NotifBroadcastForm.get("Body").setValue(response.Body);
         }
         let splitNum = response.SendTo.split(" ");
-        //regionPhoneNum = splitNum[0];
         let patchPhoneNum = splitNum[1];
+        if(!patchPhoneNum) patchPhoneNum = response.SendTo;
         this.SelectedPhoneNum = patchPhoneNum;
         this.NotifBroadcastForm.get("SendTo").setValue(patchPhoneNum);
         this.NotifBroadcastForm.get("PhoneNum").setValue(response.SendTo);
@@ -474,7 +473,6 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.NotificationTemplateDescr = ev.NotificationTemplateDescr;
     this.NotifBroadcastForm.patchValue({
       UsedParamBody: "",
-      ListPhone: [],
       Subject: ev.Subject,
       Body: ev.Body,
       TemplateVersion: ev.Version,
@@ -513,16 +511,30 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   RefreshComponent() {
     this.ResetValidatorUsedParamBody();
     this.NotifBroadcastForm.patchValue({
-      SendTo: "",
       Subject: "",
       Body: "",
       UsedParamBody: "",
-      ListPhone: [],
-      CcEmail: "",
-      BccEmail: "",
-      BaseUrl: "",
-      Path: ""
     });
+    if(!this.IsResend){
+      this.NotifBroadcastForm.get("SendTo").setValue("");
+      if(this.GetMrNotificationTypeCodeValue != this.TypePush){
+        this.NotifBroadcastForm.patchValue({
+          BaseUrl: "",
+          Path: ""
+        });
+      }
+      if(this.GetMrNotificationTypeCodeValue != this.TypeEmail){
+        this.NotifBroadcastForm.patchValue({
+          CcEmail: "",
+          BccEmail: ""
+        });
+      }
+      if(this.GetMrNotificationTypeCodeValue != this.TypeSms && this.GetMrNotificationTypeCodeValue != this.TypeWA ){
+        this.NotifBroadcastForm.patchValue({
+          PhoneNum: "",
+        });
+      }
+    }
     this.RemoveInputParamArr();
     this.RefreshReady();
   }
@@ -659,7 +671,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
     }
     if (this.IsResend) {
-      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value;
+      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value["internationalNumber"];
       return;
     }
     this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
