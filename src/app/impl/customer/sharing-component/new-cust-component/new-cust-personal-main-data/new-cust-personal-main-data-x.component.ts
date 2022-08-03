@@ -300,7 +300,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: ['', this.CustDataMode == this.CustDataModeMain ? [Validators.required] : []],
       MobilePhnNo1: ['', this.isFamily ? [Validators.required, Validators.pattern("^[0-9]+$")] : this.isShareholder ? [Validators.pattern("^[0-9]+$")] : [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]],
+      Email1: ['', [Validators.pattern(CommonConstant.regexEmail)]],
       UcAddress: this.fb.group({
         Addr: [''],
         AreaCode1: [''],
@@ -327,7 +327,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
     }
-    if(this.pageFrom == CommonConstant.CustFromCustFamily){
+    if (this.pageFrom == CommonConstant.CustFromCustFamily) {
       this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
       this.CustomerForm.get("Email1").updateValueAndValidity();
     }
@@ -732,7 +732,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   async SaveForm() {
     if(!this.validateCustPersonalAge()) return;
 
-    if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
+    if (this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
       return;
     }
 
@@ -758,7 +758,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
       });
     }
 
-    if(!this.validateCustPersonalAge()) return;
+    if (!this.validateCustPersonalAge()) return;
 
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
@@ -935,11 +935,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
   //#endregion
 
-  SetThirdPartyTrxNo(e){
+  SetThirdPartyTrxNo(e) {
     this.thirdPartyTrxNo = e;
   }
 
-  SetCustFileFormObjs(e){
+  SetCustFileFormObjs(e) {
     this.CustDocFileFormObjs = e;
   }
 
@@ -947,22 +947,20 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   maxCustPerAge: number;
   minCustPerAgeDt: Date;
   maxCustPerAgeDt: Date;
-  async getMinMaxAgeCustPersonalFromGenSet()
-  {
+  async getMinMaxAgeCustPersonalFromGenSet() {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-    var businessDt:Date = new Date(context[CommonConstant.BUSINESS_DT]);
+    var businessDt: Date = new Date(context[CommonConstant.BUSINESS_DT]);
     // jika family & bukan spouse maka skip
     if(
       this.CustDataMode == this.CustDataModeFamily &&
       this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
-      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer)
-    {
+      this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer) {
       this.minCustPerAge = 0;
       this.minCustPerAgeDt = new Date(businessDt);
       return;
     }
 
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeCustAgeLimit}).toPromise().then(
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeCustAgeLimit }).toPromise().then(
       (response) => {
         var listGsAge: Array<string> = response && response["GsValue"] ? response["GsValue"].split(';') : [17];
         this.minCustPerAge = Number(listGsAge[0]);
@@ -971,7 +969,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         this.minCustPerAgeDt = new Date(businessDt);
         this.minCustPerAgeDt.setFullYear(this.minCustPerAgeDt.getFullYear() - this.minCustPerAge);
 
-        if(this.maxCustPerAge > 0 && this.maxCustPerAge > this.minCustPerAge) {
+        if (this.maxCustPerAge > 0 && this.maxCustPerAge > this.minCustPerAge) {
           this.maxCustPerAgeDt = new Date(businessDt);
           this.maxCustPerAgeDt.setFullYear(this.maxCustPerAgeDt.getFullYear() - this.maxCustPerAge);
         }
@@ -979,8 +977,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     );
   }
 
-  validateCustPersonalAge()
-  {
+  validateCustPersonalAge() {
     // jika family & bukan spouse maka skip
     if(
       this.CustDataMode == this.CustDataModeFamily &&
@@ -990,14 +987,14 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
 
     var birthDt:Date = new Date(this.CustomerForm.get('BirthDt').value);
 
-    if(this.maxCustPerAge > 0 && (birthDt > this.minCustPerAgeDt || birthDt < this.maxCustPerAgeDt))
-    {
+    var birthDt: Date = new Date(this.CustomerForm.get('BirthDt').value);
+
+    if (this.maxCustPerAge > 0 && (birthDt > this.minCustPerAgeDt || birthDt < this.maxCustPerAgeDt)) {
       this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_BETWEEN, this.minCustPerAge, this.maxCustPerAge));
       return false;
     }
 
-    if(birthDt > this.minCustPerAgeDt)
-    {
+    if (birthDt > this.minCustPerAgeDt) {
       this.toastr.warningMessage(String.Format(ExceptionConstant.CUST_AGE_MIN, this.minCustPerAge));
       return false;
     }
