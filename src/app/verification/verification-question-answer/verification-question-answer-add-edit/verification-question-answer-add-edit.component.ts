@@ -45,6 +45,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     RefVerfAnswerTypeId: ['', Validators.required],
     VerfAnswer: ['', Validators.required],
     IsActive: [true],
+    IsMandatory: [false],
     RowVersion: ['']
   })
 
@@ -67,7 +68,6 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(URLConstant.GetVerfQuestionAnswerForUpdateById, {Id : this.VerfQuestionAnswerId}).subscribe(
       (response) => {
         this.verfQuestionAnswer = response[CommonConstant.ReturnObj];
-
         refAnswerObj = { RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId }
         this.http.post(URLConstant.GetRefVerfAnswerTypeById, {Id : this.verfQuestionAnswer.RefVerfAnswerTypeId}).subscribe(
           (respond) => {
@@ -81,6 +81,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
           VerfAnswer: this.verfQuestionAnswer.VerfAnswer,
           RefVerfAnswerTypeId: this.verfQuestionAnswer.RefVerfAnswerTypeId,
           IsActive: this.verfQuestionAnswer.IsActive,
+          IsMandatory: this.verfQuestionAnswer.IsMandatory,
           RowVersion: this.verfQuestionAnswer.RowVersion
         });
 
@@ -166,6 +167,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
     this.verfQuestionAnswerObj.VerfQuestionText = this.verfQuestionAnswerObj.VerfQuestionText;
     this.verfQuestionAnswerObj.RefVerfAnswerTypeId = this.verfQuestionAnswerObj.RefVerfAnswerTypeId;
     this.verfQuestionAnswerObj.IsActive = this.verfQuestionAnswerObj.IsActive;
+    this.verfQuestionAnswerObj.IsMandatory = this.verfQuestionAnswerObj.IsMandatory;
 
     if (this.mode == "edit") {
       this.verfQuestionAnswerObj.VerfQuestionAnswerId = this.VerfQuestionAnswerId;
