@@ -154,10 +154,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.InputLookupTemplateMessageObj.jsonSelect = objPatch;
   }
 
+  JodId: string = "";
   async GetNotificationHistHByNotificationHistHId(NotificationHistHId: number) {
     if (this.NotificationHistHId == null) return;
     await this.http.post(this.UrlConstantNew.GetNotificationHistHByNotificationHistHId, { Id: NotificationHistHId }).toPromise().then(
       async (response: NotificationHistHObj) => {
+        this.JodId = response.NotificationJobId;
         await this.GetNotificationTemplate(response.NotificationTemplateId);
         this.NotifBroadcastForm.patchValue({
           MrNotificationTypeCode: response.MrNotificationTypeCode,
@@ -688,15 +690,18 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       }
     }
     this.SetSaveObj();
+    let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
+    this.SendToNotificationEngineSaveObj.NotificationJobId = null;
+    if (this.IsResend) {
+      urlSave = this.UrlConstantNew.ResendToNotificationEngine;
+      this.SendToNotificationEngineSaveObj.NotificationJobId = this.JodId;
+    }
     if (this.GetMrNotificationTypeCodeValue == this.TypeEmail) {
       setTimeout(() => {
         this.EmailForm.SendEmail();
       }, 100);
       return
     };
-    let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
-    if (this.IsResend) urlSave = "";
-    console.log(this.SendToNotificationEngineSaveObj);
     await this.http.post(urlSave, this.SendToNotificationEngineSaveObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {

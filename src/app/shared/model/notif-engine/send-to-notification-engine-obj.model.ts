@@ -3,6 +3,7 @@ import { PushNotificationObj } from "./push-notification-obj.model";
 import { SmsWaNotificationObj } from "./sms-wa-notification-obj.model";
 
 export class SendToNotificationEngineObj {
+    NotificationJobId: string;
     NotificationTemplateCode: string;
     MrNotificationLevelCode: string;
     MrNotificationLevelDescr: string;
@@ -21,6 +22,7 @@ export class SendToNotificationEngineObj {
     RefNo: string;
 
     constructor() {
+        this.NotificationJobId = "";
         this.NotificationTemplateCode = "";
         this.MrNotificationLevelCode = "";
         this.MrNotificationLevelDescr = "";
