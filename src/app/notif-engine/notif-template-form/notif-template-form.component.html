@@ -94,7 +94,7 @@
                   <label class="col-md-3 adInsLabel" translate>{{subjectValue}}</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control adInsInput width-50-per"
-                      formControlName="Subject" [required]="subjectIsRequired">
+                      formControlName="Subject" [required]="subjectIsRequired" [IsUpperCase]="subjectUpperCase">
                     <lib-uc-show-errors [control]="NotifTemplateForm.controls.Subject" [submit]="enjiForm.submitted">
                     </lib-uc-show-errors>
                   </div>

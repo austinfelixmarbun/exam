@@ -40,6 +40,7 @@ export class NotifTemplateFormComponent implements OnInit {
   readonly notifTypePushNotif: string =CommonConstant.RefMasterTypeCodeNotificationTypesPush;
   readonly notifTypeSms: string =CommonConstant.RefMasterTypeCodeNotificationTypesSms;
   readonly notifTypeWa: string =CommonConstant.RefMasterTypeCodeNotificationTypesWA;
+  readonly notifTypeEmail: string =CommonConstant.RefMasterTypeCodeNotificationTypesEmail;
 
   readonly QuilConfig = {
     toolbar: [
@@ -364,5 +365,10 @@ export class NotifTemplateFormComponent implements OnInit {
 
   get subjectValue(){
     return this.GetMrNotificationTypeCodeFormControl.value == this.notifTypePushNotif ? "TITLE" : "SUBJECT"
+  }
+
+  get subjectUpperCase(){
+    if(this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail) return false;
+    return true;
   }
 }
