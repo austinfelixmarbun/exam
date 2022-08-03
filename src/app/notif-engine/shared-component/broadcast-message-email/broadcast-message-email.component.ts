@@ -30,6 +30,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   @Input() enjiForm: NgForm;
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
+  @Input() IsResend: boolean = false;
   @Input() SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
   @Output() SendEmailSuccess: EventEmitter<boolean> = new EventEmitter();
   readonly title: string = "Broadcast Email";
@@ -220,7 +221,9 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     };
     // #endregion
 
-    xhr.open('POST', this.UrlConstantNew.MultipleSendToNotificationEngineEmail, true);
+    let url = this.UrlConstantNew.MultipleSendToNotificationEngineEmail;
+    if(this.IsResend) url = this.UrlConstantNew.ResendToNotificationEngineEmail;
+    xhr.open('POST', url, true);
     let token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
     xhr.setRequestHeader('AdInsKey', `${token}`);
 
