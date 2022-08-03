@@ -43,6 +43,7 @@ import {NewCustCompanyMainDataXComponent} from 'app/impl/customer/sharing-compon
 import {ShareholderFormXComponent} from 'app/impl/customer/sharing-component/new-cust-component/component/shareholder-form/shareholder-form-x.component';
 import {ShareholderListingXComponent} from 'app/impl/customer/sharing-component/shareholder-listing/shareholder-listing-x.component';
 import { ThirdPartyFormXComponent } from 'app/impl/customer/sharing-component/new-cust-component/component/third-party-form/third-party-form-x.component';
+import { NewCustPublicXComponent } from 'app/impl/customer/sharing-component/new-cust-component/new-cust-public/new-cust-public-x.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -86,7 +87,8 @@ export const customCurrencyMaskConfig = {
         NewCustCompanyMainDataXComponent,
         ShareholderFormXComponent,
         ThirdPartyFormComponent,
-        ThirdPartyFormXComponent
+        ThirdPartyFormXComponent,
+        NewCustPublicXComponent
     ],
     imports: [
         CommonModule,
@@ -131,7 +133,8 @@ export const customCurrencyMaskConfig = {
         NewCustCompanyMainDataXComponent,
         ShareholderFormXComponent,
         ThirdPartyFormComponent,
-        ThirdPartyFormXComponent
+        ThirdPartyFormXComponent,
+        NewCustPublicXComponent
     ],
 
     providers: [

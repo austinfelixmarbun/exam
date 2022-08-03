@@ -730,7 +730,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   }
 
   async SaveForm() {
-    if(!this.validateCustPersonalAge()) return; 
+    if(!this.validateCustPersonalAge()) return;
 
     if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
@@ -817,6 +817,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
         this.toastr.warningMessage("Owner Need to Input Share Prcnt");
         return;
       }
+      if (tempForm["IsOwner"] == false && tempForm["SharePrcnt"] > 0.0000) {
+        this.toastr.warningMessage("Non Owner Need to Input 0% Share");
+        return;
+      }
+
       reqSubmitObj.CustCompanyMgmntShrholderObj = await this.SetCustMgmntShareholder();
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
@@ -937,7 +942,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }
-  
+
   minCustPerAge: number;
   maxCustPerAge: number;
   minCustPerAgeDt: Date;
@@ -948,7 +953,7 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
     var businessDt:Date = new Date(context[CommonConstant.BUSINESS_DT]);
     // jika family & bukan spouse maka skip
     if(
-      this.CustDataMode == this.CustDataModeFamily && 
+      this.CustDataMode == this.CustDataModeFamily &&
       this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
       this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer)
     {
@@ -978,11 +983,11 @@ export class NewCustPersonalMainDataXComponent implements OnInit {
   {
     // jika family & bukan spouse maka skip
     if(
-      this.CustDataMode == this.CustDataModeFamily && 
+      this.CustDataMode == this.CustDataModeFamily &&
       this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSpouse &&
       this.CustomerForm.get('MrCustRelationship').value != CommonConstant.MasteCodeRelationshipSelfCustomer
     ) return true;
-  
+
     var birthDt:Date = new Date(this.CustomerForm.get('BirthDt').value);
 
     if(this.maxCustPerAge > 0 && (birthDt > this.minCustPerAgeDt || birthDt < this.maxCustPerAgeDt))

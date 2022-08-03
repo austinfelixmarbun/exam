@@ -34,9 +34,9 @@
           [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
           [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSaveCoy($event)">
         </app-new-cust-company-main-data-x>
-        <app-new-cust-public *ngIf="CustType == CustTypePublic" [CustId]="ParentCustId"
+        <app-new-cust-public-x *ngIf="CustType == CustTypePublic" [CustId]="ParentCustId"
           [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
-          (outputCancel)="Cancel()"></app-new-cust-public>
+          (outputCancel)="Cancel()"></app-new-cust-public-x>
       </div>
       <div class="card-body" *ngIf="PageType == CustPageTypeDupCheck">
         <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj"
