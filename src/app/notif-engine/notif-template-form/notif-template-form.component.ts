@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
@@ -14,6 +14,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefNotifAttrTemplateObj } from 'app/shared/model/notif-engine/ref-notif-attr-template-obj.model';
 import { DatePipe } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-notif-template-form',
@@ -213,7 +214,11 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   ParamArr: Array<string> = new Array<string>();
+  PreviousActiveElement: any;
   readonly IdentifierBodyMessageParam: string = "ParamArr";
+  @ViewChild('textArea') _textArea: ElementRef;
+  @ViewChild('textAreaEmail') _textAreaEmail: QuillEditorComponent;
+
   AddParameter(IsEdit: boolean = false, ParamAttrValue: string = "") {
     let BodyMessage: string = this.NotifTemplateForm.get("Body").value;
     const ListParam: FormArray = this.NotifTemplateForm.get(this.IdentifierBodyMessageParam) as FormArray;
@@ -227,15 +232,31 @@ export class NotifTemplateFormComponent implements OnInit {
     const Validation: string = this.GetRegexAttrParam(ParamAttrCode);
 
     const ParamaterVar: string = "{" + ParamAttrCode + "}";
+    const lenBody: number = BodyMessage.length;
+    const ConditionTypeEmail: boolean = this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail
+    let textArea: any;
+    let indexCursor: number = 0;
 
+    
+    
     if (!IsEdit) {
       if(!ParamAttrCode) return;
-      const lenBody: number = BodyMessage.length;
-      let notifType: string = this.GetMrNotificationTypeCodeFormControl.value;
-      if (lenBody > 0 && BodyMessage.charAt(lenBody) != " " && notifType != CommonConstant.NOTIF_TYPE_EMAIL) {
-        BodyMessage += " ";
+
+      if(ConditionTypeEmail) {
+        textArea = this._textAreaEmail.quillEditor;
+        if(textArea.editor.scroll.domNode !== this.PreviousActiveElement) indexCursor = lenBody;
+        if(textArea.getSelection()) indexCursor = textArea.getSelection().index;
+
+        textArea.insertText(indexCursor, ParamaterVar);
+        BodyMessage = textArea.editor.scroll.domNode.innerHTML;
+      } 
+      else {
+        textArea = this._textArea.nativeElement as HTMLTextAreaElement;
+        indexCursor = textArea.selectionStart;
+        if(textArea !== this.PreviousActiveElement) indexCursor = lenBody;
+
+        BodyMessage = this.addStr(BodyMessage, indexCursor, ParamaterVar);
       }
-      BodyMessage += ParamaterVar + " ";
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
 
@@ -250,6 +271,10 @@ export class NotifTemplateFormComponent implements OnInit {
       }));
     }
     this.InputParamValue();
+  }
+
+  SetPrevActiveElement(){
+    this.PreviousActiveElement = document.activeElement;
   }
   
   getDeletedParam(param: string){
@@ -369,5 +394,15 @@ export class NotifTemplateFormComponent implements OnInit {
   get subjectUpperCase(){
     if(this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail) return false;
     return true;
+  }
+
+  private addStr(str: string, index: number, stringToAdd: string){
+    if(index != 0){
+      if(str.charAt(index-1) != " ") stringToAdd = " " + stringToAdd;
+    }
+    if(index != str.length){
+      if(str.charAt(index) != " ") stringToAdd += " ";
+    }    
+    return str.substring(0, index) + stringToAdd + str.substring(index, str.length);
   }
 }

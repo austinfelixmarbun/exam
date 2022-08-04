@@ -103,10 +103,10 @@
                   <label class="col-md-3 adInsLabel" translate>BODY</label>
                   <div class="col-md-9">
                     <div class="input-group">
-                      <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.Body.invalid }"></textarea>
+                      <textarea *ngIf="!subjectIsRequired" class="form-control adInsInput width-50-per" formControlName="Body" cols="50" rows="5" (change)="InputParamValue()" [ngClass]="{ 'is-invalid': enjiForm.submitted && NotifTemplateForm.controls.Body.invalid }" #textArea></textarea>
                       <div id="full-wrapper" *ngIf="subjectIsRequired">
                         <div id="full-container">
-                          <quill-editor [modules]="QuilConfig" formControlName="Body" (onContentChanged)="InputParamValue()"></quill-editor>
+                          <quill-editor [modules]="QuilConfig" formControlName="Body" #textAreaEmail (onContentChanged)="InputParamValue()"></quill-editor>
                         </div>
                       </div>                      
                     </div>
@@ -128,7 +128,7 @@
                     </lib-uc-show-errors>
                   </div>
                   <div class="col-md-3">
-                    <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()">
+                    <button class="input-group-append btn btn-raised btn-primary" style="height: fit-content;" type="button" (click)="AddParameter()" (mousedown)="SetPrevActiveElement()">
                       <i class="ft-plus-circle"></i>&nbsp;<span translate>Add Parameter</span>
                     </button>
                   </div>
