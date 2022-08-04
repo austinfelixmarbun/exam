@@ -242,21 +242,7 @@ export class NotifTemplateFormComponent implements OnInit {
     if (!IsEdit) {
       if(!ParamAttrCode) return;
 
-      if(ConditionTypeEmail) {
-        textArea = this._textAreaEmail.quillEditor;
-        if(textArea.editor.scroll.domNode !== this.PreviousActiveElement) indexCursor = lenBody;
-        if(textArea.getSelection()) indexCursor = textArea.getSelection().index;
-
-        textArea.insertText(indexCursor, ParamaterVar);
-        BodyMessage = textArea.editor.scroll.domNode.innerHTML;
-      } 
-      else {
-        textArea = this._textArea.nativeElement as HTMLTextAreaElement;
-        indexCursor = textArea.selectionStart;
-        if(textArea !== this.PreviousActiveElement) indexCursor = lenBody;
-
-        BodyMessage = this.addStr(BodyMessage, indexCursor, ParamaterVar);
-      }
+      BodyMessage = this.SetBodyMessage(ConditionTypeEmail, textArea, indexCursor, lenBody, ParamaterVar, BodyMessage)
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
 
@@ -271,6 +257,25 @@ export class NotifTemplateFormComponent implements OnInit {
       }));
     }
     this.InputParamValue();
+  }
+
+  private SetBodyMessage(ConditionTypeEmail: boolean, textArea: any, indexCursor: number, lenBody: number, ParamaterVar: string, BodyMessage: string): string{
+    if(ConditionTypeEmail) {
+      textArea = this._textAreaEmail.quillEditor;
+      if(textArea.editor.scroll.domNode !== this.PreviousActiveElement) indexCursor = lenBody;
+      if(textArea.getSelection()) indexCursor = textArea.getSelection().index;
+
+      textArea.insertText(indexCursor, ParamaterVar);
+      BodyMessage = textArea.editor.scroll.domNode.innerHTML;
+      return BodyMessage;
+    }
+    textArea = this._textArea.nativeElement as HTMLTextAreaElement;
+    indexCursor = textArea.selectionStart;
+    if(textArea !== this.PreviousActiveElement) indexCursor = lenBody;
+
+    BodyMessage = this.addStr(BodyMessage, indexCursor, ParamaterVar);
+
+    return BodyMessage;
   }
 
   SetPrevActiveElement(){
