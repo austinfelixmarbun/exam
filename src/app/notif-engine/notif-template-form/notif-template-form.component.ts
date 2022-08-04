@@ -288,16 +288,15 @@ export class NotifTemplateFormComponent implements OnInit {
     );
   }
 
+  // return true jika tidak valid
   get CheckFormValidity() : boolean {
-    const invalid = [];
     const controls = this.NotifTemplateForm.controls;
     for (const name in controls) {
       if (controls[name].invalid) {
-        invalid.push(name);
+        if (name == this.IdentifierBodyMessageParam) return true;
       }
     }
-    if(invalid.length == 1 && invalid.at(0) == this.IdentifierBodyMessageParam) return false;
-    return true;
+    return false;
   }
 
   private SetSaveObj(): NotificationTemplateObj {
