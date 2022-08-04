@@ -214,7 +214,7 @@ export class NotifTemplateFormComponent implements OnInit {
   }
 
   ParamArr: Array<string> = new Array<string>();
-  PreviousActiveElement: any;
+  PreviousActiveElement: Element;
   readonly IdentifierBodyMessageParam: string = "ParamArr";
   @ViewChild('textArea') _textArea: ElementRef;
   @ViewChild('textAreaEmail') _textAreaEmail: QuillEditorComponent;
