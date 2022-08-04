@@ -293,7 +293,7 @@ export class NotifTemplateFormComponent implements OnInit {
     const controls = this.NotifTemplateForm.controls;
     for (const name in controls) {
       if (controls[name].invalid) {
-        if (name == this.IdentifierBodyMessageParam) return true;
+        if (name != this.IdentifierBodyMessageParam) return true;
       }
     }
     return false;
