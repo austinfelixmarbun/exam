@@ -69,6 +69,7 @@ export class NotifTemplateFormComponent implements OnInit {
 
   DictListRefMaster: { [id: string]: Array<KeyValueObj> } = {};
   NotificationTemplateId: number = 0;
+  CursorPositionBody: number = 0;
   ListActiveRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
   ListAllRefNotifAttrTemplateObj: Array<RefNotifAttrTemplateObj> = new Array<RefNotifAttrTemplateObj>();
 
@@ -255,30 +256,32 @@ export class NotifTemplateFormComponent implements OnInit {
 
   private SetBodyMessage(ParamaterVar: string, BodyMessage: string): string{
     const ConditionTypeEmail: boolean = this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail
-    const lenBody: number = BodyMessage.length;
     let textArea: any;
-    let indexCursor: number = 0;
-    
+
     if(ConditionTypeEmail) {
       textArea = this._textAreaEmail.quillEditor;
-      if(textArea.editor.scroll.domNode !== this.PreviousActiveElement) indexCursor = lenBody;
-      if(textArea.getSelection()) indexCursor = textArea.getSelection().index;
-
-      textArea.insertText(indexCursor, ParamaterVar);
+      textArea.insertText(this.CursorPositionBody, ParamaterVar);
       BodyMessage = textArea.editor.scroll.domNode.innerHTML;
       return BodyMessage;
     }
-    textArea = this._textArea.nativeElement as HTMLTextAreaElement;
-    indexCursor = textArea.selectionStart;
-    if(textArea !== this.PreviousActiveElement) indexCursor = lenBody;
-
-    BodyMessage = this.addStr(BodyMessage, indexCursor, ParamaterVar);
-
+    BodyMessage = this.addStr(BodyMessage, this.CursorPositionBody, ParamaterVar);
     return BodyMessage;
   }
 
   SetPrevActiveElement(){
     this.PreviousActiveElement = document.activeElement;
+  }
+
+  SetLatestCursorPosition(){
+    let textArea: any;
+    const ConditionTypeEmail: boolean = this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail
+    if(ConditionTypeEmail) {
+      textArea = this._textAreaEmail.quillEditor;
+      if(textArea.getSelection()) this.CursorPositionBody = textArea.getSelection().index;
+      return;
+    }
+    textArea = this._textArea.nativeElement as HTMLTextAreaElement;
+    this.CursorPositionBody = textArea.selectionStart;
   }
   
   getDeletedParam(param: string){

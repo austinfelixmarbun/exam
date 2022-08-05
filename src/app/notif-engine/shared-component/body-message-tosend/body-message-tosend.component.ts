@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -7,7 +7,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 @Component({
   selector: 'app-body-message-tosend',
   templateUrl: './body-message-tosend.component.html',
-  styleUrls: ['./body-message-tosend.css'],
+  styleUrls: ['./body-message-tosend.component.css'],
   viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
 export class BodyMessageTosendComponent implements OnInit {
@@ -43,8 +43,8 @@ export class BodyMessageTosendComponent implements OnInit {
 
   TempBodyMessage: string = "";
 
-  DeleteParam(idx: number) {
-    if (!confirm(ExceptionConstant.DELETE_CONFIRMATION)) return;
+  DeleteParam(idx: number, isConfirm: boolean = true) {
+    if (isConfirm && !confirm(ExceptionConstant.DELETE_CONFIRMATION)) return;
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
 
     const element = this.GetListBodyMessageParam.at(idx);
@@ -59,6 +59,7 @@ export class BodyMessageTosendComponent implements OnInit {
   }
   
   InputParamValue() {
+    let Body: AbstractControl = this.parentForm.get(this.IdentifierBody);
     let BodyMessage: string = this.parentForm.get(this.IdentifierBody).value;
     for (let idx = 0; idx < this.GetListBodyMessageParam.length; idx++){
       const element = this.GetListBodyMessageParam.at(idx);
@@ -69,7 +70,12 @@ export class BodyMessageTosendComponent implements OnInit {
         ParamValue = this.transformParamValue(InputType, ParamValue);
         BodyMessage = BodyMessage.replaceAll(ParamIdxAt, ParamValue);
       }
+      if(!BodyMessage.includes(ParamIdxAt)) this.DeleteParam(idx, false);
     }
+    if(!BodyMessage) {
+      BodyMessage = "";
+      Body.setValue("");
+    } 
     this.TempBodyMessage = BodyMessage;
     if(this.IsBroadcast){
       this.parentForm.get("UsedParamBody").setValue(this.TempBodyMessage);
