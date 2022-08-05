@@ -232,17 +232,11 @@ export class NotifTemplateFormComponent implements OnInit {
     const Validation: string = this.GetRegexAttrParam(ParamAttrCode);
 
     const ParamaterVar: string = "{" + ParamAttrCode + "}";
-    const lenBody: number = BodyMessage.length;
-    const ConditionTypeEmail: boolean = this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail
-    let textArea: any;
-    let indexCursor: number = 0;
-
-    
     
     if (!IsEdit) {
       if(!ParamAttrCode) return;
 
-      BodyMessage = this.SetBodyMessage(ConditionTypeEmail, textArea, indexCursor, lenBody, ParamaterVar, BodyMessage)
+      BodyMessage = this.SetBodyMessage(ParamaterVar, BodyMessage)
       this.NotifTemplateForm.get("Body").setValue(BodyMessage);
     }
 
@@ -259,7 +253,12 @@ export class NotifTemplateFormComponent implements OnInit {
     this.InputParamValue();
   }
 
-  private SetBodyMessage(ConditionTypeEmail: boolean, textArea: any, indexCursor: number, lenBody: number, ParamaterVar: string, BodyMessage: string): string{
+  private SetBodyMessage(ParamaterVar: string, BodyMessage: string): string{
+    const ConditionTypeEmail: boolean = this.GetMrNotificationTypeCodeFormControl.value == this.notifTypeEmail
+    const lenBody: number = BodyMessage.length;
+    let textArea: any;
+    let indexCursor: number = 0;
+    
     if(ConditionTypeEmail) {
       textArea = this._textAreaEmail.quillEditor;
       if(textArea.editor.scroll.domNode !== this.PreviousActiveElement) indexCursor = lenBody;
