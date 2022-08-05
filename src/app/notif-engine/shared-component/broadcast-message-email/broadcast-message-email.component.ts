@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { SendToNotificationEngineObj } from 'app/shared/model/notif-engine/send-to-notification-engine-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute } from '@angular/router';
 
 interface IImageMeta {
   type: string;
@@ -31,6 +32,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   @Input() parentForm: FormGroup;
   @Input() IsUsedTemplate: boolean = false;
   @Input() IsResend: boolean = false;
+  @Input() NotificationJobId: string = "";
   @Input() SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
   @Output() SendEmailSuccess: EventEmitter<boolean> = new EventEmitter();
   readonly title: string = "Broadcast Email";
@@ -59,13 +61,14 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     // theme: 'snow',
   };
 
-  constructor(private fb: FormBuilder, private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient, private toastr: NGXToastrService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService, private http: HttpClient, private toastr: NGXToastrService) { }
 
   ngOnInit(): void {
     Quill.register('modules/imageDropAndPaste', QuillImageDropAndPaste);
     this.CustomPatternEmailShowErrorMessage();
     this.GetGeneralSettingFileFormat();
     this.GetGeneralSettingFileMaxSize();
+    this.GetListEmailAttachmentByNotificationHistId();
     const SendToControl = this.parentForm.get("SendTo");
     if (!SendToControl) {
       this.parentForm.addControl("SendTo", this.fb.control(""));
@@ -90,6 +93,40 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     this.http.post(this.UrlConstantNew.GetEmailAttachmentMaxFileSize, { code: CommonConstant.GsCodeEmailAttachmentMaxSize }).subscribe(
       (response: string) => {
         this.maxSize = +response;
+      });
+  }
+
+  GetListEmailAttachmentByNotificationHistId() {
+    let NotificationHistHId = 0;
+    this.route.queryParams.subscribe(params => {
+      if (params["NotificationHistHId"]) {
+        NotificationHistHId = params["NotificationHistHId"];
+      }
+    });
+    if (NotificationHistHId == 0) return;
+    this.http.post(this.UrlConstantNew.GetListEmailAttachmentByNotificationHistId, { Id: NotificationHistHId }).subscribe(
+      (response) => {
+        let listFile: Array<any> = response[CommonConstant.ReturnObj];
+        let newListFile = new Array();
+        let newListFileNotAllow = new Array();
+        let listFormatsAllowed: Array<string> = this.formatsAllowed.split('.');
+        for (let index = 0; index < listFile.length; index++) {
+          const element = listFile[index];
+          let newFile = {
+            name: element.FileName,
+            size: element.Size,
+            type: element.DataType,
+            IsOldData: true
+          };
+          let frmtAllowed = this.CheckFileFormat(newFile.type, listFormatsAllowed);
+          if (frmtAllowed) {
+            newListFile.push(newFile);
+            continue;
+          }
+          newListFileNotAllow.push(newFile);
+        }
+        this.selectedFiles = newListFile;
+        this.notAllowedList = newListFileNotAllow;
       });
   }
 
@@ -182,9 +219,20 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     const formData = new FormData();
 
     let selectedFiles: File[] = this.selectedFiles;
+    let idxExisting: number = 0;
+    let jobId: string = this.NotificationJobId + "_";
     for (let i = 0; i < selectedFiles.length; i++) {
       // Add DATA TO BE SENT
-      formData.append("Files", selectedFiles[i] as Blob);
+      const fileIdxAt = selectedFiles[i];
+      if(fileIdxAt["IsOldData"]){
+        let newFileName = jobId + fileIdxAt.name;
+        formData.append("ListFileName[" + idxExisting + "].FileName", newFileName);
+        formData.append("ListFileName[" + idxExisting + "].Size", fileIdxAt.size.toString());
+        formData.append("ListFileName[" + idxExisting + "].DataType", fileIdxAt.type);
+        idxExisting++;
+        continue;
+      }
+      formData.append("Files", fileIdxAt as Blob);
     }
 
     // #region xhr response api
@@ -229,7 +277,9 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
 
     //#region set object request
     Object.keys(this.SendToNotificationEngineSaveObj).forEach(key => {
-      if (key != "KeyValParam") formData.append(key, this.SendToNotificationEngineSaveObj[key]);
+      let value = this.SendToNotificationEngineSaveObj[key];
+      if (!value) value = "";
+      if (key != "KeyValParam") formData.append(key, value);
     });
     for (let key in this.SendToNotificationEngineSaveObj.KeyValParam) {
       let KeyValParam = this.SendToNotificationEngineSaveObj.KeyValParam[key];
@@ -237,7 +287,9 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     }
     // set to EmailNotificationObj
     Object.keys(this.SendToNotificationEngineSaveObj.EmailNotificationObj).forEach(key => {
-      formData.append("EmailNotificationObj." + key, this.SendToNotificationEngineSaveObj.EmailNotificationObj[key]);
+      let value = this.SendToNotificationEngineSaveObj.EmailNotificationObj[key];
+      if (!value) value = "";
+      formData.append("EmailNotificationObj." + key, value);
     });
     //#endregion
 

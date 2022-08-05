@@ -1251,6 +1251,7 @@ export class UrlConstantNew{
 
     // EmailNotificationHist
     public GetEmailNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetEmailNotificationHistByNotificationHistHId;
+    public GetListEmailAttachmentByNotificationHistId = this.env.NotifEngineURL + this.url.GetListEmailAttachmentByNotificationHistId;
 
     // NotificationBroadcast
     public SendToNotificationEngine = this.env.FoundationR3Url + this.url.SendToNotificationEngine;
