@@ -261,11 +261,8 @@ export class NotifTemplateFormComponent implements OnInit {
 
     if(ConditionTypeEmail) {
       textArea = this._textAreaEmail.quillEditor;
-      let tempLen = this.CursorPositionBody + ParamaterVar.length;
       textArea.insertText(this.CursorPositionBody, ParamaterVar);
       this.CursorPositionBody += ParamaterVar.length;
-      textArea.setSelection(tempLen);
-      console.log(textArea.getSelection().index);
       BodyMessage = textArea.editor.scroll.domNode.innerHTML;
       return BodyMessage;
     }
