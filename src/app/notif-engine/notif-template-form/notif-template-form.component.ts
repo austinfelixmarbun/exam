@@ -122,6 +122,7 @@ export class NotifTemplateFormComponent implements OnInit {
         this.DisableNotifType();
         this.ChangeNotifType();
         this.CheckExistingParamAttr(response.Body);
+        this.InputParamValue();
       }
     )
   }
@@ -260,7 +261,11 @@ export class NotifTemplateFormComponent implements OnInit {
 
     if(ConditionTypeEmail) {
       textArea = this._textAreaEmail.quillEditor;
+      let tempLen = this.CursorPositionBody + ParamaterVar.length;
       textArea.insertText(this.CursorPositionBody, ParamaterVar);
+      this.CursorPositionBody += ParamaterVar.length;
+      textArea.setSelection(tempLen);
+      console.log(textArea.getSelection().index);
       BodyMessage = textArea.editor.scroll.domNode.innerHTML;
       return BodyMessage;
     }
@@ -409,7 +414,8 @@ export class NotifTemplateFormComponent implements OnInit {
     }
     if(index != str.length){
       if(str.charAt(index) != " ") stringToAdd += " ";
-    }    
+    }
+    this.CursorPositionBody += stringToAdd.length;
     return str.substring(0, index) + stringToAdd + str.substring(index, str.length);
   }
 }

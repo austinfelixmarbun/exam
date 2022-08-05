@@ -66,11 +66,13 @@ export class BodyMessageTosendComponent implements OnInit {
       let ParamValue: string = element.get("Param").value;
       const ParamIdxAt: string = element.get("ParamIdxAt").value;
       const InputType: string = element.get("InputType").value;
+      if(!BodyMessage.includes(ParamIdxAt)){
+        this.DeleteParam(idx, false);
+      }
       if(ParamValue){
         ParamValue = this.transformParamValue(InputType, ParamValue);
         BodyMessage = BodyMessage.replaceAll(ParamIdxAt, ParamValue);
       }
-      if(!BodyMessage.includes(ParamIdxAt)) this.DeleteParam(idx, false);
     }
     if(!BodyMessage) {
       BodyMessage = "";
