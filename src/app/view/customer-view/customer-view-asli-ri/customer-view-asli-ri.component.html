@@ -135,7 +135,7 @@
                 <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxExtraMatchResult == null">-</label>
               </div>
               <div class="row">
-                <label class="col-md-4  adInsLabel" translate>Monthly Income - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.MonthlyIncome | currency}}</label>
+                <label class="col-md-4  adInsLabel" translate>Monthly Income - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.MonthlyIncome | number:'.2':'en-US'}}</label>
                 <label class="col-md-8  adInsLabel">{{ DataAsliRi.resAsliRiObj.TaxExtraIncome != null? DataAsliRi.resAsliRiObj.TaxExtraIncome : "-" }}</label>
               </div>
             </div>
@@ -154,7 +154,7 @@
                 <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.resAsliRiObj.TaxCompanyNpwpCompany == null">-</label>
               </div>
               <div class="row">
-                <label class="col-md-4 adInsLabel" translate>Annual Revenue - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.AnnualRevenue | currency}}</label>
+                <label class="col-md-4 adInsLabel" translate>Annual Revenue - {{ DataAsliRi.reqAddTrxSrcDataForAsliRiObj.AnnualRevenue | number:'.2':'en-US'}}</label>
                 <label class="col-md-8  adinslabel" translate>{{ DataAsliRi.resAsliRiObj.TaxCompanyIncome != null? DataAsliRi.resAsliRiObj.TaxCompanyIncome : "-" }}</label>
               </div>
             </div>

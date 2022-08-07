@@ -5,6 +5,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { ResTrxAsliRiObj } from 'app/shared/model/asli-ri/res-trx-asli-ri-obj.model';
 
 @Component({
   selector: 'app-asli-ri-view',
@@ -13,15 +15,19 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 })
 export class AsliRiViewComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal, private http: HttpClient,
-              private sanitizer: DomSanitizer) { }
+  constructor(
+    public activeModal: NgbActiveModal, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   @Input() MrCustTypeCode: string;
   @Input() custObj: CustObj;
   MrCustModelName: string;
   IDType: string;
   code: string;
-  DataAsliRi: any;
+  DataAsliRi: ResTrxAsliRiObj;
   isReady: boolean;
   img: any;
   url: string;
@@ -65,7 +71,12 @@ export class AsliRiViewComponent implements OnInit {
   async GetData()
   {
     await this.http.post(URLConstant.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
-      (res: any) => {
+      (res: ResTrxAsliRiObj) => {
+        if (res && res["StatusCode"] != 200 && res["Message"])
+        {
+          this.toastr.errorMessage(res["Message"]);
+          return;
+        }
         this.DataAsliRi = res;
         this.isReady = true;
       })
@@ -73,8 +84,9 @@ export class AsliRiViewComponent implements OnInit {
 
   async convertImage()
   {
+    if (!this.DataAsliRi || !this.DataAsliRi.ReqAsliRiObj || !this.DataAsliRi.ReqAsliRiObj.SelfiePhoto) return;
     this.url = "data:image/jpg|jpeg|png|bmp;base64"
-    this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.reqAddTrxSrcDataForAsliRiObj.SelfiePhoto}`);
+    this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.ReqAsliRiObj.SelfiePhoto}`);
   }
 
   close()

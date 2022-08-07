@@ -84,13 +84,13 @@ export class AsliRiReqConfirmationComponent implements OnInit {
 
       if (environment.SpinnerOnHttpPost) this.spinner.hide();
       if (xhr.status !== 200 && xhr.status !== 201) {
-        this.toastr.errorMessage('Upload Failed !');
+        this.toastr.errorMessage('Save Failed !');
         return;
       }
       else {
         var response = JSON.parse(xhr.response);
         if (response.HeaderObj.StatusCode != '200') {
-          this.toastr.errorMessage('Upload Failed ! '+  + response.HeaderObj.Message);
+          this.toastr.errorMessage(response.HeaderObj.Message);
           return
         }
       }

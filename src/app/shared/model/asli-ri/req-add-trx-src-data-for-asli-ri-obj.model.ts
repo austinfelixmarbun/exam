@@ -1,6 +1,7 @@
 export class ReqAddTrxSrcDataForAsliRIObj{ 
     CustNo: string;
     CustName: string;
+    CustType: string;
     Nik: string;
     Phone: string;
     Address: string;
