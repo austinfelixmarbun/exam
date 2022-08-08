@@ -104,6 +104,27 @@
             "value": "",
             "label": "Title",
             "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "IS_READ",
+            "id": "ReadStatusId",
+            "label": "Is Read",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "ddlType": "all",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
         }
     ],
     "querystring": {
@@ -169,6 +190,12 @@
             "position": "left",
             "label": "Title",
             "name": "Subject"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "READ STATUS",
+            "name": "IsRead"
         }
     ],
     "bodyList": [
@@ -233,6 +260,11 @@
             "type": "text",
             "position": "left",
             "property": "Subject"
-        }         
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsRead"
+        }     
     ]
 }

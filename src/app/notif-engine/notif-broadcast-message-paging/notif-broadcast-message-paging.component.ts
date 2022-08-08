@@ -127,7 +127,8 @@ export class NotifBroadcastMessagePagingComponent implements OnInit {
         this.TempPagingObj.pagingJson = "./assets/ucpaging/notif-engine/broadcast/add-to-temp-notif-broadcast-resend-push.json";
         break;
       }
-      case this.TypeSms || this.TypeWA:{
+      case this.TypeSms:
+      case this.TypeWA:{
         this.TempPagingObj.urlJson = "./assets/ucpaging/notif-engine/broadcast/add-to-temp-notif-broadcast-resend-sms-wa.json";
         this.TempPagingObj.pagingJson = "./assets/ucpaging/notif-engine/broadcast/add-to-temp-notif-broadcast-resend-sms-wa.json";
         break;
