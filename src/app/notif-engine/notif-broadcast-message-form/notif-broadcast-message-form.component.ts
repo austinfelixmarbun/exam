@@ -583,28 +583,28 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     return obj.Value;
   }
 
-  SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
-  private SetSaveObj() {
-    this.SendToNotificationEngineSaveObj = new SendToNotificationEngineObj();
+  SendToObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
+  private SetSendObj() {
+    this.SendToObj = new SendToNotificationEngineObj();
     if (this.IsUsedTemplate) {
-      this.SendToNotificationEngineSaveObj.NotificationTemplateCode = this.NotificationTemplateCode;
-      this.SendToNotificationEngineSaveObj.Version = this.NotifBroadcastForm.get("TemplateVersion").value;
+      this.SendToObj.NotificationTemplateCode = this.NotificationTemplateCode;
+      this.SendToObj.Version = this.NotifBroadcastForm.get("TemplateVersion").value;
     }
-    this.SendToNotificationEngineSaveObj.MrNotificationLevelCode = this.NotifBroadcastForm.get("MrNotificationLevelCode").value
-    this.SendToNotificationEngineSaveObj.MrNotificationLevelDescr = this.GetDescrFromCode(this.MrNotificationLevelCode, "MrNotificationLevelCode");
-    this.SendToNotificationEngineSaveObj.MrNotificationSourceCode = this.NotifBroadcastForm.get("MrNotificationSourceCode").value;
-    this.SendToNotificationEngineSaveObj.MrNotificationSourceDescr = this.GetDescrFromCode(this.MrNotificationSourceCode, "MrNotificationSourceCode");
-    this.SendToNotificationEngineSaveObj.MrNotificationTypeCode = this.GetMrNotificationTypeCodeValue;
-    this.SendToNotificationEngineSaveObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationTypeCode");
-    this.SendToNotificationEngineSaveObj.RefNo = this.NotifBroadcastForm.get("RefNo").value;
+    this.SendToObj.MrNotificationLevelCode = this.NotifBroadcastForm.get("MrNotificationLevelCode").value
+    this.SendToObj.MrNotificationLevelDescr = this.GetDescrFromCode(this.MrNotificationLevelCode, "MrNotificationLevelCode");
+    this.SendToObj.MrNotificationSourceCode = this.NotifBroadcastForm.get("MrNotificationSourceCode").value;
+    this.SendToObj.MrNotificationSourceDescr = this.GetDescrFromCode(this.MrNotificationSourceCode, "MrNotificationSourceCode");
+    this.SendToObj.MrNotificationTypeCode = this.GetMrNotificationTypeCodeValue;
+    this.SendToObj.MrNotificationTypeDescr = this.GetDescrFromCode(this.MrNotificationTypeCode, "MrNotificationTypeCode");
+    this.SendToObj.RefNo = this.NotifBroadcastForm.get("RefNo").value;
     if (this.ParamListCount > 0) {
       let tempParam = this.GetInputParamArr.value;
-      this.SendToNotificationEngineSaveObj.Param = new Array<string>();
+      this.SendToObj.Param = new Array<string>();
 
       for (let i = 0; i < tempParam.length; i++) {
         // TODO Ilangin field Param, udh gakepake.
-        this.SendToNotificationEngineSaveObj.Param.push(tempParam[i]["Param"]);
-        this.SendToNotificationEngineSaveObj.KeyValParam[tempParam.at(i).ParamAttrCode] = tempParam.at(i).Param;
+        this.SendToObj.Param.push(tempParam[i]["Param"]);
+        this.SendToObj.KeyValParam[tempParam.at(i).ParamAttrCode] = tempParam.at(i).Param;
       }
     }
 
@@ -638,45 +638,44 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   }
 
   private SetPushNotifObj() {
-    this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = this.NotifBroadcastForm.get("Subject").value;
-    this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = this.NotifBroadcastForm.get("Body").value;
-    this.SendToNotificationEngineSaveObj.PushNotificationObj.Key = this.NotifBroadcastForm.get("BaseUrl").value;
-    this.SendToNotificationEngineSaveObj.PushNotificationObj.Url = this.NotifBroadcastForm.get("Path").value;
+    this.SendToObj.PushNotificationObj.Title = this.NotifBroadcastForm.get("Subject").value;
+    this.SendToObj.PushNotificationObj.Message = this.NotifBroadcastForm.get("Body").value;
+    this.SendToObj.PushNotificationObj.Key = this.NotifBroadcastForm.get("BaseUrl").value;
+    this.SendToObj.PushNotificationObj.Url = this.NotifBroadcastForm.get("Path").value;
     if (this.IsUsedTemplate && this.ParamListCount > 0) {
-      this.SendToNotificationEngineSaveObj.PushNotificationObj.Message = "";
-      this.SendToNotificationEngineSaveObj.PushNotificationObj.Title = "";
+      this.SendToObj.PushNotificationObj.Message = "";
+      this.SendToObj.PushNotificationObj.Title = "";
     }
     if (this.IsResend) {
       let lookupValue = this.NotifBroadcastForm.get('LookupSendTo').value;
-      this.SendToNotificationEngineSaveObj.SendTo = lookupValue.value;
+      this.SendToObj.SendTo = lookupValue.value;
       return;
     }
-    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
+    this.SendToObj.SendTos = this.SetSendToMultipleUser();
   }
 
   private SetEmailObj() {
-    this.SendToNotificationEngineSaveObj.SendTos = [this.NotifBroadcastForm.get("SendTo").value];
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Subject = this.NotifBroadcastForm.get("Subject").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("CcEmail").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("BccEmail").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
-    this.SendToNotificationEngineSaveObj.EmailNotificationObj.SendFrom = "";
+    this.SendToObj.SendTos = [this.NotifBroadcastForm.get("SendTo").value];
+    this.SendToObj.EmailNotificationObj.Subject = this.NotifBroadcastForm.get("Subject").value;
+    this.SendToObj.EmailNotificationObj.Cc = this.NotifBroadcastForm.get("CcEmail").value;
+    this.SendToObj.EmailNotificationObj.Bcc = this.NotifBroadcastForm.get("BccEmail").value;
+    this.SendToObj.EmailNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
+    this.SendToObj.EmailNotificationObj.SendFrom = "";
 
     // Set File attachment
   }
 
   private SetSmsWaObj() {
-    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.IsWa = this.IsWa;
-    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.SendFrom = "";
-    this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
+    this.SendToObj.SmsWaNotificationObj.SendFrom = "";
+    this.SendToObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("Body").value;
     if (this.ParamListCount > 0) {
-      this.SendToNotificationEngineSaveObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
+      this.SendToObj.SmsWaNotificationObj.Body = this.NotifBroadcastForm.get("UsedParamBody").value;
     }
     if (this.IsResend) {
-      this.SendToNotificationEngineSaveObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value["internationalNumber"];
+      this.SendToObj.SendTo = this.NotifBroadcastForm.get('PhoneNum').value["internationalNumber"];
       return;
     }
-    this.SendToNotificationEngineSaveObj.SendTos = this.SetSendToMultipleUser();
+    this.SendToObj.SendTos = this.SetSendToMultipleUser();
   }
   //#endregion
 
@@ -689,12 +688,12 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
         return;
       }
     }
-    this.SetSaveObj();
-    let urlSave = this.UrlConstantNew.MultipleSendToNotificationEngine;
-    this.SendToNotificationEngineSaveObj.NotificationJobId = null;
+    this.SetSendObj();
+    let urlSend = this.UrlConstantNew.MultipleSendToNotificationEngine;
+    this.SendToObj.NotificationJobId = null;
     if (this.IsResend) {
-      urlSave = this.UrlConstantNew.ResendToNotificationEngine;
-      this.SendToNotificationEngineSaveObj.NotificationJobId = this.JodId;
+      urlSend = this.UrlConstantNew.ResendToNotificationEngine;
+      this.SendToObj.NotificationJobId = this.JodId;
     }
     if (this.GetMrNotificationTypeCodeValue == this.TypeEmail) {
       setTimeout(() => {
@@ -702,7 +701,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
       }, 100);
       return
     };
-    await this.http.post(urlSave, this.SendToNotificationEngineSaveObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    await this.http.post(urlSend, this.SendToObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == "200") {
           this.toastr.successMessage(response['message']);

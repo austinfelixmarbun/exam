@@ -33,7 +33,7 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
   @Input() IsUsedTemplate: boolean = false;
   @Input() IsResend: boolean = false;
   @Input() NotificationJobId: string = "";
-  @Input() SendToNotificationEngineSaveObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
+  @Input() SendToObj: SendToNotificationEngineObj = new SendToNotificationEngineObj();
   @Output() SendEmailSuccess: EventEmitter<boolean> = new EventEmitter();
   readonly title: string = "Broadcast Email";
 
@@ -276,18 +276,18 @@ export class BroadcastMessageEmailComponent implements OnInit, OnDestroy {
     xhr.setRequestHeader('AdInsKey', `${token}`);
 
     //#region set object request
-    Object.keys(this.SendToNotificationEngineSaveObj).forEach(key => {
-      let value = this.SendToNotificationEngineSaveObj[key];
+    Object.keys(this.SendToObj).forEach(key => {
+      let value = this.SendToObj[key];
       if (!value) value = "";
       if (key != "KeyValParam") formData.append(key, value);
     });
-    for (let key in this.SendToNotificationEngineSaveObj.KeyValParam) {
-      let KeyValParam = this.SendToNotificationEngineSaveObj.KeyValParam[key];
+    for (let key in this.SendToObj.KeyValParam) {
+      let KeyValParam = this.SendToObj.KeyValParam[key];
       formData.append("KeyValParam[" + key + "]", KeyValParam);
     }
     // set to EmailNotificationObj
-    Object.keys(this.SendToNotificationEngineSaveObj.EmailNotificationObj).forEach(key => {
-      let value = this.SendToNotificationEngineSaveObj.EmailNotificationObj[key];
+    Object.keys(this.SendToObj.EmailNotificationObj).forEach(key => {
+      let value = this.SendToObj.EmailNotificationObj[key];
       if (!value) value = "";
       formData.append("EmailNotificationObj." + key, value);
     });
