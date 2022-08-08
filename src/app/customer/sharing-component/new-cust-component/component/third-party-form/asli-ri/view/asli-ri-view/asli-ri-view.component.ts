@@ -1,12 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { ResTrxAsliRiObj } from 'app/shared/model/asli-ri/res-trx-asli-ri-obj.model';
 
 @Component({
   selector: 'app-asli-ri-view',
@@ -15,82 +9,16 @@ import { ResTrxAsliRiObj } from 'app/shared/model/asli-ri/res-trx-asli-ri-obj.mo
 })
 export class AsliRiViewComponent implements OnInit {
 
-  constructor(
-    public activeModal: NgbActiveModal, 
-    private http: HttpClient,
-    private toastr: NGXToastrService,
-    private sanitizer: DomSanitizer
-  ) { }
+  constructor(public activeModal: NgbActiveModal) { 
 
-  @Input() MrCustTypeCode: string;
+  }
+
   @Input() custObj: CustObj;
-  MrCustModelName: string;
-  IDType: string;
-  code: string;
-  DataAsliRi: ResTrxAsliRiObj;
-  isReady: boolean;
-  img: any;
-  url: string;
 
-  readonly FileExtAllowedAsliRI: Array<string> = [CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionPng, CommonConstant.FileExtensionBmp]
 
   async ngOnInit() {
-
-    if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
-    {
-      this.code = ""
-      if(this.custObj.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP)
-      {
-        this.code = this.custObj.IdNo
-      }
-    }
-    else
-    {
-      this.code = this.custObj.TaxIdNo
-    }
-
-    await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.custObj.MrCustModelCode}).toPromise().then(
-      (res: any) => {
-        this.MrCustModelName = res.Descr;
-      })
-
-    if(this.custObj.MrIdTypeCode != null)
-    {
-      await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.custObj.MrIdTypeCode}).toPromise().then(
-        (res: any) => {
-          this.IDType = res.Descr;
-        })
-    }
-
-    await this.GetData()
-    await this.convertImage()
-
-
+    
   }
 
-  async GetData()
-  {
-    await this.http.post(URLConstant.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
-      (res: ResTrxAsliRiObj) => {
-        if (res && res["StatusCode"] != 200 && res["Message"])
-        {
-          this.toastr.errorMessage(res["Message"]);
-          return;
-        }
-        this.DataAsliRi = res;
-        this.isReady = true;
-      })
-  }
 
-  async convertImage()
-  {
-    if (!this.DataAsliRi || !this.DataAsliRi.ReqAsliRiObj || !this.DataAsliRi.ReqAsliRiObj.SelfiePhoto) return;
-    this.url = "data:image/jpg|jpeg|png|bmp;base64"
-    this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.ReqAsliRiObj.SelfiePhoto}`);
-  }
-
-  close()
-  {
-    this.activeModal.dismiss('Cross click')
-  }
 }

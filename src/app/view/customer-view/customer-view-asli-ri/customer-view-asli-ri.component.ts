@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
@@ -12,8 +13,11 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 })
 export class CustomerViewAsliRiComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) 
+  constructor(
+    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) 
   {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) {
@@ -24,6 +28,8 @@ export class CustomerViewAsliRiComponent implements OnInit {
       }
     });
   }
+  @Input() InputCustObj: CustObj;
+  @Input() ActiveModal: NgbActiveModal;
 
   CustId: string = null;
   CustNo: string = null;
@@ -72,6 +78,10 @@ export class CustomerViewAsliRiComponent implements OnInit {
 
   async GetDataCustObj()
   {
+    if(this.InputCustObj){
+      this.custObj = this.InputCustObj;
+      return;      
+    }
     if(this.CustId != null)
     {
       await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
@@ -101,6 +111,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
 
   async convertImage()
   {
+    if (!this.DataAsliRi || !this.DataAsliRi.ReqAsliRiObj || !this.DataAsliRi.ReqAsliRiObj.SelfiePhoto) return;
     this.url = "data:image/jpg|jpeg|png|bmp;base64"
     this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.reqAddTrxSrcDataForAsliRiObj.SelfiePhoto}`);
   }
