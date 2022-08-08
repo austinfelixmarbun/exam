@@ -681,9 +681,9 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   //#endregion
 
   @ViewChild("EmailForm") EmailForm: BroadcastMessageEmailComponent;
-  async SaveForm() {
+  async SendForm() {
     if (!this.IsTemplateLatestVersion) {
-      let confirmMsg: string = "This Template Version is not latest, Are You Sure to Save This Data?";
+      let confirmMsg: string = "This Template Version is not latest, Are You Sure to Send This Data?";
       let confirmation = confirm(confirmMsg);
       if (!confirmation) {
         return;

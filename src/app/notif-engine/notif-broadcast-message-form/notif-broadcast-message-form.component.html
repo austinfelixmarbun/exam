@@ -12,7 +12,7 @@
           </div>
           <div class="px-3">
             <form class="form form-horizontal" [formGroup]="NotifBroadcastForm" #enjiForm="ngForm"
-              (ngSubmit)="NotifBroadcastForm.valid && SaveForm()">
+              (ngSubmit)="NotifBroadcastForm.valid && SendForm()">
               <lib-ucSubsection [id]="'NotifBroadcastId'" [title]="title" [panel]="'NotifBroadcast'"></lib-ucSubsection>
               <div class="form-body" id="NotifBroadcast">
                 <div class="form-group">
