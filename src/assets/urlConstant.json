@@ -915,6 +915,7 @@
     "GetPushNotificationHistByNotificationHistHId": "/v1/PushNotification/GetPushNotificationHistByNotificationHistHId",
     "GetSmsWaNotificationHistByNotificationHistHId": "/v1/SmsWaNotificationHist/GetSmsWaNotificationHistByNotificationHistHId",
     "GetEmailNotificationHistByNotificationHistHId": "/v1/EmailNotificationHist/GetEmailNotificationHistByNotificationHistHId",
+    "GetListEmailAttachmentByNotificationHistId": "/v1/EmailNotificationHist/GetListEmailAttachmentByNotificationHistId",
     "GetRefUserSubscriptionByUsername": "/v1/PushNotification/GetRefUserSubscriptionByUsername",
     "GetRefNotifAttrTemplateByRefNotifAttrTemplateId": "/v1/RefNotifAttrTemplate/GetRefNotifAttrTemplateByRefNotifAttrTemplateId",
     "AddRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/AddRefNotifAttrTemplate",
