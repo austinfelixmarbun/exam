@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { filter, Observable, of } from 'rxjs';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
 import { HttpClient } from '@angular/common/http';
@@ -73,16 +73,27 @@ export class BroadcastMessageSmsWaComponent implements OnInit {
   }
   
   AddSentTo(){
-    const PhnNum = this.parentForm.get("PhoneNum").value;
+    const PhnNumControl: AbstractControl = this.parentForm.get("PhoneNum");
+    const SendToControl: AbstractControl = this.parentForm.get("SendTo");
+    const PhnNum = PhnNumControl.value;
     if(!PhnNum) return;
     console.log(PhnNum);
-    const item = { display: PhnNum["internationalNumber"], value: PhnNum["internationalNumber"] };
+    let newPhnNum = this.SetPhoneNum(PhnNum);
+    const item = { display: newPhnNum, value: newPhnNum };
     
-    let sendToVal = this.parentForm.get("SendTo").value;
+    let sendToVal = SendToControl.value;
     let listSendTo: Array<TagInputObj> = sendToVal == "" ? new Array() : sendToVal;
     listSendTo.push(item);
-    this.parentForm.get("SendTo").setValue(listSendTo);
-    this.parentForm.get("PhoneNum").setValue("");
+    SendToControl.setValue(listSendTo);
+    PhnNumControl.setValue("");
+  }
+
+  private SetPhoneNum(PhnNum): string {
+    const dialCode = PhnNum["dialCode"];
+    const phoneNum = PhnNum["e164Number"];
+    const splitPhoneNum = phoneNum.replace(dialCode, "");
+
+    return dialCode + " " + splitPhoneNum;
   }
 
   ngOnDestroy(): void {
