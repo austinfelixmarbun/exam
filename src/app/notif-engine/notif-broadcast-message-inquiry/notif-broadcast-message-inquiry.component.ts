@@ -73,7 +73,8 @@ export class NotifBroadcastMessageInquiryComponent implements OnInit {
         this.inputPagingObj.pagingJson = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-push.json";
         break;
       }
-      case CommonConstant.RefMasterTypeCodeNotificationTypesSms || CommonConstant.RefMasterTypeCodeNotificationTypesWA:{
+      case CommonConstant.RefMasterTypeCodeNotificationTypesSms:
+      case CommonConstant.RefMasterTypeCodeNotificationTypesWA:{
         this.inputPagingObj._url = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-sms-wa.json";
         this.inputPagingObj.pagingJson = "./assets/ucpaging/notif-engine/inquiry/search-notif-broadcast-inquiry-sms-wa.json";
         break;
