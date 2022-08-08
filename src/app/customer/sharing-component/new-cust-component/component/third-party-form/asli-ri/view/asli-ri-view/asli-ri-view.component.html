@@ -183,7 +183,10 @@
             </div>
             <div class="row">
               <label class="col-md-4 adInsLabel" translate>Company Name - {{ DataAsliRi.ReqAsliRiObj.CompanyName }}</label>
-              <label class="col-md-8  adinslabel" translate>{{ DataAsliRi.ResAsliRiObj.WorkPlaceCompany != null? DataAsliRi.ResAsliRiObj.WorkPlaceCompany : "-" }}</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.ResAsliRiObj.WorkPlaceCompanyName">{{ DataAsliRi.ResAsliRiObj.WorkPlaceCompanyName }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="!DataAsliRi.ResAsliRiObj.WorkPlaceCompanyName && DataAsliRi.ResAsliRiObj.WorkPlaceCompany == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="!DataAsliRi.ResAsliRiObj.WorkPlaceCompanyName && DataAsliRi.ResAsliRiObj.WorkPlaceCompany == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="!DataAsliRi.ResAsliRiObj.WorkPlaceCompanyName && DataAsliRi.ResAsliRiObj.WorkPlaceCompany == null">-</label>
             </div>
             <div class="row">
               <label class="col-md-4 adInsLabel" translate>Company Phone - {{ DataAsliRi.ReqAsliRiObj.CompanyPhone }}</label>

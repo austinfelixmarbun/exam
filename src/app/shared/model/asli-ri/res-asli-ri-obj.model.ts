@@ -15,7 +15,8 @@ export class ResAsliRiObj{
   TaxCompanyIncome : string;
   WorkPlaceNik : boolean;
   WorkPlaceName : boolean;
-  WorkPlaceCompany : string;
+  WorkPlaceCompany : boolean;
+  WorkPlaceCompanyName : string;
   WorkPlaceCompanyPhone : boolean;
   
 }
