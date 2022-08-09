@@ -30,6 +30,11 @@
           "type": "text",
           "label": "Commodity",
           "property": "CommodityName"
+        },
+        {
+          "type": "boolean",
+          "label": "Foreigner",
+          "property": "IsForeigner"
         }
       ],
       "querystring": {

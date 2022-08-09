@@ -60,6 +60,7 @@ export class URLConstantX{
     public static EditCustPersonalMainDataX = environment.FoundationR3Url + "/v1" + "/CustX/EditCustPersonalMainData";
     public static EditCustPersonalMainDataXV2 = environment.FoundationR3Url + "/v2" + "/CustX/EditCustPersonalMainData";
     public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
+    public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/CustX/SaveCustCompanyShareholderMainData";
 
     //CUST EXPOSURE
     public static GetR2CustExposureByCustNo = environment.FoundationR3Url + "/v1" + "/CustX/GetR2CustExposureByCustNo";

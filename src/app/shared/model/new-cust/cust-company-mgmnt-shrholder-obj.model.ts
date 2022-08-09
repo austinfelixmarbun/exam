@@ -10,6 +10,7 @@ export class CustCompanyMgmntShrholderObj {
     IsSigner: boolean;
     SharePrcnt: number;
     EstablishmentDt: Date;
+    IsForeigner: boolean;
 
     constructor() {
         this.CustId = 0;
@@ -17,6 +18,7 @@ export class CustCompanyMgmntShrholderObj {
         this.IsActive = false;
         this.IsOwner = false;
         this.IsSigner = false;
+        this.IsForeigner = false;
         this.SharePrcnt = 0;
         this.MrJobPositionCode = "";
         this.MrPositionSlikCode = "";
@@ -38,6 +40,7 @@ export class ResCustCompanyMgmntShrholderObj {
     IsSigner: boolean;
     SharePrcnt: number;
     EstablishmentDt: Date;
+    IsForeigner: boolean;
 
     constructor() {
         this.CustCompanyMgmntShrholderId = 0;
@@ -45,6 +48,7 @@ export class ResCustCompanyMgmntShrholderObj {
         this.IsActive = false;
         this.IsOwner = false;
         this.IsSigner = false;
+        this.IsForeigner = false;
         this.SharePrcnt = 0;
         this.MrJobPositionCode = "";
         this.MrPositionSlikCode = "";

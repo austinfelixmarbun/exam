@@ -434,6 +434,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
     tempReqObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
     tempReqObj.IsActive = tempForm["IsActive"];
     tempReqObj.IsOwner = tempForm["IsOwner"];
+    tempReqObj.IsForeigner = tempForm["isForeigner"];
 
     return tempReqObj
   }

@@ -270,7 +270,7 @@ export class NewCustHeaderXComponent implements OnInit {
           urlAdd = URLConstant.AddCustCompanyMainDataV2;
           break;
         case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = URLConstant.SaveCustCompanyShareholderMainDataV2;
+          urlAdd = URLConstantX.SaveCustCompanyShareholderMainDataV2;
           break;
       }
     }else{
@@ -293,7 +293,7 @@ export class NewCustHeaderXComponent implements OnInit {
           urlAdd = URLConstant.EditCustCompanyMainDataV2;
           break;
         case CommonConstant.CustMainDataModeMgmntShrholder:
-          urlAdd = URLConstant.SaveCustCompanyShareholderMainDataV2;
+          urlAdd = URLConstantX.SaveCustCompanyShareholderMainDataV2;
           break;
       }
     }else{
