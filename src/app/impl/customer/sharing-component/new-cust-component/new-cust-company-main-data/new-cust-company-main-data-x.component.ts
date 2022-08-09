@@ -390,7 +390,17 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
     if (this.CustDataMode == this.CustDataModeShareholder) {
       reqSubmitObj.CustObj.CustName = tempForm["ExistingCustName"].value;
+      if (tempForm["IsOwner"] == true && tempForm["SharePrcnt"] < 0.0001) {
+        this.toastr.warningMessage("Owner Need to Input Share Prcnt");
+        return;
+      }
+      if (tempForm["IsOwner"] == false && tempForm["SharePrcnt"] > 0.0000) {
+        this.toastr.warningMessage("Non Owner Need to Input 0% Share");
+        return;
+      }
       reqSubmitObj.CustCompanyMgmntShrholderObj = this.SetCustMgmntShareholder();
+
+
 
       if (reqSubmitObj.CustCompanyMgmntShrholderObj.IsActive) {
         let tempTotalSharePrctTobeAdd = this.tempTotalSharePrct + reqSubmitObj.CustCompanyMgmntShrholderObj.SharePrcnt;

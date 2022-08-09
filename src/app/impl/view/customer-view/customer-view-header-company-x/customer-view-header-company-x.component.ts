@@ -1,27 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
-import { HttpClient } from '@angular/common/http';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 
 @Component({
-  selector: 'app-customer-view-header-personal-x',
-  templateUrl: './customer-view-header-personal-x.component.html'
+  selector: 'app-customer-view-header-company-x',
+  templateUrl: './customer-view-header-company-x.component.html'
 })
-export class CustomerViewHeaderPersonalXComponent implements OnInit {
+export class CustomerViewHeaderCompanyXComponent implements OnInit {
+  IdCust: number; 
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
-  IdCust: number;
   CustStatus: string = '-';
   urlGetAppCustStatusXByCustNo = URLConstantX.GetAppCustStatusXByCustNo;
-  
+
   // Input CustNo didapat dari value CustNo yang dikirim dari component customer-view
   @Input('CustNo') CustNo: string;
-
-  constructor(public Translate: TranslateService, private route: ActivatedRoute, private http: HttpClient) {
+  
+  constructor(private route: ActivatedRoute, private http: HttpClient) { 
     this.route.queryParams.subscribe(params => {
+
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
       }
@@ -29,11 +29,9 @@ export class CustomerViewHeaderPersonalXComponent implements OnInit {
         this.IdCust = params["CustId"];
       }
     });
-    console.log(Translate);
   }
-
   async ngOnInit() {
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustPersonalHeader.json";
+    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewCustCompanyHeader.json";
     await this.getCustomerStatus();
   }
 

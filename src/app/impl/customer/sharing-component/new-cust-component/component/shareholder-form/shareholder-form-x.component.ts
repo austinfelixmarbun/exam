@@ -64,8 +64,8 @@ export class ShareholderFormXComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   isShareholderReady : boolean = false;
   async ngOnInit() {
-    await this.getGsJobPostIsOwner();  
-    this.InitData();  
+    await this.getGsJobPostIsOwner();
+    this.InitData();
     await this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = NewCustSetData.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
@@ -172,7 +172,7 @@ export class ShareholderFormXComponent implements OnInit {
         let tempDesc: string = await this.PatchValueDesc(response.MrJobPositionCode, CommonConstant.RefMasterTypeCodeJobPosition);
         this.jobPositionLookupObj.nameSelect = tempDesc;
         this.jobPositionLookupObj.jsonSelect = { JobDesc: tempDesc };
-        
+
         if (!response.RefProfessionId) return;
         await this.http.post(URLConstant.GetRefProfessionByRefProfessionId, { Id: response.RefProfessionId }).subscribe(
           (response: RefProfessionObj) => {
@@ -247,7 +247,7 @@ export class ShareholderFormXComponent implements OnInit {
     {
       this.ucLookupProfession.setAddCritInput();
     }
-    
+
   }
 
   isShareOwnerMandatory: boolean = false;
@@ -279,14 +279,14 @@ export class ShareholderFormXComponent implements OnInit {
   }
 
   CheckJobPostionIsOwner(){
-    
+
     let x = this.ListJobPostIsOwner.find(f=>f == this.parentForm.controls.MrPositionSlikCode.value);
     console.log(x);
     if(x!= null){
       this.parentForm.patchValue({
         IsOwner: true,
       });
-      this.parentForm.get("IsOwner").enable();
+      this.parentForm.get("IsOwner").disable();
     }
     else{
       this.parentForm.patchValue({

@@ -259,9 +259,17 @@ export class JobDataProfessionalXComponent implements OnInit {
             this.http.post(URLConstantX.GetRefSectorEconomySlikXById, {Id: this.tempRefSectorEconomySlik}).toPromise().then(
               (response) => {
                 this.returnSectorEconomySlikObj = response;
-                this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
-                this.economicSectorSlikLookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
-                this.tempRefIndustryType = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+                
+                if(this.returnSectorEconomySlikObj.IsActive == false)
+                {
+                  this.toastr.warningMessage(ExceptionConstant.REF_SECTOR_ECONOMY_SLIK_NOT_ACTIVE);
+                }
+                else
+                {
+                  this.economicSectorSlikLookUpObj.nameSelect = this.returnSectorEconomySlikObj.SectorEconomySlikName;
+                  this.economicSectorSlikLookUpObj.jsonSelect = this.returnSectorEconomySlikObj;
+                  this.tempRefIndustryType = this.returnSectorEconomySlikObj.RefIndustryTypeId;
+                }  
               }
             );
           }

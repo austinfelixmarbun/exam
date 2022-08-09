@@ -145,7 +145,7 @@ export class NavigationConstant {
     public static VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_JOB_DATA_NON_PROF_X; //'/View/Customer/PersonalJobDataNonProf'
     public static VIEW_CUST_PERSONAL_JOB_DATA_EMP = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_JOB_DATA_EMP_X; //'/View/Customer/PersonalJobDataEmp'
     public static VIEW_CUST_PERSONAL_JOB_DATA_SME = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_JOB_DATA_SME_X; //'/View/Customer/PersonalJobDataSme'
-    public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FINANCIAL_DATA; //'/View/Customer/PersonalFinancialData'
+    public static VIEW_CUST_PERSONAL_FINANCIAL_DATA = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_FINANCIAL_DATA_X; //'/View/Customer/PersonalFinancialDataX'
     public static VIEW_CUST_ASSET_DATA = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ASSET; //'/View/Customer/CustomerAsset'
     public static VIEW_CUST_PERSONAL_FAMILY = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_PERSONAL_FAMILY; //'/View/Customer/PersonalFamily'
     public static VIEW_CUST_DOC = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_DOC; //'/View/Customer/CustDocument'

@@ -40,7 +40,7 @@
         "path": "/RefMaster/GetListKeyValueActiveByCode",
         "label": "Vendor Category",
         "criteriaPropName": "RefMasterTypeCode",
-        "criteriaPropValue": "VENDOR_CATEGORY",
+        "criteriaPropValue": "VENDOR_GRADING_CATEGORY",
         "items": [],
         "itemsUrl": [],
         "environment": "FOU"
@@ -54,7 +54,7 @@
         "type": "sort",
         "position": "center",
         "label": "Transaction No",
-        "name": "VendorGradingHistNo"
+        "name": "P.VENDOR_GRADING_HIST_NO"
       },
       {
         "type": "sort",
@@ -69,31 +69,31 @@
         "name": "V.VENDOR_NAME"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "VENDOR CATEGORY",
         "name": "RM.DESCR"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Request By",
         "name": "RequestBy"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Request Date",
         "name": "RequestDate"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Main User Id",
         "name": "MainUser"
       },
       {
-        "type": "sort",
+        "type": "label",
         "position": "center",
         "label": "Current User Id",
         "name": "CurrentUser"

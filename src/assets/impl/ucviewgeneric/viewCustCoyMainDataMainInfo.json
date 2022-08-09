@@ -35,6 +35,11 @@
           "type": "boolean",
           "label": "Foreigner",
           "property": "IsForeigner"
+        },
+        {
+          "type": "text",
+          "label": "Economic Sector Slik",
+          "property": "SectorEconomySlikName"
         }
       ],
       "querystring": {
