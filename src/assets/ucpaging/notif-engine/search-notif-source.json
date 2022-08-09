@@ -1,0 +1,104 @@
+{
+    "title": "Notification Template Attribute Mapping",
+    "exportExcel": false,
+    "component": [
+        {
+            "type": "textbox",
+            "name": "RM.MASTER_CODE",
+            "id": "NotifSourceCodeId",
+            "value": "",
+            "label": "Notification Source Code",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "textbox",
+            "name": "RM.DESCR",
+            "id": "NotifSourceDescrId",
+            "value": "",
+            "label": "Notification Source Description",
+            "placeholder": "Placeholder"
+        },
+        {
+            "type": "dropdown",
+            "name": "RM.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "ddlType": "all",
+            "items": [
+                {
+                    "key": "1",
+                    "value": "Yes"
+                },
+                {
+                    "key": "0",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        }
+    ],
+    "querystring": {
+        "name": "SearchNotifRefMaster"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notification Source Code",
+            "name": "MasterCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Notification Source Description",
+            "name": "Descr"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "ACTIVE STATUS",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "MasterCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "Descr"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE",
+                    "param": [
+                        {
+                            "type": "SourceCode",
+                            "property": "MasterCode"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

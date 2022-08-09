@@ -1232,6 +1232,10 @@ export class UrlConstantNew{
     public GetListActiveRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.GetListActiveRefNotifAttrTemplate;
     public GetListRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.GetListRefNotifAttrTemplate;
 
+    // RefNotifAttrSourceContent
+    public AddListRefNotifAttrSourceContent = this.env.NotifEngineURL + this.url.AddListRefNotifAttrSourceContent;
+    public DeleteRefNotifAttrSourceContent = this.env.NotifEngineURL + this.url.DeleteRefNotifAttrSourceContent;
+
     // NotificationHistH
     public GetNotificationHistHByNotificationHistHId = this.env.NotifEngineURL + this.url.GetNotificationHistHByNotificationHistHId;
     public GetMaxSpecificUser = this.env.NotifEngineURL + this.url.GetMaxSpecificUser;
