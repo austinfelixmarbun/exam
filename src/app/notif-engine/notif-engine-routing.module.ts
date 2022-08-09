@@ -5,6 +5,9 @@ import { NotifBroadcastMessageFormComponent } from './notif-broadcast-message-fo
 import { NotifBroadcastMessageInquiryComponent } from './notif-broadcast-message-inquiry/notif-broadcast-message-inquiry.component';
 import { NotifBroadcastMessagePagingComponent } from './notif-broadcast-message-paging/notif-broadcast-message-paging.component';
 import { NotifTemplateAttrFormComponent } from './notif-template-attr-form/notif-template-attr-form.component';
+import { NotifTemplateAttrMappingPagingComponent } from './notif-template-attr-mapping-paging/notif-template-attr-mapping-paging.component';
+import { NotifTemplateAttrMappingSourceDetailComponent } from './notif-template-attr-mapping-source-detail/notif-template-attr-mapping-source-detail.component';
+import { NotifTemplateAttrMappingSourceComponent } from './notif-template-attr-mapping-source/notif-template-attr-mapping-source.component';
 import { NotifTemplateAttrPagingComponent } from './notif-template-attr-paging/notif-template-attr-paging.component';
 import { NotifTemplateFormComponent } from './notif-template-form/notif-template-form.component';
 import { NotifTemplatePagingComponent } from './notif-template-paging/notif-template-paging.component';
@@ -73,6 +76,32 @@ const routes: Routes = [
             component: NotifTemplateAttrFormComponent,
             data: {
               title: 'Notif Attribute Template Form'
+            },
+          }
+        ]
+      },
+      {
+        path: PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING,
+        children: [
+          {
+            path: PathConstant.PAGING,
+            component: NotifTemplateAttrMappingPagingComponent,
+            data: {
+              title: 'Notif Attribute Template Mapping Paging'
+            },
+          },
+          {
+            path: PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE,
+            component: NotifTemplateAttrMappingSourceComponent,
+            data: {
+              title: 'Notif Attribute Template Mapping Source'
+            }
+          },
+          {
+            path: PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE + "/" + PathConstant.ADD_DETAIL,
+            component: NotifTemplateAttrMappingSourceDetailComponent,
+            data: {
+              title: 'Notif Attribute Template Mapping Source Detail'
             },
           }
         ]

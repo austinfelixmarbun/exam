@@ -23,6 +23,9 @@ import { NotifTemplateAttrPagingComponent } from './notif-template-attr-paging/n
 import { NotifTemplateAttrFormComponent } from './notif-template-attr-form/notif-template-attr-form.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { MatIconModule } from '@angular/material/icon';
+import { NotifTemplateAttrMappingPagingComponent } from './notif-template-attr-mapping-paging/notif-template-attr-mapping-paging.component';
+import { NotifTemplateAttrMappingSourceComponent } from './notif-template-attr-mapping-source/notif-template-attr-mapping-source.component';
+import { NotifTemplateAttrMappingSourceDetailComponent } from './notif-template-attr-mapping-source-detail/notif-template-attr-mapping-source-detail.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 export const customCurrencyMaskConfig = {     
@@ -92,7 +95,10 @@ export const customCurrencyMaskConfig = {
         BroadcastMessageEmailComponent,
         BroadcastMessageSmsWaComponent,
         BodyMessageTosendComponent,
-        NotifBroadcastMessageInquiryComponent
+        NotifBroadcastMessageInquiryComponent,
+        NotifTemplateAttrMappingPagingComponent,
+        NotifTemplateAttrMappingSourceComponent,
+        NotifTemplateAttrMappingSourceDetailComponent
     ],
     providers: [
     ]

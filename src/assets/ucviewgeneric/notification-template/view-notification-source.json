@@ -1,0 +1,25 @@
+{
+    "title": "",
+    "subsection": [
+      {
+        "subSectionId": "NotifSourceId",
+        "subSectionTitle": "Notification Source",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Notification Source Code",
+            "property": "MasterCode"
+          },
+          {
+            "type": "text",
+            "label": "Notification Soruce Name",
+            "property": "Descr"
+          }
+        ],
+        "querystring": {
+          "name": "viewNotifEngineRefMaster"
+        }
+      }
+    ]
+  }

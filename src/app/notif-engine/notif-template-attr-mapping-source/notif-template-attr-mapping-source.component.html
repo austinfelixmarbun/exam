@@ -1,0 +1,25 @@
+<div class="ucSearch-Button-Right">
+  <span class="mr-1">
+    <button type="button" class="backButton" [routerLink]="[CancelLink]">
+      <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
+    </button>
+    <button type="button" class="addButton"
+      [routerLink]="[AddLink]" [queryParams]="{SourceCode: this.SourceCode}" skipLocationChange>
+      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
+    </button>
+  </span>
+</div>
+<div class="row text-left">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="pl-3 mb-2 mt-2">
+        <h4 class="card-title">NOTIFICATION TEMPLATE ATTIRIBUTE MAPPING SOURCE</h4>
+      </div>
+      <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
+      <lib-ucpaging id="memberUcPaging" [searchObj]="inputPagingObj"></lib-ucpaging>
+    </div>
+  </div>
+</div>
+  
+  
+  
