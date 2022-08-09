@@ -490,7 +490,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
     this.DisableSelectControl();
   }
 
-  IsReady: boolean = true;
+  IsReady: boolean = false;
   ResetTemplate() {
     this.ParamListCount = 0;
     this.IsUsedTemplate = false;
@@ -551,7 +551,7 @@ export class NotifBroadcastMessageFormComponent implements OnInit {
   RefreshReady() {
     this.IsReady = false;
     setTimeout(() => {
-      this.IsReady = true
+      this.IsReady = true;
     }, 10);
   }
 
