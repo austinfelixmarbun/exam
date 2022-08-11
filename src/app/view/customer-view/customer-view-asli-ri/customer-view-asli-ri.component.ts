@@ -113,6 +113,6 @@ export class CustomerViewAsliRiComponent implements OnInit {
   {
     if (!this.DataAsliRi || !this.DataAsliRi.ReqAsliRiObj || !this.DataAsliRi.ReqAsliRiObj.SelfiePhoto) return;
     this.url = "data:image/jpg|jpeg|png|bmp;base64"
-    this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.reqAddTrxSrcDataForAsliRiObj.SelfiePhoto}`);
+    this.img = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.url}, ${this.DataAsliRi.ReqAsliRiObj.SelfiePhoto}`);
   }
 }
