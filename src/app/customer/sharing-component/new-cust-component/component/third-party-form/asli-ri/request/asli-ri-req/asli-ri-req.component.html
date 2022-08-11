@@ -32,7 +32,8 @@
               </div>
               <div class="row">
                 <label class="col-md-4  adInsLabel" translate>Selfie photo</label>
-                <label class="col-md-8 adInsLabel" *ngIf="isSelfieValid"><b style="color: #086e08;">Valid</b><br>
+                <label class="col-md-8 adInsLabel" *ngIf="isSelfieValid && !isSelfieAvailable"><b>-</b></label>
+                <label class="col-md-8 adInsLabel" *ngIf="isSelfieValid && isSelfieAvailable"><b style="color: #086e08;">Valid</b><br>
                   <img *ngIf="isSelfieAvailable" src="{{url}}" style="height: 150px; margin-top: 10px;">
                 </label>
                 <label class="col-md-8 adInsLabel" *ngIf="!isSelfieValid"><b style="color: #8d0000;">Invalid</b></label>
