@@ -927,5 +927,8 @@
     "GetListActiveRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/GetListActiveRefNotifAttrTemplate",
     "GetListRefNotifAttrTemplate": "/v1/RefNotifAttrTemplate/GetListRefNotifAttrTemplate",
     "AddListRefNotifAttrSourceContent": "/v1/RefNotifAttrSourceContent/AddListRefNotifAttrSourceContent",
-    "DeleteRefNotifAttrSourceContent": "/v1/RefNotifAttrSourceContent/DeleteRefNotifAttrSourceContent"
+    "DeleteRefNotifAttrSourceContent": "/v1/RefNotifAttrSourceContent/DeleteRefNotifAttrSourceContent",
+    "AddRefNotificationSource": "/v1/RefNotificationSource/AddRefNotificationSource",
+    "EditRefNotificationSource": "/v1/RefNotificationSource/EditRefNotificationSource",
+    "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId"
 }
