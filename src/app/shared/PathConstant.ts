@@ -525,8 +525,8 @@ export class PathConstant {
     public static VIEW_NOTIF_TEMPLATE = "ViewNotifTemplate";
     public static NOTIF_BROADCAST = "NotifBroadcast";
     public static NOTIF_ATTR_TEMPLATE = "NotifAtrrTemplate";
+    public static NOTIF_SOURCE = "NotifSource";
     public static NOTIF_ATTR_TEMPLATE_MAPPING = "NotifAttrTemplateMapping";
-    public static NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE = "Source";
     //#endregion
     
     //#region Notary

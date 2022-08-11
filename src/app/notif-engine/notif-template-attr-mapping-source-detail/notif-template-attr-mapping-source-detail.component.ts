@@ -7,8 +7,9 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AuthFormObj } from 'app/shared/model/auth-form-obj.model';
-import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ListAuthFormObj } from 'app/shared/model/list-auth-form-obj.model';
+import { ReqAddListRefNotifAttrSourceContentObj } from 'app/shared/model/notif-engine/req-add-list-ref-notif-attr-source-content-obj.model';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -20,7 +21,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class NotifTemplateAttrMappingSourceDetailComponent implements OnInit {
 
-  SourceCode: string;
+  RefNotificationSourceId: number;
   AuthFormObj: AuthFormObj;
   listAuthFormObj: ListAuthFormObj;
   listSelectedId: Array<number> = new Array<number>();
@@ -30,7 +31,7 @@ export class NotifTemplateAttrMappingSourceDetailComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE;
   constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private toastr: NGXToastrService, private router: Router) {
     this.route.queryParams.subscribe(params => {
-      this.SourceCode = params["SourceCode"];
+      this.RefNotificationSourceId = params["RefNotificationSourceId"];
     })
   }
 
@@ -43,9 +44,17 @@ export class NotifTemplateAttrMappingSourceDetailComponent implements OnInit {
     this.tempPagingObj.pagingJson = "./assets/ucpaging/notif-engine/add-to-temp-notif-template-attr-mapping-source.json";
     
     let fromValueObj = new FromValueObj();
-    fromValueObj.property = 'MrNotificationSourceCode';
-    fromValueObj.value = this.SourceCode;
+    fromValueObj.property = 'RefNotificationSourceId';
+    fromValueObj.value = this.RefNotificationSourceId;
     this.tempPagingObj.fromValue.push(fromValueObj);
+
+    let critObj = new CriteriaObj();
+    critObj.propName = 'RNAT.IS_ACTIVE';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.value = "true";
+    this.tempPagingObj.addCritInput.push(critObj);
+
+    this.tempPagingObj.isReady = true;
   }
 
   getListTemp(ev) {
@@ -59,14 +68,14 @@ export class NotifTemplateAttrMappingSourceDetailComponent implements OnInit {
       return;
     }
 
-    let ReqObj: GenericObj = new GenericObj();
-    ReqObj.Ids = this.listSelectedId;
-    ReqObj.Code = this.SourceCode;
+    let ReqObj: ReqAddListRefNotifAttrSourceContentObj = new ReqAddListRefNotifAttrSourceContentObj();
+    ReqObj.ListRefNotifAttrTemplateId = this.listSelectedId;
+    ReqObj.RefNotificationSourceId = this.RefNotificationSourceId;
 
     this.http.post(this.UrlConstantNew.AddListRefNotifAttrSourceContent, ReqObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE],{ "SourceCode": this.SourceCode });
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE],{ "RefNotificationSourceId": this.RefNotificationSourceId });
       });
   }
 

@@ -1,26 +1,26 @@
 {
-    "title": "Notification Template Attribute Mapping",
+    "title": "Notification Source",
     "exportExcel": false,
     "component": [
         {
             "type": "textbox",
-            "name": "RM.MASTER_CODE",
-            "id": "NotifSourceCodeId",
+            "name": "RNS.NOTIFICATION_SOURCE_CODE",
+            "id": "NotificationSourceCodeId",
             "value": "",
             "label": "Notification Source Code",
             "placeholder": "Placeholder"
         },
         {
             "type": "textbox",
-            "name": "RM.DESCR",
-            "id": "NotifSourceDescrId",
+            "name": "RNS.NOTIFICATION_SOURCE_DESCR",
+            "id": "NotificationSourceDescrId",
             "value": "",
             "label": "Notification Source Description",
             "placeholder": "Placeholder"
         },
         {
             "type": "dropdown",
-            "name": "RM.IS_ACTIVE",
+            "name": "RNS.IS_ACTIVE",
             "id": "ActiveStatusId",
             "label": "Active Status",
             "value": "",
@@ -41,20 +41,20 @@
         }
     ],
     "querystring": {
-        "name": "SearchNotifRefMaster"
+        "name": "SearchNotifSource"
     },
     "headerList": [
         {
             "type": "sort",
             "position": "left",
             "label": "Notification Source Code",
-            "name": "MasterCode"
+            "name": "NotificationSourceCode"
         },
         {
             "type": "sort",
             "position": "left",
             "label": "Notification Source Description",
-            "name": "Descr"
+            "name": "NotificationSourceDescr"
         },
         {
             "type": "sort",
@@ -65,19 +65,24 @@
         {
             "type": "label",
             "position": "center",
-            "label": "Action"
+            "label": "Mapping Attribute"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Edit"
         }
     ],
     "bodyList": [
         {
             "type": "text",
             "position": "left",
-            "property": "MasterCode"
+            "property": "NotificationSourceCode"
         },
         {
             "type": "text",
             "position": "left",
-            "property": "Descr"
+            "property": "NotificationSourceDescr"
         },
         {
             "type": "boolean",
@@ -93,8 +98,24 @@
                     "path": "NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE",
                     "param": [
                         {
-                            "type": "SourceCode",
-                            "property": "MasterCode"
+                            "type": "RefNotificationSourceId",
+                            "property": "RefNotificationSourceId"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "NOTIF_ENGINE_NOTIF_SOURCE_ADD_EDIT",
+                    "param": [
+                        {
+                            "type": "RefNotificationSourceId",
+                            "property": "RefNotificationSourceId"
                         }
                     ]
                 }

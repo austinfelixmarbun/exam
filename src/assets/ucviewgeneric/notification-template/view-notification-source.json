@@ -9,16 +9,16 @@
           {
             "type": "text",
             "label": "Notification Source Code",
-            "property": "MasterCode"
+            "property": "NotificationSourceCode"
           },
           {
             "type": "text",
             "label": "Notification Soruce Name",
-            "property": "Descr"
+            "property": "NotificationSourceDescr"
           }
         ],
         "querystring": {
-          "name": "viewNotifEngineRefMaster"
+          "name": "viewNotifEngineRefNotifSource"
         }
       }
     ]

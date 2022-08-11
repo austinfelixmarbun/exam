@@ -1,7 +1,7 @@
 
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="[CancelLink]" [queryParams]="{SourceCode: this.SourceCode}">
+    <button type="button" class="backButton" [routerLink]="[CancelLink]" [queryParams]="{RefNotificationSourceId: this.RefNotificationSourceId}">
       <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
       </button>
   </span>
@@ -15,7 +15,7 @@
         <h4 class="card-title">NOTIFICATION TEMPLATE ATTIRIBUTE MAPPING SOURCE ADD</h4>
       </div>
       <lib-ucviewgeneric [viewGenericObj]="viewGenericObj"> </lib-ucviewgeneric>
-      <lib-ucaddtotemp [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
+      <lib-ucaddtotemp *ngIf="tempPagingObj.isReady" [tempPagingObj]="tempPagingObj" (callback)="getListTemp($event)">
       </lib-ucaddtotemp>
       <div class="card-header" *ngIf="listSelectedId.length > 0">
         <div class="text-right">
