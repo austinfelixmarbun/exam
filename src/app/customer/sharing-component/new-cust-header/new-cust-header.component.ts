@@ -52,6 +52,7 @@ export class NewCustHeaderComponent implements OnInit {
   @Input() isMarried: boolean = false;
   @Input() listCustNoToExclude: Array<string> = new Array();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+  isSubmit: boolean = false;
 
   constructor(
     private cookieService: CookieService, private spinner: NgxSpinnerService,
@@ -132,10 +133,16 @@ export class NewCustHeaderComponent implements OnInit {
   }
 
   CancelDupCheck() {
+    this.isSubmit = false;
     this.PageType = this.CustPageTypeHeader;
   }
 
   //#region Save
+  ClickSubmit(ev)
+  {
+    this.isSubmit = ev
+  }
+
   DupCheckPersonalObj: ReqPersonalObj = new ReqPersonalObj();
   async ClickSavePersonal(ev: ReqPersonalObj) {
     if (ev.CustObj.CustId != 0) {
@@ -144,6 +151,10 @@ export class NewCustHeaderComponent implements OnInit {
       await this.http.post(this.SetUrlEditPersonal(), reqPayload.forApi).toPromise().then(
         (response) => {
           resSave = response;
+          if(response == undefined)
+          {
+            this.isSubmit = false;
+          }
         }
       );
       this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], ev.CustObj.CustId)
@@ -161,6 +172,10 @@ export class NewCustHeaderComponent implements OnInit {
       await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi).toPromise().then(
         (response) => {
           resSave = response;
+          if(response == undefined)
+          {
+            this.isSubmit = false;
+          }
         }
       );
       this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], ev.CustObj.CustId)
@@ -231,6 +246,10 @@ export class NewCustHeaderComponent implements OnInit {
     await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
       (response: GenericObj) => {
         resSave = response;
+        if(response == undefined)
+        {
+          this.isSubmit = false;
+        }
       }
     );
     this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
@@ -243,6 +262,10 @@ export class NewCustHeaderComponent implements OnInit {
     await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
       (response: GenericObj) => {
         resSave = response
+        if(response == undefined)
+        {
+          this.isSubmit = false;
+        }
       }
     );
     this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)

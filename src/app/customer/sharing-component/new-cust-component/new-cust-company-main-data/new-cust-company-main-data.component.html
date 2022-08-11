@@ -108,7 +108,7 @@
           <!-- <button type="button" class="btn btn-raised btn-warning mr-1"  (click)="getFormValidationErrors()" translate>
               <i class="far fa-window-close"></i> test
             </button> -->
-          <button type="submit" class="btn btn-raised btn-primary">
+          <button type="submit" class="btn btn-raised btn-primary" [attr.disabled]="isSubmit? true : null">
             <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Continue</span>
           </button>
         </div>
