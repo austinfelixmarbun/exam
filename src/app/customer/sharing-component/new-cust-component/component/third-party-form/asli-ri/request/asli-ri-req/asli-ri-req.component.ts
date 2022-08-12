@@ -191,7 +191,7 @@ export class AsliRiReqComponent implements OnInit {
     }
     this.isPhoneAgeVerification? this.reqAddTrxSrcDataForAsliRIObj.ListReqVerificationType.push(CommonConstant.ASLI_RI_PHN_AGE) : null;
     this.isHomeAddressPercentageVerification? this.reqAddTrxSrcDataForAsliRIObj.ListReqVerificationType.push(CommonConstant.ASLI_RI_HOME_ADDR) : null;
-    if(this.isTaxExtraVerification && this.AsliRIForm.controls.MonthlyIncome.value != 0)
+    if(this.isTaxExtraVerification && this.parent.TaxIdNo != "" && this.AsliRIForm.controls.MonthlyIncome.value != 0)
     {
       this.reqAddTrxSrcDataForAsliRIObj.ListReqVerificationType.push(CommonConstant.ASLI_RI_TAX_EXTRA)
     }
