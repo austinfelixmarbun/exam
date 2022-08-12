@@ -121,8 +121,15 @@ export class ThirdPartyFormComponent implements OnInit {
       if (svcTypePefindo != null) {
         this.IsUsePefindo = true;
       }
-      this.IsUseAsliRI = true;
     }
+
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeAsliRi }).toPromise().then(
+      (response) => {
+        if(response.ConfigValue == "1")
+        {
+          this.IsUseAsliRI = true;
+        }
+      });
   }
 
   async getListDocumentToBeUpload() {
