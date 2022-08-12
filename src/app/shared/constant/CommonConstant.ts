@@ -84,6 +84,7 @@ export class CommonConstant {
     public static SUPPLIER_ATPM = "SUPPLIER_ATPM";
     public static COLL_COMPANY = "COLL_COMPANY";
     public static NOTARY_COMPANY = "NOTARY_COMPANY";
+    public static AUCTION_COMPANY = "AUCTION_COMPANY";
     public static NOTARY_PERSONAL = "NOTARY_PERSONAL";
     public static NOTARY = "NOTARY";
 

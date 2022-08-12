@@ -524,6 +524,13 @@ export class VendorBranchAddEditComponent implements OnInit {
             this.VendorForm.patchValue({
               MrVendorTypeCode: object.Key
             });
+          } else if (this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY) {
+            var object = this.itemType.find(x => x.Key == CommonConstant.VENDOR_TYPE_COMPANY);
+            this.MrVendorTypeCode = object.Key;
+            this.RsvField = CommonConstant.CustTypeCompany
+            this.VendorForm.patchValue({
+              MrVendorTypeCode: object.Key
+            });
           } 
           else if (this.mode != "edit") {
             this.VendorForm.patchValue({
@@ -552,7 +559,7 @@ export class VendorBranchAddEditComponent implements OnInit {
         if (this.MrVendorCategoryCode == "AGENCY_PERSONAL" || this.MrVendorCategoryCode == "AGENCY_COMPANY") {
           this.VendorForm.controls.MrVendorTypeCode.disable();
         }
-        if (this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY) {
+        if (this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY || this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY) {
           this.VendorForm.controls.MrVendorTypeCode.disable();
         }
         await this.checkType();
@@ -915,6 +922,12 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.Registration = "NOTARY REGISTRATION";
       this.Code = "Notary Code";
       this.Name = "Notary Name";
+    } 
+    else if(this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY)
+    {
+      this.Registration = "AUCTION COMPANY REGISTRATION";
+      this.Code = "Auction Company Code";
+      this.Name = "Auction Company Name";
     } 
     else {
       this.Registration = "BRANCH REGISTRATION";

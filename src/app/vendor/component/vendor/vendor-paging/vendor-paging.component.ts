@@ -105,7 +105,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH
         || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
-        || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY) {
+        || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY) {
         switch (this.MrVendorCategoryCode) {
           case CommonConstant.SUPPLIER:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchSupplier.json";
@@ -151,13 +151,29 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
             critObj.value = 'C';
             this.inputPagingObj.addCritInput.push(critObj);
             break;
+          case CommonConstant.AUCTION_COMPANY: 
+            this.inputPagingObj.pagingJson = "./assets/ucpaging/vendor/auction-company/searchAuctionCompanyV2.json";
+            this.inputPagingObj._url = "./assets/ucpaging/vendor/auction-company/searchAuctionCompanyV2.json";
+            this.inputPagingObj.title = typeof (CommonConstant["TITLE_" + this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_" + this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g, ' ');
+            this.inputPagingObj.addCritInput = new Array();
+            var critObj = new CriteriaObj();
+            critObj.propName = "vdr.MR_VENDOR_CATEGORY_CODE";
+            critObj.restriction = AdInsConstant.RestrictionEq;
+            critObj.value = CommonConstant.AUCTION_COMPANY;
+            this.inputPagingObj.addCritInput.push(critObj);
+            critObj = new CriteriaObj();
+            critObj.propName = "vdr.MR_VENDOR_TYPE_CODE";
+            critObj.restriction = AdInsConstant.RestrictionEq;
+            critObj.value = 'C';
+            this.inputPagingObj.addCritInput.push(critObj);
+            break;
           default:
             this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBranch.json";
             this.inputPagingObj._url = "./assets/ucpaging/searchBranch.json";
             break;
         }
 
-        if(this.MrVendorCategoryCode != CommonConstant.NOTARY_PERSONAL && this.MrVendorCategoryCode != CommonConstant.NOTARY_COMPANY){
+        if(this.MrVendorCategoryCode != CommonConstant.NOTARY_PERSONAL && this.MrVendorCategoryCode != CommonConstant.NOTARY_COMPANY && this.MrVendorCategoryCode != CommonConstant.AUCTION_COMPANY){
           this.inputPagingObj.title = typeof (CommonConstant["TITLE_" + this.MrVendorCategoryCode]) != 'undefined' ? CommonConstant["TITLE_" + this.MrVendorCategoryCode] : this.MrVendorCategoryCode.replace(/_/g, ' ');
           this.inputPagingObj.addCritInput = new Array();
           var critObj = new CriteriaObj();
@@ -293,7 +309,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
 
   navigate() {
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
-      || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY) {
+      || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY || this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY) {
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_ADD], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
     else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
