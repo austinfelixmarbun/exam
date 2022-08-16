@@ -1,24 +1,25 @@
-import {HttpClient} from '@angular/common/http';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NGXToastrService} from 'app/components/extra/toastr/toastr.service';
-import {URLConstantX} from 'app/impl/shared/constant/URLConstantX';
-import {AdInsHelper} from 'app/shared/AdInsHelper';
-import {CommonConstant} from 'app/shared/constant/CommonConstant';
-import {URLConstant} from 'app/shared/constant/URLConstant';
-import {CustObj} from 'app/shared/model/cust-obj.model';
-import {DMSLabelValueObj} from 'app/shared/model/DMS/dms-label-value-obj.model';
-import {DMSObj} from 'app/shared/model/DMS/dms-obj.model';
-import {ResSysConfigResultObj} from 'app/shared/model/Response/res-sys-config-result-obj,model';
-import {NavigationConstant} from 'app/shared/NavigationConstant';
-import {PathConstant} from 'app/shared/PathConstant';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { URLConstant } from 'app/shared/constant/URLConstant';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { DMSLabelValueObj } from 'app/shared/model/DMS/dms-label-value-obj.model';
+import { DMSObj } from 'app/shared/model/DMS/dms-obj.model';
+import { ResSysConfigResultObj } from 'app/shared/model/Response/res-sys-config-result-obj,model';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { PathConstant } from 'app/shared/PathConstant';
 import Stepper from 'bs-stepper';
-import {CookieService} from 'ngx-cookie';
-import {NewCustSetData} from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import {CustomerCompanyContactInformationComponent} from 'app/customer/customer-company/customer-company-contact-information/customer-company-contact-information.component';
-import {CustAttrSectionComponent} from 'app/customer/cust-attr-section/cust-attr-section.component';
-import {CustomerCompanyDetailXComponent} from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
-import {CustFinDataTabXComponent} from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
+import { CookieService } from 'ngx-cookie';
+import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
+// import { CustomerCompanyContactInformationComponent } from 'app/customer/customer-company/customer-company-contact-information/customer-company-contact-information.component';
+import { CustomerCompanyContactInformationComponentX } from 'app/impl/customer/customer-company/customer-company-contact-information/customer-company-contact-information-x.component';
+import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
+import { CustomerCompanyDetailXComponent } from 'app/impl/customer/customer-company/customer-company-detail/customer-company-detail-x.component';
+import { CustFinDataTabXComponent } from 'app/impl/customer/cust-fin-data-tab/cust-fin-data-tab-x.component';
 import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/customer-view-header-company/customer-view-header-company.component';
 
 @Component({
@@ -65,7 +66,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
     });
   }
 
-  SetUrlBack(): string{
+  SetUrlBack(): string {
     let urlBack: string = NavigationConstant.CUST_PAGING;
     if (this.From) urlBack = "/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING;
     return urlBack;
@@ -92,7 +93,7 @@ export class CustomerCompanyPageXComponent implements OnInit {
         }
       );
       //check DMS
-      await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms}).toPromise().then(
+      await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.ConfigCodeIsUseDms }).toPromise().then(
         (response) => {
           this.SysConfigResultObj = response;
           if (this.SysConfigResultObj.ConfigValue == '1') {
@@ -178,12 +179,12 @@ export class CustomerCompanyPageXComponent implements OnInit {
   }
 
   @ViewChild('CustCoyDetail') private CustCoyDetail: CustomerCompanyDetailXComponent;
-  @ViewChild('CustCoyContact') private CustCoyContact: CustomerCompanyContactInformationComponent;
+  @ViewChild('CustCoyContact') private CustCoyContact: CustomerCompanyContactInformationComponentX;
   @ViewChild('CustFinData') private CustFinData: CustFinDataTabXComponent;
   @ViewChild('CustAttrData') private CustAttrData: CustAttrSectionComponent;
   async SendToR2() {
     console.log(this.CustStepIndex);
-    if(!await this.SaveData(this.CustStepIndex)) return;
+    if (!await this.SaveData(this.CustStepIndex)) return;
     await this.CustSetData.SendCustomerDataToRabbitMq(this.CustNo, this.SetUrlBack());
   }
   async SaveData(stepIdx: number): Promise<boolean> {

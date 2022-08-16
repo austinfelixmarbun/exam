@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-4" style="text-align-last: right">
                   <!-- START X-DSF INTEGRASI-CUST : 2021-10-29, Udin - Integrasi Cust FOU ke R2 -->
-                  <button type="button" class="btn btn-raised btn-success mr-2" (click)="SendToR2()" >
+                  <button type="button" class="btn btn-raised btn-success mr-2" (click)="SendToR2()">
                     <i class="fa fa-save"></i> &nbsp;<span translate>Submit To LMS</span>
                   </button>
                   <!-- END X-DSF INTEGRASI-CUST -->
@@ -123,16 +123,20 @@
             </div>
           </div>
           <div id="shareholder-tab" class="content" role="tabpanel" aria-labelledby="shareholder-tab-trigger">
-            <app-shareholder-listing-x *ngIf="CustStepIndex == 3" [CustId]="IdCust" (outputTab)="getValue($event)"></app-shareholder-listing-x>
+            <app-shareholder-listing-x *ngIf="CustStepIndex == 3" [CustId]="IdCust" (outputTab)="getValue($event)">
+            </app-shareholder-listing-x>
           </div>
           <div id="contact-tab" class="content" role="tabpanel" aria-labelledby="contact-tab-trigger">
-            <app-customer-company-contact-information #CustCoyContact *ngIf="CustStepIndex == 4" [custCompanyId]="this.CustCompanyId"
-              (outputTab)="getValue($event)">
-            </app-customer-company-contact-information>
+            <!-- <app-customer-company-contact-information #CustCoyContact *ngIf="CustStepIndex == 4"
+              [custCompanyId]="this.CustCompanyId" (outputTab)="getValue($event)">
+            </app-customer-company-contact-information> -->
+            <app-customer-company-contact-information-x #CustCoyContact *ngIf="CustStepIndex == 4"
+              [custCompanyId]="this.CustCompanyId" (outputTab)="getValue($event)">
+            </app-customer-company-contact-information-x>
           </div>
           <div id="financial-tab" class="content" role="tabpanel" aria-labelledby="financial-tab-trigger">
-            <app-cust-fin-data-tab-x #CustFinData *ngIf="CustStepIndex == 5" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'"
-              (outputTab)="getValue($event)">
+            <app-cust-fin-data-tab-x #CustFinData *ngIf="CustStepIndex == 5" [CustId]="IdCust"
+              [MrCustTypeCode]="'COMPANY'" (outputTab)="getValue($event)">
             </app-cust-fin-data-tab-x>
           </div>
           <div id="CustAsset-tab" class="content" role="tabpanel" aria-labelledby="CustAsset-tab-trigger">
@@ -150,7 +154,8 @@
               (outputTab)="getValue($event)" (outputCancel)="getValue($event)"></app-dms-iframe> -->
           </div>
           <div id="cust-attr-tab" class="content" role="tabpanel" aria-labelledby="cust-attr-tab-trigger">
-            <app-cust-attr-section #CustAttrData *ngIf="CustStepIndex == 9" [CustId]="IdCust" [MrCustTypeCode]="'COMPANY'">
+            <app-cust-attr-section #CustAttrData *ngIf="CustStepIndex == 9" [CustId]="IdCust"
+              [MrCustTypeCode]="'COMPANY'">
             </app-cust-attr-section>
           </div>
         </div>
