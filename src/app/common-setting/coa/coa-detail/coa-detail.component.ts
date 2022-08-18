@@ -6,7 +6,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { RefCoaObj } from 'app/shared/model/common-setting/ref-coa-obj.model';
-import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { Router } from '@angular/router';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
