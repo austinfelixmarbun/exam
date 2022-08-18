@@ -266,8 +266,13 @@ export class CoaSchemeDetailComponent implements OnInit {
         this.ListGetCoaCurr = this.ListRefCoaObj.map(item => item.CurrCode)
           .filter((value, index, self) => self.indexOf(value) === index);
 
+        this.ListCoa = this.GetListCoaFormArray();
         this.CountAdd = this.ListGetCoaCurr.length;
         for (let i = 0; i < this.ListGetCoaCurr.length; i++) {
+          for (let x = 0; x < this.ListPaymentAlloc.length; x++) {
+            this.ListDataCOA = this.GetListCoaInfoListDataCoa(x);
+            this.ListDataCOA.push(this.createDetailItem());
+          }
           this.colHeadTable.push({ newHead: 'COA ' + this.ListGetCoaCurr[i] });
           this.ListSelectedCurr.push({ newCurr: this.ListGetCoaCurr[i] });
         }
@@ -292,5 +297,10 @@ export class CoaSchemeDetailComponent implements OnInit {
         this.toastr.typeErrorCustom(error);
       }
     );
+  }
+
+  Test()
+  {
+    console.log(this.CoaSchemeForm);
   }
 }
