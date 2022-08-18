@@ -298,9 +298,4 @@ export class CoaSchemeDetailComponent implements OnInit {
       }
     );
   }
-
-  Test()
-  {
-    console.log(this.CoaSchemeForm);
-  }
 }
