@@ -72,7 +72,7 @@ export class CustExposureViewXComponent implements OnInit {
 
   openCustView(custNo: string) {
     this.CustNoObj.CustNo = custNo;
-    this.http.post(URLConstant.GetCustByCustNo, {TrxNo : custNo}).subscribe(
+    this.http.post(URLConstant.GetCustByCustNo, this.CustNoObj).subscribe(
       (response) => {
         AdInsHelper.OpenCustomerViewByCustId(response["CustId"]);
       }
