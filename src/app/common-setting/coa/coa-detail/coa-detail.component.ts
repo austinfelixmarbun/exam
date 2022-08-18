@@ -48,6 +48,7 @@ export class CoaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Mashino")
     this.GetDdlCurr();
 
     let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
@@ -100,7 +101,7 @@ export class CoaDetailComponent implements OnInit {
 
   AddListCoaDetailItemFormGroup(): FormGroup {
     return new FormGroup({
-      COA: new FormControl('', Validators.required)
+      COA: new FormControl('')
     });
   }
 
@@ -168,6 +169,8 @@ export class CoaDetailComponent implements OnInit {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_SELECT_ONE);
     }
     else {
+      const arr = <FormArray>this.CoaForm.controls.ListCoa;
+      arr.controls = [];
       this.ListCOA = new Array<any>();
       this.entityTypeSelect = this.entityTypeList.filter(
         comp => comp.Key == this.entitySelect);
