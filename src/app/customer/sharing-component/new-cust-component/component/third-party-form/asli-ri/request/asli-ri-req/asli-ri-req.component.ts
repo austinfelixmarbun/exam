@@ -164,7 +164,7 @@ export class AsliRiReqComponent implements OnInit {
   patchObj()
   {
     this.reqAddTrxSrcDataForAsliRIObj = new ReqAddTrxSrcDataForAsliRIObj();
-    this.reqAddTrxSrcDataForAsliRIObj.CustType = this.custObj.MrCustTypeCode;
+    this.reqAddTrxSrcDataForAsliRIObj.CustType = this.MrCustTypeCode;
     this.reqAddTrxSrcDataForAsliRIObj.CustNo = this.custObj.CustNo;
     this.reqAddTrxSrcDataForAsliRIObj.CustName = this.parent.CustName;
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)

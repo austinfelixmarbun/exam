@@ -350,6 +350,8 @@ export class ThirdPartyFormComponent implements OnInit {
   {
     const modalRef = this.modalService.open(AsliRiViewComponent); 
     modalRef.componentInstance.custObj = this.custObj;
+    modalRef.componentInstance.parentForm = this.parentForm;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
     modalRef.componentInstance.custObj.MrCustTypeCode = this.MrCustTypeCode;
   }
 
