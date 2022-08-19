@@ -27,6 +27,7 @@ export class NewCustPublicComponent implements OnInit {
   @Input() CustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() tempTotalSharePrct: number = 0;
+  @Input() isSubmit: boolean = false;
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
   CustomerForm: FormGroup = this.fb.group({});
@@ -125,7 +126,7 @@ export class NewCustPublicComponent implements OnInit {
     );
   }
 
-  SaveForm() {
+  async SaveForm() {
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ShareholderPublicObj = this.tempExisting;
 
@@ -153,9 +154,18 @@ export class NewCustPublicComponent implements OnInit {
     reqSubmitObj.PublicCity = tempForm["UcAddress"]["City"];
     reqSubmitObj.PublicZipcode = tempForm["UcAddressZipcode"]["value"];
 
-    this.http.post(this.SetUrlApi(), reqSubmitObj).subscribe(
+    this.isSubmit = true;
+
+    await this.http.post(this.SetUrlApi(), reqSubmitObj).toPromise().then(
       (response) => {
-        this.Cancel();
+        if(response == undefined)
+        {
+          this.isSubmit = false;
+        }
+        else
+        {
+          this.Cancel();
+        }
       }
     )
   }
