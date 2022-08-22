@@ -22,6 +22,7 @@ import {DupCheckOutputSaveObj} from 'app/shared/model/new-cust/dup-check-output-
 import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ReqAddEditCustCompanyXObj } from 'app/shared/model/new-cust/req-add-edit-cust-company-x-obj.model';
 
 @Component({
   selector: 'app-new-cust-header-x',
@@ -54,6 +55,8 @@ export class NewCustHeaderXComponent implements OnInit {
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
   @Input() isFamily: boolean = false;
   @Input() isShareholder: boolean =false;
+
+  AddEditCustCompanyXObj: ReqAddEditCustCompanyXObj = new ReqAddEditCustCompanyXObj();
 
   constructor(
     private cookieService: CookieService, private spinner: NgxSpinnerService,
@@ -171,10 +174,20 @@ export class NewCustHeaderXComponent implements OnInit {
   async ClickSaveCoy(ev: ReqCoyObj) {
     if (ev.CustObj.CustId != 0) {
       var reqPayload = this.separateFileUpload(ev);
+      var result: any;
       var resSave;
       await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi).toPromise().then(
         (response) => {
           resSave = response;
+        }
+      );
+
+      this.AddEditCustCompanyXObj.CustId = reqPayload.forApi.CustObj.CustId;
+      this.AddEditCustCompanyXObj.IsForeigner = reqPayload.forApi.IsForeigner;
+
+      await this.http.post(URLConstantX.AddEditDataIsForeignerCustCompanyX, this.AddEditCustCompanyXObj).toPromise().then(
+        (response) => {
+          result = response;
         }
       );
       this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], ev.CustObj.CustId)
@@ -242,9 +255,19 @@ export class NewCustHeaderXComponent implements OnInit {
     let urlAdd: string = this.SetUrlAddCoy();
     var reqPayload = this.separateFileUpload(this.DupCheckCoyObj);
     var resSave: GenericObj;
+    var result: any;
     await this.http.post(urlAdd, reqPayload.forApi).toPromise().then(
       (response: GenericObj) => {
         resSave = response;
+      }
+    );
+
+    this.AddEditCustCompanyXObj.CustId = resSave.Id;
+    this.AddEditCustCompanyXObj.IsForeigner = reqPayload.forApi.IsForeigner;
+
+    await this.http.post(URLConstantX.AddEditDataIsForeignerCustCompanyX, this.AddEditCustCompanyXObj).toPromise().then(
+      (response) => {
+        result = response;
       }
     );
     this.uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id)
