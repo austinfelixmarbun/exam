@@ -29,6 +29,10 @@ import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { TrustingSocialReqHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/trusting-social/request/trusting-social-req-header.component';
 import { TrustingSocialViewHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/trusting-social/view/trusting-social-view-header.component';
 import { AdInsHelperX } from 'app/impl/shared/AdInsHelperX';
+import { AsliRiReqComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req/asli-ri-req.component';
+import { AsliRiReqHeaderComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req-header.component';
+import { AsliRiViewComponent } from 'app/customer/sharing-component/new-cust-component/component/third-party-form/asli-ri/view/asli-ri-view/asli-ri-view.component';
+
 
 @Component({
   selector: 'app-third-party-form-x',
@@ -57,7 +61,12 @@ export class ThirdPartyFormXComponent implements OnInit {
   IsUseDigitalization: string = "0";
   IsUseTs: Boolean = false;
   IsUsePefindo: Boolean = false;
+  IsUseAsliRI: Boolean = false;
   ListDocumentKeyValueObj: Array<KeyValueObj> = new Array<KeyValueObj>();
+
+  width: number;
+  height: number;
+  url: any;
 
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   CustDocFileObjs: Array<CustDocFileObj> = new Array<CustDocFileObj>();
@@ -67,6 +76,8 @@ export class ThirdPartyFormXComponent implements OnInit {
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
   readonly ExtStr: string = String.Join(", ", this.FileExtAllowed);
 
+  readonly FileExtAllowedAsliRI: Array<string> = [CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionPng, CommonConstant.FileExtensionBmp]
+  readonly ExtStrAsliRI: string = String.Join(", ", this.FileExtAllowedAsliRI);
 
   async ngOnInit(): Promise<void> {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -110,6 +121,13 @@ export class ThirdPartyFormXComponent implements OnInit {
         this.IsUsePefindo = true;
       }
     }
+    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeAsliRi }).toPromise().then(
+      (response) => {
+        if(response.ConfigValue == "1")
+        {
+          this.IsUseAsliRI = true;
+        }
+      });
   }
 
   async getListDocumentToBeUpload() {
@@ -128,6 +146,10 @@ export class ThirdPartyFormXComponent implements OnInit {
           if (this.custObj.CustId == 0 || existingCustDocFile == undefined) {
             custDocFileFormObj.IsRequired = true;
           } else {
+            custDocFileFormObj.IsRequired = false;
+          }
+          if(custDocFileFormObj.DocTypeName == CommonConstant.ASLI_RI_SELFIE)
+          {
             custDocFileFormObj.IsRequired = false;
           }
           custDocFileFormObj.File = null;
@@ -263,6 +285,42 @@ export class ThirdPartyFormXComponent implements OnInit {
     modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
   }
 
+  async ReqASLIRI()
+  {
+    this.markFormGroupTouched(this.parentForm);
+
+    if (!this.thirdPartyUploadService.ValidateFileUploadAsliRI(this.CustDocFileFormObjs)) {
+      return;
+    }
+
+    if (!this.parentForm.valid) {
+      return;
+    }
+    
+    const modalRef = this.modalService.open(AsliRiReqHeaderComponent);
+    modalRef.componentInstance.parentForm = this.parentForm;
+    modalRef.componentInstance.custObj = this.custObj;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
+
+    for(let i = 0; i < this.CustDocFileFormObjs.length; i++)
+    {
+      if(this.MrCustTypeCode == CommonConstant.CustTypePersonal && this.parentForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP && this.CustDocFileFormObjs[i].DocTypeName == CommonConstant.ASLI_RI_SELFIE)
+      {
+        modalRef.componentInstance.custDocFileFormObj = this.CustDocFileFormObjs[i];
+        modalRef.componentInstance.height = this.height;
+        modalRef.componentInstance.width = this.width;
+        modalRef.componentInstance.url = this.url;
+      }
+    }
+  }
+
+  async ViewASLIRI()
+  {
+    const modalRef = this.modalService.open(AsliRiViewComponent); 
+    modalRef.componentInstance.custObj = this.custObj;
+    modalRef.componentInstance.custObj.MrCustTypeCode = this.MrCustTypeCode;
+  }
+
   async checkThirdPartyTrxNo() {
     if (this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == "") {
       var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
@@ -289,6 +347,26 @@ export class ThirdPartyFormXComponent implements OnInit {
   }
 
   HandleFileInput(files: FileList, i) {
+    this.CustDocFileFormObjs[i].File = files.item(0);
+    this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+  }
+
+  HandleFileInputAsliRI(files: FileList, img:any, i) {
+    if(img.target.files && img.target.files.length)
+    {
+      let file = img.target.files[0];
+      let image = new Image();
+      let reader = new FileReader();
+      image.src = window.URL.createObjectURL(file);
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setTimeout(() => {
+          this.width = image.naturalWidth
+          this.height = image.naturalHeight
+          this.url = reader.result
+        })
+      }
+    }
     this.CustDocFileFormObjs[i].File = files.item(0);
     this.OutputUploadFile.emit(this.CustDocFileFormObjs);
   }

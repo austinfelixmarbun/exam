@@ -136,7 +136,7 @@ export class NavigationConstant {
     public static VIEW_APP = "/" + PathConstant.VIEW + "/" + PathConstant.VIEW_APP;
     public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
-    public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST+"/"+PathConstantX.VIEW_CUST_X; //'View/Customer/X'
+    public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_X; //'View/Customer/X'
     public static VIEW_CUST_ADDR = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
     public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'
@@ -155,10 +155,11 @@ export class NavigationConstant {
     public static VIEW_CUST_COY_CONTACT = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_CONTACT; //'/View/Customer/CoyContact'
     public static VIEW_CUST_COY_FINANCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_COY_FINANCIAL_X; //'/View/Customer/CoyFinancial'
     public static VIEW_CUST_COY_LEGAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_COY_LEGAL; //'/View/Customer/CoyLegal'
-    public static VIEW_CUST_TRUSTING_SOCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_TRUSTING_SOCIAL; //'/View/Customer/TrustSoc'
+    public static VIEW_CUST_TRUSTING_SOCIAL = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_TRUSTING_SOCIAL; //'/View/Customer/CustTrustSoc'
     public static VIEW_NEG_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NEG_CUST; //'/View/NegativeCustomer'
     public static VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstantX.VIEW_CUST_EXPSR_X; //'/View/CustExposureView/X'
+    public static VIEW_CUST_ASLI_RI = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_ASLI_RI; //'/View/Customer/CustAsliRi'
     //#endregion
 
     public static VIEW_CUST_PERSONAL_DETAIL_X = "/" + NavigationConstant.VIEW_CUST + "/" + PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X; //'/View/Customer/PersonalDetail'
@@ -173,7 +174,7 @@ export class NavigationConstant {
     public static SRVY_TASK = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_PAGING; //'/Survey/Task'
     public static SRVY_ORDER = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_ORDER_PAGING;
     //#endregion
-
+    
     //#region Vendor
     public static VIEW_VENDOR = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_VENDOR; //'/View/Vendor'
     public static VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_VENDOR_BRANCH; //'/View/Vendor/VendorBranch'
@@ -205,7 +206,7 @@ export class NavigationConstant {
     public static VENDOR_GRD_REQ_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_REQUEST_DETAIL; //'/Vendor/VendorGrading/Request/DetailX'
     public static VENDOR_GRD_INQUIRY = "/" + PathConstant.LR_VENDOR + "/" + PathConstantX.VENDOR_GRADING_INQUIRY_X; //'/Vendor/VendorGrading/InquiryX'
     //#endregion
-
+    
     //#region Organization
     public static ORG_BZ_UNIT = "/" + PathConstant.LR_ORG + "/" + PathConstant.BZ_UNIT; //'/Organization/BusinessUnit'
     public static ORG_BZ_UNIT_MEMBER = "/" + PathConstant.LR_ORG + "/" + PathConstant.BZ_UNIT_MEMBER; //'/Organization/BusinessUnit/Member'
@@ -216,7 +217,7 @@ export class NavigationConstant {
     //#region Integration
     public static INTEGRATION_SEND_DAILY_MASTER = "/" + PathConstant.LR_INTEGRATION + "/" + PathConstant.SEND_DAILY_MASTER; //'/Integration/SendDailyMaster'
     //#endregion
-
+    
     //#region Verif
     public static VERIF_QA_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_PAGING; //'/Verification/QuestionAnswer/Paging'
     public static VERIF_QA_ADD = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_ADD; //'/Verification/QuestionAnswer/Add'
@@ -246,7 +247,7 @@ export class NavigationConstant {
     public static EMP_LEAVE_PAGING = "/" + PathConstant.LR_EMP + "/" + PathConstant.LEAVE_PAGING; //'/Employee/Leave/Paging'
     public static EMP_LEAVE_ADD = "/" + PathConstant.LR_EMP + "/" + PathConstant.LEAVE_ADD; //'/Employee/Leave/Add'
     //#endregion
-
+    
     //#region COY
     public static COY_BOD = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_BOD; //'/Company/Bod'
     public static COY_BOD_ADD = "/" + PathConstant.LR_COY + "/" + PathConstant.COY_BOD_ADD; //'/Company/Bod/Add'
@@ -270,13 +271,13 @@ export class NavigationConstant {
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
     //#endregion
 
-    //#region
+    //#region 
     public static FEE = "/" + PathConstant.LR_FEE; //'/Fee'
     public static FEE_PAGING = "/" + PathConstant.LR_FEE + "/" + PathConstant.PAGING; //'/Fee/Paging'
     public static FEE_ADD = "/" + PathConstant.LR_FEE + "/" + PathConstant.ADD; //'/Fee/Add'
     //#endregion
 
-    //#region
+    //#region 
     public static SURVEYOR = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR //'Surveyor'
     public static SURVEYOR_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING   //'/Surveyor/Paging
     public static SURVEYOR_ADD = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SURVEYOR + "/" + PathConstant.ADD
@@ -291,7 +292,7 @@ export class NavigationConstant {
     public static SURVEY_TASK_RESULT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
     public static SURVEY_TASK_RESULT_PAGE = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
     //#endregion
-
+    
     //#region Cust
     public static CUST_PERSONAL_MAIN_INFO = '..' + "/" + PathConstant.CUST_PERSONAL_MAIN_INFO; //'../CustomerPersonal/MainInfo'
     public static CUST_COY_MAIN_INFO = '..' + "/" + PathConstant.CUST_COY_MAIN_INFO; //'../CustomerCompany/MainInfo'

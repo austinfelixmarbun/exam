@@ -161,6 +161,10 @@ const routes: Routes = [
         loadChildren: './customer-view-trusting-social/customer-view-trusting-social.module#CustomerViewTrustingSocialModule'
       },
       {
+        path: PathConstant.VIEW_CUST_ASLI_RI,
+        loadChildren: './customer-view-asli-ri/customer-view-asli-ri.module#CustomerViewAsliRiModule'
+      },
+      {
         path: PathConstantX.VIEW_CUST_PERSONAL_DETAIL_X,
         component: CustomerViewPersonalDetailXComponent
       },

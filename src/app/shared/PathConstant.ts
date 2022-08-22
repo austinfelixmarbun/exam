@@ -483,6 +483,7 @@ export class PathConstant {
     public static VIEW_CUST_HIGHLIGHT_COMMENT = "HighligtComment";
     public static VIEW_CUST_TRUSTING_SOCIAL = "CustTrustSoc";
     public static VIEW_CUST_EXPOSURE = "CustExposureView";
+    public static VIEW_CUST_ASLI_RI = "CustAsliRi";
 
     //#endregion
 

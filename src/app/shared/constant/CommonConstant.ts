@@ -424,10 +424,12 @@ export class CommonConstant {
     public static FileExtensionJpeg = ".jpeg";
     public static FileExtensionGif = ".gif";
     public static FileExtensionPng = ".png";
+    public static FileExtensionBmp = ".bmp";
 
     //DIGITALIZATION SVC TYPE CODE
     public static DigitalizationSvcTypeTrustingSocial = "TS";
     public static DigitalizationSvcTypePefindo = "PEFINDO";
+    public static SvcTypeAsliRi = "IS_USE_ASLIRI";
     
     public static NegCustTypeGood = "GOOD";
     public static NegCustTypeBad = "BAD";
@@ -437,4 +439,14 @@ export class CommonConstant {
     public static IsEODRun = "IsEODRun"
     // UI ROLEPICK
     public static IS_USE_NEW_ROLEPICK = "IS_USE_NEW_ROLEPICK";
+
+    //ASLI RI
+    public static ASLI_RI_SELFIE = "PHOTO SELFIE";
+    public static ASLI_RI_PROF = "ASLIRI_PROF";
+    public static ASLI_RI_PHN_AGE = "ASLIRI_PHN_AGE";
+    public static ASLI_RI_HOME_ADDR = "ASLIRI_HOME_ADDR";
+    public static ASLI_RI_TAX_EXTRA = "ASLIRI_TAX_EXTRA";
+    public static ASLI_RI_TAX_COY = "ASLIRI_TAX_COY";
+    public static ASLI_RI_WORKPLACE = "ASLIRI_WORKPLACE";
+
 }

@@ -27,7 +27,7 @@
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Transaction Type Code</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="TransactionTypeCode"
+                  <input type="text" [IsUpperCase]="false" class="form-control" formControlName="TransactionTypeCode"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.TransactionTypeCode.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.TransactionTypeCode"
                     [submit]="enjiForm.submitted">
@@ -37,7 +37,7 @@
               <div class="form-group row">
                 <label class="col-md-2 adins-required-label" translate>Transaction Description</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="TransactionDescription"
+                  <input type="text" [IsUpperCase]="false" class="form-control" formControlName="TransactionDescription"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.TransactionDescription.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.TransactionDescription"
                     [submit]="enjiForm.submitted">
@@ -74,7 +74,7 @@
               <div class="form-group row">
                 <label class="col-md-2" translate>Entity Type</label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" formControlName="EntityType"
+                  <input type="text" [IsUpperCase]="false" class="form-control" formControlName="EntityType"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && JrMediaForm.controls.EntityType.invalid }">
                   <lib-uc-show-errors [control]="JrMediaForm.controls.EntityType" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>

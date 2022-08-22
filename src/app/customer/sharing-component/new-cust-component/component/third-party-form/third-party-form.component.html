@@ -7,7 +7,9 @@
       <div class="col-md-4">
         <label [for]="'doc' + i" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
         <input type="file" [id]="'doc' + i" style="display: none" (change)="HandleFileInput($event.target.files, i)"
-         [accept]="ExtStr"/>
+        *ngIf="item.DocTypeName != 'PHOTO SELFIE'" [accept]="ExtStr"/>
+        <input type="file" [id]="'doc' + i" style="display: none" (change)="HandleFileInputAsliRI($event.target.files, $event, i)"
+         *ngIf="item.DocTypeName == 'PHOTO SELFIE'" [accept]="ExtStrAsliRI"/>
         <div [hidden]="!CustDocFileFormObjs[i].File" style="padding-left: 15px" class="row afu-valid-file">
           <p class="col-xs-3 textOverflow"><span class="text-primary">{{CustDocFileFormObjs[i]?.File?.name}}</span></p>
           <p class="col-xs-3 padMarg sizeC">
@@ -39,6 +41,17 @@
           Request
         </button>
         <button type="button" (click)="ViewTrustingSocial()" class="btn btn-raised btn-primary" translate>
+          View
+        </button>
+      </div>
+    </div>
+    <div *ngIf="IsUseAsliRI" class="form-group row">
+      <label class="col-md-2" translate>Asli RI</label>
+      <div class="col-md-4">
+        <button type="button" (click)="ReqASLIRI()" class="btn btn-raised btn-primary mr-1" translate>
+          Request
+        </button>
+        <button type="button" (click)="ViewASLIRI()" class="btn btn-raised btn-primary" translate>
           View
         </button>
       </div>
