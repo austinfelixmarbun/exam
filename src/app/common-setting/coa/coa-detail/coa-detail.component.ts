@@ -135,6 +135,7 @@ export class CoaDetailComponent implements OnInit {
   }
 
   Submit() {
+    let CountCoaNull: number = 0;
     this.ListRefCoaObj = new Array<RefCoaObj>();
     this.GetListCoa();
     for (let i = 0; i < this.ListOfCOA.length; i++) {
@@ -145,21 +146,40 @@ export class CoaDetailComponent implements OnInit {
       this.refCoaObj.CurrCode = this.ListOfCOA[i][0].CurrCode;
       this.refCoaObj.PaymentAllocCode = this.ListOfCOA[i][0].PaymentAllocCode;
       this.refCoaObj.Coa = this.ListOfCOA[i][0].Coa;
+      if(this.refCoaObj.Coa === "")
+      {
+        CountCoaNull += 1
+      }
       this.ListRefCoaObj.push(this.refCoaObj);
     }
 
-    var RequestListRefCoa = {
-      ListRequestRefCoaObjs: this.ListRefCoaObj
+    if(this.Shows === false)
+    {
+      this.toastr.errorMessage("Can not Submit Coa, Please Select Entity Type First!");
     }
-    this.http.post(this.UrlConstantNew.SubmitListCoa, RequestListRefCoa, AdInsConstant.SpinnerOptions).subscribe(
-      (response) => {
-        this.router.navigate([NavigationConstant.CS_COA_PAGING]);
-        this.toastr.successMessage(response["Message"]);
-      },
-      (error) => {
-        this.toastr.typeErrorCustom(error);
+    else if(this.ListCurr.length === 0)
+    {
+      this.toastr.errorMessage("Can not Submit Coa, Please Select Currency First!");
+    }
+    else if(this.ListOfCOA.length === CountCoaNull)
+    {
+      this.toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
+    }
+    else
+    {
+      var RequestListRefCoa = {
+        ListRequestRefCoaObjs: this.ListRefCoaObj
       }
-    );
+      this.http.post(this.UrlConstantNew.SubmitListCoa, RequestListRefCoa, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.router.navigate([NavigationConstant.CS_COA_PAGING]);
+          this.toastr.successMessage(response["Message"]);
+        },
+        (error) => {
+          this.toastr.typeErrorCustom(error);
+        }
+      );
+    }
   }
 
   async Show(ev: HTMLInputElement) {

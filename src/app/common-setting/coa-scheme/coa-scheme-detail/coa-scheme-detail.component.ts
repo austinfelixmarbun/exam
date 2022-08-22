@@ -183,6 +183,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   Submit() {
+    let CountCoaNull: number = 0;
     this.coaSchmObj.SchmCode = this.CoaSchemeForm.controls["SchemeCode"].value;
     this.coaSchmObj.SchmName = this.CoaSchemeForm.controls["SchemeName"].value;
     this.coaSchmObj.IsActive = this.CoaSchemeForm.controls["IsActive"].value;
@@ -198,20 +199,35 @@ export class CoaSchemeDetailComponent implements OnInit {
         this.refCoaObj.CurrCode = this.ListSelectedCurr[i].newCurr;
         this.refCoaObj.PaymentAllocCode = this.ListPaymentAlloc[j].Key;
         this.refCoaObj.Coa = this.GetListCoaInfoDataCoaInfoCoaValue(j, i);
+        if(this.refCoaObj.Coa === "" || this.refCoaObj.Coa === null)
+        {
+          CountCoaNull += 1;
+        }
         this.ListRefCoaObj.push(this.refCoaObj);
       }
     }
     this.coaSchmObj.ListRefCoa = this.ListRefCoaObj;
 
-    this.http.post(this.UrlConstantNew.SubmitCoaSchm, this.coaSchmObj, AdInsConstant.SpinnerOptions).subscribe(
-      (response) => {
-        this.router.navigate([NavigationConstant.CS_COA_SCHM_PAGING]);
-        this.toastr.successMessage(response["Message"]);
-      },
-      (error) => {
-        this.toastr.typeErrorCustom(error);
-      }
-    );
+    if(this.ListSelectedCurr.length === 0 )
+    {
+      this.toastr.errorMessage("Can not Submit Coa Scheme, Please select Currency First!");
+    }
+    else if(CountCoaNull == this.ListPaymentAlloc.length * this.ListSelectedCurr.length)
+    {
+      this.toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
+    }
+    else
+    {
+      this.http.post(this.UrlConstantNew.SubmitCoaSchm, this.coaSchmObj, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          this.router.navigate([NavigationConstant.CS_COA_SCHM_PAGING]);
+          this.toastr.successMessage(response["Message"]);
+        },
+        (error) => {
+          this.toastr.typeErrorCustom(error);
+        }
+      );
+    }
   }
 
   GetDdlCurr() {
