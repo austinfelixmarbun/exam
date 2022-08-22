@@ -50,6 +50,7 @@ export class URLConstantX{
     //Customer Company
     public static EditCustCompany = environment.FoundationR3Url + "/v1" + "/CustCompanyX/EditCustCompany"
     public static GetCustCompanyByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyX/GetCustCompanyByCustId"
+    public static AddEditDataIsForeignerCustCompanyX = environment.FoundationR3Url + "/v1" + "/CustCompanyX/AddEditDataIsForeignerCustCompanyX"
     
     // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
     public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholderX/GetListManagementShareholderForListPagingByCustId";

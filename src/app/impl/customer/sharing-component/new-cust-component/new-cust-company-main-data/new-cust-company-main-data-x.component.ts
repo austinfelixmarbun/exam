@@ -27,6 +27,8 @@ import { CurrentUserContext } from 'app/shared/model/current-user-context.model'
 import { CustCompanyObj } from 'app/shared/model/cust-company-obj.model';
 import { CustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
 import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { URLConstantX } from 'app/impl/shared/constant/URLConstantX';
+import { CustCompanyObjX } from 'app/impl/shared/model/cust-company-obj-x.model';
 
 @Component({
   selector: 'app-new-cust-company-main-data-x',
@@ -340,11 +342,12 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
   tempCustCompanyObj: CustCompanyObj = new CustCompanyObj();
   GetCustCompanyData(custId: number = this.CustId) {
-    this.http.post(URLConstant.GetCustCompanyByCustId, { Id: custId }).subscribe(
-      (response: CustCompanyObj) => {
-        this.tempCustCompanyObj = response;
+    this.http.post(URLConstantX.GetCustCompanyByCustId, { Id: custId }).subscribe(
+      (response: CustCompanyObjX) => {
+        this.tempCustCompanyObj = response['responseCustCompanyObj'];
         this.CustomerForm.patchValue({
-          MrCompanyTypeCode: response.MrCompanyTypeCode
+          MrCompanyTypeCode: response['responseCustCompanyObj']['MrCompanyTypeCode'],
+          isForeigner: response['IsForeigner']
         });
       }
     );
@@ -374,6 +377,7 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
     reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];
+    reqSubmitObj.IsForeigner = tempForm["isForeigner"];
 
     reqSubmitObj.CustAddr = this.tempCustAddr;
     reqSubmitObj.CustAddr.CustId = this.CustId;
