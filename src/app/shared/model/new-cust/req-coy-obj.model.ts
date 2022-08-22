@@ -10,4 +10,5 @@ export class ReqCoyObj{
     CustAddr: CustAddrObj;
     CustCompanyMgmntShrholderObj: CustCompanyMgmntShrholderObj;
     CustDocFileObjs: Array<CustDocFileObj>;
+    IsForeigner: boolean;
 }
