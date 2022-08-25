@@ -28,15 +28,16 @@
           [CustId]="CustId" [ParentCustId]="ParentCustId" [listCustNoToExclude]="listCustNoToExclude"
           [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
           [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSavePersonal($event)"
-          [isMarried]="isMarried" [CustPersonalFamilyId]="CustPersonalFamilyId"></app-new-cust-personal-main-data>
+          [isMarried]="isMarried" [CustPersonalFamilyId]="CustPersonalFamilyId" [isSubmit]="isSubmit" (outputIsSubmit)="ClickSubmit($event)"></app-new-cust-personal-main-data>
         <app-new-cust-company-main-data *ngIf="CustType == CustTypeCoy" [hidden]="PageType != CustPageTypeHeader"
           [CustId]="CustId" [ParentCustId]="ParentCustId" [listCustNoToExclude]="listCustNoToExclude"
           [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
-          [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSaveCoy($event)">
+          [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSaveCoy($event)"
+          [isSubmit]="isSubmit" (outputIsSubmit)="ClickSubmit($event)">
         </app-new-cust-company-main-data>
         <app-new-cust-public *ngIf="CustType == CustTypePublic" [CustId]="ParentCustId"
           [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
-          (outputCancel)="Cancel()"></app-new-cust-public>
+          (outputCancel)="Cancel()" [isSubmit]="isSubmit"></app-new-cust-public>
       </div>
       <div class="card-body" *ngIf="PageType == CustPageTypeDupCheck">
         <app-cust-dup-check-header [CustPersonalObj]="DupCheckPersonalObj" [CustCoyObj]="DupCheckCoyObj"

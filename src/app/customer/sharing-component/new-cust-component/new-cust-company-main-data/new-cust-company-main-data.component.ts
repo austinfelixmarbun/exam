@@ -40,9 +40,11 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   @Input() CustCompanyMgmntShrholderId: number = 0;
   @Input() ParentCustId: number = 0;
   @Input() tempTotalSharePrct: number = 0;
+  @Input() isSubmit: boolean = false;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Output() outputAfterSave: EventEmitter<ReqCoyObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+  @Output() outputIsSubmit: EventEmitter<boolean> = new EventEmitter();
 
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
@@ -383,6 +385,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
 
     reqSubmitObj.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+    this.isSubmit = true;
+    this.outputIsSubmit.emit(this.isSubmit);
     this.outputAfterSave.emit(reqSubmitObj);
   }
   private SetCustomerDataMode(reqSubmitObj: ReqCoyObj) {

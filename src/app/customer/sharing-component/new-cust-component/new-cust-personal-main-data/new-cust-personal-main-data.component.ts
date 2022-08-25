@@ -65,8 +65,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   @Input() tempTotalSharePrct: number = 0;
   @Input() isMarried: boolean = false;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
+  @Input() isSubmit: boolean = false;
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
+  @Output() outputIsSubmit: EventEmitter<boolean> = new EventEmitter();
 
 
   custObj: CustObj = new CustObj();
@@ -652,6 +654,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     if(this.thirdPartyTrxNo != null && !this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)){
       return;
     }
+
     let tempForm = this.CustomerForm.getRawValue();
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
     reqSubmitObj.CustObj = this.custObj;
@@ -722,6 +725,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj = this.SetCustomerDataMode(reqSubmitObj);
 
     reqSubmitObj.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+    this.isSubmit = true;
+    this.outputIsSubmit.emit(this.isSubmit);
     this.outputAfterSave.emit(reqSubmitObj);
   }
 

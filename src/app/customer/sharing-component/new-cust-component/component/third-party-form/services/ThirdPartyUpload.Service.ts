@@ -13,6 +13,7 @@ export class ThirdPartyUploadService {
   }
 
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
+  readonly FileExtAllowedAsliRI: Array<string> = [CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionPng, CommonConstant.FileExtensionBmp]
 
 
   ValidateFileUpload(CustDocFileFormObjs: Array<CustDocFileFormObj>): Boolean {
@@ -47,6 +48,32 @@ export class ThirdPartyUploadService {
     if(listInvalidFormatDoc.length > 0){
       var invalidFormatDocStr = String.Join(", ", listInvalidFormatDoc);
       this.toastr.warningMessage(String.Format(ExceptionConstant.INVALID_FILE_FORMAT_FOR_DOC, invalidFormatDocStr, ExtStr));
+    }
+
+    return isValid;
+  }
+
+  ValidateFileUploadAsliRI(CustDocFileFormObjs: Array<CustDocFileFormObj>): Boolean {
+    var isValid = true;
+    var listInvalidFormatDoc = new Array<string>();
+    var ExtStrAsliRI = String.Join(", ", this.FileExtAllowedAsliRI);
+
+    for(let i = 0; i < CustDocFileFormObjs.length; i++){
+      if(CustDocFileFormObjs[i].File != null && CustDocFileFormObjs[i].DocTypeName == CommonConstant.ASLI_RI_SELFIE){
+        var lastDotIndex = CustDocFileFormObjs[i].File.name.lastIndexOf('.');
+        var ext = "." + CustDocFileFormObjs[i].File.name.substring(lastDotIndex + 1);
+  
+        var extValid = this.FileExtAllowedAsliRI.find(x => x.toUpperCase() == ext.toUpperCase());
+        if(extValid == undefined){
+          listInvalidFormatDoc.push(CustDocFileFormObjs[i].DocTypeName);
+          isValid = false;
+        }
+      }
+    }
+
+    if(listInvalidFormatDoc.length > 0){
+      var invalidFormatDocStr = String.Join(", ", listInvalidFormatDoc);
+      this.toastr.warningMessage(String.Format(ExceptionConstant.INVALID_FILE_FORMAT_FOR_DOC, invalidFormatDocStr, ExtStrAsliRI));
     }
 
     return isValid;
