@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 
 @Component({
@@ -16,7 +17,8 @@ export class CustomerViewAsliRiComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer, 
+    private UrlConstantNew: UrlConstantNew
   ) 
   {
     this.route.queryParams.subscribe(params => {
@@ -59,14 +61,14 @@ export class CustomerViewAsliRiComponent implements OnInit {
       this.code = this.custObj.TaxIdNo
     }
 
-    await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.custObj.MrCustModelCode}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : this.custObj.MrCustModelCode}).toPromise().then(
       (res: any) => {
         this.MrCustModelName = res.Descr;
     })
 
     if(this.custObj.MrIdTypeCode != null)
     {
-      await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.custObj.MrIdTypeCode}).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : this.custObj.MrIdTypeCode}).toPromise().then(
         (res: any) => {
           this.IDType = res.Descr;
       })
@@ -84,7 +86,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
     }
     if(this.CustId != null)
     {
-      await this.http.post(URLConstant.GetCustByCustId, { Id: this.CustId }).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.CustId }).toPromise().then(
         (response: CustObj) => {
           this.custObj = response;
         }
@@ -92,7 +94,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
     }
     else
     {
-      await this.http.post(URLConstant.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
         (response: CustObj) => {
           this.custObj = response;
         }
@@ -102,7 +104,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
 
   async GetData()
   {
-    await this.http.post(URLConstant.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetTrxSrcDataForAsliRi, {Code: this.code}).toPromise().then(
       (res: any) => {
         this.DataAsliRi = res;
         this.isReady = true;

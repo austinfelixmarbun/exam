@@ -1119,6 +1119,8 @@ export class UrlConstantNew{
     public AddTrxSrcDataForTrustingSocialV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForTrustingSocialV2;
     public AddTrxSrcDataForPefindo = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindo;
     public AddTrxSrcDataForPefindoV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoV2;
+    public AddTrxScrDataForAsliRi = this.env.FoundationR3Url + this.url.AddTrxScrDataForAsliRi;
+    public GetTrxSrcDataForAsliRi = this.env.FoundationR3Url + this.url.GetTrxSrcDataForAsliRi;
 
     //PEFINDO
     public GetViewMOSummary = this.env.FoundationR3Url + this.url.GetViewMOSummary;

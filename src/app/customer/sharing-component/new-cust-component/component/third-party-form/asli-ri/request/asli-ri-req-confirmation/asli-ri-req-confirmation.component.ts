@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ReqAddTrxSrcDataForAsliRIObj } from 'app/shared/model/asli-ri/req-add-trx-src-data-for-asli-ri-obj.model';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj.model';
@@ -20,7 +21,7 @@ export class AsliRiReqConfirmationComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private toastr: NGXToastrService,
               private http: HttpClient, private spinner: NgxSpinnerService,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   @Input() isPhoneAgeVerifValid: boolean;
   @Input() isHomeAddressPercentageVerifValid: boolean;
@@ -106,7 +107,7 @@ export class AsliRiReqConfirmationComponent implements OnInit {
       this.toastr.errorMessage('Upload Failed !');
       return;
     };
-    xhr.open('POST', URLConstant.AddTrxScrDataForAsliRi, true);
+    xhr.open('POST', this.UrlConstantNew.AddTrxScrDataForAsliRi, true);
     let value = this.cookieService.get('XSRF-TOKEN');
     let token = this.DecryptString(value, environment.ChipperKeyCookie);
     xhr.setRequestHeader('AdInsKey', `${token}`);

@@ -930,5 +930,7 @@
     "DeleteRefNotifAttrSourceContent": "/v1/RefNotifAttrSourceContent/DeleteRefNotifAttrSourceContent",
     "AddRefNotificationSource": "/v1/RefNotificationSource/AddRefNotificationSource",
     "EditRefNotificationSource": "/v1/RefNotificationSource/EditRefNotificationSource",
-    "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId"
+    "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId",
+    "AddTrxScrDataForAsliRi" : "/v1/IntegratorAsliRi/AddTrxSrcDataForAsliRi",
+    "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi"
 }

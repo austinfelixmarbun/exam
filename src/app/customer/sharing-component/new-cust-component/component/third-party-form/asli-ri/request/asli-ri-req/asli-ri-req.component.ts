@@ -6,6 +6,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ReqAddTrxSrcDataForAsliRIObj } from 'app/shared/model/asli-ri/req-add-trx-src-data-for-asli-ri-obj.model';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
@@ -17,8 +18,12 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 })
 export class AsliRiReqComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder,
-              private http: HttpClient) { }
+  constructor(
+    public activeModal: NgbActiveModal, 
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private UrlConstantNew: UrlConstantNew
+  ) { }
   
   @Input() parentForm: FormGroup;
   @Input() MrCustTypeCode: string;
@@ -78,14 +83,14 @@ export class AsliRiReqComponent implements OnInit {
     this.CheckValidationSubsection()
     this.CheckValidationSelfie()
 
-    await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.parent.MrCustModelCode}).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : this.parent.MrCustModelCode}).toPromise().then(
       (res: any) => {
         this.MrCustModelName = res.Descr;
       })
 
     if(this.parent.MrIdTypeCode != null)
     {
-      await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.parent.MrIdTypeCode}).toPromise().then(
+      await this.http.post(this.UrlConstantNew.GetRefMasterByMasterCode, {Code : this.parent.MrIdTypeCode}).toPromise().then(
         (res: any) => {
           this.IDType = res.Descr;
         })

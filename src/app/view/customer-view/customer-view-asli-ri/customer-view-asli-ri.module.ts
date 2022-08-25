@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
 import { UCSearchModule } from "@adins/ucsearch";
 import { UcpagingModule } from "@adins/ucpaging";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -16,6 +15,7 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { CustomerViewAsliRiComponent } from "./customer-view-asli-ri.component";
 import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing.module";
+import { HttpClientModule } from "@angular/common/http";
 
 
 
@@ -27,7 +27,7 @@ import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing
     CustomerViewAsliRiRoutingModule,
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
@@ -44,7 +44,6 @@ import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing
   ],
   declarations: [
    CustomerViewAsliRiComponent
-
   ],
   entryComponents: [
     UcviewgenericComponent,

@@ -265,7 +265,7 @@ export class CustomerViewComponent implements OnInit {
       }
     }
 
-    await this.http.post<ResSysConfigResultObj>(URLConstant.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeAsliRi }).toPromise().then(
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeAsliRi }).toPromise().then(
       (response) => {
         if(response.ConfigValue == "1")
         {
