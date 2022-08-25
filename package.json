@@ -64,7 +64,7 @@
     "@adins/ucreport": "^2.2.1",
     "@adins/ucsearch": "^2.9.13",
     "@adins/ucthingstodo": "^1.1.2",
-    "@adins/ucupload": "^1.9.2",
+    "@adins/ucupload": "^1.9.7",
     "@adins/ucviewgeneric": "^2.3.2",
     "@angular/animations": "^13.2.2",
     "@angular/cdk": "^13.2.2",
