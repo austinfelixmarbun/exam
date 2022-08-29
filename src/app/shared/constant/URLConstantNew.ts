@@ -997,6 +997,7 @@ export class UrlConstantNew{
 
     // COA
     public GetRefCoaByRefCoaId = this.env.FoundationR3Url + this.url.GetRefCoaByRefCoaId;
+    public GetListKvpPayAllocVendorByCategoryCode = this.env.FoundationR3Url + this.url.GetListKvpPayAllocVendorByCategoryCode;
     public SubmitCoa = this.env.FoundationR3Url + this.url.SubmitCoa;
     public SubmitListCoa = this.env.FoundationR3Url + this.url.SubmitListCoa;
     public GetListRefCoaByCoaSchmId = this.env.FoundationR3Url + this.url.GetListRefCoaByCoaSchmId;

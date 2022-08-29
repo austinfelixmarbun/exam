@@ -851,6 +851,7 @@
     "GetApprovedBy": "/api/RFAWeb/GetApprovedBy/",
     "GetRecommendations": "/api/RFAWeb/GetRecommendations/",
     "GetRefCoaByRefCoaId": "/v1/Coa/GetRefCoaByRefCoaId",
+    "GetListKvpPayAllocVendorByCategoryCode": "/v1/Coa/GetListKvpPayAllocVendorByCategoryCode",
     "SubmitCoa": "/v1/Coa/SubmitCoa",
     "SubmitListCoa": "/v1/Coa/SubmitListCoa",
     "GetListRefCoaByCoaSchmId": "/v1/Coa/GetListRefCoaByCoaSchmId",

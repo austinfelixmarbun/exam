@@ -125,6 +125,7 @@ export class CoaDetailComponent implements OnInit {
             EntityType: this.ListCOA[i].coa[0].EntityType,
             PaymentAllocCode: this.ListCOA[i].coa[0].PaymentAllocCode,
             EntityCode: this.ListCOA[i].coa[0].EntityCode,
+            EntityTypeCode: this.ListCOA[i].coa[0].EntityTypeCode,
             CurrCode: this.ListCurr[j].newCurr,
             Coa: DataCoa.value[j].COA
           }
@@ -142,7 +143,7 @@ export class CoaDetailComponent implements OnInit {
       this.refCoaObj = new RefCoaObj();
       this.refCoaObj.RefAcctBookId = 1;
       this.refCoaObj.MrEntityCode = this.ListOfCOA[i][0].EntityCode;
-      this.refCoaObj.MrEntityType = this.ListOfCOA[i][0].EntityCode;
+      this.refCoaObj.MrEntityType = this.ListOfCOA[i][0].EntityTypeCode;
       this.refCoaObj.CurrCode = this.ListOfCOA[i][0].CurrCode;
       this.refCoaObj.PaymentAllocCode = this.ListOfCOA[i][0].PaymentAllocCode;
       this.refCoaObj.Coa = this.ListOfCOA[i][0].Coa;
@@ -221,7 +222,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeSuppl) {
-        await this.http.post<any>(this.UrlConstantNew.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.SUPPLIER }).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKvpPayAllocVendorByCategoryCode, { Code: CommonConstant.SUPPLIER }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
           },
@@ -232,7 +233,7 @@ export class CoaDetailComponent implements OnInit {
         this.AddToCoa()
       }
       else if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany) {
-        await this.http.post<any>(this.UrlConstantNew.GetListKvpVendorObjByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
+        await this.http.post<any>(this.UrlConstantNew.GetListKvpPayAllocVendorByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
             console.log(this.ListPaymentAlloc)
@@ -263,13 +264,39 @@ export class CoaDetailComponent implements OnInit {
   AddToCoa() {
     for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
       var coa = new Array<any>();
-      coa = [
-        {
-          EntityType: this.entityTypeSelect[0].Value,
-          PaymentAllocCode: this.ListPaymentAlloc[j].Key,
-          EntityCode: this.entityTypeSelect[0].Key
-        }
-      ];
+      if(this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeBankAcc)
+      {
+        coa = [
+          {
+            EntityType: this.entityTypeSelect[0].Value,
+            EntityTypeCode: this.entityTypeSelect[0].Key,
+            PaymentAllocCode: "-",
+            EntityCode: this.ListPaymentAlloc[j].Key
+          }
+        ];
+      }
+      else if(this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeSuppl || this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany)
+      {
+        coa = [
+          {
+            EntityType: this.entityTypeSelect[0].Value,
+            EntityTypeCode: this.entityTypeSelect[0].Key,
+            PaymentAllocCode: this.ListPaymentAlloc[j].Key,
+            EntityCode: this.ListPaymentAlloc[j].Value
+          }
+        ];
+      }
+      else
+      {
+        coa = [
+          {
+            EntityType: this.entityTypeSelect[0].Value,
+            EntityTypeCode: this.entityTypeSelect[0].Key,
+            PaymentAllocCode: this.ListPaymentAlloc[j].Key,
+            EntityCode: this.entityTypeSelect[0].Key
+          }
+        ];
+      }
       this.ListCOA.push({ coa });
       this.GetListCoaFormArray().push(this.AddNewDataCoaFormGroup());
     }

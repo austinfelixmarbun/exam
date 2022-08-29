@@ -79,6 +79,12 @@
         {
             "type": "sort",
             "position": "center",
+            "label": "COA SCHEME",
+            "name": "IIF(cs.SCHM_NAME = '','-',ISNULL(cs.SCHM_NAME,'-'))"
+        },
+        {
+            "type": "sort",
+            "position": "center",
             "label": "PAYMENT ALLOCATION CODE",
             "name": "rc.PAYMENT_ALLOC_CODE"
         },
@@ -114,6 +120,11 @@
         },
         {
             "type": "text",
+            "position": "left",
+            "property": "CoaScheme"
+        },
+        {
+            "type": "text",
             "position": "center",
             "property": "PaymentAllocCode"
         },
@@ -129,7 +140,7 @@
         },
         {
             "type": "text",
-            "position": "center",
+            "position": "left",
             "property": "Coa"
         },
         {
