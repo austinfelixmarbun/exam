@@ -303,11 +303,14 @@ export class NewCustCompanyMainDataXComponent implements OnInit {
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
         this.existingCustomerLookUpObj.isReady = true;
         this.CheckTaxIdFormat();
-        if (this.existingCustomerLookUpObj.isReady && this.CustDataMode != this.CustDataModeMain) {
-          this.CustomerForm.get("isForeigner").disable();
-          this.CustomerForm.get("CustName").disable();
-          this.CustomerForm.get("TaxIdNo").disable();
-        }
+        if (this.pageFrom == CommonConstant.CustFromEditMainData)
+        {
+          if (this.existingCustomerLookUpObj.isReady && this.CustDataMode == this.CustDataModeMain) {
+            this.CustomerForm.get("isForeigner").disable();
+            this.CustomerForm.get("CustName").disable();
+            this.CustomerForm.get("TaxIdNo").disable();
+          }
+        }        
       }
     );
   }
