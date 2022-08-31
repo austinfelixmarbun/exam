@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 
@@ -14,6 +15,9 @@ export class AsliRiViewComponent implements OnInit {
   }
 
   @Input() custObj: CustObj;
+  @Input() parentForm: FormGroup;
+  @Input() MrCustTypeCode: string;
+
 
 
   async ngOnInit() {
