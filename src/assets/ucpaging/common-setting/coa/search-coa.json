@@ -14,7 +14,7 @@
             "url": "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
             "isEvent" : "true",
-            "affectedFilter" : ["rc.PAYMENT_ALLOC_CODE"],
+            "affectedFilter" : ["rc.PAYMENT_ALLOC_CODE","rc.MR_ENTITY_CODE"],
             "filterPropName" : "ENTITY_TYPE",
             "label": "Entity Type",
             "items": [],
@@ -24,13 +24,22 @@
             "criteriaPropValue" : "ENTITY_TYPE"
         },
         {
-            "type": "textbox",
+            "type": "dropdown",
             "name": "rc.MR_ENTITY_CODE",
+            "datatype": "text",
             "id": "EntityCode",
             "value": "",
-            "label": "Entity Code",
             "placeholder": "Placeholder",
-            "datatype": "text"
+            "isFromURL": true,
+            "ddlType": "all",
+            "url": "",
+            "path": "/Coa/GetListKVEntityCodeByEntityType",
+            "label": "Entity Code",
+            "criteriaPropName" : "",
+            "criteriaPropValue" : "",
+            "items": [],
+            "itemsUrl": [],
+            "environment": "FOU"
         },
         {
             "type": "dropdown",
