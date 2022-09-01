@@ -194,7 +194,7 @@ export class CoaSchemeDetailComponent implements OnInit {
       for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
         this.refCoaObj = new RefCoaObj();
         this.refCoaObj.RefAcctBookId = 1;
-        this.refCoaObj.MrEntityCode = this.ListPaymentAlloc[j].Key;
+        this.refCoaObj.MrEntityCode = CommonConstant.RefMasterTypeCodeEntityTypePayAlloc;
         this.refCoaObj.MrEntityType = CommonConstant.RefMasterTypeCodeEntityTypePayAlloc;
         this.refCoaObj.CurrCode = this.ListSelectedCurr[i].newCurr;
         this.refCoaObj.PaymentAllocCode = this.ListPaymentAlloc[j].Key;
