@@ -57,7 +57,7 @@ export class AsliRiReqComponent implements OnInit {
 
   async ngOnInit() {
     this.reqAddTrxSrcDataForAsliRIObj = new ReqAddTrxSrcDataForAsliRIObj();
-    this.parent = this.parentForm.value;
+    this.parent = this.parentForm.getRawValue();
     this.Addr = this.parentForm.controls.UcAddress.value;
     this.address = this.Addr.Addr +  " RT/RW " + this.Addr.AreaCode4 + "/" + this.Addr.AreaCode3 + " " + this.Addr.AreaCode2 + " " + this.Addr.AreaCode1 + " " + this.Addr.City;
 
