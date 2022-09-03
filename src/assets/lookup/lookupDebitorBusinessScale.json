@@ -7,7 +7,7 @@
             "name": "LBPPMS_BIZ_SCL_CODE",
             "id": "LbppmsBizSclCodeId",
             "value": "",
-            "label": "Debtor Group Code",
+            "label": "Debtor Business Scale Code",
             "placeholder": "Placeholder"
         },
         {
