@@ -479,6 +479,15 @@ export class VendorHoAddEditComponent implements OnInit {
     );
   }
 
+  setValidatiorEKTP()
+  {
+    if(this.VendorForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
+    {
+      this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+      this.VendorForm.controls.IdNo.updateValueAndValidity();
+    }
+  }
+
   NpwpCheck(isGetData: boolean = false) {
     if (this.VendorForm.controls.IsNpwpExist.value == true) {
       this.isHidden = false;
@@ -561,6 +570,8 @@ export class VendorHoAddEditComponent implements OnInit {
             });
           }
         }
+
+        this.setValidatiorEKTP()
       }
     );
 
