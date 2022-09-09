@@ -62,6 +62,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
   VatForPersonal: boolean = false;
+  isIdTypeReady: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
@@ -174,14 +175,14 @@ export class VendorHoAddEditComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.VendorForm.controls.VendorCode.disable();
-      this.getData();
+      await this.getData();
     } else {
       if(this.MrVendorCategoryCode == "SUPPLIER_HO"){
         this.checkIsAutoFormNoFromSetting("SU");
       }
       this.setDropdown();
       this.setLookup();
-      this.checkType();
+      await this.checkType();
     }
 
     this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
@@ -343,13 +344,13 @@ export class VendorHoAddEditComponent implements OnInit {
     );
   }
 
-  getData() {
+  async getData() {
     let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
     ReqGetVendorAndVendorAddr.Id = this.VendorId;
-    this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).subscribe(
-      (response) => {
+    await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
+      async (response) => {
         this.result = response;
-        this.setDropdown();
+        await this.setDropdown();
         this.MrVendorCategoryCode = this.result.VendorObj.MrVendorCategoryCode;
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
@@ -390,11 +391,11 @@ export class VendorHoAddEditComponent implements OnInit {
         
 
         this.setLookup();
-        this.checkType();
+        await this.checkType();
       }
     );
 
-    this.http.post(this.UrlConstantNew.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).subscribe(
+    await this.http.post(this.UrlConstantNew.GetListVendorAtpmMappingByVendorId, { Id: this.VendorId }).toPromise().then(
       (response: GenericListObj) => {
         this.resultAtpmMapping = response.ReturnObject;
 
@@ -402,12 +403,12 @@ export class VendorHoAddEditComponent implements OnInit {
       });
   }
 
-  setDropdown() {
+  async setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
       MasterCode: CommonConstant.HeadOffice
     }
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -421,8 +422,8 @@ export class VendorHoAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).subscribe(
-      (response) => {
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterTypeObj).toPromise().then(
+      async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.mode != "edit") {
@@ -446,7 +447,7 @@ export class VendorHoAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+          await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -481,11 +482,17 @@ export class VendorHoAddEditComponent implements OnInit {
 
   setValidatiorEKTP()
   {
+    this.VendorForm.controls.IdNo.clearValidators();
+    
     if(this.VendorForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
     {
       this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
-      this.VendorForm.controls.IdNo.updateValueAndValidity();
+      this.updateValueAndValidityForm();
+      return;
     }
+
+    this.VendorForm.controls.IdNo.setValidators([Validators.required])
+    this.updateValueAndValidityForm();
   }
 
   NpwpCheck(isGetData: boolean = false) {
@@ -531,7 +538,7 @@ export class VendorHoAddEditComponent implements OnInit {
     this.VendorForm.controls.LicenseNo.updateValueAndValidity();
   }
 
-  checkType() {
+  async checkType() {
     if (this.VendorForm.controls.MrVendorTypeCode.value != 'P') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
@@ -556,7 +563,7 @@ export class VendorHoAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -571,6 +578,7 @@ export class VendorHoAddEditComponent implements OnInit {
           }
         }
 
+        this.isIdTypeReady = true;
         this.setValidatiorEKTP()
       }
     );
