@@ -20,12 +20,7 @@
     "test": "ng test",
     "version:patch": "npm version prerelease -m UpVersion && git push origin HEAD:master --follow-tags --force",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "dev:ssr": "ng run matngular:serve-ssr",
-    "serve:ssr": "node dist/matngular/server/main.js",
-    "build:ssr": "ng build && ng run matngular:server",
-    "prerender": "ng run matngular:prerender",
-    "rename": "node -e \"require('fs').rename('dist/matngular/browser/assets/enviConfig.dev.json', 'dist/matngular/browser/assets/enviConfig.json', function(err) { if (err) console.log(err); else console.log('File successfully renamed!') })\""
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
