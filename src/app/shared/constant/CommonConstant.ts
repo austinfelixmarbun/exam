@@ -108,6 +108,9 @@ export class CommonConstant {
     public static VENDOR_GRADING_STATUS_EXE = "EXE";
     public static VENDOR_GRADING_APV = "VENDOR_GRADING_APV";
 
+    //VENDOR EMP POSITION
+    public static VENDOR_EMP_POSITION_SUPERVISOR = "SUPERVISOR";
+
     // NOTIFICATION METHOD
     public static NOTIF_METHOD_INT_LINK = "INT_LINK";
     public static NOTIF_METHOD_EXT_LINK = "EXT_LINK";
