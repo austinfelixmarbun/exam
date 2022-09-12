@@ -339,7 +339,6 @@ export class VendorEmployeeComponent implements OnInit {
       this.VendorEmpForm.get("Addr").setValidators(Validators.required);
       this.VendorEmpForm.get("Addr").updateValueAndValidity();
     }
-    console.log(this.VendorEmpForm.get("Addr"))
   }
 
   validateDate() {
