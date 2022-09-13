@@ -43,6 +43,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
   isHidden: boolean = true;
   RsvField: string;
   VatForPersonal: boolean = false;
+  isIDTypeReady: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, 
               private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
@@ -91,12 +92,12 @@ export class VendorHoldingAddEditComponent implements OnInit {
   });
 
 
-  ngOnInit() {
-    this.GetGeneralSetting();
+  async ngOnInit() {
+    await this.GetGeneralSetting();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
     if (this.mode == "edit") {
-      this.getData();
+      await this.getData();
       this.VendorForm.controls.VendorCode.disable();
     } else {
       if(this.MrVendorCategoryCode == 'SUPPLIER_HOLDING'){
@@ -104,18 +105,18 @@ export class VendorHoldingAddEditComponent implements OnInit {
       }
       this.setDropdown();
       this.setLookup();
-      this.checkType();
+      await this.checkType();
     }
 
   }
 
-  getData() {
+  async getData() {
     let GetVendorId: GenericObj = new GenericObj();
     GetVendorId.Id = this.VendorId;
-    this.vendorService.GetVendorAndVendorAddrByVendorId(GetVendorId).subscribe(
-      (response) => {
+    await this.vendorService.GetVendorAndVendorAddrByVendorId(GetVendorId).toPromise().then(
+      async (response) => {
         this.result = response;
-        this.setDropdown();
+        await this.setDropdown();
         this.VendorForm.patchValue({
           MrVendorCategoryCode: this.result.VendorObj.MrVendorCategoryCode,
           VendorCode: this.result.VendorObj.VendorCode,
@@ -155,17 +156,17 @@ export class VendorHoldingAddEditComponent implements OnInit {
         });
 
         this.setLookup();
-        this.checkType();
+        await this.checkType();
       }
     );
   }
 
-  setDropdown() {
+  async setDropdown() {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory,
       MappingCode: CommonConstant.Holding
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
         if (this.itemCategoryType.length > 0) {
@@ -179,8 +180,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
     var refMasterTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorType,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).subscribe(
-      (response) => {
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterTypeObj).toPromise().then(
+      async (response) => {
         this.itemType = response[CommonConstant.ReturnObj];
         if (this.itemType.length > 0) {
           if (this.mode != "edit") {
@@ -205,7 +206,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
             RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
             MappingCode: this.RsvField,
           }
-          this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
+          await this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).toPromise().then(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -224,7 +225,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).subscribe(
+    await this.vendorService.GetRefMasterListKeyValuePair(refMasterCalcMethodObj).toPromise().then(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -236,6 +237,21 @@ export class VendorHoldingAddEditComponent implements OnInit {
         }
       }
     );
+  }
+
+  setValidatiorEKTP()
+  {
+    this.VendorForm.controls.IdNo.clearValidators();
+    
+    if(this.VendorForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
+    {
+      this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+      this.updateValueAndValidityForm();
+      return;
+    }
+
+    this.VendorForm.controls.IdNo.setValidators([Validators.required])
+    this.updateValueAndValidityForm();
   }
 
   NpwpCheck(isGetData: boolean = false) {
@@ -379,7 +395,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
     this.NpwpCheck(true);
   }
 
-  checkType() {
+  async checkType() {
     if (this.VendorForm.controls.MrVendorTypeCode.value == 'C') {
       this.VendorForm.controls.MrIdTypeCode.clearValidators();
       this.VendorForm.controls.IdNo.clearValidators();
@@ -400,7 +416,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
       MappingCode: this.RsvField,
     }
-    this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).subscribe(
+    this.vendorService.GetListActiveRefMasterWithMappingCodeAll(refMasterIdObj).toPromise().then(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -414,6 +430,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
             });
           }
         }
+
+        this.isIDTypeReady = true;
+        this.setValidatiorEKTP();
       }
     );
     this.setVAT();
@@ -456,8 +475,8 @@ export class VendorHoldingAddEditComponent implements OnInit {
     }
   }
 
-  GetGeneralSetting(){
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+  async GetGeneralSetting(){
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;
