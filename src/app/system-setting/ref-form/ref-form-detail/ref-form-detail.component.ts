@@ -261,7 +261,9 @@ export class RefFormDetailComponent implements OnInit {
   }
 
   DeleteParam(i: number) {
-    this.parameterObj.splice(i, 1)
+    if (confirm("Are you sure to delete this record?")) {
+      this.parameterObj.splice(i, 1)
+    }
   }
 
   SaveForm() {
