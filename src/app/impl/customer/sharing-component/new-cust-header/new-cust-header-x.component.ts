@@ -158,7 +158,28 @@ export class NewCustHeaderXComponent implements OnInit {
     if (ev.CustObj.CustId != 0) {
       var reqPayload = this.separateFileUpload(ev);
       var resSave;
-      await this.http.post(this.SetUrlEditPersonal(), reqPayload.forApi).toPromise().then(
+
+      var payloadNew = {
+        PayloadOld : reqPayload.forApi,
+        IsFamilyData : false,
+        IsShareholderData : false
+      };
+      if(this.isShareholder)
+        {
+          payloadNew.IsShareholderData = true;
+        }
+        else if(this.isFamily) {
+          payloadNew.IsFamilyData = true;
+        }
+      let urlAdd: string = this.SetUrlEditPersonal();
+      var payload;
+      if(urlAdd == URLConstantX.EditCustPersonalMainDataXV2)
+      {
+          payload = payloadNew;
+      }else{
+          payload = reqPayload.forApi;
+      }
+      await this.http.post(urlAdd, payload).toPromise().then(
         (response) => {
           resSave = response;
         }
@@ -176,7 +197,25 @@ export class NewCustHeaderXComponent implements OnInit {
       var reqPayload = this.separateFileUpload(ev);
       var result: any;
       var resSave;
-      await this.http.post(this.SetUrlEditCoy(), reqPayload.forApi).toPromise().then(
+
+      var payloadNew = {
+        PayloadOld : reqPayload.forApi,
+        IsFamilyData : false,
+        IsShareholderData : false
+      };
+      if(this.isShareholder)
+        {
+          payloadNew.IsShareholderData = true;
+        }
+      let urlAdd: string = this.SetUrlEditCoy();
+      var payload;
+      if(urlAdd == URLConstantX.EditCustCompanyMainDataV2)
+      {
+          payload = payloadNew;
+      }else{
+          payload = reqPayload.forApi;
+      }
+      await this.http.post(urlAdd, payload).toPromise().then(
         (response) => {
           resSave = response;
         }
@@ -308,12 +347,13 @@ export class NewCustHeaderXComponent implements OnInit {
     }
     return urlAdd;
   }
+
   SetUrlEditCoy(): string {
     let urlAdd: string = "";
     if(environment.isCore){
       switch (this.CustDataMode) {
         case CommonConstant.CustMainDataModeCust:
-          urlAdd = URLConstant.EditCustCompanyMainDataV2;
+          urlAdd = URLConstantX.EditCustCompanyMainDataV2;
           break;
         case CommonConstant.CustMainDataModeMgmntShrholder:
           urlAdd = URLConstantX.SaveCustCompanyShareholderMainDataV2;
@@ -560,7 +600,7 @@ export class NewCustHeaderXComponent implements OnInit {
 
   uploadDocFileMultipart(objDoc: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>} , successMsg:string, custId:number)
   {
-    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId) 
+    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId)
     {
       this.toastr.successMessage(successMsg);
       this.redirectSaveEditMainData(custId);
