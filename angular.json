@@ -18,7 +18,7 @@
               "ngx-quill"
             ],
             "preserveSymlinks": true,
-            "outputPath": "dist/matngular/browser",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",

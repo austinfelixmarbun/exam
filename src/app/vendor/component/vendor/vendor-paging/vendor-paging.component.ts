@@ -222,7 +222,7 @@ export class VendorPagingComponent implements OnInit, OnDestroy {
 
         var WVAddrTypeObj = new WhereValueObj();
         WVAddrTypeObj.property = "AddrType";
-        WVAddrTypeObj.value = CommonConstant.AddrTypeTax;
+        WVAddrTypeObj.value = CommonConstant.AddrTypeLegal;
         this.inputPagingObj.whereValue.push(WVAddrTypeObj);
 
         var WVendorClassObj = new WhereValueObj();

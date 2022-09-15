@@ -43,6 +43,7 @@ export class VendorHoAddEditComponent implements OnInit {
 
   businessDt: Date;
   result: any;
+  res: any;
   resultAtpmMapping: Array<VendorAtpmMappingObj> = new Array();
   check: any;
   inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -62,7 +63,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
   VatForPersonal: boolean = false;
-  isIdTypeReady: boolean = false;
+  isIDTypeready: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
@@ -180,7 +181,7 @@ export class VendorHoAddEditComponent implements OnInit {
       if(this.MrVendorCategoryCode == "SUPPLIER_HO"){
         this.checkIsAutoFormNoFromSetting("SU");
       }
-      this.setDropdown();
+      await this.setDropdown();
       this.setLookup();
       await this.checkType();
     }
@@ -466,7 +467,7 @@ export class VendorHoAddEditComponent implements OnInit {
     var refMasterCalcMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeTaxCalcMethod,
     }
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).subscribe(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCalcMethodObj).toPromise().then(
       (response) => {
         this.itemCalcMethodType = response[CommonConstant.ReturnObj];
         if (this.itemCalcMethodType.length > 0) {
@@ -487,11 +488,17 @@ export class VendorHoAddEditComponent implements OnInit {
     if(this.VendorForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
     {
       this.VendorForm.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+      this.VendorForm.controls.IdNo.updateValueAndValidity();
+      return
+    }
+
+    if(this.VendorForm.controls.MrVendorTypeCode.value == 'P')
+    {
+      this.VendorForm.controls.IdNo.setValidators([Validators.required])
       this.updateValueAndValidityForm();
       return;
     }
 
-    this.VendorForm.controls.IdNo.setValidators([Validators.required])
     this.updateValueAndValidityForm();
   }
 
@@ -566,8 +573,14 @@ export class VendorHoAddEditComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
+
+        if(this.result != undefined)
+        {
+          this.res = this.itemIdType.filter((x) => {return x.Key == this.result.VendorObj.MrIdTypeCode})
+        }
+
         if (this.itemIdType.length > 0) {
-          if (this.mode != "edit") {
+          if (this.mode != "edit" || this.res.length == 0) {
             this.VendorForm.patchValue({
               MrIdTypeCode: this.itemIdType[0].Key
             });
@@ -576,6 +589,8 @@ export class VendorHoAddEditComponent implements OnInit {
               MrIdTypeCode: this.result.VendorObj.MrIdTypeCode
             });
           }
+
+          this.isIDTypeready = true;
         }
 
         this.isIdTypeReady = true;
