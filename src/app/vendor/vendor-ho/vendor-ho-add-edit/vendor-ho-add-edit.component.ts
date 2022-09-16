@@ -63,7 +63,7 @@ export class VendorHoAddEditComponent implements OnInit {
   vendorAttrRequest = new Array<VendorAttrContentObj>();
   vendorAtpmList = new Array();
   VatForPersonal: boolean = false;
-  isIDTypeready: boolean = false;
+  isIdTypeReady: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
@@ -590,7 +590,7 @@ export class VendorHoAddEditComponent implements OnInit {
             });
           }
 
-          this.isIDTypeready = true;
+          this.isIdTypeReady = true;
         }
 
         this.isIdTypeReady = true;
