@@ -17,26 +17,6 @@
         "placeholder": "Placeholder"
       },
       {
-          "type": "numeric",
-          "name": "VENDOR_EMP_RATING",
-          "id": "VendorEmpRatingGteId",
-          "value": "0",
-          "label": "Rating >=",
-          "restriction": "gte",
-          "placeholder": "Placeholder",
-          "datatype": "numeric"
-      },
-      {
-          "type": "numeric",
-          "name": "VENDOR_EMP_RATING",
-          "id": "VendorEmpRatingLteId",
-          "value": "100",
-          "label": "Rating <=",
-          "restriction": "lte",
-          "placeholder": "Placeholder",
-          "datatype": "numeric"
-      },
-      {
           "type": "dropdown",
           "name": "IS_ACTIVE",
           "id": "IsActiveId",
@@ -83,12 +63,6 @@
       {
         "type": "sort",
         "position": "center",
-        "label": "Rating",
-        "name": "VENDOR_EMP_RATING"
-      },
-      {
-        "type": "sort",
-        "position": "center",
         "label": "Active Status",
         "name": "IS_ACTIVE"
       },
@@ -113,11 +87,6 @@
         "type": "text",
         "position": "center",
         "property": "MobilePhnNo1"
-      }, 
-      {
-        "type": "text",
-        "position": "center",
-        "property": "VendorEmpRating"
       },
       {
         "type": "boolean",

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute } from '@angular/router';
 import { CustObj } from 'app/shared/model/cust-obj.model';
@@ -111,7 +111,7 @@ export class JobDataEmployeeComponent implements OnInit {
     PreviIndustryName: [''],
     PreviEmploymentDate: [''],
     NotesPreJob: [''],
-    NoOfEmploy: ['']
+    NoOfEmploy: ['', Validators.pattern("^[0-9]+$")]
   });
 
   inputAddressObj: InputAddressObj;

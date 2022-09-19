@@ -201,16 +201,24 @@ export class VendorEmployeeComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.objInput.VendorId;
     this.inputLookupSpvObj.addCritInput.push(critObj);
-    this.PatchDataLookupInternal();
-
+    
     if (this.mode == "edit") {
       var critObj = new CriteriaObj();
       critObj.propName = 'VENDOR_EMP_ID';
       critObj.restriction = AdInsConstant.RestrictionNeq;
       critObj.value = this.VendorEmpId + '';
       this.inputLookupSpvObj.addCritInput.push(critObj);
-      this.PatchDataLookupInternal();
     }
+
+    if (this.isVendorCollCompany){
+      var critObj = new CriteriaObj();
+      critObj.propName = 'MR_VENDOR_EMP_POSITION_CODE';
+      critObj.restriction = AdInsConstant.RestrictionEq;
+      critObj.value = CommonConstant.VENDOR_EMP_POSITION_SUPERVISOR;
+      this.inputLookupSpvObj.addCritInput.push(critObj);
+    }
+    this.PatchDataLookupInternal();
+
     this.inputLookupZipcodeObj.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
@@ -321,11 +329,15 @@ export class VendorEmployeeComponent implements OnInit {
     this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
     this.VendorEmpForm.get("TaxpayerName").clearValidators();
     this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
+    this.VendorEmpForm.get("Addr").clearValidators();
+    this.VendorEmpForm.get("Addr").updateValueAndValidity();
     if(isNpwp){
       this.VendorEmpForm.get("TaxIdNo").setValidators([Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15), Validators.required]);
       this.VendorEmpForm.get("TaxIdNo").updateValueAndValidity();
       this.VendorEmpForm.get("TaxpayerName").setValidators(Validators.required);
       this.VendorEmpForm.get("TaxpayerName").updateValueAndValidity();
+      this.VendorEmpForm.get("Addr").setValidators(Validators.required);
+      this.VendorEmpForm.get("Addr").updateValueAndValidity();
     }
   }
 
