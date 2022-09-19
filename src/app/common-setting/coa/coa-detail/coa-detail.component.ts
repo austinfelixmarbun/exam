@@ -164,7 +164,7 @@ export class CoaDetailComponent implements OnInit {
     }
     else if(this.ListOfCOA.length === CountCoaNull)
     {
-      this.toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
+      this.toastr.errorMessage("Can not Submit Coa, Please input at least one Coa!");
     }
     else
     {
