@@ -81,7 +81,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
 
   async GetDataCustObj()
   {
-    if(this.InputCustObj.CustId != 0){
+    if(typeof this.InputCustObj != "undefined" && this.InputCustObj.CustId != 0){
       this.custObj = this.InputCustObj;
       return;      
     }
