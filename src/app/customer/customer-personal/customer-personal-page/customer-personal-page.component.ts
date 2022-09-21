@@ -112,15 +112,15 @@ export class CustomerPersonalPageComponent implements OnInit {
       this.dmsObj.MetadataParent = null;
       this.dmsObj.MetadataObject.push(new DMSLabelValueObj(CommonConstant.DmsNoCust, this.CustNo));
       this.dmsObj.Option.push(new DMSLabelValueObj(CommonConstant.DmsOverideSecurity, CommonConstant.DmsOverideUploadDownloadView));
-
-      await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
-        (response) => {
-          if (response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried) {
-            this.isMarried = true;
-          }
-        }
-      );
     }
+
+    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: this.IdCust }).toPromise().then(
+      (response) => {
+        if (response.MrMaritalStatCode == CommonConstant.MasteCodeMartialStatsMarried) {
+          this.isMarried = true;
+        }
+      }
+    );
 
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
