@@ -43,6 +43,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   custAddrObj: GenericObj = new GenericObj();
   addressType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
   custAddressObj: CustAddrObj;
+  houseOwnershipObj: any;
 
   custAddrFromObj: CustAddrObj;
   copyCustomerAddrFrom: any;
@@ -99,6 +100,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.addressType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustAddrType;
     this.addressType.MappingCode = CommonConstant.CustTypePersonal;
 
+    this.buildingOwnership();
     await this.getAddrTypeOwnershipRequired();
 
     await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
@@ -145,7 +147,9 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.getCustomerAddr.PhnExt3;
           this.addressObj.FaxArea = this.getCustomerAddr.FaxArea;
           this.addressObj.Fax = this.getCustomerAddr.Fax;
-          this.addressObj.MrHouseOwnershipCode = this.getCustomerAddr.MrBuildingOwnershipCode;
+
+          var isContain = this.checkBuildingOwnership(this.getCustomerAddr.MrBuildingOwnershipCode)
+          this.addressObj.MrHouseOwnershipCode = isContain? this.getCustomerAddr.MrBuildingOwnershipCode : '';
           this.addressObj.StayLength = this.getCustomerAddr.StayLength;
 
           this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
@@ -229,7 +233,10 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
         this.addressObj.PhnExt3 = this.copyCustomerAddrFrom.PhnExt3;
         this.addressObj.FaxArea = this.copyCustomerAddrFrom.FaxArea;
         this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
-        this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
+
+        var isContain = this.checkBuildingOwnership(this.copyCustomerAddrFrom.MrBuildingOwnershipCode)
+        this.addressObj.MrHouseOwnershipCode = isContain? this.copyCustomerAddrFrom.MrBuildingOwnershipCode : '';
+        
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
         this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -301,5 +308,20 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   }
   back() {
     this.outputValue.emit({ mode: 'check' });
+  }
+
+  async buildingOwnership()
+  {
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "BUILDING_OWNERSHIP" }).toPromise().then(
+      (response) => {
+        this.houseOwnershipObj = response["ReturnObject"];
+      }
+    );
+  }
+
+  checkBuildingOwnership(event: any)
+  {
+    var isContain = this.houseOwnershipObj.some(x => x.Key == event)
+    return isContain;
   }
 }

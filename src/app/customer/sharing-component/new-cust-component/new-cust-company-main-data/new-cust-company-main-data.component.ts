@@ -53,6 +53,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   thirdPartyTrxNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
+  houseOwnershipObj: any;
 
   custObj: CustObj = new CustObj();
   isReady: boolean = false;
@@ -87,6 +88,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
     await this.InitCustAddr();
+    this.buildingOwnership();
     this.BindLookupSupplier();
     this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
@@ -231,7 +233,10 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
     tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
-    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
+
+    var isContain = this.checkBuildingOwnership(this.tempCustAddrToCopy.MrBuildingOwnershipCode)
+    tempUcAddObj.MrHouseOwnershipCode = isContain? this.tempCustAddrToCopy.MrBuildingOwnershipCode : '';
+
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
   }
@@ -307,7 +312,10 @@ export class NewCustCompanyMainDataComponent implements OnInit {
         tempUcAddObj.AreaCode4 = response.AreaCode4;
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
-        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
+
+        var isContain = this.checkBuildingOwnership(response.MrBuildingOwnershipCode)
+        tempUcAddObj.MrHouseOwnershipCode = isContain? response.MrBuildingOwnershipCode : '';
+        
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = this.inputFieldObj;
 
@@ -425,5 +433,20 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
+  }
+
+  async buildingOwnership()
+  {
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "BUILDING_OWNERSHIP" }).toPromise().then(
+      (response) => {
+        this.houseOwnershipObj = response["ReturnObject"];
+      }
+    );
+  }
+
+  checkBuildingOwnership(event: any)
+  {
+    var isContain = this.houseOwnershipObj.some(x => x.Key == event)
+    return isContain;
   }
 }
