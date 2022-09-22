@@ -55,13 +55,13 @@
       "datatype": "text"
     },
     {
-      "type": "textbox",
+      "type": "numeric",
       "name": "A.HIERARCHY_LVL",
       "id": "hierarchyLvlId",
-      "value": "",
       "label": "Hierarchy Level",
       "placeholder": "Placeholder",
-      "datatype": "text"
+      "restriction" : "",
+      "datatype": "numeric"
     },
     {
       "type": "dropdown",

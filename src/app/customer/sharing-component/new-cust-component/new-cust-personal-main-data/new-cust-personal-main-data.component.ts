@@ -79,6 +79,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
+  houseOwnershipObj: any;
   @ViewChild(ThirdPartyFormComponent) child : ThirdPartyFormComponent;
 
   constructor(private regexService: RegexService, private toastr: NGXToastrService,
@@ -121,6 +122,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     this.InitData();
+    this.buildingOwnership();
     this.GetGeneralSetting(this.GsCodeIdTypeExpDtRequired);
     this.GetGeneralSetting(this.GsCodeIdTypeExpDtReadonly);
     this.InitCustMainDataMode();
@@ -374,7 +376,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         tempUcAddObj.AreaCode4 = response.AreaCode4;
         tempUcAddObj.Addr = response.Addr;
         tempUcAddObj.City = response.City;
-        tempUcAddObj.MrHouseOwnershipCode = response.MrBuildingOwnershipCode;
+
+        var isContain = this.checkBuildingOwnership(response.MrBuildingOwnershipCode)
+        tempUcAddObj.MrHouseOwnershipCode = isContain? response.MrBuildingOwnershipCode : '';
+
         this.inputAddressObj.default = tempUcAddObj;
         this.inputAddressObj.inputField = inputFieldObj;
 
@@ -552,7 +557,10 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempUcAddObj.AreaCode4 = this.tempCustAddrToCopy.AreaCode4;
     tempUcAddObj.Addr = this.tempCustAddrToCopy.Addr;
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
-    tempUcAddObj.MrHouseOwnershipCode = this.tempCustAddrToCopy.MrBuildingOwnershipCode;
+
+    var isContain = this.checkBuildingOwnership(this.tempCustAddrToCopy.MrBuildingOwnershipCode)
+    tempUcAddObj.MrHouseOwnershipCode = isContain? this.tempCustAddrToCopy.MrBuildingOwnershipCode : '';
+    
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
   }
@@ -821,5 +829,20 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
+  }
+
+  async buildingOwnership()
+  {
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: "BUILDING_OWNERSHIP" }).toPromise().then(
+      (response) => {
+        this.houseOwnershipObj = response["ReturnObject"];
+      }
+    );
+  }
+
+  checkBuildingOwnership(event: any)
+  {
+    var isContain = this.houseOwnershipObj.some(x => x.Key == event)
+    return isContain;
   }
 }
