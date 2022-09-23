@@ -250,7 +250,12 @@ export class VendorHoldingAddEditComponent implements OnInit {
       return;
     }
 
-    this.VendorForm.controls.IdNo.setValidators([Validators.required])
+    if(this.VendorForm.controls.MrVendorTypeCode.value == 'P')
+    {
+      this.VendorForm.controls.IdNo.setValidators([Validators.required])
+      this.updateValueAndValidityForm();
+      return;
+    }
     this.updateValueAndValidityForm();
   }
 
