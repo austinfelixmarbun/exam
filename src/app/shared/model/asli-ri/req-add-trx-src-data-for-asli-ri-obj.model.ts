@@ -2,6 +2,7 @@ export class ReqAddTrxSrcDataForAsliRIObj{
     CustNo: string;
     CustName: string;
     CustType: string;
+    IdNo: string;
     Nik: string;
     Phone: string;
     Address: string;
@@ -19,6 +20,7 @@ export class ReqAddTrxSrcDataForAsliRIObj{
     constructor(){
         this.CustNo = "";
         this.CustName = "";
+        this.IdNo = "";
         this.Nik = "";
         this.Phone = "";
         this.Address = "";
