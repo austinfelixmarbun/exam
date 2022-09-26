@@ -100,7 +100,7 @@
                   <label class="adInsLabel" translate>NPWP Company</label>
                 </div>
                 <div class="form-group col-md-8">
-                  <input type="text" class="form-control adInsInput col-md-6" formControlName="NPWPCompany"
+                  <input type="text" class="form-control adInsInput col-md-6" formControlName="NPWPCompany" [attr.disabled]="MrCustTypeCode=='COMPANY'? true : null"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && AsliRIForm.controls.NPWPCompany.invalid}">
                   <lib-uc-show-errors [control]="AsliRIForm.controls.NPWPCompany"></lib-uc-show-errors>
                 </div>
