@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +32,9 @@ export class CustomerViewAsliRiComponent implements OnInit {
     });
   }
   @Input() InputCustObj: CustObj;
+  @Input() parentForm: FormGroup;
   @Input() ActiveModal: NgbActiveModal;
+  @Input() MrCustTypeCode: string;
 
   CustId: string = null;
   CustNo: string = null;
@@ -80,7 +83,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
 
   async GetDataCustObj()
   {
-    if(this.InputCustObj){
+    if(typeof this.InputCustObj != "undefined" && this.InputCustObj.CustId != 0){
       this.custObj = this.InputCustObj;
       return;      
     }
@@ -92,13 +95,30 @@ export class CustomerViewAsliRiComponent implements OnInit {
         }
       );
     }
-    else
+    else if (this.CustNo != null)
     {
       await this.http.post(this.UrlConstantNew.GetCustByCustNo, { CustNo: this.CustNo }).toPromise().then(
         (response: CustObj) => {
           this.custObj = response;
         }
       );
+    }
+    else
+    {
+      this.custObj.MrCustTypeCode = this.MrCustTypeCode;
+      this.custObj.CustName = this.parentForm.controls.CustName.value;
+      this.custObj.MrCustModelCode = this.parentForm.controls.MrCustModelCode.value;
+      this.custObj.TaxIdNo = this.parentForm.controls.TaxIdNo.value;
+      if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
+      {
+        this.custObj.MrIdTypeCode = this.parentForm.controls.MrIdTypeCode.value;
+        this.custObj.IdNo = this.parentForm.controls.IdNo.value;
+      }
+      else
+      {
+        this.custObj.MrIdTypeCode = CommonConstant.MrIdTypeCodeNPWP;
+        this.custObj.IdNo = this.parentForm.controls.TaxIdNo.value;
+      }
     }
   }
 

@@ -62,7 +62,7 @@ export class AsliRiReqComponent implements OnInit {
 
   async ngOnInit() {
     this.reqAddTrxSrcDataForAsliRIObj = new ReqAddTrxSrcDataForAsliRIObj();
-    this.parent = this.parentForm.value;
+    this.parent = this.parentForm.getRawValue();
     this.Addr = this.parentForm.controls.UcAddress.value;
     this.address = this.Addr.Addr +  " RT/RW " + this.Addr.AreaCode4 + "/" + this.Addr.AreaCode3 + " " + this.Addr.AreaCode2 + " " + this.Addr.AreaCode1 + " " + this.Addr.City;
 
@@ -122,7 +122,7 @@ export class AsliRiReqComponent implements OnInit {
       if(this.MrCustTypeCode == CommonConstant.CustTypeCompany)
       {
         this.AsliRIForm.patchValue({
-          NPWPCompany: this.parent.TaxIdNo,
+          NPWPCompany: this.reqAddTrxSrcDataForAsliRIObj.NpwpCompany != ''? this.reqAddTrxSrcDataForAsliRIObj.NpwpCompany : this.parent.TaxIdNo,
           AnnualRevenue : this.reqAddTrxSrcDataForAsliRIObj.AnnualRevenue
         })
       }
@@ -169,17 +169,22 @@ export class AsliRiReqComponent implements OnInit {
   patchObj()
   {
     this.reqAddTrxSrcDataForAsliRIObj = new ReqAddTrxSrcDataForAsliRIObj();
-    this.reqAddTrxSrcDataForAsliRIObj.CustType = this.custObj.MrCustTypeCode;
+    this.reqAddTrxSrcDataForAsliRIObj.CustType = this.MrCustTypeCode;
     this.reqAddTrxSrcDataForAsliRIObj.CustNo = this.custObj.CustNo;
     this.reqAddTrxSrcDataForAsliRIObj.CustName = this.parent.CustName;
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
     {
+      this.reqAddTrxSrcDataForAsliRIObj.IdNo = this.parent.IdNo;
       this.reqAddTrxSrcDataForAsliRIObj.Phone = this.parent.MobilePhnNo1;
       if(this.parent.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP)
       {
         this.reqAddTrxSrcDataForAsliRIObj.Nik = this.parent.IdNo,
         this.reqAddTrxSrcDataForAsliRIObj.NpwpPersonal = this.parent.TaxIdNo;
       }
+    }
+    else
+    {
+      this.reqAddTrxSrcDataForAsliRIObj.IdNo = this.parent.TaxIdNo;
     }
     this.reqAddTrxSrcDataForAsliRIObj.Address = this.address;
     this.parent.BirthDt? this.reqAddTrxSrcDataForAsliRIObj.BirthDt = this.parent.BirthDt : this.reqAddTrxSrcDataForAsliRIObj.BirthDt = null;
