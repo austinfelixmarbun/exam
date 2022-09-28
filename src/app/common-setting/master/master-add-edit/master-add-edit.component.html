@@ -20,7 +20,7 @@
                   Type</label>
                 <div class="col-md-9">
                   <lib-ucdropdownlist [dropdownListObj]="dropdownListObj" [parentForm]="RefMasterForm"
-                    [enjiForm]="enjiForm" [identifier]="'RefMasterTypeCode'"></lib-ucdropdownlist>
+                    [enjiForm]="enjiForm" [identifier]="'RefMasterTypeCode'" [isDisabled]="type == 'edit'? true : false"></lib-ucdropdownlist>
                   <!-- <select id="refMasterTypeCodeModule" formControlName="RefMasterTypeCode" class="form-control"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && RefMasterForm.controls.RefMasterTypeCode.invalid }">
                     <option *ngFor="let item of refMasterTypeObj?.ReturnObject" [value]="item.Key">
