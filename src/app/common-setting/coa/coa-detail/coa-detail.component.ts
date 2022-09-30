@@ -48,7 +48,6 @@ export class CoaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Mashino")
     this.GetDdlCurr();
 
     let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
