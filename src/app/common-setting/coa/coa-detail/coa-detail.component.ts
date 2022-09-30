@@ -48,6 +48,7 @@ export class CoaDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("Mashino")
     this.GetDdlCurr();
 
     let refMasterEntityType: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
@@ -72,7 +73,7 @@ export class CoaDetailComponent implements OnInit {
     );
   }
 
-  Add(ev: HTMLInputElement) {
+  async Add(ev: HTMLInputElement) {
     if (ev.value == "-Select One-") {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_SELECT_ONE);
     }
@@ -80,11 +81,33 @@ export class CoaDetailComponent implements OnInit {
       var ListCurrBeforeAdd = [...this.ListCurr];
       if ((ListCurrBeforeAdd.findIndex(x => x.newCurr === ev.value)) === -1) {
         this.colHeadTable.push({ newHead: 'COA ' + ev.value });
-        this.ListCurr.push({ newCurr: ev.value });
         for (let i = 0; i < this.ListCOA.length; i++) {
           var ListDataCOA = this.GetListCoaFormArray().get(i.toString()).get("DataCOA") as FormArray;
-          ListDataCOA.push(this.AddListCoaDetailItemFormGroup());
+          var CoaObjForSubmit = new RefCoaObj();
+
+          CoaObjForSubmit.MrEntityCode = this.ListCOA[i].coa[0].EntityCode;
+          CoaObjForSubmit.MrEntityType = this.ListCOA[i].coa[0].EntityTypeCode;
+          CoaObjForSubmit.PaymentAllocCode = this.ListCOA[i].coa[0].PaymentAllocCode,
+          CoaObjForSubmit.CurrCode = ev.value;
+
+          await this.http.post<RefCoaObj>(this.UrlConstantNew.GetRefCoaWithoutCoaSchemeByReqCoaObj, CoaObjForSubmit).toPromise().then(
+            (response) => {
+              var refCoaInitValue = new RefCoaObj();
+              refCoaInitValue = response;
+
+              ListDataCOA.push(this.AddListCoaDetailItemFormGroup(refCoaInitValue.Coa, refCoaInitValue.RefCoaId));
+
+              if(i === this.ListCOA.length - 1)
+              {
+                this.ListCurr.push({ newCurr: ev.value });
+              }
+            },
+            (error) => {
+              console.log(error)
+            }
+          );
         }
+        
       }
       else {
         this.toastr.warningMessage(ExceptionConstant.ALREADY_EXIST);
@@ -98,10 +121,21 @@ export class CoaDetailComponent implements OnInit {
     })
   }
 
-  AddListCoaDetailItemFormGroup(): FormGroup {
-    return new FormGroup({
-      COA: new FormControl('')
-    });
+  AddListCoaDetailItemFormGroup(Coa:string, CoaId:number): FormGroup {
+    if(Coa === '' || Coa === null)
+    {
+      return new FormGroup({
+        COA: new FormControl(''),
+        RefCoaId: new FormControl(0)
+      });
+    }
+    else
+    {
+      return new FormGroup({
+        COA: new FormControl(Coa),
+        RefCoaId: new FormControl(CoaId)
+      });
+    }
   }
 
   GetListCoaFormArray(): FormArray {
@@ -127,7 +161,8 @@ export class CoaDetailComponent implements OnInit {
             EntityCode: this.ListCOA[i].coa[0].EntityCode,
             EntityTypeCode: this.ListCOA[i].coa[0].EntityTypeCode,
             CurrCode: this.ListCurr[j].newCurr,
-            Coa: DataCoa.value[j].COA
+            Coa: DataCoa.value[j].COA,
+            RefCoaId: DataCoa.value[j].RefCoaId
           }
         ];
         this.ListOfCOA.push(coaValue);
@@ -147,6 +182,7 @@ export class CoaDetailComponent implements OnInit {
       this.refCoaObj.CurrCode = this.ListOfCOA[i][0].CurrCode;
       this.refCoaObj.PaymentAllocCode = this.ListOfCOA[i][0].PaymentAllocCode;
       this.refCoaObj.Coa = this.ListOfCOA[i][0].Coa;
+      this.refCoaObj.RefCoaId = this.ListOfCOA[i][0].RefCoaId;
       if(this.refCoaObj.Coa === "")
       {
         CountCoaNull += 1
