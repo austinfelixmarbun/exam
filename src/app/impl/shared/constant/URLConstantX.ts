@@ -1,10 +1,10 @@
 import { environment } from "environments/environment";
 
 export class URLConstantX{
-    //REF OFFICE X 
+    //REF OFFICE X
     public static GetRefOfficeXByRefOfficeCode = environment.FoundationR3Url + "/v1" + "/RefOfficeX/GetRefOfficeXByRefOfficeCode";
     public static AddRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/AddRefOfficeX";
-    public static AddRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/AddRefOfficeX";  
+    public static AddRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/AddRefOfficeX";
     public static EditRefOfficeX = environment.FoundationR3Url + "/v1" + "/RefOfficeX/EditRefOfficeX";
     public static EditRefOfficeXV2 = environment.FoundationR3Url + "/v2" + "/RefOfficeX/EditRefOfficeX";
 
@@ -34,7 +34,7 @@ export class URLConstantX{
 
     //VENDOR
     public static GetAttrContentByVendorCodeAndVendorAttrCode = environment.FoundationR3Url + "/v1" + "/VendorAttrContentX/GetAttrContentByVendorCodeAndVendorAttrCode";
-    
+
     // VENDOR BRANCH X
     public static AddVendorBranch = environment.FoundationR3Url + "/v1" + "/VendorX/AddVendorBranch";
 
@@ -51,10 +51,10 @@ export class URLConstantX{
     public static EditCustCompany = environment.FoundationR3Url + "/v1" + "/CustCompanyX/EditCustCompany"
     public static GetCustCompanyByCustId = environment.FoundationR3Url + "/v1" + "/CustCompanyX/GetCustCompanyByCustId"
     public static AddEditDataIsForeignerCustCompanyX = environment.FoundationR3Url + "/v1" + "/CustCompanyX/AddEditDataIsForeignerCustCompanyX"
-    
+
     // CUSTOMER COMPANY MANAGEMENT SHAREHOLDER
     public static GetListManagementShareholderForListPagingByCustId = environment.FoundationR3Url + '/v1' + "/CustCompanyMgmntShrholderX/GetListManagementShareholderForListPagingByCustId";
-    
+
     //CUSTOMER JOB DATA X
     public static GetCustPersonalJobDataByCustId = environment.FoundationR3Url + "/v1" + "/CustPersonalJobDataX/GetCustPersonalJobDataByCustIdX";
 
@@ -73,6 +73,7 @@ export class URLConstantX{
     public static EditCustPersonalMainDataXV2 = environment.FoundationR3Url + "/v2" + "/CustX/EditCustPersonalMainData";
     public static SendCustomerDataToRabbitMq = environment.FoundationR3Url + "/v1" + "/Cust/SendCustomerDataToRabbitMq";
     public static SaveCustCompanyShareholderMainDataV2 = environment.FoundationR3Url  + '/v2' + "/CustX/SaveCustCompanyShareholderMainData";
+    public static EditCustCompanyMainDataV2 = environment.FoundationR3Url + "/v2" + "/CustX/EditCustCompanyMainData";
 
     //CUST EXPOSURE
     public static GetR2CustExposureByCustNo = environment.FoundationR3Url + "/v1" + "/CustX/GetR2CustExposureByCustNo";
