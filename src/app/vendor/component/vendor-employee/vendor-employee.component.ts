@@ -112,6 +112,7 @@ export class VendorEmployeeComponent implements OnInit {
     } else {
       this.mode = "add";
       this.setDropdown();
+      this.checkIsAutoFormNoFromSetting("SE");
       this.inputLookupInternalEmpObj.isReady = true;
       this.inputLookupSpvObj.isReady = true;
       this.inputLookupZipcodeObj.isReady = true;
@@ -169,7 +170,7 @@ export class VendorEmployeeComponent implements OnInit {
       }
     );
 
-   
+
     this.http.post(URLConstant.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
@@ -415,9 +416,34 @@ export class VendorEmployeeComponent implements OnInit {
     }
   }
 
+
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.VendorEmpForm.patchValue({
+              VendorEmpCode: '-'
+            });
+          }
+        }
+      });
+  }
+  //check is automatic/not form no 4
+
+
   //START URS-LOS-041
 
-  onOptionsSelected(event){  
+  onOptionsSelected(event){
     this.setValidatorPattern();
   }
 
@@ -436,7 +462,7 @@ export class VendorEmployeeComponent implements OnInit {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);
