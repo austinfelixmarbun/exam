@@ -42,6 +42,7 @@ import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NotFoundComponent } from './not-found-page/not-found.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -67,6 +68,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         ContentLayoutComponent,
         ErrorDialogComponent,
         RolepickComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserAnimationsModule,

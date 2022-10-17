@@ -8,7 +8,7 @@ import { Full_ROUTES } from "app/shared/routes/full-layout.routes";
 import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
-import { NavigationConstant } from './shared/NavigationConstant';
+import { NotFoundComponent } from './not-found-page/not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     runGuardsAndResolvers: 'always'
   },
   { path: '', component: ContentLayoutComponent, data: { title: 'content Views' }, children: CONTENT_ROUTES },
-  { path: '**', redirectTo: '/Pages/SelectModule' }
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
