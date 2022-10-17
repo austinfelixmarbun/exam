@@ -87,9 +87,5 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
-  },
-  {
-    path: PathConstant.LR_NOTIF_ENGINE,
-    loadChildren: () => import('app/notif-engine/notif-engine.module').then(m => m.NotifEngineModule)
   }
 ];
