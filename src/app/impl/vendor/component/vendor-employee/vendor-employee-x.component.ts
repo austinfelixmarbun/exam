@@ -108,6 +108,7 @@ export class VendorEmployeeXComponent implements OnInit {
       }
       this.setLookup();
     } else {
+      this.checkIsAutoFormNoFromSetting("SE");
       this.mode = "add";
       this.setDropdown();
       this.inputLookupInternalEmpObj.isReady = true;
@@ -346,7 +347,7 @@ export class VendorEmployeeXComponent implements OnInit {
     if(!this.validateDate()) {
       return;
     }
-    
+
     var joinDt = new Date(this.VendorEmpForm.controls.JoinDt.value);
     joinDt.setHours(0, 0, 0, 0);
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -356,7 +357,7 @@ export class VendorEmployeeXComponent implements OnInit {
       this.toastr.warningMessage("Join Date Cannot Exceed Business Date");
       return false;
     }
-  
+
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpNo = this.VendorEmpForm.controls.VendorEmpCode.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorEmpName = this.VendorEmpForm.controls.VendorEmpName.value;
     this.VendorBranchEmpObj.VendorEmpObj.VendorId = this.objInput.VendorId;
@@ -425,6 +426,28 @@ export class VendorEmployeeXComponent implements OnInit {
           this.wizard.goToNextStep();
         });
     }
+  }
+
+  isAuto: boolean = false;
+  checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
+    var generalSettingObj = {
+      rowVersion: "",
+      code: "MASTER_AUTO_GNRT_CODE"
+    }
+    var result: any;
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      (response) => {
+        result = response;
+
+        if (result.GsValue != undefined && result.GsValue != "") {
+          if (result.GsValue.split(';').find(x => x == msAutoGenCode)) {
+            this.isAuto = true;
+            this.VendorEmpForm.patchValue({
+              VendorEmpCode: '-'
+            });
+          }
+        }
+      });
   }
 
   //START URS-LOS-041

@@ -16,7 +16,7 @@
                 </lib-uclookupgeneric>
               </div>
             </div>
-            <div class="form-group row">
+            <div *ngIf="!isAuto" class="form-group row">
               <label class="col-md-3 adins-required-label" translate>Employee Code </label>
               <div class="col-md-9">
                 <input type="text" class="form-control" formControlName="VendorEmpCode"
@@ -78,7 +78,7 @@
             <div class="form-group row">
               <label class="col-md-3" translate>Birth Place </label>
               <div class="col-md-9">
-                <input type="text" class="form-control" formControlName="BirthPlace" 
+                <input type="text" class="form-control" formControlName="BirthPlace"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && VendorEmpForm.controls.BirthPlace.invalid }">
                 <lib-uc-show-errors [control]="VendorEmpForm.controls.BirthPlace" [submit]="enjiForm.submitted">
                 </lib-uc-show-errors>
