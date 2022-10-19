@@ -304,6 +304,11 @@
                                     "property": "ShareholderMrCustTypeCode",
                                     "value": "PERSONAL",
                                     "restriction": "EQ"
+                                },
+                                {
+                                    "property": "IsCustomer",
+                                    "value": false,
+                                    "restriction": "EQ"
                                 }
                             ],
                             "result": {
@@ -332,6 +337,11 @@
                                 {
                                     "property": "ShareholderMrCustTypeCode",
                                     "value": "COMPANY",
+                                    "restriction": "EQ"
+                                },
+                                {
+                                    "property": "IsCustomer",
+                                    "value": false,
                                     "restriction": "EQ"
                                 }
                             ],
