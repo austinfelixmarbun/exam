@@ -40,6 +40,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ThirdPartyFormComponent } from '../component/third-party-form/third-party-form.component';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { String } from 'typescript-string-operations';
+import { ValidatorPattern } from '@adins/uc-show-errors/lib/model/validator-pattern.model';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -227,8 +228,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       MrIdTypeCode: ['', [Validators.required, Validators.maxLength(100)]],
       BirthPlace: ['', [Validators.required]],
       BirthDt: ['', [Validators.required]],
-      IdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      TaxIdNo: ['', [Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
+      IdNo: ['', [Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
+      TaxIdNo: ['', [Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED), Validators.minLength(15), Validators.maxLength(15)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
@@ -238,15 +239,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       SupplId: [''],
       MrCustRelationship: [''],
       MrCustModelCode: ['', [Validators.required]],
-      MobilePhnNo1: ['', [Validators.required, Validators.pattern("^[0-9]+$")]],
-      Email1: ['', [Validators.required, Validators.pattern(CommonConstant.regexEmail)]]
+      MobilePhnNo1: ['', [Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
+      Email1: ['', [Validators.required, Validators.pattern(ValidatorPattern.EMAIL_ALL_CASE)]]
     });
 
     if (this.CustDataMode != this.CustDataModeMain) {
       this.CustomerForm.get("CustName").disable();
     }
     if (this.CustDataMode == this.CustDataModeShareholder || this.pageFrom == CommonConstant.CustFromCustShareholder) {
-      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(ValidatorPattern.EMAIL_ALL_CASE));
       this.CustomerForm.get("Email1").updateValueAndValidity();
       this.CustomerForm.get("MrMaritalStatCode").clearValidators();
       this.CustomerForm.get("MrMaritalStatCode").updateValueAndValidity();
@@ -254,7 +255,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       this.CustomerForm.get("MrCustModelCode").updateValueAndValidity();
     }
     if(this.CustDataMode == this.CustDataModeFamily || this.pageFrom == CommonConstant.CustFromCustFamily){
-      this.CustomerForm.get("Email1").setValidators(Validators.pattern(CommonConstant.regexEmail));
+      this.CustomerForm.get("Email1").setValidators(Validators.pattern(ValidatorPattern.EMAIL_ALL_CASE));
       this.CustomerForm.get("Email1").updateValueAndValidity();
       this.CustomerForm.get("MrCustRelationship").setValidators(Validators.required);
       this.CustomerForm.get("MrCustRelationship").updateValueAndValidity();
@@ -465,9 +466,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     let tempIdNo = this.CustomerForm.get("IdNo");
     tempIdNo.clearValidators();
     if (idType == CommonConstant.MrIdTypeCodeEKTP) {
-      tempIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)]);
+      tempIdNo.setValidators([Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED), Validators.minLength(16), Validators.maxLength(16)]);
     } else {
-      tempIdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$")]);
+      tempIdNo.setValidators([Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]);
     }
     tempIdNo.updateValueAndValidity();
 
