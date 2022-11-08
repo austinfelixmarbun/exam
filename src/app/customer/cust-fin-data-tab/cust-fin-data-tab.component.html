@@ -47,6 +47,15 @@
       <div class="modal-body">
         <div class="form-body">
           <div class="form-group row adins-required">
+            <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
+            <div class="col-md-6">
+              <input type="date" [max]="BusinessDt | date: 'yyyy-MM-dd'" class="form-control adInsInput" formControlName="DateAsOf"
+                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.DateAsOf.invalid }" />
+              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.DateAsOf"
+                [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row adins-required">
             <label class="col-md-2 adInsLabel" for="MonthlyIncomeAmt" translate>Monthly Income</label>
             <div class="col-md-6">
               <input type="" currencyMask class="form-control adInsInput" formControlName="MonthlyIncomeAmt"
@@ -128,15 +137,6 @@
             <label class="col-md-2 adInsLabel" for="IsJoinIncome" translate>Is Join Income</label>
             <div class="col-md-6">
               <input type="checkbox" formControlName="IsJoinIncome" (change)="onChangeCustFinInput()"/>
-            </div>
-          </div>
-          <div class="form-group row adins-required">
-            <label class="col-md-2 adInsLabel" for="DateAsOf" translate>Date As Of</label>
-            <div class="col-md-6">
-              <input type="date" [max]="BusinessDt | date: 'yyyy-MM-dd'" class="form-control adInsInput" formControlName="DateAsOf"
-                [ngClass]="{ 'is-invalid': CustFinDataForm.submitted && CustPersonalFinDataForm.controls.DateAsOf.invalid }" />
-              <lib-uc-show-errors [control]="CustPersonalFinDataForm.controls.DateAsOf"
-                [submit]="CustFinDataForm.submitted"></lib-uc-show-errors>
             </div>
           </div>
           <div class="form-group row">

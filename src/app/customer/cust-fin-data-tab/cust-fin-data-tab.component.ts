@@ -502,6 +502,8 @@ export class CustFinDataTabComponent implements OnInit {
 
     await this.http.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
+        if (response == undefined) return;
+
         if (this.currentModal) this.currentModal.close();
       }
     );
@@ -549,6 +551,8 @@ export class CustFinDataTabComponent implements OnInit {
 
     await this.http.post(url, CustFinDataCustomObj, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
+        if (response == undefined) return;
+
         if (this.currentModal) this.currentModal.close();
       }
     );
