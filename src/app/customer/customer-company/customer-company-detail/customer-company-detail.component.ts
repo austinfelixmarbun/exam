@@ -52,7 +52,7 @@ export class CustomerCompanyDetailComponent implements OnInit {
   MaxDtValidate: string;
 
   CustomerDetailForm = this.fb.group({
-    NumOfEmp: ['', [Validators.maxLength(100), Validators.required, Validators.pattern("^[0-9]+$")]],
+    NumOfEmp: ['', [Validators.maxLength(100), Validators.max(2147483647), Validators.required, Validators.pattern("^[0-9]+$")]],
     EstablishmentDt: ['', [Validators.required]],
     MrCustModelCode: ['', [Validators.required]],
     IsSkt: [false],
