@@ -82,32 +82,52 @@
               </div>
           </div>
         </div>
-          <lib-ucSubsection [id]="'custAddrId'" [title]="'Address'" [panel]="'jobAddress'">
-          </lib-ucSubsection>
-          <div id="jobAddress">
-              <div id="CustMainDataPersonal"> 
-                <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
-                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress> -->
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
-                  <div class="col-md-4">
-                  <textarea type="text" class="form-control adInsInput" formControlName="Notes"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.Notes.invalid }"></textarea>
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.Notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
-          </div>
-          <lib-ucSubsection [id]="'preJobId'" [title]="'Previous Job Data'" [panel]="'preJob'">
-          </lib-ucSubsection>
-          <div id="preJob">
+
+        <lib-ucSubsection [id]="'custAddrId'" [title]="'Address'" [panel]="'jobAddress'">
+        </lib-ucSubsection>
+        <div id="jobAddress">
+          <div id="CustMainDataPersonal"> 
             <div class="form-group row">
-              <label class="col-md-2 adInsLabel" translate>Previous Company Name </label>
+              <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
               <div class="col-md-4">
-                <input type="text" class="form-control adInsInput" formControlName="PreviIndustryName"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.PreviIndustryName.invalid }">
-                <lib-uc-show-errors [control]="JobDataProForm.controls.PreviIndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                <div class="input-group">
+                  <select class="form-control adInsInput" formControlName="CopyAddrFrom">
+                    <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                    </option>
+                  </select>
+                  <div class="input-group-append">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-raised btn-primary" (click)="copyAddress()">
+                        <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
               </div>
+            </div>
+            <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+            <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputFieldAddressObj" [showOwnership]="true"></lib-ucaddress> -->
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+            <div class="col-md-4">
+              <textarea type="text" class="form-control adInsInput" formControlName="Notes"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.Notes.invalid }"></textarea>
+              <lib-uc-show-errors [control]="JobDataProForm.controls.Notes" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+        </div>
+
+        <lib-ucSubsection [id]="'preJobId'" [title]="'Previous Job Data'" [panel]="'preJob'">
+        </lib-ucSubsection>
+        <div id="preJob">
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel" translate>Previous Company Name </label>
+            <div class="col-md-4">
+              <input type="text" class="form-control adInsInput" formControlName="PreviIndustryName"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.PreviIndustryName.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.PreviIndustryName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
           </div>
           <div class="form-group row">
             <label class="col-md-2 adInsLabel" translate>Previous Employment Date </label>
@@ -116,84 +136,121 @@
                 [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.PreviEmploymentDate.invalid }">
               <lib-uc-show-errors [control]="JobDataProForm.controls.PreviEmploymentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
             </div>
+          </div>
         </div>
+
+        <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
+        </lib-ucSubsection>
+        <div id="prejobAddr">
+          <div class="form-group row">
+            <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+            <div class="col-md-4">
+                <div class="input-group">
+                  <select class="form-control adInsInput" formControlName="CopyPrevAddrFrom">
+                    <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                    </option>
+                  </select>
+                  <div class="input-group-append">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-raised btn-primary" (click)="copyPreviousAddress()">
+                        <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+            </div>
           </div>
-          <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
-          </lib-ucSubsection>
-          <div id="prejobAddr">
-              <div> 
-                <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
-                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
-                  <div class="col-md-4">
-                  <textarea type="text" class="form-control adInsInput" formControlName="NotesPreJob"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.NotesPreJob.invalid }"></textarea>
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.NotesPreJob" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
+          <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+          <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+            <div class="col-md-4">
+            <textarea type="text" class="form-control adInsInput" formControlName="NotesPreJob"
+            [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.NotesPreJob.invalid }"></textarea>
+            <lib-uc-show-errors [control]="JobDataProForm.controls.NotesPreJob" [submit]="enjiForm.submitted"></lib-uc-show-errors>
           </div>
-          <lib-ucSubsection [id]="'otherBusinessId'" [title]="'Other Business'" [panel]="'otherBusiness'">
-          </lib-ucSubsection>
-          <div id="otherBusiness">
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Other Business Name </label>
-                  <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="OtherBusinessName"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessName.invalid }">
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Other Business Type </label>
-                  <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="OtherBusinessType"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessType.invalid }">
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessType" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Other Business Industry Type </label>
-                  <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="OtherBusinessIndustry"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessIndustry.invalid }">
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessIndustry" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Other Job Position </label>
-                  <div class="col-md-4">
-                  <input type="text" class="form-control adInsInput" formControlName="OtherJobPosition"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherJobPosition.invalid }">
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.OtherJobPosition" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
-                  <div class="col-md-4">
-                    <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="OtherEstablishmentDate" max = "{{MaxDate | date: 'yyyy-MM-dd'}}"
-                      [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherEstablishmentDate.invalid }" (focusout)="onFocusOutOtherBizEstDate($event)">
-                    <lib-uc-show-errors [control]="JobDataProForm.controls.OtherEstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
+          </div>
+        </div>
+
+        <lib-ucSubsection [id]="'otherBusinessId'" [title]="'Other Business'" [panel]="'otherBusiness'">
+        </lib-ucSubsection>
+        <div id="otherBusiness">
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel adins-required" translate>Other Business Name </label>
+            <div class="col-md-4">
+              <input type="text" class="form-control adInsInput" formControlName="OtherBusinessName"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessName.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-2 adInsLabel adins-required" translate>Other Business Type </label>
+              <div class="col-md-4">
+              <input type="text" class="form-control adInsInput" formControlName="OtherBusinessType"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessType.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessType" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
-          <lib-ucSubsection [id]="'otherAddrId'" [title]="'Other Business Address'" [panel]="'otherBusinessAddr'">
-          </lib-ucSubsection>
-          <div id="otherBusinessAddr">
-              <div id="CustMainDataPersonal">
-                <lib-ucaddress [addressObj]="inputOthBizAddressObj" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
-                  <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
-              </div>
-              <div class="form-group row">
-                  <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
-                  <div class="col-md-4">
-                  <textarea type="text" class="form-control adInsInput" formControlName="NotesOther"
-                          [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.NotesOther.invalid }"></textarea>
-                  <lib-uc-show-errors [control]="JobDataProForm.controls.NotesOther" [submit]="enjiForm.submitted"></lib-uc-show-errors>
-                  </div>
+          <div class="form-group row">
+              <label class="col-md-2 adInsLabel adins-required" translate>Other Business Industry Type </label>
+              <div class="col-md-4">
+              <input type="text" class="form-control adInsInput" formControlName="OtherBusinessIndustry"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherBusinessIndustry.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.OtherBusinessIndustry" [submit]="enjiForm.submitted"></lib-uc-show-errors>
               </div>
           </div>
+          <div class="form-group row">
+              <label class="col-md-2 adInsLabel adins-required" translate>Other Job Position </label>
+              <div class="col-md-4">
+              <input type="text" class="form-control adInsInput" formControlName="OtherJobPosition"
+                      [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherJobPosition.invalid }">
+              <lib-uc-show-errors [control]="JobDataProForm.controls.OtherJobPosition" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-md-2 adInsLabel adins-required" translate>Establishment Date </label>
+              <div class="col-md-4">
+                <input type="date" id="establishmentDt" class="form-control adInsInput" formControlName="OtherEstablishmentDate" max = "{{MaxDate | date: 'yyyy-MM-dd'}}"
+                  [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.OtherEstablishmentDate.invalid }" (focusout)="onFocusOutOtherBizEstDate($event)">
+                <lib-uc-show-errors [control]="JobDataProForm.controls.OtherEstablishmentDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+              </div>
+          </div>
+        </div>
+
+        <lib-ucSubsection [id]="'otherAddrId'" [title]="'Other Business Address'" [panel]="'otherBusinessAddr'">
+        </lib-ucSubsection>
+        <div id="otherBusinessAddr">
+          <div id="CustMainDataPersonal">
+            <div class="form-group row">
+              <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+              <div class="col-md-4">
+                  <div class="input-group">
+                    <select class="form-control adInsInput" formControlName="CopyOthBizAddrFrom">
+                      <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                      </option>
+                    </select>
+                    <div class="input-group-append">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-raised btn-primary" (click)="copyOthBizAddress()">
+                          <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <lib-ucaddress [addressObj]="inputOthBizAddressObj" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [UCAddrForm]="JobDataProForm"></lib-ucaddress>
+            <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataProForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
+          </div>
+          <div class="form-group row">
+            <label class="col-md-2 adInsLabel adins-required" translate>Notes </label>
+            <div class="col-md-4">
+              <textarea type="text" class="form-control adInsInput" formControlName="NotesOther"
+              [ngClass]="{ 'is-invalid': enjiForm.submitted && JobDataProForm.controls.NotesOther.invalid }"></textarea>
+              <lib-uc-show-errors [control]="JobDataProForm.controls.NotesOther" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+            </div>
+          </div>
+        </div>
           <!-- <lib-ucSubsection [id]="'addrAttrId'" [title]="'Job Address Attribute'" [panel]="'addrAttribute'">
           </lib-ucSubsection>
           <div id="addrAttribute">
