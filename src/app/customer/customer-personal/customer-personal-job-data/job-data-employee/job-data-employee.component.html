@@ -148,7 +148,25 @@
         <lib-ucSubsection [id]="'jobAddrId'" [title]="'Address'" [panel]="'jobAddr'">
         </lib-ucSubsection>
         <div id="jobAddr">
-          <div id="CustMainDataPersonal"> 
+          <div id="CustMainDataPersonal">
+            <div class="form-group row">
+              <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <select class="form-control adInsInput" formControlName="CopyAddrFrom">
+                    <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                    </option>
+                  </select>
+                  <div class="input-group-append">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-raised btn-primary" (click)="copyAddress()">
+                        <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div> 
             <lib-ucaddress #UcAddrGrp [addressObj]="inputAddressObj" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress> 
             <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [title]="'Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'jobAddress'" [default]="addressObj" [inputField]="inputJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           </div>
@@ -186,6 +204,24 @@
         <lib-ucSubsection [id]="'prejobAddrId'" [title]="'Previous Job Address'" [panel]="'prejobAddr'">
         </lib-ucSubsection>
         <div id="prejobAddr">
+          <div class="form-group row">
+            <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <select class="form-control adInsInput" formControlName="CopyPrevAddrFrom">
+                  <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                  </option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-raised btn-primary" (click)="copyPreviousAddress()">
+                      <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
           <lib-ucaddress #UcAddrGrp [addressObj]="inputPreviousAddressObj" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress> 
           <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Previous Job Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'prejobAddress'" [default]="preJobAddrObj" [inputField]="inputPreJobAddressObj" [showOwnership]="true"></lib-ucaddress> -->
           <div class="form-group row">
@@ -276,6 +312,24 @@
         </lib-ucSubsection>
         <div id="otherBusinessAddr">
             <div id="CustMainDataPersonal">
+              <div class="form-group row">
+                <label class="col-md-2  adInsLabel" translate>Copy Address From </label>
+                <div class="col-md-4">
+                  <div class="input-group">
+                    <select class="form-control adInsInput" formControlName="CopyOthBizAddrFrom">
+                      <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">{{ram.MrCustAddrTypeCode}}
+                      </option>
+                    </select>
+                    <div class="input-group-append">
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-raised btn-primary" (click)="copyOthBizAddress()">
+                          <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div> 
               <lib-ucaddress [addressObj]="inputOthBizAddressObj" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [UCAddrForm]="JobDataEmpForm"></lib-ucaddress>
                 <!-- <lib-ucaddress #UcAddrGrp [showSubsection]="false" [isRequired]="false" [title]="'Other Business Address'" [UCAddrForm]="JobDataEmpForm" [enjiForm]="enjiForm" [identifier]="'otherBusinessAddress'" [default]="otherAddrObj" [inputField]="inputOtherAddressObj" [showOwnership]="true"></lib-ucaddress> -->
             </div>
