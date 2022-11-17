@@ -165,6 +165,11 @@ export class JobDataSmeComponent implements OnInit {
         this.listCustAddr = this.listCustAddr.filter(x => x.MrCustAddrTypeCode != CommonConstant.CustAddrJob && 
                                                           x.MrCustAddrTypeCode != CommonConstant.CustAddrPreJob && 
                                                           x.MrCustAddrTypeCode != CommonConstant.CustAddrOthBiz);
+        this.JobDataSmeForm.patchValue({
+          CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
+          CopyPrevAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
+          CopyOthBizAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId']
+        });
       });
 
     this.inputAddressObjForJobAddr = new InputAddressObj();
