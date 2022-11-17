@@ -41,7 +41,7 @@ export class CustomerViewAsliRiComponent implements OnInit {
   MrCustModelName: string;
   IDType: string;
   DataAsliRi: any;
-  isReady: boolean;
+  isReady: boolean = false;
   img: any;
   url: string;
 
