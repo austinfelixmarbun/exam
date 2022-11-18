@@ -24,6 +24,7 @@ export class UcPagingObj {
     isJoinExAPI: boolean;
     isGetAllData: boolean;
     integrationObj: IntegrationObj;
+    ListPageSize: number[];
 
     constructor(private UrlConstantNew: UrlConstantNew) {
         this._url = "";
@@ -47,6 +48,7 @@ export class UcPagingObj {
         this.isJoinExAPI = false;
         this.isGetAllData = false;
         this.integrationObj = new IntegrationObj();
+        this.ListPageSize = [10, 20, 50, 100];
     }
 }
 
