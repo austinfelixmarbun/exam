@@ -51,7 +51,7 @@ export class DashBoardComponent implements OnInit {
       integrationObj.RequestObj.UserName = this.username;
       integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
       
-      if (this.officeCode == CommonConstant.HeadOffice) {
+      if (context[CommonConstant.MR_OFFICE_TYPE_CODE] == CommonConstant.HeadOffice) {
         integrationObj2 = new ThingsToDoIntegrationV2Obj();
         integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
         integrationObj2.ApiPath = "";
