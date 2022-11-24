@@ -35,6 +35,15 @@
             "desc": "Asset Management System",
             "module": "AMS_WEB",
             "baseColor": "#12c66f"
+        },
+        {
+            "id": "LMS",
+            "title": "LMS",
+            "imgSrc": "",
+            "imgSrcUrl": "./assets/img/svg/icon-ams-module.svg",
+            "desc": "Loan Management System",
+            "module": "LMS_WEB",
+            "baseColor": "#5e9cd6"
         }
     ]
 }

@@ -15,6 +15,7 @@ export class UcModuleSelectionObj {
         this.listApis['LOS_WEB'] = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN;
         this.listApis['CMS_WEB'] = this.UrlConstantNew.env.cmsR3Web + NavigationConstant.PAGES_LOGIN;
         this.listApis['AMS_WEB'] = this.UrlConstantNew.env.amsR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['LMS_WEB'] = this.UrlConstantNew.env.lmsR3Web + NavigationConstant.PAGES_LOGIN;
         this.target = '_self';
     }
 }
