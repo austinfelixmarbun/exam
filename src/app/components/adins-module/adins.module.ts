@@ -18,6 +18,7 @@ import { UcuploadModule } from '@adins/ucupload';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
+import { UcDirectiveValidateDateModule } from '@adins/uc-directive-validate-date';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
@@ -25,6 +26,7 @@ import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 @NgModule({
     exports: [
         UcDirectiveUpperCaseModule,
+        UcDirectiveValidateDateModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
@@ -64,6 +66,7 @@ import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
         UcdropdownlistModule,
         UcaddtotempModule,
         UcDirectiveUpperCaseModule,
+        UcDirectiveValidateDateModule,
         UcdropdownsearchModule
     ],
     declarations: [
