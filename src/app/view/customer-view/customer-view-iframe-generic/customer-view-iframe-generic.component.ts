@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
 import { environment } from 'environments/environment';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-customer-view-iframe-generic',
@@ -14,7 +17,7 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   IsReady: boolean = false;
   urlLink: string = '';
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
     let queryParam: string = '';
@@ -33,6 +36,9 @@ export class CustomerViewIframeGenericComponent implements OnInit {
         arrList[this.iframeObj.Params[i].Key] = this.inputObj[this.iframeObj.Params[i].Value];
       }
     }
+    //START R3LOS-200 & RTHREE-404 : Token via iframe
+    arrList["Token"] = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
+    //END R3LOS-200 & RTHREE-404
     let queryParam: string = '?' + Object.keys(arrList).map(key => `${key}=${arrList[key]}`).join('&');
     return queryParam;
   }
