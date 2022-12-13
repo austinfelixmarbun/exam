@@ -1,6 +1,6 @@
 {
     "title": "Customer",
-    "exportExcel": false,
+    "exportExcel": true,
     "component": [
         {
             "type": "textbox",
