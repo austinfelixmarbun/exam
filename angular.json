@@ -26,14 +26,13 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/assets/css/prism.min.css",
               "src/assets/css/wizard.css",
               "src/assets/css/hopscotch.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/@swimlane/ngx-datatable/release/index.css",
               "node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bs-stepper/dist/css/bs-stepper.min.css",
