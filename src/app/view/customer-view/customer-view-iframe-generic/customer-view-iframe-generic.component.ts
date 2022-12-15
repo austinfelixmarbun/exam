@@ -23,9 +23,10 @@ export class CustomerViewIframeGenericComponent implements OnInit {
   ngOnInit() {
     let queryParam: string = '';
     queryParam = this.genQueryParam();
+    queryParam = this.addToken(queryParam);
+    queryParam = this.addEmbedded(queryParam);
     this.urlLink = this.UrlConstantNew.env.losR3Web + this.iframeObj.Url + queryParam;
     this.IsReady = true;
-
   }
 
   genQueryParam() {
@@ -36,10 +37,16 @@ export class CustomerViewIframeGenericComponent implements OnInit {
         arrList[this.iframeObj.Params[i].Key] = this.inputObj[this.iframeObj.Params[i].Value];
       }
     }
-    //START R3LOS-200 & RTHREE-404 : Token via iframe
-    arrList["Token"] = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-    //END R3LOS-200 & RTHREE-404
     let queryParam: string = '?' + Object.keys(arrList).map(key => `${key}=${arrList[key]}`).join('&');
     return queryParam;
+  }
+
+  addToken(param: string) {
+    const token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
+    return `${param}&Token=${token}`;
+  }
+
+  addEmbedded(param: string) {
+    return `${param}&IsEmbedded=true`;
   }
 }
