@@ -167,7 +167,7 @@ export class JobDataEmployeeComponent implements OnInit {
     await this.getAddrTypeOwnershipRequired();
 
     this.custAddrObj.Id = this.IdCust;
-    await this.http.post(URLConstant.GetListCustAddr, this.custAddrObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListCustAddr, this.custAddrObj).toPromise().then(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
         this.JobDataEmpForm.patchValue({ 
@@ -498,7 +498,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataEmpForm.controls["CopyAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.JobDataEmpForm.patchValue({
@@ -525,8 +525,8 @@ export class JobDataEmployeeComponent implements OnInit {
         this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
         this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
-        this.inputFieldAddressObj = new InputFieldObj();
-        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
         this.inputAddressObj.default = this.addressObj;
@@ -542,7 +542,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataEmpForm.controls["CopyPrevAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.JobDataEmpForm.patchValue({
@@ -569,8 +569,8 @@ export class JobDataEmployeeComponent implements OnInit {
         this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
         this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
-        this.inputFieldAddressObj = new InputFieldObj();
-        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
         this.inputPreviousAddressObj.default = this.addressObj;
@@ -586,7 +586,7 @@ export class JobDataEmployeeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataEmpForm.controls["CopyOthBizAddrFrom"].value;
-    this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
         this.JobDataEmpForm.patchValue({
@@ -613,8 +613,8 @@ export class JobDataEmployeeComponent implements OnInit {
         this.addressObj.Fax = this.copyCustomerAddrFrom.Fax;
         this.addressObj.MrHouseOwnershipCode = this.copyCustomerAddrFrom.MrBuildingOwnershipCode;
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
-        this.inputFieldAddressObj = new InputFieldObj();
-        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj();
+        this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
+        this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj.nameSelect = this.copyCustomerAddrFrom.Zipcode;
         this.inputFieldAddressObj.inputLookupObj.jsonSelect = { Zipcode: this.copyCustomerAddrFrom.Zipcode };
         this.inputOthBizAddressObj.default = this.addressObj;
