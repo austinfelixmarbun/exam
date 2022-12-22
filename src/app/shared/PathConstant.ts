@@ -108,6 +108,10 @@ export class PathConstant {
     public static ASSET_MASTER_RVW_UPLOAD_PAGING = PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static ASSET_MASTER_RVW_UPLOAD_DETAIL = PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static ASSET_MASTER_CHILD = PathConstant.ASSET_MASTER + "/Child";
+    public static MAPPING_ASSET_USAGE = "MappingAssetUsage";
+    public static MAPPING_ASSET_USAGE_PAGING = PathConstant.MAPPING_ASSET_USAGE + "/" + PathConstant.PAGING;
+    public static MAPPING_ASSET_USAGE_DETAIL = PathConstant.MAPPING_ASSET_USAGE + "/" + PathConstant.DETAIL;
+    public static MAPPING_ASSET_USAGE_ADD = PathConstant.MAPPING_ASSET_USAGE + "/" + PathConstant.ADD;
     //#endregion
     
     //#region Common-Setting
