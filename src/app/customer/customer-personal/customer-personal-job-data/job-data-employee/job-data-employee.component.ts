@@ -172,11 +172,6 @@ export class JobDataEmployeeComponent implements OnInit {
         this.listCustAddr = this.listCustAddr.filter(x => x.MrCustAddrTypeCode != CommonConstant.CustAddrJob && 
                                                           x.MrCustAddrTypeCode != CommonConstant.CustAddrPreJob && 
                                                           x.MrCustAddrTypeCode != CommonConstant.CustAddrOthBiz);
-        this.JobDataEmpForm.patchValue({ 
-          CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyPrevAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyOthBizAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId']
-        });
       });
 
     this.inputAddressObj = new InputAddressObj();
