@@ -511,6 +511,10 @@ export class URLConstant {
     public static GetAssetNegativeByIdEditPage = environment.FoundationR3Url + "/v1" + "/AssetNegative/GetAssetNegativeByIdEditPage";
     public static GetUploadAssetNegativeByUploadMonitoringNoAndTrxType = environment.FoundationR3Url + "/v2" + "/AssetNegative/GetUploadAssetNegativeByUploadMonitoringNoAndTrxType";
 
+    // ASSET CATEGORY USAGE MAP
+    public static AddListAssetCategoryUsageMap = environment.FoundationR3Url + "/v1" + "/AssetCategoryUsageMap/AddListAssetCategoryUsageMap";
+    public static DeleteAssetCategoryUsageMap = environment.FoundationR3Url + "/v1" + "/AssetCategoryUsageMap/DeleteAssetCategoryUsageMap";
+
     // VENDOR
     public static AddVendorHO = environment.FoundationR3Url + "/v1" + "/Vendor/AddVendorHO";
     public static EditVendorHO = environment.FoundationR3Url + "/v1" + "/Vendor/EditVendorHO";
