@@ -32,6 +32,7 @@ export class PathConstant {
     public static CR_PAGES = "Pages";
     public static CR_VIEW = "View";
     public static CR_DOC_MNGMNT_VIEW = "DocumentManagementView";
+    public static CR_JOURNAL_VIEW = "journalview";
     //#endregion
 
     //#region content-pages

@@ -15,5 +15,9 @@ export const CONTENT_ROUTES: Routes = [
     {
         path: PathConstant.CR_DOC_MNGMNT_VIEW,
         loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
-    }
+    },
+    {
+        path: PathConstant.CR_JOURNAL_VIEW,
+        loadChildren: () => import('app/journal/journal.module').then(m => m.JournalModule)
+      },
 ];
