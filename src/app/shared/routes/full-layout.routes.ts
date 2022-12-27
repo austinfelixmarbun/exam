@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from '../PathConstant';
+import { loadRemoteModule } from '@angular-architects/module-federation';
 
 //Route for content layout with sidebar, navbar and footer.
 
@@ -8,7 +9,7 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_DASHBOARD,
     loadChildren: () => import('app/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-   {
+  {
     path: PathConstant.LR_FORMS,
     loadChildren: () => import('app/forms/forms.module').then(m => m.FormModule)
   },
@@ -25,7 +26,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('app/employee/employee.module').then(m => m.EmployeeModule)
   },
   {
-    path : PathConstant.LR_ORG,
+    path: PathConstant.LR_ORG,
     loadChildren: () => import('app/organization/organization.module').then(m => m.OrganizationModule)
   },
   {
@@ -51,7 +52,7 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_ASSET,
     loadChildren: () => import('app/asset/asset.module').then(m => m.AssetModule)
-  }, 
+  },
   {
     path: PathConstant.LR_VENDOR,
     loadChildren: () => import('app/vendor/vendor.module').then(m => m.VendorModule)
@@ -87,5 +88,19 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
+  },
+
+  // dynamic import remote module
+  {
+    path: 'flights',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'https://r3web-server.ad-ins.com/MFE_FLIGHTS/remoteEntry.js',
+          exposedModule: './Module'
+        })
+        .then(m => m.FlightsModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   }
 ];
