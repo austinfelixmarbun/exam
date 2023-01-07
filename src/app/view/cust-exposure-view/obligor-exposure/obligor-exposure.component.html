@@ -275,6 +275,12 @@
             <th style="text-align: center;">
               <span class="thead-header" name='ContractStatus' translate>Contract Status</span>
             </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+            </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="ListCustDataCrdExpsrAppAgrHist.length == 0">
@@ -291,6 +297,8 @@
             <td style="text-align: center;">{{item.AppStep}}</td>
             <td style="text-align: center;">{{item.AppStat}}</td>
             <td style="text-align: center;">{{item.ContractStat}}</td>
+            <td style="text-align: right;">{{item.OverdueDays}}</td>
+              <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
           </tr>
         </tbody>
       </table>
@@ -326,6 +334,12 @@
             <th style="text-align: center;">
               <span class="thead-header" name='ContractStatus' translate>Contract Status</span>
             </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+            </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="ListFamilyDataCrdExpsrAppAgrHist.length == 0">
@@ -343,6 +357,8 @@
             <td style="text-align: center;">{{item.AppStep}}</td>
             <td style="text-align: center;">{{item.AppStat}}</td>
             <td style="text-align: center;">{{item.ContractStat}}</td>
+            <td style="text-align: right;">{{item.OverdueDays}}</td>
+            <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
           </tr>
         </tbody>
       </table>
@@ -378,6 +394,12 @@
             <th style="text-align: center;">
               <span class="thead-header" name='ContractStatus' translate>Contract Status</span>
             </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+            </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="ListGuarantorDataCrdExpsrAppAgrHist.length == 0">
@@ -395,6 +417,8 @@
             <td style="text-align: center;">{{item.AppStep}}</td>
             <td style="text-align: center;">{{item.AppStat}}</td>
             <td style="text-align: center;">{{item.ContractStat}}</td>
+            <td style="text-align: right;">{{item.OverdueDays}}</td>
+            <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
           </tr>
         </tbody>
       </table>
@@ -430,6 +454,12 @@
             <th style="text-align: center;">
               <span class="thead-header" name='ContractStatus' translate>Contract Status</span>
             </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+            </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="ListShareholderDataCrdExpsrAppAgrHist.length == 0">
@@ -447,6 +477,8 @@
             <td style="text-align: center;">{{item.AppStep}}</td>
             <td style="text-align: center;">{{item.AppStat}}</td>
             <td style="text-align: center;">{{item.ContractStat}}</td>
+            <td style="text-align: right;">{{item.OverdueDays}}</td>
+            <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
           </tr>
         </tbody>
       </table>
