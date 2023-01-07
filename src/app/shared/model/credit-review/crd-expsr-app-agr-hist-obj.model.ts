@@ -13,6 +13,8 @@ export class CrdExpsrAppAgrHistObj {
     Fpd: string;
     CustName: string;
     RoleCust: string;
+    OverdueDays: number;
+    OverdueAmt: number;
     constructor() {
     }
 }
