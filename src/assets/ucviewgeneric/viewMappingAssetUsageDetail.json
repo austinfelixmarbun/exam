@@ -1,0 +1,29 @@
+{
+    "subsection": [
+      {
+        "subSectionId": "MappingAssetUsageId",
+        "subSectionTitle": "Main Info",
+        "mainInfoPath": "/Generic/GetDataViewBySQL",
+        "mainInfo": [
+          {
+            "type": "text",
+            "label": "Asset Usage Code",
+            "property": "MasterCode"
+          },
+          {
+            "type": "boolean",
+            "label": "Active Status",
+            "property": "IsActive"
+          },
+          {
+            "type": "text",
+            "label": "Asset Usage Name",
+            "property": "Descr"
+          }
+        ],
+        "querystring": {
+            "name": "viewMappingAssetUsage"
+        }
+      }
+    ]
+  }

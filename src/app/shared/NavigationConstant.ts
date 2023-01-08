@@ -48,6 +48,9 @@ export class NavigationConstant {
     public static ASSET_DOC_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_DETAIL; //'/Asset/Document/Detail'
     public static ASSET_DOC_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_PAGING; //'/Asset/DocumentMaster/Paging'
     public static ASSET_DOC_MASTER_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_DETAIL; //'/Asset/DocumentMaster/Detail'
+    public static MAPPING_ASSET_USAGE_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.MAPPING_ASSET_USAGE_PAGING; //'/Asset/MappingAssetUsage/Paging'
+    public static MAPPING_ASSET_USAGE_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.MAPPING_ASSET_USAGE_DETAIL; //'/Asset/MappingAssetUsage/Detail'
+    public static MAPPING_ASSET_USAGE_ADD = "/" + PathConstant.LR_ASSET + "/" + PathConstant.MAPPING_ASSET_USAGE_ADD; //'/Asset/MappingAssetUsage/Add'
     //#endregion
 
     //#region Common Setting

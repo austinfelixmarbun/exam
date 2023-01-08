@@ -29,6 +29,9 @@ import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/revie
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component'; 
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { MappingAssetUsagePagingComponent } from './mapping-asset-usage/mapping-asset-usage-paging/mapping-asset-usage-paging.component';
+import { MappingAssetUsageDetailComponent } from './mapping-asset-usage/mapping-asset-usage-detail/mapping-asset-usage-detail.component';
+import { MappingAssetUsageAddComponent } from './mapping-asset-usage/mapping-asset-usage-add/mapping-asset-usage-add.component';
 
 const routes: Routes = [
   {
@@ -249,6 +252,27 @@ const routes: Routes = [
         component: ReviewUploadAssetMasterDetailComponent,
         data: {
           title: 'Review Upload Asset Master Detail'
+        },
+      },
+      {
+        path: PathConstant.MAPPING_ASSET_USAGE_PAGING,
+        component: MappingAssetUsagePagingComponent,
+        data: {
+          title: 'Mapping Asset Usage Paging'
+        },
+      },
+      {
+        path: PathConstant.MAPPING_ASSET_USAGE_DETAIL,
+        component: MappingAssetUsageDetailComponent,
+        data: {
+          title: 'Mapping Asset Usage Detail'
+        },
+      },
+      {
+        path: PathConstant.MAPPING_ASSET_USAGE_ADD,
+        component: MappingAssetUsageAddComponent,
+        data: {
+          title: 'Mapping Asset Usage Add'
         },
       }
     ]

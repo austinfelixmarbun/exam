@@ -35,6 +35,9 @@ import { AssetAttributeComponent } from './asset-attribute/asset-attribute.compo
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { MappingAssetUsagePagingComponent } from './mapping-asset-usage/mapping-asset-usage-paging/mapping-asset-usage-paging.component';
+import { MappingAssetUsageDetailComponent } from './mapping-asset-usage/mapping-asset-usage-detail/mapping-asset-usage-detail.component';
+import { MappingAssetUsageAddComponent } from './mapping-asset-usage/mapping-asset-usage-add/mapping-asset-usage-add.component';
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -88,7 +91,10 @@ export const customCurrencyMaskConfig = {
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
     AssetAttributeComponent,
-    AssetAttributeDetailComponent
+    AssetAttributeDetailComponent,
+    MappingAssetUsagePagingComponent,
+    MappingAssetUsageDetailComponent,
+    MappingAssetUsageAddComponent
   ],
   providers: [
     NGXToastrService

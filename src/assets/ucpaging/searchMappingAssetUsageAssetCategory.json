@@ -1,0 +1,115 @@
+{
+    "component": [
+        {
+            "type": "textbox",
+            "name": "AT.ASSET_TYPE_NAME",
+            "id": "AssetTypeNameId",
+            "value": "",
+            "label": "Asset Type",
+            "placeholder": "Asset Type"
+        },
+        {
+            "type": "textbox",
+            "name": "AC.ASSET_CATEGORY_CODE",
+            "id": "AssetCategoryCodeId",
+            "value": "",
+            "label": "Asset Category Code",
+            "placeholder": "Asset Category Code"
+        },
+        {
+            "type": "dropdown",
+            "name": "AC.IS_ACTIVE",
+            "id": "ActiveStatusId",
+            "label": "Active Status",
+            "value": "",
+            "placeholder": "Placeholder",
+            "isFromURL": false,
+            "ddlType": "all",
+            "items": [
+                {
+                    "key": "true",
+                    "value": "Yes"
+                },
+                {
+                    "key": "false",
+                    "value": "No"
+                }
+            ],
+            "itemsUrl": []
+        },
+        {
+            "type": "textbox",
+            "name": "AC.ASSET_CATEGORY_NAME",
+            "id": "AssetCategoryNameId",
+            "value": "",
+            "label": "Asset Category Name",
+            "placeholder": "Asset Category Name"
+        }
+    ],
+    "querystring": {
+        "name": "searchMappingAssetUsageAssetCategory"
+    },
+    "headerList": [
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Asset Type",
+            "name": "AssetType"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Asset Category Code",
+            "name": "AssetCategoryCode"
+        },
+        {
+            "type": "sort",
+            "position": "left",
+            "label": "Asset Category Name",
+            "name": "AssetCategoryName"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Active Status",
+            "name": "IsActive"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Action"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "left",
+            "property": "AssetType"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "AssetCategoryCode"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "AssetCategoryName"
+        },
+        {
+            "type": "boolean",
+            "position": "center",
+            "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "delete",
+                    "property": "AssetCategoryUsageMapId"
+                }
+            ]
+        }
+    ]
+}
