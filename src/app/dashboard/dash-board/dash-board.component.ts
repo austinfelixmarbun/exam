@@ -3,6 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
+import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -69,7 +70,7 @@ export class DashBoardComponent implements OnInit {
         this.Item.RequestObj.IntegrationObj.push(integrationObj2);
       }
     }else{
-      integrationObj = new ThingsToDoIntegrationObj();
+      integrationObj = new ThingsToDoIntegrationV2Obj();
       integrationObj.RequestObj.Office = "";
       integrationObj.RequestObj.Role = this.roleCode;
       integrationObj.RequestObj.UserName = this.username;
