@@ -690,6 +690,7 @@
     "GetCoaSchmByCoaSchmId": "/v1/CoaSchm/GetCoaSchmByCoaSchmId",
     "SubmitCoaSchm": "/v1/CoaSchm/SubmitCoaSchm",
     "GetListCoaSchm": "/v1/CoaSchm/GetListCoaSchm",
+    "GetListCoaSchmActive": "/v1/CoaSchm/GetListCoaSchmActive",
     "GetListRackByCabinetCode": "/v1/ViewDocument/GetListRackByCabinetCode",
     "GetCabinetByCabinetCode": "/v1/ViewDocument/GetCabinetByCabinetCode",
     "GetListFilingByRackCodeAndCabinetCode": "/v1/ViewDocument/GetListFilingByRackCodeAndCabinetCode",

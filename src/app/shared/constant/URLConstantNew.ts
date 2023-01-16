@@ -1007,6 +1007,7 @@ export class UrlConstantNew{
     public GetCoaSchmByCoaSchmId = this.env.FoundationR3Url + this.url.GetCoaSchmByCoaSchmId;
     public SubmitCoaSchm = this.env.FoundationR3Url + this.url.SubmitCoaSchm;
     public GetListCoaSchm = this.env.FoundationR3Url + this.url.GetListCoaSchm;
+    public GetListCoaSchmActive = this.env.FoundationR3Url + this.url.GetListCoaSchmActive;
 
 
     // View Cabinet, Rack, FIling
