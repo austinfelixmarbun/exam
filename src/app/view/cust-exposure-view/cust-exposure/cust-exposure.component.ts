@@ -70,6 +70,8 @@ export class CustExposureComponent implements OnInit {
       (response) => {
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {
           const element = response.ListCrdExpsrAppAgrHistObj[index];
+          element.OverdueDays = element.OverdueDays == undefined ? 0 : element.OverdueDays;
+          element.OverdueAmt = element.OverdueAmt == undefined ? 0 : element.OverdueAmt;
           if (element.RoleCust == this.RoleCust) 
           {
             this.ListCrdExpsrAppAgrHistCustObj.push(element);
