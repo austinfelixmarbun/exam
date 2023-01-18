@@ -90,6 +90,8 @@ export class ObligorExposureComponent implements OnInit {
         console.log(response);
         for (let index = 0; index < response.ListCrdExpsrAppAgrHistObj.length; index++) {
           const element = response.ListCrdExpsrAppAgrHistObj[index];
+          element.OverdueDays = element.OverdueDays == undefined ? 0 : element.OverdueDays;
+          element.OverdueAmt = element.OverdueAmt == undefined ? 0 : element.OverdueAmt;
           if (element.RoleCust == this.RoleCust) {
             this.ListCustDataCrdExpsrAppAgrHist.push(element);
             this.SummaryData.CustomerExposureAmt += element.OsPrincipal;
