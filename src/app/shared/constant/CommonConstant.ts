@@ -3,7 +3,7 @@ export class CommonConstant {
 
     // REGEX
     public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
-    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
     public static regexMultipleEmail = "^(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)(\s*;\\s*|\\s*$))+$";
 
     // MODULE
