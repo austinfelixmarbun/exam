@@ -289,7 +289,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             return response;
           }),
           mergeMap((response) => {
-            this.listAssetSchmDObj.AssetMasterId = response["AssetMasterId"];
+            this.listAssetSchmDObj.AssetMasterId = response["Id"];
             let observableBatch = []; 
             let editListAssetSchm = this.http.post(this.UrlConstantNew.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
             observableBatch.push(editListAssetSchm);
