@@ -12,6 +12,7 @@ import { String } from 'typescript-string-operations';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
 
 @Component({
@@ -163,6 +164,8 @@ export class CustLegalDocComponent implements OnInit {
           }
         }
       }
+    
+    if(!await this.validateMandatoryLegalDoc()) return;
 
     this.outputTab.emit({ stepMode: 'next'});
   }
@@ -177,5 +180,53 @@ export class CustLegalDocComponent implements OnInit {
     return Object.keys(groups).map(function (group) {
       return groups[group];
     })
+  }
+
+  async validateMandatoryLegalDoc()
+  {
+    var listMissingDocs: Array<string> = [];
+    var isLegalDocsValid = false;
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, {Code: CommonConstant.GSCodeCoyMandatoryLegalDocs}).toPromise().then(
+      (response) => {
+        if (response["GsValue"] == undefined || response["GsValue"] == "") {
+          isLegalDocsValid = true;
+          return;
+        }
+        var listMandatoryDocs: Array<string> = response["GsValue"].split(';');
+        if(!listMandatoryDocs || listMandatoryDocs.length <= 0)
+        {
+          isLegalDocsValid = true;
+          return;
+        }
+
+        var listExistingDocs: Array<string> = this.custLegalDocs
+          .filter(x => x.DocNo.trim() != '' && x.DocDt)
+          .map(x => x.MrLegalDocTypeCode);
+        listMandatoryDocs.forEach(x => {
+          if (!listExistingDocs.find(z => z == x)) listMissingDocs.push(x);
+        })
+
+        if(listMissingDocs.length <= 0)
+        {
+          isLegalDocsValid = true;
+          return;
+        }
+      }
+    );
+
+    if(!isLegalDocsValid) 
+    {
+      await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeLegalDocType }).toPromise().then(
+        (response) => {
+          var listLegalDocTypeObj:Array<KeyValueObj> = response[CommonConstant.ReturnObj];
+          var listMissingDocsName: Array<string> = [];
+          listMissingDocs.forEach((missingDocCode) => {
+            var foundIndex = listLegalDocTypeObj.findIndex(x => x.Key == missingDocCode);
+            listMissingDocsName.push(foundIndex >= 0 ? listLegalDocTypeObj[foundIndex].Value : missingDocCode)
+          })
+          this.toastr.warningMessage(String.Format(ExceptionConstant.MANDATORY_LEGAL_DOC, listMissingDocsName.join(', ')));
+        });
+    }
+    return isLegalDocsValid;
   }
 }

@@ -72,6 +72,8 @@ export class ExceptionConstant {
     public static EXP_PASSWORD = "Password has expired. Please change your password.";
     public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
 
+    public static MANDATORY_LEGAL_DOC = "Legal Documents with following type are mandatory: {0}";
+    
     // NotifEngine
     public static PARAM_ATTR_INACTIVE = "There are some inactive Parameter Attribute. Do you still want to continue?";
 
