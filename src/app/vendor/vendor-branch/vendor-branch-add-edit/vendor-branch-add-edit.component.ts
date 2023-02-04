@@ -688,7 +688,9 @@ export class VendorBranchAddEditComponent implements OnInit {
     this.inputLookupZipcodeObj.genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
     this.inputLookupZipcodeObj.isRequired = false;
 
-    this.inputLookupParentObj.isRequired = false;
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
+      this.inputLookupParentObj.isRequired = false;
+    }
     this.inputLookupParentObj.addCritInput = new Array();
 
     if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {

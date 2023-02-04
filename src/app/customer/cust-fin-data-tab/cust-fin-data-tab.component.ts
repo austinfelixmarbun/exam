@@ -348,8 +348,7 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: custFinData.RowVersion
     });
 
-    if (this.IsAddFinData) this.CustPersonalFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
-    else this.CustPersonalFinDataForm.controls['DateAsOf'].clearValidators();
+    this.CustPersonalFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     this.CustPersonalFinDataForm.controls['DateAsOf'].updateValueAndValidity();
   }
 
@@ -392,8 +391,7 @@ export class CustFinDataTabComponent implements OnInit {
       RowVersion: custFinData.RowVersion,
     });
 
-    if (this.IsAddFinData) this.CustCompanyFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
-    else this.CustCompanyFinDataForm.controls['DateAsOf'].clearValidators();
+    this.CustCompanyFinDataForm.controls['DateAsOf'].setValidators([Validators.required]);
     this.CustCompanyFinDataForm.controls['DateAsOf'].updateValueAndValidity();
   }
 
