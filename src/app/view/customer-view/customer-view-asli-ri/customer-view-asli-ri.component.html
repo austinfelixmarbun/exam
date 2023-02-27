@@ -204,6 +204,30 @@
           </div>
         </div>
       </div>
+      <div *ngIf="DataAsliRi.ReqAsliRiObj.ListReqVerificationType.includes('ASLIRI_INCOME_GRADE')">
+        <lib-ucSubsection [id]="'incomeGradeVerificationId'" [title]="'Income Grade Verification'" [panel]="'incomeGradeVerification'">
+        </lib-ucSubsection>
+        <div id="incomeGradeVerification">
+          <div class="px-3">
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>NPWP Personal - {{ DataAsliRi.ReqAsliRiObj.NpwpPersonal }}</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeNpwp == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeNpwp == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeNpwp == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4  adInsLabel" translate>Match Result</label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeMatchResult == true"><i class="far ft-check" style="color:green;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeMatchResult == false"><i class="far ft-x" style="color:#8d0000;"></i></label>
+              <label class="col-md-8  adInsLabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeMatchResult == null">-</label>
+            </div>
+            <div class="row">
+              <label class="col-md-4 adInsLabel" translate>Income Grade</label>
+              <label class="col-md-8  adinslabel" translate *ngIf="DataAsliRi.ResAsliRiObj.IncomeGradeGrade">{{ DataAsliRi.ResAsliRiObj.IncomeGradeGrade }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

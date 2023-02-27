@@ -44,6 +44,7 @@ export class AsliRiReqComponent implements OnInit {
   isTaxExtraVerification: boolean = false;
   isTaxCompanyVerification: boolean = false;
   isWorkplaceVerification: boolean = false;
+  isIncomeGradeVerification: boolean = false;
   isReady: boolean = false;
   key: string;
 
@@ -102,6 +103,7 @@ export class AsliRiReqComponent implements OnInit {
       this.isPhoneAgeVerification = true;
       this.isTaxExtraVerification = true;
       this.isWorkplaceVerification = true;
+      this.isIncomeGradeVerification = true;
 
       this.AsliRIForm.patchValue({
         MonthlyIncome : this.reqAddTrxSrcDataForAsliRIObj.MonthlyIncome,
@@ -207,6 +209,10 @@ export class AsliRiReqComponent implements OnInit {
     if(this.isWorkplaceVerification && this.AsliRIForm.controls.CompanyName.value != '' && this.AsliRIForm.controls.CompanyPhone.value != '')
     {
       this.reqAddTrxSrcDataForAsliRIObj.ListReqVerificationType.push(CommonConstant.ASLI_RI_WORKPLACE)
+    }
+    if(this.isIncomeGradeVerification && this.parent.TaxIdNo != "" && this.parent.IdNo != "")
+    {
+      this.reqAddTrxSrcDataForAsliRIObj.ListReqVerificationType.push(CommonConstant.ASLI_RI_INCOME_GRADE)
     }
   }
 

@@ -454,6 +454,7 @@ export class CommonConstant {
     public static ASLI_RI_TAX_EXTRA = "ASLIRI_TAX_EXTRA";
     public static ASLI_RI_TAX_COY = "ASLIRI_TAX_COY";
     public static ASLI_RI_WORKPLACE = "ASLIRI_WORKPLACE";
+    public static ASLI_RI_INCOME_GRADE = "ASLIRI_INCOME_GRADE";
 
     //Office
     public static MR_OFFICE_TYPE_CODE = "MrOfficeTypeCode";

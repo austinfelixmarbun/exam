@@ -142,6 +142,22 @@
             </div>
           </div>
         </div>
+        <div *ngIf="isIncomeGradeVerification">
+          <lib-ucSubsection [id]="'incomeGradeVerificationId'" [title]="'Income Grade Verification'" [panel]="'incomeGradeVerification'">
+          </lib-ucSubsection>
+          <div id="incomeGradeVerification">
+            <div class="px-3">
+              <div class="row">
+                <label class="col-md-4  adInsLabel" translate>NPWP Personal</label>
+                <label class="col-md-8  adinslabel" translate>{{ parent.TaxIdNo != "" ? parent.TaxIdNo : "-" }}</label>
+              </div>
+              <div class="row">
+                <label class="col-md-4  adInsLabel" translate>Id No</label>
+                <label class="col-md-8  adinslabel" translate>{{ parent.IdNo? parent.IdNo : "-" }}</label>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
   <div class="modal-footer">
