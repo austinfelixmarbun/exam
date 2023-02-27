@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ReqAddTrxSrcDataForAsliRIObj } from 'app/shared/model/asli-ri/req-add-trx-src-data-for-asli-ri-obj.model';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 @Component({
   selector: 'app-asli-ri-req',
   templateUrl: './asli-ri-req.component.html',
@@ -59,6 +58,14 @@ export class AsliRiReqComponent implements OnInit {
   async ngOnInit() {
     this.reqAddTrxSrcDataForAsliRIObj = new ReqAddTrxSrcDataForAsliRIObj();
     this.parent = this.parentForm.getRawValue();
+
+    //#region "RTHREE-504 - Validasi Phn Number"
+    if (this.parent.MobilePhnNo1 && this.parent.MobilePhnNo1.substring(0, 3) == '081') 
+    {
+      this.parent.MobilePhnNo1 = '6281' + this.parent.MobilePhnNo1.substring(3);
+    }
+    //#endregion
+    
     this.Addr = this.parentForm.controls.UcAddress.value;
     this.address = this.Addr.Addr +  " RT/RW " + this.Addr.AreaCode4 + "/" + this.Addr.AreaCode3 + " " + this.Addr.AreaCode2 + " " + this.Addr.AreaCode1 + " " + this.Addr.City;
 
@@ -76,7 +83,7 @@ export class AsliRiReqComponent implements OnInit {
       this.reqAddTrxSrcDataForAsliRIObj = JSON.parse(AdInsHelper.GetLocalStorage(this.key))
     }
 
-    this.CheckValidationSubsection()
+    await this.CheckValidationSubsection()
     this.CheckValidationSelfie()
 
     await this.http.post(URLConstant.GetRefMasterByMasterCode, {Code : this.parent.MrCustModelCode}).toPromise().then(
@@ -95,15 +102,22 @@ export class AsliRiReqComponent implements OnInit {
     this.isReady = true;
   }
 
-  CheckValidationSubsection()
+  listAvailableReqVerificationType : Array<KeyValueObj> = [];
+  async CheckValidationSubsection()
   {
+    await this.http.post(URLConstant.GetListReqVerificationTypeForAsliRi, {}).toPromise().then(
+      (res: Array<KeyValueObj>) => {
+        this.listAvailableReqVerificationType = res;
+    })
+
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal && this.parent.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP)
     {
-      this.isProfessionalVerification = true;
-      this.isPhoneAgeVerification = true;
-      this.isTaxExtraVerification = true;
-      this.isWorkplaceVerification = true;
-      this.isIncomeGradeVerification = true;
+
+      this.isProfessionalVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_PROF) > -1);
+      this.isPhoneAgeVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_PHN_AGE) > -1);
+      this.isTaxExtraVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_TAX_EXTRA) > -1);
+      this.isWorkplaceVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_WORKPLACE) > -1);
+      this.isIncomeGradeVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_INCOME_GRADE) > -1);
 
       this.AsliRIForm.patchValue({
         MonthlyIncome : this.reqAddTrxSrcDataForAsliRIObj.MonthlyIncome,
@@ -114,7 +128,7 @@ export class AsliRiReqComponent implements OnInit {
 
     if((this.MrCustTypeCode == CommonConstant.CustTypePersonal && this.parent.MrCustModelCode == CommonConstant.CUST_MODEL_SME) || this.MrCustTypeCode == CommonConstant.CustTypeCompany)
     {
-      this.isTaxCompanyVerification = true;
+      this.isTaxCompanyVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_TAX_COY) > -1);
 
       if(this.MrCustTypeCode == CommonConstant.CustTypeCompany)
       {
@@ -134,7 +148,7 @@ export class AsliRiReqComponent implements OnInit {
 
     if(this.MrCustTypeCode == CommonConstant.CustTypePersonal)
     {
-      this.isHomeAddressPercentageVerification = true;
+      this.isHomeAddressPercentageVerification = (this.listAvailableReqVerificationType.findIndex(x => x.Key == CommonConstant.ASLI_RI_HOME_ADDR) > -1);
     }
   }
 

@@ -1134,6 +1134,7 @@ export class URLConstant {
     public static GetPefindoMultiResultByGroupTrxNo = environment.FoundationR3Url + "/v1" + "/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo";
     public static AddTrxScrDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/AddTrxSrcDataForAsliRi";
     public static GetTrxSrcDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/GetTrxResultDataForAsliRi";
+    public static GetListReqVerificationTypeForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/GetListReqVerificationType";
 
     //PEFINDO
     public static GetViewMOSummary = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewMOSummary";
