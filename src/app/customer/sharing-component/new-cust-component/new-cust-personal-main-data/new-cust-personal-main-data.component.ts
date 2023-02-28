@@ -122,6 +122,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
+    this.getPatternTaxIdNo();
     this.InitData();
     this.buildingOwnership();
     this.GetGeneralSetting(this.GsCodeIdTypeExpDtRequired);
@@ -229,7 +230,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       BirthPlace: ['', [Validators.required]],
       BirthDt: ['', [Validators.required]],
       IdNo: ['', [Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
-      TaxIdNo: ['', [Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED), Validators.minLength(15), Validators.maxLength(15)]],
+      TaxIdNo: ['', [Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
       IdExpiredDt: [''],
       MrMaritalStatCode: ['', Validators.required],
       MotherMaidenName: ['', [Validators.required, Validators.maxLength(500)]],
@@ -845,5 +846,30 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   {
     var isContain = this.houseOwnershipObj.some(x => x.Key == event)
     return isContain;
+  }
+
+  customPatternTaxIdNo: Array<CustomPatternObj> = new Array();
+  resultPatternTaxIdNo: Array<KeyValueObj> = new Array();
+  taxIdNoValue: string = "TAXIDNO";
+  getPatternTaxIdNo() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPatternTaxIdNo = response[CommonConstant.ReturnObj];
+        if (this.resultPatternTaxIdNo != undefined) {
+          for (let i = 0; i < this.resultPatternTaxIdNo.length; i++) {
+            if (this.resultPatternTaxIdNo[i].Key == this.taxIdNoValue) {
+              let patternObjTaxIdNo: CustomPatternObj = new CustomPatternObj();
+              let patternValue: string = this.resultPatternTaxIdNo[i].Value;
+  
+              patternObjTaxIdNo.pattern = patternValue;
+              patternObjTaxIdNo.invalidMsg = this.regexService.getErrMessage(patternValue);
+              this.customPatternTaxIdNo.push(patternObjTaxIdNo);
+              
+              this.CustomerForm.controls.TaxIdNo.setValidators([Validators.pattern(patternObjTaxIdNo.pattern)]);
+              this.CustomerForm.controls.TaxIdNo.updateValueAndValidity();
+            }
+          }
+        }
+      });
   }
 }
