@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-cust-asset-detail',
   templateUrl: './cust-asset-detail.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class CustAssetDetailComponent implements OnInit {
   @Input() CustAssetId: number;

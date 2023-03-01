@@ -79,7 +79,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsSharedModule,
         HttpClientModule,
         DragDropModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({
+            positionClass :'toast-bottom-right'
+          }),
         NgbModule,
         TranslateModule.forRoot({
             loader: {

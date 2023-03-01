@@ -96,10 +96,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
           type: 'module',
-          remoteEntry: 'https://r3web-server.ad-ins.com/MFE_FLIGHTS/remoteEntry.js',
+          remoteEntry: 'http://localhost:4201/remoteEntry.js',
           exposedModule: './Module'
         })
-        .then(m => m.FlightsModule)
+        .then(m => m.AgreementModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   }

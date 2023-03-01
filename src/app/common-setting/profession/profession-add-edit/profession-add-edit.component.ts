@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-profession-add-edit',
   templateUrl: './profession-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class ProfessionAddEditComponent implements OnInit {
 

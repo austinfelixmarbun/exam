@@ -13,7 +13,7 @@ import { CustAssetDetailComponent } from './cust-asset-detail/cust-asset-detail.
   selector: 'app-cust-asset',
   templateUrl: './cust-asset.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class CustAssetComponent implements OnInit {
   @Input() CustId: number;

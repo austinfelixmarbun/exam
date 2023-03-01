@@ -17,7 +17,7 @@ import { forkJoin } from 'rxjs';
   selector: 'app-update-customer-fin-data',
   templateUrl: './update-customer-fin-data.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;

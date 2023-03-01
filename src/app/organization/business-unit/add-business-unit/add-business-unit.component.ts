@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
     selector: 'add-app-business-unit',
     templateUrl: './add-business-unit.component.html',
-    providers: [NGXToastrService] // add NgbPaginationConfig to the component providers
+   // providers: [NGXToastrService] // add NgbPaginationConfig to the component providers
 })
 
 export class AddBusinessUnitComponent implements OnInit {

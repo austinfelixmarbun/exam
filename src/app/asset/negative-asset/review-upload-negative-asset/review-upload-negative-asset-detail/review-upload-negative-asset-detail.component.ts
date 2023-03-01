@@ -20,7 +20,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-review-upload-negative-asset-detail',
   templateUrl: './review-upload-negative-asset-detail.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class ReviewUploadNegativeAssetDetailComponent implements OnInit {
   uploadNo: string;

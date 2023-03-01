@@ -35,7 +35,7 @@ module.exports = {
       //     './Component': './/src/app/app.component.ts',
       // },        
 
-      // For hosts (please adjust)
+      //For hosts (please adjust)
       // remotes: {
       //   "module-fou": "http://localhost:4201/remoteEntry.js",
       // },

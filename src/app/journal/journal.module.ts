@@ -47,8 +47,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     UploadJournalDetailComponent,
 
     JournalReconcilePagingComponent],
-    providers: [
-        NGXToastrService,
-    ]
+    // providers: [
+    //     NGXToastrService,
+    // ]
 })
 export class JournalModule { }

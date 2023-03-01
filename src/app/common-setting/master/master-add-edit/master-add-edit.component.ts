@@ -17,7 +17,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-master-add-edit',
   templateUrl: './master-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class MasterAddEditComponent implements OnInit {
   refMasterObj: RefMasterObj = new RefMasterObj();

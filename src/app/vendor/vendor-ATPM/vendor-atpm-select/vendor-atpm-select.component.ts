@@ -16,7 +16,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-atpm-select',
   templateUrl: './vendor-atpm-select.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class VendorAtpmSelectComponent implements OnInit {
 
