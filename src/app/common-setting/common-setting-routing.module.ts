@@ -67,6 +67,8 @@ import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
+import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
+import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 
 const routes: Routes = [
   {
@@ -536,6 +538,22 @@ const routes: Routes = [
         component: TaxOfficePagingComponent,
         data: {
           title: 'Tax Office Paging'
+        },
+      },
+
+      //REF INS CLAIM DOC
+      {
+        path: PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL,
+        component: RefInsClaimDocAddEditComponent,
+        data: {
+          title: 'Insurance Claim Document Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_INS_CLAIM_DOC_PAGING,
+        component: RefInsClaimDocPagingComponent,
+        data: {
+          title: 'Insurance Claim Document Paging'
         },
       },
     ]

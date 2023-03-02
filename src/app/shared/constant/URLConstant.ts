@@ -1172,5 +1172,10 @@ export class URLConstant {
   public static DeleteRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/DeleteRefTaxOffice";
   public static GetRefTaxOfficeDetailById = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetRefTaxOfficeDetailById";
   public static GetListRefTaxOfficeActive = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetListRefTaxOfficeActive";
+
+   // ASSET INS CLAIM DOC
+   public static AddRefInsClaimDoc = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/AddRefInsClaimDoc"
+   public static EditRefInsClaimDoc = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/EditRefInsClaimDoc"
+   public static GetRefInsClaimDocByRefInsClaimDocCode = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
 }
 

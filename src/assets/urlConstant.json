@@ -935,5 +935,8 @@
     "EditRefNotificationSource": "/v1/RefNotificationSource/EditRefNotificationSource",
     "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId",
     "AddTrxScrDataForAsliRi" : "/v1/IntegratorAsliRi/AddTrxSrcDataForAsliRi",
-    "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi"
+    "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi",
+    "AddRefInsClaimDoc": "/v1/RefInsClaimDoc/AddRefInsClaimDoc",
+    "EditRefInsClaimDoc": "/v1/RefInsClaimDoc/EditRefInsClaimDoc",
+    "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
 }
