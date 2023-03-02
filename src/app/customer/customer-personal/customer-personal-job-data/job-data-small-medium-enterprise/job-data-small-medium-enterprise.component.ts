@@ -504,6 +504,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -548,6 +549,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyPrevAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -592,6 +594,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyOthBizAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(URLConstant.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
