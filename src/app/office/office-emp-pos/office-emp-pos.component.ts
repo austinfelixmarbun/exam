@@ -19,7 +19,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-emp-pos',
   templateUrl: './office-emp-pos.component.html',
-  providers: [NGXToastrService, DecimalPipe]
+  providers: [/*NGXToastrService*/, DecimalPipe]
 })
 export class OfficeEmpPosComponent implements OnInit {
 

@@ -192,8 +192,8 @@ export const customCurrencyMaskConfig = {
     TaxOfficeDetailComponent,
     TaxOfficePagingComponent
   ],
-  providers: [
-    NGXToastrService
-  ]
+  // providers: [
+  //   NGXToastrService
+  // ]
 })
 export class CommonSettingModule { }

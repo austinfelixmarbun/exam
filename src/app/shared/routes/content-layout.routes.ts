@@ -1,3 +1,4 @@
+import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from '../PathConstant';
 
@@ -15,5 +16,113 @@ export const CONTENT_ROUTES: Routes = [
     {
         path: PathConstant.CR_DOC_MNGMNT_VIEW,
         loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
-    }
+    },
+    {
+        path: 'agrmntview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4202/remoteEntry.js',
+              exposedModule: './AgrmntModule'
+            })
+            .then(m => m.AgreementModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+    },
+    {
+        path: 'lmsschemeview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4202/remoteEntry.js',
+              exposedModule: './LmsSchmModule'
+            })
+            .then(m => m.LmsSchemeModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'payment-reversal-view',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              exposedModule: './PaymentReversal'
+            })
+            .then(m => m.PaymentReversalModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'prepaid-alloc-view',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              exposedModule: './PaymentReceive'
+            })
+            .then(m => m.PaymentReceiveModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'receiptformview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              exposedModule: './ReceiptForm'
+            })
+            .then(m => m.ReceiptFormModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'cashierview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              exposedModule: './CashierTransaction'
+            })
+            .then(m => m.CashierTransactionModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'amendmentview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4204/remoteEntry.js',
+              exposedModule: './AmendmentModule'
+            })
+            .then(m => m.AmendmentModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'writeoffview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4204/remoteEntry.js',
+              exposedModule: './WriteOffModule'
+            })
+            .then(m => m.WriteOffModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'nonaccrualview',
+        loadChildren: () => {
+          return loadRemoteModule({
+              type: 'module',
+              remoteEntry: 'http://localhost:4204/remoteEntry.js',
+              exposedModule: './NonAccModule'
+            })
+            .then(m => m.NonAccrualModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
 ];

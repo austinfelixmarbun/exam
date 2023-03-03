@@ -91,16 +91,190 @@ export const Full_ROUTES: Routes = [
   },
 
   // dynamic import remote module
+  //#region AR Module
   {
-    path: 'flights',
+    path: 'agrmnt',
     loadChildren: () => {
       return loadRemoteModule({
           type: 'module',
-          remoteEntry: 'http://localhost:4201/remoteEntry.js',
-          exposedModule: './Module'
+          remoteEntry: 'http://localhost:4202/remoteEntry.js',
+          exposedModule: './AgrmntModule'
         })
         .then(m => m.AgreementModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+  {
+    path: 'lmsscheme',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4202/remoteEntry.js',
+          exposedModule: './LmsSchmModule'
+        })
+        .then(m => m.LmsSchemeModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'golive',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4202/remoteEntry.js',
+          exposedModule: './GoLiveModule'
+        })
+        .then(m => m.GoLiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4202/remoteEntry.js',
+          exposedModule: './ReportModule'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+  //#region Payment Module
+  {
+    path: 'payment-channel',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './PaymentChannel'
+        })
+        .then(m => m.PaymentChannelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './PaymentPriority'
+        })
+        .then(m => m.PaymentPriorityModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment-receive',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './PaymentReceive'
+        })
+        .then(m => m.PaymentReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment-reversal',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './PaymentReversal'
+        })
+        .then(m => m.PaymentReversalModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'receiptform',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './ReceiptForm'
+        })
+        .then(m => m.ReceiptFormModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'cashier',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './CashierTransaction'
+        })
+        .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4203/remoteEntry.js',
+          exposedModule: './ReportModule'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+  //#region ARMNT Module
+  {
+    path: 'amendment',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4204/remoteEntry.js',
+          exposedModule: './AmendmentModule'
+        })
+        .then(m => m.AmendmentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'nonaccrual',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4204/remoteEntry.js',
+          exposedModule: './NonAccModule'
+        })
+        .then(m => m.NonAccrualModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'writeoff',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4204/remoteEntry.js',
+          exposedModule: './WriteOffModule'
+        })
+        .then(m => m.WriteOffModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry: 'http://localhost:4204/remoteEntry.js',
+          exposedModule: './ReportModule'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
 ];

@@ -29,7 +29,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-branch-add-edit',
   templateUrl: './vendor-branch-add-edit.component.html',
-  providers: [NGXToastrService, RegexService]
+  providers: [/*NGXToastrService*/, RegexService]
 })
 export class VendorBranchAddEditComponent implements OnInit {
 

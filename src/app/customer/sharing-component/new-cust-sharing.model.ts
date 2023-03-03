@@ -123,7 +123,7 @@ export const customCurrencyMaskConfig = {
         AsliRiViewComponent
     ],
     providers: [
-        NGXToastrService,
+        // NGXToastrService,
         RegexService,
         NewCustSetData,
         ThirdPartyUploadService
