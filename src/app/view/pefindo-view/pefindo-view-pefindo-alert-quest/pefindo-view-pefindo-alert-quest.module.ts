@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PefindoViewPefindoAlertQuestRoutingModule } from './pefindo-view-pefindo-alert-quest-routing.module';
 import { PefindoViewPefindoAlertQuestComponent } from './pefindo-view-pefindo-alert-quest.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +18,9 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     SharingModule,
     ArchwizardModule,
     UcSubsectionModule
+  ],
+  exports: [
+    PefindoViewPefindoAlertQuestComponent
   ]
 })
 export class PefindoViewPefindoAlertQuestModule { }

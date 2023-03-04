@@ -17,6 +17,9 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     AdInsSharedModule,
     SharingModule,
     UcSubsectionModule
+  ],
+  exports: [
+    PefindoViewInvolvementsComponent
   ]
 })
 export class PefindoViewInvolvementsModule { }

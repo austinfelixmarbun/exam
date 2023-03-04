@@ -73,6 +73,7 @@ export class PefindoViewComponent implements OnInit {
     else if (ev == 3) { // Contracts
       url = NavigationConstant.PEFINDO_CONTRACTS;
     }
+    /*
     else if (ev == 4) { // PEFINDO Alert Quest
       url = NavigationConstant.PEFINDO_PEFINDO_ALERT_QUEST;
     }
@@ -96,6 +97,16 @@ export class PefindoViewComponent implements OnInit {
     }
     else if (ev == 11) { // Financial Statements
       url = NavigationConstant.PEFINDO_FINANCIAL_STATEMENTS;
+    }
+    */
+    else if (ev == 4) { // Inquiries
+      url = NavigationConstant.PEFINDO_INQUIRIES;
+    }
+    else if (ev == 5 && this.MrCustTypeCode == CommonConstant.CustTypeCompany) { // Financial Statements
+      url = NavigationConstant.PEFINDO_FINANCIAL_STATEMENTS;
+    }
+    else if (ev == 5 && this.MrCustTypeCode != CommonConstant.CustTypeCompany || ev == 6) { // Others
+      url = NavigationConstant.PEFINDO_OTHERS;
     }
     AdInsHelper.RedirectUrlView(this.router, [url], { "TrxNo": this.Param }, true);
   }

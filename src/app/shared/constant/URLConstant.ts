@@ -1159,6 +1159,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetViewDisputes = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewDisputes";
     public static GetViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewFinancialStatements";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Pefindo/PefindoSmartSearch";
+    public static GetPefindoContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoContracts";
 
     // THINGS TO DO
   public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";
