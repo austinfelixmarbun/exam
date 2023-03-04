@@ -4,6 +4,51 @@
 			<div class="px-3">
 				<div class="form-body mt-1">
 
+          <lib-ucSubsection [id]="'ContractSummaryDebtorId'" [title]="'Contract Summary, Debtor'" [panel]="'ContractSummaryDebtor'">
+          </lib-ucSubsection>
+          <div id="ContractSummaryDebtor">
+            <div class="card-body" style="overflow-x: auto">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th style="text-align: left;">
+                      <span  name='Nama Kreditur' translate>Nama Kreditur</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Total' translate>Total</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Balance' translate>Balance</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Past Due' translate>Past Due</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Max Arreas' translate>Max Arreas</span>
+                    </th>
+                   </tr>
+                </thead>
+
+                <tbody *ngIf = "ResSummaryContractsObj.length == 0">
+                  <tr>
+                    <td colspan="100%">No Data Available</td>
+                  </tr>
+                </tbody>
+          
+                <tbody *ngIf="ResSummaryContractsObj.length > 0">
+                  <tr *ngFor="let item of ResSummaryContractsObj">
+                    <td style="text-align: left;">{{ item.Creditor }}</td>
+                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
           <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>
           <div id="ContractDebtor">
@@ -12,7 +57,13 @@
                 <thead>
                   <tr class="table-header">
                     <th style="text-align: left;">
-                      <span  name='Sector' translate>Sector</span>
+                      <span  name='Nama Kreditur' translate>Nama Kreditur</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Negative Status' translate>Negative Status</span>
+                    </th>
+                    <th style="text-align: left;">
+                      <span  name='Maturity Date' translate>Maturity Date</span>
                     </th>
                     <th style="text-align: left;">
                       <span  name='Type' translate>Type</span>
@@ -35,18 +86,23 @@
                     <th style="text-align: left;">
                       <span  name='Arreas' translate>Arreas</span>
                     </th>
+                    <th style="text-align: left;">
+                      <span  name='Last Update' translate>Last Update</span>
+                    </th>
                   </tr>
                 </thead>
 
-                <tbody *ngIf = "ResViewContractsObj.ListCntrctDebtor?.length == 0">
+                <tbody *ngIf = "ResListContractsObj.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>
           
-                <tbody *ngIf="ResViewContractsObj.ListCntrctDebtor?.length > 0">
-                  <tr *ngFor="let item of ResViewContractsObj.ListCntrctDebtor">
-                    <td style="text-align: left;">{{ item.Sector }}</td>
+                <tbody *ngIf="ResListContractsObj.length > 0">
+                  <tr *ngFor="let item of ResListContractsObj">
+                    <td style="text-align: left;">{{ item.Creditor }}</td>
+                    <td style="text-align: left;">{{ item.CntrctNegStat }}</td>
+                    <td style="text-align: left;">{{ item.MaturityDt | date: 'dd-MM-yyyy' }}</td>
                     <td style="text-align: left;">{{ item.CntrctType }}</td>
                     <td style="text-align: left;">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
                     <td style="text-align: left;">{{ item.CntrctStat }}</td>
@@ -54,6 +110,7 @@
                     <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
                     <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
                     <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                    <td style="text-align: left;">{{ item.LastUpdateDt | date: 'dd-MM-yyyy' }}</td>
                   </tr>
                 </tbody>
 

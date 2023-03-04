@@ -534,5 +534,6 @@ export class PathConstant {
     public static VIEW_INQUIRIES = "Inquiries";
     public static VIEW_DISPUTES = "Disputes";
     public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
+    public static VIEW_PEFINDO_OTHERS = "Others";
     //#endregion
 }

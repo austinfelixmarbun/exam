@@ -359,6 +359,7 @@ export class NavigationConstant {
     public static PEFINDO_INQUIRIES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_INQUIRIES; //'/View/Pefindo/Inquiries'
     public static PEFINDO_DISPUTES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_DISPUTES; //'/View/Pefindo/Disputes'
     public static PEFINDO_FINANCIAL_STATEMENTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_FINANCIAL_STATEMENTS; //'/View/Pefindo/FinancialStatements'
+    public static PEFINDO_OTHERS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_PEFINDO_OTHERS; //'/View/Pefindo/Others'
     //#endregion
 
     //#region System User
