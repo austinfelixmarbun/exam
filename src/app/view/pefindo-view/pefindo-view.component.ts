@@ -53,7 +53,7 @@ export class PefindoViewComponent implements OnInit {
         }
       )
     }
-    this.redirectTab(0);
+    this.redirectTab(3);
   }
 
   redirectTab(ev) {

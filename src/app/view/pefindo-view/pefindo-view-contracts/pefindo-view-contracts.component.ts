@@ -15,6 +15,8 @@ export class PefindoViewContractsComponent implements OnInit {
   ResViewContractsObj: ResViewContractsObj = new ResViewContractsObj();
   ResListContractsObj: Array<ResContractObj> = [];
   ResSummaryContractsObj: Array<ResContractObj> = [];
+  ViewDetailContract: ResContractObj = new ResContractObj();
+  IsViewMode: boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
@@ -51,10 +53,28 @@ export class PefindoViewContractsComponent implements OnInit {
           curr.OsAmt += x.OsAmt;
           curr.PastDueAmt += x.PastDueAmt;
           curr.PastDueDays = x.PastDueDays > curr.PastDueDays ? x.PastDueDays : curr.PastDueDays;
-      })
+        })
       }
     )
-    
+  }
+
+  viewOnClick(idx: number)
+  {
+    this.ViewDetailContract = this.ResListContractsObj[idx];
+    this.ViewDetailContract.xxx = '???'
+    this.IsViewMode = true;
+  }
+
+  backOnClick()
+  {
+    this.ViewDetailContract = new ResContractObj();
+    this.IsViewMode = false;
+  }
+
+  pascalToSpace(ori:string='')
+  {
+    if (ori == undefined || ori == null) return '';
+    return ori.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1");
   }
 
 }
