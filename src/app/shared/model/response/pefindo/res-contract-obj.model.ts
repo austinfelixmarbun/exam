@@ -69,6 +69,9 @@ export class ResContractObj {
     WorstPastDueAmt: number = 0;
     WorstPastDueDays: number = 0;
 
+    RPefindoCntrctPymntCalListObjs: Array<RPefindoCntrctPymntCalListObj> = [];
+
+    xxx: string = '????';
     constructor() {
         this.MaturityDt = new Date();
         this.StartDt = new Date();
@@ -83,5 +86,21 @@ export class ResContractObj {
         this.LastDeliquency90PlusDaysDt = new Date();
         this.RealEndDt = new Date();
         this.RestructuringDt = new Date();
+    }
+}
+
+
+export class RPefindoCntrctPymntCalListObj {
+
+    CntrctSubmittedDt: Date;
+    DeliquencyStat: string = "";
+    InterestRatePrcnt: number = 0;
+    CntrctNegStat: string = "";
+    OsAmt: number = 0;
+    PastDueAmt: number = 0;
+    PastDueDays: number = 0;
+
+    constructor() {
+        this.CntrctSubmittedDt = new Date();
     }
 }

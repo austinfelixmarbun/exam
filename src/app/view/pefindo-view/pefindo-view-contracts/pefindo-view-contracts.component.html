@@ -1,8 +1,8 @@
-<div class="col-md-12 mt-3">
+<div class="mt-3">
 	<div class="card">
 		<div class="card-body">
-			<div class="px-3">
-				<div class="form-body mt-1">
+			<div class="pl-3">
+				<div class="form-body mt-1" *ngIf="!IsViewMode">
 
           <lib-ucSubsection [id]="'ContractSummaryDebtorId'" [title]="'Contract Summary, Debtor'" [panel]="'ContractSummaryDebtor'">
           </lib-ucSubsection>
@@ -11,40 +11,37 @@
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
-                    <th style="text-align: left;">
-                      <span  name='Nama Kreditur' translate>Nama Kreditur</span>
+                    <th class="text-left">
+                      <span name='Nama Kreditur' translate>Nama Kreditur</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Total' translate>Total</span>
+                    <th class="text-right" width="120">
+                      <span name='Total' translate>Total</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Balance' translate>Balance</span>
+                    <th class="text-right" width="120">
+                      <span name='Balance' translate>Balance</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Past Due' translate>Past Due</span>
+                    <th class="text-right" width="120">
+                      <span name='Past Due' translate>Past Due</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Max Arreas' translate>Max Arreas</span>
+                    <th class="text-right" width="220">
+                      <span name='Max Arreas' translate>Max Arreas</span>
                     </th>
                    </tr>
                 </thead>
-
                 <tbody *ngIf = "ResSummaryContractsObj.length == 0">
                   <tr>
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>
-          
                 <tbody *ngIf="ResSummaryContractsObj.length > 0">
                   <tr *ngFor="let item of ResSummaryContractsObj">
-                    <td style="text-align: left;">{{ item.Creditor }}</td>
-                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                    <td class="text-left">{{ item.Creditor }}</td>
+                    <td class="text-right">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueDays }}</td>
                   </tr>
                 </tbody>
-
               </table>
             </div>
           </div>
@@ -56,64 +53,65 @@
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
-                    <th style="text-align: left;">
-                      <span  name='Nama Kreditur' translate>Nama Kreditur</span>
+                    <th class="text-left">
+                      <span name='Nama Kreditur' translate>Nama Kreditur</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Negative Status' translate>Negative Status</span>
+                    <th class="text-left">
+                      <span name='Negative Status' translate>Negative Status</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Maturity Date' translate>Maturity Date</span>
+                    <th class="text-center" width="80">
+                      <span name='Maturity Date' translate>Maturity Date</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Type' translate>Type</span>
+                    <th class="text-left">
+                      <span name='Type' translate>Type</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Opened' translate>Opened</span>
+                    <th class="text-center" width="80">
+                      <span name='Opened' translate>Opened</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Status' translate>Status</span>
+                    <th class="text-left">
+                      <span name='Status' translate>Status</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Total' translate>Total</span>
+                    <th class="text-right" width="120">
+                      <span name='Total' translate>Total</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Balance' translate>Balance</span>
+                    <th class="text-right" width="120">
+                      <span name='Balance' translate>Balance</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Past Due' translate>Past Due</span>
+                    <th class="text-right" width="120">
+                      <span name='Past Due' translate>Past Due</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Arreas' translate>Arreas</span>
+                    <th class="text-right" width="70">
+                      <span name='Arreas' translate>Arreas</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Last Update' translate>Last Update</span>
+                    <th class="text-center" width="80">
+                      <span name='Last Update' translate>Last Update</span>
+                    </th>
+                    <th class="text-center" width="70">
+                      <span name='Details' translate>Details</span>
                     </th>
                   </tr>
                 </thead>
-
                 <tbody *ngIf = "ResListContractsObj.length == 0">
                   <tr>
-                    <td colspan="100%">No Data Available</td>
+                    <td colspan="100%" translate="">No Data Available</td>
                   </tr>
                 </tbody>
-          
                 <tbody *ngIf="ResListContractsObj.length > 0">
-                  <tr *ngFor="let item of ResListContractsObj">
-                    <td style="text-align: left;">{{ item.Creditor }}</td>
-                    <td style="text-align: left;">{{ item.CntrctNegStat }}</td>
-                    <td style="text-align: left;">{{ item.MaturityDt | date: 'dd-MM-yyyy' }}</td>
-                    <td style="text-align: left;">{{ item.CntrctType }}</td>
-                    <td style="text-align: left;">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
-                    <td style="text-align: left;">{{ item.CntrctStat }}</td>
-                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
-                    <td style="text-align: left;">{{ item.LastUpdateDt | date: 'dd-MM-yyyy' }}</td>
+                  <tr *ngFor="let item of ResListContractsObj; let idx = index">
+                    <td class="text-left">{{ item.Creditor }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.CntrctNegStat) }}</td>
+                    <td class="text-center">{{ item.MaturityDt | date: 'dd-MM-yyyy' }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.CntrctType) }}</td>
+                    <td class="text-center">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.CntrctStat) }}</td>
+                    <td class="text-right">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueDays }}</td>
+                    <td class="text-center">{{ item.LastUpdateDt | date: 'dd-MM-yyyy' }}</td>
+                    <td class="text-center"><a href="javascript:;" (click)="viewOnClick(idx)">View</a></td>
                   </tr>
                 </tbody>
-
               </table>
             </div>
           </div>
@@ -125,49 +123,49 @@
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
                   <tr class="table-header">
-                    <th style="text-align: left;">
-                      <span  name='Sector' translate>Sector</span>
+                    <th class="text-left">
+                      <span name='Sector' translate>Sector</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Type' translate>Type</span>
+                    <th class="text-left">
+                      <span name='Type' translate>Type</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Opened' translate>Opened</span>
+                    <th class="text-center">
+                      <span name='Opened' translate>Opened</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Status' translate>Status</span>
+                    <th class="text-left">
+                      <span name='Status' translate>Status</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Total' translate>Total</span>
+                    <th class="text-right">
+                      <span name='Total' translate>Total</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Balance' translate>Balance</span>
+                    <th class="text-right">
+                      <span name='Balance' translate>Balance</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Past Due' translate>Past Due</span>
+                    <th class="text-right">
+                      <span name='Past Due' translate>Past Due</span>
                     </th>
-                    <th style="text-align: left;">
-                      <span  name='Arreas' translate>Arreas</span>
+                    <th class="text-right">
+                      <span name='Arreas' translate>Arreas</span>
                     </th>
                   </tr>
                 </thead>
 
                 <tbody *ngIf = "ResViewContractsObj.ListCntrctGuarantor?.length == 0">
                   <tr>
-                    <td colspan="100%">No Data Available</td>
+                    <td colspan="100%" translate>No Data Available</td>
                   </tr>
                 </tbody>
           
                 <tbody *ngIf="ResViewContractsObj.ListCntrctGuarantor?.length > 0">
                   <tr *ngFor="let item of ResViewContractsObj.ListCntrctGuarantor">
-                    <td style="text-align: left;">{{ item.Sector }}</td>
-                    <td style="text-align: left;">{{ item.CntrctType }}</td>
-                    <td style="text-align: left;">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
-                    <td style="text-align: left;">{{ item.CntrctStat }}</td>
-                    <td style="text-align: left;">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.OsAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
-                    <td style="text-align: left;">{{ item.PastDueDays }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.Sector) }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.CntrctType) }}</td>
+                    <td class="text-center">{{ item.StartDt | date: 'dd-MM-yyyy' }}</td>
+                    <td class="text-left">{{ pascalToSpace(item.CntrctStat) }}</td>
+                    <td class="text-right">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueDays }}</td>
                   </tr>
                 </tbody>
 
@@ -322,6 +320,512 @@
           </div>
 
         </div>
+
+        <div class="form-body mt-1" *ngIf="IsViewMode">
+          <div class="row">
+            <div class="col-md-10"><h4 class="form-section font-weight-bold" translate>PEFINDO CONTRACT DETAILS</h4></div>
+            <div class="col-md-2 text-right"><button class="backButton" (click)="backOnClick()"><i class="fa fa-arrow-left"></i>&nbsp; <span translate>Back</span></button></div>
+          </div>
+
+          <div class="pt-2">
+            <lib-ucSubsection [id]="'ContractDetail1Id'" [title]="'Main Info'" [panel]="'ContractDetail1'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail1">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>NAME</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ID NUMBER</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DATE OF BIRTH</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PEFINDO ID</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail2Id'" [title]="'CONTRACT DETAILS'" [panel]="'ContractDetail2'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail2">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ROLE OF CLIENTS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.ClientRole)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT TYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CntrctType)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT CHARACTERISTICS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CreditCharacteristics)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PURPOSE OF FINANCING</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.PurposeOfFinancing)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ECONOMIC SECTOR</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.EconomicSector)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CREDIT CLASSIFICATION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CreditClassification)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT CURRENCY</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT CODE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CntrctCode)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>GOVERNMENT PROGRAM</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.GovernmentProgram)}} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PHASE OF CONTRACT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CntrctPhase)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT STATUS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CntrctStat)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>NEGATIVE STATUS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CntrctNegStat)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ORIENTATION OF USE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.OrientationOfUse)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>SYNDICATED LOAN</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.SyndicatedLoan)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>NAME OF INSURED</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.NameOfInsured}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PROJECT LOCATION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.ProjectLocation}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PROJECT VALUE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.ProjectValueAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CREDITOR TYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{pascalToSpace(ViewDetailContract.CreditorType)}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CREDITOR</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.Creditor}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>BRANCH</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.BranchName }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONTRACT SUBTYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.CntrctSubType) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail3Id'" [title]="'KEY DATES'" [panel]="'ContractDetail3'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail3">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DISBURSEMENT DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.DisbDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>START DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.StartDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST UPDATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.LastUpdateDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CONDITION DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.ConditionDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST RESTRUCTURING DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.RestructuringDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL RESTRUCTURING DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.InitialRestructuringDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>MATURITY DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.MaturityDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>REAL END DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.RealEndDt | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail4Id'" [title]="'INITIAL CONTRACT DETAILS'" [panel]="'ContractDetail4'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail4">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>TOTAL AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.TtlAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL TOTAL AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.InitialTtlAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>TOTAL TAKEN AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.TtlTakenAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL INTEREST RATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.InitialInterestRatePrcnt | number: '.2':'en-US'}} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL AGREEMENT NO.</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.InitialAgrmntNo }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL AGREEMENT DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.InitialAgrmntDt  | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INITIAL INTEREST RATE TYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.InitialInterestRateType) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail5Id'" [title]="'CURRENT CONTRACT DETAILS'" [panel]="'ContractDetail5'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail5">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>TOTAL FACILITY AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.TtlFacilityAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>OUTSTANDING AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.OsAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PRINCIPAL BALANCE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.PrincipalBalanceAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>COUNTERPARTY BANK (FOR L/C)</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>RESTRUCTURED COUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RestructuredCount }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>RESTRUCTURING REASON</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.RestructuringReason) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST INTEREST RATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.LastInterestRatePrcnt }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DESCRIPTION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.Descr }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST AGREEMENT NO</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.LastAgrmntNo }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST AGREEMENT DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.LastAgrmntDt  | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>CREDIT USAGE IN LAST 30 DAYS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.CreditUsageInLast30DaysAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PENALTY</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.PenaltyAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>GUARANCY DEPOSIT (FOR B/G & L/C)</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.GuarantyDepositAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PROLONGATION COUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.ProlongationCounter }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST INTEREST RATE TYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.LastInterestRateType) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail6Id'" [title]="'PAST DUE STATUS'" [panel]="'ContractDetail6'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail6">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PAST DUE AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.PastDueAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PAST DUE INTEREST</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.PastDueInterestAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>WORST PAST DUE AMOUNT</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.WorstPastDueAmt | number: '.2':'en-US'}}</label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PRINCIPAL ARREARS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.PrincipalArrearsAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PRINCIPAL ARREARS FREQ.</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.PrincipalArrearsFreq }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INTEREST ARREARS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.InterestArrearsAmt | number: '.2':'en-US'}} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INTEREST ARREARS FREQ.</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.InterestArrearsFreq }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>PAST DUE DAYS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.PastDueDays }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>LAST DELINQUENCY (90+ DAYS IN DUE)</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.LastDeliquency90PlusDaysDt  | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DELINQUENCY DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.DeliquencyDt  | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DEFAULT DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.DefaultDt  | date: 'dd-MM-yyyy' }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DEFAULT REASON</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.DefaultReason) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DEFAULT DESCRIPTION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.DefaultReasonDescr }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>WORST NO. OF DUE DAYS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.WorstPastDueDays }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail7Id'" [title]="'COLLATERALS'" [panel]="'ContractDetail7'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail7">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>COLLATERAL CODE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>TAX VALUE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>BANK VALUE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>APPRAISAL VALUE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>3RD PARTY APPRAISER</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>IS SHARED</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>SHARED PORTION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>OWNER NAME</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>SECURITY ASSIGMENT TYPE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>COLLATERAL STATUS</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>VALUATION DATE BY BANK</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>ACCEPTANCE DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>VALUATION DATE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>DEBTOR'S RATING</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>RATING INSTITUTION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>INSURANCE</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>OWNERSHIP PROOF</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <lib-ucSubsection [id]="'ContractDetail8Id'" [title]="'DISPUTES'" [panel]="'ContractDetail8'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail8">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>NO. OF CLOSED DISPUTES</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6"><label class="label-control" translate>NO. OF FALSE DISPUTES</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                </div>
+              </div>
+            </div>
+            <br>
+            
+            <lib-ucSubsection [id]="'ContractDetail9Id'" [title]="'PAYMENT SCHEDULE'" [panel]="'ContractDetail9'">
+            </lib-ucSubsection>
+            <div class="row" id="ContractDetail9">
+              <div class="col-md-12" style="overflow-x: auto">
+                <table class="table table-responsive-md text-center table-hover">
+                  <thead>
+                    <tr class="table-header">
+                      <th class="text-center">
+                        <span name='PERIOD' translate>PERIOD</span>
+                      </th>
+                      <th class="text-right">
+                        <span name='PAST DUE' translate>PAST DUE</span>
+                      </th>
+                      <th class="text-right">
+                        <span name='DAYS PAST DUE' translate>DAYS PAST DUE</span>
+                      </th>
+                      <th class="text-left">
+                        <span name='COLLECTABILITY' translate>COLLECTABILITY</span>
+                      </th>
+                      <th class="text-right">
+                        <span name='OUTSTANDING' translate>OUTSTANDING</span>
+                      </th>
+                      <th class="text-right">
+                        <span name='INTEREST RATE' translate>INTEREST RATE</span>
+                      </th>
+                      <th class="text-left">
+                        <span name='DELINQUENCY STATUS' translate>DELINQUENCY STATUS</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf = "ViewDetailContract.RPefindoCntrctPymntCalListObjs.length == 0">
+                      <td colspan="100%" translate="">No Data Available</td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="ViewDetailContract.RPefindoCntrctPymntCalListObjs.length > 0">
+                    <tr *ngFor="let item of ViewDetailContract.RPefindoCntrctPymntCalListObjs; let idx = index">
+                      <td class="text-center">{{ item.CntrctSubmittedDt  | date: 'dd-MM-yyyy' }}</td>
+                      <td class="text-right">{{ ViewDetailContract.CntrctCurr}} {{item.PastDueAmt | number: '.2':'en-US'}}</td>
+                      <td class="text-right">{{ item.PastDueDays }}</td>
+                      <td class="text-center">{{ pascalToSpace(item.xxx) }}</td>
+                      <td class="text-right">{{ ViewDetailContract.CntrctCurr}} {{item.OsAmt | number: '.2':'en-US'}}</td>
+                      <td class="text-right">{{ item.InterestRatePrcnt }}</td>
+                      <td class="text-left">{{ pascalToSpace(item.DeliquencyStat) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <br>
+            <div class="text-right"><button class="backButton" (click)="backOnClick()"><i class="fa fa-arrow-left"></i>&nbsp; <span translate>Back</span></button></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
