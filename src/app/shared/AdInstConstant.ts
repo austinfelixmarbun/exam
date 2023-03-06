@@ -36,9 +36,9 @@ export class AdInsConstant {
   // FRAMEWORK
   public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
   //MFE
-  public static ArR3Web= "http://r3web-server.ad-ins.com/LMSAR";
-  public static ArmntR3Web= "http://r3web-server.ad-ins.com/LMSARMNT";
-  public static PaymentR3Web= "http://r3web-server.ad-ins.com/LMSPAYMENT";
+  public static ArR3Web= "https://r3web-server.ad-ins.com/LMSAR";
+  public static ArmntR3Web= "https://r3web-server.ad-ins.com/LMSARMNT";
+  public static PaymentR3Web= "https://r3web-server.ad-ins.com/LMSPAYMENT";
 
   public static Logout = "/v1/UserManagement/LogOut";
 }
