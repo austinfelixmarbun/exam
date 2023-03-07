@@ -46,6 +46,56 @@
             </div>
           </div>
 
+      <div class="px-3">
+        <div class="form-body mt-1" *ngIf="isReady">
+          <lib-ucSubsection [id]="'ContractListId'" [title]="'Contract List Graph'" [panel]="'ContractList'">
+          </lib-ucSubsection>
+          <div id="ContractList">
+            <div class="row" *ngIf="isChartReady" style="height: 400px;">
+              <ngx-charts-bar-vertical-stacked
+                [results]="multiCharts"
+                [scheme]="colorScheme" [schemeType] = "schemeType"
+                [xAxis]="true" [yAxis]="true"
+                [legend]="true"
+                [showXAxisLabel]="true" [showYAxisLabel]="true"
+                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                [legendTitle]="legendTitle"
+                [showGridLines]="true" [showDataLabel]="false"
+                [barPadding]="barPadding"
+                [tooltipDisabled]="false"
+                (select)="onSelect($event)"></ngx-charts-bar-vertical-stacked>
+            </div><br>
+            <div class="row" style="justify-content: center;">
+              <div class="col-md-3">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="adInsLabel" translate>Years </label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control adInsInput" style="width: 100px;" (change)="getQuarters($event.target.value)">
+                      <option *ngFor="let item of Years" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="row" *ngIf="isDdlReady">
+                  <div class="col-md-3">
+                    <label class="adInsLabel" translate>Quarters </label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control adInsInput" style="width: 100px;" (change)="setCharts(tempYear, $event.target.value)">
+                      <option *ngFor="let item of Quarters" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><br><br>
+        </div>
+      </div>
+			<div class="px-3">
+				<div class="form-body mt-1">
           <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>
           <div id="ContractDebtor">
