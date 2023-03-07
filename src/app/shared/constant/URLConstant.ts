@@ -1150,6 +1150,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoPersonal";
     public static GetViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoCompany";
     public static GetViewContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewContracts";
+    public static GetPefindoContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoContracts";
     public static GetViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoAlertQuest";
     public static GetViewSecurities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSecurities";
     public static GetViewOtherLiabilities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewOtherLiabilities";

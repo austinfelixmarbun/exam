@@ -1,51 +1,55 @@
 <div class="mt-3">
 	<div class="card">
 		<div class="card-body">
-			<div class="pl-3">
-				<div class="form-body mt-1" *ngIf="!IsViewMode">
-
-          <lib-ucSubsection [id]="'ContractSummaryDebtorId'" [title]="'Contract Summary, Debtor'" [panel]="'ContractSummaryDebtor'">
+      <div class="px-3">
+        <div class="form-body mt-1" *ngIf="isReady">
+          <lib-ucSubsection [id]="'ContractListId'" [title]="'Contract List Graph'" [panel]="'ContractList'">
           </lib-ucSubsection>
-          <div id="ContractSummaryDebtor">
-            <div class="card-body" style="overflow-x: auto">
-              <table class="table table-responsive-md text-center table-hover">
-                <thead>
-                  <tr class="table-header">
-                    <th class="text-left">
-                      <span name='Nama Kreditur' translate>Nama Kreditur</span>
-                    </th>
-                    <th class="text-right" width="120">
-                      <span name='Total' translate>Total</span>
-                    </th>
-                    <th class="text-right" width="120">
-                      <span name='Balance' translate>Balance</span>
-                    </th>
-                    <th class="text-right" width="120">
-                      <span name='Past Due' translate>Past Due</span>
-                    </th>
-                    <th class="text-right" width="220">
-                      <span name='Max Arreas' translate>Max Arreas</span>
-                    </th>
-                   </tr>
-                </thead>
-                <tbody *ngIf = "ResSummaryContractsObj.length == 0">
-                  <tr>
-                    <td colspan="100%">No Data Available</td>
-                  </tr>
-                </tbody>
-                <tbody *ngIf="ResSummaryContractsObj.length > 0">
-                  <tr *ngFor="let item of ResSummaryContractsObj">
-                    <td class="text-left">{{ item.Creditor }}</td>
-                    <td class="text-right">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
-                    <td class="text-right">{{ item.OsAmt | number: '.2':'en-US' }}</td>
-                    <td class="text-right">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
-                    <td class="text-right">{{ item.PastDueDays }}</td>
-                  </tr>
-                </tbody>
-              </table>
+          <div id="ContractList">
+            <div class="row" *ngIf="isChartReady" style="height: 400px;">
+              <ngx-charts-bar-vertical-stacked
+                [results]="multiCharts"
+                [scheme]="colorScheme" [schemeType] = "schemeType"
+                [xAxis]="true" [yAxis]="true"
+                [legend]="true"
+                [showXAxisLabel]="true" [showYAxisLabel]="true"
+                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                [legendTitle]="legendTitle"
+                [showGridLines]="true" [showDataLabel]="false"
+                [barPadding]="barPadding"
+                [tooltipDisabled]="false"
+                (select)="onSelect($event)"></ngx-charts-bar-vertical-stacked>
+            </div><br>
+            <div class="row" style="justify-content: center;">
+              <div class="col-md-3">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="adInsLabel" translate>Years </label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control adInsInput" style="width: 100px;" (change)="getQuarters($event.target.value)">
+                      <option *ngFor="let item of Years" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="row" *ngIf="isDdlReady">
+                  <div class="col-md-3">
+                    <label class="adInsLabel" translate>Quarters </label>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control adInsInput" style="width: 100px;" (change)="setCharts(tempYear, $event.target.value)">
+                      <option *ngFor="let item of Quarters" [value]="item">{{item}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-
+          </div><br><br>
+        </div>
+      </div>
+			<div class="px-3">
           <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>
           <div id="ContractDebtor">
