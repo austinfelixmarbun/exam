@@ -21,99 +21,56 @@ export var barChartSingle = [
 
 export var barChartmulti = [
   {
-    "name": "2004",
+    "name": "Germany",
     "series": [
       {
-        "name": "PT. BANK CIMB NIAGA, TBK D/H NIAGA",
-        "value": 1000000000
-      }
-    ]
-  },
-  {
-    "name": "2005",
-    "series": [
-      {
-        "name": "PT. BANK CIMB NIAGA, TBK D/H NIAGA",
-        "value": 2000000000
-      }
-    ]
-  },
-  {
-    "name": "2013",
-    "series": [
-      {
-        "name": "PT. BANK CIMB NIAGA, TBK D/H NIAGA",
-        "value": 2000000000
+        "name": "2010",
+        "value": 730
       },
       {
-        "name": "PT. BANK MAYORA",
-        "value": 2500000000
+        "name": "2011",
+        "value": 894
       }
     ]
   },
+
   {
-    "name": "2014",
+    "name": "USA",
     "series": [
       {
-        "name": "PT. BANK MAYORA",
-        "value": 8000000000
+        "name": "2010",
+        "value": 787
       },
       {
-        "name": "PT. BANK NEGARA INDONESIA (PERSERO), TBK",
-        "value": 17000000000
+        "name": "2011",
+        "value": 827
       }
     ]
   },
+
   {
-    "name": "2015",
+    "name": "France",
     "series": [
       {
-        "name": "PANIN BANK",
-        "value": 500000000
-      }
-    ]
-  },
-  {
-    "name": "2017",
-    "series": [
-      {
-        "name": "PT. BANK MANDIRI (PERSERO), TBK",
-        "value": 4000000000
+        "name": "2010",
+        "value": 500
       },
       {
-        "name": "PT. BANK NEGARA INDONESIA (PERSERO), TBK",
-        "value": 9000000000
+        "name": "2011",
+        "value": 580
       }
     ]
   },
   {
-    "name": "2018",
+    "name": "Australia",
     "series": [
       {
-        "name": "PT. BANK MAYORA",
-        "value": 1000000000
-      }
-    ]
-  },
-  {
-    "name": "2019",
-    "series": [
-      {
-        "name": "PT. BANK MANDIRI (PERSERO), TBK",
-        "value": 1500000000
-      }
-    ]
-  },
-  {
-    "name": "2022",
-    "series": [
-      {
-        "name": "SUZUKI FINANCE INDONESIA, PT.",
-        "value": 2000000000
+        "name": "2010",
+        "value": 600
       },
       {
-        "name": "PT. BANK TUNAS FINANCE",
-        "value": 1500000000
+        "name": "2011",
+        "value": 650
       }
     ]
   }
