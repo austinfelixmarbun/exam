@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <tr>
-              <td *ngIf="responseObj.NegativeStatus == null" class="text-left">Normal</td>
+              <td *ngIf="responseObj.NegativeStatus == null || responseObj.NegativeStatus == ''" class="text-left">Normal</td>
               <td *ngIf="responseObj.NegativeStatus == 'BAD'" class="text-left">Bad</td>
               <td *ngIf="responseObj.NegativeStatus == 'WARNING'" class="text-left">Warning</td>
               <td class="text-center"><a href="{{custViewUrl + responseObj.CustId}}" target="_blank">{{responseObj.CustNo}}</a></td>
