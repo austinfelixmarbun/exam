@@ -497,4 +497,7 @@ export class CommonConstant {
 
     //Office
     public static MR_OFFICE_TYPE_CODE = "MrOfficeTypeCode";
+
+    //Highlight Comment
+    public static HIGHLIGHT_COMMENT = "HighlightComment";
 }

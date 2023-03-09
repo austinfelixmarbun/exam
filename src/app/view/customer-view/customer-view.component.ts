@@ -21,6 +21,7 @@ export class CustomerViewComponent implements OnInit {
   viewCustCoyMainInfoHeader: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   CustId: number;
+  selectedIndex: number;
 
   CustNo: string;
   custModel: string;
@@ -28,6 +29,7 @@ export class CustomerViewComponent implements OnInit {
   viewCustJobData: string;
   getCustByCustIdUrl: string;
   viewCustJobDataAddress: string;
+  Tab: string;
 
   IsLos: boolean = false;
   IsLms: boolean = false;
@@ -60,8 +62,17 @@ export class CustomerViewComponent implements OnInit {
       if (params["CustId"] != null) {
         this.CustId = params["CustId"];
       }
+      if (params["Tab"] != null) {
+        this.Tab = params["Tab"];
+      }
     });
-
+    
+    if (this.Tab == CommonConstant.HIGHLIGHT_COMMENT) {
+      this.selectedIndex = 8;
+      var linkUrl = NavigationConstant.VIEW_CUST_HIGHLIGHT_COMMENT;
+      AdInsHelper.RedirectUrlView(this.router, [linkUrl], { "CustId": this.CustId }, true);
+    }
+    
     var custObj = {
       CustId: this.CustId
     }
