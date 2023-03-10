@@ -19,7 +19,7 @@
       "dom",
       "ES2021.String"
     ],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": false,

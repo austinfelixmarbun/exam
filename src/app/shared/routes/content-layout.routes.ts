@@ -1,8 +1,10 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from '../PathConstant';
-
+import * as _environment from "../../../assets/config/enviConfig.json";
 //Route for content layout without sidebar, navbar and footer for pages like Login, Registration etc...
+
+const envi = _environment;
 
 export const CONTENT_ROUTES: Routes = [
     {
@@ -22,7 +24,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4202/remoteEntry.js',
+              remoteEntry: envi.arR3Web + '/remoteEntry.js',
               exposedModule: './AgrmntModule'
             })
             .then(m => m.AgreementModule)
@@ -34,7 +36,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4202/remoteEntry.js',
+              remoteEntry: envi.arR3Web + '/remoteEntry.js',
               exposedModule: './LmsSchmModule'
             })
             .then(m => m.LmsSchemeModule)
@@ -46,7 +48,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
               exposedModule: './PaymentReversal'
             })
             .then(m => m.PaymentReversalModule)
@@ -58,7 +60,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
               exposedModule: './PaymentReceive'
             })
             .then(m => m.PaymentReceiveModule)
@@ -70,7 +72,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
               exposedModule: './ReceiptForm'
             })
             .then(m => m.ReceiptFormModule)
@@ -82,7 +84,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4203/remoteEntry.js',
+              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
               exposedModule: './CashierTransaction'
             })
             .then(m => m.CashierTransactionModule)
