@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,9 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { ReqAddTrxSrcDataForPefindoMultiResultObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-multi-result-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
 
 
 @Component({
@@ -29,20 +32,26 @@ export class PefindoReqComponent implements OnInit {
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCompany: string = CommonConstant.CustomerCompany;
 
+  PefindoForm: FormGroup = this.fb.group({
+    PefindoArr: this.fb.array([])
+  });
+
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     public activeModal: NgbActiveModal,
     private toastr: NGXToastrService, 
     private UrlConstantNew: UrlConstantNew
-  ) { }
 
-  ngOnInit() {
-    this.initGrid();
   }
 
-  initGrid(){
-    this.http.post(this.UrlConstantNew.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).subscribe(
+  async ngOnInit() {
+    await this.getGenSet();
+    await this.initGrid();
+  }
+
+  async initGrid(){
+    this.http.post(URLConstant.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).toPromise().then(
       (response) => {
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal){
           this.PefindoSmartSearchPersonalObjs = response["ReturnObject"];
@@ -50,6 +59,104 @@ export class PefindoReqComponent implements OnInit {
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypeCompany){
           this.PefindoSmartSearchCoyObjs = response["ReturnObject"];
         }
+
+        if (this.pefindoMultiResMax > 0) this.setData();
+      }
+    );
+  }
+
+  pefindoMultiResMax: number = 0;
+  @Input() CustId: number;
+  @Output() thirdPartyGroupTrxNo: EventEmitter<string> = new EventEmitter();
+  async getGenSet()
+  {
+    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        this.pefindoMultiResMax = parseInt(result.GsValue);
+      }
+    );
+  }
+
+  setData()
+  {
+    let PefindoArr = this.PefindoForm.get("PefindoArr") as FormArray;
+    
+    if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal)
+    {
+      this.PefindoSmartSearchPersonalObjs.forEach(x => {
+        let pefindo = this.fb.group({
+          IsChecked: false,
+          PefindoId: x.PefindoId,
+          IdCardNumber: x.KTP,
+          Name: x.FullName,
+          BirthDt: x.DateOfBirth,
+          Address: x.Address
+        })
+
+        PefindoArr.push(pefindo);
+      });
+    }
+
+    if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypeCompany)
+    {
+      this.PefindoSmartSearchCoyObjs.forEach(x => {
+        let pefindo = this.fb.group({
+          IsChecked: false,
+          PefindoId: x.PefindoId,
+          IdCardNumber: x.NPWP,
+          Name: x.CompanyName,
+          Address: x.Address
+        })
+
+        PefindoArr.push(pefindo);
+      });
+    }
+  }
+
+  async Request()
+  {
+    var reqAddTrxSrcDataForPefindoMultiResultObj = new ReqAddTrxSrcDataForPefindoMultiResultObj();
+
+    let PefindoArr = this.PefindoForm.value.PefindoArr.filter(x => x.IsChecked);
+
+    await this.getGenSet();
+    if (PefindoArr.length > this.pefindoMultiResMax)
+    {
+      this.toastr.warningMessage(ExceptionConstant.CAN_NOT_REQUEST_PEFINDO_MORE_THAN + " "  + this.pefindoMultiResMax);
+      return;
+    }
+
+    if (this.CustId) reqAddTrxSrcDataForPefindoMultiResultObj.CustId = this.CustId;
+    reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoObj>();
+    PefindoArr.forEach(x => {
+      let reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
+
+      reqAddTrxSrcDataForPefindoObj.PefindoId = x.PefindoId;
+      reqAddTrxSrcDataForPefindoObj.IdNo = x.IdCardNumber;
+      reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
+      reqAddTrxSrcDataForPefindoObj.CustName = x.Name;
+      reqAddTrxSrcDataForPefindoObj.Addr = x.Address;
+
+      if (this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal)
+      {
+        reqAddTrxSrcDataForPefindoObj.CustType = this.CustTypePersonal;
+        reqAddTrxSrcDataForPefindoObj.BirthDt = x.BirthDt;
+      }
+      
+      if (this.ReqPefindoSmartSearchObj.CustType == this.CustTypeCompany)
+      {
+        reqAddTrxSrcDataForPefindoObj.CustType = this.CustTypeCompany;
+        reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
+      }
+
+      reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj.push(reqAddTrxSrcDataForPefindoObj);
+    });
+
+    this.http.post(URLConstant.AddTrxSrcDataForPefindoMultiResult, reqAddTrxSrcDataForPefindoMultiResultObj, AdInsConstant.SpinnerOptions).subscribe(
+      (response) => {
+        this.thirdPartyGroupTrxNo.emit(response['ThirdPartyRsltHGroupNo'])
+        this.toastr.successMessage(response["Message"]);
+        this.activeModal.close(response["ThirdPartyRsltHGroupNo"]);
       }
     );
   }

@@ -1,4 +1,10 @@
 export class ResContractObj {
+    PefindoId: number = 0;
+    Name: string = "";
+    IdNumber: string = "";
+    BirthDt: Date;
+    Addr: string = "";
+
     Creditor: string = "";
     CntrctNegStat: string = "";
     MaturityDt: Date;
@@ -70,9 +76,11 @@ export class ResContractObj {
     WorstPastDueDays: number = 0;
 
     RPefindoCntrctPymntCalListObjs: Array<RPefindoCntrctPymntCalListObj> = [];
+    RPefindoCntrctCltrlListObjs: Array<RPefindoCntrctCltrlListObjs> = [];
 
     xxx: string = '????';
     constructor() {
+        this.BirthDt = new Date();
         this.MaturityDt = new Date();
         this.StartDt = new Date();
         this.LastUpdateDt = new Date();
@@ -102,5 +110,38 @@ export class RPefindoCntrctPymntCalListObj {
 
     constructor() {
         this.CntrctSubmittedDt = new Date();
+    }
+}
+
+export class RPefindoCntrctCltrlListObjs{
+    Addr: string = "";
+    AppraisalAmt: number = 0;
+    BankAmt: number = 0;
+    BankValuationDt: Date;
+    BranchName: string = "";
+    City: string = "";
+    CltrlAcceptanceDt: Date;
+    CltrlAmt: number = 0;
+    CltrlAppraisalAuthority: string = "";
+    CltrlCode: string = "";
+    CltrlIsShared: string = "";
+    CltrlRating: string = "";
+    CltrlStat: string = "";
+    CltrlType: string = "";
+    Descr: string = "";
+    HasMultipleCltrl: string = "";
+    Insurance: string = "";
+    OwnerName: string = "";
+    ProofOfOwnership: string = "";
+    RatingAuthority: string = "";
+    SecurityAssignmentType: string = "";
+    SharedPrprtnPrcnt: number = 0;
+    Street: string = "";
+    ValuationDt: Date;
+
+    constructor() {
+        this.BankValuationDt = new Date();
+        this.CltrlAcceptanceDt = new Date();
+        this.ValuationDt = new Date();
     }
 }

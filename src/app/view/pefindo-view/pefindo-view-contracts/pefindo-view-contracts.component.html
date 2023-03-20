@@ -338,25 +338,25 @@
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>NAME</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.Name) }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>ID NUMBER</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.IdNumber) }} </label></div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="this.MrCustTypeCode == 'PERSONAL'">
                   <div class="col-md-6"><label class="label-control" translate>DATE OF BIRTH</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.BirthDt | date: 'dd-MM-yyyy' }} </label></div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>PEFINDO ID</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.PefindoId }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.Addr) }} </label></div>
                 </div>
               </div>
             </div>
@@ -678,19 +678,25 @@
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>COLLATERAL CODE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].CltrlCode) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>TAX VALUE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.xxx) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>BANK VALUE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6">
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.RPefindoCntrctCltrlListObjs[0].BankAmt | number: '.2':'en-US'}} </label>
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length == 0"> - </label>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>APPRAISAL VALUE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6">
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.RPefindoCntrctCltrlListObjs[0].AppraisalAmt | number: '.2':'en-US'}} </label>
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length == 0"> - </label>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>3RD PARTY APPRAISER</label></div>
@@ -698,45 +704,48 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>IS SHARED</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].CltrlIsShared) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>SHARED PORTION</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6">
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0"> {{ViewDetailContract.RPefindoCntrctCltrlListObjs[0].SharedPrprtnPrcnt | number: '.2':'en-US'}} % </label>
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length == 0"> - </label>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>OWNER NAME</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].OwnerName) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>SECURITY ASSIGMENT TYPE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].SecurityAssignmentType) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].Addr) : "-" }} </label></div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6"><label class="label-control" translate>ADDRESS</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control" translate>DESCRIPTION</label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].Descr) : "-" }} </label></div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>COLLATERAL STATUS</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].CltrlStat) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>VALUATION DATE BY BANK</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? (ViewDetailContract.RPefindoCntrctCltrlListObjs[0].BankValuationDt | date: 'dd-MM-yyyy') : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>ACCEPTANCE DATE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? (ViewDetailContract.RPefindoCntrctCltrlListObjs[0].CltrlAcceptanceDt | date: 'dd-MM-yyyy') : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>VALUATION DATE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? (ViewDetailContract.RPefindoCntrctCltrlListObjs[0].ValuationDt | date: 'dd-MM-yyyy') : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>DEBTOR'S RATING</label></div>
@@ -744,15 +753,15 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>RATING INSTITUTION</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].RatingAuthority) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>INSURANCE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].Insurance) : "-" }} </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>OWNERSHIP PROOF</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.RPefindoCntrctCltrlListObjs[0].ProofOfOwnership) : "-" }} </label></div>
                 </div>
               </div>
             </div>

@@ -61,12 +61,14 @@ export class ThirdPartyFormComponent implements OnInit {
 
   officeCode: string;
   IsUseDigitalization: string = "0";
+  pefindoMultiResMax: number = 0;
   IsUseTs: Boolean = false;
   IsUsePefindo: Boolean = false;
   IsUseAsliRI: Boolean = false;
   IsUseCbasSlik: Boolean = false;
   ListDocumentKeyValueObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   SpouseIdCode : string = "";
+  thirdPartyGroupTrxNo: string = null;
 
   width: number;
   height: number;
@@ -89,6 +91,7 @@ export class ThirdPartyFormComponent implements OnInit {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.officeCode = context[CommonConstant.OFFICE_CODE];
     await this.getIsUseDigitalization();
+    await this.checkIsPefindoMulti();
     if (this.IsUseDigitalization == CommonConstant.TRUE_CONDITION) {
       await this.getDigitalizationSvcType();
       if (this.custObj.CustId > 0) {
@@ -195,6 +198,14 @@ export class ThirdPartyFormComponent implements OnInit {
     );
   }
 
+  async checkIsPefindoMulti()
+  {
+    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+      (response) => {
+        this.pefindoMultiResMax = parseInt(response["GsValue"]);
+      });
+  }
+
   async ReqPefindo() {
     this.markFormGroupTouched(this.parentForm);
     if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
@@ -205,8 +216,13 @@ export class ThirdPartyFormComponent implements OnInit {
       return;
     }
 
-    await this.checkThirdPartyTrxNo();
-    await this.saveThirdPartyTrxNo();
+    await this.checkIsPefindoMulti();
+
+    if (this.pefindoMultiResMax == 0)
+    {
+      await this.checkThirdPartyTrxNo();
+      await this.saveThirdPartyTrxNo();
+    }
 
 
     let tempForm = this.parentForm.getRawValue();
@@ -237,6 +253,7 @@ export class ThirdPartyFormComponent implements OnInit {
           const modalRef = this.modalService.open(PefindoReqComponent);
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
           modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+          modalRef.componentInstance.CustId = this.custObj.CustId;
         }
       );
     }
@@ -244,13 +261,40 @@ export class ThirdPartyFormComponent implements OnInit {
       const modalRef = this.modalService.open(PefindoReqComponent);
       modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
       modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+      modalRef.result.then((res) => {
+        this.thirdPartyGroupTrxNo = res;
+      })
     }
 
   }
 
-  ViewPefindo() {
-    let TrxNo = this.thirdPartyTrxNo;
-    this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+  async ViewPefindo() {
+    await this.checkIsPefindoMulti();
+    if (this.pefindoMultiResMax > 0)
+    {
+      let TrxNo = this.thirdPartyGroupTrxNo;
+
+      if (this.custObj.CustId > 0)
+      {
+        await this.http.post(URLConstant.GetCustByCustId, { Id: this.custObj.CustId }).toPromise().then(
+          (response: CustObj) => {
+            TrxNo = response["ThirdPartyGroupTrxNo"];
+          });
+      }
+
+      if (TrxNo == null)
+      {
+        this.toastr.warningMessage("Please request Pefindo first!");
+        return;
+      }
+
+      AdInsHelper.OpenPefindoMultiResultView(TrxNo, this.MrCustTypeCode);
+    }
+    else
+    {
+      let TrxNo = this.thirdPartyTrxNo;
+      AdInsHelper.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+    }
   }
 
   async ReqTrustingSocial() {

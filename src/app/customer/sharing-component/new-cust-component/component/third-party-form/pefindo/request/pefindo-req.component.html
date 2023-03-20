@@ -8,6 +8,7 @@
 <div class="modal-body">
     <div class="card bg-light-blue-card">
         <div class="card-body">
+          <div class="px-3" *ngIf="pefindoMultiResMax == 0">
           <lib-ucSubsection [id]="'PefindoId'" [title]="'Detail'" [panel]="'Pefindo'">
           </lib-ucSubsection>
           <div id="Pefindo">
@@ -69,11 +70,51 @@
             </div>
           </div>
         </div>
+          <div class="px-3" *ngIf="pefindoMultiResMax > 0">
+            <form class="form form-horizontal" #enjiForm="ngForm" [formGroup]="PefindoForm">
+              <lib-ucSubsection [id]="'PefindoId'" [title]="'Detail'" [panel]="'Pefindo'">
+              </lib-ucSubsection>
+              <div id="Pefindo">
+                <div class="form-body" formArrayName="PefindoArr" style="overflow-x: auto;">
+                  <table class="table table-responsive-md text-center table-hover">
+                    <thead>
+                      <tr class="table-header">
+                        <th class="text-left"><span class="thead-header" name='checked' translate></span></th>
+                        <th class="text-left"><span class="thead-header" name='pefindoId' translate>PEFINDO ID</span> </th>
+                        <th class="text-left"><span class="thead-header" name='idCardNumber' translate>ID CARD NUMBER</span></th>
+                        <th class="text-left"><span class="thead-header" name='name' translate>NAME</span> </th>
+                        <th class="text-left" *ngIf="ReqPefindoSmartSearchObj.CustType == CustTypePersonal"><span class="thead-header" name='dob' translate>DATE OF BIRTH</span> </th>
+                        <th class="text-left"><span class="thead-header" name='checkedDate' translate>ADDRESS</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="PefindoForm.controls.PefindoArr.length == 0">
+                      <tr>
+                        <td colspan="100%">No Data Available</td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="PefindoForm.controls.PefindoArr.length > 0">
+                      <tr *ngFor="let item of PefindoForm.controls.PefindoArr.controls; let i = index" [formGroupName]="i">
+                        <td>
+                          <input type="checkbox" class="border-primary" formControlName="IsChecked" style="height: auto;">
+                        </td>
+                        <td class="text-left">{{item.controls.PefindoId.value}}</td>
+                        <td class="text-left">{{item.controls.IdCardNumber.value}}</td>
+                        <td class="text-left">{{item.controls.Name.value}}</td>
+                        <td class="text-left" *ngIf="ReqPefindoSmartSearchObj.CustType == CustTypePersonal">{{item.controls.BirthDt.value | date: 'dd-MMM-yyyy'}}</td>
+                        <td class="text-left">{{item.controls.Address.value}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </form>
+          </div>
       </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-raised btn-outline-2" (click)="activeModal.close('Close click')">
-        <i class="ft-x"></i>&nbsp;<span translate>Cancel</span>
-    </button>
+  <button type="button" class="btn btn-raised btn-warning" (click)="Request()" *ngIf="pefindoMultiResMax > 0">Request</button>
+  <button type="button" class="btn btn-raised btn-warning" (click)="activeModal.close('Close click')">
+      <i class="ft-x"></i>&nbsp;<span translate>Cancel</span>
+  </button>
 </div>
 </div>

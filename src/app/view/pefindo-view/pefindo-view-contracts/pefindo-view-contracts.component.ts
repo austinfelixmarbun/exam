@@ -2,14 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ColorHelper } from '@swimlane/ngx-charts';
-import { ChartsObj } from 'app/shared/model/charts/charts-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { MultiChartsObj } from 'app/shared/model/charts/multi-charts-obj.model';
 import { ResForChartsObj } from 'app/shared/model/charts/res-for-charts-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResContractObj } from 'app/shared/model/Response/pefindo/res-contract-obj.model';
 import { ResViewContractsObj } from 'app/shared/model/response/pefindo/res-view-contracts-obj.model';
+import { ResViewSubjectInfoCompanyObj } from 'app/shared/model/response/pefindo/res-view-subject-info-company-obj.model';
 import { ResViewPefindoContractsObj } from 'app/shared/model/response/pefindo/res-view-pefindo-contracts-obj.model';
+import { ResViewSubjectInfoPersonalObj } from 'app/shared/model/response/pefindo/res-view-subject-info-personal-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
@@ -21,19 +24,31 @@ export class PefindoViewContractsComponent implements OnInit {
   ResListContractsObj: Array<ResContractObj> = [];
   ResSummaryContractsObj: Array<ResContractObj> = [];
   ViewDetailContract: ResContractObj = new ResContractObj();
+  TempDetailContract: ResContractObj = new ResContractObj();
   IsViewMode: boolean = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  CustNo: string;
+  MrCustTypeCode: string;
+  CustObj: CustObj = new CustObj();
+
     this.route.queryParams.subscribe(params => {
       if (params["TrxNo"] != null) {
         this.TrxNo = params["TrxNo"];
+      }
+
+      if (params["MrCustTypeCode"] != null) {
+        this.MrCustTypeCode = params["MrCustTypeCode"];
+      }
+
+      if (params["CustNo"] != null) {
+        this.CustNo = params["CustNo"];
       }
     });
   }
 
   async ngOnInit() {
-    this.Years.push("All");
-    this.Quarters.push("All");
+    this.getSubjectInfo();
+
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
     await this.http.post(URLConstant.GetViewContracts, reqByTrxNo).toPromise().then(
@@ -65,10 +80,56 @@ export class PefindoViewContractsComponent implements OnInit {
     )
   }
 
-  viewOnClick(idx: number)
+  getSubjectInfo()
+  {
+    if (this.CustNo != null)
+    {
+      let reqByCustNo: GenericObj = new GenericObj();
+      reqByCustNo.CustNo = this.CustNo;
+      this.http.post(URLConstant.GetCustByCustNo, reqByCustNo).subscribe(
+        (response: CustObj) => {
+          this.MrCustTypeCode = this.CustObj.MrCustTypeCode;
+        })
+    }
+
+    let reqByTrxNo: GenericObj = new GenericObj();
+    reqByTrxNo.TrxNo = this.TrxNo;
+
+    if (this.MrCustTypeCode == CommonConstant.CustTypePersonal)
+    {
+      reqByTrxNo.TrxNo = this.TrxNo;
+      this.http.post(URLConstant.GetViewSubjectInfoPersonal, reqByTrxNo).subscribe(
+      (response: ResViewSubjectInfoPersonalObj) => {
+        this.TempDetailContract.PefindoId = response.PefindoId;
+        this.TempDetailContract.Name = response.FullName;
+        this.TempDetailContract.IdNumber = response.IdNo;
+        this.TempDetailContract.Addr = response.Addr;
+        this.TempDetailContract.BirthDt = response.DateOfBirth;
+      })
+    }
+    else
+    {
+      this.http.post(URLConstant.GetViewSubjectInfoCompany, reqByTrxNo).subscribe(
+        (response: ResViewSubjectInfoCompanyObj) => {
+          this.TempDetailContract.PefindoId = response.PefindoId;
+          this.TempDetailContract.Name = response.CoyName;
+          this.TempDetailContract.IdNumber = response.IdNo;
+          this.TempDetailContract.Addr = response.Addr;
+        }
+      )
+    }
+  }
+
+  async viewOnClick(idx: number)
   {
     this.ViewDetailContract = this.ResListContractsObj[idx];
     this.ViewDetailContract.xxx = '???'
+
+    this.ViewDetailContract.PefindoId = this.TempDetailContract.PefindoId;
+    this.ViewDetailContract.Name = this.TempDetailContract.Name;
+    this.ViewDetailContract.IdNumber = this.TempDetailContract.IdNumber;
+    this.ViewDetailContract.Addr = this.TempDetailContract.Addr;
+    
     this.IsViewMode = true;
   }
 

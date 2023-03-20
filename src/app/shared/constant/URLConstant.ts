@@ -1141,6 +1141,8 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoMultiResult = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindoMultiResult";
+    public static GetPefindoMultiResultByGroupTrxNo = environment.FoundationR3Url + "/v1" + "/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo";
     public static AddTrxScrDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/AddTrxSrcDataForAsliRi";
     public static GetTrxSrcDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/GetTrxResultDataForAsliRi";
 
