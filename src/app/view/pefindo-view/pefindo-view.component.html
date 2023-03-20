@@ -4,7 +4,21 @@
 			<div class="px-3">
 				<div class="form-body">
 					<h4 class="form-section card-title"  translate>PEFINDO</h4>
-					<div>
+					<div *ngIf="GroupTrxNo != null" id="stepper" class="bs-stepper">
+						<div class="bs-stepper-header" role="tablist" style="overflow-x: auto;">
+							<ng-container *ngFor="let item of ListPefindoMulti; let i = index">
+								<div class="step" [ngClass]="{'active': ListActive[i]}" [attr.data-target]="'#'+ item.TrxNo +'-tab'">
+									<button type="button" class="step-trigger" role="tab" [attr.aria-controls]="item.TrxNo + '-tab'"
+										[id]="item.TrxNo + '-tab-trigger'" (click)="ChangeTab(item.TrxNo, item.CustType)">
+										<div style="width: 100%;"><span class="bs-stepper-circle">{{ i + 1 }}</span></div>
+										<span class="bs-stepper-label">{{ item.PefindoId }} - {{ item.CustName }}</span>
+									</button>
+								</div>
+								<div class="line" *ngIf="i != (ListPefindoMulti.length - 1)"></div>
+							</ng-container>
+						</div>
+					</div>
+					<div *ngIf="GroupTrxNo == null || (GroupTrxNo != null && isReady)">
 						<mat-tab-group (selectedIndexChange)="redirectTab($event)">
 							<mat-tab [label]="MrCustTypeCode == 'PERSONAL' ? 'Subject Info Personal' : 'Subject Info Company' ">
 							</mat-tab>
@@ -34,7 +48,7 @@
 							</mat-tab>
 						</mat-tab-group>
 					</div>
-					<router-outlet></router-outlet>
+					<router-outlet *ngIf="GroupTrxNo == null || (GroupTrxNo != null && isReady)"></router-outlet>
 				</div>
 			</div>
 		</div>

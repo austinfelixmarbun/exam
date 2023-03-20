@@ -17,6 +17,8 @@ export class ResViewSubjectInfoPersonalObj {
   Email: string;
   ClsdDsptsSbjctNum: number;
   FalseDsptsNum: number;
+  PefindoId: number;
+  IdNo: string;
 
   constructor() {
     this.FullName = "";
@@ -37,5 +39,7 @@ export class ResViewSubjectInfoPersonalObj {
     this.Email = "";
     this.ClsdDsptsSbjctNum = 0;
     this.FalseDsptsNum = 0;
+    this.PefindoId = 0;
+    this.IdNo = "";
   }
 }

@@ -201,6 +201,7 @@ export class CommonConstant {
     public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
+    public static GsPefindoMultiResultMax = "PEFINDO_MULTI_RESULT_MAX";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
