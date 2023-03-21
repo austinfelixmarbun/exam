@@ -25,6 +25,8 @@ export class PefindoViewContractsComponent implements OnInit {
   ResSummaryContractsObj: Array<ResContractObj> = [];
   ViewDetailContract: ResContractObj = new ResContractObj();
   TempDetailContract: ResContractObj = new ResContractObj();
+  NoOfFalseDisputes: number = 0;
+  NoOfClosedDisputes: number = 0;
   IsViewMode: boolean = false;
 
   CustNo: string;
@@ -129,6 +131,12 @@ export class PefindoViewContractsComponent implements OnInit {
     this.ViewDetailContract.Name = this.TempDetailContract.Name;
     this.ViewDetailContract.IdNumber = this.TempDetailContract.IdNumber;
     this.ViewDetailContract.Addr = this.TempDetailContract.Addr;
+
+    if (this.ViewDetailContract.RPefindoCntrctDsptsListObjs.length > 0)
+    {
+      this.NoOfClosedDisputes = this.ViewDetailContract.RPefindoCntrctDsptsListObjs.filter(x => x.DsptsStat == "Closed").length;
+      this.NoOfFalseDisputes = this.ViewDetailContract.RPefindoCntrctDsptsListObjs.filter(x => x.Resolution == "FalseDispute").length;
+    }
     
     this.IsViewMode = true;
   }
@@ -136,6 +144,9 @@ export class PefindoViewContractsComponent implements OnInit {
   backOnClick()
   {
     this.ViewDetailContract = new ResContractObj();
+    this.NoOfClosedDisputes = 0;
+    this.NoOfFalseDisputes = 0;
+    
     this.IsViewMode = false;
   }
 

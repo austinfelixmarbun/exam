@@ -76,7 +76,8 @@ export class ResContractObj {
     WorstPastDueDays: number = 0;
 
     RPefindoCntrctPymntCalListObjs: Array<RPefindoCntrctPymntCalListObj> = [];
-    RPefindoCntrctCltrlListObjs: Array<RPefindoCntrctCltrlListObjs> = [];
+    RPefindoCntrctCltrlListObjs: Array<RPefindoCntrctCltrlListObj> = [];
+    RPefindoCntrctDsptsListObjs: Array<RPefindoCntrctDsptsListObj> = [];
 
     xxx: string = '????';
     constructor() {
@@ -113,7 +114,7 @@ export class RPefindoCntrctPymntCalListObj {
     }
 }
 
-export class RPefindoCntrctCltrlListObjs{
+export class RPefindoCntrctCltrlListObj{
     Addr: string = "";
     AppraisalAmt: number = 0;
     BankAmt: number = 0;
@@ -143,5 +144,16 @@ export class RPefindoCntrctCltrlListObjs{
         this.BankValuationDt = new Date();
         this.CltrlAcceptanceDt = new Date();
         this.ValuationDt = new Date();
+    }
+}
+
+export class RPefindoCntrctDsptsListObj {
+    Comment: string = "";
+    CreateDt: Date;
+    DsptsStat: string = "";
+    Resolution: string = "";
+
+    constructor() {
+        this.CreateDt = new Date();
     }
 }
