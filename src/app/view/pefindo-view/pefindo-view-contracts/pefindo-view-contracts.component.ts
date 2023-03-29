@@ -122,7 +122,6 @@ export class PefindoViewContractsComponent implements OnInit {
   async viewOnClick(idx: number)
   {
     this.ViewDetailContract = this.ResListContractsObj[idx];
-    this.ViewDetailContract.xxx = '???'
 
     this.ViewDetailContract.PefindoId = this.TempDetailContract.PefindoId;
     this.ViewDetailContract.Name = this.TempDetailContract.Name;
