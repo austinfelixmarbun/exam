@@ -1,55 +1,57 @@
 <div class="mt-3">
 	<div class="card">
 		<div class="card-body">
-      <div class="px-3">
-        <div class="form-body mt-1" *ngIf="isReady">
-          <lib-ucSubsection [id]="'ContractListId'" [title]="'Contract List Graph'" [panel]="'ContractList'">
-          </lib-ucSubsection>
-          <div id="ContractList">
-            <div class="row" *ngIf="isChartReady" style="height: 400px;">
-              <ngx-charts-bar-vertical-stacked
-                [results]="multiCharts"
-                [scheme]="colorScheme" [schemeType] = "schemeType"
-                [xAxis]="true" [yAxis]="true"
-                [legend]="true"
-                [showXAxisLabel]="true" [showYAxisLabel]="true"
-                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-                [legendTitle]="legendTitle"
-                [showGridLines]="true" [showDataLabel]="false"
-                [barPadding]="barPadding"
-                [tooltipDisabled]="false"
-                (select)="onSelect($event)"></ngx-charts-bar-vertical-stacked>
-            </div><br>
-            <div class="row" style="justify-content: center;">
-              <div class="col-md-3">
-                <div class="row">
-                  <div class="col-md-3">
-                    <label class="adInsLabel" translate>Years </label>
+      <div class="pl-3">
+        <div class="form-body mt-1" *ngIf="!IsViewMode">
+
+          <div *ngIf="isReady">
+            <lib-ucSubsection [id]="'ContractListId'" [title]="'Contract List Graph'" [panel]="'ContractList'">
+            </lib-ucSubsection>
+            <div id="ContractList">
+              <div class="row" *ngIf="isChartReady" style="height: 400px;">
+                <ngx-charts-bar-vertical-stacked
+                  [results]="multiCharts"
+                  [scheme]="colorScheme" [schemeType] = "schemeType"
+                  [xAxis]="true" [yAxis]="true"
+                  [legend]="true"
+                  [showXAxisLabel]="true" [showYAxisLabel]="true"
+                  [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+                  [legendTitle]="legendTitle"
+                  [showGridLines]="true" [showDataLabel]="false"
+                  [barPadding]="barPadding"
+                  [tooltipDisabled]="false"
+                  (select)="onSelect($event)"></ngx-charts-bar-vertical-stacked>
+              </div><br>
+              <div class="row" style="justify-content: center;">
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label class="adInsLabel" translate>Years </label>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="form-control adInsInput" style="width: 100px;" (change)="getQuarters($event.target.value)">
+                        <option *ngFor="let item of Years" [value]="item">{{item}}</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="col-md-6">
-                    <select class="form-control adInsInput" style="width: 100px;" (change)="getQuarters($event.target.value)">
-                      <option *ngFor="let item of Years" [value]="item">{{item}}</option>
-                    </select>
+                </div>
+                <div class="col-md-3">
+                  <div class="row" *ngIf="isDdlReady">
+                    <div class="col-md-3">
+                      <label class="adInsLabel" translate>Quarters </label>
+                    </div>
+                    <div class="col-md-6">
+                      <select class="form-control adInsInput" style="width: 100px;" (change)="setCharts(tempYear, $event.target.value)">
+                        <option *ngFor="let item of Quarters" [value]="item">{{item}}</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="row" *ngIf="isDdlReady">
-                  <div class="col-md-3">
-                    <label class="adInsLabel" translate>Quarters </label>
-                  </div>
-                  <div class="col-md-6">
-                    <select class="form-control adInsInput" style="width: 100px;" (change)="setCharts(tempYear, $event.target.value)">
-                      <option *ngFor="let item of Quarters" [value]="item">{{item}}</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div><br><br>
-        </div>
-      </div>
-			<div class="px-3">
+            </div><br><br>
+          </div>
+                    </tr>
+
           <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>
           <div id="ContractDebtor">
@@ -153,7 +155,7 @@
                     </th>
                   </tr>
                 </thead>
-
+  
                 <tbody *ngIf = "ResViewContractsObj.ListCntrctGuarantor?.length == 0">
                   <tr>
                     <td colspan="100%" translate>No Data Available</td>
@@ -172,15 +174,15 @@
                     <td class="text-right">{{ item.PastDueDays }}</td>
                   </tr>
                 </tbody>
-
+  
               </table>
             </div>
           </div>
-
+  
           <lib-ucSubsection [id]="'ContractsSummaryId'" [title]="'Contracts Summary'" [panel]="'ContractsSummary'">
           </lib-ucSubsection>
           <div class="row" id="ContractsSummary">
-
+  
             <!-- Summary Of All Contracts -->
             <div class="col-md-12 px-4">
               <lib-ucSubsection [id]="'SummaryAllContractsId'" [title]="'Summary Of All Contracts'" [panel]="'SummaryAllContracts'">
@@ -268,7 +270,7 @@
                 </div>
               </div>
             </div>
-
+  
             <!--As Guarantor - Open Contracts-->
             <div class="col-md-12 px-4">
               <lib-ucSubsection [id]="'GuarantorOpenContractsId'" [title]="'As Guarantor - Open Contracts'" [panel]="'GuarantorOpenContracts'">
@@ -320,9 +322,9 @@
                 </div>
               </div>
             </div>
-
+  
           </div>
-
+          <br><br>  
         </div>
 
         <div class="form-body mt-1" *ngIf="IsViewMode">
@@ -330,7 +332,7 @@
             <div class="col-md-10"><h4 class="form-section font-weight-bold" translate>PEFINDO CONTRACT DETAILS</h4></div>
             <div class="col-md-2 text-right"><button class="backButton" (click)="backOnClick()"><i class="fa fa-arrow-left"></i>&nbsp; <span translate>Back</span></button></div>
           </div>
-
+  
           <div class="pt-2">
             <lib-ucSubsection [id]="'ContractDetail1Id'" [title]="'Main Info'" [panel]="'ContractDetail1'">
             </lib-ucSubsection>
@@ -361,7 +363,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail2Id'" [title]="'CONTRACT DETAILS'" [panel]="'ContractDetail2'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail2">
@@ -455,7 +457,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail3Id'" [title]="'KEY DATES'" [panel]="'ContractDetail3'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail3">
@@ -497,7 +499,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail4Id'" [title]="'INITIAL CONTRACT DETAILS'" [panel]="'ContractDetail4'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail4">
@@ -535,7 +537,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail5Id'" [title]="'CURRENT CONTRACT DETAILS'" [panel]="'ContractDetail5'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail5">
@@ -605,7 +607,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail6Id'" [title]="'PAST DUE STATUS'" [panel]="'ContractDetail6'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail6">
@@ -671,7 +673,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail7Id'" [title]="'COLLATERALS'" [panel]="'ContractDetail7'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail7">
@@ -769,7 +771,7 @@
               </div>
             </div>
             <br>
-
+  
             <lib-ucSubsection [id]="'ContractDetail8Id'" [title]="'DISPUTES'" [panel]="'ContractDetail8'">
             </lib-ucSubsection>
             <div class="row" id="ContractDetail8">
@@ -841,7 +843,6 @@
             <div class="text-right"><button class="backButton" (click)="backOnClick()"><i class="fa fa-arrow-left"></i>&nbsp; <span translate>Back</span></button></div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

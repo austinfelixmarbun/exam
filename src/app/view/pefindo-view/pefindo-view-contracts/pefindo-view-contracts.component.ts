@@ -63,23 +63,6 @@ export class PefindoViewContractsComponent implements OnInit {
     await this.setCharts("All","");
 
     this.isReady = true;
-        this.ResListContractsObj.forEach(x => {
-          var idx = this.ResSummaryContractsObj.findIndex(y => y.Creditor == x.Creditor);
-          if (idx < 0)
-          {
-            let newItem = new ResContractObj();
-            newItem.Creditor = x.Creditor;
-            this.ResSummaryContractsObj.push(newItem);
-            idx = this.ResSummaryContractsObj.findIndex(y => y.Creditor == x.Creditor);
-          }
-          let curr = this.ResSummaryContractsObj[idx];
-          curr.TtlAmt += x.TtlAmt;
-          curr.OsAmt += x.OsAmt;
-          curr.PastDueAmt += x.PastDueAmt;
-          curr.PastDueDays = x.PastDueDays > curr.PastDueDays ? x.PastDueDays : curr.PastDueDays;
-        })
-      }
-    )
   }
 
   getSubjectInfo()
@@ -181,10 +164,28 @@ export class PefindoViewContractsComponent implements OnInit {
   async getData()
   {
     let reqByTrxNo: GenericObj = new GenericObj();
-    reqByTrxNo.TrxNo = "0002CTP20210800033";
+    reqByTrxNo.TrxNo = this.TrxNo;
     await this.http.post(URLConstant.GetPefindoContracts, reqByTrxNo).toPromise().then(
-      (response) => {
-        response['ReturnObject'].forEach(x => {
+      (response: {ReturnObject: Array<ResContractObj>}) => {
+        this.ResListContractsObj = response.ReturnObject;
+        this.ResListContractsObj = this.ResListContractsObj.filter(x => x.ClientRole == 'MainDebtor');
+        this.ResListContractsObj.forEach(x => {
+          var idx = this.ResSummaryContractsObj.findIndex(y => y.Creditor == x.Creditor);
+          if (idx < 0)
+          {
+            let newItem = new ResContractObj();
+            newItem.Creditor = x.Creditor;
+            this.ResSummaryContractsObj.push(newItem);
+            idx = this.ResSummaryContractsObj.findIndex(y => y.Creditor == x.Creditor);
+          }
+          let curr = this.ResSummaryContractsObj[idx];
+          curr.TtlAmt += x.TtlAmt;
+          curr.OsAmt += x.OsAmt;
+          curr.PastDueAmt += x.PastDueAmt;
+          curr.PastDueDays = x.PastDueDays > curr.PastDueDays ? x.PastDueDays : curr.PastDueDays;
+        })
+
+        this.ResListContractsObj.forEach(x => {
           let resViewPefindoContractsObj = new ResViewPefindoContractsObj();
           resViewPefindoContractsObj.Creditor = x['Creditor'];
           resViewPefindoContractsObj.StartDt = x['StartDt'];
