@@ -554,7 +554,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>COUNTERPARTY BANK (FOR L/C)</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> <!-- Sengaja kosong, karena belum ada informasi dari pefindonya --> </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>RESTRUCTURED COUNT</label></div>
@@ -682,7 +682,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>TAX VALUE</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0? pascalToSpace(ViewDetailContract.xxx) : "-" }} </label></div>
+                  <div class="col-md-6">
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length > 0"> {{ViewDetailContract.CntrctCurr}} {{ViewDetailContract.RPefindoCntrctCltrlListObjs[0].TaxAmt | number: '.2':'en-US'}} </label>
+                    <label class="label-control" *ngIf="ViewDetailContract.RPefindoCntrctCltrlListObjs.length == 0"> - </label>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>BANK VALUE</label></div>
@@ -700,7 +703,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>3RD PARTY APPRAISER</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> <!-- Sengaja kosong, karena belum ada informasi dari pefindonya --> </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>IS SHARED</label></div>
@@ -749,7 +752,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>DEBTOR'S RATING</label></div>
-                  <div class="col-md-6"><label class="label-control"> {{ pascalToSpace(ViewDetailContract.xxx) }} </label></div>
+                  <div class="col-md-6"><label class="label-control"> <!-- Sengaja kosong, karena belum ada informasi dari pefindonya --> </label></div>
                 </div>
                 <div class="row">
                   <div class="col-md-6"><label class="label-control" translate>RATING INSTITUTION</label></div>
@@ -825,7 +828,7 @@
                       <td class="text-center">{{ item.CntrctSubmittedDt  | date: 'dd-MM-yyyy' }}</td>
                       <td class="text-right">{{ ViewDetailContract.CntrctCurr}} {{item.PastDueAmt | number: '.2':'en-US'}}</td>
                       <td class="text-right">{{ item.PastDueDays }}</td>
-                      <td class="text-center">{{ pascalToSpace(item.xxx) }}</td>
+                      <td class="text-center"><!-- Sengaja kosong, karena belum ada informasi dari pefindonya --></td>
                       <td class="text-right">{{ ViewDetailContract.CntrctCurr}} {{item.OsAmt | number: '.2':'en-US'}}</td>
                       <td class="text-right">{{ item.InterestRatePrcnt }}</td>
                       <td class="text-left">{{ pascalToSpace(item.DeliquencyStat) }}</td>

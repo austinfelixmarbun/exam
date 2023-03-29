@@ -79,7 +79,6 @@ export class ResContractObj {
     RPefindoCntrctCltrlListObjs: Array<RPefindoCntrctCltrlListObj> = [];
     RPefindoCntrctDsptsListObjs: Array<RPefindoCntrctDsptsListObj> = [];
 
-    xxx: string = '????';
     constructor() {
         this.BirthDt = new Date();
         this.MaturityDt = new Date();
@@ -139,6 +138,7 @@ export class RPefindoCntrctCltrlListObj{
     SharedPrprtnPrcnt: number = 0;
     Street: string = "";
     ValuationDt: Date;
+    TaxAmt: number = 0;
 
     constructor() {
         this.BankValuationDt = new Date();
