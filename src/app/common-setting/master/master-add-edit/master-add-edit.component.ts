@@ -41,7 +41,8 @@ export class MasterAddEditComponent implements OnInit {
     ReserveField3: [''],
     ReserveField4: [''],
     ReserveField5: [''],
-    DefaultValue: ['']
+    DefaultValue: [''],
+    MappingCode: ['']
   });
 
   readonly CancelLink: string = NavigationConstant.CS_MASTER;
@@ -87,7 +88,8 @@ export class MasterAddEditComponent implements OnInit {
             ReserveField3: this.resultData.ReserveField3,
             ReserveField4: this.resultData.ReserveField4,
             ReserveField5: this.resultData.ReserveField5,
-            DefaultValue: this.resultData.DefaultValue
+            DefaultValue: this.resultData.DefaultValue,
+            MappingCode: this.resultData.MappingCode
           });
         }
       );
