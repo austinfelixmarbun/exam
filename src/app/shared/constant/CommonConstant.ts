@@ -248,6 +248,7 @@ export class CommonConstant {
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
     public static GsPefindoMultiResultMax = "PEFINDO_MULTI_RESULT_MAX";
+    public static GsDefPefindoGraphCntrctYears = "DEF_PEFINDO_GRAPH_CNTRCT_YEARS";
     public static GsCodeIdTypeExpDtRequired = "ID_TYPE_EXP_DT_REQUIRED";
     public static GsCodeIdTypeExpDtReadonly = "ID_TYPE_EXP_DT_READONLY";
     public static GsCodeEmailAttachmentFormat = "EMAIL_ATTCHMNT_FORMAT";

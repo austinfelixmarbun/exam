@@ -9,6 +9,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [PefindoViewContractsComponent],
@@ -20,7 +21,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts'
     SharingModule,
     ArchwizardModule,
     UcSubsectionModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FormsModule
   ]
 })
 export class PefindoViewContractsModule { }

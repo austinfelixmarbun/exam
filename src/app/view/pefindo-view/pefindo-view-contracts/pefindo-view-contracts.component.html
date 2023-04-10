@@ -8,6 +8,21 @@
             <lib-ucSubsection [id]="'ContractListId'" [title]="'Contract List Graph'" [panel]="'ContractList'">
             </lib-ucSubsection>
             <div id="ContractList">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row my-3">
+                    <label class="col-md-6 adInsLabel" translate>Show Pefindo Graph Contract </label>
+                      <div class="col-md-6">
+                        <select class="form-control adInsInput" (change)="ChangeShowLatestYear()" [(ngModel)]="ShowYears">
+                          <option *ngFor="let item of ShowYearsArr" [value]="item">{{item}} Latest Year</option>
+                        </select>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="ListResViewPefindoContractsObj.length == 0">
+                <div class="text-center" style="background-color: #faa026; width: 100%; height: 30px; padding-top: 10px;"><h5><b><span class="mt-1">No Data Available</span></b></h5></div>
+              </div>
               <div class="row" *ngIf="isChartReady" style="height: 400px;">
                 <ngx-charts-bar-vertical-stacked
                   [results]="multiCharts"
@@ -24,7 +39,7 @@
               </div><br>
               <div class="row" style="justify-content: center;">
                 <div class="col-md-3">
-                  <div class="row">
+                  <div class="row" *ngIf="isDdlYearsReady">
                     <div class="col-md-3">
                       <label class="adInsLabel" translate>Years </label>
                     </div>
@@ -36,7 +51,7 @@
                   </div>
                 </div>
                 <div class="col-md-3">
-                  <div class="row" *ngIf="isDdlReady">
+                  <div class="row" *ngIf="isDdlQuartersReady">
                     <div class="col-md-3">
                       <label class="adInsLabel" translate>Quarters </label>
                     </div>

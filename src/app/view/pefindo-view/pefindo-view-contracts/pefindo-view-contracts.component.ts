@@ -8,11 +8,15 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 import { MultiChartsObj } from 'app/shared/model/charts/multi-charts-obj.model';
 import { ResForChartsObj } from 'app/shared/model/charts/res-for-charts-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { ResContractObj } from 'app/shared/model/Response/pefindo/res-contract-obj.model';
 import { ResViewContractsObj } from 'app/shared/model/response/pefindo/res-view-contracts-obj.model';
 import { ResViewSubjectInfoCompanyObj } from 'app/shared/model/response/pefindo/res-view-subject-info-company-obj.model';
 import { ResViewPefindoContractsObj } from 'app/shared/model/response/pefindo/res-view-pefindo-contracts-obj.model';
 import { ResViewSubjectInfoPersonalObj } from 'app/shared/model/response/pefindo/res-view-subject-info-personal-obj.model';
+import { ResContractObj } from 'app/shared/model/response/pefindo/res-contract-obj.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { forEach } from 'core-js/core/array';
+import { CookieService } from 'ngx-cookie';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
@@ -33,6 +37,7 @@ export class PefindoViewContractsComponent implements OnInit {
   MrCustTypeCode: string;
   CustObj: CustObj = new CustObj();
 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) {
     this.route.queryParams.subscribe(params => {
       if (params["TrxNo"] != null) {
         this.TrxNo = params["TrxNo"];
@@ -51,6 +56,8 @@ export class PefindoViewContractsComponent implements OnInit {
   async ngOnInit() {
     this.getSubjectInfo();
 
+    this.initYears.push("All");
+
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
     await this.http.post(URLConstant.GetViewContracts, reqByTrxNo).toPromise().then(
@@ -60,7 +67,7 @@ export class PefindoViewContractsComponent implements OnInit {
     )
 
     await this.getData();
-    await this.setCharts("All","");
+    await this.ChangeShowLatestYear();
 
     this.isReady = true;
   }
@@ -150,16 +157,20 @@ export class PefindoViewContractsComponent implements OnInit {
   barPadding: number = 1;
 
   tempYear: string = "";
+  ShowYears: string = "";
+  businessDt: Date = new Date();
   multiCharts: Array<MultiChartsObj> = new Array<MultiChartsObj>();
   initMulti: Array<MultiChartsObj> = new Array<MultiChartsObj>();
-  tempListForChartsObj: Array<ResForChartsObj> = new Array<ResForChartsObj>();
-  tempListResViewPefindoContractsObj: Array<ResViewPefindoContractsObj> = new Array<ResViewPefindoContractsObj>();
+  initListResViewPefindoContractsObj: Array<ResViewPefindoContractsObj> = new Array<ResViewPefindoContractsObj>();
   ListResViewPefindoContractsObj: Array<ResViewPefindoContractsObj> = new Array<ResViewPefindoContractsObj>();
+  initYears: Array<string> = new Array<string>();
   Years: Array<string> = new Array<string>();
   Quarters: Array<string> = new Array<string>();
+  ShowYearsArr: Array<string> = new Array<string>();
 
   isChartReady: boolean = false;
-  isDdlReady: boolean = false;
+  isDdlQuartersReady: boolean = false;
+  isDdlYearsReady: boolean = false;
   isReady: boolean = false;
   async getData()
   {
@@ -196,11 +207,11 @@ export class PefindoViewContractsComponent implements OnInit {
           resViewPefindoContractsObj.Month = month;
           resViewPefindoContractsObj.Quarters = month >= 0 && month < 3? 1 : month >= 3 && month < 6? 2 : month >= 6 && month < 9? 3 : 4;
 
-          this.ListResViewPefindoContractsObj.push(resViewPefindoContractsObj);
+          this.initListResViewPefindoContractsObj.push(resViewPefindoContractsObj);
         });
       })
 
-    this.ListResViewPefindoContractsObj.sort((a, b) => {
+    this.initListResViewPefindoContractsObj.sort((a, b) => {
       if(a["Years"] < b["Years"]) return -1;
       if(a["Years"] > b["Years"]) return 1;
       if (a["Quarters"] < b["Quarters"]) return -1;
@@ -209,11 +220,35 @@ export class PefindoViewContractsComponent implements OnInit {
       if (a["Month"] > b["Month"]) return 1;
     });
 
-    let tempYear: Array<string> = new Array<string>();
-    tempYear = this.ListResViewPefindoContractsObj.map(x => x.Years.toString());
-    this.Years.push(...tempYear.filter((item, index, self) => self.indexOf(item) === index))
+    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsDefPefindoGraphCntrctYears }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        let def: Array<string> = result.GsValue != null? result.GsValue.split(";") : ["5","5"];
 
-    this.isDdlReady = true;
+        if (def.length > 0)
+        {
+          for (let i = 1; i <= parseInt(def[0]); i++)
+          {
+            this.ShowYearsArr.push(i.toString())
+          }
+
+          this.ShowYears = def[1];
+        }
+      }
+    );
+
+    if(localStorage.getItem(this.TrxNo) != null)
+    {
+      let tempShowYears = JSON.parse(AdInsHelper.GetLocalStorage(this.TrxNo))
+
+      this.ShowYears = parseInt(tempShowYears) > parseInt(this.ShowYearsArr[this.ShowYearsArr.length-1])? this.ShowYearsArr[this.ShowYearsArr.length-1] : tempShowYears;
+    }
+
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
+
+    let tempYears: Array<string> = new Array<string>();
+    tempYears = this.initListResViewPefindoContractsObj.map(x => x.Years.toString());
+    this.initYears.push(...tempYears.filter((item, index, self) => self.indexOf(item) === index))
   }
 
   async initCharts(data: Array<ResForChartsObj>)
@@ -264,7 +299,7 @@ export class PefindoViewContractsComponent implements OnInit {
     //legend by years
     if(year == "All")
     {
-      this.tempListForChartsObj = new Array<ResForChartsObj>();
+      let tempListForChartsObj : Array<ResForChartsObj> = new Array<ResForChartsObj>();
       
       this.ListResViewPefindoContractsObj.forEach(x => {
         let temp = new ResForChartsObj();
@@ -272,11 +307,11 @@ export class PefindoViewContractsComponent implements OnInit {
         temp.SeriesName = x.Creditor;
         temp.Value = x.TtlAmt;
 
-        this.tempListForChartsObj.push(temp);
+        tempListForChartsObj.push(temp);
       });
 
       this.xAxisLabel = "Years";
-      await this.initCharts(this.tempListForChartsObj);
+      await this.initCharts(tempListForChartsObj);
       return;
     }
 
@@ -284,21 +319,21 @@ export class PefindoViewContractsComponent implements OnInit {
     if((year != "" && quarter == "") || (quarter == "All"))
     {
       this.tempYear = year;
-      this.tempListForChartsObj = new Array<ResForChartsObj>();
-      this.tempListResViewPefindoContractsObj = new Array<ResViewPefindoContractsObj>();
-      this.tempListResViewPefindoContractsObj = this.ListResViewPefindoContractsObj.filter(x => x.Years.toString() == year);
+      let tempListForChartsObj: Array<ResForChartsObj> = new Array<ResForChartsObj>();
+      let tempListResViewPefindoContractsObj: Array<ResViewPefindoContractsObj> = new Array<ResViewPefindoContractsObj>();
+      tempListResViewPefindoContractsObj = this.ListResViewPefindoContractsObj.filter(x => x.Years.toString() == year);
 
-      this.tempListResViewPefindoContractsObj.forEach(x => {
+      tempListResViewPefindoContractsObj.forEach(x => {
         let temp = new ResForChartsObj();
         temp.Name = "Q" + x.Quarters.toString();
         temp.SeriesName = x.Creditor;
         temp.Value = x.TtlAmt;
 
-        this.tempListForChartsObj.push(temp);
+        tempListForChartsObj.push(temp);
       });
 
       this.xAxisLabel = "Quarters";
-      await this.initCharts(this.tempListForChartsObj);
+      await this.initCharts(tempListForChartsObj);
       return;
     }
 
@@ -308,28 +343,28 @@ export class PefindoViewContractsComponent implements OnInit {
       const monthNames = ["January", "February", "March", "April", "May", "June",
                           "July", "August", "September", "October", "November", "December"];
 
-      this.tempListForChartsObj = new Array<ResForChartsObj>();
-      this.tempListResViewPefindoContractsObj = new Array<ResViewPefindoContractsObj>();
-      this.tempListResViewPefindoContractsObj = this.ListResViewPefindoContractsObj.filter(x => x.Years.toString() == year && x.Quarters.toString() == quarter[1]);
+      let tempListForChartsObj: Array<ResForChartsObj> = new Array<ResForChartsObj>();
+      let tempListResViewPefindoContractsObj: Array<ResViewPefindoContractsObj> = new Array<ResViewPefindoContractsObj>();
+      tempListResViewPefindoContractsObj = this.ListResViewPefindoContractsObj.filter(x => x.Years.toString() == year && x.Quarters.toString() == quarter[1]);
       
-      this.tempListResViewPefindoContractsObj.forEach(x => {
+      tempListResViewPefindoContractsObj.forEach(x => {
         let temp = new ResForChartsObj();
         temp.Name = monthNames[x.Month];
         temp.SeriesName = x.Creditor;
         temp.Value = x.TtlAmt;
 
-        this.tempListForChartsObj.push(temp);
+        tempListForChartsObj.push(temp);
       });
 
       this.xAxisLabel = "Months";
-      await this.initCharts(this.tempListForChartsObj);
+      await this.initCharts(tempListForChartsObj);
       return;
     }
   }
 
   async getQuarters(event: any)
   {
-    this.isDdlReady = false;
+    this.isDdlQuartersReady = false;
 
     this.Quarters = new Array<string>();
     this.Quarters.push("All")
@@ -342,10 +377,52 @@ export class PefindoViewContractsComponent implements OnInit {
     });
 
     setTimeout (() => {
-      this.isDdlReady = true
+      this.isDdlQuartersReady = true
     }, 50);
 
     await this.setCharts(event, "")
+  }
+
+  async ChangeShowLatestYear()
+  {
+    this.isDdlYearsReady = false;
+    this.isDdlQuartersReady = false;
+    this.isChartReady = false;
+    AdInsHelper.SetLocalStorage(this.TrxNo, JSON.stringify(this.ShowYears));
+
+    let thisYear : number = this.businessDt.getFullYear();
+    let temp: number = thisYear - parseInt(this.ShowYears);
+    
+    this.Years = new Array<string>();
+    this.Years.push("All")
+    console.log(this.Years)
+
+    for (let i = 1; i < this.initYears.length; i++)
+    {
+      if (parseInt(this.initYears[i]) > temp)
+      {
+        this.Years.push(this.initYears[i])
+      }
+    }
+
+    this.ListResViewPefindoContractsObj = new Array<ResViewPefindoContractsObj>();
+    this.initListResViewPefindoContractsObj.forEach(x => {
+      if (this.Years.includes(x.Years.toString()))
+      {
+        this.ListResViewPefindoContractsObj.push(x);
+      }
+    });
+
+    if (this.ListResViewPefindoContractsObj.length > 0) await this.setCharts("All", "");
+
+    setTimeout (() => {
+
+      if (this.ListResViewPefindoContractsObj.length > 0)
+      {
+        this.isDdlYearsReady = true
+        this.isDdlQuartersReady = true;
+      }
+    }, 50);
   }
 
   onSelect(event: any)
