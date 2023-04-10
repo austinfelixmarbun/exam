@@ -251,8 +251,6 @@ export class PefindoViewContractsComponent implements OnInit {
     let tempYears: Array<string> = new Array<string>();
     tempYears = this.initListResViewPefindoContractsObj.map(x => x.Years.toString());
     this.initYears.push(...tempYears.filter((item, index, self) => self.indexOf(item) === index))
-
-    this.isDdlReady = true;
   }
 
   async initCharts(data: Array<ResForChartsObj>)

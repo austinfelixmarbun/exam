@@ -202,6 +202,7 @@ export class CommonConstant {
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
     public static GsPefindoMultiResultMax = "PEFINDO_MULTI_RESULT_MAX";
+    public static GsDefPefindoGraphCntrctYears = "DEF_PEFINDO_GRAPH_CNTRCT_YEARS";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";
