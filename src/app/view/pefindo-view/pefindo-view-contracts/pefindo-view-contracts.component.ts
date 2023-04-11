@@ -373,7 +373,7 @@ export class PefindoViewContractsComponent implements OnInit {
     temp = this.ListResViewPefindoContractsObj.filter(x => x.Years == event);
 
     temp.forEach(x => {
-      if (!this.Quarters.includes(x.Quarters.toString())) this.Quarters.push("Q" + x.Quarters.toString());
+      if (!this.Quarters.includes(("Q" + x.Quarters.toString()))) this.Quarters.push("Q" + x.Quarters.toString());
     });
 
     setTimeout (() => {
