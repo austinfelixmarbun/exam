@@ -1279,4 +1279,9 @@ export class UrlConstantNew{
     public AddRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.AddRefNotifAttrTemplate;
     public EditRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.EditRefNotifAttrTemplate;
     public GetRefNotifAttrTemplateByRefNotifAttrTemplateId = this.env.NotifEngineURL + this.url.GetRefNotifAttrTemplateByRefNotifAttrTemplateId;
+
+    // Ref Ins Claim Doc
+    public AddRefInsClaimDoc = this.env.FoundationR3Url + this.url.AddRefInsClaimDoc;
+    public EditRefInsClaimDoc = this.env.FoundationR3Url + this.url.EditRefInsClaimDoc;
+    public GetRefInsClaimDocByRefInsClaimDocCode = this.env.FoundationR3Url + this.url.GetRefInsClaimDocByRefInsClaimDocCode;
 }

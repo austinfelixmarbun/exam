@@ -86,6 +86,8 @@ import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
+import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
+import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -190,7 +192,9 @@ export const customCurrencyMaskConfig = {
     RefTcComponent,
     RefTcAddEditComponent,
     TaxOfficeDetailComponent,
-    TaxOfficePagingComponent
+    TaxOfficePagingComponent,
+    RefInsClaimDocPagingComponent,
+    RefInsClaimDocAddEditComponent
   ],
   providers: [
     NGXToastrService

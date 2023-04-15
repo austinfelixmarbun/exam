@@ -191,6 +191,9 @@ export class PathConstant {
     public static CS_REF_TAX_OFFICE = "TaxOffice";
     public static CS_REF_TAX_OFFICE_PAGING = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
     public static CS_REF_TAX_OFFICE_DETAIL = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
+    public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
+    public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
+    public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
