@@ -8,6 +8,7 @@ import { WizardComponent } from 'angular-archwizard';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-address',
@@ -26,8 +27,15 @@ export class AddressComponent implements OnInit {
   resultAddr: any;
   getUrl: string;
   ReqGetVendor : GenericObj = new GenericObj();
+  MrVendorCategoryCode: string;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService, private wizard: WizardComponent) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NGXToastrService,
+              private wizard: WizardComponent, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      if (params["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
+    });
   }
 
   AddressForm = this.fb.group({
@@ -50,6 +58,18 @@ export class AddressComponent implements OnInit {
     this.AddressForm.controls.AreaCode1.disable();
     this.AddressForm.controls.City.disable();
     this.AddressForm.controls.Province.disable();
+
+    //RTHREE-540 : Integrasi ke R2
+    if (this.MrVendorCategoryCode != CommonConstant.SURVEYOR_HO && this.MrVendorCategoryCode != CommonConstant.SURVEYOR_BRANCH)
+    {
+      this.AddressForm.controls.Addr.setValidators([Validators.required, Validators.maxLength(200)]);
+      this.AddressForm.controls.AreaCode3.setValidators(Validators.maxLength(3));
+      this.AddressForm.controls.AreaCode4.setValidators(Validators.maxLength(3));
+
+      this.AddressForm.controls.Addr.updateValueAndValidity();
+      this.AddressForm.controls.AreaCode3.updateValueAndValidity();
+      this.AddressForm.controls.AreaCode4.updateValueAndValidity();
+    }
 
     if (this.objInput.Type == "Vendor") {
       this.getUrl = URLConstant.GetVendorAddrByVendorId;
