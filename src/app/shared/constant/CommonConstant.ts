@@ -97,6 +97,10 @@ export class CommonConstant {
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
     public static TITLE_COLL_COMPANY = "Collection Company";
 
+    public static MASTER_AUTO_GNRT_CODE_SUPPLIER = "SB";
+    public static MASTER_AUTO_GNRT_CODE_AGENCY_COMPANY = "AGC";
+    public static MASTER_AUTO_GNRT_CODE_AGENCY_PERSONAL = "AGP";
+
     // VENDOR TYPE
     public static VENDOR_TYPE_COMPANY = "C";
     public static VENDOR_TYPE_PERSONAL = "P";

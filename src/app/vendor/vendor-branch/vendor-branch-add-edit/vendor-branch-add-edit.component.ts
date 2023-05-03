@@ -193,10 +193,15 @@ export class VendorBranchAddEditComponent implements OnInit {
       await this.getData();
     }
     else {
-      if (this.MrVendorCategoryCode == "SUPPLIER") {
-        this.checkIsAutoFormNoFromSetting("SB");
+      if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
+        this.checkIsAutoFormNoFromSetting(CommonConstant.MASTER_AUTO_GNRT_CODE_SUPPLIER);
         this.VendorForm.controls.ReservedField5.setValidators([Validators.required]);
         this.VendorForm.controls.ReservedField5.updateValueAndValidity();
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY)
+      {
+        let master = this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL? CommonConstant.MASTER_AUTO_GNRT_CODE_AGENCY_PERSONAL : CommonConstant.MASTER_AUTO_GNRT_CODE_AGENCY_COMPANY;
+        this.checkIsAutoFormNoFromSetting(master);
       }
       this.bindText()
       await this.setDropdown();
