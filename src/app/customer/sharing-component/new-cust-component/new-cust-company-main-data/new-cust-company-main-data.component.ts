@@ -198,8 +198,16 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   ExistingShareholderObj: CustFormExistingObj = new CustFormExistingObj();
-  GetExistingShareholder(ev: CustFormExistingObj) {
-    this.ExistingShareholderObj = ev;
+  async GetExistingShareholder() {
+    if (this.CustCompanyMgmntShrholderId == 0) return;
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
+      async (response: CustCompanyMgmntShrholderObj) => {
+        this.ExistingShareholderObj.CustCompanyMgmntShrholder = response;
+        if (this.ParentCustId == 0) {
+          this.ParentCustId = response.CustId;
+        }
+      }
+    )
   }
 
   async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {

@@ -435,6 +435,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         this.CustomerForm.patchValue({
           MrCustRelationship: response.MrCustRelationship,
         });
+        if (this.ParentCustId == 0) {
+          this.ParentCustId = response.CustId
+        }
       }
     );
   }
@@ -761,6 +764,13 @@ export class NewCustPersonalMainDataComponent implements OnInit {
 
   async SetCustMgmntShareholder(): Promise<CustCompanyMgmntShrholderObj>  {
     let CustCompanyMgmntShrholder : ResCustCompanyMgmntShrholderObj = new ResCustCompanyMgmntShrholderObj();
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
+      async (response: CustCompanyMgmntShrholderObj) => {
+        if (this.ParentCustId == 0) {
+          this.ParentCustId = response.CustId
+        }
+      }
+    )
     await this.http.post<ResCustCompanyMgmntShrholderObj>(this.UrlConstantNew.GetCustCompanyMgmntShrholderByCustIdAndShrholderId, { CustId: this.ParentCustId, ShrholderId: this.CustId }).toPromise().then(
       async (response) => {
         CustCompanyMgmntShrholder = response;
