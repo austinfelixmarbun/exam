@@ -120,6 +120,12 @@ export class PefindoReqComponent implements OnInit {
     let PefindoArr = this.PefindoForm.value.PefindoArr.filter(x => x.IsChecked);
 
     await this.getGenSet();
+
+    if (PefindoArr.length == 0)
+    {
+      this.toastr.warningMessage(ExceptionConstant.PLEASE_SELECT_MIN_1_PEFINDO_DATA);
+      return;
+    }
     if (PefindoArr.length > this.pefindoMultiResMax)
     {
       this.toastr.warningMessage(ExceptionConstant.CAN_NOT_REQUEST_PEFINDO_MORE_THAN + " "  + this.pefindoMultiResMax);
