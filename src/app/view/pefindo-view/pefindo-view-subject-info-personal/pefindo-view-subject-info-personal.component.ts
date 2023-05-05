@@ -42,11 +42,6 @@ export class PefindoViewSubjectInfoPersonalComponent implements OnInit {
         this.ListRPefindoSubjInfoCntctHist = response["ListRPefindoSubjInfoCntctHist"];
         this.ListRPefindoSubjInfoGnrlHist = response["ListRPefindoSubjInfoGnrlHist"];
         this.ListRPefindoSubjInfoIdntfctnHist = response["ListRPefindoSubjInfoIdntfctnHist"];
-
-        console.log(this.ListRPefindoSubjInfoAddrHist)
-        console.log(this.ListRPefindoSubjInfoCntctHist)
-        console.log(this.ListRPefindoSubjInfoGnrlHist)
-        console.log(this.ListRPefindoSubjInfoIdntfctnHist)
       }
     )
   }
