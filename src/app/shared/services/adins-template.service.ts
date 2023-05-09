@@ -1,0 +1,44 @@
+import { Injectable } from '@angular/core';
+import {UcTemplateService} from '@adins/uctemplate';
+import {AdInsHelper} from '../AdInsHelper';
+import {CookieService} from 'ngx-cookie';
+import {environment} from '../../../environments/environment';
+import * as _moment from 'moment';
+import {URLConstant, envi} from '../constant/URLConstant';
+import * as Module from 'app/components';
+
+const listEnvironments = [
+    { environment: 'FOU', url: envi.FoundationR3Url + '/v1' },
+    { environment: 'FOU_WEB', url: envi.FoundationR3Web },
+    { environment: 'LOSR3WEB', url: envi.losR3Web },
+    { environment: 'LMSR3WEB', url: envi.lmsR3Web },
+    //{ environment: 'PAYMENT', url: envi.PaymentUrl },
+    //{ environment: 'AR', url: envi.ARUrl + '/v1' },
+    //{ environment: 'ARMNT', url: envi.ARMNTUrl + '/v1' },
+    { environment: 'LOS', url: envi.LosURL + '/v1' }
+];
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdinsTemplateService extends UcTemplateService {
+
+  constructor() {
+    super();
+
+    this.configure();
+  }
+
+  getCookie(cookieService: CookieService, key: string): any {
+    return AdInsHelper.GetCookie(cookieService, key);
+  }
+
+  private configure() {
+    this.environment  = environment;
+    this.envConfig    = envi;
+    this.urlConstant  = URLConstant;
+    this.listEnvironments = listEnvironments;
+    this.moment = _moment;
+    this.module = Module;
+  }
+}

@@ -43,6 +43,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
+import {UcTemplateService} from '@adins/uctemplate';
+import {AdinsTemplateService} from './shared/services/adins-template.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -118,6 +120,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsHelperService,
         UrlConstantNew,
         EnviConfigService,
+        { provide: UcTemplateService, useClass: AdinsTemplateService },
         {
             provide: APP_INITIALIZER, useFactory: enviConfig, multi: true, deps: [EnviConfigService]
         },

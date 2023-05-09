@@ -5,9 +5,15 @@ import { environment } from 'environments/environment';
 import e from 'express';
 import { AdInsConstant } from '../AdInstConstant';
 import * as _environment from "../../../assets/config/enviConfig.json";
+import {UcTemplateComponent} from '@adins/uctemplate';
+
 //Route for content layout with sidebar, navbar and footer.
 const envi = _environment;
 export const Full_ROUTES: Routes = [
+  {
+    path: 'BREAD/:page',
+    component: UcTemplateComponent
+  },
   {
     path: PathConstant.LR_DASHBOARD,
     loadChildren: () => import('app/dashboard/dashboard.module').then(m => m.DashboardModule)
@@ -106,178 +112,6 @@ export const Full_ROUTES: Routes = [
         .then(m => m.AgreementModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  },
-  {
-    path: 'lmsscheme',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './LmsSchmModule'
-        })
-        .then(m => m.LmsSchemeModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'golive',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './GoLiveModule'
-        })
-        .then(m => m.GoLiveModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'report',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './ReportModule'
-        })
-        .then(m => m.ReportModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  //#endregion
-  //#region Payment Module
-  {
-    path: 'payment-channel',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentChannel'
-        })
-        .then(m => m.PaymentChannelModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'payment',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentPriority'
-        })
-        .then(m => m.PaymentPriorityModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'payment-receive',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentReceive'
-        })
-        .then(m => m.PaymentReceiveModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'payment-reversal',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentReversal'
-        })
-        .then(m => m.PaymentReversalModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'receiptform',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './ReceiptForm'
-        })
-        .then(m => m.ReceiptFormModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'cashier',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './CashierTransaction'
-        })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'report',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './ReportModule'
-        })
-        .then(m => m.ReportModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  //#endregion
-  //#region ARMNT Module
-  {
-    path: 'amendment',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './AmendmentModule'
-        })
-        .then(m => m.AmendmentModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'nonaccrual',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './NonAccModule'
-        })
-        .then(m => m.NonAccrualModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'writeoff',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './WriteOffModule'
-        })
-        .then(m => m.WriteOffModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'report',
-    loadChildren: () => {
-      return loadRemoteModule({
-          type: 'module',
-          remoteEntry: envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './ReportModule'
-        })
-        .then(m => m.ReportModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
+  }
   //#endregion
 ];
