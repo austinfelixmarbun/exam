@@ -45,6 +45,7 @@ import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
 import {UcTemplateService} from '@adins/uctemplate';
 import {AdinsTemplateService} from './shared/services/adins-template.service';
+import { UcformModule } from '@adins/ucform'; 
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -99,6 +100,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         FormsModule,
         ReactiveFormsModule,
         UcdropdownsearchModule,
+        UcformModule,
         NgMultiSelectDropDownModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: environment.production,
