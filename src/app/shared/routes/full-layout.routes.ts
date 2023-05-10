@@ -213,4 +213,103 @@ export const Full_ROUTES: Routes = [
     }
   },
   //#endregion
+  
+  //#region Payment
+  {
+    path: 'payment-channel',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './PaymentChannel'
+        })
+        .then(m => m.PaymentChannelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './PaymentPriority'
+        })
+        .then(m => m.PaymentPriorityModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment-receive',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './PaymentReceive'
+        })
+        .then(m => m.PaymentReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'payment-reversal',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './PaymentReversal'
+        })
+        .then(m => m.PaymentReversalModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'receiptform',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './ReceiptForm'
+        })
+        .then(m => m.ReceiptFormModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'cashier',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './CashierTransaction'
+        })
+        .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'changewop',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './ChangeWop'
+        })
+        .then(m => m.ChangeWopModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
+          exposedModule: './Report'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
 ];
