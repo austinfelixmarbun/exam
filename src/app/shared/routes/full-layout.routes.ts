@@ -113,7 +113,6 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-
   {
     path: 'lmsscheme',
     loadChildren: () => {
@@ -156,6 +155,57 @@ export const Full_ROUTES: Routes = [
       return loadRemoteModule({
           type: 'module',
           remoteEntry:  envi.arR3Web+'/remoteEntry.js',
+          exposedModule: './ReportModule'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+  
+  //#region ARMNT
+  {
+    path: 'nonaccrual',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
+          exposedModule: './NonAccModule'
+        })
+        .then(m => m.NonAccrualModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'writeoff',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
+          exposedModule: './WriteOffModule'
+        })
+        .then(m => m.WriteOffModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'waived',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
+          exposedModule: './WaivedModule'
+        })
+        .then(m => m.WaivedModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
           exposedModule: './ReportModule'
         })
         .then(m => m.ReportModule)
