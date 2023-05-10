@@ -6,15 +6,20 @@
 export const environment = {
   production: true,
   navbarColor: 'transparent',
-  //losUrl: 'https://localhost:5001',
-  //FoundationR3Url: 'https://localhost:5000',
+  ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
+  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
+  Module: "FOU",
+  isCore: true,
+  SpinnerOnHttpPost: false,
+  isPageFromService: true,
+  NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE",
+
   LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_DEV',
   DMSUrl: "https://sky.ad-ins.com/LITEDMS_POC/Integration/ViewDoc.aspx",
   AMSUrl: "https://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "https://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
   lmsWeb: "https://r3impl-websvr.ad-ins.com/LMS", //sementara ku tak tau
-  //ApprovalURL: 'https://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalR3Url: 'https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
   ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
   FoundationR3Web: 'https://r3web-server.ad-ins.com/FOUNDATION_DEV',
@@ -25,10 +30,4 @@ export const environment = {
   DashboardURL: 'https://r3app-server.ad-ins.com/Dashboard',
   dmsURL: 'https://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx',
   WFThingsToDoUrl: 'https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
-  ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
-  ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
-  Module: "FOU",
-  isCore: true,
-  SpinnerOnHttpPost: false,
-  NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE"
 };

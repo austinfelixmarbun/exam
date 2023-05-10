@@ -112,6 +112,55 @@ export const Full_ROUTES: Routes = [
         .then(m => m.AgreementModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+
+  {
+    path: 'lmsscheme',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
+          exposedModule: './LmsSchmModule'
+        })
+        .then(m => m.LmsSchemeModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'golive',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
+          exposedModule: './GoLiveModule'
+        })
+        .then(m => m.GoLiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'chargereceivable',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
+          exposedModule: './ChargeReceivableModule'
+        })
+        .then(m => m.ChargeReceivableModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+          type: 'module',
+          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
+          exposedModule: './ReportModule'
+        })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 ];
