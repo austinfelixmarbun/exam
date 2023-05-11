@@ -15,8 +15,10 @@ import { ResViewSubjectInfoPersonalObj } from 'app/shared/model/response/pefindo
 import { ResContractObj } from 'app/shared/model/response/pefindo/res-contract-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
-import { forEach } from 'core-js/core/array';
 import { CookieService } from 'ngx-cookie';
+import { ResPefindoContractForExportObj } from 'app/shared/model/response/pefindo/res-pefindo-contract-for-export-obj.model';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
@@ -467,6 +469,61 @@ export class PefindoViewContractsComponent implements OnInit {
     const tempData = JSON.parse(JSON.stringify(this.multiCharts));
     tempData.find(x => x.name === name).series.find(y => y.name === creditor).value = total;
     this.multiCharts = tempData;
+  }
+
+  ExcelData: any;
+  resPefindoContractForExportObj: Array<ResPefindoContractForExportObj> = new Array<ResPefindoContractForExportObj>();
+  async exportAsXLSX()
+  {
+    await this.selectDataForExport();
+    this.ExcelData = this.resPefindoContractForExportObj;
+
+    let filename = "PefindoContract_" + this.TempDetailContract.PefindoId  + "_" + this.TempDetailContract.Name;
+    this.exportAsExcelFile(this.ExcelData, filename);
+  }
+
+  selectDataForExport()
+  {
+    this.resPefindoContractForExportObj = new Array<ResPefindoContractForExportObj>();
+    this.ResListContractsObj.forEach(x => {
+      let temp: ResPefindoContractForExportObj = new ResPefindoContractForExportObj();
+      temp.CreditorName = x.Creditor;
+      temp.NegativeStatus = x.CntrctNegStat;
+      temp.MaturityDate = x.MaturityDt;
+      temp.Type = x.CntrctType;
+      temp.Opened = x.StartDt;
+      temp.Status = x.CntrctStat;
+      temp.Total = x.TtlAmt;
+      temp.Balance = x.OsAmt;
+      temp.PastDue = x.PastDueAmt;
+      temp.Arreas = x.PastDueDays;
+      temp.LastUpdate = x.LastUpdateDt;
+
+      this.resPefindoContractForExportObj.push(temp);
+    });
+  }
+
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    let header = [["Creditor Name", "Negative Status", "Maturity Date", "Type", "Opened", "Status", "Total", "Balance", "Past Due", "Arreas", "Last Update"]];
+
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet([]);
+    XLSX.utils.sheet_add_aoa(worksheet, header);
+    XLSX.utils.sheet_add_json(worksheet, json, {origin: 'A2', skipHeader: true})
+    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const EXCEL_EXTENSION = '.xlsx';
+
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    let date = new Date().getDate() + "_" + (new Date().getMonth() + 1) + "_" + new Date().getFullYear() + "_" + new Date().getTime();
+    FileSaver.saveAs(data, fileName + '_export_' + date + EXCEL_EXTENSION);
   }
   //#endregion
 

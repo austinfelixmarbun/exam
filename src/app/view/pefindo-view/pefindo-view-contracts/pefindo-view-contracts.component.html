@@ -67,9 +67,15 @@
           </div>
                     </tr>
 
-          <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List, Debtor'" [panel]="'ContractDebtor'">
+          <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>
           <div id="ContractDebtor">
+            <div class="text-right" *ngIf="ResListContractsObj.length > 200">
+              <button type="button" (click)="exportAsXLSX()"
+                class="btn btn-raised btn-success mr-1" translate>
+                <i class="fa ft-download"></i>&nbsp;<span translate>Export Excel</span>
+              </button>
+            </div>
             <div class="card-body" style="overflow-x: auto">
               <table class="table table-responsive-md text-center table-hover">
                 <thead>
@@ -118,7 +124,7 @@
                   </tr>
                 </tbody>
                 <tbody *ngIf="ResListContractsObj.length > 0">
-                  <tr *ngFor="let item of ResListContractsObj; let idx = index">
+                  <tr *ngFor="let item of ResListContractsObj | slice:0:200; let idx = index">
                     <td class="text-left">{{ item.Creditor }}</td>
                     <td class="text-left">{{ pascalToSpace(item.CntrctNegStat) }}</td>
                     <td class="text-center">{{ item.MaturityDt | date: 'dd-MM-yyyy' }}</td>
