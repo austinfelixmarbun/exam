@@ -5,7 +5,7 @@ import { environment } from 'environments/environment';
 import e from 'express';
 import { AdInsConstant } from '../AdInstConstant';
 import * as _environment from "../../../assets/config/enviConfig.json";
-import {UcTemplateComponent} from '@adins/uctemplate';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 //Route for content layout with sidebar, navbar and footer.
 const envi = _environment;
@@ -105,10 +105,10 @@ export const Full_ROUTES: Routes = [
     path: 'agrmnt',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './AgrmntModule'
-        })
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './AgrmntModule'
+      })
         .then(m => m.AgreementModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -117,10 +117,10 @@ export const Full_ROUTES: Routes = [
     path: 'lmsscheme',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './LmsSchmModule'
-        })
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './LmsSchmModule'
+      })
         .then(m => m.LmsSchemeModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -129,10 +129,10 @@ export const Full_ROUTES: Routes = [
     path: 'golive',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './GoLiveModule'
-        })
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './GoLiveModule'
+      })
         .then(m => m.GoLiveModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -141,10 +141,10 @@ export const Full_ROUTES: Routes = [
     path: 'chargereceivable',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './ChargeReceivableModule'
-        })
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './ChargeReceivableModule'
+      })
         .then(m => m.ChargeReceivableModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -153,25 +153,25 @@ export const Full_ROUTES: Routes = [
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.arR3Web+'/remoteEntry.js',
-          exposedModule: './ReportModule'
-        })
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
   //#endregion
-  
+
   //#region ARMNT
   {
     path: 'nonaccrual',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './NonAccModule'
-        })
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './NonAccModule'
+      })
         .then(m => m.NonAccrualModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -180,10 +180,10 @@ export const Full_ROUTES: Routes = [
     path: 'writeoff',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './WriteOffModule'
-        })
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './WriteOffModule'
+      })
         .then(m => m.WriteOffModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -192,10 +192,10 @@ export const Full_ROUTES: Routes = [
     path: 'waived',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './WaivedModule'
-        })
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './WaivedModule'
+      })
         .then(m => m.WaivedModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -204,25 +204,25 @@ export const Full_ROUTES: Routes = [
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.armntR3Web+'/remoteEntry.js',
-          exposedModule: './ReportModule'
-        })
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
   //#endregion
-  
+
   //#region Payment
   {
     path: 'payment-channel',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentChannel'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentChannel'
+      })
         .then(m => m.PaymentChannelModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -231,10 +231,10 @@ export const Full_ROUTES: Routes = [
     path: 'payment',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentPriority'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentPriority'
+      })
         .then(m => m.PaymentPriorityModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -243,10 +243,10 @@ export const Full_ROUTES: Routes = [
     path: 'payment-receive',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentReceive'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentReceive'
+      })
         .then(m => m.PaymentReceiveModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -255,10 +255,10 @@ export const Full_ROUTES: Routes = [
     path: 'payment-reversal',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PaymentReversal'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentReversal'
+      })
         .then(m => m.PaymentReversalModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -267,10 +267,10 @@ export const Full_ROUTES: Routes = [
     path: 'receiptform',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './ReceiptForm'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './ReceiptForm'
+      })
         .then(m => m.ReceiptFormModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -279,10 +279,10 @@ export const Full_ROUTES: Routes = [
     path: 'cashier',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './CashierTransaction'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './CashierTransaction'
+      })
         .then(m => m.CashierTransactionModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -291,10 +291,10 @@ export const Full_ROUTES: Routes = [
     path: 'changewop',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './ChangeWop'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './ChangeWop'
+      })
         .then(m => m.ChangeWopModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -303,10 +303,10 @@ export const Full_ROUTES: Routes = [
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './Report'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './Report'
+      })
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
@@ -315,13 +315,26 @@ export const Full_ROUTES: Routes = [
     path: 'prepaid-alloc',
     loadChildren: () => {
       return loadRemoteModule({
-          type: 'module',
-          remoteEntry:  envi.paymentR3Web+'/remoteEntry.js',
-          exposedModule: './PrepaidAlloc'
-        })
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PrepaidAlloc'
+      })
         .then(m => m.PrepaidAllocModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  //#region Cashbank
+  {
+    path: 'cashiertransaction',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './CashierTransactionModule'
+      })
+        .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  }
   //#endregion
 ];
