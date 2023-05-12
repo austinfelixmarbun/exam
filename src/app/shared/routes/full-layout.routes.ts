@@ -212,6 +212,18 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'prepaidtransfer',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './PrepaidTransferModule'
+      })
+        .then(m => m.PrepaidTransferModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 
   //#region Payment
