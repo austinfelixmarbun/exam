@@ -6,7 +6,7 @@
 export const environment = {
     production: true,
     navbarColor: 'transparent',
-    isPageFromService: true,
+    isPageFromService: false,
     isCore: true,
     SpinnerOnHttpPost: true,
     Module:"FOU",
