@@ -347,6 +347,19 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CashierTransactionModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  },
+  {
+    path: 'cashier',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './CashierTransactionModule'
+      })
+        .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   }
+  
   //#endregion
 ];
