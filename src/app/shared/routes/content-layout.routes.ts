@@ -127,4 +127,16 @@ export const CONTENT_ROUTES: Routes = [
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
       },
+      {
+        path: 'waivedview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+            exposedModule: './WaivedModule'
+          })
+            .then(m => m.WaivedModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      }
 ];
