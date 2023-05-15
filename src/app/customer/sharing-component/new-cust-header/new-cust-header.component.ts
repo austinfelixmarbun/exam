@@ -107,10 +107,6 @@ export class NewCustHeaderComponent implements OnInit {
   SetCustDataMode() {
     let custLabel: string = "";
     switch (this.From) {
-      case CommonConstant.CustFromEditMainData:
-        this.CustDataMode = CommonConstant.CustMainDataModeCust;
-        custLabel = "Customer";
-        break;
       case CommonConstant.CustFromCustFamily:
         this.CustDataMode = CommonConstant.CustMainDataModeFamily;
         custLabel = "Family";
@@ -119,6 +115,9 @@ export class NewCustHeaderComponent implements OnInit {
         this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
         custLabel = "Shareholder";
         break;
+      default:
+        this.CustDataMode = CommonConstant.CustMainDataModeCust;
+        custLabel = "Customer";
     }
 
     this.TitleLabel = custLabel + " Main Data Registration";
