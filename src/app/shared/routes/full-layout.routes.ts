@@ -348,6 +348,34 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+
+  //#region Amendment
+  {
+    path: 'amendment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './AmendmentModule'
+      })
+        .then(m => m.AmendmentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
   //#region Cashbank
   {
     path: 'cashiertransaction',
