@@ -15,6 +15,7 @@
     "lmsR3Web": "https://r3web-server.ad-ins.com/LMS",
     "arR3Web": "https://r3web-server.ad-ins.com/LMSAR",
     "armntR3Web": "https://r3web-server.ad-ins.com/LMSARMNT",
+    "amendmentR3Web": "https://r3web-server.ad-ins.com/LMSAMENDMENT",
     "paymentR3Web": "https://r3web-server.ad-ins.com/LMSPAYMENT",
     "cashbankR3Web": "https://r3web-server.ad-ins.com/LMSCASHBANK",
     "WorkflowR3Url": "https://R3App-Server.ad-ins.com/WORKFLOW_R3",

@@ -224,6 +224,19 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+
+  {
+    path: 'refund',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './RefundModule'
+      })
+        .then(m => m.RefundModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 
   //#region Payment
@@ -335,6 +348,34 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+
+  //#region Amendment
+  {
+    path: 'amendment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './AmendmentModule'
+      })
+        .then(m => m.AmendmentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
   //#region Cashbank
   {
     path: 'cashiertransaction',
@@ -347,6 +388,19 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CashierTransactionModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  },
+  {
+    path: 'cashier',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './CashierTransactionModule'
+      })
+        .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   }
+  
   //#endregion
 ];
