@@ -276,7 +276,7 @@ export const CONTENT_ROUTES: Routes = [
         }
       },
       {
-        path: 'prepaidtransfer',
+        path: 'prepaidtransferview',
         loadChildren: () => {
           return loadRemoteModule({
             type: 'module',
