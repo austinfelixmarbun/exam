@@ -96,7 +96,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4204/remoteEntry.js',
+              remoteEntry: envi.amendmentR3Web + './remoteEntry.js',
               exposedModule: './AmendmentModule'
             })
             .then(m => m.AmendmentModule)
@@ -108,7 +108,7 @@ export const CONTENT_ROUTES: Routes = [
         loadChildren: () => {
           return loadRemoteModule({
               type: 'module',
-              remoteEntry: 'http://localhost:4204/remoteEntry.js',
+              remoteEntry: envi.armntR3Web + './remoteEntry.js',
               exposedModule: './WriteOffModule'
             })
             .then(m => m.WriteOffModule)
@@ -119,10 +119,10 @@ export const CONTENT_ROUTES: Routes = [
         path: 'nonaccrualview',
         loadChildren: () => {
           return loadRemoteModule({
-              type: 'module',
-              remoteEntry: 'http://localhost:4204/remoteEntry.js',
-              exposedModule: './NonAccModule'
-            })
+            type: 'module',
+            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+            exposedModule: './NonAccModule'
+          })
             .then(m => m.NonAccrualModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
@@ -136,6 +136,18 @@ export const CONTENT_ROUTES: Routes = [
             exposedModule: './WaivedModule'
           })
             .then(m => m.WaivedModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'prepaidtransfer',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+            exposedModule: './PrepaidTransferModule'
+          })
+            .then(m => m.PrepaidTransferModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
       }
