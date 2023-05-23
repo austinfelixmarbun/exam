@@ -400,7 +400,20 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CashierTransactionModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
-  
+  }, 
   //#endregion
+  // #region LBPP & SLIK
+  {
+    path: 'lbpp',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.gvrmntrgltionR3Web + '/remoteEntry.js',
+        exposedModule: './LbppModule'
+      })
+        .then(m => m.LbppModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  }
+  // #endregion
 ];

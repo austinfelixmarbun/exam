@@ -16,6 +16,7 @@
     "arR3Web": "https://r3web-server.ad-ins.com/LMSAR",
     "armntR3Web": "https://r3web-server.ad-ins.com/LMSARMNT",
     "amendmentR3Web": "https://r3web-server.ad-ins.com/LMSAMENDMENT",
+    "gvrmntrgltionR3Web": "https://r3web-server.ad-ins.com/LMSGOVREG",
     "paymentR3Web": "https://r3web-server.ad-ins.com/LMSPAYMENT",
     "cashbankR3Web": "https://r3web-server.ad-ins.com/LMSCASHBANK",
     "WorkflowR3Url": "https://R3App-Server.ad-ins.com/WORKFLOW_R3",
@@ -24,7 +25,6 @@
     "dmsURL": "https://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx",
     "WFThingsToDoUrl": "https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/",
     "IseUseNotification": "1",
-    "PagesURL": "http://rnd-server-2.ad-ins.com:88/",
-    "amendmentR3Web" : "https://r3web-server.ad-ins.com/LMSAMENDMENT"
+    "PagesURL": "http://rnd-server-2.ad-ins.com:88/"
 }
   
