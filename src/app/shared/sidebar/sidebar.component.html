@@ -35,7 +35,8 @@
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>
                         <span class="menu-title">{{menuItem.Title | translate }}</span>
-                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' " [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
+                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' "
+                            [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
                     </a>
                 </ng-template>
                 <ng-template #internalHasSubBlock>
@@ -43,23 +44,25 @@
                         [contextMenuSubject]="menuItem">
                         <i [ngClass]="[menuItem.Icon]"></i>
                         <span class="menu-title">{{menuItem.Title | translate }}</span>
-                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' " [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
+                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' "
+                            [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
                     </a>
                 </ng-template>
                 <ng-template #externalLinkBlock>
                     <a [href]="[menuItem.Path]" target="_blank">
                         <i [ngClass]="[menuItem.Icon]"></i>
                         <span class="menu-title">{{menuItem.Title | translate }}</span>
-                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' " [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
+                        <span *ngIf="menuItem.Badge != undefined && menuItem.Badge != '' "
+                            [ngClass]="[menuItem.BadgeClass]">{{menuItem.Badge}}</span>
                     </a>
                 </ng-template>
                 <!-- Second level menu -->
                 <ul class="menu-content" *ngIf="menuItem.Submenu.length > 0">
                     <li *ngFor="let menuSubItem of menuItem.Submenu"
                         [routerLinkActive]="menuSubItem.Submenu.length > 0 ? '' : 'active'"
-                        [routerLinkActiveOptions]="{exact: true}"
-                        [ngClass]="[menuSubItem.Class]">
-                        <span *ngIf="menuSubItem.Class != 'has-sub'; then secondLevelNoSubBlock else secondLevelHasSubBlock"></span>
+                        [routerLinkActiveOptions]="{exact: true}" [ngClass]="[menuSubItem.Class]">
+                        <span
+                            *ngIf="menuSubItem.Class != 'has-sub'; then secondLevelNoSubBlock else secondLevelHasSubBlock"></span>
                         <ng-template #secondLevelNoSubBlock>
                             <a (click)="navigateSkipLocationChange(menuSubItem)" [routerLink]="menuSubItem.Path"
                                 *ngIf="!menuSubItem.IsExternalLink; else externalSubLinkBlock">
@@ -90,13 +93,28 @@
                         <ul class="menu-content" *ngIf="menuSubItem.Submenu.length > 0">
                             <li *ngFor="let menuSubsubItem of menuSubItem.Submenu" routerLinkActive="active"
                                 [routerLinkActiveOptions]="{exact: true}" [ngClass]="[menuSubsubItem.Class]">
-                                <a (click)="navigateSkipLocationChange(menuSubsubItem)" [routerLink]="menuSubsubItem.Path"
-                                    *ngIf="!menuSubsubItem.IsExternalLink; else externalSubSubLinkBlock">
-                                    <i [ngClass]="[menuSubsubItem.Icon]"></i>
-                                    <span class="menu-title">{{menuSubsubItem.Title | translate }}</span>
-                                    <span *ngIf="menuSubsubItem.Badge != undefined && menuSubsubItem.Badge != '' "
-                                        [ngClass]="[menuSubsubItem.BadgeClass]">{{menuSubsubItem.Badge}}</span>
-                                </a>
+                                <span
+                                    *ngIf="menuSubsubItem.Class != 'has-sub'; then thirdLevelNoSubBlock else thirdLevelHasSubBlock"></span>
+                                <ng-template #thirdLevelNoSubBlock>
+
+
+                                    <a (click)="navigateSkipLocationChange(menuSubsubItem)"
+                                        [routerLink]="menuSubsubItem.Path"
+                                        *ngIf="!menuSubsubItem.IsExternalLink; else externalSubSubLinkBlock">
+                                        <i [ngClass]="[menuSubsubItem.Icon]"></i>
+                                        <span class="menu-title">{{menuSubsubItem.Title | translate }}</span>
+                                        <span *ngIf="menuSubsubItem.Badge != undefined && menuSubsubItem.Badge != '' "
+                                            [ngClass]="[menuSubsubItem.BadgeClass]">{{menuSubsubItem.Badge}}</span>
+                                    </a>
+                                </ng-template>
+                                <ng-template #thirdLevelHasSubBlock>
+                                    <a *ngIf="!menuSubsubItem.IsExternalLink; else externalSubLinkBlock">
+                                        <i [ngClass]="[menuSubsubItem.Icon]"></i>
+                                        <span class="menu-title">{{menuSubsubItem.Title | translate }}</span>
+                                        <span *ngIf="menuSubsubItem.Badge != undefined && menuSubsubItem.Badge != '' "
+                                            [ngClass]="[menuSubsubItem.BadgeClass]">{{menuSubsubItem.Badge}}</span>
+                                    </a>
+                                </ng-template>
                                 <!-- </div> -->
                                 <ng-template #externalSubSubLinkBlock>
                                     <a [href]="[menuSubsubItem.Path]">
@@ -106,6 +124,32 @@
                                             [ngClass]="[menuSubsubItem.BadgeClass]">{{menuSubsubItem.Badge}}</span>
                                     </a>
                                 </ng-template>
+
+
+                                <!-- Fourth level menu -->
+                                <ul class="menu-content" *ngIf="menuSubsubItem.Submenu.length > 0">
+                                    <li *ngFor="let menuSubSubsubItem of menuSubsubItem.Submenu"
+                                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                        [ngClass]="[menuSubSubsubItem.Class]">
+                                        <a (click)="navigateSkipLocationChange(menuSubSubsubItem)"
+                                            *ngIf="!menuSubSubsubItem.IsExternalLink; else externalSubSubSubLinkBlock">
+                                            <i [ngClass]="[menuSubSubsubItem.Icon]"></i>
+                                            <span class="menu-title">{{menuSubSubsubItem.Title | translate }}</span>
+                                            <span
+                                                *ngIf="menuSubSubsubItem.Badge != undefined && menuSubSubsubItem.Badge != '' "
+                                                [ngClass]="[menuSubSubsubItem.BadgeClass]">{{menuSubSubsubItem.Badge}}</span>
+                                        </a>
+                                        <ng-template #externalSubSubSubLinkBlock>
+                                            <a [href]="[menuSubSubsubItem.Path]">
+                                                <i [ngClass]="[menuSubSubsubItem.Icon]"></i>
+                                                <span class="menu-title">{{menuSubSubsubItem.Title | translate }}</span>
+                                                <span
+                                                    *ngIf="menuSubSubsubItem.Badge != undefined && menuSubSubsubItem.Badge != '' "
+                                                    [ngClass]="[menuSubSubsubItem.BadgeClass]">{{menuSubSubsubItem.Badge}}</span>
+                                            </a>
+                                        </ng-template>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
