@@ -96,7 +96,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
         exposedModule: './AmendmentModule'
       })
         .then(m => m.AmendmentModule)
@@ -108,7 +108,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
         exposedModule: './WriteOffModule'
       })
         .then(m => m.WriteOffModule)
@@ -120,7 +120,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
         exposedModule: './NonAccModule'
       })
         .then(m => m.NonAccrualModule)
