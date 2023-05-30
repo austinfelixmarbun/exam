@@ -86,6 +86,10 @@ import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
+import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
+import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
+import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
+import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -122,6 +126,7 @@ export const customCurrencyMaskConfig = {
     AdInsModule,
     SharedModule,
     AdInsSharedModule,
+    UcTemplateModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
@@ -190,10 +195,12 @@ export const customCurrencyMaskConfig = {
     RefTcComponent,
     RefTcAddEditComponent,
     TaxOfficeDetailComponent,
-    TaxOfficePagingComponent
+    TaxOfficePagingComponent,
+    RefAmrtzAddEditComponent,
+    RefAmrtzItemPagingComponent
   ],
-  // providers: [
-  //   NGXToastrService
-  // ]
+  providers: [
+    { provide: UcTemplateService, useClass: AdinsTemplateService }
+  ]
 })
 export class CommonSettingModule { }

@@ -67,6 +67,8 @@ import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
+import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
+import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
 
 const routes: Routes = [
   {
@@ -536,6 +538,22 @@ const routes: Routes = [
         component: TaxOfficePagingComponent,
         data: {
           title: 'Tax Office Paging'
+        },
+      },
+      
+      //REF AMRTZ ITEM
+      {
+        path: PathConstant.CS_REF_AMRTZ_ITEM_DETAIL,
+        component: RefAmrtzAddEditComponent,
+        data: {
+          title: 'Ref Amortize Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_AMRTZ_ITEM_PAGING,
+        component: RefAmrtzItemPagingComponent,
+        data: {
+          title: 'Ref Amortize Paging'
         },
       },
     ]
