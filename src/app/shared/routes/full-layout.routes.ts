@@ -414,6 +414,39 @@ export const Full_ROUTES: Routes = [
         .then(m => m.LbppModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
   // #endregion
+
+  //#regin AP
+  {
+    path: 'disbursement',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.apR3Web + '/remoteEntry.js',
+        exposedModule: './DisbursementModule'
+      })
+        .then(m => m.DisbursementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
+  //#region FINOPS
+  {
+    path: 'othtrx',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './OthTrxModule'
+      })
+        .then(m => m.OthTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
+
+  
 ];
