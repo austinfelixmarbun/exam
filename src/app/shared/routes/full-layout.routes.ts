@@ -447,6 +447,21 @@ export const Full_ROUTES: Routes = [
   },
   //#endregion
 
+  //#region PDC
+  {
+    path: 'pdcclearing',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './ClearingModule'
+      })
+        .then(m => m.OthTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
 
   
 ];
