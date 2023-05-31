@@ -7,9 +7,9 @@ export const environment = {
   production: false,
   navbarColor: 'transparent',
   //losUrl: 'https://localhost:5001',
-  //FoundationR3Url: 'https://localhost:5000',
+  FoundationR3Url: 'http://localhost:5000',
   LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
-  FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_DEV',
+  //FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_DEV',
   DMSUrl: "https://sky.ad-ins.com/LITEDMS_POC/Integration/ViewDoc.aspx",
   AMSUrl: "https://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada
   LMSUrl: "https://r3app-server.ad-ins.com/LMS_DEMO", //OPL dah ada
@@ -17,7 +17,8 @@ export const environment = {
   //ApprovalURL: 'https://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalR3Url: 'https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
   ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
-  FoundationR3Web: 'https://r3web-server.ad-ins.com/FOUNDATION_DEV',
+  FoundationR3Web: 'https://localhost:4200',
+  //FoundationR3Web: 'https://r3web-server.ad-ins.com/FOUNDATION_DEV',
   losR3Web: 'https://r3web-server.ad-ins.com/LOS_DEV',
   cmsR3Web: 'https://r3web-server.ad-ins.com/CMS_DEV',
   WorkflowR3Url: 'https://R3App-Server.ad-ins.com/WORKFLOW_R3',

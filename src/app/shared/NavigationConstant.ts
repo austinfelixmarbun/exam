@@ -206,6 +206,9 @@ export class NavigationConstant {
     public static VENDOR_COLL_COMPANY_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_MBR_ADD; //'/Vendor/CollectionCompany/Member/Add'
     public static VENDOR_COLL_COMPANY_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_REG; //'/Vendor/CollectionCompany/Registration'
     public static VENDOR_COLL_COMPANY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_VIEW; //'/Vendor/CollectionCompany/View'
+    public static VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
+    public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
+    public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
     //#endregion
     
     //#region Organization

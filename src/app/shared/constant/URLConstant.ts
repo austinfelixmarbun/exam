@@ -109,11 +109,15 @@ export class URLConstant {
     public static GetBankPaging = environment.FoundationR3Url + "/v1" + "/RefBank/GetRefBankPaging";
     public static GetBank = environment.FoundationR3Url + "/v1" + "/RefBank/GetBank";
     public static GetRefBankByRefBankIdAsync = environment.FoundationR3Url + "/v1" + "/RefBank/GetRefBankByRefBankIdAsync";
+    public static GetRefBankByRefBankCodeAsync = environment.FoundationR3Url + "/v1" + "/RefBank/GetRefBankByBankCodeAsync";
     public static EditRefBank = environment.FoundationR3Url + "/v1" + "/RefBank/EditRefBank";
     public static AddRefBank = environment.FoundationR3Url + "/v1" + "/RefBank/AddRefBank";
     public static AddRefBankAsync = environment.FoundationR3Url + "/v1" + "/RefBank/AddRefBankAsync";
     public static DeleteRefBank = environment.FoundationR3Url + "/v1" + "/RefBank/DeleteRefBank";
     public static GetBankByBankCode = environment.FoundationR3Url + "/v1" + "/RefBank/GetBankByBankCode";
+
+//LBPPMS-CNTRPRT
+public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetLbppmsCntrprtByLbppmsCntrprtCode";
 
     //REF-EMP
     public static GetEmpNameByRefUserId = environment.FoundationR3Url + "/v1" + "/RefEmp/GetEmpNameByRefUserId";
@@ -519,6 +523,7 @@ export class URLConstant {
     public static AddVendorATPM = environment.FoundationR3Url + "/v1" + "/Vendor/AddVendorATPM";
     public static EditVendorATPM = environment.FoundationR3Url + "/v1" + "/Vendor/EditVendorATPM";
     public static GetVendorAndVendorAddr = environment.FoundationR3Url + "/v1" + "/Vendor/GetVendorAndVendorTaxAddrByVendorId";
+    public static GetVendorAddrByVendorIdOnly = environment.FoundationR3Url + "/v1" + "/VendorAddr/GetVendorAddrByVendorId";
     public static GetVendorByVendorId = environment.FoundationR3Url + "/v1" + "/Vendor/GetVendorByVendorId";
     public static AddVendorAddr = environment.FoundationR3Url + "/v1" + "/VendorAddr/AddVendorAddr";
     public static EditVendorAddr = environment.FoundationR3Url + "/v1" + "/VendorAddr/EditVendorAddr";
@@ -529,6 +534,7 @@ export class URLConstant {
     public static EditVendorBankAcc = environment.FoundationR3Url + "/v1" + "/VendorBankAcc/EditVendorBankAcc";
     public static GetVendorBankAccByVendorBankAccId = environment.FoundationR3Url + "/v1" + "/VendorBankAcc/GetVendorBankAccByVendorBankAccId";
     public static DeleteVendorBankAcc = environment.FoundationR3Url + "/v1" + "/VendorBankAcc/DeleteVendorBankAcc";
+    public static GetListVendorContactPersonByVendorCode = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/GetListVendorContactPersonByVendorCode"
     public static GetVendorContactPersonById = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/GetVendorContactPersonById";
     public static AddVendorContactPerson = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/AddVendorContactPerson";
     public static EditVendorContactPerson = environment.FoundationR3Url + "/v1" + "/VendorContactPerson/EditVendorContactPerson";
@@ -540,6 +546,10 @@ export class URLConstant {
     public static GetVendorByVendorCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetVendorByVendorCode";
     public static GetListKeyValueActiveByCategoryCodeAndOfficeCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetListKeyValueActiveByCategoryCodeAndOfficeCode";
     public static GetListKvpVendorObjByCategoryCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetListKvpVendorObjByCategoryCode";
+    
+    //VENDOR FUNDING COY
+    public static AddVendorFundingCoy = environment.FoundationR3Url + "/v1" + "/Vendor/AddFundingCompany";
+    public static EditVendorFundingCoy = environment.FoundationR3Url + "/v1" + "/Vendor/EditFundingCompany";
 
     // VENDOR ADDR
     public static GetVendorAddrByVendorCodeAndMrAddrTypeCode = environment.FoundationR3Url + "/v1" + "/VendorAddr/GetVendorAddrByVendorCodeAndMrAddrTypeCode";

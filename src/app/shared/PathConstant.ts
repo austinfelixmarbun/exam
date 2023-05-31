@@ -397,6 +397,10 @@ export class PathConstant {
     public static VENDOR_HO_PAGING = PathConstant.VENDOR_HO + "/" + PathConstant.PAGING;
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstant.DETAIL;
     public static VENDOR_HO_REG = PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
+    public static VENDOR_FUNDING_COY = "FundingCompany";
+    public static VENDOR_FUNDING_COY_PAGING = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; //FundingCompany/Paging
+    public static VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT; //FundingCompany/AddEDit
+    public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW; 
     public static VENDOR_ATPM = "ATPM";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static VENDOR_ATPM_REG = PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
