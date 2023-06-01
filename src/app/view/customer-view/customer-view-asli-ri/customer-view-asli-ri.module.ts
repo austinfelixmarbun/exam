@@ -15,8 +15,6 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { CustomerViewAsliRiComponent } from "./customer-view-asli-ri.component";
 import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing.module";
-import { HttpClientModule } from "@angular/common/http";
-
 
 
 @NgModule({
@@ -27,7 +25,6 @@ import { HttpClientModule } from "@angular/common/http";
     CustomerViewAsliRiRoutingModule,
     CommonModule,
     FormsModule,
-    HttpClientModule,
     UCSearchModule,
     UcgridfooterModule,
     UcpagingModule,
