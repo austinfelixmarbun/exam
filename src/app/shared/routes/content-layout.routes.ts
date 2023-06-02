@@ -298,5 +298,17 @@ export const CONTENT_ROUTES: Routes = [
             .then(m => m.RefundModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
+      },
+      {
+        path: 'disbursementview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.apR3Web + '/remoteEntry.js',
+            exposedModule: './PayVoucherModule'
+          })
+            .then(m => m.PayVoucherModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
       }
 ];
