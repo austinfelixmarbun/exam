@@ -553,7 +553,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
 
     // VENDOR ADDR
     public static GetVendorAddrByVendorCodeAndMrAddrTypeCode = environment.FoundationR3Url + "/v1" + "/VendorAddr/GetVendorAddrByVendorCodeAndMrAddrTypeCode";
-
+    public static GetVendorAddrByVendorCode = environment.FoundationR3Url + "/v1" + "/VendorAddr/GetVendorAddrByVendorCode";
     // VENDOR BANK ACC
     public static GetVendorBankAccDefaultByVendorId = environment.FoundationR3Url + "/v1" + "/VendorBankAcc/GetVendorBankAccDefaultByVendorId";
 
@@ -618,6 +618,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static DeleteRangeVendorAttrContentByIds = "/VendorAttrContent/DeleteRangeVendorAttrContentByIds";
     public static GetListVendorAttrContentByVendorAttrId = environment.FoundationR3Url + "/v1" + "/VendorAttrContent/GetListVendorAttrContentByVendorAttrId";
     public static GetListVendorAttrContentByVendorId = environment.FoundationR3Url + "/v1" + "/VendorAttrContent/GetListVendorAttrContentByVendorId";
+    public static GetListVendorAttrContentByVendorCode = environment.FoundationR3Url + "/v1" + "/VendorAttrContent/GetListVendorAttrContentByVendorCode";
 
     // VENDOR ATPM MAPPING
     public static GetListVendorAtpmMappingByVendorId = environment.FoundationR3Url + "/v1" + "/Vendor/GetListVendorAtpmMappingByVendorId"

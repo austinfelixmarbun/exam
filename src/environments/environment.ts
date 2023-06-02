@@ -17,7 +17,7 @@ export const environment = {
   //ApprovalURL: 'https://r3app-server.ad-ins.com/FOUNDATION_R3/Approval',
   ApprovalR3Url: 'https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT',
   ApprovalURL: 'https://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT',
-  FoundationR3Web: 'https://localhost:4200',
+  FoundationR3Web: 'http://localhost:4200',
   //FoundationR3Web: 'https://r3web-server.ad-ins.com/FOUNDATION_DEV',
   losR3Web: 'https://r3web-server.ad-ins.com/LOS_DEV',
   cmsR3Web: 'https://r3web-server.ad-ins.com/CMS_DEV',

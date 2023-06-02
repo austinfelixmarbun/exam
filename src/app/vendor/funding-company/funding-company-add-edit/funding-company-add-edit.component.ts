@@ -67,6 +67,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
   countryResponse: any;
   countryCode1: any;
   countryCode2: any;
+  VendorCode: any;
 
   FormUtama = this.fb.group({
     InputCode: ['', Validators.required],
@@ -90,6 +91,10 @@ export class FundingCompanyAddEditComponent implements OnInit {
           this.VendorId = params['VendorId'];
         }
 
+        if(params["FundCoyCode"] != null){
+          this.VendorCode = params['FundCoyCode'];
+        }
+
         if (params['mode'] != null) {
           this.mode = params['mode'];
         }
@@ -107,9 +112,9 @@ export class FundingCompanyAddEditComponent implements OnInit {
       await this.getData();
     }
 
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
-        this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
+        this.ListVendorAttrContent = response;
         if (this.ListVendorAttrContent != null) {
           if (this.ListVendorAttrContent.length < 1) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
@@ -383,7 +388,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
   }
 
   async getData(){
-    await this.http.post(URLConstant.GetVendorByVendorId, { Id: this.VendorId }).toPromise().then(
+    await this.http.post(URLConstant.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
       async (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -393,7 +398,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
           IsActive: this.result.IsActive,
         })
       })
-      await this.http.post(URLConstant.GetVendorAddrByVendorIdOnly, { Id: this.VendorId }).toPromise().then(
+      await this.http.post(URLConstant.GetVendorAddrByVendorCode, { Code: this.VendorCode }).toPromise().then(
         async (response) => {
           this.resultAddr = response;
           this.FormUtama.patchValue({

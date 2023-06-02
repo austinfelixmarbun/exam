@@ -80,7 +80,7 @@ export class FundingCompanyDetailComponent implements OnInit {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewFundingCompany.json";
     this.viewGenericObj.whereValue = where
 
-    this.http.post(URLConstant.GetVendorByVendorId, { Id: this.VendorId }).toPromise().then(
+    this.http.post(URLConstant.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
       async (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -91,7 +91,7 @@ export class FundingCompanyDetailComponent implements OnInit {
         })
         this.vendor = vendorData;
       })
-      this.http.post(URLConstant.GetVendorAddrByVendorIdOnly, { Id: this.VendorId }).toPromise().then(
+      this.http.post(URLConstant.GetVendorAddrByVendorCode, { Code: this.VendorCode }).toPromise().then(
         async (response) => {
           this.resultAddr = response;
           const vendorAddrData = ({
@@ -101,9 +101,9 @@ export class FundingCompanyDetailComponent implements OnInit {
         }
       )
   
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
+    this.http.post(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
-        this.ListVendorAttrContent = response[CommonConstant.ReturnObj]
+        this.ListVendorAttrContent = response;
         if (this.ListVendorAttrContent != null) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
