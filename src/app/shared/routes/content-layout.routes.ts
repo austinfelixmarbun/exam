@@ -73,9 +73,9 @@ export const CONTENT_ROUTES: Routes = [
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
-        exposedModule: './PaymentReceive'
+        exposedModule: './'
       })
-        .then(m => m.PaymentReceiveModule)
+        .then(m => m.PrepaidAllocModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
