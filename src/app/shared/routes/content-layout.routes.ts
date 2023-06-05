@@ -68,6 +68,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'payment-receive-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentReceive'
+      })
+        .then(m => m.PaymentReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'receiptformview',
     loadChildren: () => {
       return loadRemoteModule({
