@@ -400,7 +400,7 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CashierTransactionModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }, 
+  },
   //#endregion
   // #region LBPP & SLIK
   {
@@ -453,7 +453,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
         exposedModule: './ClearingModule'
       })
         .then(m => m.OthTrxModule)
@@ -463,5 +463,5 @@ export const Full_ROUTES: Routes = [
   //#endregion
 
 
-  
+
 ];
