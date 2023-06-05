@@ -1,5 +1,5 @@
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -109,6 +109,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
           registrationStrategy: 'registerWhenStable:30000'
         })
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
         AuthService,
         AuthGuard,

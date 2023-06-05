@@ -41,7 +41,9 @@
 							"src/styles.css",
 							"src/adInsStyles.css",
 							"node_modules/intl-tel-input/build/css/intlTelInput.css",
-							"node_modules/angular-archwizard/archwizard.css"
+							"node_modules/angular-archwizard/archwizard.css",
+							"node_modules/ngx-spinner/animations/ball-atom.css"
+
 						],
 						"scripts": [
 							"node_modules/jquery/dist/jquery.min.js",
