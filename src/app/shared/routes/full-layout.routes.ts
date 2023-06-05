@@ -449,14 +449,14 @@ export const Full_ROUTES: Routes = [
 
   //#region PDC
   {
-    path: 'pdcclearing',
+    path: 'clearing',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
         exposedModule: './ClearingModule'
       })
-        .then(m => m.OthTrxModule)
+        .then(m => m.ClearingModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
