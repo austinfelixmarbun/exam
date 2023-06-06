@@ -11,6 +11,7 @@ import { OfficeAreaPagingComponent } from './office-area/office-area-paging/offi
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { OfficeEmpViewComponent } from './office-emp-view/office-emp-view.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,13 @@ const routes: Routes = [
         component: OfficeAreaMemberAddComponent,
         data: {
           title: 'Office Area Member Add'
+        }
+      },
+      {
+        path: PathConstant.OFFICE_EMP_VIEW,
+        component: OfficeEmpViewComponent,
+        data: {
+          title: 'Office Employee View'
         }
       }
     ]

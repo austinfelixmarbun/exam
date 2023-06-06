@@ -279,6 +279,7 @@ export class PathConstant {
     //#region Office-Module
     public static OFFICE_EMP_POS = "OfficeEmpPos";
     public static OFFICE_EMP_POS_ADD = "OfficeEmpPosAdd";
+    public static OFFICE_EMP_VIEW = "OfficeEmpView";
     public static OFFICE_AREA = "OfficeArea";
     public static OFFICE_AREA_DETAIL = PathConstant.OFFICE_AREA + "/" + PathConstant.DETAIL;
     public static OFFICE_AREA_MEMBER = PathConstant.OFFICE_AREA + "/" + PathConstant.MEMBER;

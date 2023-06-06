@@ -257,6 +257,7 @@ export class NavigationConstant {
     public static OFFICE_AREA_DETAIL = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_DETAIL; //'/Office/OfficeArea/Detail'
     public static OFFICE_AREA_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_MEMBER; //'/Office/OfficeArea/Member'
     public static OFFICE_AREA_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_MEMBER_ADD; //'/Office/OfficeArea/Member/Add'
+    public static OFFICE_EMP_VIEW = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_VIEW; //'/Office/OfficeEmpView'
     public static OFFICE_EMP_POS = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS; //'/Office/OfficeEmpPos'
     public static OFFICE_EMP_POS_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS_ADD; //'/Office/OfficeEmpPosAdd'
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
