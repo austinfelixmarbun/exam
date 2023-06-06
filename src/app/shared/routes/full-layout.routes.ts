@@ -471,7 +471,7 @@ export const Full_ROUTES: Routes = [
         .then(m => m.PdcReceiveModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  } 
   //#endregion
 
 
