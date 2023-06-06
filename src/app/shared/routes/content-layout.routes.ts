@@ -68,6 +68,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'payment-receive-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './PrepaidAlloc'
+      })
+        .then(m => m.PrepaidAllocModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'receiptformview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -96,7 +108,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
         exposedModule: './AmendmentModule'
       })
         .then(m => m.AmendmentModule)
@@ -108,7 +120,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
         exposedModule: './WriteOffModule'
       })
         .then(m => m.WriteOffModule)
@@ -120,7 +132,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4204/remoteEntry.js',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
         exposedModule: './NonAccModule'
       })
         .then(m => m.NonAccrualModule)
@@ -296,6 +308,18 @@ export const CONTENT_ROUTES: Routes = [
             exposedModule: './RefundModule'
           })
             .then(m => m.RefundModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+      {
+        path: 'disbursementview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.apR3Web + '/remoteEntry.js',
+            exposedModule: './PayVoucherModule'
+          })
+            .then(m => m.PayVoucherModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
       }

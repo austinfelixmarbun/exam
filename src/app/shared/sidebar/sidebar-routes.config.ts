@@ -43,6 +43,7 @@ export const ROUTES: RouteInfo[] = [
       { Path: NavigationConstant.CS_REASON_PAGING, Title: 'Reason', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_PAYMENT_ALLOC_PAGING, Title: 'Payment Allocation', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.CS_PAYMENT_ALLOC_GRP_PAGING, Title: 'Payment Allocation Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CS_REF_AMRTZ_ITEM_PAGING, Title: 'Ref Amortize Item', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SYSTEM_SETTING_NOTIF, Title: 'Notification', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV, Title: 'Notification Approval', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
       { Path: NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING, Title: 'Ref Form', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
