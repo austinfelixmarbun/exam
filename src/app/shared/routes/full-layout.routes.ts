@@ -471,7 +471,20 @@ export const Full_ROUTES: Routes = [
         .then(m => m.PdcReceiveModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  } ,
+  {
+    path: 'pdccancel',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcCancelModule'
+      })
+        .then(m => m.PdcCancelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   } 
+  
   //#endregion
 
 
