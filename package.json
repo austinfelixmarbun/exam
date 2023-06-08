@@ -49,7 +49,7 @@
     "@adins/ucgridfooter": "^3.0.1",
     "@adins/ucgridview": "^3.1.2",
     "@adins/uclookupgeneric": "^3.0.2",
-    "@adins/ucmoduleselection": "^3.0.1",
+    "@adins/ucmoduleselection": "^3.0.3",
     "@adins/ucnotification": "^1.5.6",
     "@adins/ucpaging": "^3.0.3",
     "@adins/ucreport": "^3.0.1",

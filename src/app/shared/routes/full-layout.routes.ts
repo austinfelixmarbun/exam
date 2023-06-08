@@ -363,6 +363,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'changeduedate',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './ChangeDueDateModule'
+      })
+        .then(m => m.ChangeDueDateModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
