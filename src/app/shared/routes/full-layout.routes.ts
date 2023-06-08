@@ -513,7 +513,7 @@ export const Full_ROUTES: Routes = [
     }
   } ,
   {
-    path: 'integrationmapping',
+    path: 'integration-mapping',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
