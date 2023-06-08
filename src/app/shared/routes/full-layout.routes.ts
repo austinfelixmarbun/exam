@@ -495,8 +495,35 @@ export const Full_ROUTES: Routes = [
         .then(m => m.PdcCancelModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  } 
+  },
   
+  //#endregion
+
+  //#region INTEGRATION
+  {
+    path: 'integration',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './IntegrationModule'
+      })
+        .then(m => m.IntegrationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } ,
+  {
+    path: 'integrationmapping',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './IntegrationMappingModule'
+      })
+        .then(m => m.IntegrationMappingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } 
   //#endregion
 
 

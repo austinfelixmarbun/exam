@@ -322,5 +322,17 @@ export const CONTENT_ROUTES: Routes = [
             .then(m => m.PayVoucherModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
+      },
+      {
+        path: 'integrationview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+            exposedModule: './IntegrationModule'
+          })
+            .then(m => m.IntegrationModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
       }
 ];
