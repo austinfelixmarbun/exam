@@ -351,6 +351,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'changeduedate',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './ChangeDueDateModule'
+      })
+        .then(m => m.ChangeDueDateModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
@@ -448,6 +460,58 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'pdcreceive',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcReceiveModule'
+      })
+        .then(m => m.PdcReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } ,
+  {
+    path: 'pdccancel',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcCancelModule'
+      })
+        .then(m => m.PdcCancelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  
+  //#endregion
+
+  //#region INTEGRATION
+  {
+    path: 'integration',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './IntegrationModule'
+      })
+        .then(m => m.IntegrationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } ,
+  {
+    path: 'integration-mapping',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './IntegrationMappingModule'
+      })
+        .then(m => m.IntegrationMappingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } 
   //#endregion
 
 

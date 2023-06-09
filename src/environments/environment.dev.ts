@@ -11,7 +11,7 @@ export const environment = {
   Module: "FOU",
   isCore: true,
   SpinnerOnHttpPost: false,
-  isPageFromService: true,
+  isPageFromService: false,
   NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE",
 
   LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
