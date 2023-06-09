@@ -322,5 +322,17 @@ export const CONTENT_ROUTES: Routes = [
             .then(m => m.IntegrationModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
+      },
+      {
+        path: 'chargereceivableview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.arR3Web + '/remoteEntry.js',
+            exposedModule: './ChargeReceivableModule'
+          })
+            .then(m => m.ChargeReceivableModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
       }
 ];
