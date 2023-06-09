@@ -301,18 +301,6 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'cashier',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-        exposedModule: './CashierTransaction'
-      })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
     path: 'changewop',
     loadChildren: () => {
       return loadRemoteModule({

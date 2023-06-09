@@ -192,18 +192,6 @@ export const CONTENT_ROUTES: Routes = [
         }
       },
       {
-        path: 'payment-reversal-view',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-              exposedModule: './PaymentReversal'
-            })
-            .then(m => m.PaymentReversalModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
         path: 'prepaid-alloc-view',
         loadChildren: () => {
           return loadRemoteModule({
