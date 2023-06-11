@@ -484,7 +484,30 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+  {
+    path: 'bounce',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './BounceModule'
+      })
+        .then(m => m.BounceModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'deposit',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './DepositModule'
+      })
+        .then(m => m.DepositModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 
   //#region INTEGRATION
