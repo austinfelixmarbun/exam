@@ -301,18 +301,6 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'cashier',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-        exposedModule: './CashierTransaction'
-      })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
     path: 'changewop',
     loadChildren: () => {
       return loadRemoteModule({
@@ -496,7 +484,30 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+  {
+    path: 'bounce',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './BounceModule'
+      })
+        .then(m => m.BounceModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'deposit',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './DepositModule'
+      })
+        .then(m => m.DepositModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 
   //#region INTEGRATION
@@ -513,7 +524,7 @@ export const Full_ROUTES: Routes = [
     }
   } ,
   {
-    path: 'integrationmapping',
+    path: 'integration-mapping',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
