@@ -56,6 +56,7 @@ export class ThirdPartyFormComponent implements OnInit {
   @Input() MrCustTypeCode: string = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
   @Output() OutputThirdPartyTrxNo: EventEmitter<string> = new EventEmitter<string>();
+  @Output() OutputCustObj: EventEmitter<CustObj> = new EventEmitter<CustObj>();
   @Output() OutputUploadFile: EventEmitter<Array<CustDocFileFormObj>> = new EventEmitter<Array<CustDocFileFormObj>>();
 
 
@@ -254,6 +255,21 @@ export class ThirdPartyFormComponent implements OnInit {
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
           modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
           modalRef.componentInstance.CustId = this.custObj.CustId;
+          modalRef.componentInstance.RowVersion = this.custObj.RowVersion;
+          if (this.pefindoMultiResMax > 0)
+              this.thirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
+              this.custObj.ThirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
+              this.custObj.RowVersion = res["RowVersion"];
+              this.OutputCustObj.emit(this.custObj);
+            })
+          }
+          else
+          {
+            modalRef.result.then((res) => {
+              this.thirdPartyTrxNo = res["Code"];
+              this.custObj.ThirdPartyTrxNo = res["Code"];
+              this.custObj.RowVersion = res["RowVersion"];
+              this.OutputCustObj.emit(this.custObj);
         }
       );
     }
@@ -262,7 +278,12 @@ export class ThirdPartyFormComponent implements OnInit {
       modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
       modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
       modalRef.result.then((res) => {
-        this.thirdPartyGroupTrxNo = res;
+          this.thirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
+          this.custObj.ThirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
+          this.OutputCustObj.emit(this.custObj);
+          this.thirdPartyTrxNo = res["Code"];
+          this.custObj.ThirdPartyTrxNo = res["Code"];
+          this.OutputCustObj.emit(this.custObj);
       })
     }
 

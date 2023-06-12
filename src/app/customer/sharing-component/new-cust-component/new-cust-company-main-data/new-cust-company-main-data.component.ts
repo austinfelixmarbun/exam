@@ -452,6 +452,10 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.thirdPartyTrxNo = e;
   }
 
+  SetThirdPartyTrxNoAndRowVersion(e){
+    this.thirdPartyTrxGroupNo = e.ThirdPartyGroupTrxNo;
+    this.thirdPartyTrxNo = e.ThirdPartyTrxNo;
+    if (this.custObj.CustId > 0) this.custObj.RowVersion = e.RowVersion;
   SetCustFileFormObjs(e){
     this.CustDocFileFormObjs = e;
   }

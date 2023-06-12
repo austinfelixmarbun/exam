@@ -3,9 +3,11 @@ import { ReqAddTrxSrcDataForPefindoObj } from "./req-add-trx-src-data-for-pefind
 export class ReqAddTrxSrcDataForPefindoMultiResultObj {
     ReqAddTrxSrcDataForPefindoObj: Array<ReqAddTrxSrcDataForPefindoObj>;
     CustId: number;
+    RowVersion: string;
 
     constructor() {
         this.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoObj>();
         this.CustId = 0;
+        this.RowVersion = "";
     }
 }

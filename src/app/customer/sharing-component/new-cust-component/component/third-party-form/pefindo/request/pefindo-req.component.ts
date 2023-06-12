@@ -25,6 +25,7 @@ export class PefindoReqComponent implements OnInit {
 
   @Input() ReqPefindoSmartSearchObj: ReqPefindoSmartSearchObj;
   @Input() ThirdPartyTrxNo: string;
+  @Input() RowVersion: string;
 
   PefindoSmartSearchPersonalObjs: Array<PefindoSmartSearchPersonalObj> = new Array<PefindoSmartSearchPersonalObj>();
   PefindoSmartSearchCoyObjs: Array<PefindoSmartSearchCoyObj> = new Array<PefindoSmartSearchCoyObj>();
@@ -132,7 +133,11 @@ export class PefindoReqComponent implements OnInit {
       return;
     }
 
-    if (this.CustId) reqAddTrxSrcDataForPefindoMultiResultObj.CustId = this.CustId;
+    if (this.CustId)
+    {
+      reqAddTrxSrcDataForPefindoMultiResultObj.CustId = this.CustId;
+      reqAddTrxSrcDataForPefindoMultiResultObj.RowVersion = this.RowVersion;
+    }
     reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoObj>();
     PefindoArr.forEach(x => {
       let reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
@@ -162,7 +167,7 @@ export class PefindoReqComponent implements OnInit {
       (response) => {
         this.thirdPartyGroupTrxNo.emit(response['ThirdPartyRsltHGroupNo'])
         this.toastr.successMessage(response["Message"]);
-        this.activeModal.close(response["ThirdPartyRsltHGroupNo"]);
+        this.activeModal.close(response);
       }
     );
   }
@@ -188,14 +193,12 @@ export class PefindoReqComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
         }
       );
     }else{
       this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
         }
       );
     }
@@ -222,17 +225,23 @@ export class PefindoReqComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
         }
       );
     }else{
       this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          this.activeModal.dismiss('Cross click');
         }
       );
     }
 
   }
+    if (!this.CustId)
+    {
+      reqByIdAndCode.Code = this.ThirdPartyTrxNo;
+      this.activeModal.close(reqByIdAndCode);
+      return;
+    }
+    reqByIdAndCode.RowVersion = this.RowVersion;
+        this.activeModal.close(response);
 }
