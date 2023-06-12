@@ -92,18 +92,6 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
-    path: 'cashierview',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-        exposedModule: './CashierTransaction'
-      })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
     path: 'amendmentview',
     loadChildren: () => {
       return loadRemoteModule({
