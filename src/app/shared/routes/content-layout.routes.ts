@@ -92,18 +92,6 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
-    path: 'cashierview',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-        exposedModule: './CashierTransaction'
-      })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
     path: 'amendmentview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -334,5 +322,18 @@ export const CONTENT_ROUTES: Routes = [
             .then(m => m.ChargeReceivableModule)
             .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
         }
-      }
+      },
+      {
+        path: 'pdccancelview',
+        loadChildren: () => {
+          return loadRemoteModule({
+            type: 'module',
+            remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+            exposedModule: './PdcCancelModule'
+          })
+            .then(m => m.PdcCancelModule)
+            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+        }
+      },
+
 ];
