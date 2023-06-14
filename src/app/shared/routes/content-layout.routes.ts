@@ -151,189 +151,177 @@ export const CONTENT_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-    {
-        path: PathConstant.CR_DOC_MNGMNT_VIEW,
-        loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
-    },
-    {
-        path: 'agrmntview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.arR3Web + '/remoteEntry.js',
-              exposedModule: './AgrmntModule'
-            })
-            .then(m => m.AgreementModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-    },
-    {
-        path: 'lmsschemeview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.arR3Web + '/remoteEntry.js',
-              exposedModule: './LmsSchmModule'
-            })
-            .then(m => m.LmsSchemeModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'prepaid-alloc-view',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-              exposedModule: './PaymentReceive'
-            })
-            .then(m => m.PaymentReceiveModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'receiptformview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-              exposedModule: './ReceiptForm'
-            })
-            .then(m => m.ReceiptFormModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'cashierview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
-              exposedModule: './CashierTransaction'
-            })
-            .then(m => m.CashierTransactionModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'amendmentview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.amendmentR3Web + './remoteEntry.js',
-              exposedModule: './AmendmentModule'
-            })
-            .then(m => m.AmendmentModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'writeoffview',
-        loadChildren: () => {
-          return loadRemoteModule({
-              type: 'module',
-              remoteEntry: envi.armntR3Web + './remoteEntry.js',
-              exposedModule: './WriteOffModule'
-            })
-            .then(m => m.WriteOffModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'nonaccrualview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
-            exposedModule: './NonAccModule'
-          })
-            .then(m => m.NonAccrualModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'waivedview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
-            exposedModule: './WaivedModule'
-          })
-            .then(m => m.WaivedModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'prepaidtransferview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
-            exposedModule: './PrepaidTransferModule'
-          })
-            .then(m => m.PrepaidTransferModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'refundview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.armntR3Web + '/remoteEntry.js',
-            exposedModule: './RefundModule'
-          })
-            .then(m => m.RefundModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'disbursementview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.apR3Web + '/remoteEntry.js',
-            exposedModule: './PayVoucherModule'
-          })
-            .then(m => m.PayVoucherModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'integrationview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
-            exposedModule: './IntegrationModule'
-          })
-            .then(m => m.IntegrationModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'chargereceivableview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.arR3Web + '/remoteEntry.js',
-            exposedModule: './ChargeReceivableModule'
-          })
-            .then(m => m.ChargeReceivableModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
-      {
-        path: 'pdccancelview',
-        loadChildren: () => {
-          return loadRemoteModule({
-            type: 'module',
-            remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
-            exposedModule: './PdcCancelModule'
-          })
-            .then(m => m.PdcCancelModule)
-            .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-        }
-      },
+  {
+    path: PathConstant.CR_DOC_MNGMNT_VIEW,
+    loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
+  },
+  {
+    path: 'agrmntview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './AgrmntModule'
+      })
+        .then(m => m.AgreementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'lmsschemeview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './LmsSchmModule'
+      })
+        .then(m => m.LmsSchemeModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'prepaid-alloc-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentReceive'
+      })
+        .then(m => m.PaymentReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'receiptformview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './ReceiptForm'
+      })
+        .then(m => m.ReceiptFormModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'amendmentview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + './remoteEntry.js',
+        exposedModule: './AmendmentModule'
+      })
+        .then(m => m.AmendmentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'writeoffview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + './remoteEntry.js',
+        exposedModule: './WriteOffModule'
+      })
+        .then(m => m.WriteOffModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'nonaccrualview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './NonAccModule'
+      })
+        .then(m => m.NonAccrualModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'waivedview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './WaivedModule'
+      })
+        .then(m => m.WaivedModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'prepaidtransferview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './PrepaidTransferModule'
+      })
+        .then(m => m.PrepaidTransferModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'refundview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.armntR3Web + '/remoteEntry.js',
+        exposedModule: './RefundModule'
+      })
+        .then(m => m.RefundModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'disbursementview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.apR3Web + '/remoteEntry.js',
+        exposedModule: './PayVoucherModule'
+      })
+        .then(m => m.PayVoucherModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'integrationview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './IntegrationModule'
+      })
+        .then(m => m.IntegrationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'chargereceivableview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './ChargeReceivableModule'
+      })
+        .then(m => m.ChargeReceivableModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'pdccancelview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcCancelModule'
+      })
+        .then(m => m.PdcCancelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
 
 ];
