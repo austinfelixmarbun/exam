@@ -6,15 +6,13 @@ import {environment} from '../../../environments/environment';
 import * as _moment from 'moment';
 import {URLConstant, envi} from '../constant/URLConstant';
 import * as Module from 'app/components';
+import { NavigationConstant } from '../NavigationConstant';
 
 const listEnvironments = [
     { environment: 'FOU', url: envi.FoundationR3Url},
     { environment: 'FOU_WEB', url: envi.FoundationR3Web },
     { environment: 'LOSR3WEB', url: envi.losR3Web },
     { environment: 'LMSR3WEB', url: envi.lmsR3Web },
-    //{ environment: 'PAYMENT', url: envi.PaymentUrl },
-    //{ environment: 'AR', url: envi.ARUrl + '/v1' },
-    //{ environment: 'ARMNT', url: envi.ARMNTUrl + '/v1' },
     { environment: 'LOS', url: envi.LosURL }
 ];
 
@@ -40,5 +38,6 @@ export class AdinsTemplateService extends UcTemplateService {
     this.listEnvironments = listEnvironments;
     this.moment = _moment;
     this.module = Module;
+    this.navConstant = NavigationConstant
   }
 }
