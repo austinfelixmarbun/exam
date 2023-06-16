@@ -253,6 +253,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'payment-channel-receive',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentChannel'
+      })
+        .then(m => m.PaymentChannelModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'payment',
     loadChildren: () => {
       return loadRemoteModule({
