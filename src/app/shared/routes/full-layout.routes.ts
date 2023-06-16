@@ -363,6 +363,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'prepayment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './PrepaymentModule'
+      })
+        .then(m => m.PrepaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'changeduedate',
     loadChildren: () => {
       return loadRemoteModule({
