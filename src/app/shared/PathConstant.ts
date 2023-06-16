@@ -191,7 +191,7 @@ export class PathConstant {
     public static CS_REF_TAX_OFFICE_PAGING = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
     public static CS_REF_TAX_OFFICE_DETAIL = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
-    public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM;
+    public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
     public static CS_REF_AMRTZ_ITEM_DETAIL = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.DETAIL;
     //#endregion
 

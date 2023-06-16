@@ -378,18 +378,6 @@ export const Full_ROUTES: Routes = [
 
   //#region Cashbank
   {
-    path: 'cashiertransaction',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
-        exposedModule: './CashierTransactionModule'
-      })
-        .then(m => m.CashierTransactionModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
     path: 'cashier',
     loadChildren: () => {
       return loadRemoteModule({
@@ -505,6 +493,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './DepositModule'
       })
         .then(m => m.DepositModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'pdctransit',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcTransitModule'
+      })
+        .then(m => m.PdcTransitModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },

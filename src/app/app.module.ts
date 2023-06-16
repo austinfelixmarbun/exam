@@ -43,9 +43,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
-import {UcTemplateService} from '@adins/uctemplate';
-import {AdinsTemplateService} from './shared/services/adins-template.service';
-import { UcformModule } from '@adins/ucform'; 
+import { UcTemplateService } from '@adins/uctemplate';
+import { AdinsTemplateService } from './shared/services/adins-template.service';
+import { UcformModule } from '@adins/ucform';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,8 +83,8 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         HttpClientModule,
         DragDropModule,
         ToastrModule.forRoot({
-            positionClass :'toast-bottom-right'
-          }),
+            positionClass: 'toast-top-right'
+        }),
         NgbModule,
         TranslateModule.forRoot({
             loader: {
@@ -103,10 +103,10 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         UcformModule,
         NgMultiSelectDropDownModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
         })
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
