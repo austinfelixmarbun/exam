@@ -509,4 +509,9 @@ export class AssetMasterAddEditChildComponent implements OnInit {
       }
     }
   }
+  Space(event:any){
+    if(event.code === "Space"){
+      event.preventDefault()
+    }
+  }
 }

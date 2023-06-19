@@ -371,9 +371,14 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           }
         );
-         
+
       }
 
+    }
+  }
+  Space(event:any){
+    if(event.code === "Space"){
+      event.preventDefault()
     }
   }
 }

@@ -43,7 +43,7 @@
                   <input type="text" class="form-control adInsInput" formControlName="FullAssetCode" disabled>
                 </div>
                 <div class="col-md-5">
-                  <input type="text" class="form-control adInsInput" formControlName="AssetCode"
+                  <input type="text" class="form-control adInsInput" formControlName="AssetCode" (keydown)="Space($event)"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && AssetMasterChildForm.controls.AssetCode.invalid }" [attr.disabled]="pageType == 'edit' ? true : null">
                   <lib-uc-show-errors [control]="AssetMasterChildForm.controls.AssetCode" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
