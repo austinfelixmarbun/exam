@@ -193,6 +193,9 @@ export class PathConstant {
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
     public static CS_REF_AMRTZ_ITEM_DETAIL = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.DETAIL;
+    public static CS_REF_TRX_TYPE = "RefTrxType";
+    public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
+    public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust

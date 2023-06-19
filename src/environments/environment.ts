@@ -11,7 +11,7 @@ export const environment = {
   Module: "FOU",
   isCore: true,
   SpinnerOnHttpPost: false,
-  isPageFromService: false,
+  isPageFromService: true,
 
   LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_DEV',
