@@ -534,7 +534,19 @@ export const Full_ROUTES: Routes = [
         .then(m => m.IntegrationMappingModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  } 
+  },
+  {
+    path: 'pdc',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcModule'
+      })
+        .then(m => m.PdcModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  }
   //#endregion
 
 
