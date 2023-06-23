@@ -29,5 +29,7 @@
     "dmsURL": "https://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx",
     "WFThingsToDoUrl": "https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/",
     "IseUseNotification": "1",
-    "PagesURL": "http://rnd-server-2.ad-ins.com:88/"
+    "PagesURL": "http://rnd-server-2.ad-ins.com:88/",
+    "PDCUrl": "https://r3app-server.ad-ins.com/PDC"
+
 }
