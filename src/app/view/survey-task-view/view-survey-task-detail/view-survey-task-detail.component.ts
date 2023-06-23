@@ -22,6 +22,8 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
   ReqByIdObj: GenericObj = new GenericObj();
   ReqByCodeObj: GenericObj = new GenericObj();
   htmlCode: string;
+  mobileassignmentid: number;
+  ViewSurveyFromMobile: string;
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
@@ -71,10 +73,10 @@ export class ViewSurveyTaskDetailComponent implements OnInit {
     )
   }
 
-  async getHtmlCodeFromMobile(){
-    await this.http.post(this.UrlConstantNew.GetHtmlCodeFromMobile, this.ReqByIdObj).toPromise().then(
+    async getHtmlCodeFromMobile(){
+    await this.http.post(this.UrlConstantNew.GetUrlViewSurveyFromMobile, this.ReqByIdObj).toPromise().then(
       (response) => {
-        this.htmlCode = response["HtmlCode"];
+        this.ViewSurveyFromMobile = response["UrlViewSurvey"];
       }
     );
   }
