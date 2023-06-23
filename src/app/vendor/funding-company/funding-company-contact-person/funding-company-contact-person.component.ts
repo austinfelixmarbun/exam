@@ -13,7 +13,6 @@ import { FundingCompanyService } from 'app/vendor/funding-company.service';
 @Component({
   selector: 'app-funding-company-contact-person',
   templateUrl: './funding-company-contact-person.component.html',
-  styleUrls: ['./funding-company-contact-person.component.css']
 })
 export class FundingCompanyContactPersonComponent implements OnInit {
   modeCP: string;
@@ -81,11 +80,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
       this.http.post(URLConstant.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
         (response: ResGetListVendorContactPersonObj) => {
           this.listVendorCP = response[CommonConstant.ReturnObj];
-          // if (this.mode === 'edit') {
-          //   this.listVendorCP = this.listVendorCP.concat(this.listVendorCP);
-          // } else {
-          //   this.listVendorCP.push(...this.listVendorCP);
-          // }
           this.listVendorCP = this.listVendorCP.concat(this.childFormService.getChildFormValues());
           this.addContactPerson.emit(this.listVendorCP);
         })
@@ -104,7 +98,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
   getValue(ev) {
     this.mode = ev.mode;
     this.vendorContactPersonForm = ev.formValue;
-    // this.VendorContactPersonId = ev.VendorContactPersonId;
     console.log(this.mode);
   }
 
@@ -142,26 +135,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
   addCP() {
     this.modeCP = "add";
   }
-  // checkForm(){
-  //   if (this.vendorContactPersonForm.valid) {
-  //     const contactPerson = this.vendorContactPersonForm.value;
 
-  //     if (this.mode === 'edit') {
-  //       const index = this.listVendorCP.findIndex(item => item.VendorContactPersonId === contactPerson.VendorContactPersonId);
-  //       if (index >= 0) {
-  //         // Update existing contact person
-  //         this.listVendorCP[index] = contactPerson;
-  //       }
-  //     }
-  //  else {
-  //       // Add new contact person
-  //       this.CPFormValues.push(contactPerson);
-  //     }
-  //     this.listVendorCP = this.CPFormValues;
-  //     this.childFormService.addChildFormValue(contactPerson); 
-  //     console.log(contactPerson);
-  //   }
-  // }
 
   SaveForm(): void {
     if (this.vendorContactPersonForm.valid) {
@@ -172,7 +146,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
           this.listVendorCP[index].Email = this.vendorContactPersonForm.value.Email;
           this.listVendorCP[index].Name = this.vendorContactPersonForm.value.Name;
           this.listVendorCP[index].Phone1 = this.vendorContactPersonForm.value.Phone1;
-          // this.childFormService.addChildFormValue(this.listVendorCP);
           console.log("ini list vendor CP sblm di emit", this.listVendorCP)
           this.isChange = true;
           this.addContactPerson.emit(this.listVendorCP);
@@ -189,15 +162,11 @@ export class FundingCompanyContactPersonComponent implements OnInit {
           Phone1: this.vendorContactPersonForm.value.Phone1
         };
         this.listVendorCP.push(newContactPerson);
-        // this.childFormService.addChildFormValue(this.listVendorCP);
         this.isChange = true;
         this.addContactPerson.emit(this.listVendorCP);
         this.modeCP = "check";
         this.vendorContactPersonForm.reset();
       }
-
-      // this.listVendorCP = this.CPFormValues;
-
     }
   }
 

@@ -8,7 +8,6 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 @Component({
   selector: 'app-funding-company-paging',
   templateUrl: './funding-company-paging.component.html',
-  styleUrls: ['./funding-company-paging.component.css']
 })
 export class FundingCompanyPagingComponent implements OnInit {
 

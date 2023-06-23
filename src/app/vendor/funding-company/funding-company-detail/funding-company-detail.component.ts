@@ -18,7 +18,6 @@ import { FundingCompanyService } from 'app/vendor/funding-company.service';
 @Component({
   selector: 'app-funding-company-detail',
   templateUrl: './funding-company-detail.component.html',
-  styleUrls: ['./funding-company-detail.component.css']
 })
 export class FundingCompanyDetailComponent implements OnInit {
   VendorCode : string = "";
@@ -169,11 +168,6 @@ export class FundingCompanyDetailComponent implements OnInit {
     this.http.post(URLConstant.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
       (response: ResGetListVendorContactPersonObj) => {
         this.listVendorCP = response[CommonConstant.ReturnObj];
-        // if (this.mode === 'edit') {
-        //   this.listVendorCP = this.listVendorCP.concat(this.listVendorCP);
-        // } else {
-        //   this.listVendorCP.push(...this.listVendorCP);
-        // }
         this.listVendorCP = this.listVendorCP.concat(this.childFormService.getChildFormValues());
       })
   }

@@ -3,17 +3,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
 import { FundingCompanyService } from '../../../funding-company.service';
 
 @Component({
   selector: 'app-funding-company-contact-person-add-edit',
   templateUrl: './funding-company-contact-person-add-edit.component.html',
-  styleUrls: ['./funding-company-contact-person-add-edit.component.css']
 })
 export class FundingCompanyContactPersonAddEditComponent implements OnInit {
 
@@ -64,7 +59,6 @@ export class FundingCompanyContactPersonAddEditComponent implements OnInit {
       this.childFormService.addChildFormValue(formValue); 
       console.log("ini isi form CP", formValue);
       this.outputValue.emit({ mode: 'check' });
-      // this.formCP.reset();
     }
   }
 

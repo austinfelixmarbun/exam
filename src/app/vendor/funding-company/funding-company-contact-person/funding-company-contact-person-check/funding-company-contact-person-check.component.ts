@@ -3,8 +3,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
@@ -15,7 +13,6 @@ import { FundingCompanyService } from '../../../funding-company.service';
 @Component({
   selector: 'app-funding-company-contact-person-check',
   templateUrl: './funding-company-contact-person-check.component.html',
-  styleUrls: ['./funding-company-contact-person-check.component.css']
 })
 export class FundingCompanyContactPersonCheckComponent implements OnInit {
 
@@ -94,17 +91,6 @@ export class FundingCompanyContactPersonCheckComponent implements OnInit {
     
   }
 
-  
-  // addCPValues(value: any) {
-  //   const ContactPerson = this.listVendorCP;
-  //   ContactPerson.push(this.fb.group({
-  //     Name: value.CPName,
-  //     Email: value.CPEmail,
-  //     Phone: value.CPNumber,
-  //   }));
-  //   console.log("ini list CP", ContactPerson)
-  // }
-
   listAddressType: Array<string> = new Array();
   CheckListToBeEdit(VendorContactPersonId: number): boolean {
     let idx: number = this.listVendorCP.findIndex(x => x.VendorContactPersonId == VendorContactPersonId);
@@ -115,17 +101,6 @@ export class FundingCompanyContactPersonCheckComponent implements OnInit {
   editItem(vendorCPObj: any) {
     this.outputValue.emit({ mode: 'edit', AddrId: vendorCPObj.VendorContactPersonId});
   }
-
-  // deleteItem(custAddrObj: any) {
-  //   var custAddr = new CustAddrObj();
-  //   custAddr.CustAddrId = custAddrObj.CustAddrId;
-  //   this.http.post(this.deleteCustAddr, custAddr).subscribe(
-  //     (response: any) => {
-  //       this.toastr.successMessage(response["message"]);
-  //     }
-  //   );
-  //   //this.outputTab.emit({ mode: 'edit', AddrId: custAddrObj.CustAddrId });
-  // }
 
   addCP() {
     this.outputValue.emit({mode: 'add'});

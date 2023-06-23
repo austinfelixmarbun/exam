@@ -167,14 +167,6 @@ export class FundingCompanyAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = true;
-                        // var arrAddCrit = new Array();
-                        // var critAssetObj = new CriteriaObj();
-                        // critAssetObj.DataType = 'text';
-                        // critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                        // critAssetObj.propName = 'IS_ACTIVE';
-                        // critAssetObj.value = 1;
-                        // arrAddCrit.push(critAssetObj);
-                        // tempLookup[vendorAttr["AttrCode"]].addCritInput = arrAddCrit;
                       }
 
                       if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'MR_COUNTERPART_CATEGORY') {
@@ -184,14 +176,6 @@ export class FundingCompanyAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/lookup/lookupCounterpartCategory.json";
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = true;
-                        // var arrAddCrit = new Array();
-                        // var critAssetObj = new CriteriaObj();
-                        // critAssetObj.DataType = 'text';
-                        // critAssetObj.restriction = AdInsConstant.RestrictionEq;
-                        // critAssetObj.propName = 'LBPPMS_CNTRPRT_CODE';
-                        // critAssetObj.value = vendorAttr.AttrValue;
-                        // arrAddCrit.push(critAssetObj);
-                        // tempLookup[vendorAttr["AttrCode"]].addCritInput = arrAddCrit;
                       }
                   }
                   this.ListInputLookUpObj.push(tempLookup);
@@ -287,16 +271,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
                       if (vendorAttr["AttrInputType"] == 'T') {
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
-                      // else if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'BANK_CODE') {
-                      //   tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj();
-                      //   tempLookup[vendorAttr["AttrCode"]].urlJson = vendorAttr["AttrValue"];
-                      //   tempLookup[vendorAttr["AttrCode"]].pagingJson = vendorAttr["AttrValue"];
-                      //   tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
-                      //   tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
-                      //   tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                        
-                    
-                      // }
+             
                       else if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'BANK_CODE') {
                         tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                         tempLookup[vendorAttr["AttrCode"]].urlJson = vendorAttr["AttrValue"];
