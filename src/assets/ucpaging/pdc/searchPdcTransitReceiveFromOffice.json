@@ -12,7 +12,7 @@
             "isFromURL": true,
             "items": [],
             "url": "",
-            "path": "/RefOffice/GetListKvpActiveRefOffice",
+            "path": "/RefOffice/GetListKvpActiveRefOfficeTypeHOAndBranchWoCurrBranch",
             "itemsUrl": [],
             "environment": "FOU"
         },
