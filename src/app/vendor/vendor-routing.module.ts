@@ -39,6 +39,9 @@ import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/
 import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
 import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
+import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
+import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
+import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
 
 const routes: Routes = [
   {
@@ -310,6 +313,27 @@ const routes: Routes = [
           title: 'Vendor Collection Company Registration'
         },
       },
+      {
+        path: PathConstant.VENDOR_FUNDING_COY_PAGING,
+        component: FundingCompanyPagingComponent,
+        data: {
+          title: 'Funding Company Paging'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_FUNDING_COY_ADD_EDIT,
+        component: FundingCompanyAddEditComponent,
+        data: {
+          title: 'Funding Company Addedit'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_FUNDING_COY_VIEW,
+        component: FundingCompanyDetailComponent,
+        data: {
+          title: 'Funding Company View'
+        },
+      }
     ]
 
   }
