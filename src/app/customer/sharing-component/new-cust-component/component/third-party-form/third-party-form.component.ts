@@ -472,10 +472,11 @@ export class ThirdPartyFormComponent implements OnInit {
     let reqByIdAndCode: GenericObj = new GenericObj();
     reqByIdAndCode.Id = this.custObj.CustId;
     reqByIdAndCode.Code = this.thirdPartyTrxNo;
+    reqByIdAndCode.RowVersion = this.custObj.RowVersion;
 
     await this.http.post(this.UrlConstantNew.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
       response => {
-
+        this.custObj.RowVersion = response["RowVersion"]
       }
     )
   }
