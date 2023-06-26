@@ -180,7 +180,7 @@ export class PefindoViewContractsComponent implements OnInit {
     reqByTrxNo.TrxNo = this.TrxNo;
     await this.http.post(URLConstant.GetPefindoContracts, reqByTrxNo).toPromise().then(
       (response: {ReturnObject: Array<ResContractObj>}) => {
-        this.ResListContractsObj = response.ReturnObject;
+        this.ResListContractsObj = response.ReturnObject? response.ReturnObject : [];
         this.ResListContractsObj = this.ResListContractsObj.filter(x => x.ClientRole == 'MainDebtor');
         this.ResListContractsObj.forEach(x => {
           var idx = this.ResSummaryContractsObj.findIndex(y => y.Creditor == x.Creditor);
