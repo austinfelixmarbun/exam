@@ -334,6 +334,30 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.AdvancePaymentModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+  {
+    path: 'pdcview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcModule'
+      })
+        .then(m => m.PdcModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'pdcreceiveview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcReceiveModule'
+      })
+        .then(m => m.PdcReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  } 
 
 ];
