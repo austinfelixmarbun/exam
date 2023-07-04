@@ -142,7 +142,7 @@
                     "bodyList": [
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "BankName"
                         },
                         {
@@ -164,7 +164,7 @@
                         },
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "PdcIssueName"
                         },
                         {
@@ -191,7 +191,7 @@
                         },
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "City"
                         },
                         {

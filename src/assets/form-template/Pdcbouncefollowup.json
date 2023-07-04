@@ -80,7 +80,7 @@
                             "type": "sort",
                             "label": "Agreement No",
                             "position": "center",
-                            "name": "PA.AGRMNT_NO"
+                            "name": "CASE WHEN COUNT(PA.AGRMNT_NO) > 1 THEN 'MULTI AGREEMENT' ELSE (SELECT pa2.AGRMNT_NO FROM dbo.PDC_AGRMNT pa2 WITH(NOLOCK) WHERE pa2.PDC_ID = p.PDC_ID) END"
                         },
                         {
                             "type": "sort",
@@ -139,12 +139,12 @@
                     "bodyList": [
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "BankName"
                         },
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "BankBranch"
                         },
                         {
@@ -165,15 +165,49 @@
                             ]
                         },
                         {
-                            "type": "link",
+                            "type": "action",
                             "position": "center",
-                            "property": "AgrmntNo",
-                            "target": "_blank",
-                            "path": "/agrmntview/view",
-                            "param": [
+                            "action": [
                                 {
-                                    "type": "AgrmntNo",
-                                    "property": "AgrmntNo"
+                                    "type": "switch",
+                                    "case": [
+                                        {
+                                            "isHide": false,
+                                            "conditions": [
+                                                {
+                                                    "property": "AgrmntNo",
+                                                    "restriction": "EQ",
+                                                    "value": "MULTI AGREEMENT"
+                                                }
+                                            ],
+                                            "result": {
+                                                "property": "AgrmntNo",
+                                                "type": "text"
+                                            }
+                                        },
+                                        {
+                                            "isHide": false,
+                                            "conditions": [
+                                                {
+                                                    "property": "AgrmntNo",
+                                                    "restriction": "NEQ",
+                                                    "value": "MULTI AGREEMENT"
+                                                }
+                                            ],
+                                            "result": {
+                                                "property": "AgrmntNo",
+                                                "path": "/agrmntview/view",
+                                                "target": "_blank",
+                                                "type": "link",
+                                                "param": [
+                                                    {
+                                                        "type": "AgrmntNo",
+                                                        "property": "AgrmntNo"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -204,7 +238,7 @@
                         },
                         {
                             "type": "text",
-                            "position": "center",
+                            "position": "left",
                             "property": "City"
                         },
                         {

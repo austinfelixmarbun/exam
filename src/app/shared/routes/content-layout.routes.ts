@@ -324,6 +324,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'advancepayment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './advancepayment'
+      })
+        .then(m => m.AdvancePaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'pdcview',
     loadChildren: () => {
       return loadRemoteModule({
