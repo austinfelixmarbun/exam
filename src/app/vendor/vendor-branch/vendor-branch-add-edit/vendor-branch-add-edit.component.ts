@@ -28,8 +28,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-vendor-branch-add-edit',
-  templateUrl: './vendor-branch-add-edit.component.html',
-  providers: [/*NGXToastrService*/, RegexService]
+  templateUrl: './vendor-branch-add-edit.component.html'
 })
 export class VendorBranchAddEditComponent implements OnInit {
 
@@ -922,6 +921,12 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.Registration = "NOTARY REGISTRATION";
       this.Code = "Notary Code";
       this.Name = "Notary Name";
+    } 
+    else if(this.MrVendorCategoryCode == CommonConstant.CUSTODY)
+    {
+      this.Registration = "CUSTODY REGISTRATION";
+      this.Code = "Custody Code";
+      this.Name = "Custody Name";
     } 
     else if(this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY)
     {
