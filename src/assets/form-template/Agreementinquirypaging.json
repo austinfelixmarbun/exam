@@ -203,8 +203,8 @@
                         "id": "case when aassetassetNo is null then '-' else stuff((select ', ' + tempalserialNo3 from dboagrmntAsset tempaa with(nolock) join dboagrmnt tempa on tempaaagrmntId = tempaagrmntId left join dboassetLms tempal with(nolock) on tempalassetNo = tempaaassetNo where tempaagrmntId = aagrmntId for xml path('')), 1, 1, '') endSearchId",
                         "label": "License Plate No",
                         "name": "CASE WHEN AAsset.ASSET_NO IS NULL THEN '-' ELSE STUFF((SELECT ', ' + TEMPAL.SERIAL_NO_3 FROM dbo.AGRMNT_ASSET TEMPAA WITH(NOLOCK) JOIN dbo.AGRMNT TEMPA ON TEMPAA.AGRMNT_ID = TEMPA.AGRMNT_ID LEFT JOIN dbo.ASSET_LMS TEMPAL WITH(NOLOCK) ON TEMPAL.ASSET_NO = TEMPAA.ASSET_NO WHERE TEMPA.AGRMNT_ID = A.AGRMNT_ID FOR XML PATH('')), 1, 1, '') END",
-                        "placeholder": "",
-						"restriction": "like",
+                        "restriction": "like",
+						"placeholder": "",
                         "type": "textbox",
                         "value": ""
                         },
@@ -278,13 +278,13 @@
                         },
                         {
                         "label": "ASSET DESCRIPTION",
-                        "name": "CASE WHEN AAsset.CountAgrmntAsset > 1 THEN 'Multi Asset' ELSE CASE WHEN AAsset.CountAgrmntAsset IS NULL THEN N'-' ELSE ISNULL(AAsset.FULL_ASSET_NAME, '-') END",
+                        "name": "AssetName",
                         "position": "center",
                         "type": "sort"
                         },
                         {
                         "label": "LICENSE PLATE NO",
-                        "name": "ASE WHEN AAsset.CountAgrmntAsset > 1 THEN 'Multi License Plate No' ELSE CASE WHEN AAsset.CountAgrmntAsset IS NULL THEN N'-' ELSE ISNULL(AAsset.SERIAL_NO_3, '-') END",
+                        "name": "LicensePlate",
                         "position": "center",
                         "type": "sort"
                         }
