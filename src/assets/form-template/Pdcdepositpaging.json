@@ -24,7 +24,7 @@
                             "placeholder": "",
                             "datatype": "text",
                             "isFromURL": true,
-                            "ddlType": "all",
+                            "ddlType": "one",
                             "isEvent": false,
                             "environment": "FOU",
                             "path": "/v1/RefOffice/GetListKvpActiveRefOfficeForPaging",
