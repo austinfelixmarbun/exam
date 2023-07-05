@@ -261,6 +261,10 @@
                                         {
                                             "type": "PdcNo",
                                             "property": "PdcNo"
+                                        },
+                                        {
+                                            "type": "BankCode",
+                                            "property": "BankCode"
                                         }
                                     ],
                                     "path": "/bounce/follow-up/detail",
