@@ -373,10 +373,14 @@
                   </div>
                 </div>
               </div>
-              <lib-ucSubsection *ngIf="MrVendorCategoryCode=='ASSET_INSCO_BRANCH' || MrVendorCategoryCode=='VENDOR_CATEGORY_GENERAL' " [id]="'HOIdTwo'"
+              <lib-ucSubsection *ngIf="MrVendorCategoryCode=='ASSET_INSCO_BRANCH' || MrVendorCategoryCode=='VENDOR_CATEGORY_GENERAL' || MrVendorCategoryCode == 'CONSULTANT'
+              || MrVendorCategoryCode == 'LOGISTIC' || MrVendorCategoryCode == 'COURIER'
+              || MrVendorCategoryCode == 'IT_INFRA_SOLUTION'" [id]="'HOIdTwo'"
                 [title]="HoTitle + 'Info'" [panel]="'HOInformation2'">
               </lib-ucSubsection>
-              <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_BRANCH' || MrVendorCategoryCode=='VENDOR_CATEGORY_GENERAL'" id="HOInformation2">
+              <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_BRANCH' || MrVendorCategoryCode=='VENDOR_CATEGORY_GENERAL' || MrVendorCategoryCode == 'CONSULTANT'
+              || MrVendorCategoryCode == 'LOGISTIC' || MrVendorCategoryCode == 'COURIER'
+              || MrVendorCategoryCode == 'IT_INFRA_SOLUTION'" id="HOInformation2">
                 <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
                   <ng-container *ngFor="let attr of VendorAttrList">
                     <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">

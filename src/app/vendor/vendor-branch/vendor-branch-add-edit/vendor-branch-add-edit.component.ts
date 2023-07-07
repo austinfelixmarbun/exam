@@ -274,6 +274,12 @@ export class VendorBranchAddEditComponent implements OnInit {
           else {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
+            if(this.MrVendorCategoryCode === CommonConstant.VENDOR_CATEGORY_GENERAL || this.MrVendorCategoryCode === CommonConstant.CONSULTANT
+              || this.MrVendorCategoryCode === CommonConstant.LOGISTIC || this.MrVendorCategoryCode === CommonConstant.COURIER 
+              || this.MrVendorCategoryCode === CommonConstant.IT_INFRA_SOLUTION)
+            {
+              reqByAttrGroup.AttrGroup = CommonConstant.VENDOR_CATEGORY_GENERAL
+            }
             this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
@@ -914,7 +920,6 @@ export class VendorBranchAddEditComponent implements OnInit {
         });
     }
     else {
-
       this.http.post<GenericObj>(this.UrlConstantNew.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
