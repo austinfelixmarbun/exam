@@ -358,6 +358,18 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.PdcReceiveModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  },
+  {
+    path: 'pdctransitview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcTransitModule'
+      })
+        .then(m => m.PdcTransitModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   } 
 
 ];
