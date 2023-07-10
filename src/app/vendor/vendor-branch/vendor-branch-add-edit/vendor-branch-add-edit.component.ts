@@ -44,7 +44,7 @@ export class VendorBranchAddEditComponent implements OnInit {
   inputLookupATPMObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   inputLookupZipcodeObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
-  MrVendorCategoryCode: string;
+  MrVendorCategoryCode: string = CommonConstant.VENDOR_CATEGORY_GENERAL;
   MrVendorTypeCode: string;
   arrCrit: any;
   mode: string = "add";
@@ -177,12 +177,20 @@ export class VendorBranchAddEditComponent implements OnInit {
         this.VendorForm.get("IsVat").clearValidators();
         this.VendorForm.get("IsVat").updateValueAndValidity();
         break;
+      case CommonConstant.VENDOR_CATEGORY_GENERAL:
+        this.HoTitle = "Vendor ";
+        this.VendorForm.get("MrVendorCategoryCode").enable();
+        this.VendorForm.get("MrVendorCategoryCode").setValidators([Validators.required]);
+        this.VendorForm.get("MrVendorCategoryCode").updateValueAndValidity();
+        break;
     }
     this.GetGeneralSetting();
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
   async ngOnInit() {
+    console.log("Mashino");
+    console.log(this.MrVendorCategoryCode);
     this.SetTitleHoInfo();
     this.customPattern = new Array<CustomPatternObj>();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -266,6 +274,12 @@ export class VendorBranchAddEditComponent implements OnInit {
           else {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
+            if(this.MrVendorCategoryCode === CommonConstant.VENDOR_CATEGORY_GENERAL || this.MrVendorCategoryCode === CommonConstant.CONSULTANT
+              || this.MrVendorCategoryCode === CommonConstant.LOGISTIC || this.MrVendorCategoryCode === CommonConstant.COURIER 
+              || this.MrVendorCategoryCode === CommonConstant.IT_INFRA_SOLUTION)
+            {
+              reqByAttrGroup.AttrGroup = CommonConstant.VENDOR_CATEGORY_GENERAL
+            }
             this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
@@ -424,6 +438,12 @@ export class VendorBranchAddEditComponent implements OnInit {
     var refMasterCategoryObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeVendorCategory
     }
+    if(this.MrVendorCategoryCode === CommonConstant.VENDOR_CATEGORY_GENERAL || this.MrVendorCategoryCode === CommonConstant.CONSULTANT
+      || this.MrVendorCategoryCode === CommonConstant.LOGISTIC || this.MrVendorCategoryCode === CommonConstant.COURIER 
+      || this.MrVendorCategoryCode === CommonConstant.IT_INFRA_SOLUTION)
+    {
+      refMasterCategoryObj.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeVendorCategoryGeneral
+    }
     await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, refMasterCategoryObj).toPromise().then(
       (response) => {
         this.itemCategoryType = response[CommonConstant.ReturnObj];
@@ -431,6 +451,12 @@ export class VendorBranchAddEditComponent implements OnInit {
           if(this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
             this.VendorForm.patchValue({
               MrVendorCategoryCode: CommonConstant.NOTARY
+            });
+          }
+          else if (this.MrVendorCategoryCode == CommonConstant.VENDOR_CATEGORY_GENERAL)
+          {
+            this.VendorForm.patchValue({
+              MrVendorCategoryCode: this.itemCategoryType[0].Key
             });
           }
           else{
@@ -894,7 +920,6 @@ export class VendorBranchAddEditComponent implements OnInit {
         });
     }
     else {
-
       this.http.post<GenericObj>(this.UrlConstantNew.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
@@ -933,6 +958,12 @@ export class VendorBranchAddEditComponent implements OnInit {
       this.Registration = "AUCTION COMPANY REGISTRATION";
       this.Code = "Auction Company Code";
       this.Name = "Auction Company Name";
+    } 
+    else if(this.MrVendorCategoryCode == CommonConstant.VENDOR_CATEGORY_GENERAL)
+    {
+      this.Registration = "VENDOR REGISTRATION";
+      this.Code = "Vendor Code";
+      this.Name = "Vendor Name";
     } 
     else {
       this.Registration = "BRANCH REGISTRATION";

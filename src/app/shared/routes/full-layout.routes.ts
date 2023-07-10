@@ -162,7 +162,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   //#endregion
-
+ 
   //#region ARMNT
   {
     path: 'nonaccrual',
@@ -529,6 +529,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './PdcTransitModule'
       })
         .then(m => m.PdcTransitModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'custody',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcCustodyModule'
+      })
+        .then(m => m.PdcCustodyModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
