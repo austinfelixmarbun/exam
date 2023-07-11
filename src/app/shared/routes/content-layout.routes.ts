@@ -324,6 +324,30 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'advancepayment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './advancepayment'
+      })
+        .then(m => m.AdvancePaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'changeduedateview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './ChangeDueDateModule'
+      })
+        .then(m => m.ChangeDueDateModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'pdcview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -344,6 +368,18 @@ export const CONTENT_ROUTES: Routes = [
         exposedModule: './PdcReceiveModule'
       })
         .then(m => m.PdcReceiveModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'pdctransitview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.pdcR3Web + '/remoteEntry.js',
+        exposedModule: './PdcTransitModule'
+      })
+        .then(m => m.PdcTransitModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   } 
