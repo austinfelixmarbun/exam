@@ -74,7 +74,7 @@
                 </div>
               </div>
               <!-- BANK NAME  -->
-              <div class="form-group row" *ngIf="attr.AttrInputType == 'LU'" [formGroupName]="attr.AttrCode">
+              <div class="form-group row" *ngIf="attr.AttrInputType == 'LU'  && attr.AttrCode == 'BANK_CODE'" [formGroupName]="attr.AttrCode">
                 <label class="col-md-3 col-form-label adins-required-label">{{attr.AttrName}}</label>
                 <div class="col-md-4">
                   <lib-uclookupgeneric [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]" [parentForm]="FormUtama"
