@@ -406,5 +406,80 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.JournalModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+
+  //#region AMS
+  {
+    path: 'assetdocumentview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.assetdocR3Web + '/remoteEntry.js',
+        exposedModule: './AssetDocModule'
+      })
+        .then(m => m.AssetDocumentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'insuranceview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.insuranceR3Web + '/remoteEntry.js',
+        exposedModule: './InsuranceModule'
+      })
+        .then(m => m.InsuranceModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'filingmanagementview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.filingR3Web + '/remoteEntry.js',
+        exposedModule: './FilingModule'
+      })
+        .then(m => m.FilingManagementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.assetR3Web + '/remoteEntry.js',
+        exposedModule: './AssetViewModule'
+      })
+        .then(m => m.ViewModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'assetmanagementview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.assetR3Web + '/remoteEntry.js',
+        exposedModule: './AssetModule'
+      })
+        .then(m => m.AssetManagementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'assetdisposalview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.storageR3Web + '/remoteEntry.js',
+        exposedModule: './StorageModule'
+      })
+        .then(m => m.AssetDisposalModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
 ];
