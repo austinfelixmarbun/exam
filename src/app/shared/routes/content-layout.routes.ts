@@ -20,6 +20,10 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => import('app/document-management/document-management.module').then(m => m.DocumentManagementModule)
   },
   {
+    path: PathConstant.JOURNAL_RESULT_VIEW,
+    loadChildren: () => import('app/journal/journal.module').then(m => m.JournalModule)
+  },
+  {
     path: 'agrmntview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -392,18 +396,6 @@ export const CONTENT_ROUTES: Routes = [
         exposedModule: './AssetDocModule'
       })
         .then(m => m.AssetDocumentModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
-  {
-    path: 'journalview',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.FoundationR3Web + '/remoteEntry.js',
-        exposedModule: './AssetDocModule'
-      })
-        .then(m => m.JournalModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
