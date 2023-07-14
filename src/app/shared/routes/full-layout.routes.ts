@@ -599,27 +599,15 @@ export const Full_ROUTES: Routes = [
 
   //#region AMS
 
-  // {
-  //   path: 'assetdocument',
-  //   loadChildren: () => {
-  //     return loadRemoteModule({
-  //       type: 'module',
-  //       remoteEntry: envi.assetdocR3Web + '/remoteEntry.js',
-  //       exposedModule: './AssetDocModule'
-  //     })
-  //       .then(m => m.AssetDocumentModule)
-  //       .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-  //   }
-  // },
   {
-    path: 'assetdocument/borrow',
+    path: 'assetdocument',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.assetdocR3Web + '/remoteEntry.js',
-        exposedModule: './AssetDocumentBorrowModule'
+        exposedModule: './AssetDocModule'
       })
-        .then(m => m.AssetDocumentBorrowModule)
+        .then(m => m.AssetDocumentModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
