@@ -382,6 +382,17 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.PdcTransitModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  } 
-
+  },
+  {
+    path: 'assetdocumentview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.assetdocR3Web + '/remoteEntry.js',
+        exposedModule: './AssetDocModule'
+      })
+        .then(m => m.AssetDocumentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  }
 ];
