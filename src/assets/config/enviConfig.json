@@ -11,7 +11,6 @@
     "FoundationR3Web": "https://r3web-server.ad-ins.com/FOUNDATION_DEV",
     "losR3Web": "http://r3web-server.ad-ins.com/LOSR3",
     "cmsR3Web": "https://r3web-server.ad-ins.com/CMS_DEV",
-    "amsR3Web": "https://r3web-server.ad-ins.com/AMS",
     "lmsR3Web": "https://r3web-server.ad-ins.com/LMS",
     "arR3Web": "https://r3web-server.ad-ins.com/LMSAR",
     "armntR3Web": "https://r3web-server.ad-ins.com/LMSARMNT",
@@ -30,6 +29,12 @@
     "WFThingsToDoUrl": "https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/",
     "IseUseNotification": "1",
     "PagesURL": "http://rnd-server-2.ad-ins.com:88/",
-    "PDCUrl": "https://r3app-server.ad-ins.com/PDC"
-
+    "PDCUrl": "https://r3app-server.ad-ins.com/PDC",
+    "amsR3Web": "https://r3web-server.ad-ins.com/AMS",
+    "assetR3Web": "https://r3web-server.ad-ins.com/AMS_ASSET",
+    "assetdocR3Web": "https://r3web-server.ad-ins.com/AMS_ASSETDOC",
+    "insuranceR3Web": "https://r3web-server.ad-ins.com/AMS_INSURANCE",
+    "assetpricingR3Web": "https://r3web-server.ad-ins.com/AMS_ASSETPRICING",
+    "filingR3Web": "https://r3web-server.ad-ins.com/AMS_FILING",
+    "storageR3Web": "https://r3web-server.ad-ins.com/AMS_STORAGE"
 }
