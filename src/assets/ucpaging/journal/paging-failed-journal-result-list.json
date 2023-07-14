@@ -207,7 +207,7 @@
             "position": "center",
             "property": "Detail",
             "target": "_blank",
-            "path": "/journal/journalresult",
+            "path": "/journalview/journalresult",
             "param": [
                 {
                     "type": "JrMsgHId",

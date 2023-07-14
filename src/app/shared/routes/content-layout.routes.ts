@@ -394,5 +394,17 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.AssetDocumentModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  },
+  {
+    path: 'journalview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.FoundationR3Web + '/remoteEntry.js',
+        exposedModule: './AssetDocModule'
+      })
+        .then(m => m.JournalModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   }
 ];
