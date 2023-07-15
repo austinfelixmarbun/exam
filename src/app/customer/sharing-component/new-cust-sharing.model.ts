@@ -40,6 +40,9 @@ import { AsliRiReqConfirmationComponent } from './new-cust-component/component/t
 import { AsliRiReqHeaderComponent } from './new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req-header.component';
 import { AsliRiViewComponent } from './new-cust-component/component/third-party-form/asli-ri/view/asli-ri-view/asli-ri-view.component';
 import { CustomerViewAsliRiModule } from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.module';
+import { CustomerViewCbasSlikModule } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.module';
+import { CbasSlikViewComponent } from './new-cust-component/component/third-party-form/cbas-slik/cbas-slik-view.component';
+import { CbasSlikReqHeaderComponent } from './new-cust-component/component/third-party-form/cbas-slik/cbas-slik-req-header.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -79,7 +82,9 @@ export const customCurrencyMaskConfig = {
         AsliRiReqHeaderComponent,
         AsliRiReqComponent,
         AsliRiReqConfirmationComponent,
-        AsliRiViewComponent
+        AsliRiViewComponent,
+        CbasSlikReqHeaderComponent,
+        CbasSlikViewComponent
     ],
     imports: [
         CommonModule,
@@ -94,7 +99,8 @@ export const customCurrencyMaskConfig = {
         NgMultiSelectDropDownModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         CustomerViewTrustingSocialModule,
-        CustomerViewAsliRiModule
+        CustomerViewAsliRiModule,
+        CustomerViewCbasSlikModule
     ],
     declarations: [
         NewCustPersonalMainDataComponent,
@@ -120,7 +126,9 @@ export const customCurrencyMaskConfig = {
         AsliRiReqHeaderComponent,
         AsliRiReqComponent,
         AsliRiReqConfirmationComponent,
-        AsliRiViewComponent
+        AsliRiViewComponent,
+        CbasSlikReqHeaderComponent,
+        CbasSlikViewComponent
     ],
     providers: [
         NGXToastrService,
@@ -128,7 +136,7 @@ export const customCurrencyMaskConfig = {
         NewCustSetData,
         ThirdPartyUploadService
     ],
-    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent,AsliRiReqHeaderComponent, AsliRiReqComponent, AsliRiReqConfirmationComponent, AsliRiViewComponent]
+    entryComponents: [TrustingSocialReqHeaderComponent, TrustingSocialViewHeaderComponent, PefindoReqComponent,AsliRiReqHeaderComponent, AsliRiReqComponent, AsliRiReqConfirmationComponent, AsliRiViewComponent, CbasSlikViewComponent]
 })
 export class NewCustomerSharingModule {
     constructor() {

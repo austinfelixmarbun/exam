@@ -39,6 +39,7 @@ export class CustomerViewComponent implements OnInit {
   IsUseDigitalization: boolean = false;
   IsUseTs: boolean = false;
   IsUseAsliRi: boolean = false;
+  IsUseCbasSlik: Boolean = false;
   listIframe: Array<ResCustListIframeViewObj> = new Array<ResCustListIframeViewObj>();
 
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
@@ -136,9 +137,11 @@ export class CustomerViewComponent implements OnInit {
 
       if (this.IsUseDigitalization && this.IsUseTs) this.dictIdxAt["TrustSocial"] = ++idxAt;
       if (this.IsUseDigitalization && this.IsUseAsliRi) this.dictIdxAt["AsliRi"] = ++idxAt;
+      if (this.IsUseDigitalization && this.IsUseCbasSlik) this.dictIdxAt["CbasSlik"] = ++idxAt;
     } else {
       if (this.IsUseDigitalization) this.dictIdxAt["TrustSocial"] = ++idxAt;
       if (this.IsUseDigitalization && this.IsUseAsliRi) this.dictIdxAt["AsliRi"] = ++idxAt;
+      if (this.IsUseDigitalization && this.IsUseCbasSlik) this.dictIdxAt["CbasSlik"] = ++idxAt;
     }
     if (this.IsIframe) {
       let totalListIframe: number = this.listIframe.length;
@@ -204,6 +207,7 @@ export class CustomerViewComponent implements OnInit {
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
         else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_CUST_ASLI_RI;
+        else if(ev == this.dictIdxAt["CbasSlik"]) linkUrl = NavigationConstant.VIEW_CUST_CBAS_SLIK;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
@@ -240,6 +244,7 @@ export class CustomerViewComponent implements OnInit {
         if(ev == this.dictIdxAt["DMS"]) linkUrl = NavigationConstant.VIEW_CUST_DOC;
         else if(ev == this.dictIdxAt["TrustSocial"]) linkUrl = NavigationConstant.VIEW_CUST_TRUSTING_SOCIAL;
         else if(ev == this.dictIdxAt["AsliRi"]) linkUrl = NavigationConstant.VIEW_CUST_ASLI_RI;
+        else if(ev == this.dictIdxAt["CbasSlik"]) linkUrl = NavigationConstant.VIEW_CUST_CBAS_SLIK;
         else if(ev == this.dictIdxAt["OTH"]) linkUrl = NavigationConstant.VIEW_CUST_OTH_INFO;
       }
     }
@@ -283,5 +288,11 @@ export class CustomerViewComponent implements OnInit {
           this.IsUseAsliRi = true;
         }
       });
+
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeCbasSlik }).toPromise().then(
+      (response) => {
+        if(response.ConfigValue == "1") this.IsUseCbasSlik = true;
+      }
+    );
   }
 }

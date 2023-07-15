@@ -49,6 +49,10 @@
 								<mat-tab label="Asli Ri">
 								</mat-tab>
 							</div>
+							<div *ngIf="IsUseDigitalization && IsUseCbasSlik">
+								<mat-tab label="CBAS SLIK">
+								</mat-tab>
+							</div>
 							<div *ngIf="IsIframe">
 								<mat-tab *ngFor="let iframe of listIframe" [label]="iframe.Title">
 									<app-customer-view-iframe-generic [inputObj]="custResultData" [iframeObj]="iframe">
@@ -90,6 +94,10 @@
 							</div>
 							<div *ngIf="IsUseDigitalization && IsUseAsliRi">
 								<mat-tab label="Asli Ri">
+								</mat-tab>
+							</div>
+							<div *ngIf="IsUseDigitalization && IsUseCbasSlik">
+								<mat-tab label="CBAS SLIK">
 								</mat-tab>
 							</div>
 							<div *ngIf="IsIframe">

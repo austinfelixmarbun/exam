@@ -470,6 +470,7 @@ export class CommonConstant {
     public static DigitalizationSvcTypeTrustingSocial = "TS";
     public static DigitalizationSvcTypePefindo = "PEFINDO";
     public static SvcTypeAsliRi = "IS_USE_ASLIRI";
+    public static SvcTypeCbasSlik = "IS_USE_CBAS_SLIK";
 
     public static NegCustTypeGood = "GOOD";
     public static NegCustTypeBad = "BAD";

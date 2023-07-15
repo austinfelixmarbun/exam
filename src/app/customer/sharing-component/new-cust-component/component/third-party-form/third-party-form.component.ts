@@ -31,6 +31,8 @@ import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 import { AsliRiReqComponent } from './asli-ri/request/asli-ri-req/asli-ri-req.component';
 import { AsliRiReqHeaderComponent } from './asli-ri/request/asli-ri-req-header.component';
 import { AsliRiViewComponent } from './asli-ri/view/asli-ri-view/asli-ri-view.component';
+import { CbasSlikViewComponent } from './cbas-slik/cbas-slik-view.component';
+import { CbasSlikReqHeaderComponent } from './cbas-slik/cbas-slik-req-header.component';
 
 @Component({
   selector: 'app-third-party-form',
@@ -62,6 +64,7 @@ export class ThirdPartyFormComponent implements OnInit {
   IsUseTs: Boolean = false;
   IsUsePefindo: Boolean = false;
   IsUseAsliRI: Boolean = false;
+  IsUseCbasSlik: Boolean = false;
   ListDocumentKeyValueObj: Array<KeyValueObj> = new Array<KeyValueObj>();
   SpouseIdCode : string = "";
 
@@ -132,6 +135,12 @@ export class ThirdPartyFormComponent implements OnInit {
           this.IsUseAsliRI = true;
         }
       });
+
+    await this.http.post<ResSysConfigResultObj>(this.UrlConstantNew.GetSysConfigPncplResultByCode, { Code: CommonConstant.SvcTypeCbasSlik }).toPromise().then(
+      (response) => {
+        if(response.ConfigValue == "1") this.IsUseCbasSlik = true;
+      }
+    );
   }
 
   async getListDocumentToBeUpload() {
@@ -356,6 +365,29 @@ export class ThirdPartyFormComponent implements OnInit {
     modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
     modalRef.componentInstance.custObj.MrCustTypeCode = this.MrCustTypeCode;
   }
+
+  CbasSlikTrxNo: string = "";
+  async ReqCbasSlik()
+  {
+    this.markFormGroupTouched(this.parentForm);
+    if (!this.parentForm.valid) return;
+    
+    const modalRef = this.modalService.open(CbasSlikReqHeaderComponent);
+    modalRef.componentInstance.ParentForm = this.parentForm;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
+    modalRef.componentInstance.SubmitReqTrxNo.subscribe((trxNo) => {
+      this.CbasSlikTrxNo = trxNo
+      alert(this.CbasSlikTrxNo)
+    })
+  }
+
+  async ViewCbasSlik()
+  {
+    const modalRef = this.modalService.open(CbasSlikViewComponent); 
+    modalRef.componentInstance.ParentForm = this.parentForm;
+    modalRef.componentInstance.InputTrxNo = this.CbasSlikTrxNo;
+  }
+
 
   async checkThirdPartyTrxNo() {
     if (this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == "") {
