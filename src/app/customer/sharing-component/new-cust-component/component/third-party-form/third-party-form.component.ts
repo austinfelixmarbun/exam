@@ -377,7 +377,6 @@ export class ThirdPartyFormComponent implements OnInit {
     modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
     modalRef.componentInstance.SubmitReqTrxNo.subscribe((trxNo) => {
       this.CbasSlikTrxNo = trxNo
-      alert(this.CbasSlikTrxNo)
     })
   }
 
