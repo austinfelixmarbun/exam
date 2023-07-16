@@ -75,6 +75,8 @@ export class PefindoViewComponent implements OnInit {
       this.ListActive[0] = true;
       this.isReady = true;
     }
+    await this.checkTrxSrcStat();
+    if (this.IsTrxStatRequest) return;
 
     this.redirectTab(0);
   }
@@ -183,11 +185,31 @@ export class PefindoViewComponent implements OnInit {
     this.ListActive[numPrev] = false;
     this.ListActive[numNext] = true;
 
+    await this.checkTrxSrcStat();
+    if (this.IsTrxStatRequest) return;
+
     await this.redirectTab(0);
 
     setTimeout (() => {
       this.isReady = true
     }, 50);
+  }
+
+  IsTrxStatRequest : boolean = false;
+  IsTrxStatInProgress : boolean = false;
+  async checkTrxSrcStat()
+  {
+    this.isReady = false;
+    await this.http.post(this.UrlConstantNew.GetPefindoTrxSrcData, {TrxNo: this.Param}).toPromise().then(
+      (response: object) => {
+        this.IsTrxStatRequest = (response && response['ReferenceNo'] && response['TrxStat'] && response['TrxStat'] == CommonConstant.PEFINDO_TRX_SRC_DATA_STAT_REQ)
+        this.IsTrxStatInProgress = (response && response['ReferenceNo'] && response['TrxStat'] && response['TrxStat'] == CommonConstant.PEFINDO_TRX_SRC_DATA_STAT_INP)
+        this.isReady = true;
+      }
+    )
+    if(this.IsTrxStatRequest)setTimeout(() => {
+      this.ChangeTab(this.Param, this.MrCustTypeCode)
+    }, 10000);
   }
 
 }

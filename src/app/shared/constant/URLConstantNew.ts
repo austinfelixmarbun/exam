@@ -1166,6 +1166,7 @@ export class UrlConstantNew{
     public GetViewSubjectInfoAllHistory = this.env.FoundationR3Url + this.url.GetViewSubjectInfoAllHistory;
     public GetPefindoMultiResultByGroupTrxNo = this.env.FoundationR3Url + this.url.GetPefindoMultiResultByGroupTrxNo;
     public AddTrxSrcDataForPefindoMultiResult = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoMultiResult;
+    public GetPefindoTrxSrcData = this.env.FoundationR3Url + this.url.GetPefindoTrxSrcData;
 
     // THINGS TO DO
     public GetThingsToDoByRole = this.env.FoundationR3Url + this.url.GetThingsToDoByRole;

@@ -524,4 +524,9 @@ export class CommonConstant {
 
     //Highlight Comment
     public static HIGHLIGHT_COMMENT = "HighlightComment";
+    
+    //Pefindo
+    public static PEFINDO_TRX_SRC_DATA_STAT_REQ = "REQ";
+    public static PEFINDO_TRX_SRC_DATA_STAT_INP = "INP";
+    
 }

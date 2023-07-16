@@ -968,5 +968,6 @@
     "GetViewSubjectInfoAllHistory" : "/v1/Pefindo/GetViewSubjectInfoAllHistory",
     "GetPefindoMultiResultByGroupTrxNo" : "/v1/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo",
     "AddTrxSrcDataForPefindoMultiResult" : "/v1/Digitalization/AddTrxSrcDataForPefindoMultiResult",
+    "GetPefindoTrxSrcData" : "/v1/Pefindo/GetPefindoTrxSrcData",
     "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
 }
