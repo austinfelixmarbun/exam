@@ -193,10 +193,6 @@
                                 {
                                     "type": "TransactionNo",
                                     "property": "TrxNo"
-                                },
-                                {
-                                    "type": "AgrmntNo",
-                                    "property": "AgrmntNo"
                                 }
                             ]
                         },
