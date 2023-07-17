@@ -153,9 +153,9 @@ form label {
 }
 
 .mat-dialog-container {
-    background-color: #BD362F;
-    color: #FFFFFF;
-}
+    background-color: rgb(255, 255, 255) !important;
+    color: #212121 !important;
+  }
 
 .header-page {
     background-color: white !important;

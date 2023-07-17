@@ -72,6 +72,7 @@ import { FundingCompanyContactPersonComponent } from './funding-company/funding-
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
 import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { RegexService } from 'app/customer/regex.service';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -166,7 +167,8 @@ export const customCurrencyMaskConfig = {
     ],
     providers: [
         VendorService,
-        NGXToastrService
+        NGXToastrService,
+        RegexService
     ]
 })
 export class VendorModule { }

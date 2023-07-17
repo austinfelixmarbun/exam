@@ -21,7 +21,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-holding-add-edit',
   templateUrl: './vendor-holding-add-edit.component.html',
-  providers: [VendorService, NGXToastrService]
+  providers: [VendorService]
 })
 export class VendorHoldingAddEditComponent implements OnInit {
   itemCategoryType: any;

@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-district-add-edit',
   templateUrl: './district-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class DistrictAddEditComponent implements OnInit {
 

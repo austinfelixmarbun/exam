@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-reason-add-edit',
   templateUrl: './reason-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class ReasonAddEditComponent implements OnInit {
 

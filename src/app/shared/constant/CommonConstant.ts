@@ -88,6 +88,14 @@ export class CommonConstant {
     public static AUCTION_COMPANY = "AUCTION_COMPANY";
     public static NOTARY_PERSONAL = "NOTARY_PERSONAL";
     public static NOTARY = "NOTARY";
+    public static CUSTODY = "CUSTODY";
+    public static CUSTODY_COMPANY = "CUSTODY_COMPANY";
+    public static CUSTODY_PERSONAL = "CUSTODY_PERSONAL";
+    public static VENDOR_CATEGORY_GENERAL = "VENDOR_CATEGORY_GENERAL";
+    public static CONSULTANT = "CONSULTANT";
+    public static LOGISTIC = "LOGISTIC";
+    public static COURIER = "COURIER";
+    public static IT_INFRA_SOLUTION = "IT_INFRA_SOLUTION";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
     public static TITLE_SUPPLIER_BRANCH = "Supplier";
@@ -207,7 +215,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeAppSrcType = "APP_SRC_TYPE";
     public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
     public static RefMasterTypeCodeVendorCollCompanyPosition = "VENDOR_COLL_COMPANY_POSITION";
-
+    public static RefMasterTypeCodeVendorCategoryGeneral = "VENDOR_CATEGORY_GENERAL";
+    
     //MASTER CODE
     public static MasterCodeCustDocTypeSpouseId = "APGEN03";
 

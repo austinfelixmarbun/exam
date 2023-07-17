@@ -67,8 +67,10 @@ import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
-import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
-import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
+import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
+import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
+import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
 
 const routes: Routes = [
   {
@@ -540,20 +542,36 @@ const routes: Routes = [
           title: 'Tax Office Paging'
         },
       },
-
-      //REF INS CLAIM DOC
+      
+      //REF AMRTZ ITEM
       {
-        path: PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL,
-        component: RefInsClaimDocAddEditComponent,
+        path: PathConstant.CS_REF_AMRTZ_ITEM_DETAIL,
+        component: RefAmrtzAddEditComponent,
         data: {
-          title: 'Insurance Claim Document Detail'
+          title: 'Ref Amortize Detail'
         },
       },
       {
-        path: PathConstant.CS_REF_INS_CLAIM_DOC_PAGING,
-        component: RefInsClaimDocPagingComponent,
+        path: PathConstant.CS_REF_AMRTZ_ITEM_PAGING,
+        component: RefAmrtzItemPagingComponent,
         data: {
-          title: 'Insurance Claim Document Paging'
+          title: 'Ref Amortize Paging'
+        },
+      },
+      
+      //REF TRX TYPE
+      {
+        path: PathConstant.CS_REF_TRX_TYPE_PAGING,
+        component: RefTrxTypePagingComponent,
+        data: {
+          title: 'Ref Trx Type Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_TRX_TYPE_DETAIL,
+        component: RefTrxTypeDetailComponent,
+        data: {
+          title: 'Ref Trx Type Detail'
         },
       },
     ]

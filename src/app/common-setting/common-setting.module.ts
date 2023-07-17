@@ -86,8 +86,12 @@ import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
-import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
-import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
+import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
+import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
+import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
+import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
+import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -124,6 +128,7 @@ export const customCurrencyMaskConfig = {
     AdInsModule,
     SharedModule,
     AdInsSharedModule,
+    UcTemplateModule,
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
   ],
   declarations: [
@@ -193,11 +198,13 @@ export const customCurrencyMaskConfig = {
     RefTcAddEditComponent,
     TaxOfficeDetailComponent,
     TaxOfficePagingComponent,
-    RefInsClaimDocPagingComponent,
-    RefInsClaimDocAddEditComponent
+    RefAmrtzAddEditComponent,
+    RefAmrtzItemPagingComponent,
+    RefTrxTypePagingComponent,
+    RefTrxTypeDetailComponent
   ],
   providers: [
-    NGXToastrService
+    { provide: UcTemplateService, useClass: AdinsTemplateService }
   ]
 })
 export class CommonSettingModule { }

@@ -10,7 +10,7 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es2020",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -19,10 +19,10 @@
       "dom",
       "ES2021.String"
     ],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "angularCompilerOptions": {
-    "preserveWhitespaces": false,    
+    "preserveWhitespaces": false,
     "enableIvy": true
   }
 }

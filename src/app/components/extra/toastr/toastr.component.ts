@@ -4,7 +4,7 @@ import { NGXToastrService } from './toastr.service'
     selector: 'app-toastr',
     templateUrl: './toastr.component.html',
     styleUrls: ['./toastr.component.scss'],
-    providers: [NGXToastrService]
+   // providers: [NGXToastrService]
 })
 
 export class ToastrComponent {

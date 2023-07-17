@@ -16,7 +16,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-zipcode-member-add',
   templateUrl: './office-zipcode-member-add.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberAddComponent implements OnInit {
   //** Start UC Search **//

@@ -131,7 +131,7 @@ export const customCurrencyMaskConfig = {
         CbasSlikViewComponent
     ],
     providers: [
-        NGXToastrService,
+        // NGXToastrService,
         RegexService,
         NewCustSetData,
         ThirdPartyUploadService

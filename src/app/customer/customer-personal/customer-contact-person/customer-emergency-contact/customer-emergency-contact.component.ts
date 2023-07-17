@@ -32,7 +32,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-customer-emergency-contact',
   templateUrl: './customer-emergency-contact.component.html',
   styles: [],
-  providers: [NGXToastrService, RegexService],
+  providers: [ RegexService],
 })
 export class CustomerEmergencyContactComponent implements OnInit {
   @Output() outputTab: EventEmitter<any> = new EventEmitter();

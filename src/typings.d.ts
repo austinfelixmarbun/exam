@@ -7,3 +7,4 @@ declare module 'leaflet';
 declare module 'perfect-scrollbar';
 declare module 'screenfull';
 declare module 'd3-shape';
+declare module 'module-fou/Module'

@@ -191,9 +191,12 @@ export class PathConstant {
     public static CS_REF_TAX_OFFICE = "TaxOffice";
     public static CS_REF_TAX_OFFICE_PAGING = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
     public static CS_REF_TAX_OFFICE_DETAIL = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
-    public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
-    public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
-    public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
+    public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
+    public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
+    public static CS_REF_AMRTZ_ITEM_DETAIL = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.DETAIL;
+    public static CS_REF_TRX_TYPE = "RefTrxType";
+    public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
+    public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
@@ -488,6 +491,7 @@ export class PathConstant {
      //#region JOURNAL
     public static JOURNAL_MEDIA = "journalmedia";
     public static JOURNAL_RESULT = "journalresult";
+    public static JOURNAL_RESULT_VIEW = "journalview";
     public static HEADER = "header";
     public static FACT = "fact";
     public static ITEM_VALUE = "itemvalue";

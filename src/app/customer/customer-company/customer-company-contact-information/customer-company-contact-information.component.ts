@@ -27,7 +27,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-customer-company-contact-information',
   templateUrl: './customer-company-contact-information.component.html',
   styleUrls: [],
-  providers: [NGXToastrService, RegexService],
+  providers: [ RegexService],
 })
 export class CustomerCompanyContactInformationComponent implements OnInit {
   @Input() custCompanyId: number;

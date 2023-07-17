@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-ref-industry-type-detail',
   templateUrl: './ref-industry-type-detail.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class RefIndustryTypeDetailComponent implements OnInit {
   refIndustryType: RefIndustryTypeObj;

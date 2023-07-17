@@ -25,7 +25,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
   styleUrls: [],
-  providers: [NGXToastrService],
+ // providers: [NGXToastrService],
 })
 export class CustomerPersonalPageComponent implements OnInit {
   private stepper: Stepper;

@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'add-zipcode',
   templateUrl: './add-zipcode.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class ZipcodeAddComponent implements OnInit {
   pageType: string = "add";
