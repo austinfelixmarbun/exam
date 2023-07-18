@@ -15,7 +15,7 @@ import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
 import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
@@ -46,6 +46,7 @@ import { NotFoundComponent } from './not-found-page/not-found.component';
 import { UcTemplateService } from '@adins/uctemplate';
 import { AdinsTemplateService } from './shared/services/adins-template.service';
 import { UcformModule } from '@adins/ucform';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -95,6 +96,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         }),
         CookieModule.forRoot(),
         MatDialogModule,
+        MatTabsModule,
         BrowserAnimationsModule,
         ClipboardModule,
         FormsModule,
@@ -111,6 +113,8 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
         AuthService,
         AuthGuard,
         RolePickService,

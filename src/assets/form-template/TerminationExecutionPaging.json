@@ -1,0 +1,300 @@
+{
+    "title": "Termination Execution Paging",
+    "hideTitle": false,
+    "id": "TerminationExecutionPaging",
+    "addButton": false,
+    "addLink": "",
+    "pathOption": "",
+    "backButton": false,
+    "component": [
+        {
+            "paging": {
+                "environment": "PayoutUrl",
+                "apiVersion": "v1",
+                "pagingInput": {
+                    "title": "Termination Execution Paging",
+                    "sectionTitle": "",
+                    "querystring": {
+                        "name": "searchTerminationExecPaging"
+                    },
+                    "exportExcel": false,
+                    "component": [
+                        {
+                            "id": "vtvendorCodeSearchId",
+                            "type": "dropdown",
+                            "label": "Funding Company Name",
+                            "name": "VT.VENDOR_CODE",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": true,
+                            "ddlType": "all",
+                            "isEvent": false,
+                            "environment": "FACILITYMNT",
+                            "path": "/VendorTms/GetAllVendorTms",
+                            "criteriaPropName": "",
+                            "criteriaPropValue": "",
+                            "isQueryIn": false
+                        },
+                        {
+                            "id": "jcjfContractNoSearchId",
+                            "type": "dropdown",
+                            "label": "Funding Contract Name",
+                            "name": "JC.JF_CONTRACT_NO",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": true,
+                            "ddlType": "all",
+                            "isEvent": false,
+                            "environment": "FACILITYMNT",
+                            "path": "/JfContract/GetListAllKeyAndValueJfContract",
+                            "criteriaPropName": "",
+                            "criteriaPropValue": "",
+                            "isQueryIn": false
+                        },
+                        {
+                            "id": "trxnoSearchId",
+                            "type": "textbox",
+                            "label": "Termination Batch No",
+                            "name": "TrxNo",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text"
+                        },
+                        {
+                            "id": "htrxDtSearchId",
+                            "type": "datepicker",
+                            "label": "Batch Prepare Date From >=",
+                            "name": "H.TRX_DT",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "date",
+                            "restriction": "gte",
+                            "useDefVal": false
+                        },
+                        {
+                            "id": "htrxDtSearchId",
+                            "type": "datepicker",
+                            "label": "Batch Prepare Date To <=",
+                            "name": "H.TRX_DT",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "date",
+                            "restriction": "lte",
+                            "useDefVal": false
+                        },
+                        {
+                            "id": "trxstatSearchId",
+                            "type": "dropdown",
+                            "label": "Termination Batch Status",
+                            "name": "TrxStat",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": false,
+                            "ddlType": "all",
+                            "isEvent": false,
+                            "items": [
+                                {
+                                    "key": "NEW",
+                                    "value": "NEW"
+                                },
+                                {
+                                    "key": "GNR",
+                                    "value": "GNR"
+                                },
+                                {
+                                    "key": "RDY",
+                                    "value": "RDY"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "terminationtypeSearchId",
+                            "type": "dropdown",
+                            "label": "Batch Type",
+                            "name": "TerminationType",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": false,
+                            "ddlType": "all",
+                            "isEvent": false,
+                            "items": [
+                                {
+                                    "key": "ET",
+                                    "value": "Early Termination"
+                                },
+                                {
+                                    "key": "BB",
+                                    "value": "Buy Back"
+                                }
+                            ]
+                        }
+                    ],
+                    "headerList": [
+                        {
+                            "type": "sort",
+                            "label": "Funding Company Name",
+                            "position": "center",
+                            "name": "VT.VENDOR_NAME"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Funding Contract Name",
+                            "position": "center",
+                            "name": "JC.JF_CONTRACT_NO"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Termination Batch No",
+                            "position": "center",
+                            "name": "TrxNo"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Prepare Date",
+                            "position": "center",
+                            "name": "H.TRX_DT"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Termination Batch Status",
+                            "position": "center",
+                            "name": "TrxStat"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Type",
+                            "position": "center",
+                            "name": "TerminationType"
+                        },
+                        {
+                            "type": "label",
+                            "label": "action",
+                            "position": "center"
+                        },
+                        {
+                            "type": "label",
+                            "label": "Generate Textfile",
+                            "position": "center"
+                        }
+                    ],
+                    "bodyList": [
+                        {
+                            "type": "link",
+                            "position": "center",
+                            "property": "FundCoyName",
+                            "target": "_blank",
+                            "path": "/Vendor/FundingCompany/View",
+                            "param": [
+                                {
+                                    "type": "FundCoyCode",
+                                    "property": "FundCoyCode"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "link",
+                            "position": "center",
+                            "property": "JfContractName",
+                            "target": "_blank",
+                            "path": "/View/FundingContract/View",
+                            "param": [
+                                {
+                                    "type": "JfContractNo",
+                                    "property": "JfContractNo"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position": "center",
+                            "property": "TrxNo"
+                        },
+                        {
+                            "type": "date",
+                            "position": "center",
+                            "property": "TrxDt"
+                        },
+                        {
+                            "type": "text",
+                            "position": "center",
+                            "property": "TrxStat"
+                        },
+                        {
+                            "type": "text",
+                            "position": "center",
+                            "property": "TerminationType"
+                        },
+                        {
+                            "type": "action",
+                            "position": "center",
+                            "action": [
+                                {
+                                    "type": "edit",
+                                    "param": [
+                                        {
+                                            "type": "TransactionNo",
+                                            "property": "TrxNo"
+                                        }
+                                    ],
+                                    "path": "/Termination/TerminationExecution/Detail",
+                                    "icon": ""
+                                }
+                            ]
+                        },
+                        {
+                            "type": "action",
+                            "position": "center",
+                            "action": [
+                                {
+                                    "type": "callback",
+                                    "key": "GenerateTextfile",
+                                    "isText": false,
+                                    "property": ""
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "criteria": [],
+                "whereValue": [],
+                "fromValue": [],
+                "useIntegration": false,
+                "isHideSearch": false,
+                "isSearched": false,
+                "delay": 1
+            },
+            "id": "75fad405-cd63-40d4-8ec7-6adc0b3345a3"
+        }
+    ],
+    "serviceUrl": {
+        "add": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "edit": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "createRfa": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        }
+    },
+    "isRedirect": false,
+    "redirectOption": "",
+    "redirectLink": "",
+    "hideSubmitButton": false,
+    "listBtn": [],
+    "onInit": [],
+    "isOverrideSubmit": false,
+    "onSubmit": [],
+    "isOverrideCancel": false,
+    "onCancel": {}
+}

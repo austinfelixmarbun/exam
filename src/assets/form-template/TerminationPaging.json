@@ -1,0 +1,189 @@
+{
+  "title": "Termination Paging",
+  "hideTitle": false,
+  "id": "TerminationPaging",
+  "addButton": true,
+  "addLink": "/Termination/TerminationPrepare/AddEdit",
+  "pathOption": "fromChild",
+  "backButton": false,
+  "component": [
+    {
+      "paging": {
+        "environment": "PayoutUrl",
+        "apiVersion": "v1",
+        "pagingInput": {
+          "title": "TerminationPaging",
+          "sectionTitle": "",
+          "querystring": { "name": "searchTerminationPaging" },
+          "exportExcel": false,
+          "component": [
+            {
+              "id": "vtvendorNameSearchId",
+              "type": "dropdown",
+              "label": "Funding Coy Name",
+              "name": "VT.VENDOR_NAME",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text",
+              "isFromURL": true,
+              "ddlType": "all",
+              "isEvent": false,
+              "environment": "FOU",
+              "path": "/Vendor/GetListKvpVendorObjByCategoryCode",
+              "criteriaPropName": "Code",
+              "criteriaPropValue": "JF_FUNDING_COMPANY",
+              "isQueryIn": false
+            },
+            {
+              "id": "bthtrxStatSearchId",
+              "type": "dropdown",
+              "label": "Termination Batch Status",
+              "name": "BTH.TRX_STAT",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text",
+              "isFromURL": true,
+              "ddlType": "all",
+              "isEvent": false,
+              "environment": "FOU",
+              "path": "/RefStatus/GetListKeyValueActiveGrpCodeByCode",
+              "criteriaPropName": "Code",
+              "criteriaPropValue": "TERMINATION_TMS",
+              "isQueryIn": false
+            },
+            {
+              "id": "bthtrxNoSearchId",
+              "type": "textbox",
+              "label": "Termination Batch No",
+              "name": "BTH.TRX_NO",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text"
+            },
+            {
+              "id": "bthtrxStatSearchId",
+              "type": "dropdown",
+              "label": "Batch Type",
+              "name": "BTH.TRX_STAT",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text",
+              "isFromURL": false,
+              "ddlType": "all",
+              "isEvent": false,
+              "items": [
+                { "key": "BB", "value": "Buy Back" },
+                { "key": "ET", "value": "Early Termination" }
+              ]
+            },
+            {
+              "id": "bthbatchExecutionDtSearchId",
+              "type": "datepicker",
+              "label": "Batch Prepare Date >=",
+              "name": "BTH.BATCH_EXECUTION_DT",
+              "value": "",
+              "placeholder": "",
+              "datatype": "date",
+              "restriction": "gt",
+              "useDefVal": false
+            },
+            {
+              "id": "bthbatchExecutionDtSearchId",
+              "type": "datepicker",
+              "label": "Batch Prepare Date <=",
+              "name": "BTH.BATCH_EXECUTION_DT",
+              "value": "",
+              "placeholder": "",
+              "datatype": "date",
+              "restriction": "lte",
+              "useDefVal": false
+            }
+          ],
+          "headerList": [
+            { "type": "label", "label": "Fund Coy Name", "position": "left" },
+            { "type": "label", "label": "Contract Name", "position": "left" },
+            { "type": "label", "label": "Batch No", "position": "left" },
+            {
+              "type": "label",
+              "label": "Batch Prepare Date",
+              "position": "left"
+            },
+            {
+              "type": "label",
+              "label": "Termination Batch Status",
+              "position": "left"
+            },
+            { "type": "label", "label": "Batch Type", "position": "left" },
+            {
+              "type": "label",
+              "label": "Payment Batch No",
+              "position": "left"
+            },
+            { "type": "label", "label": "action", "position": "center" }
+          ],
+          "bodyList": [
+            { "type": "text", "position": "left", "property": "FundCoyName" },
+            { "type": "text", "position": "left", "property": "ContractName" },
+            { "type": "text", "position": "left", "property": "BatchNo" },
+            {
+              "type": "date",
+              "position": "center",
+              "property": "BatchPrepareDt"
+            },
+            {
+              "type": "text",
+              "position": "center",
+              "property": "TerminationStatus"
+            },
+            { "type": "text", "position": "center", "property": "BatchType" },
+            {
+              "type": "text",
+              "position": "left",
+              "property": "PaymentBatchNo"
+            },
+            {
+              "type": "action",
+              "position": "center",
+              "action": [
+                {
+                  "type": "link",
+                  "path": "/Termination/TerminationPrepare/View",
+                  "target": "_self",
+                  "param": [
+                    { "type": "TerminationNo", "property": "PaymentBatchNo" }
+                  ],
+                  "property": ""
+                }
+              ]
+            }
+          ]
+        },
+        "criteria": [],
+        "whereValue": [],
+        "fromValue": [],
+        "useIntegration": false,
+        "isHideSearch": false,
+        "isSearched": false,
+        "delay": 1
+      },
+      "id": "5ed74203-b1ca-4e6f-9ed0-d65f846a38ed"
+    }
+  ],
+  "serviceUrl": {
+    "add": { "environment": "", "apiPath": "", "apiUrl": "" },
+    "edit": { "environment": "", "apiPath": "", "apiUrl": "" },
+    "createRfa": { "environment": "", "apiPath": "", "apiUrl": "" }
+  },
+  "isRedirect": false,
+  "redirectOption": "",
+  "redirectLink": "",
+  "hideSubmitButton": false,
+  "listBtn": [],
+  "customToastrMsg": "",
+  "onInit": [],
+  "isOverrideSubmit": false,
+  "onSubmit": [],
+  "isOverrideCancel": false,
+  "onCancel": {},
+  "child": ["TerminationAddEdit"]
+}
