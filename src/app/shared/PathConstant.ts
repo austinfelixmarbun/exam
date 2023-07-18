@@ -484,6 +484,7 @@ export class PathConstant {
      //#region JOURNAL
     public static JOURNAL_MEDIA = "journalmedia";
     public static JOURNAL_RESULT = "journalresult";
+    public static JOURNAL_RESULT_VIEW = "journalview";
     public static HEADER = "header";
     public static FACT = "fact";
     public static ITEM_VALUE = "itemvalue";

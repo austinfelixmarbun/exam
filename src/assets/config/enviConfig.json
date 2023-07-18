@@ -9,9 +9,8 @@
     "ApprovalR3Url": "https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT",
     "ApprovalURL": "https://r3impl-appsvr.ad-ins.com/APPROVAL_DSF_R3_SIT",
     "FoundationR3Web": "https://r3web-server.ad-ins.com/FOUNDATION_DEV",
-    "losR3Web": "https://r3web-server.ad-ins.com/LOS_DEV",
+    "losR3Web": "http://r3web-server.ad-ins.com/LOSR3",
     "cmsR3Web": "https://r3web-server.ad-ins.com/CMS_DEV",
-    "amsR3Web": "https://r3web-server.ad-ins.com/AMS",
     "lmsR3Web": "https://r3web-server.ad-ins.com/LMS",
     "arR3Web": "http://localhost:4202",
     "armntR3Web": "https://r3web-server.ad-ins.com/LMSARMNT",
@@ -30,6 +29,12 @@
     "WFThingsToDoUrl": "https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/",
     "IseUseNotification": "1",
     "PagesURL": "http://rnd-server-2.ad-ins.com:88/",
-    "PDCUrl": "https://r3app-server.ad-ins.com/PDC"
-
+    "PDCUrl": "https://r3app-server.ad-ins.com/PDC",
+    "amsR3Web": "https://r3web-server.ad-ins.com/AMS",
+    "assetR3Web": "https://r3web-server.ad-ins.com/AMS_ASSET",
+    "assetdocR3Web": "https://r3web-server.ad-ins.com/AMS_ASSETDOC",
+    "insuranceR3Web": "https://r3web-server.ad-ins.com/AMS_INSURANCE",
+    "assetpricingR3Web": "https://r3web-server.ad-ins.com/AMS_ASSETPRICING",
+    "filingR3Web": "https://r3web-server.ad-ins.com/AMS_FILING",
+    "storageR3Web": "https://r3web-server.ad-ins.com/AMS_STORAGE"
 }
