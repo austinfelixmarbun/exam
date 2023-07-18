@@ -317,6 +317,10 @@
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
+                                        "type": "CustCompanyMgmntShrholderId",
+                                        "property": "CustCompanyMgmntShrholderId"
+                                    },
+                                    {
                                         "type": "CustId",
                                         "property": "ShareholderId"
                                     },
@@ -350,6 +354,10 @@
                                 "path": "CUST_NEW_FORM",
                                 "icon": "ft-edit-2",
                                 "param": [
+                                    {
+                                        "type": "CustCompanyMgmntShrholderId",
+                                        "property": "CustCompanyMgmntShrholderId"
+                                    },
                                     {
                                         "type": "CustId",
                                         "property": "ShareholderId"

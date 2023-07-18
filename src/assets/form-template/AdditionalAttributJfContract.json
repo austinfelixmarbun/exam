@@ -1,0 +1,85 @@
+{
+	"title": "Additional Attribut Jf Contract",
+	"hideTitle": false,
+	"id": "AdditionalAttributJfContract",
+	"addButton": false,
+	"addLink": "",
+	"pathOption": "",
+	"backButton": false,
+	"component": [{
+		"view": {
+			"subsection": {
+				"subSectionId": "MainInformationId",
+				"subSectionTitle": "Main Information",
+				"concatDate": false,
+				"setDate": "",
+				"formatDate": "",
+				"environment": "facilityMntUrl",
+				"apiVersion": "v1",
+				"uri": "",
+				"mainInfoPath": "/Generic/GetDataViewBySQL",
+				"querystring": {
+					"name": "viewFundingContractMainInfo"
+				},
+				"reqObj": {},
+				"mainInfo": [{
+					"type": "text",
+					"label": "Funding Company Name",
+					"property": "FundCoyName",
+					"position": "left",
+					"isHide": false
+				}, {
+					"type": "text",
+					"label": "",
+					"property": "",
+					"position": "left",
+					"isHide": false
+				}, {
+					"type": "text",
+					"label": "Funding Company No",
+					"property": "FundContractNo",
+					"position": "left",
+					"isHide": false
+				}],
+				"whereValue": [],
+				"fromValue": [],
+				"subsectionId": "MainInformationId"
+			}
+		},
+		"id": "c1aeac57-7180-42fe-870c-4d301efad05d"
+	}, {
+		"container": {
+			"key": "DefaultFeeComponent",
+			"className": "DetailFundingContractAddTabComponent",
+			"cssClass": "",
+			"input": {
+				"JfContractNo": "ContractNo",
+				"mode": "mode"
+			}
+		},
+		"id": "1d765de2-e831-4a7f-b1e3-7ad59040aab0"
+	}],
+	"serviceUrl": {
+		"add": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		},
+		"edit": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		},
+		"createRfa": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		}
+	},
+	"isRedirect": false,
+	"redirectOption": "",
+	"redirectLink": "",
+	"hideSubmitButton": false,
+	"listBtn": [],
+	"onInit": []
+}

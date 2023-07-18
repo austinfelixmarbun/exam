@@ -226,6 +226,12 @@
             <th style="text-align: center;">
               <span class="thead-header" name='Fpd' translate>FPD (#AGR)</span>
             </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+            </th>
+            <th style="text-align: center;">
+              <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+            </th>
           </tr>
         </thead>
         <tbody *ngIf="ListCrdExpsrAppAgrHistCustObj.length == 0">
@@ -244,6 +250,8 @@
               <td style="text-align: center;">{{item.ContractStat}}</td>
               <td style="text-align: right;">{{item.OsPrincipal | number:'.2':'en-US'}}</td>
               <td style="text-align: center;">{{item.Fpd}}</td>
+              <td style="text-align: right;">{{item.OverdueDays}}</td>
+              <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
             </tr>
           </ng-container>
         </tbody>
@@ -284,6 +292,12 @@
               <th style="text-align: center;">
                 <span class="thead-header" name='Fpd' translate>FPD (#AGR)</span>
               </th>
+              <th style="text-align: center;">
+                <span class="thead-header" name='OverdueDays' translate>Overdue Days</span>
+              </th>
+              <th style="text-align: center;">
+                <span class="thead-header" name='OverdueAmt' translate>Overdue Amount</span>
+              </th>
             </tr>
           </thead>
           <tbody *ngIf="ListCrdExpsrAppAgrHistCustGrpObj.length == 0">
@@ -303,6 +317,8 @@
                 <td style="text-align: center;">{{item.ContractStat}}</td>
                 <td style="text-align: right;">{{item.OsPrincipal | number:'.2':'en-US'}}</td>
                 <td style="text-align: center;">{{item.Fpd}}</td>
+                <td style="text-align: right;">{{item.OverdueDays}}</td>
+                <td style="text-align: right;">{{item.OverdueAmt | number:'.2':'en-US'}}</td>
               </tr>
             </ng-container>
           </tbody>

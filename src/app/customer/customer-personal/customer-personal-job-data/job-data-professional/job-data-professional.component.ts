@@ -147,11 +147,9 @@ export class JobDataProfessionalComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetListCustAddr, this.custAddrObjForCopy).toPromise().then(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
-        this.JobDataProForm.patchValue({
-          CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyPrevAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyOthBizAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId']
-        });
+        this.listCustAddr = this.listCustAddr.filter(x => x.MrCustAddrTypeCode != CommonConstant.CustAddrJob && 
+                                                          x.MrCustAddrTypeCode != CommonConstant.CustAddrPreJob && 
+                                                          x.MrCustAddrTypeCode != CommonConstant.CustAddrOthBiz);
       });
 
     this.UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -437,6 +435,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataProForm.controls["CopyAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -481,6 +480,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataProForm.controls["CopyPrevAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -525,6 +525,7 @@ export class JobDataProfessionalComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataProForm.controls["CopyOthBizAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;

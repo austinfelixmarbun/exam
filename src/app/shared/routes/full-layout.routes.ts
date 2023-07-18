@@ -670,8 +670,70 @@ export const Full_ROUTES: Routes = [
         .then(m => m.AssetPricingModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
 
   //#endregion
-
+  // #region TMS
+  {
+    path: 'Setting',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityMntR3Web + '/remoteEntry.js',
+        exposedModule: './SettingsModule'
+      })
+        .then(m => m.SettingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  
+  {
+    path: 'drawdown',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityExecR3Web + '/remoteEntry.js',
+        exposedModule: './DrawdownModule'
+      })
+        .then(m => m.DrawdownModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'undraw',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityExecR3Web + '/remoteEntry.js',
+        exposedModule: './UndrawModule'
+      })
+        .then(m => m.UndrawModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'PaymentOut',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './PayoutModule'
+      })
+        .then(m => m.PayoutModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Termination',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './TerminationModule'
+      })
+        .then(m => m.TerminationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  // #endregion
 ];

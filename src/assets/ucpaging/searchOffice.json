@@ -122,6 +122,11 @@
         {
             "type": "label",
             "position": "center",
+            "label": "Employee"
+        },
+        {
+            "type": "label",
+            "position": "center",
             "label": "Action"
         }
     ],
@@ -187,6 +192,23 @@
                                 ]
                             },
                             "isHide" : false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "edit",
+                    "path": "OFFICE_EMP_VIEW",
+                    "icon" : "ft-users",
+                    "param": [
+                        {
+                            "type": "RefOfficeId",
+                            "property": "RefOfficeId"
                         }
                     ]
                 }

@@ -145,6 +145,9 @@ export class ShareholderFormComponent implements OnInit {
           });
         }
         this.tempExisting.CustCompanyMgmntShrholder = response;
+        if (this.ParentCustId == 0) {
+          this.ParentCustId = response.CustId
+        }
       }
     )
   }

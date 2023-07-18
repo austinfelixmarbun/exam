@@ -67,6 +67,11 @@ import { VendorCollCompanyEmployeeAddEditComponent } from './vendor-coll-company
 import { VendorCollCompanyEmployeePagingComponent } from './vendor-coll-company/vendor-coll-company-employee-paging/vendor-coll-company-employee-paging.component';
 import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/vendor-coll-company-office-member/vendor-coll-company-office-member.component';
 import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company/vendor-coll-company-office-member-add/vendor-coll-company-office-member-add.component';
+import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
+import { FundingCompanyContactPersonComponent } from './funding-company/funding-company-contact-person/funding-company-contact-person.component';
+import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
+import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
+import { MatRadioModule } from '@angular/material/radio';
 import { RegexService } from 'app/customer/regex.service';
 
 export const customCurrencyMaskConfig = {     
@@ -105,6 +110,7 @@ export const customCurrencyMaskConfig = {
         UcaddressModule,
         UcaddtotempModule,
         UcapprovalModule,
+        MatRadioModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         UcapprovalcreateModule,
         UcapprovalR3Module,
@@ -153,7 +159,11 @@ export const customCurrencyMaskConfig = {
         VendorCollCompanyEmployeeAddEditComponent,
         VendorCollCompanyEmployeePagingComponent,
         VendorCollCompanyOfficeMemberComponent,
-        VendorCollCompanyOfficeMemberAddComponent
+        VendorCollCompanyOfficeMemberAddComponent,
+        FundingCompanyAddEditComponent,
+        FundingCompanyContactPersonComponent,
+        FundingCompanyPagingComponent,
+        FundingCompanyDetailComponent
     ],
     providers: [
         VendorService,
