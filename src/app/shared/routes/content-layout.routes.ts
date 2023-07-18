@@ -387,18 +387,6 @@ export const CONTENT_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  {
-    path: 'assetdocumentview',
-    loadChildren: () => {
-      return loadRemoteModule({
-        type: 'module',
-        remoteEntry: envi.assetdocR3Web + '/remoteEntry.js',
-        exposedModule: './AssetDocModule'
-      })
-        .then(m => m.AssetDocumentModule)
-        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
-  },
 
   //#region AMS
   {
