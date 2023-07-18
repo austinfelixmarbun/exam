@@ -469,7 +469,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4201' + '/remoteEntry.js',
+        remoteEntry: envi.facilityMntR3Web + '/remoteEntry.js',
         exposedModule: './ViewSettingModule'
       })
         .then(m => m.ViewSettingModule)
@@ -481,7 +481,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4203' + '/remoteEntry.js',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
         exposedModule: './PayoutModule'
       })
         .then(m => m.PayoutModule)
@@ -493,7 +493,7 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4203' + '/remoteEntry.js',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
         exposedModule: './TerminationModule'
       })
         .then(m => m.TerminationModule)

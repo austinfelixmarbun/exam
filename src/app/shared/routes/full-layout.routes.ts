@@ -679,7 +679,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4201' + '/remoteEntry.js',
+        remoteEntry: envi.facilityMntR3Web + '/remoteEntry.js',
         exposedModule: './SettingsModule'
       })
         .then(m => m.SettingModule)
@@ -692,7 +692,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4202' + '/remoteEntry.js',
+        remoteEntry: envi.facilityExecR3Web + '/remoteEntry.js',
         exposedModule: './DrawdownModule'
       })
         .then(m => m.DrawdownModule)
@@ -704,7 +704,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4202' + '/remoteEntry.js',
+        remoteEntry: envi.facilityExecR3Web + '/remoteEntry.js',
         exposedModule: './UndrawModule'
       })
         .then(m => m.UndrawModule)
@@ -716,7 +716,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4203' + '/remoteEntry.js',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
         exposedModule: './PayoutModule'
       })
         .then(m => m.PayoutModule)
@@ -728,7 +728,7 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:4203' + '/remoteEntry.js',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
         exposedModule: './TerminationModule'
       })
         .then(m => m.TerminationModule)
