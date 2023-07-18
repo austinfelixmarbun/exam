@@ -17,6 +17,7 @@ import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { NewCustSetData } from '../NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { RefMasterConstant } from 'app/shared/RefMasterConstant';
 
 @Component({
   selector: 'app-new-cust-public',
@@ -30,6 +31,7 @@ export class NewCustPublicComponent implements OnInit {
   @Input() isSubmit: boolean = false;
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
 
+  isHideAddress = false;
   CustomerForm: FormGroup = this.fb.group({});
   inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
@@ -45,6 +47,7 @@ export class NewCustPublicComponent implements OnInit {
     this.GetCustAddrToCopy();
     await this.GetExisting();
     this.IsReady = true;
+    await this.hideaddr();
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -75,7 +78,7 @@ export class NewCustPublicComponent implements OnInit {
       this.inputAddressObj.inputField = inputFieldObj;
       //#endregion
 
-      //#region patch positionSlik    
+      //#region patch positionSlik
       let reqMasterObj: ReqRefMasterByTypeCodeAndMasterCodeObj = {
         MasterCode: item.MrPositionSlikCode,
         RefMasterTypeCode: CommonConstant.RefMasterTypeCodePositionSlik
@@ -189,7 +192,22 @@ export class NewCustPublicComponent implements OnInit {
   onOptionsSelected(ev: { selectedIndex: number, selectedObj: RefMasterObj, selectedValue: string }) {
     let tempPublicName = this.CustomerForm.get("PublicName");
     let tempPublicIdentityNo = this.CustomerForm.get("PublicIdentityNo");
-    if (ev.selectedValue == "CMTY" || ev.selectedValue == "PRI") {
+
+    if (ev.selectedValue == RefMasterConstant.MR_PUBLIC_TYPE_CODE_CMTY){
+      this.inputAddressObj.isRequired = false;
+      this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
+
+      setTimeout(() => { this.isHideAddress = true; }, 100);
+
+    }
+    else{
+      this.inputAddressObj.isRequired = true;
+      this.inputAddressObj.inputField.inputLookupObj.isRequired = true;
+      this.isHideAddress = false;
+
+    }
+
+    if (ev.selectedValue == RefMasterConstant.MR_PUBLIC_TYPE_CODE_CMTY || ev.selectedValue == RefMasterConstant.MR_PUBLIC_TYPE_CODE_PRI) {
       tempPublicName.patchValue(ev.selectedObj.Descr);
       tempPublicIdentityNo.patchValue(ev.selectedObj.ReserveField1);
       this.disableOrEnableForm();
@@ -204,7 +222,7 @@ export class NewCustPublicComponent implements OnInit {
     let tempMrPublicTypeCode = this.CustomerForm.get("MrPublicTypeCode");
     let tempPublicName = this.CustomerForm.get("PublicName");
     let tempPublicIdentityNo = this.CustomerForm.get("PublicIdentityNo");
-    if (tempMrPublicTypeCode.value == "CMTY" || tempMrPublicTypeCode.value == "PRI") {
+    if (tempMrPublicTypeCode.value == RefMasterConstant.MR_PUBLIC_TYPE_CODE_CMTY || tempMrPublicTypeCode.value == RefMasterConstant.MR_PUBLIC_TYPE_CODE_PRI) {
       tempPublicName.disable();
       tempPublicIdentityNo.disable();
       return;
@@ -228,6 +246,15 @@ export class NewCustPublicComponent implements OnInit {
     tempUcAddObj.City = this.tempCustAddrToCopy.City;
     this.inputAddressObj.default = tempUcAddObj;
     this.inputAddressObj.inputField = inputFieldObj;
+  }
+
+  async hideaddr(){
+    let tempMrPublicTypeCode = this.CustomerForm.get("MrPublicTypeCode");
+    if(tempMrPublicTypeCode.value == RefMasterConstant.MR_PUBLIC_TYPE_CODE_CMTY){
+      this.inputAddressObj.isRequired = false;
+      this.inputAddressObj.inputField.inputLookupObj.isRequired = false;
+      setTimeout(() => { this.isHideAddress = true; }, 100);
+    }
   }
   //#endregion
 }

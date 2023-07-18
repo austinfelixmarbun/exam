@@ -1007,6 +1007,7 @@ export class UrlConstantNew{
     public GetCoaSchmByCoaSchmId = this.env.FoundationR3Url + this.url.GetCoaSchmByCoaSchmId;
     public SubmitCoaSchm = this.env.FoundationR3Url + this.url.SubmitCoaSchm;
     public GetListCoaSchm = this.env.FoundationR3Url + this.url.GetListCoaSchm;
+    public GetListCoaSchmActive = this.env.FoundationR3Url + this.url.GetListCoaSchmActive;
 
 
     // View Cabinet, Rack, FIling
@@ -1123,6 +1124,9 @@ export class UrlConstantNew{
     public AddTrxSrcDataForPefindoV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoV2;
     public AddTrxScrDataForAsliRi = this.env.FoundationR3Url + this.url.AddTrxScrDataForAsliRi;
     public GetTrxSrcDataForAsliRi = this.env.FoundationR3Url + this.url.GetTrxSrcDataForAsliRi;
+    public GetTrxResultDataForCbasSlik = this.env.FoundationR3Url + this.url.GetTrxResultDataForCbasSlik;
+    public GetCbasSlikLatestTrxNoByKtpNoNpwp = this.env.FoundationR3Url + this.url.GetCbasSlikLatestTrxNoByKtpNoNpwp;
+    public AddTrxSrcDataForCbasSlik = this.env.FoundationR3Url + this.url.AddTrxSrcDataForCbasSlik;
 
     //PEFINDO
     public GetViewMOSummary = this.env.FoundationR3Url + this.url.GetViewMOSummary;
@@ -1278,4 +1282,9 @@ export class UrlConstantNew{
     public AddRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.AddRefNotifAttrTemplate;
     public EditRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.EditRefNotifAttrTemplate;
     public GetRefNotifAttrTemplateByRefNotifAttrTemplateId = this.env.NotifEngineURL + this.url.GetRefNotifAttrTemplateByRefNotifAttrTemplateId;
+
+    // Ref Ins Claim Doc
+    public AddRefInsClaimDoc = this.env.FoundationR3Url + this.url.AddRefInsClaimDoc;
+    public EditRefInsClaimDoc = this.env.FoundationR3Url + this.url.EditRefInsClaimDoc;
+    public GetRefInsClaimDocByRefInsClaimDocCode = this.env.FoundationR3Url + this.url.GetRefInsClaimDocByRefInsClaimDocCode;
 }

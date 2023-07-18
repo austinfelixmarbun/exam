@@ -462,4 +462,43 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   //#endregion
+
+  //#region TMS
+  {
+    path: 'View',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityMntR3Web + '/remoteEntry.js',
+        exposedModule: './ViewSettingModule'
+      })
+        .then(m => m.ViewSettingModule)
+        .catch(e => console.log(e))
+    }
+  },
+  {
+    path: 'PaymentOut',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './PayoutModule'
+      })
+        .then(m => m.PayoutModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Termination',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './TerminationModule'
+      })
+        .then(m => m.TerminationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
 ];

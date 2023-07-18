@@ -206,6 +206,10 @@
                                 "icon": "ft-edit-2",
                                 "param": [
                                     {
+                                        "type": "CustPersonalFamilyId",
+                                        "property": "CustPersonalFamilyId"
+                                    },
+                                    {
                                         "type": "CustId",
                                         "property": "FamilyId"
                                     },

@@ -330,7 +330,7 @@ export class UpdateCustomerJobDataComponent implements OnInit {
         });
       }
       else if (formControlName == "ProfessionId") {
-        this.CustomerJobForm.get("ProfessionId").patchValue({
+        this.CustomerJobForm.get("ProfessionLookup").patchValue({
           value: this.AppJobData.ProfessionName
         });
       }

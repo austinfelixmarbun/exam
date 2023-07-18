@@ -126,7 +126,6 @@ export class UpdateCustomerFinDataComponent implements OnInit {
                 for (let i = 0; i < item["CustBankStmntList"].length; i++) {
                   for (const key in item["CustBankStmntList"][i]) {
                     if (key == "Month") {
-                      item["CustBankStmntList"][i][key] = this.MonthNames[item["CustBankStmntList"][i][key] - 1];
                       if (!isNaN(main["CustBankStmntList"][i][key]) && !isNaN(parseInt(main["CustBankStmntList"][i][key]))) {
                         var monthIdx = parseInt(main["CustBankStmntList"][i][key]) - 1;
                         main["CustBankStmntList"][i][key] = this.MonthNames[monthIdx];
@@ -196,7 +195,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.CustomerFinDataForm.patchValue(obj);
     this.MainCustBankAcc = new Array<any>();
     for (let i = 0; i < this.AppCustBankAcc.length; i++) {
-      this.AddNewBankAcc(i);
+      if (this.AppCustBankAcc[i]["CustBankAccId"] != undefined) this.AddNewBankAcc(i);
     }
     this.IsCopyAll = true;
     // this.CalculateFinData();
@@ -326,10 +325,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     var formValue = this.CustomerFinDataForm.value;
     var requestBankAcc = new Array<any>();
     for (const item of this.MainCustBankAcc) {
-      if (!item["IsMasterData"]) {
-        for (const stmnt of item["CustBankStmntList"]) {
-          stmnt["Month"] = this.MonthNames.findIndex(x => x == stmnt["Month"]) + 1;
-        }
+      if (!item["IsMasterData"] && item["CustBankStmntList"] != undefined) {
         requestBankAcc.push(item);
       }
     }

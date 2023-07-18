@@ -89,9 +89,9 @@ import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-off
 import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
 import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
 import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
-import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
 import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
 import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
+import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
