@@ -690,6 +690,7 @@
     "GetCoaSchmByCoaSchmId": "/v1/CoaSchm/GetCoaSchmByCoaSchmId",
     "SubmitCoaSchm": "/v1/CoaSchm/SubmitCoaSchm",
     "GetListCoaSchm": "/v1/CoaSchm/GetListCoaSchm",
+    "GetListCoaSchmActive": "/v1/CoaSchm/GetListCoaSchmActive",
     "GetListRackByCabinetCode": "/v1/ViewDocument/GetListRackByCabinetCode",
     "GetCabinetByCabinetCode": "/v1/ViewDocument/GetCabinetByCabinetCode",
     "GetListFilingByRackCodeAndCabinetCode": "/v1/ViewDocument/GetListFilingByRackCodeAndCabinetCode",
@@ -934,5 +935,11 @@
     "EditRefNotificationSource": "/v1/RefNotificationSource/EditRefNotificationSource",
     "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId",
     "AddTrxScrDataForAsliRi" : "/v1/IntegratorAsliRi/AddTrxSrcDataForAsliRi",
-    "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi"
+    "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi",
+    "GetTrxResultDataForCbasSlik" : "/v1/IntegratorCbasSlik/GetTrxResultDataForCbasSlik",
+    "GetCbasSlikLatestTrxNoByKtpNoNpwp" : "/v1/IntegratorCbasSlik/GetCbasSlikLatestTrxNoByKtpNoNpwp",
+    "AddTrxSrcDataForCbasSlik" : "/v1/IntegratorCbasSlik/AddTrxSrcDataForCbasSlik",
+    "AddRefInsClaimDoc": "/v1/RefInsClaimDoc/AddRefInsClaimDoc",
+    "EditRefInsClaimDoc": "/v1/RefInsClaimDoc/EditRefInsClaimDoc",
+    "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
 }

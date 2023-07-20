@@ -109,6 +109,8 @@ export class NavigationConstant {
     public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
     public static CS_REF_TAX_OFFICE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING; //'/CommonSetting/TaxOffice/Paging'
     public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
+    // public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
+    // public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
     //#endregion
 
     //#region System Setting
@@ -159,6 +161,7 @@ export class NavigationConstant {
     public static VIEW_CUST_EXPOSURE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST_EXPOSURE; //'/View/CustExposureView'
     public static VIEW_NOTIF_TEMPLATE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NOTIF_TEMPLATE; //'/View/ViewNotifTemplate'
     public static VIEW_CUST_ASLI_RI = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_ASLI_RI; //'/View/Customer/CustAsliRi'
+    public static VIEW_CUST_CBAS_SLIK = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_CBAS_SLIK; //'/View/Customer/CustCbasSlik'
     //#endregion
 
     //#region Upload
@@ -206,6 +209,9 @@ export class NavigationConstant {
     public static VENDOR_COLL_COMPANY_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_MBR_ADD; //'/Vendor/CollectionCompany/Member/Add'
     public static VENDOR_COLL_COMPANY_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_REG; //'/Vendor/CollectionCompany/Registration'
     public static VENDOR_COLL_COMPANY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_COLL_COMPANY_VIEW; //'/Vendor/CollectionCompany/View'
+    public static VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
+    public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
+    public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
     //#endregion
     
     //#region Organization
@@ -257,6 +263,7 @@ export class NavigationConstant {
     public static OFFICE_AREA_DETAIL = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_DETAIL; //'/Office/OfficeArea/Detail'
     public static OFFICE_AREA_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_MEMBER; //'/Office/OfficeArea/Member'
     public static OFFICE_AREA_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_AREA_MEMBER_ADD; //'/Office/OfficeArea/Member/Add'
+    public static OFFICE_EMP_VIEW = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_VIEW; //'/Office/OfficeEmpView'
     public static OFFICE_EMP_POS = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS; //'/Office/OfficeEmpPos'
     public static OFFICE_EMP_POS_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS_ADD; //'/Office/OfficeEmpPosAdd'
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'

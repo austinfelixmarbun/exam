@@ -213,6 +213,7 @@ thead tr th {
 
 select.form-control {
     width: unset;
+    max-width: 100%;
 }
 
 select.form-control.search-form-control {

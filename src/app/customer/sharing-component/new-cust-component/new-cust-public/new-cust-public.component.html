@@ -75,9 +75,9 @@
                 </div>
               </div>
             </div>
-            <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
+            <lib-ucSubsection *ngIf="!isHideAddress" [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
             </lib-ucSubsection>
-            <div class="form-body" id="LegalAddrSection">
+            <div *ngIf="!isHideAddress" class="form-body" id="LegalAddrSection">
               <div class="form-group row" *ngIf="!IsLockCopyAddrBtn">
                 <label class="col-md-2 adInsLabel" translate>Copy Address From Legal Customer</label>
                 <div class="col-md-4">

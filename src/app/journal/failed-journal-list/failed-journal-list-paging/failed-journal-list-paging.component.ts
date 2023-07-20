@@ -42,11 +42,11 @@ export class FailedJournalListPagingComponent implements OnInit {
     }
     for (let i = 0; i < this.listTemp.length; i++) {
       if (!req.some(x => x == this.listTemp[i].JrNo)) {
-        req.push(this.listTemp[i].JournalLogFailedHId)
+        req.push(this.listTemp[i].JrNo)
       }
     }
 
-    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournalLog, {
+    this.http.post<any>(this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.RerunJournal, {
       ListTransactionNo: req
     }, AdInsConstant.SpinnerOptions).subscribe(
       res => {

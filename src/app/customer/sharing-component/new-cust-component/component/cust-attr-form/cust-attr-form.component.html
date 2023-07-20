@@ -26,7 +26,7 @@
               [ngClass]="{ 'is-invalid': enjiForm.submitted && parenitemtForm.controls.AttrValue.invalid }"></textarea>
 
             <input type="date" *ngSwitchCase="AttrInputTypeDate" class="form-control adInsInput"
-              formControlName="AttrValue"
+              formControlName="AttrValue" max="9999-12-31"
               [ngClass]="{ 'is-invalid': enjiForm.submitted && item.controls.AttrValue.invalid}">
 
             <lib-uclookupgeneric *ngSwitchCase="AttrInputTypeRefMaster"

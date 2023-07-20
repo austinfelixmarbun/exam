@@ -41,7 +41,7 @@ export class NewCustHeaderComponent implements OnInit {
 
   @Input() CustType: string = CommonConstant.CustomerPersonal;
   PageType: string = CommonConstant.CustPageTypeHeader;
-  @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
+  @Input() CustDataMode: string;
   subjectTitle: string = "Customer";
   From: string = "";
   @Input() CustId: number = 0;
@@ -68,11 +68,21 @@ export class NewCustHeaderComponent implements OnInit {
       if (params["From"] != null) {
         this.From = params["From"];
       }
+      if (params["CustPersonalFamilyId"] != null) {
+        this.CustPersonalFamilyId = params["CustPersonalFamilyId"];
+      }
+      if (params["CustCompanyMgmntShrholderId"] != null) {
+        this.CustCompanyMgmntShrholderId = params["CustCompanyMgmntShrholderId"];
+      }
     });
   }
 
   async ngOnInit() {
-    this.SetTitleLabel();
+    if (this.CustDataMode != undefined) {
+      this.SetTitleLabel();
+    } else {
+      this.SetCustDataMode();
+    }
     await this.GetListCustType();
   }
 
@@ -89,6 +99,25 @@ export class NewCustHeaderComponent implements OnInit {
       case CommonConstant.CustMainDataModeMgmntShrholder:
         custLabel = "Shareholder";
         break;
+    }
+
+    this.TitleLabel = custLabel + " Main Data Registration";
+  }
+
+  SetCustDataMode() {
+    let custLabel: string = "";
+    switch (this.From) {
+      case CommonConstant.CustFromCustFamily:
+        this.CustDataMode = CommonConstant.CustMainDataModeFamily;
+        custLabel = "Family";
+        break;
+      case CommonConstant.CustFromCustShareholder:
+        this.CustDataMode = CommonConstant.CustMainDataModeMgmntShrholder;
+        custLabel = "Shareholder";
+        break;
+      default:
+        this.CustDataMode = CommonConstant.CustMainDataModeCust;
+        custLabel = "Customer";
     }
 
     this.TitleLabel = custLabel + " Main Data Registration";
@@ -112,7 +141,6 @@ export class NewCustHeaderComponent implements OnInit {
   Cancel() {
     if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.outputCancel.emit();
-      return;
     }
     switch (this.From) {
       case CommonConstant.CustFromEditMainData:

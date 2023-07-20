@@ -32,6 +32,7 @@ export class PathConstant {
     public static CR_PAGES = "Pages";
     public static CR_VIEW = "View";
     public static CR_DOC_MNGMNT_VIEW = "DocumentManagementView";
+    public static CR_JOURNAL_VIEW = "journalview";
     //#endregion
 
     //#region content-pages
@@ -281,6 +282,7 @@ export class PathConstant {
     //#region Office-Module
     public static OFFICE_EMP_POS = "OfficeEmpPos";
     public static OFFICE_EMP_POS_ADD = "OfficeEmpPosAdd";
+    public static OFFICE_EMP_VIEW = "OfficeEmpView";
     public static OFFICE_AREA = "OfficeArea";
     public static OFFICE_AREA_DETAIL = PathConstant.OFFICE_AREA + "/" + PathConstant.DETAIL;
     public static OFFICE_AREA_MEMBER = PathConstant.OFFICE_AREA + "/" + PathConstant.MEMBER;
@@ -399,6 +401,10 @@ export class PathConstant {
     public static VENDOR_HO_PAGING = PathConstant.VENDOR_HO + "/" + PathConstant.PAGING;
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstant.DETAIL;
     public static VENDOR_HO_REG = PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
+    public static VENDOR_FUNDING_COY = "FundingCompany";
+    public static VENDOR_FUNDING_COY_PAGING = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; //FundingCompany/Paging
+    public static VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT; //FundingCompany/AddEDit
+    public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW; 
     public static VENDOR_ATPM = "ATPM";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static VENDOR_ATPM_REG = PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
@@ -478,6 +484,7 @@ export class PathConstant {
     public static VIEW_CUST_TRUSTING_SOCIAL = "CustTrustSoc";
     public static VIEW_CUST_EXPOSURE = "CustExposureView";
     public static VIEW_CUST_ASLI_RI = "CustAsliRi";
+    public static VIEW_CUST_CBAS_SLIK = "CustCbasSlik";
 
     //#endregion
 
