@@ -111,7 +111,7 @@ export class CoaSchemeDetailComponent implements OnInit {
   }
 
   getListCopy() {
-    this.http.post<any>(this.UrlConstantNew.GetListCoaSchm, {}).subscribe
+    this.http.post<any>(this.UrlConstantNew.GetListCoaSchmActive, {}).subscribe
       (
         (response: any) => {
           this.ListCopy = response.ReturnObject

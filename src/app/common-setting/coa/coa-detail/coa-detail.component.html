@@ -57,7 +57,7 @@
 
                       <div class="input-group-append">
                         <span class="input-group-btn">
-                          <button class="btn btn-raised btn-primary" type="button" (click)="Add(currselect)">
+                          <button class="btn btn-raised btn-primary" [disabled]="!isReady" type="button" (click)="Add(currselect)">
                             <em class="fa fa-check-square-o"></em>Add
                           </button>
                         </span>

@@ -7,7 +7,7 @@
 					<h4 class="form-section card-title" *ngIf="custType == 'COMPANY'" translate>CUSTOMER COMPANY</h4>
 					<div *ngIf="custType == 'PERSONAL'">
 						<app-customer-view-header-personal></app-customer-view-header-personal>
-						<mat-tab-group (selectedIndexChange)="mencuba($event)">
+						<mat-tab-group (selectedIndexChange)="mencuba($event)" [selectedIndex]="selectedIndex">
 							<mat-tab label="Main Data">
 							</mat-tab>
 							<mat-tab label="Address">
@@ -49,6 +49,10 @@
 								<mat-tab label="Asli Ri">
 								</mat-tab>
 							</div>
+							<div *ngIf="IsUseDigitalization && IsUseCbasSlik">
+								<mat-tab label="CBAS SLIK">
+								</mat-tab>
+							</div>
 							<div *ngIf="IsIframe">
 								<mat-tab *ngFor="let iframe of listIframe" [label]="iframe.Title">
 									<app-customer-view-iframe-generic [inputObj]="custResultData" [iframeObj]="iframe">
@@ -61,7 +65,7 @@
 					</div>
 					<div *ngIf="custType == 'COMPANY'">
 						<app-customer-view-header-company></app-customer-view-header-company>
-						<mat-tab-group (selectedIndexChange)="mencuba($event)">
+						<mat-tab-group (selectedIndexChange)="mencuba($event)" [selectedIndex]="selectedIndex">
 							<mat-tab label="Main Data">
 							</mat-tab>
 							<mat-tab label="Address">
@@ -90,6 +94,10 @@
 							</div>
 							<div *ngIf="IsUseDigitalization && IsUseAsliRi">
 								<mat-tab label="Asli Ri">
+								</mat-tab>
+							</div>
+							<div *ngIf="IsUseDigitalization && IsUseCbasSlik">
+								<mat-tab label="CBAS SLIK">
 								</mat-tab>
 							</div>
 							<div *ngIf="IsIframe">

@@ -3,8 +3,9 @@ export class CommonConstant {
 
     // REGEX
     public static regexAPI = "\\/[v,V][1-9]\\d*(\\.[1-9]\\d*)*";
-    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+    public static regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
     public static regexMultipleEmail = "^(([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)(\s*;\\s*|\\s*$))+$";
+    public static regexSpace = "^[^ ]*$";
 
     // MODULE
     public static MODULE_FOU = "FOU";
@@ -34,7 +35,7 @@ export class CommonConstant {
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
     public static ROLE_CODE = 'RoleCode';
-    
+
     //SYS CTRL COY KEY
     public static IsEodRun = "IsEodRun";
 
@@ -47,7 +48,7 @@ export class CommonConstant {
     public static CustFromEditMainData = "EditMainData";
     public static CustFromCustFamily = "CustFamily";
     public static CustFromCustShareholder = "CustShareholder";
-    
+
     //CUST MAIN Page Type
     public static CustPageTypeHeader = "HEADER";
     public static CustPageTypeDupCheck = "DUP_CHECK";
@@ -69,7 +70,7 @@ export class CommonConstant {
     public static TRUE = "true";
     public static FALSE = "false";
 
-    // VENDOR CATEGORY    
+    // VENDOR CATEGORY
     public static SUPPLIER = "SUPPLIER"
     public static ASSET_INSCO_BRANCH = "ASSET_INSCO_BRANCH";
     public static LIFE_INSCO_BRANCH = "LIFE_INSCO_BRANCH";
@@ -104,6 +105,10 @@ export class CommonConstant {
     public static TITLE_AGENCY_COMPANY = "Agency Company";
     public static TITLE_AGENCY_PERSONAL = "Agency Personal";
     public static TITLE_COLL_COMPANY = "Collection Company";
+
+    public static MASTER_AUTO_GNRT_CODE_SUPPLIER = "SB";
+    public static MASTER_AUTO_GNRT_CODE_AGENCY_COMPANY = "AGC";
+    public static MASTER_AUTO_GNRT_CODE_AGENCY_PERSONAL = "AGP";
 
     // VENDOR TYPE
     public static VENDOR_TYPE_COMPANY = "C";
@@ -233,7 +238,7 @@ export class CommonConstant {
     public static GSCodeVATForPersonal = "VAT_FOR_PERSONAL";
     public static GSCodeIsUseNotification = "IS_USE_NOTIFICATION";
     public static GSCodeTakeTopXNotification = "TAKE_TOP_X_NOTIFICATION";
-    
+
     public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
@@ -248,12 +253,12 @@ export class CommonConstant {
     // CUST TYPE
     public static CustTypePersonal = "PERSONAL";
     public static CustTypeCompany = "COMPANY";
-    
+
     // CUST GENDER
     public static GENDER_MALE = "MALE";
     public static GENDER_FEMALE = "FEMALE";
 
-    // CUST ADDR TYPE 
+    // CUST ADDR TYPE
     public static CustAddrTypeLegal = "LEGAL";
     public static CustAddrTypeContact = "CONTACT";
     public static CustAddrTypeContactInfo = "Contact Info";
@@ -265,7 +270,12 @@ export class CommonConstant {
     public static CustAddrTypePreJob = "PREV_JOB";
     public static CustAddrTypeBiz = "BIZ";
 
-    // ADDR TYPE 
+    // CUST ADDR TYPE DESC
+    public static CustAddrJob = "Job";
+    public static CustAddrPreJob = "Previous Job";
+    public static CustAddrOthBiz = "Other Business";
+
+    // ADDR TYPE
     public static AddrTypeLegal = "LEGAL";
     public static AddrTypeTax = "TAX";
 
@@ -335,7 +345,7 @@ export class CommonConstant {
 
     //outputChange
     public static CUST_CHANGE_PROFESSION = "PROFESSION";
-    
+
     //ATTR Input Type
     public static AttrInputTypeDate = "D";
     public static AttrInputTypeNum = "N";
@@ -370,7 +380,7 @@ export class CommonConstant {
     public static DmsSurveyId = "Survey Id";
     public static DmsTaskId = "Task Id";
 
-    // Cust Type  
+    // Cust Type
     public static WhiteIndicator = "WHITE";
     public static NoData = "No Data";
     public static MaritalStatusMarried = "MARRIED";
@@ -469,7 +479,8 @@ export class CommonConstant {
     public static DigitalizationSvcTypeTrustingSocial = "TS";
     public static DigitalizationSvcTypePefindo = "PEFINDO";
     public static SvcTypeAsliRi = "IS_USE_ASLIRI";
-    
+    public static SvcTypeCbasSlik = "IS_USE_CBAS_SLIK";
+
     public static NegCustTypeGood = "GOOD";
     public static NegCustTypeBad = "BAD";
     public static NegCustTypeWarning = "WARNING";
@@ -501,4 +512,7 @@ export class CommonConstant {
 
     //Office
     public static MR_OFFICE_TYPE_CODE = "MrOfficeTypeCode";
+
+    //Highlight Comment
+    public static HIGHLIGHT_COMMENT = "HighlightComment";
 }

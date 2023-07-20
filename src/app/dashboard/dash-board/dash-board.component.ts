@@ -3,6 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
+import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -48,26 +49,21 @@ export class DashBoardComponent implements OnInit {
     integrationObj.ApiPath = "";
     integrationObj.RequestObj.OfficeCode = "";
     integrationObj.RequestObj.UserName = this.username;
-    integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
+
+    integrationObj2 = new ThingsToDoIntegrationV2Obj();
+    integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
+    integrationObj2.ApiPath = "";
+    integrationObj2.RequestObj.OfficeCode = "";
+    integrationObj2.RequestObj.UserName = this.username;
+    integrationObj2.RequestObj.RoleCode = this.roleCode;
+    this.Item.RequestObj.IntegrationObj.push(integrationObj2);
     
     if (context[CommonConstant.MR_OFFICE_TYPE_CODE] == CommonConstant.HeadOffice) {
-      integrationObj2 = new ThingsToDoIntegrationV2Obj();
-      integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
-      integrationObj2.ApiPath = "";
-      integrationObj2.RequestObj.OfficeCode = "";
-      integrationObj2.RequestObj.UserName = this.username;
-      integrationObj2.RequestObj.RoleCode = this.roleCode;
-      this.Item.RequestObj.IntegrationObj.push(integrationObj2);
+      integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode, this.roleCode + "-" + this.officeCode, this.officeCode];
     } else {
-      integrationObj2 = new ThingsToDoIntegrationV2Obj();
-      integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
-      integrationObj2.ApiPath = "";
-      integrationObj2.RequestObj.OfficeCode = this.officeCode;
-      integrationObj2.RequestObj.UserName = this.username;
-      integrationObj2.RequestObj.RoleCode = this.roleCode;
-      this.Item.RequestObj.IntegrationObj.push(integrationObj2);
+      integrationObj.RequestObj.OfficeRoleCodes = [this.roleCode + "-" + this.officeCode, this.officeCode];
     }
-   
+
     this.Item.RequestObj.IntegrationObj.push(integrationObj);
   }
   

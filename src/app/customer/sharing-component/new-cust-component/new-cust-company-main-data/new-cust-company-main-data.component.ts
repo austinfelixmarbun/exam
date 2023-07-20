@@ -27,6 +27,9 @@ import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file
 import { ThirdPartyUploadService } from '../component/third-party-form/services/ThirdPartyUpload.Service';
 import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { RegexService } from 'app/customer/regex.service';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 
 @Component({
   selector: 'app-new-cust-company-main-data',
@@ -61,7 +64,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
     private route: ActivatedRoute, private newCustService: NewCustSetData, 
-    private UrlConstantNew: UrlConstantNew) { 
+    private UrlConstantNew: UrlConstantNew, private regexService: RegexService) { 
       this.route.queryParams.subscribe(params => {
         if (params["From"] != null) {        
           this.pageFrom = params["From"];
@@ -84,6 +87,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.getPatternTaxIdNo();
     this.ClearCustForm();
     this.BindLookupExistingCust();
     this.InitCustMainDataMode();
@@ -194,8 +198,16 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
 
   ExistingShareholderObj: CustFormExistingObj = new CustFormExistingObj();
-  GetExistingShareholder(ev: CustFormExistingObj) {
-    this.ExistingShareholderObj = ev;
+  async GetExistingShareholder() {
+    if (this.CustCompanyMgmntShrholderId == 0) return;
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: this.CustCompanyMgmntShrholderId }).toPromise().then(
+      async (response: CustCompanyMgmntShrholderObj) => {
+        this.ExistingShareholderObj.CustCompanyMgmntShrholder = response;
+        if (this.ParentCustId == 0) {
+          this.ParentCustId = response.CustId;
+        }
+      }
+    )
   }
 
   async getLookUpCustomer(ev: { CustId: number, CustCompanyMgmntShrholderId: number }) {
@@ -448,5 +460,30 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   {
     var isContain = this.houseOwnershipObj.some(x => x.Key == event)
     return isContain;
+  }
+
+  customPatternTaxIdNo: Array<CustomPatternObj> = new Array();
+  resultPatternTaxIdNo: Array<KeyValueObj> = new Array();
+  taxIdNoValue: string = "TAXIDNO";
+  getPatternTaxIdNo() {
+    this.regexService.getListPattern().subscribe(
+      response => {
+        this.resultPatternTaxIdNo = response[CommonConstant.ReturnObj];
+        if (this.resultPatternTaxIdNo != undefined) {
+          for (let i = 0; i < this.resultPatternTaxIdNo.length; i++) {
+            if (this.resultPatternTaxIdNo[i].Key == this.taxIdNoValue) {
+              let patternObjTaxIdNo: CustomPatternObj = new CustomPatternObj();
+              let patternValue: string = this.resultPatternTaxIdNo[i].Value;
+  
+              patternObjTaxIdNo.pattern = patternValue;
+              patternObjTaxIdNo.invalidMsg = this.regexService.getErrMessage(patternValue);
+              this.customPatternTaxIdNo.push(patternObjTaxIdNo);
+              
+              this.CustomerForm.controls.TaxIdNo.setValidators([Validators.required, Validators.pattern(patternObjTaxIdNo.pattern)]);
+              this.CustomerForm.controls.TaxIdNo.updateValueAndValidity();
+            }
+          }
+        }
+      });
   }
 }

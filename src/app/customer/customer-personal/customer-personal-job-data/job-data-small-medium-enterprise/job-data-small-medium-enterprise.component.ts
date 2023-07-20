@@ -163,11 +163,9 @@ export class JobDataSmeComponent implements OnInit {
     await this.http.post(this.UrlConstantNew.GetListCustAddr, this.custAddrObjForCopy).toPromise().then(
       (response : ResGetListCustAddrObj) => {
         this.listCustAddr = response[CommonConstant.ReturnObj];
-        this.JobDataSmeForm.patchValue({
-          CopyAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyPrevAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId'],
-          CopyOthBizAddrFrom: response[CommonConstant.ReturnObj][0]['CustAddrId']
-        });
+        this.listCustAddr = this.listCustAddr.filter(x => x.MrCustAddrTypeCode != CommonConstant.CustAddrJob && 
+                                                          x.MrCustAddrTypeCode != CommonConstant.CustAddrPreJob && 
+                                                          x.MrCustAddrTypeCode != CommonConstant.CustAddrOthBiz);
       });
 
     this.inputAddressObjForJobAddr = new InputAddressObj(this.UrlConstantNew);
@@ -507,6 +505,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -551,6 +550,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyPrevAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;
@@ -595,6 +595,7 @@ export class JobDataSmeComponent implements OnInit {
 
     this.custAddrFromObj = new CustAddrObj();
     this.custAddrFromObj.CustAddrId = this.JobDataSmeForm.controls["CopyOthBizAddrFrom"].value;
+    if (this.custAddrFromObj.CustAddrId == 0) return;
     this.http.post(this.UrlConstantNew.GetCustAddr, { Id: this.custAddrFromObj.CustAddrId }).subscribe(
       (response) => {
         this.copyCustomerAddrFrom = response;

@@ -37,6 +37,7 @@ export class CoaDetailComponent implements OnInit {
     ListCoa: this.fb.array([])
   });
   Shows: boolean = false;
+  isReady: boolean = true;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(
@@ -77,6 +78,7 @@ export class CoaDetailComponent implements OnInit {
       this.toastr.warningMessage(ExceptionConstant.PLEASE_SELECT_ONE);
     }
     else {
+      this.isReady = false;
       var ListCurrBeforeAdd = [...this.ListCurr];
       if ((ListCurrBeforeAdd.findIndex(x => x.newCurr === ev.value)) === -1) {
         this.colHeadTable.push({ newHead: 'COA ' + ev.value });
@@ -87,7 +89,7 @@ export class CoaDetailComponent implements OnInit {
           CoaObjForSubmit.MrEntityCode = this.ListCOA[i].coa[0].EntityCode;
           CoaObjForSubmit.MrEntityType = this.ListCOA[i].coa[0].EntityTypeCode;
           CoaObjForSubmit.PaymentAllocCode = this.ListCOA[i].coa[0].PaymentAllocCode,
-          CoaObjForSubmit.CurrCode = ev.value;
+            CoaObjForSubmit.CurrCode = ev.value;
 
           await this.http.post<RefCoaObj>(this.UrlConstantNew.GetRefCoaWithoutCoaSchemeByReqCoaObj, CoaObjForSubmit).toPromise().then(
             (response) => {
@@ -96,8 +98,7 @@ export class CoaDetailComponent implements OnInit {
 
               ListDataCOA.push(this.AddListCoaDetailItemFormGroup(refCoaInitValue.Coa, refCoaInitValue.RefCoaId));
 
-              if(i === this.ListCOA.length - 1)
-              {
+              if (i === this.ListCOA.length - 1) {
                 this.ListCurr.push({ newCurr: ev.value });
               }
             },
@@ -106,11 +107,12 @@ export class CoaDetailComponent implements OnInit {
             }
           );
         }
-        
+
       }
       else {
         this.toastr.warningMessage(ExceptionConstant.ALREADY_EXIST);
       }
+      this.isReady = true;
     }
   }
 
@@ -120,16 +122,14 @@ export class CoaDetailComponent implements OnInit {
     })
   }
 
-  AddListCoaDetailItemFormGroup(Coa:string, CoaId:number): FormGroup {
-    if(Coa === '' || Coa === null)
-    {
+  AddListCoaDetailItemFormGroup(Coa: string, CoaId: number): FormGroup {
+    if (Coa === '' || Coa === null) {
       return new FormGroup({
         COA: new FormControl(''),
         RefCoaId: new FormControl(0)
       });
     }
-    else
-    {
+    else {
       return new FormGroup({
         COA: new FormControl(Coa),
         RefCoaId: new FormControl(CoaId)
@@ -141,7 +141,7 @@ export class CoaDetailComponent implements OnInit {
     return this.CoaForm.get("ListCoa") as FormArray
   }
 
-  GetListCoaInfoDataCOA(idx: number): FormControl{
+  GetListCoaInfoDataCOA(idx: number): FormControl {
     let ListCoaInfo: FormArray = this.CoaForm.get("ListCoa") as FormArray;
     let ListCoaInfoIdxAt = ListCoaInfo.get(idx.toString()) as FormGroup;
     return ListCoaInfoIdxAt.get("DataCOA") as FormControl;
@@ -182,27 +182,22 @@ export class CoaDetailComponent implements OnInit {
       this.refCoaObj.PaymentAllocCode = this.ListOfCOA[i][0].PaymentAllocCode;
       this.refCoaObj.Coa = this.ListOfCOA[i][0].Coa;
       this.refCoaObj.RefCoaId = this.ListOfCOA[i][0].RefCoaId;
-      if(this.refCoaObj.Coa === "")
-      {
+      if (this.refCoaObj.Coa === "") {
         CountCoaNull += 1
       }
       this.ListRefCoaObj.push(this.refCoaObj);
     }
 
-    if(this.Shows === false)
-    {
+    if (this.Shows === false) {
       this.toastr.errorMessage("Can not Submit Coa, Please Select Entity Type First!");
     }
-    else if(this.ListCurr.length === 0)
-    {
+    else if (this.ListCurr.length === 0) {
       this.toastr.errorMessage("Can not Submit Coa, Please Select Currency First!");
     }
-    else if(this.ListOfCOA.length === CountCoaNull)
-    {
+    else if (this.ListOfCOA.length === CountCoaNull) {
       this.toastr.errorMessage("Can not Submit Coa, Please input at least one Coa!");
     }
-    else
-    {
+    else {
       var RequestListRefCoa = {
         ListRequestRefCoaObjs: this.ListRefCoaObj
       }
@@ -230,8 +225,8 @@ export class CoaDetailComponent implements OnInit {
       this.entityTypeSelect = this.entityTypeList.filter(
         comp => comp.Key == this.entitySelect);
 
-      this.colHeadTable = [];	
-      this.ListPaymentAlloc = new Array<any>();	
+      this.colHeadTable = [];
+      this.ListPaymentAlloc = new Array<any>();
       this.ListCurr = new Array<any>();
 
       if (this.entitySelect == CommonConstant.RefMasterTypeCodeEntityTypePayAlloc) {
@@ -271,7 +266,6 @@ export class CoaDetailComponent implements OnInit {
         await this.http.post<any>(this.UrlConstantNew.GetListKvpPayAllocVendorByCategoryCode, { Code: CommonConstant.ASSET_INSCO_BRANCH }).toPromise().then(
           (response: any) => {
             this.ListPaymentAlloc = response.ReturnObject
-            console.log(this.ListPaymentAlloc)
           },
           (error) => {
             console.log(error)
@@ -299,8 +293,7 @@ export class CoaDetailComponent implements OnInit {
   AddToCoa() {
     for (let j = 0; j < this.ListPaymentAlloc.length; j++) {
       var coa = new Array<any>();
-      if(this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeBankAcc)
-      {
+      if (this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeBankAcc) {
         coa = [
           {
             EntityType: this.entityTypeSelect[0].Value,
@@ -310,8 +303,7 @@ export class CoaDetailComponent implements OnInit {
           }
         ];
       }
-      else if(this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeSuppl || this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany)
-      {
+      else if (this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeSuppl || this.entityTypeSelect[0].Key == CommonConstant.RefMasterTypeCodeEntityTypeInsuranceCompany) {
         coa = [
           {
             EntityType: this.entityTypeSelect[0].Value,
@@ -321,8 +313,7 @@ export class CoaDetailComponent implements OnInit {
           }
         ];
       }
-      else
-      {
+      else {
         coa = [
           {
             EntityType: this.entityTypeSelect[0].Value,
