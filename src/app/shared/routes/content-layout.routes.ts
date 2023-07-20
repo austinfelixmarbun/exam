@@ -473,7 +473,7 @@ export const CONTENT_ROUTES: Routes = [
         exposedModule: './ViewSettingModule'
       })
         .then(m => m.ViewSettingModule)
-        .catch(e => console.log(e))
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
   {
