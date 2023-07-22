@@ -263,7 +263,7 @@ export class UrlConstantNew{
     public GetListKeyValueActiveByCodeOrderBySeqNoDDL = this.url.GetListKeyValueActiveByCodeOrderBySeqNoDDL;
 
     public GetListActiveRefMasterDetail = this.env.FoundationR3Url + this.url.GetListActiveRefMasterDetail;
-    
+
     //REF COUNTRY
     public GetListRefCountry = this.env.FoundationR3Url + this.url.GetListRefCountry;
     public GetRefCountryByCountryCode = this.env.FoundationR3Url + this.url.GetRefCountryByCountryCode;
@@ -571,7 +571,7 @@ export class UrlConstantNew{
     public GetVendorGrpForUpdateByVendorGrpId = this.env.FoundationR3Url + this.url.GetVendorGrpForUpdateByVendorGrpId;
     public GetListVendorGrpByVendorId = this.env.FoundationR3Url + this.url.GetListVendorGrpByVendorId;
 
-    // VENDOR GROUP MEMBER 
+    // VENDOR GROUP MEMBER
     public GetListVendorGrpMbrByVendorGrpId = this.env.FoundationR3Url + this.url.GetListVendorGrpMbrByVendorGrpId;
     public GetListVendorGrpMbrByVendorId = this.env.FoundationR3Url + this.url.GetListVendorGrpMbrByVendorId;
     public AddRangeVendorGrpMbr = this.env.FoundationR3Url + this.url.AddRangeVendorGrpMbr;
@@ -671,7 +671,7 @@ export class UrlConstantNew{
     public GetVerfResultDsByVerfResultHId = this.env.FoundationR3Url + this.url.GetVerfResultDsByVerfResultHId;
     public GetVerfResultDById = this.env.FoundationR3Url + this.url.GetVerfResultDById;
     public GetListVerfResultDInQuestionGrp = this.env.FoundationR3Url + this.url.GetListVerfResultDInQuestionGrp;
-    
+
     // VERF SCHEME H
     public AddVerfSchemeH = this.env.FoundationR3Url + this.url.AddVerfSchemeH;
     public EditVerfSchemeH = this.env.FoundationR3Url + this.url.EditVerfSchemeH;
@@ -738,7 +738,7 @@ export class UrlConstantNew{
     public NewEditDuplicateCust = this.env.FoundationR3Url  + this.url.NewEditDuplicateCust;
     public NewEditDuplicateCustV2 = this.env.FoundationR3Url  + this.url.NewEditDuplicateCustV2;
 
-    
+
     public GetCustHighlightCommentByCustId = this.env.FoundationR3Url + this.url.GetCustHighlightCommentByCustId;
     public SendCustomerDataToRabbitMq = this.env.FoundationR3Url + this.url.SendCustomerDataToRabbitMq;
     // CUSTOMER COMPANY
@@ -799,7 +799,7 @@ export class UrlConstantNew{
     // CUSTOMER COMPANY LEGAL DOC
     public GetCustCompanyLegalDocForCustViewByCustId = this.env.FoundationR3Url + this.url.GetCustCompanyLegalDocForCustViewByCustId;
 
-    // CUSTOMER COMPANY 
+    // CUSTOMER COMPANY
     public GetCustCompanyByCustId = this.env.FoundationR3Url + this.url.GetCustCompanyByCustId;
     public EditCustCompany = this.env.FoundationR3Url + this.url.EditCustCompany;
 
@@ -891,10 +891,11 @@ export class UrlConstantNew{
     public GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview = this.env.FoundationR3Url + this.url.GetListCustomSrvyTaskBySrvyOrderIdForSrvyResultReview;
     public ReviewSurveyResult = this.env.FoundationR3Url + this.url.ReviewSurveyResult;
     public GetHtmlCodeFromMobile = this.env.FoundationR3Url + this.url.GetHtmlCodeFromMobile;
+    public GetUrlViewSurveyFromMobile = this.env.FoundationR3Url + this.url.GetUrlViewSurveyFromMobile;
     public UpdateSrvyTaskAndAddVerfResultH = this.env.FoundationR3Url + this.url.UpdateSrvyTaskAndAddVerfResultH;
     public UpdateSrvyTaskAndEditVerfResultH = this.env.FoundationR3Url + this.url.UpdateSrvyTaskAndEditVerfResultH;
     public UpdateMrSurveyTaskStatCode = this.env.FoundationR3Url + this.url.UpdateMrSurveyTaskStatCode;
-   
+
     // SURVEY ORDER
     public GetSrvyOrderBySrvyOrderId = this.env.FoundationR3Url + this.url.GetSrvyOrderBySrvyOrderId;
     public GetSrvyOrderByTrxRefNo = this.env.FoundationR3Url + this.url.GetSrvyOrderByTrxRefNo;
@@ -1124,6 +1125,9 @@ export class UrlConstantNew{
     public AddTrxSrcDataForPefindoV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoV2;
     public AddTrxScrDataForAsliRi = this.env.FoundationR3Url + this.url.AddTrxScrDataForAsliRi;
     public GetTrxSrcDataForAsliRi = this.env.FoundationR3Url + this.url.GetTrxSrcDataForAsliRi;
+    public GetTrxResultDataForCbasSlik = this.env.FoundationR3Url + this.url.GetTrxResultDataForCbasSlik;
+    public GetCbasSlikLatestTrxNoByKtpNoNpwp = this.env.FoundationR3Url + this.url.GetCbasSlikLatestTrxNoByKtpNoNpwp;
+    public AddTrxSrcDataForCbasSlik = this.env.FoundationR3Url + this.url.AddTrxSrcDataForCbasSlik;
 
     //PEFINDO
     public GetViewMOSummary = this.env.FoundationR3Url + this.url.GetViewMOSummary;
@@ -1215,10 +1219,10 @@ export class UrlConstantNew{
 
     //UPLOAD
     public UploadFileV2 = this.env.FoundationR3Url + this.url.UploadFileV2;
-    
+
     // THINGS TO DO
     public GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = this.url.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
-    
+
     // NotificationTemplate
     public GetNotificationTemplateByNotificationTemplateId = this.env.NotifEngineURL + this.url.GetNotificationTemplateByNotificationTemplateId;
     public GetLatestNotificationTemplateByNotificationTemplateCode = this.env.NotifEngineURL + this.url.GetLatestNotificationTemplateByNotificationTemplateCode;
@@ -1259,7 +1263,7 @@ export class UrlConstantNew{
     // PushNotificationHist
     public GetPushNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetPushNotificationHistByNotificationHistHId;
     public GetRefUserSubscriptionByUsername = this.env.NotifEngineURL + this.url.GetRefUserSubscriptionByUsername;
-    
+
     // SmsWaNotificationHist
     public GetSmsWaNotificationHistByNotificationHistHId = this.env.NotifEngineURL + this.url.GetSmsWaNotificationHistByNotificationHistHId;
 
@@ -1274,7 +1278,7 @@ export class UrlConstantNew{
     public MultipleSendToNotificationEngineEmail = this.env.FoundationR3Url + this.url.MultipleSendToNotificationEngineEmail;
     public ResendToNotificationEngineEmail = this.env.FoundationR3Url + this.url.ResendToNotificationEngineEmail;
     public MultipleResendToNotificationEngine = this.env.FoundationR3Url + this.url.MultipleResendToNotificationEngine;
-    
+
     // RefNotifAttrTemplate
     public AddRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.AddRefNotifAttrTemplate;
     public EditRefNotifAttrTemplate = this.env.NotifEngineURL + this.url.EditRefNotifAttrTemplate;
@@ -1284,4 +1288,5 @@ export class UrlConstantNew{
     public AddRefInsClaimDoc = this.env.FoundationR3Url + this.url.AddRefInsClaimDoc;
     public EditRefInsClaimDoc = this.env.FoundationR3Url + this.url.EditRefInsClaimDoc;
     public GetRefInsClaimDocByRefInsClaimDocCode = this.env.FoundationR3Url + this.url.GetRefInsClaimDocByRefInsClaimDocCode;
+
 }

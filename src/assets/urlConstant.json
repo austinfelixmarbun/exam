@@ -936,7 +936,11 @@
     "GetRefNotificationSourceByRefNotificationSourceId": "/v1/RefNotificationSource/GetRefNotificationSourceByRefNotificationSourceId",
     "AddTrxScrDataForAsliRi" : "/v1/IntegratorAsliRi/AddTrxSrcDataForAsliRi",
     "GetTrxSrcDataForAsliRi" : "/v1/IntegratorAsliRi/GetTrxResultDataForAsliRi",
+    "GetTrxResultDataForCbasSlik" : "/v1/IntegratorCbasSlik/GetTrxResultDataForCbasSlik",
+    "GetCbasSlikLatestTrxNoByKtpNoNpwp" : "/v1/IntegratorCbasSlik/GetCbasSlikLatestTrxNoByKtpNoNpwp",
+    "AddTrxSrcDataForCbasSlik" : "/v1/IntegratorCbasSlik/AddTrxSrcDataForCbasSlik",
     "AddRefInsClaimDoc": "/v1/RefInsClaimDoc/AddRefInsClaimDoc",
     "EditRefInsClaimDoc": "/v1/RefInsClaimDoc/EditRefInsClaimDoc",
-    "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
+    "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode",
+    "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile"
 }

@@ -22,6 +22,8 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/response/asset-master/res-get-list-asset-scheme-h-obj.model';
 import { AssetMasterAttrContentObj, AssetMasterAttrObj } from 'app/shared/model/asset-master-attr/asset-master-attr-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -54,6 +56,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   checkboxAll: boolean = false;
   listAssetMasterAttrContent: Array<ResGetAssetMasterAttrContentByIdObj>;
   isReadyAssetMasterAttr: boolean = false;
+  customPattern = new Array<CustomPatternObj>();
 
   AssetMasterChildForm = this.fb.group({
     AssetCategoryId: [''],
@@ -85,6 +88,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkSpace();
     if (this.pageType == "edit") {
       this.AssetMasterChildForm.controls["AssetCode"].disable();
       this.assetMasterObj = new AssetMasterObj();
@@ -268,7 +272,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var parentFormGroup = new Object();
                     for (const masterAttr of this.listAssetMasterAttrContent) {
-                      
+
                       var formGroupObject = new Object();
                       formGroupObject["AssetAttrId"] = [masterAttr["AssetAttrId"]];
                       formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
@@ -313,7 +317,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
     else{
       formGroupObject["AttrValue"] = [masterAttr.AttrContent == null ? "" : masterAttr.AttrContent, [Validators.maxLength(masterAttr.AttrLength)]];
     }
-    
+
     parentFormGroup[masterAttr.AssetAttrId] = this.fb.group(formGroupObject);
   }
 
@@ -360,7 +364,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
           let x = this.listAssetMasterAttrContent.find(f=>f.AssetAttrId == assetMasterAttr.AssetAttrId);
           if(x != null){
             if((x.AttrInputType == "A" || x.AttrInputType == "N") && assetMasterAttr.AttrContent == ""){
-              assetMasterAttr.AttrContent = "0"; 
+              assetMasterAttr.AttrContent = "0";
             }
           }
           assetMasterAttrValues.push(assetMasterAttr);
@@ -508,5 +512,13 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         );
       }
     }
+  }
+  checkSpace(){
+    const patternObj: CustomPatternObj = new CustomPatternObj();
+    patternObj.pattern = CommonConstant.regexSpace;
+    patternObj.invalidMsg = ExceptionConstant.NO_WHITE_SPACE;
+    this.customPattern.push(patternObj);
+    this.AssetMasterChildForm.controls.AssetCode.setValidators([Validators.required,Validators.pattern(CommonConstant.regexSpace)]);
+    this.AssetMasterChildForm.controls.AssetCode.updateValueAndValidity();
   }
 }

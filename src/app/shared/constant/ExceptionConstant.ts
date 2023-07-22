@@ -56,7 +56,7 @@ export class ExceptionConstant {
     public static ISSUE_DT_MUST_LESS_EQ_THAN_BD = "Issue Date must be <= Business Date";
     public static EXP_DT_MUST_HIGHER_THAN_BD = "Expired Date must be > Business Date";
     public static DUPLICATE_LEGAL_DOC = "Document with Legal Document Type {0} and Document No {1} already exists";
-    public static TRUSTING_SOCIAL_MAX_SUBJECT = "Subject cannot be more than 8";    
+    public static TRUSTING_SOCIAL_MAX_SUBJECT = "Subject cannot be more than 8";
     public static TRUSTING_SOCIAL_DUPL_RELATION_CUST = "Cannot add another subject with Relation: Customer";
     public static TRUSTING_SOCIAL_DUPL_MOBILE_PHN_NO = "Duplicate Mobile Phone No";
     public static INVALID_FILE_FORMAT = "File format must be {0}";
@@ -67,14 +67,16 @@ export class ExceptionConstant {
     public static OTHER_BIZ_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Other Business Establishment Date Must Be Less Than Business Date";
     public static EMP_EST_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Employee Start Working Date Date Must Be Less Than Business Date";
     public static START_WORKING_DATE_MUST_BE_LESS_THAN_BIZ_DATE = "Start Working Date Date Must Be Less Than Business Date";
-    public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX"; 
-    public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2"; 
+    public static MOBILE_PHN_NO_INVALID = "Mobile Phone No Must be Started With 62XXXXXXXXX";
+    public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2";
     public static EXP_PASSWORD = "Password has expired. Please change your password.";
     public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
 
     public static MANDATORY_LEGAL_DOC = "Legal Documents with following type are mandatory: {0}";
-    
+
     // NotifEngine
     public static PARAM_ATTR_INACTIVE = "There are some inactive Parameter Attribute. Do you still want to continue?";
 
+    // No Whitespace
+    public static NO_WHITE_SPACE = "Cannot contain space";
 }

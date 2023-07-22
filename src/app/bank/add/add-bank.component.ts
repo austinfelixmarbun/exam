@@ -5,9 +5,16 @@ import { HttpClient } from '@angular/common/http';
 import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { UcLookupObj } from 'app/shared/model/uc-lookup-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
@@ -20,22 +27,45 @@ export class BankAddComponent implements OnInit {
         BankCode : ['',Validators.required],
         BankName : ['', Validators.required],
         RegRptCode : ['',Validators.required],
+        BankCountryCode: ['',Validators.required],
         RtgsCode :[''],
         IsActive : [false]
     });
 
     refBankId: number = 0;
+    Country: any;
+    flag: boolean = false;
+    LocalCountry: string;
+    LocalCountryCode: string;
+    BankCountryCode: string;
+    BankCountryName: string = "";
     result: any;
+    custObj: CustObj;
+     IdCust: number;
+    custPersonalObj: CustPersonalObj;
+    tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
     mode: string;
+    tempNationality: any;
     title : string = "Add Bank";
+    tempCountry: any;
+    tempCountryCode: any;
+    isReady: boolean;
+
+    lookUpObj: InputLookupObj;
     bankObj: RefBankObj;
     criteria: CriteriaObj[] = [];
+    criteriaList: Array<CriteriaObj>;
+    criteriaObj: CriteriaObj;
+    professionLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
+    response: any;
+    responseCountry: any;
 
     readonly CancelLink: string = NavigationConstant.CS_BANK_PAGING;
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
-        this.route.queryParams.subscribe(params => {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private fb: FormBuilder) {
+        this.route.queryParams.subscribe((params) => {
             this.refBankId = params["RefBankId"];
             this.mode = params["mode"];
+
             if (this.mode == "edit") {
                 var tempCrit = new CriteriaObj();
                 tempCrit.restriction = "Eq";
@@ -46,28 +76,97 @@ export class BankAddComponent implements OnInit {
     }
 
     ngOnInit() {
+       if(this.mode != "edit"){
+        this.setDefaultCountryName();
+       }
+        this.SetLookupCountry();
+        this.isEdit();
+        
+    }
+
+   async setDefaultCountryName(){
+        await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GSCodeDefLocalNationality }).subscribe(
+            (response) => {
+              this.Country = response;
+              let splitCodeDesc = this.Country.GsValue.split(';');
+              this.LocalCountryCode = splitCodeDesc[0];
+              this.LocalCountry = splitCodeDesc[1];
+              this.SetLookupCountry();
+              this.criteriaList = new Array();
+              this.criteriaObj = new CriteriaObj();
+              this.criteriaObj.restriction = AdInsConstant.RestrictionNeq;
+              this.criteriaObj.propName = 'COUNTRY_CODE';
+              this.criteriaObj.value = this.LocalCountryCode;
+              this.criteriaList.push(this.criteriaObj);
+              this.lookUpObj.addCritInput = this.criteriaList;
+              this.BankAddForm.patchValue({
+                BankCountryCode: this.LocalCountryCode
+              });
+              this.lookUpObj.isRequired = false;
+            });
+    }
+ 
+    async isEdit(){
         if (this.mode == "edit") {
             this.title = "Edit Bank";
             this.BankAddForm.controls.BankCode.disable();
             var bankObj = new RefBankObj();
             bankObj.RefBankId = this.refBankId;
             
-            this.http.post(this.UrlConstantNew.GetRefBankByRefBankIdAsync, {Id: this.refBankId}).subscribe(
-                (response) => {
+            await this.http.post(URLConstant.GetRefBankByRefBankIdAsync, {Id: this.refBankId}).toPromise().then(
+                async (response) => {
                     this.result = response;
-                    this.BankAddForm.patchValue({
-                        BankCode : this.result.BankCode,
-                        BankName : this.result.BankName,
-                        RegRptCode : this.result.RegRptCode,
-                        RtgsCode: this.result.RtgsCode,
-                        IsActive : this.result.IsActive
-                    })
+
+                    await this.http.post(URLConstant.GetRefCountryByCountryCode,{
+                        Code: response["BankCountryCode"]
+                      }).subscribe((responseCountry)=>{
+                        this.responseCountry = responseCountry;
+                        console.log("ini isi response country",this.responseCountry.CountryName);
+                        this.BankCountryName = this.responseCountry.CountryName;
+                        this.lookUpObj.jsonSelect = {CountryName :this.BankCountryName};
+                        this.lookUpObj.nameSelect = this.BankCountryName
+                      })
+                    await this.PatchData();
                 }
             );
         }else{
             this.checkIsAutoFormNoFromSetting('BN')
         }
     }
+
+    SetLookupCountry(){
+        this.lookUpObj = new InputLookupObj(this.UrlConstantNew);
+        this.lookUpObj.isReady = false;
+        this.lookUpObj.urlJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.pagingJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.genericJson = "./assets/lookup/lookupCustomerCountry.json";
+        this.lookUpObj.isReady = true;
+        this.lookUpObj.nameSelect = this.LocalCountry;
+        // this.lookUpObj.jsonSelect = {CountryName: this.BankCountryName};
+    }
+    
+
+    getLookup(ev) {
+        console.log(ev);
+        this.response = ev.CountryCode
+        this.BankAddForm.patchValue({
+            BankCountryCode: ev.CountryCode
+        })
+        console.log("this is Bank Country Code",this.BankAddForm.controls.BankCountryCode.value)
+      }
+
+      PatchData(){
+        this.BankAddForm.patchValue({
+            CountryName: this.BankCountryName,
+            BankCode : this.result.BankCode,
+            BankName : this.result.BankName,
+            RegRptCode : this.result.RegRptCode,
+            RtgsCode: this.result.RtgsCode,
+            BankCountryCode: this.result.BankCountryCode,
+            IsActive : this.result.IsActive
+        })
+    }
+
 
     SaveForm(){
         if (this.mode == "edit") {
@@ -77,7 +176,7 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = this.refBankId;
             this.bankObj.RowVersion  = this.result.RowVersion;
 
-            this.http.post(this.UrlConstantNew.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(URLConstant.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
                     this.toastr.successMessage(response['message']);
@@ -89,12 +188,13 @@ export class BankAddComponent implements OnInit {
             this.bankObj.RefBankId = 0;
             this.bankObj.RowVersion = "";
 
-            this.http.post(this.UrlConstantNew.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
+            this.http.post(URLConstant.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
                 AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
             });
         }
     }
+
     //check is automatic/not form no 4
     isAuto: boolean = false;
     checkIsAutoFormNoFromSetting(msAutoGenCode: any) {
@@ -103,7 +203,7 @@ export class BankAddComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
       }
       var result: any;
-      this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
+      this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
         (response) => {
           result = response;
 
