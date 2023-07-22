@@ -36,7 +36,13 @@ export class MasterAddEditComponent implements OnInit {
     IsActive: [true],
     RowVersion: [''],
     IsDeletable: [true],
-    IsSystem: [false]
+    IsSystem: [false],
+    ReserveField1: [''],
+    ReserveField2: [''],
+    ReserveField3: [''],
+    ReserveField4: [''],
+    ReserveField5: [''],
+    DefaultValue: ['']
   });
 
   readonly CancelLink: string = NavigationConstant.CS_MASTER;
@@ -77,7 +83,13 @@ export class MasterAddEditComponent implements OnInit {
             IsActive: this.resultData.IsActive,
             RowVersion: this.resultData.RowVersion,
             IsDeletable: this.resultData.IsDeletable,
-            IsSystem: this.resultData.IsSystem
+            IsSystem: this.resultData.IsSystem,
+            ReserveField1: this.resultData.ReserveField1,
+            ReserveField2: this.resultData.ReserveField2,
+            ReserveField3: this.resultData.ReserveField3,
+            ReserveField4: this.resultData.ReserveField4,
+            ReserveField5: this.resultData.ReserveField5,
+            DefaultValue: this.resultData.DefaultValue
           });
         }
       );

@@ -1125,6 +1125,9 @@ export class UrlConstantNew{
     public AddTrxSrcDataForPefindoV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoV2;
     public AddTrxScrDataForAsliRi = this.env.FoundationR3Url + this.url.AddTrxScrDataForAsliRi;
     public GetTrxSrcDataForAsliRi = this.env.FoundationR3Url + this.url.GetTrxSrcDataForAsliRi;
+    public GetTrxResultDataForCbasSlik = this.env.FoundationR3Url + this.url.GetTrxResultDataForCbasSlik;
+    public GetCbasSlikLatestTrxNoByKtpNoNpwp = this.env.FoundationR3Url + this.url.GetCbasSlikLatestTrxNoByKtpNoNpwp;
+    public AddTrxSrcDataForCbasSlik = this.env.FoundationR3Url + this.url.AddTrxSrcDataForCbasSlik;
 
     //PEFINDO
     public GetViewMOSummary = this.env.FoundationR3Url + this.url.GetViewMOSummary;

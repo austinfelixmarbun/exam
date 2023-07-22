@@ -56,5 +56,17 @@
         </button>
       </div>
     </div>
+
+    <div *ngIf="IsUseCbasSlik" class="form-group row">
+      <label class="col-md-2" translate>CBAS SLIK</label>
+      <div class="col-md-4">
+        <button type="button" (click)="ReqCbasSlik()" class="btn btn-raised btn-primary mr-1" translate>
+          Request
+        </button>
+        <button type="button" (click)="ViewCbasSlik()" class="btn btn-raised btn-primary" translate>
+          View
+        </button>
+      </div>
+    </div>
   </div>
 </div>

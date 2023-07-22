@@ -26,8 +26,7 @@ import { VendorObj } from 'app/shared/model/vendor-obj.model';
 
 @Component({
   selector: 'app-funding-company-add-edit',
-  templateUrl: './funding-company-add-edit.component.html',
-  styleUrls: ['./funding-company-add-edit.component.css']
+  templateUrl: './funding-company-add-edit.component.html'
 })
 export class FundingCompanyAddEditComponent implements OnInit {
 

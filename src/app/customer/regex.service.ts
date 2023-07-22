@@ -32,7 +32,7 @@ export class RegexService {
       default:
         errMessage = 'Not yet setting';
         break;
-    } 
+    }
     return errMessage;
   }
 

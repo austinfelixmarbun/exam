@@ -18,7 +18,9 @@ import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-val
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ListAssetSchemeHObj, ResGetListAssetSchemeHObj } from 'app/shared/model/response/asset-master/res-get-list-asset-scheme-h-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
-;
+import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+
 
 @Component({
   selector: 'app-asset-master-add-edit-parent',
@@ -42,6 +44,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
   listAssetScheme: Array<ListAssetSchemeHObj> = new Array<ListAssetSchemeHObj>();
   checkboxAll: boolean = false;
   isFinal: boolean;
+  customPattern = new Array<CustomPatternObj>();
   AssetMasterParentForm = this.fb.group({
     AssetCategoryId: [''],
     AssetTypeId: [0, [Validators.required]],
@@ -121,8 +124,8 @@ export class AssetMasterAddEditParentComponent implements OnInit {
       });
   }
 
-  async ngOnInit() { 
-    
+  async ngOnInit() {
+    this.checkSpace();
     await this.http.post(this.UrlConstantNew.GetValueAssetType, null).toPromise().then(
       (response) => {
         this.allAssetMasterMethod = response[CommonConstant.ReturnObj];
@@ -157,7 +160,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
 
           this.isFinal = this.resultData.IsFinal;
           if(this.isFinal)
-          {            
+          {
             this.AssetMasterParentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
             this.AssetMasterParentForm.controls['AssetCategoryId'].updateValueAndValidity();
           }
@@ -202,7 +205,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             });
         }
       );
-    }else{ 
+    }else{
           this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
           this.reqGetListAssetSchmHObj.AssetMasterId = this.AssetMasterId;
           this.reqGetListAssetSchmHObj.AssetTypeId = this.allAssetMasterMethod[0]['Key'];
@@ -215,7 +218,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
                 }
               }
             });
-   
+
     }
   }
 
@@ -290,7 +293,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           }),
           mergeMap((response) => {
             this.listAssetSchmDObj.AssetMasterId = response["Id"];
-            let observableBatch = []; 
+            let observableBatch = [];
             let editListAssetSchm = this.http.post(this.UrlConstantNew.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
             observableBatch.push(editListAssetSchm);
             return forkJoin(observableBatch);
@@ -306,7 +309,7 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           (response) => {
             this.toastr.successMessage(response["Message"]);
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
-  
+
           }
         );
       }
@@ -348,12 +351,12 @@ export class AssetMasterAddEditParentComponent implements OnInit {
           } else {
             this.listAssetScheme[i].AssetMasterId = null;
           }
-        } 
-  
+        }
+
         let editAssetMaster = this.http.post(this.UrlConstantNew.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions);
         let editAssetSchm = this.http.post(this.UrlConstantNew.EditListAssetSchmDByAssetMasterId, this.listAssetSchmDObj, AdInsConstant.SpinnerOptions);
         let observableBatch = [editAssetMaster, editAssetSchm];
-      
+
 
         forkJoin(observableBatch).subscribe(
           (response) => {
@@ -371,9 +374,17 @@ export class AssetMasterAddEditParentComponent implements OnInit {
             AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
           }
         );
-         
+
       }
 
     }
+  }
+  checkSpace(){
+    const patternObj: CustomPatternObj = new CustomPatternObj();
+    patternObj.pattern = CommonConstant.regexSpace;
+    patternObj.invalidMsg = ExceptionConstant.NO_WHITE_SPACE;
+    this.customPattern.push(patternObj);
+    this.AssetMasterParentForm.controls.AssetCode.setValidators([Validators.required,Validators.pattern(CommonConstant.regexSpace)]);
+    this.AssetMasterParentForm.controls.AssetCode.updateValueAndValidity();
   }
 }

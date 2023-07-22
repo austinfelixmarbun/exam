@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title" translate>Request CBAS SLIK Checking</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" translate>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="text-center mb-3"><label>Are you sure want to get customer information from CBAS SLIK with following data ?</label></div>
+  <table style="margin-left:auto;margin-right:auto" cellpadding="4">
+    <tbody>
+      <tr><td translate>Customer Name</td><td> : </td><td>{{ReqObj.Name}}</td></tr>
+      <tr><td translate>NPWP</td><td> : </td><td>{{ReqObj.Npwp}}</td></tr>
+
+      <ng-container *ngIf="MrCustTypeCode == 'PERSONAL'">
+        <tr><td translate>KTP No</td><td> : </td><td>{{ReqObj.KtpNo}}</td></tr>
+        <tr><td translate>Birth Place</td><td> : </td><td>{{ReqObj.BirthPlace}}</td></tr>
+        <tr><td translate>Birth Date</td><td> : </td><td>{{ReqObj.BirthDate}}</td></tr>
+        <tr><td translate>Gender</td><td> : </td><td>{{ParentForm.get('MrGenderCode').value}}</td></tr>
+        <tr><td translate>Mother Name</td><td> : </td><td>{{ReqObj.MotherName}}</td></tr>
+      </ng-container>
+
+      <ng-container *ngIf="MrCustTypeCode == 'COMPANY'">
+        <tr><td translate>Akta No</td><td> : </td><td>{{ReqObj.AktaNo}}</td></tr>
+        <tr><td translate>Birth Date</td><td> : </td><td>{{ReqObj.BirthDate}}</td></tr>
+      </ng-container>
+
+      <tr><td translate>Address</td><td> : </td><td>{{ReqObj.Address}}</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-footer">
+  <div class="button-right">
+    <span class="mr-1">
+      <button type="button" class="btn btn-warning btn-raised mr-1" (click)="activeModal.dismiss('Cross click')">
+          <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+      </button>
+      <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="Submit()">
+        <i class="far fa-check-square"></i>&nbsp;<span translate>Yes</span>
+      </button>
+    </span>
+  </div>
+</div>
