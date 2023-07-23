@@ -136,6 +136,9 @@ export class FundingCompanyAddEditComponent implements OnInit {
                     if (vendorAttr["AttrInputType"] == 'N'  && vendorAttr["IsMandatory"] == true) {
                       formGroupObject["VendorAttrValue"] = [0, Validators.required];
                     }
+                    if (vendorAttr["AttrInputType"] == 'P') {
+                      formGroupObject["VendorAttrValue"] = [0];
+                    }
                     if (vendorAttr["AttrInputType"] == 'C') {
                       var temp = vendorAttr["AttrValue"].split(";");
                       this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;

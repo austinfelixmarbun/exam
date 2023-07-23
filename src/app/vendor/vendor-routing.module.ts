@@ -41,7 +41,7 @@ import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/ve
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
-import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
+import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
 
 const routes: Routes = [
   {
@@ -325,13 +325,6 @@ const routes: Routes = [
         component: FundingCompanyAddEditComponent,
         data: {
           title: 'Funding Company Addedit'
-        },
-      },
-      {
-        path: PathConstant.VENDOR_FUNDING_COY_VIEW,
-        component: FundingCompanyDetailComponent,
-        data: {
-          title: 'Funding Company View'
         },
       }
     ]

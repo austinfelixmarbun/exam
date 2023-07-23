@@ -209,6 +209,7 @@ export class NavigationConstant {
     public static VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
     public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
     public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
+    public static VIEW_FUNDING_COMPANY = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_FUNDING_COMPANY;
     //#endregion
     
     //#region Organization

@@ -70,7 +70,7 @@ import { VendorCollCompanyOfficeMemberAddComponent } from './vendor-coll-company
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyContactPersonComponent } from './funding-company/funding-company-contact-person/funding-company-contact-person.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
-import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
+import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 export const customCurrencyMaskConfig = {     
@@ -161,8 +161,7 @@ export const customCurrencyMaskConfig = {
         VendorCollCompanyOfficeMemberAddComponent,
         FundingCompanyAddEditComponent,
         FundingCompanyContactPersonComponent,
-        FundingCompanyPagingComponent,
-        FundingCompanyDetailComponent
+        FundingCompanyPagingComponent
     ],
     providers: [
         VendorService,

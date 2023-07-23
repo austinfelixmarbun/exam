@@ -29,6 +29,7 @@ import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info
 import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendor-coll-company-view.component";
+import { FundingCompanyDetailComponent } from "./vendor-funding-company-view/funding-company-detail.component";
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendo
         MainHoInfoComponent,
         MainInfoViewComponent,
         HoAtpmInfoComponent,
-        VendorCollCompanyViewComponent
+        VendorCollCompanyViewComponent,
+        FundingCompanyDetailComponent
     ]
 })
 export class VendorViewModule { }

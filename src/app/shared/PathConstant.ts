@@ -449,6 +449,7 @@ export class PathConstant {
     public static VIEW_VENDOR_HOLDING = "VendorHolding";
     public static VIEW_VENDOR_HO = "VendorHO";
     public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
+    public static VIEW_FUNDING_COMPANY = "FundingCompany";
     //#endregion
 
     //#region View-Survey-Module
