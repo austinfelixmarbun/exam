@@ -35,9 +35,7 @@
               "IsCallback": false,
               "IsReadonly": false,
               "IsHide": false,
-              "IsEditable": false,
-              "Min": "1",
-              "Max": "100"
+              "IsEditable": false
             },
             {
               "Type": "NUMERIC",
@@ -47,9 +45,17 @@
               "IsCallback": false,
               "IsReadonly": false,
               "IsHide": false,
-              "IsEditable": false,
-              "Min": "1",
-              "Max": "100"
+              "IsEditable": false
+            },
+            {
+              "Type": "LABEL",
+              "Label": "Ref Cov Code",
+              "Variable": "RefCovCode",
+              "IsRequired": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": false
             }
           ],
           "addBodyList": [],
@@ -87,7 +93,7 @@
     }
   ],
   "serviceUrl": {
-    "add": { "environment": "", "apiPath": "", "apiUrl": "" },
+    "add": { "environment": "facilityMntUrl", "apiPath": "/v1/JfContract/AddRangeJfContractNegativeCov", "apiUrl": "" },
     "edit": { "environment": "", "apiPath": "", "apiUrl": "" },
     "createRfa": { "environment": "", "apiPath": "", "apiUrl": "" }
   },

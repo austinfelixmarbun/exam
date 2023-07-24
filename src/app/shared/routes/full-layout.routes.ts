@@ -720,7 +720,7 @@ export const Full_ROUTES: Routes = [
         exposedModule: './PayoutModule'
       })
         .then(m => m.PayoutModule)
-        .catch(e => console.log(e))
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
   {
