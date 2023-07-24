@@ -17,7 +17,6 @@ import { FundingCompanyService } from 'app/vendor/funding-company.service';
 export class FundingCompanyContactPersonComponent implements OnInit {
   modeCP: string;
   VendorContactPersonId: number;
-  // VendorId: number;
   @Input() mode: string;
   @Input() VendorId: number;
   @Output() addContactPerson = new EventEmitter<any>();
@@ -113,7 +112,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
 
   editItem(item: any) {
     console.log("ini item name", item.Name);
-    // this.editContactPerson = vendorCPObj;
     this.modeCP = "edit";
     if (this.modeCP == "edit") {
       this.VendorContactPersonId = item.VendorContactPersonId
@@ -128,13 +126,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
     console.log(this.VendorContactPersonId)
   }
 
-  // deleteVendorCP(vendorCP: ResListVendorContactPersonObj): void {
-  //   const index = this.listVendorCP.indexOf(vendorCP);
-  //   if (index !== -1) {
-  //     this.listVendorCP.splice(index, 1);
-  //   }
-  // }
-
   deleteVendorCP(vendorCP: ResListVendorContactPersonObj): void {
 
       // Remove newly added contact person from the newVendorContactPersons array
@@ -142,20 +133,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
     if (index !== -1) {
       this.listVendorCP.splice(index, 1);
     }
-    
-    // else{
-    //   this.http.post<any>(URLConstant.DeleteVendorContactPerson , { Id: vendorCP.VendorContactPersonId }).subscribe(
-    //     (response: any) => {
-    //       // Update the frontend list after successful deletion
-    //       this.listVendorCP = this.listVendorCP.filter(cp => cp.VendorContactPersonId !== vendorCP.VendorContactPersonId);
-    //       console.log("Contact person deleted successfully!");
-    //     },
-    //     (error: any) => {
-    //       console.error("Error occurred while deleting contact person:", error);
-    //     }
-    //   )
-    // }
-    
+
   }
 
   addCP() {

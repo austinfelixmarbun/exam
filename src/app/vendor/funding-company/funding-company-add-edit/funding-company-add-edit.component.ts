@@ -336,7 +336,6 @@ export class FundingCompanyAddEditComponent implements OnInit {
                       else if (vendorAttr["AttrInputType"] == 'C') {
                         var temp = vendorAttr["AttrValue"].split(";");
                         const booleanValue = item["AttrContent"] === 'true' ? true : false;
-                        // formGroupObject["VendorAttrValue"] = booleanValue;
                         formGroupObject["VendorAttrValue"] = booleanValue;
                       }
                       else if (vendorAttr["AttrInputType"] == 'R') {
@@ -422,7 +421,6 @@ export class FundingCompanyAddEditComponent implements OnInit {
 
       if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
         const vendorAttrContent = Object.keys(formValue).map(key => ({
-          // VendorAttrContentId: formValue[key].VendorAttrContentId,
           attrCode: formValue[key].AttrCode,
           attrContent: formValue[key].VendorAttrValue
         }));
@@ -499,9 +497,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
         this.vendorFundingCoyObj.VendorContactPerson = this.vendorContactPerson;
 
 
-        // this.vendorFundingCoyObj.VendorId = this.VendorId;
-        // this.vendorFundingCoyObj.vendorFundCoyAddrObj.VendorAddrId = this.result.VendorAddrObj.VendorAddrId;
-     
+  
      
      
      
@@ -518,8 +514,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
           VendorFundCoyObj: this.vendorFundingCoyObj.VendorFundCoyObj,
           VendorFundCoyAddrObj: this.vendorFundingCoyObj.VendorFundCoyAddrObj,
           VendorAttrContent: vendorAttrContent,
-          VendorContactPerson : this.vendorContactPerson,
-          // vendorId: this.vendorFundingCoyObj.VendorObj.VendorId
+          VendorContactPerson : this.vendorContactPerson
         } 
         console.log("ini isi form data edit", formDataEdit)
         this.http.post(URLConstant.EditVendorFundingCoy, formDataEdit).subscribe(

@@ -25,19 +25,6 @@
               </th>
             </tr>
           </thead>
-          <!-- <tbody *ngIf="mode == 'add'">
-            <tr *ngFor="let item of CPFormValues">
-              <td style="text-align: left;" hidden>{{item.VendorContactPersonId}}</td>
-              <td style="text-align: left;">{{item.name}}</td>
-              <td style="text-align: left;">{{item.phone1}}</td>
-              <td style="text-align: left;">{{item.email}}</td>
-              <td style="text-align: center;">
-                <a [hidden]="CheckListToBeEdit(item.VendorContactPersonId)" (click)="editItem(item)" style="cursor: pointer">
-                  <i class="fa fa-edit"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody> -->
           <tbody>
             <tr *ngFor="let item of listVendorCP">
               <td style="text-align: left;" hidden>{{item.VendorContactPersonId}}</td>

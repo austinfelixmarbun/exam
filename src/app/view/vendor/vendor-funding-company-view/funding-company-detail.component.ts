@@ -74,10 +74,6 @@ export class FundingCompanyDetailComponent implements OnInit {
    RadioButtonVendorAttr:  { [id: string]: Array<any> } = {};
   ngOnInit(): void {
     console.log("ini id",this.VendorCode);
-    let where = []
-    where.push(this.VendorCode)
-    this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewFundingCompany.json";
-    this.viewGenericObj.whereValue = where
 
     this.http.post(URLConstant.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
       async (response) => {
@@ -155,7 +151,6 @@ export class FundingCompanyDetailComponent implements OnInit {
                   
   
                   console.log(this.attributeList);
-                  // You can assign it to a class property if needed
                 }
               }
               });
