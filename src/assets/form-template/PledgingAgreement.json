@@ -21,7 +21,7 @@
 					"id": "vvendorCodeSearchId",
 					"type": "dropdown",
 					"label": "Funding Company Name",
-					"name": "V.VENDOR_CODE",
+					"name": "VT.VENDOR_CODE",
 					"value": "",
 					"placeholder": "",
 					"datatype": "text",

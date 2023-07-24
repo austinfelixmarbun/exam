@@ -88,8 +88,8 @@
           "customObjName": "ReturnObject",
           "reqObj": [
             {
-              "propName": "Id",
-              "propValue": "PaymentHistHId",
+              "propName": "AgrmntNo",
+              "propValue": "JfAgrmntNo",
               "isFromDict": false
             }
           ]

@@ -21,7 +21,7 @@
               "id": "vtvendorNameSearchId",
               "type": "dropdown",
               "label": "Funding Coy Name",
-              "name": "VT.VENDOR_NAME",
+              "name": "VT.VENDOR_CODE",
               "value": "",
               "placeholder": "",
               "datatype": "text",
