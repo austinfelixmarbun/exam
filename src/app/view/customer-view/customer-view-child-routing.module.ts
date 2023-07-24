@@ -149,6 +149,10 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_ASLI_RI,
         loadChildren: () => import('./customer-view-asli-ri/customer-view-asli-ri.module').then(m => m.CustomerViewAsliRiModule)
+      },
+      {
+        path: PathConstant.VIEW_CUST_CBAS_SLIK,
+        loadChildren: () => import('./customer-view-cbas-slik/customer-view-cbas-slik.module').then(m => m.CustomerViewCbasSlikModule)
       }
     ]
   }
