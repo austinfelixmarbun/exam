@@ -35,11 +35,11 @@
               "DdlItemsObj": null,
               "DdlReqObj": {
                 "Environment": "FOU",
-                "Url": "/RefOffice/GetListKvpActiveRefOffice",
+                "Url": "/RefOffice/GetListKvpActiveRefOfficeByMrOfficeCategoryCode",
                 "CustomObjName": "ReturnObject",
                 "CustomKeyName": "Key",
                 "CustomValueName": "Value",
-                "ReqObj": {}
+                "ReqObj": {"code":"BRANCH"}
               }
             },
             {
