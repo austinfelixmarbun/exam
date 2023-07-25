@@ -45,7 +45,7 @@ module.exports = {
         "@angular/common": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
         "@angular/common/http": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
         "@angular/router": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
-
+        "ngx-spinner": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         ...sharedMappings.getDescriptors()
       })
 
