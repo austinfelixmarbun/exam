@@ -30,10 +30,10 @@
                             "isFromURL": true,
                             "ddlType": "all",
                             "isEvent": false,
-                            "environment": "FACILITYMNT",
-                            "path": "/VendorTms/GetAllVendorTms",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
+                            "environment": "FOU",
+                            "path": "/Vendor/GetListKvpVendorObjByCategoryCode",
+                            "criteriaPropName": "Code",
+                            "criteriaPropValue": "JF_FUNDING_COMPANY",
                             "isQueryIn": false
                         },
                         {

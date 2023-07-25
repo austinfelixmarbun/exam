@@ -63,7 +63,9 @@
           "environment": "facilityMntUrl",
           "apiPath": "/v1/JfContract/GetListJfContractBranchPlafondInfoByJfContractNo",
           "reqObj": { "JfContractNo": "ContractNo" }
-        }
+        },
+        "isFromApi": true,
+        "resultData": ""
       },
       "id": "58a30ca6-9fd2-4458-b438-b04f838609d1"
     },
@@ -99,8 +101,8 @@
     "edit": { "environment": "", "apiPath": "", "apiUrl": "" },
     "createRfa": { "environment": "", "apiPath": "", "apiUrl": "" }
   },
-  "isRedirect": false,
-  "redirectOption": "",
+  "isRedirect": true,
+  "redirectOption": "selfPage",
   "redirectLink": "",
   "hideSubmitButton": false,
   "listBtn": [],
@@ -114,9 +116,8 @@
       "return": [{ "propName": "JfContractNo", "propValue": "JfContractNo" }]
     }
   ],
-  "customToastrMsg": "",
-  "isOverrideSubmit": true,
+  "customToastrMsg": "Success ",
+  "isOverrideSubmit": false,
   "isOverrideCancel": false,
-  "onSubmit": [
-  ]
+  "onSubmit": []
 }
