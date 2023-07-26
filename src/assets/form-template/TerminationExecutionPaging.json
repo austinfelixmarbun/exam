@@ -30,10 +30,10 @@
                             "isFromURL": true,
                             "ddlType": "all",
                             "isEvent": false,
-                            "environment": "FACILITYMNT",
-                            "path": "/VendorTms/GetAllVendorTms",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
+                            "environment": "FOU",
+                            "path": "/Vendor/GetListKvpVendorObjByCategoryCode",
+                            "criteriaPropName": "Code",
+                            "criteriaPropValue": "JF_FUNDING_COMPANY",
                             "isQueryIn": false
                         },
                         {
@@ -65,7 +65,7 @@
                         {
                             "id": "htrxDtSearchId",
                             "type": "datepicker",
-                            "label": "Batch Prepare Date From >=",
+                            "label": "Batch Prepare Date >=",
                             "name": "H.TRX_DT",
                             "value": "",
                             "placeholder": "",
@@ -76,7 +76,7 @@
                         {
                             "id": "htrxDtSearchId",
                             "type": "datepicker",
-                            "label": "Batch Prepare Date To <=",
+                            "label": "Batch Prepare Date <=",
                             "name": "H.TRX_DT",
                             "value": "",
                             "placeholder": "",
@@ -85,10 +85,10 @@
                             "useDefVal": false
                         },
                         {
-                            "id": "trxstatSearchId",
+                            "id": "htrxStatSearchId",
                             "type": "dropdown",
                             "label": "Termination Batch Status",
-                            "name": "TrxStat",
+                            "name": "H.TRX_STAT",
                             "value": "",
                             "placeholder": "",
                             "datatype": "text",
@@ -98,23 +98,23 @@
                             "items": [
                                 {
                                     "key": "NEW",
-                                    "value": "NEW"
+                                    "value": "New"
                                 },
                                 {
                                     "key": "GNR",
-                                    "value": "GNR"
+                                    "value": "Generate Text"
                                 },
                                 {
                                     "key": "RDY",
-                                    "value": "RDY"
+                                    "value": "Ready"
                                 }
                             ]
                         },
                         {
-                            "id": "terminationtypeSearchId",
+                            "id": "hterminationTypeSearchId",
                             "type": "dropdown",
                             "label": "Batch Type",
-                            "name": "TerminationType",
+                            "name": "H.TERMINATION_TYPE",
                             "value": "",
                             "placeholder": "",
                             "datatype": "text",

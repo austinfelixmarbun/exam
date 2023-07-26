@@ -65,7 +65,9 @@
           "environment": "facilityMntUrl",
           "apiPath": "/v1/JfContract/GetListNegativeCovenantByContractNo",
           "reqObj": { "JfContractNo": "ContractNo" }
-        }
+        },
+        "isFromApi": true,
+        "resultData": ""
       },
       "id": "4507cacb-9307-4567-bf3c-3d1a2b275bcf"
     },
@@ -97,8 +99,8 @@
     "edit": { "environment": "", "apiPath": "", "apiUrl": "" },
     "createRfa": { "environment": "", "apiPath": "", "apiUrl": "" }
   },
-  "isRedirect": false,
-  "redirectOption": "",
+  "isRedirect": true,
+  "redirectOption": "selfPage",
   "redirectLink": "",
   "hideSubmitButton": false,
   "listBtn": [],
@@ -113,7 +115,7 @@
     }
   ],
   "child": ["Negativecovenantedit"],
-  "customToastrMsg": "",
+  "customToastrMsg": "Success",
   "isOverrideSubmit": false,
   "isOverrideCancel": false
 }
