@@ -71,6 +71,10 @@ import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/re
 import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
 import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
 import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
+import { PaymentAllocGroupHPagingComponent } from './payment-alloc-group-new/payment-alloc-group-h-paging/payment-alloc-group-h-paging.component';
+import { PaymentAllocGroupHDetailComponent } from './payment-alloc-group-new/payment-alloc-group-h-detail/payment-alloc-group-h-detail.component';
+import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
+import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/payment-alloc-group-d-paging/payment-alloc-group-d-paging.component';
 
 const routes: Routes = [
   {
@@ -572,6 +576,36 @@ const routes: Routes = [
         component: RefTrxTypeDetailComponent,
         data: {
           title: 'Ref Trx Type Detail'
+        },
+      },
+
+      // PAYMENT ALLOCATION GROUP H AND D
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_H_PAGING,
+        component: PaymentAllocGroupHPagingComponent,
+        data: {
+          title: 'Payment Allocation Group Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_H_DETAIL,
+        component: PaymentAllocGroupHDetailComponent,
+        data: {
+          title: 'Payment Allocation Group Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_D_PAGING,
+        component: PaymentAllocGroupDPagingComponent,
+        data: {
+          title: 'Payment Allocation Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_D_DETAIL,
+        component: PaymentAllocGroupDDetailComponent,
+        data: {
+          title: 'Payment Allocation Detail'
         },
       },
     ]

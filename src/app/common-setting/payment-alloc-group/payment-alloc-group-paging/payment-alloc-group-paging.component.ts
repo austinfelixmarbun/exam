@@ -8,15 +8,11 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   templateUrl: './payment-alloc-group-paging.component.html'
 })
 export class PaymentAllocGroupPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  isReady: boolean;
+  pageName = '';
 
-  readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.inputPagingObj._url = "./assets/ucpaging/common-setting/payment-alloc-group/search-payment-alloc-group-paging.json";
-    this.inputPagingObj.pagingJson = "./assets/ucpaging/common-setting/payment-alloc-group/search-payment-alloc-group-paging.json";
-    this.isReady = true;
+  ngOnInit(): void {
+    this.pageName = 'PaymentAllocationGroup';
   }
 }
