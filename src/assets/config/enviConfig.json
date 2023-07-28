@@ -13,7 +13,7 @@
     "losR3Web": "http://r3web-server.ad-ins.com/LOSR3",
     "cmsR3Web": "https://r3web-server.ad-ins.com/CMS_DEV",
     "lmsR3Web": "https://r3web-server.ad-ins.com/LMS",
-    "arR3Web": "http://localhost:4202",
+    "arR3Web": "https://r3web-server.ad-ins.com/LMSAR",
     "armntR3Web": "https://r3web-server.ad-ins.com/LMSARMNT",
     "amendmentR3Web": "https://r3web-server.ad-ins.com/LMSAMENDMENT",
     "gvrmntrgltionR3Web": "https://r3web-server.ad-ins.com/LMSGOVREG",
