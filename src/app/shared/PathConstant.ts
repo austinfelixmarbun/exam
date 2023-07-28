@@ -177,6 +177,12 @@ export class PathConstant {
     public static CS_PAYMENT_ALLOC_GRP = "PaymentAllocGrp";
     public static CS_PAYMENT_ALLOC_GRP_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP + "/" + PathConstant.PAGING;
     public static CS_PAYMENT_ALLOC_GRP_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP + "/" + PathConstant.DETAIL;
+    public static CS_PAYMENT_ALLOC_GRP_H = "PaymentAllocGrpH";
+    public static CS_PAYMENT_ALLOC_GRP_H_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP_H + "/" + PathConstant.PAGING;
+    public static CS_PAYMENT_ALLOC_GRP_H_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP_H + "/" + PathConstant.DETAIL;
+    public static CS_PAYMENT_ALLOC_GRP_D = "PaymentAllocGrpD";
+    public static CS_PAYMENT_ALLOC_GRP_D_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP_D + "/" + PathConstant.PAGING;
+    public static CS_PAYMENT_ALLOC_GRP_D_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP_D + "/" + PathConstant.DETAIL;
     public static CS_COA = "Coa";
     public static CS_COA_PAGING = PathConstant.CS_COA + "/" + PathConstant.PAGING;
     public static CS_COA_DETAIL = PathConstant.CS_COA + "/" + PathConstant.DETAIL;

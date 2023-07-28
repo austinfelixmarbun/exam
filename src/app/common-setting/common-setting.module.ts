@@ -92,6 +92,10 @@ import { AdinsTemplateService } from 'app/shared/services/adins-template.service
 import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
 import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
 import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
+import { PaymentAllocGroupHDetailComponent } from './payment-alloc-group-new/payment-alloc-group-h-detail/payment-alloc-group-h-detail.component';
+import { PaymentAllocGroupHPagingComponent } from './payment-alloc-group-new/payment-alloc-group-h-paging/payment-alloc-group-h-paging.component';
+import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/payment-alloc-group-d-paging/payment-alloc-group-d-paging.component';
+import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -201,7 +205,11 @@ export const customCurrencyMaskConfig = {
     RefAmrtzAddEditComponent,
     RefAmrtzItemPagingComponent,
     RefTrxTypePagingComponent,
-    RefTrxTypeDetailComponent
+    RefTrxTypeDetailComponent,
+    PaymentAllocGroupHDetailComponent,
+    PaymentAllocGroupHPagingComponent,
+    PaymentAllocGroupDDetailComponent,
+    PaymentAllocGroupDPagingComponent
   ],
   providers: [
     { provide: UcTemplateService, useClass: AdinsTemplateService }
