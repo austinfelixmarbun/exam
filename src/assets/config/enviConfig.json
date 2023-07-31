@@ -38,7 +38,7 @@
     "assetpricingR3Web": "https://r3web-server.ad-ins.com/AMS_ASSETPRICING",
     "filingR3Web": "https://r3web-server.ad-ins.com/AMS_FILING",
     "storageR3Web": "https://r3web-server.ad-ins.com/AMS_STORAGE",
-    "facilityMntR3Web": "http://cfr3sit:60001/Pages/Login",
-    "facilityExecR3Web": "http://cfr3sit:60002/Pages/Login",
-    "PayOutR3Web": "http://cfr3sit:60003/Pages/Login"
+    "facilityMntR3Web": "https://FCLTY_MNT/Pages/Login",
+    "facilityExecR3Web": "https://FCLTY_EXE/Pages/Login",
+    "PayOutR3Web": "https://FCLTY_PAY/Pages/Login"
 }
