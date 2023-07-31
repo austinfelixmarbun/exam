@@ -72,6 +72,14 @@ import { FundingCompanyContactPersonComponent } from './funding-company/funding-
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
 import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { SelfCustomVendorPagingComponent } from './component/vendor/self-custom-vendor-paging/self-custom-vendor-paging.component';
+import { SelfCustomVendorHoAddEditComponent } from './vendor-ho/self-custom-vendor-ho-add-edit/self-custom-vendor-ho-add-edit.component';
+import { SelfCustomVendorHoldingAddEditComponent } from './self-custom-vendor-holding-add-edit/self-custom-vendor-holding-add-edit.component';
+import { UcTemplateModule } from '@adins/uctemplate';
+import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-custom-vendor-branch-add-edit/self-custom-vendor-branch-add-edit.component';
+import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
+import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
+import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -114,7 +122,8 @@ export const customCurrencyMaskConfig = {
         UcapprovalcreateModule,
         UcapprovalR3Module,
         UcapprovalHistoryModule,
-        UcapprovalgeneralinfoModule
+        UcapprovalgeneralinfoModule,
+        UcTemplateModule
     ],
     declarations: [
         VendorHoldingPagingComponent,
@@ -161,11 +170,18 @@ export const customCurrencyMaskConfig = {
         VendorCollCompanyOfficeMemberAddComponent,
         FundingCompanyAddEditComponent,
         FundingCompanyContactPersonComponent,
-        FundingCompanyPagingComponent
+        FundingCompanyPagingComponent,
+        SelfCustomVendorPagingComponent,
+        SelfCustomVendorHoAddEditComponent,
+        SelfCustomVendorHoldingAddEditComponent,
+        SelfCustomVendorBranchAddEditComponent,
+        SelfCustomVendorSchemeAddEditComponent,
+        SelfCustomVendorSchemeMemberPagingComponent,
+        SelfCustomVendorSchemeMemberAddComponent
     ],
     providers: [
         VendorService,
-        NGXToastrService
+        NGXToastrService,
     ]
 })
 export class VendorModule { }

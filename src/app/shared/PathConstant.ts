@@ -66,6 +66,7 @@ export class PathConstant {
     public static MEMBER = "Member";
     public static RTN_PAGING = "ReturnPaging";
     public static GROUP = "Group";
+    public static SELF_CUSTOM = "SelfCustom";
     //#endregion
 
     //#region Asset
@@ -409,6 +410,14 @@ export class PathConstant {
     public static REQUEST = "Request";
     public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;
     public static VENDOR_GRADING_REQUEST_APPROVAL_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.APPRV + "/" + PathConstant.DETAIL;
+
+    public static SELF_CUSTOM_VENDOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HOLDING_DETAIL;
+    public static SELF_CUSTOM_VENDOR_HO_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HO_DETAIL;
+    public static SELF_CUSTOM_VENDOR_BRANCH_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH_ADD;
+    public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM_DETAIL;
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM + "/" + PathConstant.MEMBER;
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
     //#endregion
     
     //#region Verif-Module

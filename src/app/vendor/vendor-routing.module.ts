@@ -42,6 +42,13 @@ import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/ve
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
 import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
+import { SelfCustomVendorPagingComponent } from './component/vendor/self-custom-vendor-paging/self-custom-vendor-paging.component';
+import { SelfCustomVendorHoldingAddEditComponent } from './self-custom-vendor-holding-add-edit/self-custom-vendor-holding-add-edit.component';
+import { SelfCustomVendorHoAddEditComponent } from './vendor-ho/self-custom-vendor-ho-add-edit/self-custom-vendor-ho-add-edit.component';
+import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-custom-vendor-branch-add-edit/self-custom-vendor-branch-add-edit.component';
+import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
+import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
+import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
 
 const routes: Routes = [
   {
@@ -326,7 +333,56 @@ const routes: Routes = [
         data: {
           title: 'Funding Company Addedit'
         },
-      }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_PAGING,
+        component: SelfCustomVendorPagingComponent,
+        data: {
+          title: 'Vendor Paging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        component: SelfCustomVendorHoldingAddEditComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        component: SelfCustomVendorHoAddEditComponent,
+        data: {
+          title: 'Vendor HO Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD,
+        component: SelfCustomVendorBranchAddEditComponent,
+        data: {
+          title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL,
+        component: SelfCustomVendorSchemeAddEditComponent,
+        data: {
+          title: 'Vendor Scheme Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR,
+        component: SelfCustomVendorSchemeMemberPagingComponent,
+        data: {
+          title: 'Vendor Scheme Member'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD,
+        component: SelfCustomVendorSchemeMemberAddComponent,
+        data: {
+          title: 'Vendor Scheme Member Add'
+        },
+      },
     ]
 
   }

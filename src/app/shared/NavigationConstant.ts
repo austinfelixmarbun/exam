@@ -211,6 +211,14 @@ export class NavigationConstant {
     public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
     public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
     public static VIEW_FUNDING_COMPANY = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_FUNDING_COMPANY;
+
+    public static SELF_CUSTOM_VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_PAGING; //'/Vendor/SelfCustom/Paging'
+    public static SELF_CUSTOM_VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL; //'/Vendor/SelfCustom/HO/Detail'
+    public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL; //'/Vendor/SelfCustom/Holding/Detail'
+    public static SELF_CUSTOM_VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD; //'/Vendor/SelfCustom/Branch/Add'
+    public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL; //'/Vendor/SelfCustom/VendorScheme/Detail'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR; //'/Vendor/SelfCustom/VendorScheme/Member'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD; //'/Vendor/SelfCustom/VendorScheme/Member/Add'
     //#endregion
     
     //#region Organization
