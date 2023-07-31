@@ -28,11 +28,11 @@
   "dependencies": {
     "@adins/form-engine": "^1.0.2",
     "@adins/uc-attribute": "^1.0.3",
-    "@adins/uc-directive-upper-case": "^1.1.1",
+    "@adins/uc-directive-upper-case": "^3.0.1",
     "@adins/uc-directive-validate-date": "^1.0.1",
     "@adins/uc-show-errors": "^1.0.10",
     "@adins/uc-subsection": "^1.1.1",
-    "@adins/ucaddress": "^1.1.8",
+    "@adins/ucaddress": "^3.0.4-canary.1",
     "@adins/ucaddtotemp": "^1.0.25",
     "@adins/ucapproval": "^1.0.12",
     "@adins/ucapproval-history": "^1.0.10",

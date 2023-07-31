@@ -18,6 +18,7 @@ import { NewCustSetData } from 'app/customer/sharing-component/new-cust-componen
 import { AddressService } from 'app/shared/services/custAddr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { UcaddressService } from '@adins/ucaddress';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -74,13 +75,14 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     KapasitasListrik: [''],
     LocationClass: [''],
     PriceEstimates: [''],
+    StaySince:[''],
     StayLength: [''],
     MrCustAddrTypeCode: [''],
     CopyAddrFrom: ['']
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData, private addressService: AddressService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData, private addressService: AddressService, private UrlConstantNew: UrlConstantNew, private ucaddrSvc: UcaddressService) {
     this.route.queryParams.subscribe(params => {
       if (params["IdCust"] != null) {
         this.IdCust = params["IdCust"];
@@ -150,6 +152,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
           var isContain = this.checkBuildingOwnership(this.getCustomerAddr.MrBuildingOwnershipCode)
           this.addressObj.MrHouseOwnershipCode = isContain? this.getCustomerAddr.MrBuildingOwnershipCode : '';
+          this.addressObj.StaySince = this.getCustomerAddr.StaySince;
           this.addressObj.StayLength = this.getCustomerAddr.StayLength;
 
           this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
@@ -160,6 +163,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
           this.inputAddressObj.inputField = this.inputFieldAddressObj;
           if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeResidence || this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeLegal) {
             this.inputAddressObj.showStayLength = true;
+            this.inputAddressObj.useStaySince = true;
           }
           if (this.getCustomerAddr.MrCustAddrTypeCode == CommonConstant.CustAddrTypeJob) {
             this.inputAddressObj.showOwnership = false;
@@ -191,13 +195,15 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     }
     if (addrType == CommonConstant.CustAddrTypeResidence || addrType == CommonConstant.CustAddrTypeLegal) {
       this.inputAddressObj.showStayLength = true;
-      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
+      this.inputAddressObj.useStaySince = true;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StaySince.setValidators([Validators.required]); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
     else {
       this.inputAddressObj.showStayLength = false;
-      this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.clearValidators(); //solusi sementara sampai perbaikan pada lib-ucaddress
+      this.inputAddressObj.useStaySince = false;
+      this.CustDataPersonalForm.controls["custAddress"]["controls"].StaySince.clearValidators(); //solusi sementara sampai perbaikan pada lib-ucaddress
     }
-    this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.updateValueAndValidity(); //solusi sementara sampai perbaikan pada lib-ucaddress
+    this.CustDataPersonalForm.controls["custAddress"]["controls"].StaySince.updateValueAndValidity(); //solusi sementara sampai perbaikan pada lib-ucaddress
     this.setOwnership(this.CustDataPersonalForm.controls.MrCustAddrTypeCode.value);
   }
 
@@ -236,7 +242,8 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
 
         var isContain = this.checkBuildingOwnership(this.copyCustomerAddrFrom.MrBuildingOwnershipCode)
         this.addressObj.MrHouseOwnershipCode = isContain? this.copyCustomerAddrFrom.MrBuildingOwnershipCode : '';
-        
+
+        this.addressObj.StaySince = this.ucaddrSvc.FormatDateToYYYYMM(new Date(this.copyCustomerAddrFrom.StaySince));
         this.addressObj.StayLength = this.copyCustomerAddrFrom.StayLength;
         this.inputFieldAddressObj = new InputFieldObj(this.UrlConstantNew);
         this.inputFieldAddressObj.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -271,6 +278,7 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
     this.custAddressObj.Fax = this.CustDataPersonalForm.controls["custAddress"]["controls"].Fax.value;
     this.custAddressObj.MrBuildingOwnershipCode = this.CustDataPersonalForm.controls["custAddress"]["controls"].MrHouseOwnershipCode.value;
     if (this.custAddressObj.MrCustAddrTypeCode == 'RESIDENCE' || this.custAddressObj.MrCustAddrTypeCode == 'LEGAL') {
+      this.custAddressObj.StaySince = this.CustDataPersonalForm.controls["custAddress"]["controls"].StaySince.value;
       this.custAddressObj.StayLength = this.CustDataPersonalForm.controls["custAddress"]["controls"].StayLength.value;
     }
     this.custAddressObj.Notes = this.CustDataPersonalForm.controls["Notes"].value;
