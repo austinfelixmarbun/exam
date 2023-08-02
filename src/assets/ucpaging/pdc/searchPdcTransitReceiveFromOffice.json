@@ -61,9 +61,17 @@
             "property": "OfficeFromName"
         },
         {
-            "type": "text",
+            "type": "link",
             "position": "center",
-            "property": "PdcTransitNo"
+            "property": "PdcTransitNo",
+            "target": "_blank",
+            "path": "/pdctransitview/view",
+            "param": [
+                {
+                    "type": "PdcTransitNo",
+                    "property": "PdcTransitNo"
+                }
+            ]
         },
         {
             "type": "date",
