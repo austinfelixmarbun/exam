@@ -307,6 +307,12 @@ export class NavigationConstant {
     public static CUST_GUARANTOR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_GUARANTOR_PAGING; //'/Customer/CustGuarantor/Paging'
     public static CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_FAMILY_PAGING; //'/Customer/CustFamily/Paging'
     public static CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.NEW_CUST; //'/Customer/NewCustomer'
+
+    public static SELF_CUSTOM_CUST_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PAGING; //'/Customer/SelfCustom/Paging'
+    public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING; //'/Customer/SelfCustom/EditMainData/Paging'
+    public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_SHRHLDR_PAGING; //'/Customer/SelfCustom/CustShareholder/Paging'
+    public static SELF_CUSTOM_CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_FAMILY_PAGING; //'/Customer/SelfCustom/CustFamily/Paging'
+    public static SELF_CUSTOM_CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_NEW_CUST; //'/Customer/SelfCustom/NewCustomer'
     //#endregion
 
     //#region Document Management

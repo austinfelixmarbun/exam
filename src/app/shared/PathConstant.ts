@@ -66,6 +66,7 @@ export class PathConstant {
     public static MEMBER = "Member";
     public static RTN_PAGING = "ReturnPaging";
     public static GROUP = "Group";
+    public static SELF_CUSTOM = "SelfCustom";
     //#endregion
 
     //#region Asset
@@ -239,6 +240,12 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
+
+    public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_FAMILY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_FAMILY + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_SHRHLDR + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_NEW_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.NEW_CUST;
     //#endregion
     
     //#region Dashboard-Module

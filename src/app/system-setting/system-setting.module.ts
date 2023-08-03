@@ -37,6 +37,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { UcTemplateModule } from '@adins/uctemplate';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         UcShowErrorsModule,
         UcaddtotempModule,
         MatSlideToggleModule,
-        UcdropdownlistModule
+        UcdropdownlistModule,
+        UcTemplateModule
     ],
     declarations: [
         UserPagingComponent,

@@ -15,7 +15,7 @@ import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
 import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
@@ -43,6 +43,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
+import { UcformModule } from '@adins/ucform';
+import { UcformarrayModule } from '@adins/ucformarray';
+import { AdinsTemplateService } from './shared/services/adins-template.service';
+import { UcTemplateService } from '@adins/uctemplate';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -101,7 +105,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
           // Register the ServiceWorker as soon as the application is stable
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
+        UcformModule,
+        UcformarrayModule
     ],
     providers: [
         AuthService,
@@ -124,7 +130,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
             provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
         },
         ErrorDialogService,
-        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+        { provide: UcTemplateService, useClass: AdinsTemplateService},
+        { provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     bootstrap: [AppComponent]
 })

@@ -76,6 +76,14 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
 import { CustomerViewModule } from 'app/view/customer-view/customer-view.module';
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
+import { SelfCustomCustomerPagingComponent } from './self-custom-customer-paging/self-custom-customer-paging.component';
+import { UcTemplateModule } from '@adins/uctemplate';
+import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
+import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
+import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
+import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
+import { SelfCustomContainerNewCustHeaderComponent } from './sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component';
+import { SelfCustomContainerThirdPartyFormComponent } from './sharing-component/self-custom-container-third-party-form/self-custom-container-third-party-form.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -119,7 +127,8 @@ export const customCurrencyMaskConfig = {
         NewCustomerSharingModule,
         CustomerViewModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
-        UcdropdownlistModule
+        UcdropdownlistModule,
+        UcTemplateModule
     ],
     declarations: [
         CustomerPagingComponent, CustAssetDetailComponent,
@@ -171,13 +180,20 @@ export const customCurrencyMaskConfig = {
         CustBankAccComponent,
         CustAssetComponent,
         CustomerViewHeaderPersonalComponent,
-        CustomerViewHeaderCompanyComponent
+        CustomerViewHeaderCompanyComponent,
+        SelfCustomCustomerPagingComponent,
+        SelfCustomEditMainDataPagingComponent,
+        SelfCustomCustomerShareholderMenuComponent,
+        SelfCustomCustomerFamilyMenuComponent,
+        SelfCustomNewCustHeaderComponent,
+        SelfCustomContainerNewCustHeaderComponent,
+        SelfCustomContainerThirdPartyFormComponent
     ],
     providers: [
         CustAssetComponent,
         CustAssetDetailComponent,
         CustomerPersonalJobDataComponent,
-        RegexService
+        RegexService,
     ]
 })
 export class CustomerModule {

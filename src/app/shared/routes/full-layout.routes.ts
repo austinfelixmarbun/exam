@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from '../PathConstant';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 //Route for content layout with sidebar, navbar and footer.
 
@@ -87,5 +88,9 @@ export const Full_ROUTES: Routes = [
   {
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
-  }
+  },
+  {
+    path: 'BREAD/:page',
+    component: UcTemplateComponent
+  },
 ];
