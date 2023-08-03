@@ -15,6 +15,8 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { CustomerViewAsliRiComponent } from "./customer-view-asli-ri.component";
 import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 @NgModule({
@@ -45,6 +47,9 @@ import { CustomerViewAsliRiRoutingModule } from "./customer-view-asli-ri-routing
   entryComponents: [
     UcviewgenericComponent,
     UcgridviewComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 
 })

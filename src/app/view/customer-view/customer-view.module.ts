@@ -20,6 +20,8 @@ import { CustomerViewRoutingModule } from "./customer-view-routing.module";
 import { CustomerViewIframeGenericComponent } from "./customer-view-iframe-generic/customer-view-iframe-generic.component";
 import { SharedModule } from "app/shared/shared.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 @NgModule({
@@ -48,6 +50,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         CustomerViewHeaderPersonalComponent,
         CustomerViewHeaderCompanyComponent,
         CustomerViewIframeGenericComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewModule { }
