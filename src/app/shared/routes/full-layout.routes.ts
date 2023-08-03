@@ -764,10 +764,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
-        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
         exposedModule: './RescheduleModule'
       })
-        .then(m => m.TerminationModule)
+        .then(m => m.RescheduleModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
