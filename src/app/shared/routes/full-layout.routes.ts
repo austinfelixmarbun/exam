@@ -759,5 +759,17 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'rescheduling',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './RescheduleModule'
+      })
+        .then(m => m.RescheduleModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   // #endregion
 ];
