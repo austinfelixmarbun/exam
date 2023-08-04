@@ -246,6 +246,7 @@ export class PathConstant {
     public static SELF_CUSTOM_CUST_FAMILY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_FAMILY + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_SHRHLDR + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_NEW_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.NEW_CUST;
+    public static SELF_CUSTOM_CUST_PERSONAL_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
     //#endregion
     
     //#region Dashboard-Module

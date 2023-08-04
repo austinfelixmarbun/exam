@@ -46,7 +46,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
 
       if (row.MrCustTypeCode == CommonConstant.CustTypePersonal)
       {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], param);
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE], param);
       }
       else
       {

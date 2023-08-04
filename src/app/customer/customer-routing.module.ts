@@ -28,6 +28,7 @@ import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-cus
 import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
 import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
 import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
+import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
 
 const routes: Routes = [
   {
@@ -214,6 +215,13 @@ const routes: Routes = [
         component: SelfCustomNewCustHeaderComponent,
         data: {
           title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE,
+        component: SelfCustomCustomerPersonalPageComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
         }
       },
     ]
