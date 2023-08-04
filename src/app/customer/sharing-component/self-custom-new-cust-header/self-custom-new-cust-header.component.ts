@@ -28,20 +28,5 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.GetListCustType();
-  }
-
-  listCustType: Array<KeyValueObj> = new Array();
-  async GetListCustType() {
-    let tempCode = CommonConstant.RefMasterTypeCodeCustType;
-    let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: tempCode, MappingCode: null };
-    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, tempReq).toPromise().then(
-      (response) => {
-        this.listCustType = response[CommonConstant.ReturnObj];
-      });
-  }
-
-  ChangeType() {
-    console.log(this.CustType);
   }
 }

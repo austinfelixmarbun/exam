@@ -1,2 +1,3 @@
 export{SelfCustomContainerNewCustHeaderComponent} from "app/customer/sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component";
 export{ThirdPartyFormComponent} from "app/customer/sharing-component/new-cust-component/component/third-party-form/third-party-form.component";
+export{SelfCustomContainerThirdPartyFormComponent} from "app/customer/sharing-component/self-custom-container-third-party-form/self-custom-container-third-party-form.component";
