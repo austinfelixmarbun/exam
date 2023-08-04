@@ -23,6 +23,7 @@ export class InputAddressObj {
     showOwnership: boolean;
     requiredOwnership: boolean;
     showSubsection: boolean;
+    useStaySince: boolean;
     showStayLength: boolean;
     isRequired: boolean;
     environmentUrl: string;
@@ -47,6 +48,7 @@ export class InputAddressObj {
         this.showOwnership = false;
         this.requiredOwnership = false;
         this.showSubsection = true;
+        this.useStaySince = false;
         this.showStayLength = false;
         this.isRequired = true;
         this.environmentUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";

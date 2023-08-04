@@ -15,6 +15,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 
 @NgModule({
     declarations: [
@@ -38,6 +40,9 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         UcSubsectionModule,
         SharingComponentModule,
         UcShowErrorsModule,
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewCustomerAssetModule { }

@@ -32,7 +32,7 @@
     "@adins/uc-directive-validate-date": "3.0.1",
     "@adins/uc-show-errors": "3.0.1",
     "@adins/uc-subsection": "3.0.1",
-    "@adins/ucaddress": "3.0.3",
+    "@adins/ucaddress": "^3.0.4-canary.1",
     "@adins/ucaddtotemp": "3.0.8",
     "@adins/ucapproval": "^1.0.12",
     "@adins/ucapproval-history": "3.0.1",

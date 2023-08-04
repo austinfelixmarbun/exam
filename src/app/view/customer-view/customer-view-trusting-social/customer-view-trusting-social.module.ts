@@ -15,6 +15,8 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewTrustingSocialRoutingModule } from "./customer-view-trusting-social-routing.module";
 import { CustomerViewTrustingSocialComponent } from "./customer-view-trusting-social.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -42,6 +44,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewTrustingSocialComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewTrustingSocialModule { }

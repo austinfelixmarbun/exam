@@ -26,6 +26,7 @@ export class CustAddrObj{
     Notes : string;
     MrHouseOwnershipCode: string;
     RowVersion: string;
+    StaySince: string;
     StayLength : number;
     constructor(){this.CustAddrId = 0, this.RowVersion = ""}
 }

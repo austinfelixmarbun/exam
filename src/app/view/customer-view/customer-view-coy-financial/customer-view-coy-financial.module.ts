@@ -16,6 +16,8 @@ import { CustomerViewCoyFinancialComponent } from "./customer-view-coy-financial
 import { CustomerViewCoyFinancialRoutingModule } from "./customer-view-coy-financial-routing.module";
 import { CustomerViewCoyFinancialSectionComponent } from "../customer-view-coy-financial-section/customer-view-coy-financial-section.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -41,6 +43,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     declarations: [
         CustomerViewCoyFinancialComponent,
         CustomerViewCoyFinancialSectionComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewCoyFinancialModule { }
