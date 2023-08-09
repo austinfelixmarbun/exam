@@ -190,7 +190,7 @@ export class ShareholderFormComponent implements OnInit {
     return tempDesc;
   }
 
-  getLookUpSlik(ev: { Code: string, Jabatan: string }) {
+  getLookUpSlik(ev) {
     let tempMrPositionSlikCode = this.parentForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
   }
