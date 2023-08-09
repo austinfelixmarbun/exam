@@ -42,6 +42,12 @@ import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/ve
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
 import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
+import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
+import { VendorCreditInsuranceAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
+import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
+import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
+import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
+import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 
 const routes: Routes = [
   {
@@ -333,7 +339,49 @@ const routes: Routes = [
         data: {
           title: 'Funding Company View'
         },
-      }
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_PAGING,
+        component: VendorCreditInsurancePagingComponent,
+        data: {
+          title: 'Vendor Credit Insurance Paging'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_ADD,
+        component: VendorCreditInsuranceAddEditComponent,
+        data: {
+          title: 'Vendor Credit Insurance Paging'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_BRANCH_PAGING,
+        component: VendorCreditInsuranceBranchPagingComponent,
+        data: {
+          title: 'Vendor Credit Insurance Branch Paging'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_BRANCH_ADD_EDIT,
+        component: VendorCreditInsuranceBranchAddEditComponent,
+        data: {
+          title: 'Vendor Credit Insurance Branch Add Edit'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_GROUP_PAGING,
+        component: VendorCreditInsuranceGroupPagingComponent,
+        data: {
+          title: 'Vendor Credit Insurance Group Paging'
+        },
+      },
+      {
+        path: PathConstant.VENDOR_CREDIT_INS_GROUP_ADD_EDIT,
+        component: VendorCreditInsuranceGroupAddEditComponent,
+        data: {
+          title: 'Vendor Credit Insurance Group Add Edit'
+        },
+      },
     ]
 
   }

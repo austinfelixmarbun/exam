@@ -408,9 +408,16 @@ export class PathConstant {
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstant.DETAIL;
     public static VENDOR_HO_REG = PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
     public static VENDOR_FUNDING_COY = "FundingCompany";
+    public static VENDOR_CREDIT_INS = "creditinsurance"
     public static VENDOR_FUNDING_COY_PAGING = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; //FundingCompany/Paging
     public static VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT; //FundingCompany/AddEDit
     public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW; 
+    public static VENDOR_CREDIT_INS_PAGING = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.PAGING;
+    public static VENDOR_CREDIT_INS_BRANCH_PAGING = PathConstant.VENDOR_CREDIT_INS  + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING
+    public static VENDOR_CREDIT_INS_BRANCH_ADD_EDIT = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD_EDIT
+    public static VENDOR_CREDIT_INS_GROUP_PAGING= PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.PAGING
+    public static VENDOR_CREDIT_INS_GROUP_ADD_EDIT= PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.ADD_EDIT
+    public static VENDOR_CREDIT_INS_ADD = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.ADD
     public static VENDOR_ATPM = "ATPM";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static VENDOR_ATPM_REG = PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
