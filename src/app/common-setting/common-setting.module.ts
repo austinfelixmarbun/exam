@@ -91,6 +91,8 @@ import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-clai
 import { CustomEconomicSectorAddEditComponent } from './custom/economic-sector/custom-economic-sector-add-edit/custom-economic-sector-add-edit.component';
 import { CustomEconomicSectorComponent } from './custom/economic-sector/custom-economic-sector-paging/custom-economic-sector-paging.component';
 import { UcTemplateModule } from '@adins/uctemplate';
+import { CustomMasterAddEditComponent } from './custom/master/master-add-edit/custom-master-add-edit.component';
+import { CustomMasterComponent } from './custom/master/master-paging/custom-master-paging.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -200,7 +202,9 @@ export const customCurrencyMaskConfig = {
     RefInsClaimDocPagingComponent,
     RefInsClaimDocAddEditComponent,
     CustomEconomicSectorComponent,
-    CustomEconomicSectorAddEditComponent
+    CustomEconomicSectorAddEditComponent,
+    CustomMasterComponent,
+    CustomMasterAddEditComponent
   ],
   providers: [
     NGXToastrService
