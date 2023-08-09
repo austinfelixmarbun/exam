@@ -13,16 +13,23 @@ import { ActivatedRoute } from '@angular/router';
 export class SelfCustomNewCustHeaderComponent implements OnInit {
 
   pageName: string;
+  from:string;
   @Input() CustId: number = 0;
   @Input() CustType: string = CommonConstant.CustomerPersonal;
 
   constructor(private UrlConstantNew: UrlConstantNew, private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal) {
+      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && params["From"] == CommonConstant.CustFromCustFamily) {
+        this.pageName = "CustomerFamilyMainDataRegistration"
+        return;
+      }
+      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && params["From"] != CommonConstant.CustFromCustFamily) {
         this.pageName = "CustomerMainDataRegistration"
+        return;
       }
       if (params["MrCustTypeCode"] == CommonConstant.CustTypeCompany) {
         this.pageName = "CustomerMainDataRegistrationCompany"
+        return;
       }
     });
   }
