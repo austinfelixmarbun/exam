@@ -2,6 +2,7 @@ export class CustCompanyLegalDocObj {
     CustCompanyLegalDocId: any;
     CustCompanyId: any;
     MrLegalDocTypeCode: any;
+    MrLegalDocTypeDescr: string;
     DocNo: any;
     DocDt: any;
     DocExpiredDt: any;

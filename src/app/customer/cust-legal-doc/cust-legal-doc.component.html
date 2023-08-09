@@ -47,7 +47,7 @@
       <tbody>
         <tr *ngFor="let item of custLegalDocs; let i = index">
           <td style="text-align: center;">{{i+1}}</td>
-          <td style="text-align: left;">{{item.MrLegalDocTypeCode}}</td>
+          <td style="text-align: left;">{{item.MrLegalDocTypeDescr}}</td>
           <td style="text-align: left;">{{item.DocNo}}</td>
           <td style="text-align: left;">{{item.DocDt | date:'yyyy-MM-dd'}}</td>
           <td style="text-align: left;">{{item.DocExpiredDt | date:'yyyy-MM-dd'}}</td>
