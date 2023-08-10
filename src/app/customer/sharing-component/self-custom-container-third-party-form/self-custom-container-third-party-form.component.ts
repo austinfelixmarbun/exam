@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
@@ -10,6 +11,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
 
   IsCustLoaded: boolean = true;
   @Input() CustId: number = 0;
+  @Input() parentForm: FormGroup;
   @Input() MrCustTypeCode: string = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
 
@@ -20,6 +22,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     // {
     //   this.IsCustLoaded = true
     // }
+    console.log(this.parentForm.getRawValue())
     alert(this.MrCustTypeCode)
   }
 

@@ -85,6 +85,8 @@ import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custo
 import { SelfCustomContainerNewCustHeaderComponent } from './sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component';
 import { SelfCustomContainerThirdPartyFormComponent } from './sharing-component/self-custom-container-third-party-form/self-custom-container-third-party-form.component';
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
+import { SelfCustomCustomerPersonalAddressComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-address/self-custom-customer-personal-address.component';
+import { SelfCustomContainerCustAttrComponent } from './sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -189,7 +191,9 @@ export const customCurrencyMaskConfig = {
         SelfCustomNewCustHeaderComponent,
         SelfCustomContainerNewCustHeaderComponent,
         SelfCustomContainerThirdPartyFormComponent,
-        SelfCustomCustomerPersonalPageComponent
+        SelfCustomCustomerPersonalPageComponent,
+        SelfCustomCustomerPersonalAddressComponent,
+        SelfCustomContainerCustAttrComponent,
     ],
     providers: [
         CustAssetComponent,
