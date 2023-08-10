@@ -29,6 +29,8 @@ import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/revie
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component'; 
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { CustomAssetDocumentMasterPagingComponent } from './custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component';
+import { CustomAssetDocumentMasterAddEditComponent } from './custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component';
 
 const routes: Routes = [
   {
@@ -249,6 +251,21 @@ const routes: Routes = [
         component: ReviewUploadAssetMasterDetailComponent,
         data: {
           title: 'Review Upload Asset Master Detail'
+        },
+      },
+      //uc template
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_MASTER_PAGING,
+        component: CustomAssetDocumentMasterPagingComponent,
+        data: {
+          title: 'Asset Doc Master Paging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_MASTER_DETAIL,
+        component: CustomAssetDocumentMasterAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
         },
       }
     ]

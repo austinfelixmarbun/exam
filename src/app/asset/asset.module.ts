@@ -35,6 +35,9 @@ import { AssetAttributeComponent } from './asset-attribute/asset-attribute.compo
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomAssetDocumentMasterPagingComponent } from "./custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component";
+import { CustomAssetDocumentMasterAddEditComponent } from "./custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component";
+import { UcTemplateModule } from "@adins/uctemplate";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -58,6 +61,7 @@ export const customCurrencyMaskConfig = {
     SharingComponentModule,
     UcaddtotempModule,    
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcTemplateModule
   ],
   declarations: [
     AssetTypePagingComponent,
@@ -88,7 +92,10 @@ export const customCurrencyMaskConfig = {
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
     AssetAttributeComponent,
-    AssetAttributeDetailComponent
+    AssetAttributeDetailComponent,
+    CustomAssetDocumentMasterPagingComponent,
+    CustomAssetDocumentMasterAddEditComponent
+
   ],
   providers: [
     NGXToastrService
