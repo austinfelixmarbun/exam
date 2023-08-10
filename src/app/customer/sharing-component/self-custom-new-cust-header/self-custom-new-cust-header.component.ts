@@ -19,12 +19,12 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
 
   constructor(private UrlConstantNew: UrlConstantNew, private http: HttpClient, private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && params["From"] == CommonConstant.CustFromCustFamily) {
+      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && (params["From"] == CommonConstant.CustFromCustFamily || params["CustDataMode"] == CommonConstant.CustMainDataModeFamily)) {
         this.pageName = "CustomerFamilyMainDataRegistration"
         return;
       }
       if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && params["From"] == CommonConstant.CustFromCustShareholder) {
-        this.pageName = "CustomerFamilyMainDataRegistration"
+        this.pageName = "CustomerShareholderPersonalMainDataRegistration"
         return;
       }
       if (params["MrCustTypeCode"] == CommonConstant.CustTypeCompany && params["From"] == CommonConstant.CustFromCustShareholder) {

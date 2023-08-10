@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { UcTemplateService } from '@adins/uctemplate';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-self-custom-customer-personal-address',
@@ -8,12 +10,76 @@ import { Component, OnInit } from '@angular/core';
 export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
 
   pageName: string;
+  isReady: boolean = false;
 
-  constructor() {
-    this.pageName = "CustPersonalAddress"
+  @Input()
+  dicts: Record<string, any> = {};
+
+  @Output()
+  next: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  data: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(private http: HttpClient, private uctemplateService: UcTemplateService) {
+    this.pageName = "CustomerPersonalAddress"
+    this.isReady = true
   }
 
   ngOnInit(): void {
+  }
+
+  handler = {
+
+    callback: ($event) => this.callback($event)
+
+  };
+
+  callback(ev) {
+    let row = ev.RowObj;
+
+    alert("x")
+
+    if (ev.Action.key == "edit")
+    {
+      this.isReady = false;
+      this.pageName = "CustomerPersonalAddressAdd"
+
+      setTimeout(() => {
+        this.isReady = true;
+      }, 100)
+    }
+  }
+
+  onNext() {
+    // Todo: Call API Custom Implementation here...
+    // Then call next action to next step
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    let Data: any[];
+    this.next.emit({Actions: actions, Data: {ListCust: Data}});
+    // this.http.post(`${this.uctemplateService.envConfig['mockUrl']}/v1/mock`, {CustType: 'Personal'})
+    //   .subscribe(res => {
+    //     Data = res['Data'];
+
+    //     /***
+    //      * Event arguments:
+    //      * Actions: required, next actions...
+    //      * Data: optional, passing data reference to uctemplate dictionary
+    //      */
+    //     this.next.emit({Actions: actions, Data: {ListCust: Data}});
+    //   });
   }
 
 }
