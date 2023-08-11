@@ -75,7 +75,7 @@ export class SelfCustomVendorPagingComponent implements OnInit {
         this.pageName = 'SupplierHoldingComponent'
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
-        this.pageName = 'SupplierAtpmComponent'
+        this.pageName = 'SupplierAtmpComponent'
       }
     }
   }

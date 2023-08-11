@@ -49,6 +49,9 @@ import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-cus
 import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
 import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
 import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
+import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
+import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
+import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
 
 const routes: Routes = [
   {
@@ -380,7 +383,28 @@ const routes: Routes = [
         path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD,
         component: SelfCustomVendorSchemeMemberAddComponent,
         data: {
-          title: 'Vendor Scheme Member Add'
+          title: 'Vendor Scheme Member Add',
+        }
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD,
+          component: SelfCustomVendorGroupComponent,
+          data: {
+            title: 'Vendor Group Add'
+          },
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW,
+          component: SelfCustomVendorGroupViewComponent,
+          data: {
+            title: 'Vendor Group View'
+          },
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD,
+          component: SelfCustomVendorGroupMemberAddComponent,
+          data: {
+            title: 'Vendor Group Member View'
         },
       },
     ]

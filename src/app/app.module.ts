@@ -46,7 +46,8 @@ import { NotFoundComponent } from './not-found-page/not-found.component';
 import { UcformModule } from '@adins/ucform';
 import { UcformarrayModule } from '@adins/ucformarray';
 import { AdinsTemplateService } from './shared/services/adins-template.service';
-import { UcTemplateService } from '@adins/uctemplate';
+import { ExecutorService, UcTemplateService } from '@adins/uctemplate';
+import { AdInsExecutorService } from './shared/services/adins-executor.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -132,6 +133,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
         { provide: UcTemplateService, useClass: AdinsTemplateService},
+        { provide: ExecutorService, useClass: AdInsExecutorService },
         { provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     bootstrap: [AppComponent]

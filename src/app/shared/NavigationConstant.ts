@@ -219,6 +219,9 @@ export class NavigationConstant {
     public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL; //'/Vendor/SelfCustom/VendorScheme/Detail'
     public static SELF_CUSTOM_VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR; //'/Vendor/SelfCustom/VendorScheme/Member'
     public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD; //'/Vendor/SelfCustom/VendorScheme/Member/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD; //'/Vendor/SelfCustom/Group/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW; //'/Vendor/SelfCustom/Group/View'
+    public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD; //'/Vendor/SelfCustom/GroupMbr/Add
     //#endregion
     
     //#region Organization

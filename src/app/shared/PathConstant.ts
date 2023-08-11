@@ -433,6 +433,9 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM_DETAIL;
     public static SELF_CUSTOM_VENDOR_SCHM_MBR = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM + "/" + PathConstant.MEMBER;
     public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_VENDOR_GRP_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_VENDOR_GRP_VIEW = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.VIEW;
+    public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRP_MBR + "/" + PathConstant.ADD;
     //#endregion
     
     //#region Verif-Module

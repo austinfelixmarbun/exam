@@ -80,6 +80,9 @@ import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-cus
 import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
 import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
 import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
+import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
+import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
+import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -177,7 +180,10 @@ export const customCurrencyMaskConfig = {
         SelfCustomVendorBranchAddEditComponent,
         SelfCustomVendorSchemeAddEditComponent,
         SelfCustomVendorSchemeMemberPagingComponent,
-        SelfCustomVendorSchemeMemberAddComponent
+        SelfCustomVendorSchemeMemberAddComponent,
+        SelfCustomVendorGroupComponent,
+        SelfCustomVendorGroupViewComponent,
+        SelfCustomVendorGroupMemberAddComponent
     ],
     providers: [
         VendorService,
