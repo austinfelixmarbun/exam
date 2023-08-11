@@ -16,6 +16,8 @@ import { CustomerViewComponent } from "../customer-view.component";
 import { CustomerViewCustomerGroupComponent } from "./customer-view-customer-group.component";
 import { CustomerViewGroupRoutingModule } from "./customer-view-group-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -40,6 +42,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewCustomerGroupComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewGroupModule { }

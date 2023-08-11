@@ -107,6 +107,9 @@ export class PathConstant {
     public static ASSET_MASTER_RVW_UPLOAD_PAGING = PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static ASSET_MASTER_RVW_UPLOAD_DETAIL = PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static ASSET_MASTER_CHILD = PathConstant.ASSET_MASTER + "/Child";
+
+    public static CUSTOM_ASSET_DOC_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC_MASTER + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_DOC_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC_MASTER + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Common-Setting
@@ -195,6 +198,11 @@ export class PathConstant {
     public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
     public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
+    
+    public static CS_CUSTOM_ECONOMIC_SECTOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
@@ -240,6 +248,13 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
+
+    public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_FAMILY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_FAMILY + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_SHRHLDR + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_NEW_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.NEW_CUST;
+    public static SELF_CUSTOM_CUST_PERSONAL_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
     //#endregion
     
     //#region Dashboard-Module

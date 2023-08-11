@@ -69,6 +69,10 @@ import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-off
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { CustomEconomicSectorComponent } from './custom/economic-sector/custom-economic-sector-paging/custom-economic-sector-paging.component';
+import { CustomEconomicSectorAddEditComponent } from './custom/economic-sector/custom-economic-sector-add-edit/custom-economic-sector-add-edit.component';
+import { CustomMasterAddEditComponent } from './custom/master/master-add-edit/custom-master-add-edit.component';
+import { CustomMasterComponent } from './custom/master/master-paging/custom-master-paging.component';
 
 const routes: Routes = [
   {
@@ -554,6 +558,36 @@ const routes: Routes = [
         component: RefInsClaimDocPagingComponent,
         data: {
           title: 'Insurance Claim Document Paging'
+        },
+      },
+
+      //CUSTOM UC TEMPLATE
+      {
+        path: PathConstant.CS_CUSTOM_ECONOMIC_SECTOR_PAGING,
+        component: CustomEconomicSectorComponent,
+        data: {
+          title: 'Economic Sector Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_ECONOMIC_SECTOR_DETAIL,
+        component: CustomEconomicSectorAddEditComponent,
+        data: {
+          title: 'Economic Sector Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_MASTER_PAGING,
+        component: CustomMasterComponent,
+        data: {
+          title: 'Economic Sector Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_MASTER_DETAIL,
+        component: CustomMasterAddEditComponent,
+        data: {
+          title: 'Economic Sector Paging'
         },
       },
     ]

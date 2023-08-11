@@ -15,6 +15,8 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewCoyContactRoutingModule } from "./customer-view-coy-contact-routing.module";
 import { CustomerViewCoyContactComponent } from "./customer-view-coy-contact.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -39,6 +41,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewCoyContactComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewCoyContactModule { }

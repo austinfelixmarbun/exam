@@ -15,6 +15,8 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalJobDataEmpComponent } from "./customer-view-personal-job-data-emp.component";
 import { CustomerViewPersonalJobDataEmpRoutingModule } from "./customer-view-personal-job-data-emp-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -39,6 +41,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewPersonalJobDataEmpComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewPersonalJobDataEmpModule { }

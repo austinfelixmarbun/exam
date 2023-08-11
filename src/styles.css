@@ -188,12 +188,19 @@ thead tr th {
     margin: 3px;
 }
 
-.ucSearch-Button-Right {
+/* .ucSearch-Button-Right {
     z-index: 1;
     position: absolute;
     right: 50px;
     top: 3px;
     text-decoration-line: underline;
+} */
+
+.ucSearch-Button-Right {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    text-decoration-line: underline;
+    margin-right: 10px; /* Add some right margin to create space between the button and the right edge */
 }
 
 .Button-Add {
@@ -479,4 +486,24 @@ mat-dialog-container#role-modal {
 
 .link-text:hover {
     filter: brightness(80%);
+}
+
+.addButtonFlex {
+    z-index: 1;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #fff !important;
+    background-color: #009DA0 !important;
+    border: 1px solid transparent;
+    border-color: #009DA0;
+    border-radius: 0.2rem;
+    margin-left: 0.375rem !important;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.5rem;
+    display: inline-block;
+    user-select: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }

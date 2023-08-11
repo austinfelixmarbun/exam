@@ -24,6 +24,8 @@ import { CustomerViewPersonalCustomerGroupComponent } from "./customer-view-pers
 import { CustomerViewCoyAddressComponent } from "./customer-view-coy-address/customer-view-coy-address.component";
 import { SharedModule } from "app/shared/shared.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 @NgModule({
@@ -55,6 +57,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         CustomerViewPersonalAddressComponent,
         CustomerViewCoyAddressComponent,
         CustomerViewPersonalCustomerGroupComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewChildModule { }

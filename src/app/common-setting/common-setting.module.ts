@@ -88,6 +88,11 @@ import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-off
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { CustomEconomicSectorAddEditComponent } from './custom/economic-sector/custom-economic-sector-add-edit/custom-economic-sector-add-edit.component';
+import { CustomEconomicSectorComponent } from './custom/economic-sector/custom-economic-sector-paging/custom-economic-sector-paging.component';
+import { UcTemplateModule } from '@adins/uctemplate';
+import { CustomMasterAddEditComponent } from './custom/master/master-add-edit/custom-master-add-edit.component';
+import { CustomMasterComponent } from './custom/master/master-paging/custom-master-paging.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -124,7 +129,8 @@ export const customCurrencyMaskConfig = {
     AdInsModule,
     SharedModule,
     AdInsSharedModule,
-    NgxCurrencyModule.forRoot(customCurrencyMaskConfig)
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcTemplateModule
   ],
   declarations: [
     MasterPagingComponent,
@@ -194,7 +200,11 @@ export const customCurrencyMaskConfig = {
     TaxOfficeDetailComponent,
     TaxOfficePagingComponent,
     RefInsClaimDocPagingComponent,
-    RefInsClaimDocAddEditComponent
+    RefInsClaimDocAddEditComponent,
+    CustomEconomicSectorComponent,
+    CustomEconomicSectorAddEditComponent,
+    CustomMasterComponent,
+    CustomMasterAddEditComponent
   ],
   providers: [
     NGXToastrService
