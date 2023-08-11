@@ -795,5 +795,41 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'suspend',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdTrxModule'
+      })
+        .then(m => m.SuspdTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendreverse',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdRvsTrxModule'
+      })
+        .then(m => m.SuspdRvsTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendalloc',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdAllocModule'
+      })
+        .then(m => m.SuspdAllocModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   // #endregion
 ];
