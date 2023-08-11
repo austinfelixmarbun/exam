@@ -387,6 +387,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'agreement-transfer',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './AgrTransferModule'
+      })
+        .then(m => m.AgrTransferModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'splitagrmnt',
     loadChildren: () => {
       return loadRemoteModule({
