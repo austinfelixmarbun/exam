@@ -79,6 +79,7 @@ export class CommonConstant {
     public static AGENCY_PERSONAL = "AGENCY_PERSONAL";
     public static ASSET_INSCO_HO = "ASSET_INSCO_HO";
     public static LIFE_INSCO_HO = "LIFE_INSCO_HO";
+    public static CRD_INSCO_HO = "CRD_INSCO_HO";
     public static SUPPLIER_HO = "SUPPLIER_HO";
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";

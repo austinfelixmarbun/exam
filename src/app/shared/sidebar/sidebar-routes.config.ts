@@ -82,6 +82,7 @@ export const ROUTES: RouteInfo[] = [
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Supplier Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.SUPPLIER }] },
+
         ], Params: []
       }
       , {
@@ -148,6 +149,17 @@ export const ROUTES: RouteInfo[] = [
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Life Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Life Insurance Scheme', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Scheme" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },
           { Path: NavigationConstant.VENDOR_PAGING, Title: 'Life Insurance Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [{ Attr: "Type", Value: "Group" }, { Attr: "MrVendorCategoryCode", Value: CommonConstant.LIFE_INSCO_BRANCH }] },
+        ], Params: []
+      },
+      {
+        Path: '', Title: 'Credit Insurance', Icon: '', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+        Submenu: [
+
+          { Path: NavigationConstant.CREDIT_INS_PAGING, Title: 'Credit Insurance HO', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+          { Path: NavigationConstant.CREDIT_INS_BRANCH_PAGING, Title: 'Credit Insurance Branch', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+          { Path: NavigationConstant.CREDIT_INS_GROUP_PAGING, Title: 'Credit Insurance Group', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+
+
         ], Params: []
       },
       {

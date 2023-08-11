@@ -73,7 +73,13 @@ import { FundingCompanyPagingComponent } from './funding-company/funding-company
 import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { RegexService } from 'app/customer/regex.service';
-
+import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
+import { UcTemplateModule } from '@adins/uctemplate';
+import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
+import { VendorCreditInsuranceAddEditComponent} from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
+import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
+import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
+import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 export const customCurrencyMaskConfig = {     
   align: "right",     
   allowNegative: true,     
@@ -115,7 +121,8 @@ export const customCurrencyMaskConfig = {
         UcapprovalcreateModule,
         UcapprovalR3Module,
         UcapprovalHistoryModule,
-        UcapprovalgeneralinfoModule
+        UcapprovalgeneralinfoModule,
+        UcTemplateModule
     ],
     declarations: [
         VendorHoldingPagingComponent,
@@ -163,7 +170,13 @@ export const customCurrencyMaskConfig = {
         FundingCompanyAddEditComponent,
         FundingCompanyContactPersonComponent,
         FundingCompanyPagingComponent,
-        FundingCompanyDetailComponent
+        FundingCompanyDetailComponent,
+        VendorCreditInsurancePagingComponent,
+        VendorCreditInsuranceBranchPagingComponent,
+        VendorCreditInsuranceAddEditComponent,
+        VendorCreditInsuranceBranchAddEditComponent,
+        VendorCreditInsuranceGroupPagingComponent,
+        VendorCreditInsuranceGroupAddEditComponent,
     ],
     providers: [
         VendorService,

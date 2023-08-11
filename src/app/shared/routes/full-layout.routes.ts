@@ -399,6 +399,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'agreement-transfer',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './AgrTransferModule'
+      })
+        .then(m => m.AgrTransferModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'splitagrmnt',
     loadChildren: () => {
       return loadRemoteModule({
@@ -792,6 +804,54 @@ export const Full_ROUTES: Routes = [
         exposedModule: './RescheduleModule'
       })
         .then(m => m.RescheduleModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'creditinsurance',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './RescheduleModule'
+      })
+        .then(m => m.RescheduleModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspend',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdTrxModule'
+      })
+        .then(m => m.SuspdTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendreverse',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdRvsTrxModule'
+      })
+        .then(m => m.SuspdRvsTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendalloc',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdAllocModule'
+      })
+        .then(m => m.SuspdAllocModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },

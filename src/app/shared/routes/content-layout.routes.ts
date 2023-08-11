@@ -512,5 +512,41 @@ export const CONTENT_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'collateralreplacementview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './CollateralReplacementModule'
+      })
+        .then(m => m.CollateralReplacementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdTrxModule'
+      })
+        .then(m => m.SuspdTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'suspendreverseview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.paymentR3Web + '/remoteEntry.js',
+        exposedModule: './SuspdRvsTrxModule'
+      })
+        .then(m => m.SuspdRvsTrxModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  }
   //#endregion
 ];
