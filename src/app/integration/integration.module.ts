@@ -21,9 +21,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         DailyMasterContinuousFormComponent,
     ],
     exports: [],
-    providers: [
-        NGXToastrService
-    ]
+    // providers: [
+    //     NGXToastrService
+    // ]
 })
 
 export class IntegrationModule { }

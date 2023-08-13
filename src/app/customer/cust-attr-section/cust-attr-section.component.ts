@@ -22,7 +22,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-cust-attr-section',
   templateUrl: './cust-attr-section.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class CustAttrSectionComponent implements OnInit {
 

@@ -20,7 +20,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-ref-form-detail',
   templateUrl: './ref-form-detail.component.html',
   styleUrls: ['./ref-form-detail.component.scss'],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class RefFormDetailComponent implements OnInit {
   itemModuleType: Array<KeyValueObj> = new Array();

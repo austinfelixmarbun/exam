@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: "request-new-password",
   templateUrl: "./request-new-password-new.component.html",
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class RequestNewPasswordComponent implements OnInit {
 

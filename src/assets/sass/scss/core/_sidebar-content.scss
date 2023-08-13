@@ -231,12 +231,19 @@
                 li{
                     a{
                         display: block;
-                        padding: 8px 18px 8px 60px;
+                        padding: 8px 18px 8px 30px;
                     }
                     ul{
                         li{
                             a{
-                                padding: 8px 18px 8px 70px;           
+                                padding: 8px 18px 8px 40px;           
+                            }
+                            ul{
+                                li{
+                                    a{
+                                        padding: 8px 18px 8px 50px;
+                                    }
+                                }
                             }
                             ul{
                                 li{

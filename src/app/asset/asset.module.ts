@@ -97,8 +97,8 @@ export const customCurrencyMaskConfig = {
     CustomAssetDocumentMasterAddEditComponent
 
   ],
-  providers: [
-    NGXToastrService
-  ]
+  // providers: [
+  //   NGXToastrService
+  // ]
 })
 export class AssetModule { }

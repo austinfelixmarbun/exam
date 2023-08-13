@@ -28,7 +28,7 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 @Component({
   selector: "app-employee-add",
   templateUrl: "./employee-add.component.html",
-  providers: [NGXToastrService, RegexService]
+  providers: [ RegexService]
 })
 export class EmployeeAddComponent implements OnInit {
   pageType: string = "add";

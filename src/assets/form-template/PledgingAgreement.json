@@ -1,0 +1,210 @@
+{
+	"title": "Pledging Agreement",
+	"hideTitle": false,
+	"id": "PledgingAgreement",
+	"addButton": false,
+	"addLink": "",
+	"pathOption": "",
+	"backButton": false,
+	"component": [{
+		"paging": {
+			"environment": "facilityMntUrl",
+			"apiVersion": "v2",
+			"pagingInput": {
+				"title": "",
+				"sectionTitle": "",
+				"querystring": {
+					"name": "searchPledgeUnpledgeAgrmnt"
+				},
+				"exportExcel": false,
+				"component": [{
+					"id": "vvendorCodeSearchId",
+					"type": "dropdown",
+					"label": "Funding Company Name",
+					"name": "VT.VENDOR_CODE",
+					"value": "",
+					"placeholder": "",
+					"datatype": "text",
+					"isFromURL": true,
+					"ddlType": "all",
+					"isEvent": false,
+					"environment": "FOU",
+					"path": "/Vendor/GetListKvpVendorObjByCategoryCode",
+					"criteriaPropName": "Code",
+					"criteriaPropValue": "JF_FUNDING_COMPANY",
+					"isQueryIn": false
+				}, {
+					"id": "fundingbatchstatusSearchId",
+					"type": "dropdown",
+					"label": "Funding Batch Status",
+					"name": "FundingBatchStatus",
+					"value": "",
+					"placeholder": "",
+					"datatype": "text",
+					"isFromURL": false,
+					"ddlType": "all",
+					"isEvent": false,
+					"items": [{
+						"key": "NEW",
+						"value": "New"
+					}, {
+						"key": "RTD",
+						"value": "Ready To Drawdown"
+					}, {
+						"key": "DRW",
+						"value": "Drawdown"
+					}, {
+						"key": "INP",
+						"value": "In Progress"
+					}]
+				}, {
+					"id": "jcjfContractNameSearchId",
+					"type": "textbox",
+					"label": "Funding Contract Name",
+					"name": "JC.JF_CONTRACT_NAME",
+					"value": "",
+					"placeholder": "",
+					"datatype": "text"
+				}],
+				"headerList": [{
+					"type": "sort",
+					"label": "Funding Company Name",
+					"position": "left",
+					"name": "V.VENDOR_CODE"
+				}, {
+					"type": "sort",
+					"label": "Funding Contract Name",
+					"position": "left",
+					"name": "JC.JF_CONTRACT_NAME"
+				}, {
+					"type": "sort",
+					"label": "Batch No",
+					"position": "left",
+					"name": "JB.JF_BATCH_NO"
+				}, {
+					"type": "sort",
+					"label": "Drawdown Plan Amount",
+					"position": "right",
+					"name": "JB.DRAWDOWN_AMT"
+				}, {
+					"type": "sort",
+					"label": "Principal Amount To Funding",
+					"position": "right",
+					"name": "JB.PRINCIPAL_AMT_TO_FUNDING"
+				}, {
+					"type": "sort",
+					"label": "Number of Agreement",
+					"position": "center",
+					"name": "JB.NUM_OF_AGRMNT"
+				}, {
+					"type": "sort",
+					"label": "Funding Batch Status",
+					"position": "center",
+					"name": "JB.JF_BATCH_STAT"
+				}, {
+					"type": "label",
+					"label": "Pledge",
+					"position": "center"
+				}, {
+					"type": "label",
+					"label": "Unpledge",
+					"position": "center"
+				}],
+				"bodyList": [{
+					"type": "text",
+					"position": "left",
+					"property": "FundingCompanyName"
+				}, {
+					"type": "text",
+					"position": "left",
+					"property": "FundingContractName"
+				}, {
+					"type": "text",
+					"position": "left",
+					"property": "BatchNo"
+				}, {
+					"type": "decimal",
+					"position": "right",
+					"property": "DrawdownPlanAmt",
+					"precision": "0.2",
+					"IsPrcnt": false
+				}, {
+					"type": "decimal",
+					"position": "right",
+					"property": "PrincipalAmtToFunding",
+					"precision": "0.2",
+					"IsPrcnt": false
+				}, {
+					"type": "text",
+					"position": "center",
+					"property": "NumOfAgrmnt"
+				}, {
+					"type": "text",
+					"position": "center",
+					"property": "FundingBatchStatus"
+				}, {
+					"type": "action",
+					"position": "center",
+					"action": [{
+						"type": "link",
+						"path": "SETTING_FUNDING_CONTRACT_PLEDGING_VIEW",
+						"target": "_self",
+						"param": [{
+							"type": "JfBatchNo",
+							"property": "BatchNo"
+						}],
+						"property": "Pledge"
+					}]
+				}, {
+					"type": "action",
+					"position": "center",
+					"action": [{
+						"type": "link",
+						"path": "SETTING_FUNDING_CONTRACT_UNPLEDGE",
+						"target": "_self",
+						"param": [{
+							"type": "JfBatchNo",
+							"property": "BatchNo"
+						}],
+						"property": "Unpledge"
+					}]
+				}]
+			},
+			"criteria": [],
+			"whereValue": [],
+			"fromValue": [],
+			"useIntegration": false,
+			"isHideSearch": false,
+			"isSearched": false,
+			"delay": 1
+		},
+		"id": "ce2329b0-0a61-47b3-b297-c283eaac4156"
+	}],
+	"serviceUrl": {
+		"add": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		},
+		"edit": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		},
+		"createRfa": {
+			"environment": "",
+			"apiPath": "",
+			"apiUrl": ""
+		}
+	},
+	"isRedirect": false,
+	"redirectOption": "",
+	"redirectLink": "",
+	"hideSubmitButton": false,
+	"listBtn": [],
+	"onInit": [],
+	"isOverrideSubmit": false,
+	"onSubmit": [],
+	"isOverrideCancel": false,
+	"onCancel": {}
+}

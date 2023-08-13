@@ -82,6 +82,8 @@ export class NavigationConstant {
     public static CS_PAYMENT_ALLOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_PAGING; //'/CommonSetting/PaymentAlloc/Paging'
     public static CS_PAYMENT_ALLOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_DETAIL; //'/CommonSetting/PaymentAlloc/Detail'
     public static CS_PAYMENT_ALLOC_GRP_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_GRP_PAGING; //'/CommonSetting/PaymentAllocGrp/Paging'
+    public static CS_REF_AMRTZ_ITEM_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_AMRTZ_ITEM_PAGING; //'/CommonSetting/RefAmrtzItem/Paging'
+    public static CS_REF_TRX_TYPE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TRX_TYPE_PAGING; //'/CommonSetting/RefTrxType/Paging'
     public static CS_PAYMENT_ALLOC_GRP_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_GRP_DETAIL; //'/CommonSetting/PaymentAllocGrp/Detail'
     public static CS_PROFESSION_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PROFESSION_PAGING; //'/CommonSetting/Profession/Paging'
     public static CS_PROFESSION_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PROFESSION_DETAIL; //'/CommonSetting/Profession/Detail'
@@ -107,8 +109,8 @@ export class NavigationConstant {
     public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
     public static CS_REF_TAX_OFFICE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING; //'/CommonSetting/TaxOffice/Paging'
     public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
-    public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
-    public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
+    // public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
+    // public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
     //#endregion
 
     //#region System Setting
@@ -184,6 +186,7 @@ export class NavigationConstant {
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
     public static VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_MBR_ADD; //'/Vendor/GroupMbr/Add
     public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_DETAIL; //'/Vendor/HO/Detail'
+    public static VENDOR_CRD_INSCO_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS_ADD;
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
     public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_REG; //'/Vendor/Holding/Registration'
@@ -394,4 +397,15 @@ export class NavigationConstant {
     public static NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_SOURCE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING;
     public static NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE_DETAIL = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_SOURCE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING + "/" + PathConstant.ADD_DETAIL;
     //#endregion
+
+
+    //#region CREDIT INS 
+    public static CREDIT_INS_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.ADD;
+    public static CREDIT_INS_BRANCH_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_BRANCH_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD_EDIT;
+    public static CREDIT_INS_GROUP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_GROUP_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.ADD_EDIT;
+
+    //#endregiom
 }

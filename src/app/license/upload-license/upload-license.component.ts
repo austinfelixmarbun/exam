@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-upload-license',
   templateUrl: './upload-license.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UploadLicenseComponent implements OnInit {
 

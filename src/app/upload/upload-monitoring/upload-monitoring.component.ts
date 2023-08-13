@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-upload-monitoring',
   templateUrl: './upload-monitoring.component.html',
   styleUrls: ['./upload-monitoring.component.scss'],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UploadMonitoringComponent implements OnInit {
 

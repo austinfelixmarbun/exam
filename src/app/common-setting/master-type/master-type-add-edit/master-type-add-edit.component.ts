@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-master-type-add-edit',
   templateUrl: './master-type-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class MasterTypeAddEditComponent implements OnInit {
 

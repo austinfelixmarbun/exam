@@ -20,7 +20,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-working-hour-d-detail',
   templateUrl: './working-hour-d-detail.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 
 export class WorkingHourDDetailComponent implements OnInit {

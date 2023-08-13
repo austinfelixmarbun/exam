@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-contact-person-list',
   templateUrl: './contact-person-list.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class ContactPersonListComponent implements OnInit {
   VendorContactPersonId: any;

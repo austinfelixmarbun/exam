@@ -39,7 +39,7 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     EmployeeBusinessunitPagingComponent
   ],
   providers: [
-    NGXToastrService
+    // NGXToastrService
   ]
 })
 export class EmployeeModule { }

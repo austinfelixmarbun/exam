@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-general-setting-add-edit',
   templateUrl: './general-setting-add-edit.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class GeneralSettingAddEditComponent implements OnInit {
 

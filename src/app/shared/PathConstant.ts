@@ -181,6 +181,12 @@ export class PathConstant {
     public static CS_PAYMENT_ALLOC_GRP = "PaymentAllocGrp";
     public static CS_PAYMENT_ALLOC_GRP_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP + "/" + PathConstant.PAGING;
     public static CS_PAYMENT_ALLOC_GRP_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP + "/" + PathConstant.DETAIL;
+    public static CS_PAYMENT_ALLOC_GRP_H = "PaymentAllocGrpH";
+    public static CS_PAYMENT_ALLOC_GRP_H_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP_H + "/" + PathConstant.PAGING;
+    public static CS_PAYMENT_ALLOC_GRP_H_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP_H + "/" + PathConstant.DETAIL;
+    public static CS_PAYMENT_ALLOC_GRP_D = "PaymentAllocGrpD";
+    public static CS_PAYMENT_ALLOC_GRP_D_PAGING = PathConstant.CS_PAYMENT_ALLOC_GRP_D + "/" + PathConstant.PAGING;
+    public static CS_PAYMENT_ALLOC_GRP_D_DETAIL = PathConstant.CS_PAYMENT_ALLOC_GRP_D + "/" + PathConstant.DETAIL;
     public static CS_COA = "Coa";
     public static CS_COA_PAGING = PathConstant.CS_COA + "/" + PathConstant.PAGING;
     public static CS_COA_DETAIL = PathConstant.CS_COA + "/" + PathConstant.DETAIL;
@@ -195,6 +201,7 @@ export class PathConstant {
     public static CS_REF_TAX_OFFICE = "TaxOffice";
     public static CS_REF_TAX_OFFICE_PAGING = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
     public static CS_REF_TAX_OFFICE_DETAIL = PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
+<<<<<<< HEAD
     public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
     public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
@@ -203,6 +210,14 @@ export class PathConstant {
     public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
+=======
+    public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
+    public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
+    public static CS_REF_AMRTZ_ITEM_DETAIL = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.DETAIL;
+    public static CS_REF_TRX_TYPE = "RefTrxType";
+    public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
+    public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
+>>>>>>> host-mfe-lms
     //#endregion
 
     //#region Cust
@@ -415,9 +430,16 @@ export class PathConstant {
     public static VENDOR_HO_DETAIL = PathConstant.VENDOR_HO + "/" + PathConstant.DETAIL;
     public static VENDOR_HO_REG = PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
     public static VENDOR_FUNDING_COY = "FundingCompany";
+    public static VENDOR_CREDIT_INS = "creditinsurance"
     public static VENDOR_FUNDING_COY_PAGING = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; //FundingCompany/Paging
     public static VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT; //FundingCompany/AddEDit
     public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW; 
+    public static VENDOR_CREDIT_INS_PAGING = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.PAGING;
+    public static VENDOR_CREDIT_INS_BRANCH_PAGING = PathConstant.VENDOR_CREDIT_INS  + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING
+    public static VENDOR_CREDIT_INS_BRANCH_ADD_EDIT = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD_EDIT
+    public static VENDOR_CREDIT_INS_GROUP_PAGING= PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.PAGING
+    public static VENDOR_CREDIT_INS_GROUP_ADD_EDIT= PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.ADD_EDIT
+    public static VENDOR_CREDIT_INS_ADD = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.ADD
     public static VENDOR_ATPM = "ATPM";
     public static VENDOR_ATPM_DETAIL = PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static VENDOR_ATPM_REG = PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
@@ -516,6 +538,7 @@ export class PathConstant {
      //#region JOURNAL
     public static JOURNAL_MEDIA = "journalmedia";
     public static JOURNAL_RESULT = "journalresult";
+    public static JOURNAL_RESULT_VIEW = "journalview";
     public static HEADER = "header";
     public static FACT = "fact";
     public static ITEM_VALUE = "itemvalue";

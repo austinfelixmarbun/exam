@@ -15,7 +15,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   selector: 'app-update-customer-family',
   templateUrl: './update-customer-family.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UpdateCustomerFamilyComponent implements OnInit {
   @Input() CustDataTrxId: number;

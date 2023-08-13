@@ -33,7 +33,7 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 @Component({
   selector: 'app-system-user-add',
   templateUrl: './system-user-add.component.html',
-  providers: [NGXToastrService, RegexService]
+  providers: [/*NGXToastrService*/, RegexService]
 })
 export class SystemUserAddComponent implements OnInit {
 

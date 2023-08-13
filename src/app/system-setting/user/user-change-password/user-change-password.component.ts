@@ -18,7 +18,7 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 @Component({
   selector: "app-user-change-password",
   templateUrl: "./user-change-password.component.html",
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UserChangePasswordComponent implements OnInit {
   apiUrl: any;

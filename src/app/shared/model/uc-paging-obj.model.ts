@@ -25,7 +25,7 @@ export class UcPagingObj {
     isGetAllData: boolean;
     integrationObj: IntegrationObj;
     ListPageSize: number[];
-    dicts: any;
+    dicts: Record<string, any>;
 
     constructor(private UrlConstantNew: UrlConstantNew) {
         this.dicts = {};
@@ -51,6 +51,7 @@ export class UcPagingObj {
         this.isGetAllData = false;
         this.integrationObj = new IntegrationObj();
         this.ListPageSize = [10, 20, 50, 100];
+        this.dicts = {};
     }
 }
 
