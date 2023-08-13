@@ -41,7 +41,6 @@ import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/ve
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
-<<<<<<< HEAD
 import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
 import { SelfCustomVendorPagingComponent } from './component/vendor/self-custom-vendor-paging/self-custom-vendor-paging.component';
 import { SelfCustomVendorHoldingAddEditComponent } from './self-custom-vendor-holding-add-edit/self-custom-vendor-holding-add-edit.component';
@@ -53,15 +52,12 @@ import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor
 import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
 import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
 import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
-=======
-import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
 import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
 import { VendorCreditInsuranceAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
 import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
 import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
->>>>>>> host-mfe-lms
 
 const routes: Routes = [
   {
@@ -390,7 +386,6 @@ const routes: Routes = [
         },
       },
       {
-<<<<<<< HEAD
         path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD,
         component: SelfCustomVendorSchemeMemberAddComponent,
         data: {
@@ -416,7 +411,9 @@ const routes: Routes = [
           component: SelfCustomVendorGroupMemberAddComponent,
           data: {
             title: 'Vendor Group Member View'
-=======
+          }
+      },
+      {
         path: PathConstant.VENDOR_CREDIT_INS_PAGING,
         component: VendorCreditInsurancePagingComponent,
         data: {
@@ -456,7 +453,6 @@ const routes: Routes = [
         component: VendorCreditInsuranceGroupAddEditComponent,
         data: {
           title: 'Vendor Credit Insurance Group Add Edit'
->>>>>>> host-mfe-lms
         },
       },
     ]

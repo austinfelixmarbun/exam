@@ -1,14 +1,8 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { PathConstant } from '../PathConstant';
-<<<<<<< HEAD
-=======
-import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from 'environments/environment';
-import e from 'express';
-import { AdInsConstant } from '../AdInstConstant';
 import * as _environment from "../../../assets/config/enviConfig.json";
->>>>>>> host-mfe-lms
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { loadRemoteModule } from '@angular-architects/module-federation';
 
 //Route for content layout with sidebar, navbar and footer.
 const envi = _environment;
@@ -101,13 +95,6 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
   },
-<<<<<<< HEAD
-  {
-    path: 'BREAD/:page',
-    component: UcTemplateComponent
-  },
-=======
-
   // dynamic import remote module
   //#region AR Module
   {
@@ -865,5 +852,4 @@ export const Full_ROUTES: Routes = [
     }
   },
   // #endregion
->>>>>>> host-mfe-lms
 ];
