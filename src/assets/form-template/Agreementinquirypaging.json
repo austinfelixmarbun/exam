@@ -1,0 +1,341 @@
+{
+"addButton": false,
+"addLink": "",
+"backButton": false,
+"component":
+    [
+        {
+        "id": "2d34daeb-b4a8-4d5e-b898-cd81e4bf3f22",
+        "paging":
+            {
+            "apiVersion": "v1",
+            "criteria":
+                [
+                ],
+            "delay": 1,
+            "environment": "ARUrl",
+            "fromValue":
+                [
+                ],
+            "isHideSearch": false,
+            "isSearched": false,
+            "pagingInput":
+                {
+                "bodyList":
+                    [
+                        {
+                        "key": "App",
+                        "position": "center",
+                        "property": "AppNo",
+                        "type": "callback"
+                        },
+                        {
+                        "param":
+                            [
+                                {
+                                "property": "AgrmntNo",
+                                "type": "AgrmntNo"
+                                }
+                            ],
+                        "path": "/agrmntview/view",
+                        "position": "left",
+                        "property": "AgrmntNo",
+                        "target": "_blank",
+                        "type": "link"
+                        },
+                        {
+                        "key": "Cust",
+                        "position": "center",
+                        "property": "CustNo",
+                        "type": "callback"
+                        },
+                        {
+                        "position": "left",
+                        "property": "CustName",
+                        "type": "text"
+                        },
+                        {
+                        "key": "ProdOffering",
+                        "position": "left",
+                        "property": "OfferingName",
+                        "type": "callback"
+                        },
+                        {
+                        "param":
+                            [
+                                {
+                                "property": "LmsSchmCode",
+                                "type": "LmsSchmHCode"
+                                }
+                            ],
+                        "path": "/lmsschemeview/view",
+                        "position": "left",
+                        "property": "LmsSchmName",
+                        "target": "_blank",
+                        "type": "link"
+                        },
+                        {
+                        "position": "center",
+                        "property": "ContractStat",
+                        "type": "text"
+                        },
+                        {
+                        "position": "center",
+                        "property": "GoliveDt",
+                        "type": "date"
+                        },
+                        {
+                        "position": "left",
+                        "property": "AssetName",
+                        "type": "text"
+                        },
+                        {
+                        "position": "center",
+                        "property": "LicensePlate",
+                        "type": "text"
+                        }
+                    ],
+                "component":
+                    [
+                        {
+                        "criteriaPropName": "",
+                        "criteriaPropValue": "",
+                        "datatype": "text",
+                        "ddlType": "all",
+                        "environment": "FOU",
+                        "id": "aofficeCodeSearchId",
+                        "isEvent": false,
+                        "isFromURL": true,
+                        "label": "Office Name",
+                        "name": "A.OFFICE_CODE",
+                        "path": "/RefOffice/GetListKvpActiveRefOfficeForPaging",
+                        "placeholder": "",
+                        "type": "dropdown",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "aappNoSearchId",
+                        "label": "Application No",
+                        "name": "A.APP_NO",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "aagrmntNoSearchId",
+                        "label": "Agreement No",
+                        "name": "A.AGRMNT_NO",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "clcustNoSearchId",
+                        "label": "Customer No",
+                        "name": "CL.CUST_NO",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "clcustNameSearchId",
+                        "label": "Customer Name",
+                        "name": "CL.CUST_NAME",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "aprodOfferingCodeSearchId",
+                        "label": "Offering LOS Code",
+                        "name": "A.PROD_OFFERING_CODE",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "polofferingNameSearchId",
+                        "label": "Offering LOS Name",
+                        "name": "POL.OFFERING_NAME",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "lshlmsSchmNameSearchId",
+                        "label": "LMS Scheme Name",
+                        "name": "LSH.LMS_SCHM_NAME",
+                        "placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "datatype": "date",
+                        "id": "agoLiveDtSearchId",
+                        "label": "Golive Date >=",
+                        "name": "A.GO_LIVE_DT",
+                        "placeholder": "",
+                        "restriction": "gte",
+                        "type": "datepicker",
+                        "useDefVal": false,
+                        "value": ""
+                        },
+                        {
+                        "datatype": "date",
+                        "id": "agoLiveDtSearchId",
+                        "label": "Golive Date <=",
+                        "name": "A.GO_LIVE_DT",
+                        "placeholder": "",
+                        "restriction": "lte",
+                        "type": "datepicker",
+                        "useDefVal": false,
+                        "value": ""
+                        },
+                        {
+                        "datatype": "text",
+                        "id": "case when aassetassetNo is null then '-' else stuff((select ', ' + tempalserialNo3 from dboagrmntAsset tempaa with(nolock) join dboagrmnt tempa on tempaaagrmntId = tempaagrmntId left join dboassetLms tempal with(nolock) on tempalassetNo = tempaaassetNo where tempaagrmntId = aagrmntId for xml path('')), 1, 1, '') endSearchId",
+                        "label": "License Plate No",
+                        "name": "CASE WHEN AAsset.ASSET_NO IS NULL THEN '-' ELSE STUFF((SELECT ', ' + TEMPAL.SERIAL_NO_3 FROM dbo.AGRMNT_ASSET TEMPAA WITH(NOLOCK) JOIN dbo.AGRMNT TEMPA ON TEMPAA.AGRMNT_ID = TEMPA.AGRMNT_ID LEFT JOIN dbo.ASSET_LMS TEMPAL WITH(NOLOCK) ON TEMPAL.ASSET_NO = TEMPAA.ASSET_NO WHERE TEMPA.AGRMNT_ID = A.AGRMNT_ID FOR XML PATH('')), 1, 1, '') END",
+                        "restriction": "like",
+						"placeholder": "",
+                        "type": "textbox",
+                        "value": ""
+                        },
+                        {
+                        "criteriaPropName": "Code",
+                        "criteriaPropValue": "CONTRACT_STAT",
+                        "datatype": "text",
+                        "ddlType": "all",
+                        "environment": "FOU",
+                        "id": "acontractStatCodeSearchId",
+                        "isEvent": false,
+                        "isFromURL": true,
+                        "label": "Contract Status",
+                        "name": "A.CONTRACT_STAT_CODE",
+                        "path": "/RefStatus/GetListKeyValueActiveGrpCodeByCode",
+                        "placeholder": "",
+                        "type": "dropdown",
+                        "value": ""
+                        }
+                    ],
+                "exportExcel": false,
+                "headerList":
+                    [
+                        {
+                        "label": "Application No",
+                        "name": "A.APP_NO",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Agreement No",
+                        "name": "A.AGRMNT_NO",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Customer No",
+                        "name": "CL.CUST_NO",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Customer Name",
+                        "name": "CL.CUST_NAME",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Offering LOS Name",
+                        "name": "POL.OFFERING_NAME",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "LMS Scheme Name",
+                        "name": "LSH.LMS_SCHM_NAME",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Contract Status",
+                        "name": "A.CONTRACT_STAT_CODE",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "Golive Date",
+                        "name": "A.GO_LIVE_DT",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "ASSET DESCRIPTION",
+                        "name": "AssetName",
+                        "position": "center",
+                        "type": "sort"
+                        },
+                        {
+                        "label": "LICENSE PLATE NO",
+                        "name": "LicensePlate",
+                        "position": "center",
+                        "type": "sort"
+                        }
+                    ],
+                "querystring":
+                    {
+                    "name": "searchAgreementInquiry"
+                    },
+                "title": "AGREEMENT INQUIRY"
+                },
+            "useIntegration": false,
+            "whereValue":
+                [
+                ]
+            }
+        }
+    ],
+"customToastrMsg": "",
+"hideSubmitButton": false,
+"hideTitle": false,
+"id": "Agreementinquirypaging",
+"isRedirect": false,
+"pathOption": "",
+"redirectLink": "",
+"redirectOption": "",
+"serviceUrl":
+    {
+    "add":
+        {
+        "apiPath": "",
+        "apiUrl": "",
+        "environment": ""
+        },
+    "createRfa":
+        {
+        "apiPath": "",
+        "apiUrl": "",
+        "environment": ""
+        },
+    "detail":
+        {
+        "apiPath": "",
+        "apiUrl": "",
+        "environment": ""
+        },
+    "edit":
+        {
+        "apiPath": "",
+        "apiUrl": "",
+        "environment": ""
+        }
+    },
+"title": "Agreement Inquiry"
+}

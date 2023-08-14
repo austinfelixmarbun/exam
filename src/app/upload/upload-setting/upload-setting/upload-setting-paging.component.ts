@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-upload-setting-paging',
   templateUrl: './upload-setting-paging.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UploadSettingPagingComponent implements OnInit {
   // ** Start Query Paging */

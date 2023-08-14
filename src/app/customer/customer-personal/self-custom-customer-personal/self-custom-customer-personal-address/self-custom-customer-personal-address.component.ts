@@ -21,6 +21,9 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
   @Output()
   data: EventEmitter<any> = new EventEmitter<any>();
 
+  @Output()
+  onBtnClick: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private http: HttpClient, private uctemplateService: UcTemplateService) {
     this.pageName = "CustomerPersonalAddress"
     this.isReady = true
@@ -35,10 +38,27 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
 
   };
 
+  btnClickHandler(ev)
+  {
+    if (ev.key == "add")
+    {
+      this.isReady = false;
+      this.pageName = "CustomerPersonalAddressAdd"
+    }
+    
+    if (ev.key == "back")
+    {
+      this.isReady = false;
+      this.pageName = "CustomerPersonalAddress"
+    }
+
+    setTimeout(() => {
+      this.isReady = true;
+    }, 100)
+  }
+
   callback(ev) {
     let row = ev.RowObj;
-
-    alert("x")
 
     if (ev.Action.key == "edit")
     {
@@ -47,6 +67,11 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
 
       setTimeout(() => {
         this.isReady = true;
+        const data = {
+          CustAddrId: row.CustAddrId, mode: 'edit'
+        };
+  
+        this.data.emit(data);
       }, 100)
     }
   }

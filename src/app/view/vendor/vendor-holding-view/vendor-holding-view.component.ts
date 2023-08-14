@@ -15,7 +15,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-holding-view',
   templateUrl: './vendor-holding-view.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class VendorHoldingViewComponent implements OnInit {
   @ViewChild(UcgridfooterComponent) UCGridFooter;

@@ -23,7 +23,7 @@ import { UcNotificationObj } from '../model/uc-notification-obj.model';
 @Component({
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
-    providers: [NGXToastrService]
+   // providers: [NGXToastrService]
 })
 
 export class NavbarComponent implements AfterViewChecked, OnInit {

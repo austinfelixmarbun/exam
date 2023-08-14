@@ -9,7 +9,7 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 @Component({
   selector: 'app-system-user',
   templateUrl: './system-user.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class SystemUserComponent implements OnInit {
 

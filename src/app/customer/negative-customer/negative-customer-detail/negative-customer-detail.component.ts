@@ -27,7 +27,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-negative-customer-detail',
   templateUrl: './negative-customer-detail.component.html',
   styleUrls: [],
-  providers: [NGXToastrService, RegexService]
+  providers: [ RegexService]
 })
 export class NegativeCustomerDetailComponent implements OnInit {
   pageType: string = "add";

@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
     selector: 'app-holiday-add',
     templateUrl: './holiday-add.component.html',
-    providers: [NGXToastrService]
+    //providers: [NGXToastrService]
 })
 export class HolidayAddComponent implements OnInit {
 

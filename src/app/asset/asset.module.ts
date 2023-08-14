@@ -103,8 +103,8 @@ export const customCurrencyMaskConfig = {
     CustomAssetCategoryAddEditComponent
 
   ],
-  providers: [
-    NGXToastrService
-  ]
+  // providers: [
+  //   NGXToastrService
+  // ]
 })
 export class AssetModule { }

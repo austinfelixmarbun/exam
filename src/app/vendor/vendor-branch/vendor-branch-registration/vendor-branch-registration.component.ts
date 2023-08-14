@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-branch-registration',
@@ -14,7 +15,7 @@ export class VendorBranchRegistrationComponent implements OnInit {
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
   Registration : string;
-  constructor(private route: ActivatedRoute,private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router : Router,private route: ActivatedRoute,private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       if(!params['VendorEmpId']){
@@ -24,8 +25,9 @@ export class VendorBranchRegistrationComponent implements OnInit {
   }
 
   readonly EditLink: string = NavigationConstant.VENDOR_BRANCH_ADD;
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  CancelLink: string ;
   ngOnInit() {
+
     this.VendorId = this.objPassing["VendorId"];
     this.objPassing["Type"]="Vendor";
 
@@ -44,6 +46,23 @@ export class VendorBranchRegistrationComponent implements OnInit {
         } 
       }
     );
+
+   
+  }
+
+  back(){
+    if(this.MrVendorCategoryCode == "CRD_INSCO_BRANCH"){
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING]);
+    }
+    else{
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING]);
+    }
+  }
+
+  backTo(){
+   
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING],{ MrVendorCategoryCode: this.MrVendorCategoryCode  });
+    
   }
 
 }

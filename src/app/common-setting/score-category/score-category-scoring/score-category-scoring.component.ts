@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-score-category-scoring',
   templateUrl: './score-category-scoring.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class ScoreCategoryScoringComponent implements OnInit {
   scoreCategorySchmHObj: ScoreCategorySchmHObj = new ScoreCategorySchmHObj();

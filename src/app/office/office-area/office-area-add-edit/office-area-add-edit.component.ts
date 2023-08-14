@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-area-add-edit',
   templateUrl: './office-area-add-edit.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class OfficeAreaAddEditComponent implements OnInit {
   refOfficeAreaObj: RefOfficeAreaObj;

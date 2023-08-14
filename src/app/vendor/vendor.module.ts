@@ -73,6 +73,25 @@ import { FundingCompanyPagingComponent } from './funding-company/funding-company
 import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
 import { MatRadioModule } from '@angular/material/radio';
 
+import { SelfCustomVendorPagingComponent } from './component/vendor/self-custom-vendor-paging/self-custom-vendor-paging.component';
+import { SelfCustomVendorHoAddEditComponent } from './vendor-ho/self-custom-vendor-ho-add-edit/self-custom-vendor-ho-add-edit.component';
+import { SelfCustomVendorHoldingAddEditComponent } from './self-custom-vendor-holding-add-edit/self-custom-vendor-holding-add-edit.component';
+import { UcTemplateModule } from '@adins/uctemplate';
+import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-custom-vendor-branch-add-edit/self-custom-vendor-branch-add-edit.component';
+import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
+import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
+import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
+import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
+import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
+import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
+import { RegexService } from 'app/customer/regex.service';
+import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
+import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
+import { VendorCreditInsuranceAddEditComponent} from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
+import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
+import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
+import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
+
 export const customCurrencyMaskConfig = {     
   align: "right",     
   allowNegative: true,     
@@ -114,7 +133,8 @@ export const customCurrencyMaskConfig = {
         UcapprovalcreateModule,
         UcapprovalR3Module,
         UcapprovalHistoryModule,
-        UcapprovalgeneralinfoModule
+        UcapprovalgeneralinfoModule,
+        UcTemplateModule
     ],
     declarations: [
         VendorHoldingPagingComponent,
@@ -161,11 +181,28 @@ export const customCurrencyMaskConfig = {
         VendorCollCompanyOfficeMemberAddComponent,
         FundingCompanyAddEditComponent,
         FundingCompanyContactPersonComponent,
-        FundingCompanyPagingComponent
+        FundingCompanyPagingComponent,
+        SelfCustomVendorPagingComponent,
+        SelfCustomVendorHoAddEditComponent,
+        SelfCustomVendorHoldingAddEditComponent,
+        SelfCustomVendorBranchAddEditComponent,
+        SelfCustomVendorSchemeAddEditComponent,
+        SelfCustomVendorSchemeMemberPagingComponent,
+        SelfCustomVendorSchemeMemberAddComponent,
+        SelfCustomVendorGroupComponent,
+        SelfCustomVendorGroupViewComponent,
+        SelfCustomVendorGroupMemberAddComponent,
+        VendorCreditInsurancePagingComponent,
+        VendorCreditInsuranceBranchPagingComponent,
+        VendorCreditInsuranceAddEditComponent,
+        VendorCreditInsuranceBranchAddEditComponent,
+        VendorCreditInsuranceGroupPagingComponent,
+        VendorCreditInsuranceGroupAddEditComponent,
     ],
     providers: [
         VendorService,
-        NGXToastrService
+        NGXToastrService,
+        RegexService
     ]
 })
 export class VendorModule { }

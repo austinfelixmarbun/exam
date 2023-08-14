@@ -22,7 +22,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-cust-fin-data-tab',
   templateUrl: './cust-fin-data-tab.component.html',
   styleUrls: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class CustFinDataTabComponent implements OnInit {
   @Input() MrCustTypeCode: string;

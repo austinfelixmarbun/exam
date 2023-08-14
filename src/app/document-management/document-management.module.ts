@@ -44,7 +44,7 @@ import { AdInsModule } from "app/components/adins-module/adins.module";
         ViewCabinetComponent,
         ViewRackComponent
     ],
-    providers:[NGXToastrService]
+    //providers:[NGXToastrService]
 })
 
 export class DocumentManagementModule{}

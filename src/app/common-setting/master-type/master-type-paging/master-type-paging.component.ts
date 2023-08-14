@@ -16,7 +16,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-master-type-paging',
   templateUrl: './master-type-paging.component.html',
-  providers: [NGXToastrService, ExcelService, DecimalPipe]
+  providers: [ ExcelService, DecimalPipe]
 })
 export class MasterTypePagingComponent implements OnInit {
 

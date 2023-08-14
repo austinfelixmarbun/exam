@@ -1,11 +1,11 @@
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from "app/shared/shared.module";
-import { ToastrModule } from 'ngx-toastr';
+import { IndividualConfig, ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -15,7 +15,7 @@ import { FullLayoutComponent } from "app/layouts/full/full-layout.component";
 import { AuthService } from 'app/shared/auth/auth.service';
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
@@ -43,10 +43,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
-import { UcformModule } from '@adins/ucform';
-import { UcformarrayModule } from '@adins/ucformarray';
-import { AdinsTemplateService } from './shared/services/adins-template.service';
 import { UcTemplateService } from '@adins/uctemplate';
+import { AdinsTemplateService } from './shared/services/adins-template.service';
+import { UcformModule } from '@adins/ucform';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,7 +83,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsSharedModule,
         HttpClientModule,
         DragDropModule,
-        ToastrModule.forRoot(),
+        ToastrModule.forRoot({
+            positionClass: 'toast-top-right'
+        }),
         NgbModule,
         TranslateModule.forRoot({
             loader: {
@@ -94,22 +96,25 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         }),
         CookieModule.forRoot(),
         MatDialogModule,
+        MatTabsModule,
         BrowserAnimationsModule,
         ClipboardModule,
         FormsModule,
         ReactiveFormsModule,
         UcdropdownsearchModule,
+        UcformModule,
         NgMultiSelectDropDownModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
-          // Register the ServiceWorker as soon as the application is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
-        }),
-        UcformModule,
-        UcformarrayModule
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
         AuthService,
         AuthGuard,
         RolePickService,
@@ -122,6 +127,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsHelperService,
         UrlConstantNew,
         EnviConfigService,
+        { provide: UcTemplateService, useClass: AdinsTemplateService },
         {
             provide: APP_INITIALIZER, useFactory: enviConfig, multi: true, deps: [EnviConfigService]
         },
@@ -130,9 +136,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
             provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
         },
         ErrorDialogService,
-        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
-        { provide: UcTemplateService, useClass: AdinsTemplateService},
-        { provide: MAT_DIALOG_DATA, useValue: {}}
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ],
     bootstrap: [AppComponent]
 })

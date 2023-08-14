@@ -17,7 +17,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   selector: 'app-upload-setting-edit',
   templateUrl: './upload-setting-edit.component.html',
   styleUrls: ['./upload-setting-edit.component.scss'],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UploadSettingEditComponent implements OnInit {
   @ViewChild(SearchComponent) searchComponent;
