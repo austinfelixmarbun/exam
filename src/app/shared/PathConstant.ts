@@ -110,6 +110,9 @@ export class PathConstant {
 
     public static CUSTOM_ASSET_DOC_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC_MASTER + "/" + PathConstant.PAGING;
     public static CUSTOM_ASSET_DOC_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC_MASTER + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_CONFIG_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CONFIG + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_CATEGORY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CATEGORY + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_CATEGORY_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CATEGORY + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Common-Setting

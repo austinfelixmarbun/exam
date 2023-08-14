@@ -38,6 +38,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
 import { CustomAssetDocumentMasterPagingComponent } from "./custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component";
 import { CustomAssetDocumentMasterAddEditComponent } from "./custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component";
 import { UcTemplateModule } from "@adins/uctemplate";
+import { CustomAssetCategoryPagingComponent } from "./custom/asset-category/asset-category-paging/custom-asset-category-paging.component";
+import { CustomAssetConfigurationPagingComponent } from "./custom/asset-configuration/asset-configuration-paging/custom-asset-configuration-paging.component";
+import { CustomAssetCategoryAddEditComponent } from "./custom/asset-category/asset-category-add-edit/custom-asset-category-add-edit.component";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -94,7 +97,10 @@ export const customCurrencyMaskConfig = {
     AssetAttributeComponent,
     AssetAttributeDetailComponent,
     CustomAssetDocumentMasterPagingComponent,
-    CustomAssetDocumentMasterAddEditComponent
+    CustomAssetDocumentMasterAddEditComponent,
+    CustomAssetConfigurationPagingComponent,
+    CustomAssetCategoryPagingComponent,
+    CustomAssetCategoryAddEditComponent
 
   ],
   providers: [

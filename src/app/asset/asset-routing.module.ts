@@ -31,6 +31,9 @@ import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute
 import { PathConstant } from 'app/shared/PathConstant';
 import { CustomAssetDocumentMasterPagingComponent } from './custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component';
 import { CustomAssetDocumentMasterAddEditComponent } from './custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component';
+import { CustomAssetConfigurationPagingComponent } from './custom/asset-configuration/asset-configuration-paging/custom-asset-configuration-paging.component';
+import { CustomAssetCategoryPagingComponent } from './custom/asset-category/asset-category-paging/custom-asset-category-paging.component';
+import { CustomAssetCategoryAddEditComponent } from './custom/asset-category/asset-category-add-edit/custom-asset-category-add-edit.component';
 
 const routes: Routes = [
   {
@@ -267,11 +270,31 @@ const routes: Routes = [
         data: {
           title: 'Asset Doc Master Detail'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CONFIG_PAGING,
+        component: CustomAssetConfigurationPagingComponent,
+        data: {
+          title: 'Asset Doc Master Paging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CATEGORY_PAGING,
+        component: CustomAssetCategoryPagingComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CATEGORY_DETAIL,
+        component: CustomAssetCategoryAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
       }
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
