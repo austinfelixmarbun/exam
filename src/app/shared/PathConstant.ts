@@ -113,6 +113,12 @@ export class PathConstant {
     public static CUSTOM_ASSET_CONFIG_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CONFIG + "/" + PathConstant.PAGING;
     public static CUSTOM_ASSET_CATEGORY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CATEGORY + "/" + PathConstant.PAGING;
     public static CUSTOM_ASSET_CATEGORY_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_CATEGORY + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_DOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_DOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_DOC + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_ACC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ACC + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_ACC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ACC + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_ATTR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_ATTR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Common-Setting
