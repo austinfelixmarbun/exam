@@ -225,6 +225,15 @@ export class NavigationConstant {
     public static SELF_CUSTOM_VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD; //'/Vendor/SelfCustom/Group/Add'
     public static SELF_CUSTOM_VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW; //'/Vendor/SelfCustom/Group/View'
     public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD; //'/Vendor/SelfCustom/GroupMbr/Add
+    public static SELF_CUSTOM_VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG; //'/Vendor/SelfCustom/Holding/Registration'
+    public static SELF_CUSTOM_VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_REG; //'/Vendor/SelfCustom/HO/Registration'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING; //'/Vendor/SelfCustom/Branch/Member/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD; //'/Vendor/SelfCustom/Branch/Member/Add'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING; //'/Vendor/SelfCustom/Branch/Employee/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL; //'/Vendor/SelfCustom/Branch/Employee/Detail'
+    public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING; //'/View/Vendor/SelfCustom/VendorHolding'
+    public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
+    public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
     //#endregion
     
     //#region Organization

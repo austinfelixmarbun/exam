@@ -465,6 +465,12 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_GRP_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.ADD;
     public static SELF_CUSTOM_VENDOR_GRP_VIEW = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.VIEW;
     public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRP_MBR + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_VENDOR_HOLDING_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HOLDING + "/" + PathConstant.VENDOR_REG;
+    public static SELF_CUSTOM_VENDOR_HO_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Verif-Module
@@ -506,6 +512,11 @@ export class PathConstant {
     public static VIEW_VENDOR_HO = "VendorHO";
     public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
     public static VIEW_FUNDING_COMPANY = "FundingCompany";
+
+    
+    public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = PathConstant.SELF_CUSTOM + "/" + "VendorHolding";
+    public static SELF_CUSTOM_VIEW_VENDOR_HO = PathConstant.SELF_CUSTOM + "/" + "VendorHO";
+    public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = PathConstant.SELF_CUSTOM + "/" + "VendorBranch";
     //#endregion
 
     //#region View-Survey-Module

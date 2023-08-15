@@ -6,6 +6,7 @@ import { VendorHoInfoComponent } from './vendor-ho-info/vendor-ho-info.component
 import { PathConstant } from 'app/shared/PathConstant';
 import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendor-coll-company-view.component";
 import { FundingCompanyDetailComponent } from './vendor-funding-company-view/funding-company-detail.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 const routes: Routes = [
   {
     path: '',
@@ -44,7 +45,28 @@ const routes: Routes = [
         data: {
           title: 'Vendor Funding Company Company View'
         }
-      }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING,
+        component: UcTemplateComponent,
+        data: {
+          page: 'ViewSupplierHolding'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO,
+        component: UcTemplateComponent,
+        data: {
+          page: 'ViewSupplierHo'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH,
+        component: UcTemplateComponent,
+        data: {
+          page: 'ViewVendorBranch'
+        }
+      },
     ]
   }
 ];

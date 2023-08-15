@@ -91,6 +91,7 @@ import { VendorCreditInsuranceAddEditComponent} from './vendor-credit-insurance/
 import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
+import { SelfCustomVendorHoldingRegistrationComponent } from './self-custom-vendor-holding-registration/self-custom-vendor-holding-registration.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -198,6 +199,7 @@ export const customCurrencyMaskConfig = {
         VendorCreditInsuranceBranchAddEditComponent,
         VendorCreditInsuranceGroupPagingComponent,
         VendorCreditInsuranceGroupAddEditComponent,
+        SelfCustomVendorHoldingRegistrationComponent,
     ],
     providers: [
         VendorService,

@@ -58,6 +58,7 @@ import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insu
 import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -453,6 +454,40 @@ const routes: Routes = [
         component: VendorCreditInsuranceGroupAddEditComponent,
         data: {
           title: 'Vendor Credit Insurance Group Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierHoDetail'
+        },
+      },{
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierOfficeMemberPaging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierOfficeMemberAdd'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierEmpPaging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierEmpDetail'
         },
       },
     ]
