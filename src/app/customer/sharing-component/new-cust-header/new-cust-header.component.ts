@@ -141,6 +141,9 @@ export class NewCustHeaderComponent implements OnInit {
   Cancel() {
     if (this.CustDataMode != CommonConstant.CustMainDataModeCust) {
       this.outputCancel.emit();
+      let temp = this.From.toUpperCase();
+      let isFromIncCustDataMode = temp.includes(this.CustDataMode);
+      if (this.From == "" || (!isFromIncCustDataMode)) return;
     }
     switch (this.From) {
       case CommonConstant.CustFromEditMainData:

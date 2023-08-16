@@ -16,6 +16,8 @@ import { CustomerViewOtherInfoComponent } from "./customer-view-other-info.compo
 import { CustomerViewOtherInfoRoutingModule } from "./customer-view-other-info-routing.module";
 import { SharedModule } from "app/shared/shared.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 @NgModule({
     imports: [
@@ -39,6 +41,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewOtherInfoComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewOtherInfoModule { }

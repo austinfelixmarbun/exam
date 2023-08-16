@@ -9,6 +9,8 @@ export class UcViewGenericObj {
     whereValue: Array<WhereValueObj>;
     navigationConst: any;
     listEnvironments: Array<EnvisObj>;
+    IsCard: boolean;
+    dataInput: any;
 
     constructor(private UrlConstantNew: UrlConstantNew) {
         this.viewInput = "";

@@ -19,6 +19,7 @@ export class UcAddressObj {
         Fax: string;
         MrHouseOwnershipCode: string;
         SubZipcode: string;
+        StaySince: string;
         StayLength: number;
         RowVersion: string;
 
@@ -42,6 +43,7 @@ export class UcAddressObj {
                 this.Fax = "";
                 this.MrHouseOwnershipCode = "";
                 this.SubZipcode = "";
+                this.StaySince = "";
                 this.StayLength = 0;
                 this.RowVersion = "";
         }

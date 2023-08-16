@@ -23,6 +23,12 @@ import { CustomerUpdateMasterComponent } from './customer-update-master/customer
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
+import { SelfCustomCustomerPagingComponent } from './self-custom-customer-paging/self-custom-customer-paging.component';
+import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
+import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
+import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
+import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
+import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
 
 const routes: Routes = [
   {
@@ -175,7 +181,49 @@ const routes: Routes = [
         data: {
           title: 'New Cust'
         }
-      }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_PAGING,
+        component: SelfCustomCustomerPagingComponent,
+        data: {
+          title: 'Customer Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING,
+        component: SelfCustomEditMainDataPagingComponent,
+        data: {
+          title: 'Edit Main Data Page'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_FAMILY_PAGING,
+        component: SelfCustomCustomerFamilyMenuComponent,
+        data: {
+          title: 'Customer Family'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_SHRHLDR_PAGING,
+        component: SelfCustomCustomerShareholderMenuComponent,
+        data: {
+          title: 'Customer Shareholder'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_NEW_CUST,
+        component: SelfCustomNewCustHeaderComponent,
+        data: {
+          title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE,
+        component: SelfCustomCustomerPersonalPageComponent,
+        data: {
+          title: 'Customer Personal DuplicateCheck  '
+        }
+      },
     ]
   }
 ];

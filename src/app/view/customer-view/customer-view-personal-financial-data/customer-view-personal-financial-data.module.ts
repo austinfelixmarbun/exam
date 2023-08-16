@@ -16,6 +16,8 @@ import { CustomerViewPersonalFinancialDataComponent } from "./customer-view-pers
 import { CustomerViewPersonalFinancialDataRoutingModule } from "./customer-view-personal-financial-data-routing.module";
 import { CustomerViewPersonalFinancialSectionComponent } from "../customer-view-personal-financial-section/customer-view-personal-financial-section.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 
@@ -42,6 +44,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         ///customer
         CustomerViewPersonalFinancialDataComponent,
         CustomerViewPersonalFinancialSectionComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewPersonalFinancialDataModule { }

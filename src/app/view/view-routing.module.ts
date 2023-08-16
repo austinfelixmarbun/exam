@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_NOTIF_TEMPLATE,
         loadChildren: () => import('./notif-engine-template-view/notif-engine-template-view.module').then(m => m.NotifEngineTemplateViewModule)
+      },
+      {
+        path: PathConstant.VENDOR_FUNDING_COY,
+        loadChildren: () => import('./vendor/vendor-view.module').then(m => m.VendorViewModule)
       }
     ]
   }

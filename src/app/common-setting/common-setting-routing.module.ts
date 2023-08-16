@@ -67,6 +67,10 @@ import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
+import { CustomEconomicSectorComponent } from './custom/economic-sector/custom-economic-sector-paging/custom-economic-sector-paging.component';
+import { CustomEconomicSectorAddEditComponent } from './custom/economic-sector/custom-economic-sector-add-edit/custom-economic-sector-add-edit.component';
+import { CustomMasterAddEditComponent } from './custom/master/master-add-edit/custom-master-add-edit.component';
+import { CustomMasterComponent } from './custom/master/master-paging/custom-master-paging.component';
 import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
 import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
 import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
@@ -75,6 +79,8 @@ import { PaymentAllocGroupHPagingComponent } from './payment-alloc-group-new/pay
 import { PaymentAllocGroupHDetailComponent } from './payment-alloc-group-new/payment-alloc-group-h-detail/payment-alloc-group-h-detail.component';
 import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
 import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/payment-alloc-group-d-paging/payment-alloc-group-d-paging.component';
+import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 
 const routes: Routes = [
   {
@@ -544,6 +550,52 @@ const routes: Routes = [
         component: TaxOfficePagingComponent,
         data: {
           title: 'Tax Office Paging'
+        },
+      },
+
+      //REF INS CLAIM DOC
+      {
+        path: PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL,
+        component: RefInsClaimDocAddEditComponent,
+        data: {
+          title: 'Insurance Claim Document Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_INS_CLAIM_DOC_PAGING,
+        component: RefInsClaimDocPagingComponent,
+        data: {
+          title: 'Insurance Claim Document Paging'
+        },
+      },
+
+      //CUSTOM UC TEMPLATE
+      {
+        path: PathConstant.CS_CUSTOM_ECONOMIC_SECTOR_PAGING,
+        component: CustomEconomicSectorComponent,
+        data: {
+          title: 'Economic Sector Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_ECONOMIC_SECTOR_DETAIL,
+        component: CustomEconomicSectorAddEditComponent,
+        data: {
+          title: 'Economic Sector Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_MASTER_PAGING,
+        component: CustomMasterComponent,
+        data: {
+          title: 'Economic Sector Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_MASTER_DETAIL,
+        component: CustomMasterAddEditComponent,
+        data: {
+          title: 'Economic Sector Paging'
         },
       },
       

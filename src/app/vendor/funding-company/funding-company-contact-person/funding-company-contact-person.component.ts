@@ -17,14 +17,13 @@ import { FundingCompanyService } from 'app/vendor/funding-company.service';
 export class FundingCompanyContactPersonComponent implements OnInit {
   modeCP: string;
   VendorContactPersonId: number;
-  // VendorId: number;
   @Input() mode: string;
   @Input() VendorId: number;
   @Output() addContactPerson = new EventEmitter<any>();
   @Output() outputValue: EventEmitter<object> = new EventEmitter();
   vendorObj: any;
   resultData: any;
-  listVendorCP: Array<ResListVendorContactPersonObj> = [];
+  listVendorCP: Array<ResListVendorContactPersonObj> = new Array<ResListVendorContactPersonObj>();
   initialListVendorCP: any[] = [];
 
   objVendor: VendorObj;
@@ -53,6 +52,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
   pageType: string;
   VendorCode: string;
   isChange: boolean = false;
+  newVendorContactPerson: any;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private fb: FormBuilder, private toastr: NGXToastrService, private childFormService: FundingCompanyService) {
     this.route.queryParams.subscribe(params => {
@@ -79,9 +79,11 @@ export class FundingCompanyContactPersonComponent implements OnInit {
     if(this.mode === 'edit'){
       this.http.post(URLConstant.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
         (response: ResGetListVendorContactPersonObj) => {
+          if(response[CommonConstant.ReturnObj] != null){
           this.listVendorCP = response[CommonConstant.ReturnObj];
           this.listVendorCP = this.listVendorCP.concat(this.childFormService.getChildFormValues());
           this.addContactPerson.emit(this.listVendorCP);
+          }
         })
     }
     else{
@@ -110,7 +112,6 @@ export class FundingCompanyContactPersonComponent implements OnInit {
 
   editItem(item: any) {
     console.log("ini item name", item.Name);
-    // this.editContactPerson = vendorCPObj;
     this.modeCP = "edit";
     if (this.modeCP == "edit") {
       this.VendorContactPersonId = item.VendorContactPersonId
@@ -126,10 +127,13 @@ export class FundingCompanyContactPersonComponent implements OnInit {
   }
 
   deleteVendorCP(vendorCP: ResListVendorContactPersonObj): void {
-    const index = this.listVendorCP.indexOf(vendorCP);
+
+      // Remove newly added contact person from the newVendorContactPersons array
+      const index = this.listVendorCP.indexOf(vendorCP);
     if (index !== -1) {
       this.listVendorCP.splice(index, 1);
     }
+
   }
 
   addCP() {
@@ -138,7 +142,9 @@ export class FundingCompanyContactPersonComponent implements OnInit {
 
 
   SaveForm(): void {
+    console.log(this.vendorContactPersonForm)
     if (this.vendorContactPersonForm.valid) {
+
       if (this.modeCP === 'edit') {
         const index = this.listVendorCP.findIndex(item => item.VendorContactPersonId == this.VendorContactPersonId);
         if (index >= 0) {

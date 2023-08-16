@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {UcTemplateService} from '@adins/uctemplate';
 import {AdInsHelper} from '../AdInsHelper';
 import {CookieService} from 'ngx-cookie';
@@ -9,12 +9,12 @@ import * as Module from 'app/components';
 import { NavigationConstant } from '../NavigationConstant';
 
 const listEnvironments = [
-    { environment: 'FOU', url: envi.FoundationR3Url},
-    { environment: 'FOU_WEB', url: envi.FoundationR3Web },
-    { environment: 'LOSR3WEB', url: envi.losR3Web },
-    { environment: 'LMSR3WEB', url: envi.lmsR3Web },
-    { environment: 'LOS', url: envi.LosURL },
-    { environment: 'CashBankUrl', url: envi.CashBankUrl }
+  { environment: 'FOU', url: envi.FoundationR3Url},
+  { environment: 'FOU_WEB', url: envi.FoundationR3Web },
+  { environment: 'LOSR3WEB', url: envi.losR3Web },
+  { environment: 'LMSR3WEB', url: envi.lmsR3Web },
+  { environment: 'LOS', url: envi.LosURL },
+  { environment: 'CashBankUrl', url: envi.CashBankUrl }
 ];
 
 @Injectable({
@@ -24,7 +24,6 @@ export class AdinsTemplateService extends UcTemplateService {
 
   constructor() {
     super();
-
     this.configure();
   }
 

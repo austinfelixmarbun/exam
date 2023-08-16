@@ -15,6 +15,8 @@ import { UcShowErrorsModule } from "@adins/uc-show-errors";
 import { CustomerViewPersonalContactPersonComponent } from "./customer-view-personal-contact-person.component";
 import { CustomerViewPersonalContactPersonRoutingModule } from "./customer-view-personal-contact-person-routing.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 
 
@@ -39,6 +41,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     ],
     declarations: [
         CustomerViewPersonalContactPersonComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class CustomerViewPersonalContactPersonModule { }

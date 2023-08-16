@@ -29,6 +29,10 @@ import { MainInfoViewComponent } from "./vendor-ho-info/main-info-view/main-info
 import { HoAtpmInfoComponent } from "./vendor-ho-info/ho-atpm-info/ho-atpm-info.component";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendor-coll-company-view.component";
+import { FundingCompanyDetailComponent } from "./vendor-funding-company-view/funding-company-detail.component";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { SelfCustomContainerViewVendorAttrComponent } from './self-custom-container-view-vendor-attr/self-custom-container-view-vendor-attr.component';
 
 
 @NgModule({
@@ -65,7 +69,12 @@ import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendo
         MainHoInfoComponent,
         MainInfoViewComponent,
         HoAtpmInfoComponent,
-        VendorCollCompanyViewComponent
+        VendorCollCompanyViewComponent,
+        FundingCompanyDetailComponent,
+        SelfCustomContainerViewVendorAttrComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class VendorViewModule { }

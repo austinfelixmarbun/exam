@@ -109,8 +109,8 @@ export class NavigationConstant {
     public static CS_REF_TC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TC_DETAIL; //'/CommonSetting/RefTc/Detail'
     public static CS_REF_TAX_OFFICE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING; //'/CommonSetting/TaxOffice/Paging'
     public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
-    // public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
-    // public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
+    public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
+    public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
     //#endregion
 
     //#region System Setting
@@ -213,6 +213,27 @@ export class NavigationConstant {
     public static VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
     public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
     public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
+    public static VIEW_FUNDING_COMPANY = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_FUNDING_COMPANY;
+
+    public static SELF_CUSTOM_VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_PAGING; //'/Vendor/SelfCustom/Paging'
+    public static SELF_CUSTOM_VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL; //'/Vendor/SelfCustom/HO/Detail'
+    public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL; //'/Vendor/SelfCustom/Holding/Detail'
+    public static SELF_CUSTOM_VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD; //'/Vendor/SelfCustom/Branch/Add'
+    public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL; //'/Vendor/SelfCustom/VendorScheme/Detail'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR; //'/Vendor/SelfCustom/VendorScheme/Member'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD; //'/Vendor/SelfCustom/VendorScheme/Member/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD; //'/Vendor/SelfCustom/Group/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW; //'/Vendor/SelfCustom/Group/View'
+    public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD; //'/Vendor/SelfCustom/GroupMbr/Add
+    public static SELF_CUSTOM_VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG; //'/Vendor/SelfCustom/Holding/Registration'
+    public static SELF_CUSTOM_VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_REG; //'/Vendor/SelfCustom/HO/Registration'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING; //'/Vendor/SelfCustom/Branch/Member/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD; //'/Vendor/SelfCustom/Branch/Member/Add'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING; //'/Vendor/SelfCustom/Branch/Employee/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL; //'/Vendor/SelfCustom/Branch/Employee/Detail'
+    public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING; //'/View/Vendor/SelfCustom/VendorHolding'
+    public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
+    public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
     //#endregion
     
     //#region Organization
@@ -309,6 +330,13 @@ export class NavigationConstant {
     public static CUST_GUARANTOR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_GUARANTOR_PAGING; //'/Customer/CustGuarantor/Paging'
     public static CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUST_FAMILY_PAGING; //'/Customer/CustFamily/Paging'
     public static CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.NEW_CUST; //'/Customer/NewCustomer'
+
+    public static SELF_CUSTOM_CUST_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PAGING; //'/Customer/SelfCustom/Paging'
+    public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING; //'/Customer/SelfCustom/EditMainData/Paging'
+    public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_SHRHLDR_PAGING; //'/Customer/SelfCustom/CustShareholder/Paging'
+    public static SELF_CUSTOM_CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_FAMILY_PAGING; //'/Customer/SelfCustom/CustFamily/Paging'
+    public static SELF_CUSTOM_CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_NEW_CUST; //'/Customer/SelfCustom/NewCustomer'
+    public static SELF_CUSTOM_CUST_PERSONAL_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE; //'/Customer/SelfCustom/CustomerPersonal/Page'
     //#endregion
 
     //#region Document Management

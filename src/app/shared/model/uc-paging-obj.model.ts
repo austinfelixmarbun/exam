@@ -28,6 +28,7 @@ export class UcPagingObj {
     dicts: Record<string, any>;
 
     constructor(private UrlConstantNew: UrlConstantNew) {
+        this.dicts = {};
         this._url = "";
         this.title = "";
         this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + '/v2';

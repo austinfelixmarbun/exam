@@ -1,11 +1,8 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { PathConstant } from '../PathConstant';
-import { loadRemoteModule } from '@angular-architects/module-federation';
-import { environment } from 'environments/environment';
-import e from 'express';
-import { AdInsConstant } from '../AdInstConstant';
 import * as _environment from "../../../assets/config/enviConfig.json";
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { loadRemoteModule } from '@angular-architects/module-federation';
 
 //Route for content layout with sidebar, navbar and footer.
 const envi = _environment;
@@ -98,7 +95,6 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
   },
-
   // dynamic import remote module
   //#region AR Module
   {
@@ -158,6 +154,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './ReportModule'
       })
         .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'prepaidpurpose',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './RefPrepaidPurposeModule'
+      })
+        .then(m => m.RefPrepaidPurposeModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },

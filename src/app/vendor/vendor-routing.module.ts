@@ -41,13 +41,24 @@ import { VendorCollCompanyOfficeMemberComponent } from './vendor-coll-company/ve
 import { VendorCollCompanyRegistrationComponent } from './vendor-coll-company/vendor-coll-company-registration/vendor-coll-company-registration.component';
 import { FundingCompanyAddEditComponent } from './funding-company/funding-company-add-edit/funding-company-add-edit.component';
 import { FundingCompanyPagingComponent } from './funding-company/funding-company-paging/funding-company-paging.component';
-import { FundingCompanyDetailComponent } from './funding-company/funding-company-detail/funding-company-detail.component';
+import { FundingCompanyDetailComponent } from '../view/vendor/vendor-funding-company-view/funding-company-detail.component';
+import { SelfCustomVendorPagingComponent } from './component/vendor/self-custom-vendor-paging/self-custom-vendor-paging.component';
+import { SelfCustomVendorHoldingAddEditComponent } from './self-custom-vendor-holding-add-edit/self-custom-vendor-holding-add-edit.component';
+import { SelfCustomVendorHoAddEditComponent } from './vendor-ho/self-custom-vendor-ho-add-edit/self-custom-vendor-ho-add-edit.component';
+import { SelfCustomVendorBranchAddEditComponent } from './vendor-branch/self-custom-vendor-branch-add-edit/self-custom-vendor-branch-add-edit.component';
+import { SelfCustomVendorSchemeAddEditComponent } from './vendor-scheme/self-custom-vendor-scheme-add-edit/self-custom-vendor-scheme-add-edit.component';
+import { SelfCustomVendorSchemeMemberPagingComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-paging/self-custom-vendor-scheme-member-paging.component';
+import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor-scheme-member/self-custom-vendor-scheme-member-add/self-custom-vendor-scheme-member-add.component';
+import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
+import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
+import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
 import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
 import { VendorCreditInsuranceAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
 import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
 import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-add-edit/vendor-credit-insurance-branch-add-edit.component';
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -334,11 +345,74 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.VENDOR_FUNDING_COY_VIEW,
-        component: FundingCompanyDetailComponent,
+        path: PathConstant.SELF_CUSTOM_VENDOR_PAGING,
+        component: SelfCustomVendorPagingComponent,
         data: {
-          title: 'Funding Company View'
+          title: 'Vendor Paging'
         },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        component: SelfCustomVendorHoldingAddEditComponent,
+        data: {
+          title: 'Vendor Holding Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        component: SelfCustomVendorHoAddEditComponent,
+        data: {
+          title: 'Vendor HO Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD,
+        component: SelfCustomVendorBranchAddEditComponent,
+        data: {
+          title: 'Vendor Branch Add'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL,
+        component: SelfCustomVendorSchemeAddEditComponent,
+        data: {
+          title: 'Vendor Scheme Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR,
+        component: SelfCustomVendorSchemeMemberPagingComponent,
+        data: {
+          title: 'Vendor Scheme Member'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD,
+        component: SelfCustomVendorSchemeMemberAddComponent,
+        data: {
+          title: 'Vendor Scheme Member Add',
+        }
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD,
+          component: SelfCustomVendorGroupComponent,
+          data: {
+            title: 'Vendor Group Add'
+          },
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW,
+          component: SelfCustomVendorGroupViewComponent,
+          data: {
+            title: 'Vendor Group View'
+          },
+      },
+      {
+          path: PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD,
+          component: SelfCustomVendorGroupMemberAddComponent,
+          data: {
+            title: 'Vendor Group Member View'
+          }
       },
       {
         path: PathConstant.VENDOR_CREDIT_INS_PAGING,
@@ -380,6 +454,40 @@ const routes: Routes = [
         component: VendorCreditInsuranceGroupAddEditComponent,
         data: {
           title: 'Vendor Credit Insurance Group Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierHoDetail'
+        },
+      },{
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierOfficeMemberPaging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierOfficeMemberAdd'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierEmpPaging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierEmpDetail'
         },
       },
     ]

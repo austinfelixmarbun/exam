@@ -90,7 +90,7 @@
             "position" : "left",
             "property" : "FundCoyCode",
             "target" : "_blank", 
-            "path" : "VENDOR_FUNDING_COY_VIEW", 
+            "path" : "VIEW_FUNDING_COMPANY", 
             "param" : [ 
                   {
                     "type": "VendorId",

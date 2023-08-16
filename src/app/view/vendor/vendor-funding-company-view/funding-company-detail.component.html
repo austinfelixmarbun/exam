@@ -1,0 +1,100 @@
+  
+    <div class="card">
+        <div class="card-header header-title">
+          <h4 class="card-title">Funding Company View</h4>
+      </div>
+     
+      <div class="col-md-12">
+        <div class="card-body px-3 mt-3">
+          <lib-ucSubsection [id]="'section1'" [title]="'Main Information'" [panel]="'section1'"></lib-ucSubsection>
+          <div id="section1">
+          <div class="form-group row">
+              <div class="col md-6">
+                  <div class="row">
+                      <label class="col-md-6">Vendor Code</label>
+                      <div class="col-md-6">
+                          {{this.vendor.InputCode}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <label class="col-md-6">Vendor Name</label>
+                      <div class="col-md-6">
+                          {{this.vendor.InputName}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <label class="col-md-6">Is Active</label>
+                      <div class="col-md-6">
+                          {{this.vendor.IsActive}}
+                      </div>
+                  </div>
+                     
+                  
+                  <div *ngIf="MrVendorCategoryCode=='JF_FUNDING_COMPANY'">
+                      <div class="form-body">
+                        <ng-container *ngFor="let attr of attributeList">
+                          <!-- DAYS_PER_YEAR  -->
+                          <div class="row">
+                            <label class="col-md-6">{{attr.AttrName}}</label>
+                            <div class="col-md-6">
+                              {{ attr.AttrContent }}
+                            </div>
+                            {{attr.VendorAttrValue}}
+                          </div>
+                        </ng-container>
+                      </div>
+                      </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <label class="col-md-6">Address</label>
+                  <div class="col-md-6">
+                      {{this.address.Address}}
+                  </div>
+              </div>
+              <div class="row">
+                <label class="col-md-6">Jurisdiction</label>
+                <div class="col-md-6">
+                    {{this.jurisdiction}}
+                </div>
+            </div>
+              </div>
+          </div>
+         
+        
+          
+      </div>
+      <lib-ucSubsection [id]="'section1'" [title]="'Contact Information'" [panel]="'section2'"></lib-ucSubsection>
+      <div id="section2">
+      <div class="addEdit" style="overflow-x: auto;">
+        
+          <table class="table table-responsive-md text-center table-hover">
+            <thead>
+              <tr class="table-header">
+                <th style="text-align: left;"><span class="thead-header" name='assetTypeName' translate>CONTACT PERSON NAME</span>
+                </th>
+                <th style="text-align: left;"><span class="thead-header" name='fullAddress' translate>CONTACT PERSON NUMBER</span>
+                </th>
+                <th style="text-align: left;"><span class="thead-header" name='buildingOwnership' translate>CONTACT PERSON EMAIL</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listVendorCP">
+                <td style="text-align: left;" hidden>{{item.VendorContactPersonId}}</td>
+                <td style="text-align: left;">{{item.Name}}</td>
+                <td style="text-align: left;">{{item.Phone1}}</td>
+                <td style="text-align: left;">{{item.Email}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br>
+        <br>
+        <br>
+  </div>
+      </div>
+      </div>
+        
+ 
+      </div>
