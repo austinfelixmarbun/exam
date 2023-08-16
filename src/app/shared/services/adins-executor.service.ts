@@ -15,5 +15,4 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("test", test);
     this.setExecutor("addEditCustAsset", addEditCustAsset);
   }
-
 }
