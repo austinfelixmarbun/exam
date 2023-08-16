@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UserRoleComponent implements OnInit {
 

@@ -14,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
   selector: 'app-update-customer-mgmnt-shareholder',
   templateUrl: './update-customer-mgmnt-shareholder.component.html',
   styles: [],
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   @Input() CustDataTrxId: number;

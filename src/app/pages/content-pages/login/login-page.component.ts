@@ -17,7 +17,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page-new.component.html',
-  providers: [RolePickService, NGXToastrService]
+  providers: [RolePickService, /*NGXToastrService*/]
 })
 
 export class LoginPageComponent implements OnInit {

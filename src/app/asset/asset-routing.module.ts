@@ -29,6 +29,17 @@ import { ReviewUploadNegativeAssetDetailComponent } from './negative-asset/revie
 import { AssetAttributeComponent } from './asset-attribute/asset-attribute.component'; 
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { CustomAssetDocumentMasterPagingComponent } from './custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component';
+import { CustomAssetDocumentMasterAddEditComponent } from './custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component';
+import { CustomAssetConfigurationPagingComponent } from './custom/asset-configuration/asset-configuration-paging/custom-asset-configuration-paging.component';
+import { CustomAssetCategoryPagingComponent } from './custom/asset-category/asset-category-paging/custom-asset-category-paging.component';
+import { CustomAssetCategoryAddEditComponent } from './custom/asset-category/asset-category-add-edit/custom-asset-category-add-edit.component';
+import { CustomAssetDocumentAddEditComponent } from './custom/asset-document/asset-document-add-edit/custom-asset-document-add-edit.component';
+import { CustomAssetDocumentPagingComponent } from './custom/asset-document/asset-document-paging/custom-asset-document-paging.component';
+import { CustomAssetAccessoryAddEditComponent } from './custom/asset-accessory/asset-accessory-add-edit/custom-asset-accessory-add-edit.component';
+import { CustomAssetAccessoryPagingComponent } from './custom/asset-accessory/asset-accessory-paging/custom-asset-accessory-paging.component';
+import { CustomAssetAttributeAddEditComponent } from './custom/asset-attribute/asset-attribute-add-edit/custom-asset-attribute-add-edit.component';
+import { CustomAssetAttributePagingComponent } from './custom/asset-attribute/asset-attribute-paging/custom-asset-attribute-paging.component';
 
 const routes: Routes = [
   {
@@ -250,11 +261,88 @@ const routes: Routes = [
         data: {
           title: 'Review Upload Asset Master Detail'
         },
+      },
+      //uc template
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_MASTER_PAGING,
+        component: CustomAssetDocumentMasterPagingComponent,
+        data: {
+          title: 'Asset Doc Master Paging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_MASTER_DETAIL,
+        component: CustomAssetDocumentMasterAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CONFIG_PAGING,
+        component: CustomAssetConfigurationPagingComponent,
+        data: {
+          title: 'Asset Doc Master Paging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CATEGORY_PAGING,
+        component: CustomAssetCategoryPagingComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_CATEGORY_DETAIL,
+        component: CustomAssetCategoryAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_PAGING,
+        component: CustomAssetDocumentPagingComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_DOC_DETAIL,
+        component: CustomAssetDocumentAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_ACC_PAGING,
+        component: CustomAssetAccessoryPagingComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_ACC_DETAIL,
+        component: CustomAssetAccessoryAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_ATTR_PAGING,
+        component: CustomAssetAttributePagingComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_ATTR_DETAIL,
+        component: CustomAssetAttributeAddEditComponent,
+        data: {
+          title: 'Asset Doc Master Detail'
+        },
       }
     ]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

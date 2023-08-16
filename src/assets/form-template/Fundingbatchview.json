@@ -1,0 +1,308 @@
+{
+  "title": "FundingBatchView",
+  "hideTitle": true,
+  "id": "Fundingbatchview",
+  "addButton": false,
+  "addLink": "",
+  "pathOption": "",
+  "backButton": false,
+  "component": [
+    {
+      "view": {
+        "subsection": {
+          "subSectionId": "FundingContractMainInfoId",
+          "subSectionTitle": "Funding Contract Main Info",
+          "concatDate": false,
+          "setDate": "",
+          "formatDate": "",
+          "environment": "facilityMntUrl",
+          "apiVersion": "v1",
+          "uri": "",
+          "mainInfoPath": "/Generic/GetDataViewBySQL",
+          "querystring": { "name": "fundingBatchFundingContractMainInfo" },
+          "reqObj": {},
+          "mainInfo": [
+            {
+              "type": "text",
+              "label": "Funding Batch No",
+              "property": "BatchNo",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "text",
+              "label": "Batch Status",
+              "property": "BatchStatus",
+              "position": "",
+              "isHide": false
+            },
+            {
+              "type": "date",
+              "label": "Drawdown Plan Date",
+              "property": "DrawdownPlanDate",
+              "dateFormat": "dd/MM/YYYY",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "date",
+              "label": "Drawdown Plan Amt",
+              "property": "DrawdownPlanAmt",
+              "dateFormat": "dd/MM/YYYY",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "text",
+              "label": "Principal Amt to Funding",
+              "property": "PrincipalAmtToFunding",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "text",
+              "label": "Num Of Agrmnt",
+              "property": "NumOfAgrmnt",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "text",
+              "label": "Due Date Type",
+              "property": "DueDateTypeName",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "date",
+              "label": "Drawdown Date",
+              "property": "DrawdownDate",
+              "dateFormat": "dd/MM/YYYY",
+              "position": "left",
+              "isHide": false
+            },
+            {
+              "type": "date",
+              "label": "Drawdown Amt",
+              "property": "DrawdownAmt",
+              "dateFormat": "dd/MM/YYYY",
+              "position": "left",
+              "isHide": false
+            }
+          ],
+          "whereValue": ["BatchNo"],
+          "fromValue": [],
+          "subsectionId": "FundingContractMainInfoId"
+        }
+      },
+      "id": "5abff7cd-57ec-47b1-b395-ac9b281316d3"
+    },
+    {
+      "container": {
+        "key": "FundingBatchViewFee",
+        "className": "ViewFundingBatchFeeComponent",
+        "cssClass": "",
+        "input": {}
+      },
+      "id": "0f00cdf6-4a32-4765-b8f7-a3bcadac0230"
+    },
+    {
+      "table": {
+        "isFromApi": true,
+        "title": "Interest Rate",
+        "resultData": "",
+        "isSubsection": true,
+        "tableInput": {
+          "isSeq": false,
+          "headerList": [
+            { "type": "label", "label": "Tenor From", "position": "left" },
+            { "type": "label", "label": "Tenor To", "position": "left" },
+            { "type": "label", "label": "Interest Rate", "position": "left" }
+          ],
+          "bodyList": [
+            { "type": "text", "position": "left", "property": "TenorFrom" },
+            { "type": "text", "position": "left", "property": "TenorTo" },
+            {
+              "type": "decimal",
+              "position": "left",
+              "property": "InterestRate",
+              "precision": "0.2",
+              "IsPrcnt": true
+            }
+          ]
+        },
+        "getData": {
+          "environment": "facilityMntUrl",
+          "apiPath": "/v1/JfBatchInterestRate/GetListJfBatchInterestRateByJfBatchNo",
+          "customObjName": "ReturnObject",
+          "reqObj": [
+            { "propName": "trxNo", "propValue": "BatchNo", "isFromDict": false }
+          ]
+        }
+      },
+      "id": "165a8c62-f7d7-4112-a4e2-db20cc0a45f5"
+    },
+    {
+      "paging": {
+        "environment": "facilityMntUrl",
+        "apiVersion": "v1",
+        "pagingInput": {
+          "title": "List of Agrmnt",
+          "querystring": { "name": "searchFundingBatchListAgrmnt" },
+          "exportExcel": false,
+          "component": [
+            {
+              "id": "jajfAgrmntNoSearchId",
+              "type": "textbox",
+              "label": "Agrmnt No",
+              "name": "JA.JF_AGRMNT_NO",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text"
+            },
+            {
+              "id": "facustNameSearchId",
+              "type": "textbox",
+              "label": "Cust Name",
+              "name": "FA.CUST_NAME",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text"
+            }
+          ],
+          "headerList": [
+            { "type": "label", "label": "Agrmnt No", "position": "left" },
+            { "type": "label", "label": "Cust Name", "position": "left" },
+            {
+              "type": "label",
+              "label": "Os Principal Amt",
+              "position": "left"
+            },
+            { "type": "label", "label": "Os Interest Amt", "position": "left" },
+            {
+              "type": "label",
+              "label": "Principal Amt To Funding",
+              "position": "left"
+            }
+          ],
+          "bodyList": [
+            { "type": "text", "position": "left", "property": "AgrmntNo" },
+            { "type": "text", "position": "left", "property": "CustName" },
+            {
+              "type": "decimal",
+              "position": "left",
+              "property": "OsPrincipalAmt",
+              "precision": "0.2",
+              "IsPrcnt": false
+            },
+            {
+              "type": "decimal",
+              "position": "left",
+              "property": "OsInterestAmt",
+              "precision": "0.2",
+              "IsPrcnt": false
+            },
+            {
+              "type": "decimal",
+              "position": "left",
+              "property": "PrincipalAmtToFunding",
+              "precision": "0.2",
+              "IsPrcnt": false
+            }
+          ],
+          "sectionTitle": ""
+        },
+        "criteria": [
+          {
+            "isFromDict": true,
+            "propName": "JB.JF_BATCH_NO",
+            "restriction": "Eq",
+            "value": "BatchNo"
+          }
+        ],
+        "whereValue": ["BatchNo"],
+        "fromValue": [],
+        "useIntegration": false,
+        "isHideSearch": false,
+        "isSearched": false,
+        "delay": 1
+      },
+      "id": "240e2e28-8b69-4646-8737-9d9c7610b5cd"
+    }
+  ],
+  "serviceUrl": {
+    "add": { "environment": "", "apiPath": "", "apiUrl": "" },
+    "edit": { "environment": "", "apiPath": "", "apiUrl": "" },
+    "createRfa": { "environment": "", "apiPath": "", "apiUrl": "" }
+  },
+  "isRedirect": false,
+  "redirectOption": "",
+  "redirectLink": "",
+  "hideSubmitButton": false,
+  "listBtn": [
+    {
+      "displayName": "Generate Funding Schedule",
+      "id": "generate funding scheduleId",
+      "key": "",
+      "position": "top",
+      "icon": "",
+      "cssClass": "btn",
+      "conditions": [],
+      "action": {
+        "type": "http",
+        "environment": "facilityMntUrl",
+        "path": "/v1/JfAgrmnt/PledgingBatchExecution",
+        "reqObj": [{ "propName": "BatchNo", "propValue": "BatchNo" }],
+        "onSuccess": [
+          {
+            "result": {
+              "type": "toaster",
+              "mode": "success",
+              "message": "Generate Funding Schedule Success"
+            },
+            "conditions": []
+          }
+        ],
+        "onError": { "type": "toaster", "message": "" }
+      }
+    },
+    {
+      "displayName": "Download TextFile",
+      "id": "download textfileId",
+      "key": "",
+      "position": "top",
+      "icon": "",
+      "cssClass": "btn",
+      "conditions": [],
+      "action": {
+        "type": "http",
+        "environment": "LocalMntUrl",
+        "path": " ​/v1​/FundTextfileMaster​/GenerateTextFile",
+        "onError": { "type": "toaster", "message": "" },
+        "reqObj": [
+          { "propName": "vendorCode", "propValue": "" },
+          { "propName": "trxTypeCode", "propValue": "" },
+          { "propName": "listTrxNo", "propValue": "" }
+        ],
+        "onSuccess": []
+      }
+    },
+    {
+      "displayName": "Cancel Batch",
+      "id": "cancel batchId",
+      "key": "",
+      "position": "top",
+      "icon": "",
+      "cssClass": "btn btn-warning",
+      "conditions": [],
+      "action": {
+        "type": "link",
+        "path": "Setting/funding-batch-paging",
+        "target": "_self",
+        "params": [{ "propName": "ContractNo", "propValue": "ContractNo" }]
+      }
+    }
+  ],
+  "customToastrMsg": "",
+  "onInit": []
+}

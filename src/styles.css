@@ -153,9 +153,9 @@ form label {
 }
 
 .mat-dialog-container {
-    background-color: #BD362F;
-    color: #FFFFFF;
-}
+    background-color: rgb(255, 255, 255) !important;
+    color: #212121 !important;
+  }
 
 .header-page {
     background-color: white !important;
@@ -188,12 +188,19 @@ thead tr th {
     margin: 3px;
 }
 
-.ucSearch-Button-Right {
+/* .ucSearch-Button-Right {
     z-index: 1;
     position: absolute;
     right: 50px;
     top: 3px;
     text-decoration-line: underline;
+} */
+
+.ucSearch-Button-Right {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    text-decoration-line: underline;
+    margin-right: 10px; /* Add some right margin to create space between the button and the right edge */
 }
 
 .Button-Add {
@@ -481,9 +488,8 @@ mat-dialog-container#role-modal {
     filter: brightness(80%);
 }
 
-.addButtonForDetailInStepper {
-    position: absolute;
-    text-align: center;
+.addButtonFlex {
+    z-index: 1;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
@@ -494,7 +500,7 @@ mat-dialog-container#role-modal {
     border: 1px solid transparent;
     border-color: #009DA0;
     border-radius: 0.2rem;
-    margin-right: 0.375rem !important;
+    margin-left: 0.375rem !important;
     margin-bottom: 1rem;
     padding: 0.25rem 0.5rem;
     display: inline-block;

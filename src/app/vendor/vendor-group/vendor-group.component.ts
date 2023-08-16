@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-group',
   templateUrl: './vendor-group.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class VendorGroupComponent implements OnInit {
   pageType: string = "add";

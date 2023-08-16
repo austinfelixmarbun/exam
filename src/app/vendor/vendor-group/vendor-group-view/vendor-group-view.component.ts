@@ -21,7 +21,7 @@ export class VendorGroupViewComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly AddLink: string = NavigationConstant.VENDOR_GRP_MBR_ADD;
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  CancelLink: string = NavigationConstant.VENDOR_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params['VendorGrpId'] != null) {
@@ -31,6 +31,10 @@ export class VendorGroupViewComponent implements OnInit {
         this.MrVendorCategoryCode = params['MrVendorCategoryCode'];
       }
     });
+
+    if(this.MrVendorCategoryCode == "CRD_INSCO_BRANCH"){
+      this.CancelLink = NavigationConstant.CREDIT_INS_GROUP_PAGING;
+    }
   }
 
 

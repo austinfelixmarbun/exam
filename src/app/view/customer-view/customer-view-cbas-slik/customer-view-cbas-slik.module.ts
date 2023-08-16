@@ -8,6 +8,8 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { CustomerViewCbasSlikComponent } from "./customer-view-cbas-slik.component";
 import { CustomerViewCbasSlikRoutingModule } from "./customer-view-cbas-slik-routing.module";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
 
 
 @NgModule({
@@ -26,6 +28,9 @@ import { CustomerViewCbasSlikRoutingModule } from "./customer-view-cbas-slik-rou
   ],
   declarations: [
    CustomerViewCbasSlikComponent
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
   ],
   entryComponents: [
     UcSubsectionComponent

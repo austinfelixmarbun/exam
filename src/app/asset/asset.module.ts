@@ -35,6 +35,18 @@ import { AssetAttributeComponent } from './asset-attribute/asset-attribute.compo
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { CustomAssetDocumentMasterPagingComponent } from "./custom/asset-document-master/asset-document-master-paging/custom-asset-document-master-paging.component";
+import { CustomAssetDocumentMasterAddEditComponent } from "./custom/asset-document-master/asset-document-master-add-edit/custom-asset-document-master-add-edit.component";
+import { UcTemplateModule } from "@adins/uctemplate";
+import { CustomAssetCategoryPagingComponent } from "./custom/asset-category/asset-category-paging/custom-asset-category-paging.component";
+import { CustomAssetConfigurationPagingComponent } from "./custom/asset-configuration/asset-configuration-paging/custom-asset-configuration-paging.component";
+import { CustomAssetCategoryAddEditComponent } from "./custom/asset-category/asset-category-add-edit/custom-asset-category-add-edit.component";
+import { CustomAssetDocumentAddEditComponent } from "./custom/asset-document/asset-document-add-edit/custom-asset-document-add-edit.component";
+import { CustomAssetDocumentPagingComponent } from "./custom/asset-document/asset-document-paging/custom-asset-document-paging.component";
+import { CustomAssetAccessoryAddEditComponent } from "./custom/asset-accessory/asset-accessory-add-edit/custom-asset-accessory-add-edit.component";
+import { CustomAssetAccessoryPagingComponent } from "./custom/asset-accessory/asset-accessory-paging/custom-asset-accessory-paging.component";
+import { CustomAssetAttributePagingComponent } from "./custom/asset-attribute/asset-attribute-paging/custom-asset-attribute-paging.component";
+import { CustomAssetAttributeAddEditComponent } from "./custom/asset-attribute/asset-attribute-add-edit/custom-asset-attribute-add-edit.component";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -58,6 +70,7 @@ export const customCurrencyMaskConfig = {
     SharingComponentModule,
     UcaddtotempModule,    
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcTemplateModule
   ],
   declarations: [
     AssetTypePagingComponent,
@@ -88,10 +101,22 @@ export const customCurrencyMaskConfig = {
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
     AssetAttributeComponent,
-    AssetAttributeDetailComponent
+    AssetAttributeDetailComponent,
+    CustomAssetDocumentMasterPagingComponent,
+    CustomAssetDocumentMasterAddEditComponent,
+    CustomAssetConfigurationPagingComponent,
+    CustomAssetCategoryPagingComponent,
+    CustomAssetCategoryAddEditComponent,
+    CustomAssetDocumentPagingComponent,
+    CustomAssetDocumentAddEditComponent,
+    CustomAssetAccessoryPagingComponent,
+    CustomAssetAccessoryAddEditComponent,
+    CustomAssetAttributePagingComponent,
+    CustomAssetAttributeAddEditComponent
+
   ],
-  providers: [
-    NGXToastrService
-  ]
+  // providers: [
+  //   NGXToastrService
+  // ]
 })
 export class AssetModule { }

@@ -13,7 +13,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 @Component({
   selector: 'app-vendor-grading-approval-detail',
   templateUrl: './vendor-grading-approval-detail.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class VendorGradingApprovalDetailComponent implements OnInit {
 

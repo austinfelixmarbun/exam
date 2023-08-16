@@ -64,7 +64,7 @@ export class JournalMediaDetailComponent implements OnInit {
   Submit() {
     let request = {
       SubSystem: this.JrMediaForm.value.Subsystem,
-      TrxTypeCode: this.JrMediaForm.value.TransactionTypeCode,
+      TrxTypeCode: this.JrMediaForm.value.TransactionTypeCode.trim(),
       TrxDesc: this.JrMediaForm.value.TransactionDescription,
       ListJrMEntity: this.listEntityType.map(x => {
         return {

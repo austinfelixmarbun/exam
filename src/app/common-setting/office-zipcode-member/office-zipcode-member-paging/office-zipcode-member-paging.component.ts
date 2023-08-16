@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-zipcode-member-paging',
   templateUrl: './office-zipcode-member-paging.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class OfficeZipcodeMemberPagingComponent implements OnInit {
   //** Start UC Search **//

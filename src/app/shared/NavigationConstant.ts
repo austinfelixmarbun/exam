@@ -82,6 +82,8 @@ export class NavigationConstant {
     public static CS_PAYMENT_ALLOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_PAGING; //'/CommonSetting/PaymentAlloc/Paging'
     public static CS_PAYMENT_ALLOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_DETAIL; //'/CommonSetting/PaymentAlloc/Detail'
     public static CS_PAYMENT_ALLOC_GRP_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_GRP_PAGING; //'/CommonSetting/PaymentAllocGrp/Paging'
+    public static CS_REF_AMRTZ_ITEM_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_AMRTZ_ITEM_PAGING; //'/CommonSetting/RefAmrtzItem/Paging'
+    public static CS_REF_TRX_TYPE_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TRX_TYPE_PAGING; //'/CommonSetting/RefTrxType/Paging'
     public static CS_PAYMENT_ALLOC_GRP_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PAYMENT_ALLOC_GRP_DETAIL; //'/CommonSetting/PaymentAllocGrp/Detail'
     public static CS_PROFESSION_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PROFESSION_PAGING; //'/CommonSetting/Profession/Paging'
     public static CS_PROFESSION_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_PROFESSION_DETAIL; //'/CommonSetting/Profession/Detail'
@@ -184,6 +186,7 @@ export class NavigationConstant {
     public static VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_VIEW; //'/Vendor/Group/View'
     public static VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_GRP_MBR_ADD; //'/Vendor/GroupMbr/Add
     public static VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_DETAIL; //'/Vendor/HO/Detail'
+    public static VENDOR_CRD_INSCO_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS_ADD;
     public static VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HO_REG; //'/Vendor/HO/Registration'
     public static VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_DETAIL; //'/Vendor/Holding/Detail'
     public static VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_HOLDING_REG; //'/Vendor/Holding/Registration'
@@ -211,6 +214,26 @@ export class NavigationConstant {
     public static VENDOR_FUNDING_COY_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_ADD_EDIT; //'/Vendor/FundingCompany/AddEdit'//'/Vendor/FundingCompany/AddEdit'
     public static VENDOR_FUNDING_COY_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_FUNDING_COY_VIEW;
     public static VIEW_FUNDING_COMPANY = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.VIEW_FUNDING_COMPANY;
+
+    public static SELF_CUSTOM_VENDOR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_PAGING; //'/Vendor/SelfCustom/Paging'
+    public static SELF_CUSTOM_VENDOR_HO_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL; //'/Vendor/SelfCustom/HO/Detail'
+    public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL; //'/Vendor/SelfCustom/Holding/Detail'
+    public static SELF_CUSTOM_VENDOR_BRANCH_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD; //'/Vendor/SelfCustom/Branch/Add'
+    public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_DETAIL; //'/Vendor/SelfCustom/VendorScheme/Detail'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR; //'/Vendor/SelfCustom/VendorScheme/Member'
+    public static SELF_CUSTOM_VENDOR_SCHM_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_SCHM_MBR_ADD; //'/Vendor/SelfCustom/VendorScheme/Member/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_ADD; //'/Vendor/SelfCustom/Group/Add'
+    public static SELF_CUSTOM_VENDOR_GRP_VIEW = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_VIEW; //'/Vendor/SelfCustom/Group/View'
+    public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_GRP_MBR_ADD; //'/Vendor/SelfCustom/GroupMbr/Add
+    public static SELF_CUSTOM_VENDOR_HOLDING_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG; //'/Vendor/SelfCustom/Holding/Registration'
+    public static SELF_CUSTOM_VENDOR_HO_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_HO_REG; //'/Vendor/SelfCustom/HO/Registration'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING; //'/Vendor/SelfCustom/Branch/Member/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD; //'/Vendor/SelfCustom/Branch/Member/Add'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING; //'/Vendor/SelfCustom/Branch/Employee/Paging'
+    public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL; //'/Vendor/SelfCustom/Branch/Employee/Detail'
+    public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING; //'/View/Vendor/SelfCustom/VendorHolding'
+    public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
+    public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
     //#endregion
     
     //#region Organization
@@ -383,4 +406,15 @@ export class NavigationConstant {
     public static NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_SOURCE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING;
     public static NOTIF_ENGINE_NOTIF_ATTR_TEMPLATE_MAPPING_SOURCE_DETAIL = "/" + PathConstant.LR_NOTIF_ENGINE + "/" + PathConstant.NOTIF_SOURCE + "/" + PathConstant.NOTIF_ATTR_TEMPLATE_MAPPING + "/" + PathConstant.ADD_DETAIL;
     //#endregion
+
+
+    //#region CREDIT INS 
+    public static CREDIT_INS_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_ADD = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.ADD;
+    public static CREDIT_INS_BRANCH_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_BRANCH_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD_EDIT;
+    public static CREDIT_INS_GROUP_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.PAGING;
+    public static CREDIT_INS_GROUP_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.ADD_EDIT;
+
+    //#endregiom
 }

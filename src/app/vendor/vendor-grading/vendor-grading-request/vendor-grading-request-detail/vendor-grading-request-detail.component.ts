@@ -20,7 +20,7 @@ import { ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj } from "app/sha
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
-  providers: [NGXToastrService],
+ // providers: [NGXToastrService],
 })
 export class VendorGradingRequestDetailComponent implements OnInit {
   inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);

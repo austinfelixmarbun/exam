@@ -13,7 +13,7 @@ import { NotFoundComponent } from './not-found-page/not-found.component';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/Pages/SelectModule',
+    redirectTo: '/Pages/Login',
     pathMatch: 'full',
   },
   {

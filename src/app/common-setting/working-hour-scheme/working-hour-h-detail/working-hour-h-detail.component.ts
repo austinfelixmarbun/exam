@@ -12,7 +12,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-working-hour-h-detail',
   templateUrl: './working-hour-h-detail.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 
 export class WorkingHourHDetailComponent implements OnInit {

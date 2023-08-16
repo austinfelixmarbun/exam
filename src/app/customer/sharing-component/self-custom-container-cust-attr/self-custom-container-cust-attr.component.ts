@@ -17,7 +17,7 @@ export class SelfCustomContainerCustAttrComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    alert(this.CustDataMode)
+    alert("x")
     console.log(this.CustId)
     console.log(this.parentForm)
     console.log(this.AttrGroupCustPersonalOther)

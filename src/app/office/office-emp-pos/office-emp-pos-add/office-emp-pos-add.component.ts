@@ -18,7 +18,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-emp-pos-add',
   templateUrl: './office-emp-pos-add.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class OfficeEmpPosAddComponent implements OnInit {
 

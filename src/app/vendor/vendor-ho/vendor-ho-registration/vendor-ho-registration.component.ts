@@ -48,6 +48,11 @@ export class VendorHoRegistrationComponent implements OnInit {
   }
 
   Back() {
+    if(this.MrVendorCategoryCode == "CRD_INSCO_HO"){
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_PAGING]);
+    }
+    else{
       AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCodeParam });
+    }
   }
 }

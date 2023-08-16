@@ -32,6 +32,7 @@ import { VendorCollCompanyViewComponent } from "./vendor-coll-company-view/vendo
 import { FundingCompanyDetailComponent } from "./vendor-funding-company-view/funding-company-detail.component";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { SelfCustomContainerViewVendorAttrComponent } from './self-custom-container-view-vendor-attr/self-custom-container-view-vendor-attr.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
         MainInfoViewComponent,
         HoAtpmInfoComponent,
         VendorCollCompanyViewComponent,
-        FundingCompanyDetailComponent
+        FundingCompanyDetailComponent,
+        SelfCustomContainerViewVendorAttrComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }

@@ -19,7 +19,7 @@ import { String } from 'typescript-string-operations';
 @Component({
   selector: 'app-vendor-grading-approval-paging',
   templateUrl: './vendor-grading-approval-paging.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class VendorGradingApprovalPagingComponent implements OnInit {
 

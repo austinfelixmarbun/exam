@@ -22,7 +22,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-office-add',
   templateUrl: './office-add.component.html',
-  providers: [NGXToastrService]
+ // providers: [NGXToastrService]
 })
 export class OfficeAddComponent implements OnInit {
 

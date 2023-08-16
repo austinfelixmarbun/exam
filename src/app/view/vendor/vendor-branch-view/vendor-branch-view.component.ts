@@ -14,7 +14,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-vendor-branch-view',
   templateUrl: './vendor-branch-view.component.html',
-  providers : [NGXToastrService]
+  // providers : [NGXToastrService]
 })
 export class VendorBranchViewComponent implements OnInit {
   VendorId: number;

@@ -67,12 +67,20 @@ import { RefTcComponent } from './ref-tc/ref-tc-paging/ref-tc.component';
 import { RefTcAddEditComponent } from './ref-tc/ref-tc-add-edit/ref-tc-add-edit.component';
 import { TaxOfficeDetailComponent } from './tax-office/tax-office-detail/tax-office-detail.component';
 import { TaxOfficePagingComponent } from './tax-office/tax-office-paging/tax-office-paging.component';
-import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
-import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { CustomEconomicSectorComponent } from './custom/economic-sector/custom-economic-sector-paging/custom-economic-sector-paging.component';
 import { CustomEconomicSectorAddEditComponent } from './custom/economic-sector/custom-economic-sector-add-edit/custom-economic-sector-add-edit.component';
 import { CustomMasterAddEditComponent } from './custom/master/master-add-edit/custom-master-add-edit.component';
 import { CustomMasterComponent } from './custom/master/master-paging/custom-master-paging.component';
+import { RefAmrtzAddEditComponent } from './ref-amrtz-item/ref-amrtz-add-edit/ref-amrtz-add-edit.component';
+import { RefAmrtzItemPagingComponent } from './ref-amrtz-item/ref-amrtz-item-paging/ref-amrtz-item-paging.component';
+import { RefTrxTypePagingComponent } from './ref-trx-type/ref-trx-type-paging/ref-trx-type-paging.component';
+import { RefTrxTypeDetailComponent } from './ref-trx-type/ref-trx-type-detail/ref-trx-type-detail.component';
+import { PaymentAllocGroupHPagingComponent } from './payment-alloc-group-new/payment-alloc-group-h-paging/payment-alloc-group-h-paging.component';
+import { PaymentAllocGroupHDetailComponent } from './payment-alloc-group-new/payment-alloc-group-h-detail/payment-alloc-group-h-detail.component';
+import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
+import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/payment-alloc-group-d-paging/payment-alloc-group-d-paging.component';
+import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
+import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 
 const routes: Routes = [
   {
@@ -588,6 +596,68 @@ const routes: Routes = [
         component: CustomMasterAddEditComponent,
         data: {
           title: 'Economic Sector Paging'
+        },
+      },
+      
+      //REF AMRTZ ITEM
+      {
+        path: PathConstant.CS_REF_AMRTZ_ITEM_DETAIL,
+        component: RefAmrtzAddEditComponent,
+        data: {
+          title: 'Ref Amortize Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_AMRTZ_ITEM_PAGING,
+        component: RefAmrtzItemPagingComponent,
+        data: {
+          title: 'Ref Amortize Paging'
+        },
+      },
+      
+      //REF TRX TYPE
+      {
+        path: PathConstant.CS_REF_TRX_TYPE_PAGING,
+        component: RefTrxTypePagingComponent,
+        data: {
+          title: 'Ref Trx Type Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_REF_TRX_TYPE_DETAIL,
+        component: RefTrxTypeDetailComponent,
+        data: {
+          title: 'Ref Trx Type Detail'
+        },
+      },
+
+      // PAYMENT ALLOCATION GROUP H AND D
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_H_PAGING,
+        component: PaymentAllocGroupHPagingComponent,
+        data: {
+          title: 'Payment Allocation Group Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_H_DETAIL,
+        component: PaymentAllocGroupHDetailComponent,
+        data: {
+          title: 'Payment Allocation Group Detail'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_D_PAGING,
+        component: PaymentAllocGroupDPagingComponent,
+        data: {
+          title: 'Payment Allocation Paging'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_GRP_D_DETAIL,
+        component: PaymentAllocGroupDDetailComponent,
+        data: {
+          title: 'Payment Allocation Detail'
         },
       },
     ]

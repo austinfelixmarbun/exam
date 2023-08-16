@@ -13,7 +13,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-currency-add',
   templateUrl: './currency-add.component.html',
-  providers: [NGXToastrService]
+  //providers: [NGXToastrService]
 })
 export class CurrencyAddComponent implements OnInit {
 
