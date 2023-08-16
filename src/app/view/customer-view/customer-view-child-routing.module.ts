@@ -153,7 +153,12 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_CUST_CBAS_SLIK,
         loadChildren: () => import('./customer-view-cbas-slik/customer-view-cbas-slik.module').then(m => m.CustomerViewCbasSlikModule)
-      }
+      },
+      //CustomOther Info
+      {
+        path: PathConstant.CUSTOM_VIEW_CUST_OTH_INFO,
+        loadChildren: () => import('../custom/customer-view/customer-view-other-info/custom-customer-view-other-info.module').then(m => m.CustomCustomerViewOtherInfoModule)
+      },
     ]
   }
 ];

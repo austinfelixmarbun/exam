@@ -553,6 +553,8 @@ export class PathConstant {
     public static VIEW_CUST_ASLI_RI = "CustAsliRi";
     public static VIEW_CUST_CBAS_SLIK = "CustCbasSlik";
 
+    public static CUSTOM_VIEW_CUST_OTH_INFO = PathConstant.SELF_CUSTOM + "/" + "CustOthInfo";
+
     //#endregion
 
      //#region JOURNAL

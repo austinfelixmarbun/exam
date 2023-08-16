@@ -162,6 +162,7 @@ export class NavigationConstant {
     public static VIEW_NOTIF_TEMPLATE = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_NOTIF_TEMPLATE; //'/View/ViewNotifTemplate'
     public static VIEW_CUST_ASLI_RI = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_ASLI_RI; //'/View/Customer/CustAsliRi'
     public static VIEW_CUST_CBAS_SLIK = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_CBAS_SLIK; //'/View/Customer/CustCbasSlik'
+    public static CUSTOM_VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.CUSTOM_VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
     //#endregion
 
     //#region Upload
