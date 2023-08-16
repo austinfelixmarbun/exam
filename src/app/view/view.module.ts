@@ -23,7 +23,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         ReactiveFormsModule,
         SurveyTaskViewModule,
         SharedModule,
-        AdInsSharedModule
+        AdInsSharedModule,
+        
         //   TranslateModule.forRoot({
         //     loader: {
         //         provide: TranslateLoader,

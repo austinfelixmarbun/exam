@@ -504,6 +504,8 @@ export class PathConstant {
     public static VIEW_CUST_EXPSR = "CustExposureView";
     public static VIEW_SRVY_TASK = "SurveyTask";
     public static VIEW_PEFINDO = "Pefindo";
+
+    public static CUSTOM_VIEW_NEG_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.VIEW_NEG_CUST;
     //#endregion
 
     //#region View-Vendor-Module

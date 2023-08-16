@@ -40,7 +40,11 @@ const routes: Routes = [
       {
         path: PathConstant.VENDOR_FUNDING_COY,
         loadChildren: () => import('./vendor/vendor-view.module').then(m => m.VendorViewModule)
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_VIEW_NEG_CUST,
+        loadChildren: () => import('./custom/negative-customer-view/custom-negative-customer-view.module').then(m => m.CustomNegativeCustomerViewModule)
+      },
     ]
   }
 ];
