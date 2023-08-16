@@ -36,6 +36,15 @@ import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute
 import { CurrencyMaskInputMode, NgxCurrencyModule } from "ngx-currency";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 
+import { ExecutorService, UcTemplateModule } from '@adins/uctemplate';
+import { CustomAssetTypePagingComponent } from "./custom/asset-type/asset-type-paging/custom-asset-type-paging.component";
+import { CustomAssetTypeAddEditComponent } from "./custom/asset-type/asset-type-add-edit/custom-asset-type-add-edit.component";
+import { CustomAssetSchemePagingComponent } from "./custom/asset-scheme/asset-scheme-paging/custom-asset-scheme-paging.component";
+import { CustomAssetSchemeAddEditInformationComponent } from "./custom/asset-scheme/asset-scheme-add-edit-information/custom-asset-scheme-add-edit-information.component";
+import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
+import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
+import { AdinsExecutorService } from "app/shared/services/adins-executor.service";
+
 export const customCurrencyMaskConfig = {     
   align: "left",     
   allowNegative: true,     
@@ -58,6 +67,7 @@ export const customCurrencyMaskConfig = {
     SharingComponentModule,
     UcaddtotempModule,    
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
+    UcTemplateModule,
   ],
   declarations: [
     AssetTypePagingComponent,
@@ -88,10 +98,19 @@ export const customCurrencyMaskConfig = {
     ReviewUploadNegativeAssetPagingComponent,
     ReviewUploadNegativeAssetDetailComponent,
     AssetAttributeComponent,
-    AssetAttributeDetailComponent
+    AssetAttributeDetailComponent,
+    CustomAssetTypePagingComponent,
+    CustomAssetTypeAddEditComponent,
+    CustomAssetSchemePagingComponent,
+    CustomAssetSchemeAddEditInformationComponent,
+    CustomAssetSchemeMemberComponent,
+    CustomAddAssetSchemeComponent
   ],
   providers: [
-    NGXToastrService
+    NGXToastrService,
+    {
+      provide: ExecutorService, useClass: AdinsExecutorService
+    }
   ]
 })
 export class AssetModule { }

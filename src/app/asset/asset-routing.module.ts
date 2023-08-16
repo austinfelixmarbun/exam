@@ -30,48 +30,55 @@ import { AssetAttributeComponent } from './asset-attribute/asset-attribute.compo
 import { AssetAttributeDetailComponent } from './asset-attribute/asset-attribute-detail/asset-attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 
+import { CustomAssetTypePagingComponent } from './custom/asset-type/asset-type-paging/custom-asset-type-paging.component';
+import { CustomAssetTypeAddEditComponent } from './custom/asset-type/asset-type-add-edit/custom-asset-type-add-edit.component';
+import { CustomAssetSchemePagingComponent } from './custom/asset-scheme/asset-scheme-paging/custom-asset-scheme-paging.component';
+import { CustomAssetSchemeAddEditInformationComponent } from './custom/asset-scheme/asset-scheme-add-edit-information/custom-asset-scheme-add-edit-information.component';
+import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
+import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
+
 const routes: Routes = [
   {
     path: '',
     children: [
       {
         path: PathConstant.ASSET_TYPE_PAGING,
-        component: AssetTypePagingComponent,
+        component: CustomAssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
         }
       },
       {
         path: PathConstant.ASSET_TYPE_DETAIL,
-        component: AssetTypeAddEditComponent,
+        component: CustomAssetTypeAddEditComponent,
         data: {
           title: 'Asset Type Add Edit'
         }
       },
       {
         path: PathConstant.ASSET_SCHM_PAGING,
-        component: AssetSchemePagingComponent,
+        component: CustomAssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
         }
       },
       {
         path: PathConstant.ASSET_SCHM_MBR_DETAIL,
-        component: AssetSchemeMemberComponent,
+        component: CustomAssetSchemeMemberComponent,
         data: {
           title: 'Asset Scheme Member Detail'
         }
       },
       {
         path: PathConstant.ASSET_SCHM_ADD_MBR,
-        component: AddAssetSchemeComponent,
+        component: CustomAddAssetSchemeComponent,
         data: {
           title: 'Asset Scheme Member Add'
         }
       },
       {
         path: PathConstant.ASSET_SCHM_INFO_DETAIL,
-        component: AssetSchemeAddEditInformationComponent,
+        component: CustomAssetSchemeAddEditInformationComponent,
         data: {
           title: 'Asset Scheme Information Add Edit'
         }
