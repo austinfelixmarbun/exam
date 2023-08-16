@@ -54,7 +54,7 @@ import { CustomAssetSchemePagingComponent } from "./custom/asset-scheme/asset-sc
 import { CustomAssetSchemeAddEditInformationComponent } from "./custom/asset-scheme/asset-scheme-add-edit-information/custom-asset-scheme-add-edit-information.component";
 import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
 import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
-import { AdinsExecutorService } from "app/shared/services/adins-executor.service";
+import { AdInsExecutorService } from "app/shared/services/adins-executor.service";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -132,7 +132,7 @@ export const customCurrencyMaskConfig = {
   providers: [
     NGXToastrService,
     {
-      provide: ExecutorService, useClass: AdinsExecutorService
+      provide: ExecutorService, useClass: AdInsExecutorService
     }
   ]
 })
