@@ -137,6 +137,7 @@ export class NavigationConstant {
     public static VIEW_SRVY_TASK = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY_TASK; //'/View/Survey/SurveyTask'
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
     public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
+    public static SELF_CUSTOM_VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST; //'View/SelfCustomCustomer'
     public static VIEW_CUST_ADDR = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
     public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" +PathConstant.VIEW_CUST_PERSONAL_DETAIL; //'/View/Customer/PersonalDetail'
@@ -163,6 +164,8 @@ export class NavigationConstant {
     public static VIEW_CUST_ASLI_RI = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_ASLI_RI; //'/View/Customer/CustAsliRi'
     public static VIEW_CUST_CBAS_SLIK = NavigationConstant.VIEW_CUST +"/" + PathConstant.VIEW_CUST_CBAS_SLIK; //'/View/Customer/CustCbasSlik'
     public static CUSTOM_VIEW_CUST_OTH_INFO = NavigationConstant.VIEW_CUST + "/" + PathConstant.CUSTOM_VIEW_CUST_OTH_INFO; //'/View/Customer/CustOthInfo'
+    public static SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL; //'/View/SelfCustomCustomer/SelfCustom/PersonalDetail'
+    public static SELF_CUSTOM_VIEW_CUST_EXPOSURE = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_EXPOSURE; //'/View/SelfCustomCustomer/SelfCustom/CustExposureView'
     //#endregion
 
     //#region Upload

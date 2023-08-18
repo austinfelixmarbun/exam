@@ -45,6 +45,10 @@ const routes: Routes = [
         path: PathConstant.CUSTOM_VIEW_NEG_CUST,
         loadChildren: () => import('./custom/negative-customer-view/custom-negative-customer-view.module').then(m => m.CustomNegativeCustomerViewModule)
       },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_CUST,
+        loadChildren: () => import('./self-custom-cust-view/self-custom-cust-view.module').then(m => m.SelfCustomCustViewModule)
+      }
     ]
   }
 ];

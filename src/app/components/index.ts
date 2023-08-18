@@ -6,3 +6,5 @@ export{SelfCustomContainerThirdPartyFormComponent} from "app/customer/sharing-co
 export{SelfCustomContainerCustAttrComponent} from "app/customer/sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component";
 export{SelfCustomCustomerPersonalAddressComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-personal-address/self-custom-customer-personal-address.component";
 export{SelfCustomContainerViewVendorAttrComponent} from "app/view/vendor/self-custom-container-view-vendor-attr/self-custom-container-view-vendor-attr.component";
+export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component";
+export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";

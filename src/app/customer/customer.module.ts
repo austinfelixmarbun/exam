@@ -87,6 +87,7 @@ import { SelfCustomContainerThirdPartyFormComponent } from './sharing-component/
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
 import { SelfCustomCustomerPersonalAddressComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-address/self-custom-customer-personal-address.component';
 import { SelfCustomContainerCustAttrComponent } from './sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component';
+import { SelfCustomCustViewModule } from 'app/view/self-custom-cust-view/self-custom-cust-view.module';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -131,6 +132,7 @@ export const customCurrencyMaskConfig = {
         CustomerViewModule,
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         UcdropdownlistModule,
+        SelfCustomCustViewModule,
         UcTemplateModule
     ],
     declarations: [
