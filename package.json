@@ -55,7 +55,7 @@
     "@adins/ucreport": "^3.0.2",
     "@adins/ucsearch": "^3.2.0",
     "@adins/uctable": "^1.0.6",
-    "@adins/uctemplate": "^1.9.9",
+    "@adins/uctemplate": "^1.9.11",
     "@adins/ucthingstodo": "^3.0.1",
     "@adins/ucupload": "^3.0.1",
     "@adins/ucviewgeneric": "^3.3.4-legacy.2",

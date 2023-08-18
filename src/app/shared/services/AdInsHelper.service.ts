@@ -8,10 +8,15 @@ import { NavigationConstant } from "../NavigationConstant";
 @Injectable()
 export class AdInsHelperService {
   constructor(private UrlConstantNew: UrlConstantNew){ }
+  
+	public OpenCustomerViewByCustId(CustId) {
+    	let url = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
+    	window.open(url, "_blank");
+		}
 
-  public OpenCustomerViewByCustId(CustId) {
-    let url = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
-    window.open(url, "_blank");
+	public OpenCustomerViewByCustIdForTemplate(CustId) {
+		let url = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
+		window.open(url, "_blank");
 	}
 
 	public OpenCustomerCoyViewByCustId(CustId) {

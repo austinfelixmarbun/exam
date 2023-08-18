@@ -504,6 +504,8 @@ export class PathConstant {
     public static VIEW_CUST_EXPSR = "CustExposureView";
     public static VIEW_SRVY_TASK = "SurveyTask";
     public static VIEW_PEFINDO = "Pefindo";
+    public static CUSTOM_VIEW_NEG_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.VIEW_NEG_CUST;
+    public static SELF_CUSTOM_VIEW_CUST = "SelfCustomCustomer";
     //#endregion
 
     //#region View-Vendor-Module
@@ -550,6 +552,9 @@ export class PathConstant {
     public static VIEW_CUST_EXPOSURE = "CustExposureView";
     public static VIEW_CUST_ASLI_RI = "CustAsliRi";
     public static VIEW_CUST_CBAS_SLIK = "CustCbasSlik";
+    public static CUSTOM_VIEW_CUST_OTH_INFO = PathConstant.SELF_CUSTOM + "/" + "CustOthInfo";
+    public static SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL = PathConstant.SELF_CUSTOM + "/" + "PersonalDetail";
+    public static SELF_CUSTOM_VIEW_CUST_EXPOSURE = PathConstant.SELF_CUSTOM + "/" + "CustExposureView";
 
     //#endregion
 

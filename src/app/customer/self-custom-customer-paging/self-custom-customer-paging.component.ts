@@ -32,7 +32,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
     if (ev.Key == "ViewCust") {
       if (row.MrCustTypeCode == CommonConstant.CustTypePersonal)
       {
-        this.adInsHelperService.OpenCustomerViewByCustId(row.CustId);
+        this.adInsHelperService.OpenCustomerViewByCustIdForTemplate(row.CustId);
       }
       else
       {
