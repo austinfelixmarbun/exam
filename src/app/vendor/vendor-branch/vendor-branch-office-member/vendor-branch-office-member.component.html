@@ -11,14 +11,14 @@
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
     <button *ngIf="this.MrVendorCategoryCode != 'CONSULTANT' && this.MrVendorCategoryCode != 'LOGISTIC' 
-      && this.MrVendorCategoryCode != 'COURIER' && this.MrVendorCategoryCode != 'IT_INFRA_SOLUTION'" type="button"
+      && this.MrVendorCategoryCode != 'COURIER' && this.MrVendorCategoryCode != 'IT_INFRA_SOLUTION'" && this.MrVendorCategoryCode != 'CRD_INSCO_BRANCH' type="button"
       class="backButton" [routerLink]="[CancelLink]" skipLocationChange
       [queryParams]="{ MrVendorCategoryCode: this.MrVendorCategoryCode  }">
       <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
     </button>
     <button *ngIf="this.MrVendorCategoryCode === 'CONSULTANT' || this.MrVendorCategoryCode === 'LOGISTIC' 
-      || this.MrVendorCategoryCode === 'COURIER' || this.MrVendorCategoryCode === 'IT_INFRA_SOLUTION'" type="button"
-      class="backButton" [routerLink]="[CancelLink]" skipLocationChange>
+      || this.MrVendorCategoryCode === 'COURIER' || this.MrVendorCategoryCode === 'IT_INFRA_SOLUTION' || this.MrVendorCategoryCode === 'CRD_INSCO_BRANCH'y" type="button" 
+      class="backButton" (click)="back()" skipLocationChange>
       <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
     </button>
     <button type="button" class="addButton" [routerLink]="[AddLink]" skipLocationChange
