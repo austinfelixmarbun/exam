@@ -484,6 +484,13 @@ const routes: Routes = [
           page: 'SupplierEmpDetail'
         },
       },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierHoldingDetail'
+        },
+      },
     ]
 
   }

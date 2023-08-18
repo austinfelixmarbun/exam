@@ -1,0 +1,32 @@
+import { UcTemplateComponent } from '@adins/uctemplate';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { PathConstant } from 'app/shared/PathConstant';
+import { SelfCustomCustExposureViewComponent } from './self-custom-cust-exposure-view/self-custom-cust-exposure-view.component';
+
+const routes: Routes = [
+  {
+      path: '',
+      children: [
+        {
+          path: PathConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL,
+          component: UcTemplateComponent,
+          data: {
+            page: 'ViewCustomerPersonal'
+          },
+        },
+        {
+          path: PathConstant.SELF_CUSTOM_VIEW_CUST_EXPOSURE,
+          component: SelfCustomCustExposureViewComponent,
+          data: {
+            title: 'View Customer Exposure'
+          },
+        },
+  ]}
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class SelfCustomCustViewRoutingModule { }
