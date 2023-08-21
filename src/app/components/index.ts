@@ -10,3 +10,4 @@ export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-
 export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";
 export{CustomerViewAsliRiComponent} from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.component';
 export{ CustomerViewCbasSlikComponent } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.component';
+export{SelfCustomCustomerViewIframeGenericComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component";
