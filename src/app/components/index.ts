@@ -8,3 +8,4 @@ export{SelfCustomCustomerPersonalAddressComponent} from "app/customer/customer-p
 export{SelfCustomContainerViewVendorAttrComponent} from "app/view/vendor/self-custom-container-view-vendor-attr/self-custom-container-view-vendor-attr.component";
 export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component";
 export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";
+export{SelfCustomCustomerViewIframeGenericComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component";
