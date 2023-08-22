@@ -3,8 +3,9 @@ import { FormGroup } from "@angular/forms";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import {environment} from '../../../environments/environment';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { MatDialogRef } from "@angular/material/dialog";
 
-export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService)
+export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService, DialogRef: MatDialogRef<any>)
 {
     let url = environment.FoundationR3Url + api;
     let AssetTotalValue = parentForm.AssetValue * parentForm.AssetQty;
@@ -23,10 +24,11 @@ export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: n
     http.post(url, obj).subscribe(
     (response: any) => {
         toastr.successMessage(response["message"]);
+        DialogRef.close()
     })
 }
 
-export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService)
+export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService, DialogRef: MatDialogRef<any>)
 {
     let url = environment.FoundationR3Url + api;
     let FullAddr = parentForm.UcAddress.Addr + " RT: " + parentForm.UcAddress.AreaCode4 + " RW: " + parentForm.UcAddress.AreaCode3 + " " + parentForm.UcAddress.AreaCode2 + ", " + parentForm.UcAddress.AreaCode1 + " " + parentForm.UcAddress.Zipcode;
@@ -62,5 +64,6 @@ export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: num
     http.post(url, obj).subscribe(
     (response: any) => {
         toastr.successMessage(response["message"]);
+        DialogRef.close()
     })
 }

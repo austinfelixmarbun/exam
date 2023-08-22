@@ -17,9 +17,9 @@ const routes: Routes = [
         },
         {
           path: PathConstant.SELF_CUSTOM_VIEW_CUST_EXPOSURE,
-          component: SelfCustomCustExposureViewComponent,
+          component: UcTemplateComponent,
           data: {
-            title: 'View Customer Exposure'
+            page: 'CustomerExposureView'
           },
         },
   ]}
