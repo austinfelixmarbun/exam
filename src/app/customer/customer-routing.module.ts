@@ -29,6 +29,7 @@ import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-fa
 import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
 import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -57,16 +58,16 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUST_NEG_UPLOAD,
-        component: UploadNegativeCustomerComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Upload Negative Customer'
+          page: 'UploadCustomerNegative'
         }
       },
       {
         path: PathConstant.CUST_NEG_RVW_UPLOAD_PAGING,
-        component: ReviewUploadNegativeCustomerPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Review Upload Negative Customer Paging'
+          page: 'ReviewUploadNegativeCustomer'
         }
       },
       {

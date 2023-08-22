@@ -19,7 +19,6 @@ export class SelfCustomContainerCustViewFinDataAttrComponent implements OnInit {
     private UrlConstantNew: UrlConstantNew) { }
 
   async ngOnInit() {
-    alert("ATTR")
     await this.http.post(this.UrlConstantNew.GetCustFinDataAttrContentForCustViewByCustId, { Id : this.CustId }).toPromise().then(
       (response) => {
         this.responseCustAttr = response[CommonConstant.ReturnObj];

@@ -711,6 +711,7 @@
     "EditAuctionCompany": "/v1/AuctionCompany/EditAuctionCompany",
     "GetVendorByIdForEdit": "/v1/AuctionCompany/GetVendorByIdForEdit",
     "GetCustExpsrInfoByCustId": "/v1/CustExpsrInfo/GetCustExpsrInfoByCustId",
+    "GetCustExpsrInfoByCustIdAndExposureTypeForTemplate": "/v1/CustExpsrInfo/GetCustExpsrInfoByCustIdAndExposureTypeForTemplate",
     "RequestExposure": "/v1/CustExpsrInfo/RequestExposure",
     "RequestExposureV2": "/v2/CustExpsrInfo/RequestExposure",
     "GetListCustExpsrBucketByCustExpsrDId": "/v1/CustExpsrInfo/GetListCustExpsrBucketByCustExpsrDId",
