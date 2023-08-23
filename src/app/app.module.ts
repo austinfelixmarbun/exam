@@ -35,7 +35,7 @@ import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { ClipboardModule } from 'ngx-clipboard'
 import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 import { AddressService } from './shared/services/custAddr.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { AdInsHelperService } from './shared/services/AdInsHelper.service';
 import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
@@ -48,6 +48,9 @@ import { AdinsTemplateService } from './shared/services/adins-template.service';
 import { UcformModule } from '@adins/ucform';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsExecutorService } from './shared/services/adins-executor.service';
+import { NewCustSetData } from './customer/sharing-component/new-cust-component/NewCustSetData.Service';
+import { ThirdPartyUploadService } from './customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -128,6 +131,9 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         AdInsHelperService,
         UrlConstantNew,
         EnviConfigService,
+        NewCustSetData,
+        FormGroupDirective,
+        ThirdPartyUploadService,
         { provide: UcTemplateService, useClass: AdinsTemplateService },
         { provide: ExecutorService, useClass: AdInsExecutorService },
         {

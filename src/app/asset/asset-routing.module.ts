@@ -47,6 +47,7 @@ import { CustomAssetSchemePagingComponent } from './custom/asset-scheme/asset-sc
 import { CustomAssetSchemeAddEditInformationComponent } from './custom/asset-scheme/asset-scheme-add-edit-information/custom-asset-scheme-add-edit-information.component';
 import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
 import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -345,6 +346,54 @@ const routes: Routes = [
         component: CustomAssetAttributeAddEditComponent,
         data: {
           title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Asset Master',
+          page: 'AssetMaster'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Asset Master Add Edit Parent',
+          page: 'AssetMasterDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_CHILD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Asset Master Add Edit Child',
+          page: 'AssetMasterChild'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_UPLOAD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Upload Asset Master',
+          page: 'UploadAssetMaster'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Asset Master Paging',
+          page: 'ReviewUploadNegativeAsset'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Asset Master Detail',
+          page: 'ReviewUploadNegativeAssetDetail'
         },
       }
     ]

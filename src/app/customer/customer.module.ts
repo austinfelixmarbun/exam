@@ -89,6 +89,7 @@ import { SelfCustomCustomerPersonalAddressComponent } from './customer-personal/
 import { SelfCustomContainerCustAttrComponent } from './sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component';
 import { SelfCustomCustViewModule } from 'app/view/self-custom-cust-view/self-custom-cust-view.module';
 import { SelfCustomContainerCustAttrSectionComponent } from './self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
+import { CustomCustAttrSectionComponent } from './custom-cust-attr-section/custom-cust-attr-section.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -198,6 +199,7 @@ export const customCurrencyMaskConfig = {
         SelfCustomCustomerPersonalAddressComponent,
         SelfCustomContainerCustAttrComponent,
         SelfCustomContainerCustAttrSectionComponent,
+        CustomCustAttrSectionComponent
     ],
     providers: [
         CustAssetComponent,
