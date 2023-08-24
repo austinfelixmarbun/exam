@@ -19,4 +19,6 @@ export { SelfCustomContainerCustAttrSectionComponent } from 'app/customer/self-c
 export { CustomCustAttrSectionComponent } from 'app/customer/custom-cust-attr-section/custom-cust-attr-section.component';
 export { CustomAssetMasterDetailParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component';
 export { ShareholderListingComponent } from 'app/customer/sharing-component/shareholder-listing/shareholder-listing.component';
+export { CustomerCompanyAddressComponent } from 'app/customer/customer-company/customer-company-address/customer-company-address.component';
+
 
