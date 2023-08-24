@@ -14,8 +14,7 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-custom-asset-master-detail-parent',
-  templateUrl: './custom-asset-master-detail-parent.component.html',
-  styleUrls: ['./custom-asset-master-detail-parent.component.css']
+  templateUrl: './custom-asset-master-detail-parent.component.html'
 })
 export class CustomAssetMasterDetailParentComponent implements OnInit, AfterViewInit, OnDestroy {
 

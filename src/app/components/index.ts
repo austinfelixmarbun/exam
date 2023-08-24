@@ -18,7 +18,7 @@ export{SelfCustomContainerDmsIframeComponent} from "app/shared/self-custom-conta
 export { SelfCustomContainerCustAttrSectionComponent } from 'app/customer/self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
 export { CustomCustAttrSectionComponent } from 'app/customer/custom-cust-attr-section/custom-cust-attr-section.component';
 export { CustomAssetMasterDetailParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component';
-export { ShareholderListingComponent } from 'app/customer/sharing-component/shareholder-listing/shareholder-listing.component';
+export { CustomShareholderListingComponent } from 'app/customer/sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
 export { CustomCustomerCompanyAddressComponent } from 'app/customer/customer-company/custom-customer-company-address/custom-customer-company-address.component';
 export{SelfCustomCustomerViewCoyFinancialComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component";
 export{SelfCustomContainerFamilyListingComponent} from "app/customer/sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component";
