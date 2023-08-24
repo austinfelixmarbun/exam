@@ -22,3 +22,5 @@ export { ShareholderListingComponent } from 'app/customer/sharing-component/shar
 export { CustomerCompanyAddressComponent } from 'app/customer/customer-company/customer-company-address/customer-company-address.component';
 
 
+
+export{SelfCustomCustomerViewCoyFinancialComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component";

@@ -25,6 +25,7 @@ import { SelfCustomCustExposureViewComponent } from './self-custom-cust-exposure
 import { SelfCustomCustomerViewIframeGenericComponent } from './self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component';
 import { SelfCustomContainerCustViewFinDataBankStmntComponent } from './self-custom-container-cust-view-fin-data-bank-stmnt/self-custom-container-cust-view-fin-data-bank-stmnt.component';
 import { SelfCustomContainerViewExposureBucketComponent } from './self-custom-container-view-exposure-bucket/self-custom-container-view-exposure-bucket.component';
+import { SelfCustomCustomerViewCoyFinancialComponent} from './self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component';
 import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AdinsTemplateService } from 'app/shared/services/adins-template.service
     SelfCustomCustExposureViewComponent,
     SelfCustomCustomerViewIframeGenericComponent,
     SelfCustomContainerCustViewFinDataBankStmntComponent,
-    SelfCustomContainerViewExposureBucketComponent
+    SelfCustomContainerViewExposureBucketComponent,
+    SelfCustomCustomerViewCoyFinancialComponent
   ],
   imports: [
     CommonModule,
@@ -58,8 +60,8 @@ import { AdinsTemplateService } from 'app/shared/services/adins-template.service
     SelfCustomCustViewRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
     { provide: UcTemplateService, useClass: AdinsTemplateService },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 ]
 })
 export class SelfCustomCustViewModule { }

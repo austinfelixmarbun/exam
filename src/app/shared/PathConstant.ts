@@ -71,7 +71,9 @@ export class PathConstant {
 
     //#region Asset
     public static ASSET_TYPE_PAGING = PathConstant.TYPE + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_ASSET_TYPE_PAGING = this.SELF_CUSTOM + "/" + PathConstant.TYPE + "/" + PathConstant.PAGING;
     public static ASSET_TYPE_DETAIL = PathConstant.TYPE + "/" + PathConstant.DETAIL;
+    public static SELF_CUSTOM_ASSET_TYPE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.TYPE + "/" + PathConstant.DETAIL;
     public static ASSET_SCHM = "Scheme";
     public static ASSET_SCHM_PAGING = PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
     public static ASSET_SCHM_MBR_DETAIL = PathConstant.ASSET_SCHM + "/MemberDetail";
