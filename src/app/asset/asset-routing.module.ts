@@ -54,6 +54,13 @@ const routes: Routes = [
     children: [
       {
         path: PathConstant.ASSET_TYPE_PAGING,
+        component: AssetTypePagingComponent,
+        data: {
+          title: 'Asset Type Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_TYPE_PAGING,
         component: CustomAssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
@@ -61,6 +68,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_TYPE_DETAIL,
+        component: AssetTypeAddEditComponent,
+        data: {
+          title: 'Asset Type Add Edit'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_TYPE_DETAIL,
         component: CustomAssetTypeAddEditComponent,
         data: {
           title: 'Asset Type Add Edit'
