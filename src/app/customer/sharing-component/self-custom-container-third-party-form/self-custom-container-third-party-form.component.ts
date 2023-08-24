@@ -29,6 +29,10 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { TrustingSocialReqHeaderComponent } from '../new-cust-component/component/third-party-form/trusting-social/request/trusting-social-req-header.component';
+import { ReqGenerateTrxNoObj } from 'app/shared/model/master-sequence/req-generate-trx-no-obj.model';
+import { ResGenerateTrxNoObj } from 'app/shared/model/master-sequence/res-generate-trx-no-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-self-custom-container-third-party-form',
@@ -46,6 +50,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   @Input() thirdPartyTrxNo: string = null;
   @Input() custObj: CustObj = new CustObj();
 
+  @Output() data: EventEmitter<any> = new EventEmitter<any>();
   @Output() OutputUploadFile: EventEmitter<Array<CustDocFileFormObj>> = new EventEmitter<Array<CustDocFileFormObj>>();
 
   officeCode: string;
@@ -85,7 +90,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     //   this.IsCustLoaded = true
     // }
     console.log(this.parentForm.getRawValue())
-    alert(this.MrCustTypeCode)
+    // alert(this.MrCustTypeCode)
 
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.officeCode = context[CommonConstant.OFFICE_CODE];
@@ -171,7 +176,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
 
           this.CustDocFileFormObjs.push(custDocFileFormObj);
         }
-        this.setDocFormCustMaritalTypeChanged();
+        // this.setDocFormCustMaritalTypeChanged();
         // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
       }
     );
@@ -206,8 +211,8 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
       return;
     }
 
-    // await this.checkThirdPartyTrxNo();
-    // await this.saveThirdPartyTrxNo();
+    await this.checkThirdPartyTrxNo();
+    await this.saveThirdPartyTrxNo();
 
 
     let tempForm = this.parentForm.getRawValue();
@@ -401,6 +406,13 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   HandleFileInput(files: FileList, i) {
     this.CustDocFileFormObjs[i].File = files.item(0);
     this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+
+    const data = {
+      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+      "UploadFile": this.CustDocFileFormObjs
+    }
+
+    this.data.emit(data)
   }
   
   HandleFileInputAsliRI(files: FileList, img:any, i) {
@@ -420,13 +432,51 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
       }
     }
     this.CustDocFileFormObjs[i].File = files.item(0);
-    this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+    // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+    const data = {
+      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+      "UploadFile": this.CustDocFileFormObjs
+    }
+    this.data.emit(data)
   }
 
   ConvertSize(fileSize: number) {
     return fileSize < 1024000
       ? (fileSize / 1024).toFixed(2) + ' KB'
       : (fileSize / 1024000).toFixed(2) + ' MB';
+  }
+
+  async checkThirdPartyTrxNo() {
+    if (this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == "") {
+      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
+      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
+      reqGenerateTrxNoObj.OfficeCode = this.officeCode;
+
+      await this.http.post(this.UrlConstantNew.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj, AdInsConstant.SpinnerOptions).toPromise().then(
+        (response: ResGenerateTrxNoObj) => {
+          this.thirdPartyTrxNo = response.TrxNo;
+          // this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
+
+          const data = {
+            "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+            "UploadFile": this.CustDocFileFormObjs
+          }
+          this.data.emit(data)
+        }
+      );
+    }
+  }
+
+  async saveThirdPartyTrxNo() {
+    let reqByIdAndCode: GenericObj = new GenericObj();
+    reqByIdAndCode.Id = this.CustId;
+    reqByIdAndCode.Code = this.thirdPartyTrxNo;
+
+    await this.http.post(this.UrlConstantNew.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
+      response => {
+
+      }
+    )
   }
 
   SetThirdPartyTrxNo(ev: any)

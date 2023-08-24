@@ -90,6 +90,8 @@ import { SelfCustomContainerCustAttrComponent } from './sharing-component/self-c
 import { SelfCustomCustViewModule } from 'app/view/self-custom-cust-view/self-custom-cust-view.module';
 import { SelfCustomContainerCustAttrSectionComponent } from './self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
 import { CustomCustAttrSectionComponent } from './custom-cust-attr-section/custom-cust-attr-section.component';
+import { SelfCustomCustomerEmergencyContactComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component';
+import { SelfCustomContainerFamilyListingComponent } from './sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -199,7 +201,9 @@ export const customCurrencyMaskConfig = {
         SelfCustomCustomerPersonalAddressComponent,
         SelfCustomContainerCustAttrComponent,
         SelfCustomContainerCustAttrSectionComponent,
-        CustomCustAttrSectionComponent
+        CustomCustAttrSectionComponent,
+        SelfCustomCustomerEmergencyContactComponent,
+        SelfCustomContainerFamilyListingComponent,
     ],
     providers: [
         CustAssetComponent,

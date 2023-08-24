@@ -1,5 +1,5 @@
 <!-- <app-third-party-form [parentForm]="parentForm" [CustDataMode]="CustDataMode" [MrCustTypeCode]="MrCustTypeCode" (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"></app-third-party-form> -->
-<div *ngIf="IsUseDigitalization == '1' && (IsUseTs || IsUsePefindo)">
+<div class="px-3" *ngIf="IsUseDigitalization == '1' && (IsUseTs || IsUsePefindo)">
     <lib-ucSubsection [id]="'documentId'" [title]="'Document'" [panel]="'document'">
     </lib-ucSubsection>
     <div id="document">
