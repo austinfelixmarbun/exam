@@ -92,6 +92,7 @@ import { SelfCustomContainerCustAttrSectionComponent } from './self-custom-conta
 import { CustomCustAttrSectionComponent } from './custom-cust-attr-section/custom-cust-attr-section.component';
 import { SelfCustomCustomerEmergencyContactComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component';
 import { SelfCustomContainerFamilyListingComponent } from './sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component';
+import { CustomCustomerCompanyAddressComponent } from './customer-company/custom-customer-company-address/custom-customer-company-address.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -204,6 +205,7 @@ export const customCurrencyMaskConfig = {
         CustomCustAttrSectionComponent,
         SelfCustomCustomerEmergencyContactComponent,
         SelfCustomContainerFamilyListingComponent,
+        CustomCustomerCompanyAddressComponent,
     ],
     providers: [
         CustAssetComponent,
