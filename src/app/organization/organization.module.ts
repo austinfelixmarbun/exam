@@ -23,6 +23,7 @@ import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { UcTemplateModule } from '@adins/uctemplate';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     ReactiveFormsModule,
     UcviewgenericModule,
     UcSubsectionModule,
-    UcShowErrorsModule
+    UcShowErrorsModule,
+    UcTemplateModule
   ],
   declarations: [
     RefJobTitleComponent,

@@ -346,6 +346,9 @@ export class PathConstant {
     public static BZ_UNIT_DETAIL = PathConstant.BZ_UNIT + "/" + PathConstant.DETAIL;
     public static BZ_UNIT_EDIT = PathConstant.BZ_UNIT + "/" + PathConstant.EDIT;
     public static BZ_UNIT_MEMBER = PathConstant.BZ_UNIT + "/" + PathConstant.MEMBER;
+
+    public static CUSTOM_JOB_TITLE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.JOB_TITLE + "/" + PathConstant.PAGING;
+    public static CUSTOM_JOB_TITLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.JOB_TITLE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Survey-Module
