@@ -8,5 +8,19 @@ export{SelfCustomCustomerPersonalAddressComponent} from "app/customer/customer-p
 export{SelfCustomContainerViewVendorAttrComponent} from "app/view/vendor/self-custom-container-view-vendor-attr/self-custom-container-view-vendor-attr.component";
 export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component";
 export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";
+export{CustomerViewAsliRiComponent} from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.component';
+export{ CustomerViewCbasSlikComponent } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.component';
 export{SelfCustomCustomerViewIframeGenericComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component";
+export{SelfCustomContainerCustViewFinDataBankStmntComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-bank-stmnt/self-custom-container-cust-view-fin-data-bank-stmnt.component";
+export{SelfCustomCustExposureViewComponent} from "app/view/self-custom-cust-view/self-custom-cust-exposure-view/self-custom-cust-exposure-view.component";
+export{SelfCustomContainerViewExposureBucketComponent} from "app/view/self-custom-cust-view/self-custom-container-view-exposure-bucket/self-custom-container-view-exposure-bucket.component";
+export{SelfCustomContainerDmsIframeComponent} from "app/shared/self-custom-container-dms-iframe/self-custom-container-dms-iframe.component";
+export { SelfCustomContainerCustAttrSectionComponent } from 'app/customer/self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
+export { CustomCustAttrSectionComponent } from 'app/customer/custom-cust-attr-section/custom-cust-attr-section.component';
+export { CustomAssetMasterDetailParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component';
+export { ShareholderListingComponent } from 'app/customer/sharing-component/shareholder-listing/shareholder-listing.component';
+export { CustomerCompanyAddressComponent } from 'app/customer/customer-company/customer-company-address/customer-company-address.component';
+
+
+
 export{SelfCustomCustomerViewCoyFinancialComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component";

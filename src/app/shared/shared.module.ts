@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcnotificationModule } from '@adins/ucnotification';
+import { SelfCustomContainerDmsIframeComponent } from './self-custom-container-dms-iframe/self-custom-container-dms-iframe.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,6 +32,7 @@ export function createTranslateLoader(http: HttpClient) {
         ToggleFullscreenDirective,
         NgbModule,
         DmsIframeComponent,
+        SelfCustomContainerDmsIframeComponent,
         SafePipe
     ],
     imports: [
@@ -50,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         DmsIframeComponent,
+        SelfCustomContainerDmsIframeComponent,
         SafePipe
     ]
 })

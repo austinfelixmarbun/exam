@@ -1,0 +1,22 @@
+<lib-ucSubsection [id]="'BucketInfo' + exposureType + 'Id'" [title]="'Bucket'" [panel]="'BucketInfo' + exposureType">
+</lib-ucSubsection>
+<div [id]="'BucketInfo' + exposureType" style="overflow-x: auto;">
+  <table class="table table-responsive-md text-center table-hover">
+    <tr class="table-header">
+      <th style="text-align: left;">
+        <span name='Bucket'>
+          <label class="label-control" translate>Bucket</label>
+        </span>
+      </th>
+      <td style="text-align: right;" *ngFor="let item of ListCustExpsrBucketObj; let i = index;">
+        <span class="thead-header" translate>
+          <label class="label-control"> {{item.BucketRange}} </label>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th style="text-align: left;" translate>Total Past Due</th>
+      <td style="text-align: right;" *ngFor="let item of ListCustExpsrBucketObj; let i = index;"> {{item.Value | number:'.2':'en-US'}} </td>
+    </tr>
+  </table>
+</div>

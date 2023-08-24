@@ -121,6 +121,12 @@ export class PathConstant {
     public static CUSTOM_ASSET_ACC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ACC + "/" + PathConstant.DETAIL;
     public static CUSTOM_ASSET_ATTR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.PAGING;
     public static CUSTOM_ASSET_ATTR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_MASTER_UPLOAD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.UPLOAD;
+    public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_PAGING;
+    public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_DETAIL;
+    public static CUSTOM_ASSET_MASTER_CHILD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/Child";
     //#endregion
     
     //#region Common-Setting
@@ -279,6 +285,10 @@ export class PathConstant {
     public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_SHRHLDR + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_NEW_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.NEW_CUST;
     public static SELF_CUSTOM_CUST_PERSONAL_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
+    public static SELF_CUSTOM_CS_REASON_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CS_REASON_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CUST_COY_ADDR = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_ADDR;
+
     //#endregion
     
     //#region Dashboard-Module
