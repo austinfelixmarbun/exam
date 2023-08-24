@@ -226,7 +226,7 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.CUSTOM_CUST_COY_ADDR,
+        path: PathConstant.CUSTOM_CUST_COY_PAGE,
         component: UcTemplateComponent,
         data: {
           title: 'Customer Company Address',
