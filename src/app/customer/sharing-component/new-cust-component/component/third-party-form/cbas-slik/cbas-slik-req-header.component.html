@@ -4,6 +4,8 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+
+<form class="form form-horizontal" [formGroup]="CbasSlikReqForm" (ngSubmit)="CbasSlikReqForm.valid && Submit()" #enjiForm="ngForm">
 <div class="modal-body">
   <div class="text-center mb-3"><label>Are you sure want to get customer information from CBAS SLIK with following data ?</label></div>
   <table style="margin-left:auto;margin-right:auto" cellpadding="4">
@@ -25,6 +27,10 @@
       </ng-container>
 
       <tr><td translate>Address</td><td> : </td><td>{{ReqObj.Address}}</td></tr>
+      <tr><td><label class="adins-required-label" translate>Purpose</label></td><td> : </td><td>
+        <lib-ucdropdownlist [dropdownListObj]="DdlCbasSlikPurposeObj" [parentForm]="CbasSlikReqForm" [enjiForm]="enjiForm" [identifier]="'PurposeCode'">
+        </lib-ucdropdownlist>
+      </td></tr>
     </tbody>
   </table>
 </div>
@@ -35,9 +41,10 @@
       <button type="button" class="btn btn-warning btn-raised mr-1" (click)="activeModal.dismiss('Cross click')">
           <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
       </button>
-      <button type="submit" class="btn btn-primary btn-raised mr-1" (click)="Submit()">
+      <button type="submit" class="btn btn-primary btn-raised mr-1">
         <i class="far fa-check-square"></i>&nbsp;<span translate>Yes</span>
       </button>
     </span>
   </div>
 </div>
+</form>

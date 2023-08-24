@@ -217,6 +217,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeCustDocType = "CUST_DOC_TYPE";
     public static RefMasterTypeCodeVendorCollCompanyPosition = "VENDOR_COLL_COMPANY_POSITION";
     public static RefMasterTypeCodeVendorCategoryGeneral = "VENDOR_CATEGORY_GENERAL";
+    public static RefMasterTypeCodeCbasSlikPurposeCode = "CBAS_SLIK_PURPOSE_CODE";
     
     //MASTER CODE
     public static MasterCodeCustDocTypeSpouseId = "APGEN03";
