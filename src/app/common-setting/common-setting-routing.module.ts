@@ -661,12 +661,29 @@ const routes: Routes = [
           title: 'Payment Allocation Detail'
         },
       },
+      //Custom Page
       {
         path: PathConstant.SELF_CUSTOM_CS_REASON_PAGING,
         component: UcTemplateComponent,
         data: {
           title: 'Custom Reason  ',
           page: 'Reason'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Detail',
+          page: 'IndustryTypeCategoryDetail'
         }
       },
       {
@@ -691,6 +708,38 @@ const routes: Routes = [
         data: {
           title: 'General Setting Maintenance Add Edit',
           page: 'GeneralSettingEdit'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Paging',
+          page: 'Fou-sysset-bank'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Detail',
+          page: 'FouBankRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC',
+          page: 'Reftc'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC Add Edit',
+          page: 'ReftcDetail'
         },
       }
     ]

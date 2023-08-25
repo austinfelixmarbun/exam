@@ -230,6 +230,8 @@ export class PathConstant {
     public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.DETAIL;
 
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
@@ -240,6 +242,11 @@ export class PathConstant {
     
     public static CUSTOM_CS_GEN_SETTING = PathConstant.SELF_CUSTOM + "/" + "GeneralSetting";
     public static CUSTOM_CS_GEN_SETTING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_BANK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_BANK_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_REF_TC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_REF_TC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
+    
     //#endregion
 
     //#region Cust
@@ -328,6 +335,9 @@ export class PathConstant {
     public static EMP_BZ_UNIT = "EmployeeBusinessUnit";
     public static EMP_BZ_UNIT_PAGING = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.PAGING;
     public static EMP_BZ_UNIT_ADD = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.ADD;
+
+    public static CUSTOM_LEAVE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.LEAVE + "/" + PathConstant.PAGING;
+    public static CUSTOM_LEAVE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LEAVE + "/" + PathConstant.DETAIL;
     //#endregion
     
     //#region Integration-Module
