@@ -671,6 +671,22 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Detail',
+          page: 'IndustryTypeCategoryDetail'
+        }
+      },
+      {
         path: PathConstant.SELF_CUSTOM_CS_REASON_DETAIL,
         component: ReasonAddEditComponent,
         data: {
