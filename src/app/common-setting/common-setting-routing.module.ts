@@ -684,6 +684,30 @@ const routes: Routes = [
           title: 'Industry Type Category Detail',
           page: 'IndustryTypeCategoryDetail'
         }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REASON_DETAIL,
+        component: ReasonAddEditComponent,
+        data: {
+          title: 'Reason Paging',
+          page: 'ReasonRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_GEN_SETTING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'General Setting Maintenance Paging',
+          page: 'Generalsetting'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_GEN_SETTING_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'General Setting Maintenance Add Edit',
+          page: 'GeneralSettingEdit'
+        },
       }
     ]
   }
