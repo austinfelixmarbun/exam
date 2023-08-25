@@ -76,9 +76,13 @@ export class PathConstant {
     public static SELF_CUSTOM_ASSET_TYPE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.TYPE + "/" + PathConstant.DETAIL;
     public static ASSET_SCHM = "Scheme";
     public static ASSET_SCHM_PAGING = PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_ASSET_SCHM_PAGING = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
     public static ASSET_SCHM_MBR_DETAIL = PathConstant.ASSET_SCHM + "/MemberDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/MemberDetail";
     public static ASSET_SCHM_ADD_MBR = PathConstant.ASSET_SCHM + "/AddMember";
+    public static SELF_CUSTOM_ASSET_SCHM_ADD_MBR = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/AddMember";
     public static ASSET_SCHM_INFO_DETAIL = PathConstant.ASSET_SCHM + "/InformationDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_INFO_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/InformationDetail";
     public static ASSET_CONFIG = "Configuration";
     public static ASSET_CONFIG_PAGING = PathConstant.ASSET_CONFIG + "/" + PathConstant.PAGING;
     public static ASSET_CATEGORY = "Category";
