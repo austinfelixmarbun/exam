@@ -661,6 +661,7 @@ const routes: Routes = [
           title: 'Payment Allocation Detail'
         },
       },
+      //Custom Page
       {
         path: PathConstant.SELF_CUSTOM_CS_REASON_PAGING,
         component: UcTemplateComponent,
@@ -741,6 +742,39 @@ const routes: Routes = [
           page: 'ProfessionDetail'
         }
       },
+      {
+        
+        path: PathConstant.CUSTOM_CS_BANK_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Paging',
+          page: 'Fou-sysset-bank'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Detail',
+          page: 'FouBankRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC',
+          page: 'Reftc'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC Add Edit',
+          page: 'ReftcDetail'
+        },
+      }
     ]
   }
 ];

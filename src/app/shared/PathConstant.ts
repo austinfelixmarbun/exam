@@ -76,9 +76,13 @@ export class PathConstant {
     public static SELF_CUSTOM_ASSET_TYPE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.TYPE + "/" + PathConstant.DETAIL;
     public static ASSET_SCHM = "Scheme";
     public static ASSET_SCHM_PAGING = PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_ASSET_SCHM_PAGING = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
     public static ASSET_SCHM_MBR_DETAIL = PathConstant.ASSET_SCHM + "/MemberDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/MemberDetail";
     public static ASSET_SCHM_ADD_MBR = PathConstant.ASSET_SCHM + "/AddMember";
+    public static SELF_CUSTOM_ASSET_SCHM_ADD_MBR = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/AddMember";
     public static ASSET_SCHM_INFO_DETAIL = PathConstant.ASSET_SCHM + "/InformationDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_INFO_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/InformationDetail";
     public static ASSET_CONFIG = "Configuration";
     public static ASSET_CONFIG_PAGING = PathConstant.ASSET_CONFIG + "/" + PathConstant.PAGING;
     public static ASSET_CATEGORY = "Category";
@@ -242,6 +246,11 @@ export class PathConstant {
     
     public static CUSTOM_CS_GEN_SETTING = PathConstant.SELF_CUSTOM + "/" + "GeneralSetting";
     public static CUSTOM_CS_GEN_SETTING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_BANK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_BANK_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_REF_TC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_REF_TC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
+    
     //#endregion
 
     //#region Cust
