@@ -228,6 +228,10 @@ export class PathConstant {
     public static CS_CUSTOM_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_INDUSTRY_TYPE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_INDUSTRY_TYPE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_PROFESSION_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_PROFESSION_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.DETAIL;
 
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;

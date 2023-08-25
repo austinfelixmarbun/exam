@@ -670,22 +670,6 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Industry Type Category Paging',
-          page: 'IndustryTypeCategoryPaging'
-        }
-      },
-      {
-        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Industry Type Category Detail',
-          page: 'IndustryTypeCategoryDetail'
-        }
-      },
-      {
         path: PathConstant.SELF_CUSTOM_CS_REASON_DETAIL,
         component: ReasonAddEditComponent,
         data: {
@@ -708,7 +692,55 @@ const routes: Routes = [
           title: 'General Setting Maintenance Add Edit',
           page: 'GeneralSettingEdit'
         },
-      }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Detail',
+          page: 'IndustryTypeCategoryDetail'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Paging',
+          page: 'IndustryTypePaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Detail',
+          page: 'IndustryTypeDetail'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PROFESSION_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Profession Paging',
+          page: 'Professionpaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PROFESSION_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Profession Detail',
+          page: 'ProfessionDetail'
+        }
+      },
     ]
   }
 ];
