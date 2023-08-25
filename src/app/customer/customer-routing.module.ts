@@ -233,6 +233,14 @@ const routes: Routes = [
           page: 'CustomerCompony'
         }
       },
+      {
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchPersonal'
+        }
+      },
     ]
   }
 ];

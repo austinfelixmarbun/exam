@@ -1,5 +1,6 @@
+import { UcTemplateService } from '@adins/uctemplate';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
@@ -8,20 +9,23 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 })
 export class SelfCustomContainerCustAttrComponent implements OnInit {
 
-  @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
+  @Input() CustDataMode: string;
   @Input() CustId: number = 0;
   @Input() parentForm: FormGroup;
   @Input() AttrGroupCustPersonalOther: string = CommonConstant.AttrGroupCustPersonalOther;
   @Input() listAttrCodes: Array<string> = [CommonConstant.AttrCodeDeptAml, CommonConstant.AttrCodeAuthAml];
+  
+  enjiForm: NgForm;
 
-  constructor() { }
+  constructor(private templateService: UcTemplateService) { }
 
   ngOnInit(): void {
-    alert("x")
-    console.log(this.CustId)
-    console.log(this.parentForm)
-    console.log(this.AttrGroupCustPersonalOther)
-    console.log(this.listAttrCodes)
+    this.enjiForm = this.templateService.container.getEnjiForm();
+
+    if (this.CustDataMode == undefined)
+    {
+      this.CustDataMode = CommonConstant.CustMainDataModeFamily;
+    }
   }
 
 }
