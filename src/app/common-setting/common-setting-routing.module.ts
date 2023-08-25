@@ -668,6 +668,22 @@ const routes: Routes = [
           title: 'Custom Reason  ',
           page: 'Reason'
         }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Detail',
+          page: 'IndustryTypeCategoryDetail'
+        }
       }
     ]
   }
