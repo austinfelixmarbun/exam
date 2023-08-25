@@ -9,6 +9,7 @@ import { LeaveMaintenanceAddEditComponent } from './leave-maintenance/leave-main
 import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/employee-businessunit-add.component';
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -90,6 +91,22 @@ const routes: Routes = [
         data: {
           title: 'Employee Business Unit Paging'
         }
+      },
+      {
+        path: PathConstant.CUSTOM_LEAVE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Leave Management Paging',
+          page: 'EmployeeLeaveManagementPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_LEAVE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Leave Management Detail',
+          page: 'EmployeeLeaveManagementDetail'
+        },
       },
     ]
   }

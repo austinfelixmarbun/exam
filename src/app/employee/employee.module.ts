@@ -15,6 +15,7 @@ import { EmployeeBusinessunitAddComponent } from './employee-businessunit-add/em
 import { EmployeeBusinessunitPagingComponent } from './employee-businessunit-paging/employee-businessunit-paging.component';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { UcTemplateModule } from "@adins/uctemplate";
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     NgbModule,
     AdInsSharedModule,
     SharingComponentModule,
-    AdInsModule
+    AdInsModule,
+    UcTemplateModule
   ],
   declarations: [
     EmployeePositionAddComponent,

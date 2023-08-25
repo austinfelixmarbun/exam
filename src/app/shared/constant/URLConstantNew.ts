@@ -1038,6 +1038,7 @@ export class UrlConstantNew{
 
     // Cust Exposure
     public GetCustExpsrInfoByCustId = this.env.FoundationR3Url + this.url.GetCustExpsrInfoByCustId;
+    public GetCustExpsrInfoByCustIdAndExposureTypeForTemplate = this.env.FoundationR3Url + this.url.GetCustExpsrInfoByCustIdAndExposureTypeForTemplate;
     public RequestExposure = this.env.FoundationR3Url + this.url.RequestExposure;
     public RequestExposureV2 = this.env.FoundationR3Url + this.url.RequestExposureV2;
     public GetListCustExpsrBucketByCustExpsrDId = this.env.FoundationR3Url + this.url.GetListCustExpsrBucketByCustExpsrDId;

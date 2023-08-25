@@ -16,6 +16,23 @@ import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj
 import { ResSysConfigResultObj } from 'app/shared/model/response/res-sys-config-result-obj,model';
 import { String } from 'typescript-string-operations';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { CbasSlikReqHeaderComponent } from '../new-cust-component/component/third-party-form/cbas-slik/cbas-slik-req-header.component';
+import { CbasSlikViewComponent } from '../new-cust-component/component/third-party-form/cbas-slik/cbas-slik-view.component';
+import { AsliRiViewComponent } from '../new-cust-component/component/third-party-form/asli-ri/view/asli-ri-view/asli-ri-view.component';
+import { AsliRiReqHeaderComponent } from '../new-cust-component/component/third-party-form/asli-ri/request/asli-ri-req-header.component';
+import { TrustingSocialViewHeaderComponent } from '../new-cust-component/component/third-party-form/trusting-social/view/trusting-social-view-header.component';
+import { ReqPefindoSmartSearchObj } from 'app/shared/model/digitalization/req-pefindo-smart-search-obj.model';
+import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-file-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { PefindoReqComponent } from '../new-cust-component/component/third-party-form/pefindo/request/pefindo-req.component';
+import { CustObj } from 'app/shared/model/cust-obj.model';
+import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { TrustingSocialReqHeaderComponent } from '../new-cust-component/component/third-party-form/trusting-social/request/trusting-social-req-header.component';
+import { ReqGenerateTrxNoObj } from 'app/shared/model/master-sequence/req-generate-trx-no-obj.model';
+import { ResGenerateTrxNoObj } from 'app/shared/model/master-sequence/res-generate-trx-no-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-self-custom-container-third-party-form',
@@ -30,6 +47,10 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   @Input() MrCustTypeCode: string = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
 
+  @Input() thirdPartyTrxNo: string = null;
+  @Input() custObj: CustObj = new CustObj();
+
+  @Output() data: EventEmitter<any> = new EventEmitter<any>();
   @Output() OutputUploadFile: EventEmitter<Array<CustDocFileFormObj>> = new EventEmitter<Array<CustDocFileFormObj>>();
 
   officeCode: string;
@@ -69,7 +90,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     //   this.IsCustLoaded = true
     // }
     console.log(this.parentForm.getRawValue())
-    alert(this.MrCustTypeCode)
+    // alert(this.MrCustTypeCode)
 
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.officeCode = context[CommonConstant.OFFICE_CODE];
@@ -155,7 +176,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
 
           this.CustDocFileFormObjs.push(custDocFileFormObj);
         }
-        this.setDocFormCustMaritalTypeChanged();
+        // this.setDocFormCustMaritalTypeChanged();
         // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
       }
     );
@@ -178,6 +199,284 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
         this.CustDocFileObjs = response[CommonConstant.ReturnObj];
       }
     );
+  }
+
+  async ReqPefindo() {
+    this.markFormGroupTouched(this.parentForm);
+    if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
+      return;
+    }
+
+    if (!this.parentForm.valid) {
+      return;
+    }
+
+    await this.checkThirdPartyTrxNo();
+    await this.saveThirdPartyTrxNo();
+
+
+    let tempForm = this.parentForm.getRawValue();
+
+    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    if (this.CustDataMode == this.CustDataModeMain) {
+      reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
+    } else {
+      reqPefindoSmartSearchObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
+    reqPefindoSmartSearchObj.CustType = this.MrCustTypeCode;
+    reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
+
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
+      reqPefindoSmartSearchObj.IdType = tempForm["MrIdTypeCode"];
+      reqPefindoSmartSearchObj.IdNo = tempForm["IdNo"];
+    } else {
+      reqPefindoSmartSearchObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
+      reqPefindoSmartSearchObj.IdNo = tempForm["TaxIdNo"];
+    }
+
+    if(this.custObj.CustId > 0) {
+      var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
+      custDocFileObjs.CustId = this.custObj.CustId;
+      custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          const modalRef = this.modalService.open(PefindoReqComponent);
+          modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+          modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+        }
+      );
+    }
+    else {
+      const modalRef = this.modalService.open(PefindoReqComponent);
+      modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
+      modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    }
+
+  }
+
+  ViewPefindo() {
+    let TrxNo = this.thirdPartyTrxNo;
+    this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+  }
+
+  async ReqTrustingSocial() {
+    this.markFormGroupTouched(this.parentForm);
+
+    if (!this.parentForm.valid) {
+      return;
+    }
+
+    let tempForm = this.parentForm.getRawValue();
+    let custObj: CustObj = new CustObj();
+    let custPersonalObj = new CustPersonalObj();
+
+    // cek nomor telepon valid atau gak 
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
+      let MobilePhnNo = tempForm["MobilePhnNo1"];
+      if (MobilePhnNo.substring(0, 2) != '62') {
+        this.toastr.warningMessage(ExceptionConstant.MOBILE_PHN_NO_INVALID);
+        return;
+      }
+    }
+
+    if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
+      return;
+    }
+
+    // await this.checkThirdPartyTrxNo();
+    // await this.saveThirdPartyTrxNo();
+
+    if (this.CustDataMode == this.CustDataModeMain) {
+      custObj.CustName = tempForm["CustName"];
+    } else {
+      custObj.CustName = tempForm["ExistingCustName"]["value"];
+    }
+    custObj.CustNo = this.custObj.CustNo;
+    custObj.TaxIdNo = tempForm["TaxIdNo"];
+    custObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    custObj.MrCustTypeCode = this.MrCustTypeCode;
+
+    if (tempForm["MrIdTypeCode"] == CommonConstant.MrIdTypeCodeEKTP) {
+      custObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
+      custObj.IdNo = tempForm["IdNo"];
+    } else {
+      custObj.MrIdTypeCode = CommonConstant.TrustingSocialDummyIdType;
+      custObj.IdNo = CommonConstant.TrustingSocialDummyIdNo;
+    }
+
+    if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
+      custPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
+    }
+
+    if(this.custObj.CustId > 0) {
+      var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
+      custDocFileObjs.CustId = this.custObj.CustId;
+      custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+          modalRef.componentInstance.CustObj = custObj;
+          modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+        }
+      );
+    }
+    else {
+      const modalRef = this.modalService.open(TrustingSocialReqHeaderComponent);
+      modalRef.componentInstance.CustObj = custObj;
+      modalRef.componentInstance.CustPersonalObj = custPersonalObj;
+    }
+    
+  }
+
+
+  ViewTrustingSocial() {
+    const modalRef = this.modalService.open(TrustingSocialViewHeaderComponent);
+    modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+  }
+
+  async ReqASLIRI()
+  {
+    this.markFormGroupTouched(this.parentForm);
+
+    if (!this.thirdPartyUploadService.ValidateFileUploadAsliRI(this.CustDocFileFormObjs)) {
+      return;
+    }
+
+    if (!this.parentForm.valid) {
+      return;
+    }
+    
+    const modalRef = this.modalService.open(AsliRiReqHeaderComponent);
+    modalRef.componentInstance.parentForm = this.parentForm;
+    modalRef.componentInstance.custObj = this.custObj;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
+
+    for(let i = 0; i < this.CustDocFileFormObjs.length; i++)
+    {
+      if(this.MrCustTypeCode == CommonConstant.CustTypePersonal && this.parentForm.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP && this.CustDocFileFormObjs[i].DocTypeName == CommonConstant.ASLI_RI_SELFIE)
+      {
+        modalRef.componentInstance.custDocFileFormObj = this.CustDocFileFormObjs[i];
+        modalRef.componentInstance.height = this.height;
+        modalRef.componentInstance.width = this.width;
+        modalRef.componentInstance.url = this.url;
+      }
+    }
+  }
+
+  async ViewASLIRI()
+  {
+    const modalRef = this.modalService.open(AsliRiViewComponent); 
+    modalRef.componentInstance.custObj = this.custObj;
+    modalRef.componentInstance.parentForm = this.parentForm;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
+    modalRef.componentInstance.custObj.MrCustTypeCode = this.MrCustTypeCode;
+  }
+
+  CbasSlikTrxNo: string = "";
+  async ReqCbasSlik()
+  {
+    this.markFormGroupTouched(this.parentForm);
+    if (!this.parentForm.valid) return;
+    
+    const modalRef = this.modalService.open(CbasSlikReqHeaderComponent);
+    modalRef.componentInstance.ParentForm = this.parentForm;
+    modalRef.componentInstance.MrCustTypeCode = this.MrCustTypeCode;
+    modalRef.componentInstance.SubmitReqTrxNo.subscribe((trxNo) => {
+      this.CbasSlikTrxNo = trxNo
+    })
+  }
+
+  async ViewCbasSlik()
+  {
+    const modalRef = this.modalService.open(CbasSlikViewComponent); 
+    modalRef.componentInstance.ParentForm = this.parentForm;
+    modalRef.componentInstance.InputTrxNo = this.CbasSlikTrxNo;
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
+  HandleFileInput(files: FileList, i) {
+    this.CustDocFileFormObjs[i].File = files.item(0);
+    this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+
+    const data = {
+      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+      "UploadFile": this.CustDocFileFormObjs
+    }
+
+    this.data.emit(data)
+  }
+  
+  HandleFileInputAsliRI(files: FileList, img:any, i) {
+    if(img.target.files && img.target.files.length)
+    {
+      let file = img.target.files[0];
+      let image = new Image();
+      let reader = new FileReader();
+      image.src = window.URL.createObjectURL(file);
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setTimeout(() => {
+          this.width = image.naturalWidth
+          this.height = image.naturalHeight
+          this.url = reader.result
+        })
+      }
+    }
+    this.CustDocFileFormObjs[i].File = files.item(0);
+    // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+    const data = {
+      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+      "UploadFile": this.CustDocFileFormObjs
+    }
+    this.data.emit(data)
+  }
+
+  ConvertSize(fileSize: number) {
+    return fileSize < 1024000
+      ? (fileSize / 1024).toFixed(2) + ' KB'
+      : (fileSize / 1024000).toFixed(2) + ' MB';
+  }
+
+  async checkThirdPartyTrxNo() {
+    if (this.thirdPartyTrxNo == null || this.thirdPartyTrxNo == "") {
+      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
+      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
+      reqGenerateTrxNoObj.OfficeCode = this.officeCode;
+
+      await this.http.post(this.UrlConstantNew.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj, AdInsConstant.SpinnerOptions).toPromise().then(
+        (response: ResGenerateTrxNoObj) => {
+          this.thirdPartyTrxNo = response.TrxNo;
+          // this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
+
+          const data = {
+            "ThirdPartyTrxNo": this.thirdPartyTrxNo,
+            "UploadFile": this.CustDocFileFormObjs
+          }
+          this.data.emit(data)
+        }
+      );
+    }
+  }
+
+  async saveThirdPartyTrxNo() {
+    let reqByIdAndCode: GenericObj = new GenericObj();
+    reqByIdAndCode.Id = this.CustId;
+    reqByIdAndCode.Code = this.thirdPartyTrxNo;
+
+    await this.http.post(this.UrlConstantNew.SaveCustThirdPartyTrxNo, reqByIdAndCode, AdInsConstant.SpinnerOptions).toPromise().then(
+      response => {
+
+      }
+    )
   }
 
   SetThirdPartyTrxNo(ev: any)

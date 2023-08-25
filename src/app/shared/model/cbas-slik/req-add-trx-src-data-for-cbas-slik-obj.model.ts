@@ -9,5 +9,6 @@ export class ReqAddTrxSrcDataForCbasSlik{
     Gender: string = '';
     Address: string = '';
     MotherName: string = '';
+    PurposeCode: string = '';
 
 }

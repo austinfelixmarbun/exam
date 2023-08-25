@@ -221,6 +221,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'prepaidtransfer',
     loadChildren: () => {
       return loadRemoteModule({
@@ -454,6 +466,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './CashierTransactionModule'
       })
         .then(m => m.CashierTransactionModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'cashbankvoucher',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './CashbankModule'
+      })
+        .then(m => m.CashbankModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
@@ -742,7 +766,7 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+
   {
     path: 'drawdown',
     loadChildren: () => {
