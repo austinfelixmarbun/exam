@@ -692,6 +692,22 @@ const routes: Routes = [
           title: 'General Setting Maintenance Add Edit',
           page: 'GeneralSettingEdit'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Paging',
+          page: 'Fou-sysset-bank'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Detail',
+          page: 'FouBankRegistration'
+        },
       }
     ]
   }
