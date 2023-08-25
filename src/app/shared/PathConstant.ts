@@ -233,6 +233,9 @@ export class PathConstant {
     public static CS_REF_TRX_TYPE = "RefTrxType";
     public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
     public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
+    
+    public static CUSTOM_CS_GEN_SETTING = PathConstant.SELF_CUSTOM + "/" + "GeneralSetting";
+    public static CUSTOM_CS_GEN_SETTING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
