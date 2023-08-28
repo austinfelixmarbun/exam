@@ -790,6 +790,22 @@ const routes: Routes = [
           title: 'Payment Allocation Detail',
           page: 'PaymentAllocationDetail'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Detail',
+          page: 'Insuranceclaimdocdetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Paging',
+          page: 'InsuranceClaimDoc'
+        },
       }
     ]
   }
