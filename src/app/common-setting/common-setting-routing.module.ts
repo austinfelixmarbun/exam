@@ -741,6 +741,22 @@ const routes: Routes = [
           title: 'Ref TC Add Edit',
           page: 'ReftcDetail'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Detail',
+          page: 'Insuranceclaimdocdetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Paging',
+          page: 'InsuranceClaimDoc'
+        },
       }
     ]
   }

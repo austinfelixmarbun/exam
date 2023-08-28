@@ -19,6 +19,7 @@ import { RoleFormPagingComponent } from './role/role-form-paging/role-form-pagin
 import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -150,6 +151,22 @@ const routes: Routes = [
           title: 'Attribute Detail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_SYS_ATTR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Attribute Paging',
+          page: 'Sysattr'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_SYS_ATTR_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Attribute Detail',
+          page: 'Sysattrdetail'
+        },
+      }
     ]
   }
 ];

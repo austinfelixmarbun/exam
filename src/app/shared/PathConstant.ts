@@ -242,6 +242,8 @@ export class PathConstant {
     public static CUSTOM_CS_BANK_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_REF_TC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_REF_TC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
     
     //#endregion
 
@@ -415,6 +417,9 @@ export class PathConstant {
     public static SYS_ATTR = "Attribute";
     public static SYS_ATTR_PAGING = PathConstant.SYS_ATTR + "/" + PathConstant.PAGING;
     public static SYS_ATTR_DETAIL = PathConstant.SYS_ATTR + "/" + PathConstant.DETAIL;
+
+    public static CUSTOM_SYS_ATTR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SYS_ATTR + "/" + PathConstant.PAGING;
+    public static CUSTOM_SYS_ATTR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.SYS_ATTR + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Upload-Module
