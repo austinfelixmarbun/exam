@@ -7,6 +7,7 @@ import { RefJobTitleAddComponent } from 'app/organization/ref-job-title/ref-job-
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { MemberBusinessUnitComponent } from 'app/organization/business-unit/member-business-unit/member-business-unit.component';
 import { PathConstant } from 'app/shared/PathConstant';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 
 const routes: Routes = [
@@ -53,6 +54,22 @@ const routes: Routes = [
         component: MemberBusinessUnitComponent,
         data: {
           title: 'Business Unit Member'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_JOB_TITLE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Job Title Paging',
+          page: 'Jobtitlepaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_JOB_TITLE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Job Title Detail',
+          page: 'JobTitleDetail'
         },
       }
     ]

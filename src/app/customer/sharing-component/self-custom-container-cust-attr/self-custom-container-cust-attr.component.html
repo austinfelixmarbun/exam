@@ -1,2 +1,6 @@
-<app-cust-attr-form [Label]="CustDataMode" [CustId]="CustId"
-    [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="parentForm"></app-cust-attr-form>
+<div class="px-3">
+    <form [formGroup]="parentForm">
+        <app-cust-attr-form [Label]="CustDataMode" [CustId]="CustId"
+        [AttrGroup]="AttrGroupCustPersonalOther" [AttrCodes]="listAttrCodes" [parentForm]="parentForm" [enjiForm]="enjiForm"></app-cust-attr-form>
+    </form>
+</div>

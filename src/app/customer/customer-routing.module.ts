@@ -225,6 +225,22 @@ const routes: Routes = [
           title: 'Customer Personal DuplicateCheck  '
         }
       },
+      {
+        path: PathConstant.CUSTOM_CUST_COY_PAGE,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Company Address',
+          page: 'CustomerCompony'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchPersonal'
+        }
+      },
     ]
   }
 ];

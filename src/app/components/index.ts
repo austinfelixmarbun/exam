@@ -16,3 +16,10 @@ export{SelfCustomCustExposureViewComponent} from "app/view/self-custom-cust-view
 export{SelfCustomContainerViewExposureBucketComponent} from "app/view/self-custom-cust-view/self-custom-container-view-exposure-bucket/self-custom-container-view-exposure-bucket.component";
 export{SelfCustomContainerDmsIframeComponent} from "app/shared/self-custom-container-dms-iframe/self-custom-container-dms-iframe.component";
 export { SelfCustomContainerCustAttrSectionComponent } from 'app/customer/self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
+export { CustomCustAttrSectionComponent } from 'app/customer/custom-cust-attr-section/custom-cust-attr-section.component';
+export { CustomAssetMasterDetailParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component';
+export { CustomShareholderListingComponent } from 'app/customer/sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
+export { CustomCustomerCompanyAddressComponent } from 'app/customer/customer-company/custom-customer-company-address/custom-customer-company-address.component';
+export{SelfCustomCustomerViewCoyFinancialComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component";
+export{SelfCustomContainerFamilyListingComponent} from "app/customer/sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component";
+export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component";
