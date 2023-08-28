@@ -774,6 +774,22 @@ const routes: Routes = [
           title: 'Ref TC Add Edit',
           page: 'ReftcDetail'
         },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Paging',
+          page: 'PaymentAllocationPaging'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Detail',
+          page: 'PaymentAllocationDetail'
+        },
       }
     ]
   }

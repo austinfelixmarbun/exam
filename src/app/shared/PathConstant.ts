@@ -236,6 +236,8 @@ export class PathConstant {
     public static CS_CUSTOM_INDUSTRY_TYPE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_PROFESSION_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_PROFESSION_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_PAYMENT_ALLOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_PAYMENT_ALLOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.DETAIL;
 
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
