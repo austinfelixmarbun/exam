@@ -83,6 +83,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_PAGING,
+        component: AssetSchemePagingComponent,
+        data: {
+          title: 'Asset Scheme Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_PAGING,
         component: CustomAssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
@@ -90,6 +97,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_MBR_DETAIL,
+        component: AssetSchemeMemberComponent,
+        data: {
+          title: 'Asset Scheme Member Detail'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL,
         component: CustomAssetSchemeMemberComponent,
         data: {
           title: 'Asset Scheme Member Detail'
@@ -97,6 +111,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_ADD_MBR,
+        component: AddAssetSchemeComponent,
+        data: {
+          title: 'Asset Scheme Member Add'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_ADD_MBR,
         component: CustomAddAssetSchemeComponent,
         data: {
           title: 'Asset Scheme Member Add'
@@ -104,6 +125,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_INFO_DETAIL,
+        component: AssetSchemeAddEditInformationComponent,
+        data: {
+          title: 'Asset Scheme Information Add Edit'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_INFO_DETAIL,
         component: CustomAssetSchemeAddEditInformationComponent,
         data: {
           title: 'Asset Scheme Information Add Edit'

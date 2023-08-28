@@ -85,7 +85,7 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
 
     await this.getAddrTypeOwnershipRequired();
 
-    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, this.addressType).toPromise().then(
       async (response) => {
         this.listAddressType = response[CommonConstant.ReturnObj];
         this.listAddressType = await this.CustSetData.FilterAddr(this.listAddressType);

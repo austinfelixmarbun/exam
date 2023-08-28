@@ -76,9 +76,13 @@ export class PathConstant {
     public static SELF_CUSTOM_ASSET_TYPE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.TYPE + "/" + PathConstant.DETAIL;
     public static ASSET_SCHM = "Scheme";
     public static ASSET_SCHM_PAGING = PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_ASSET_SCHM_PAGING = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/" + PathConstant.PAGING;
     public static ASSET_SCHM_MBR_DETAIL = PathConstant.ASSET_SCHM + "/MemberDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/MemberDetail";
     public static ASSET_SCHM_ADD_MBR = PathConstant.ASSET_SCHM + "/AddMember";
+    public static SELF_CUSTOM_ASSET_SCHM_ADD_MBR = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/AddMember";
     public static ASSET_SCHM_INFO_DETAIL = PathConstant.ASSET_SCHM + "/InformationDetail";
+    public static SELF_CUSTOM_ASSET_SCHM_INFO_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.ASSET_SCHM + "/InformationDetail";
     public static ASSET_CONFIG = "Configuration";
     public static ASSET_CONFIG_PAGING = PathConstant.ASSET_CONFIG + "/" + PathConstant.PAGING;
     public static ASSET_CATEGORY = "Category";
@@ -228,6 +232,10 @@ export class PathConstant {
     public static CS_CUSTOM_MASTER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE_CAT + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_INDUSTRY_TYPE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_INDUSTRY_TYPE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_PROFESSION_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_PROFESSION_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.DETAIL;
 
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
@@ -300,6 +308,7 @@ export class PathConstant {
     public static SELF_CUSTOM_CS_REASON_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CS_REASON_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.DETAIL;
     public static CUSTOM_CUST_COY_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_PAGE;
+    public static SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerDuplicateChecking";
 
 
     //#endregion

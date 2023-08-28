@@ -1,7 +1,7 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
 import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
-import { addEditCustAddr, addEditCustAsset } from "../function/customer-function";
+import { addCustToDuplicate, addEditCustAddr, addEditCustAsset, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 
 @Injectable({
@@ -17,5 +17,7 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addEditCustAsset", addEditCustAsset);
     this.setExecutor("addRangeAssetSchmD", addRangeAssetSchmD);
     this.setExecutor("addEditCustAddr", addEditCustAddr);
+    this.setExecutor("editCustomer", editCustomer);
+    this.setExecutor("addCustToDuplicate", addCustToDuplicate);
   }
 }
