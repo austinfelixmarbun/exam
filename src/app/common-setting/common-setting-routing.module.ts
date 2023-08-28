@@ -806,6 +806,22 @@ const routes: Routes = [
           title: 'Insurance Claim Document Paging',
           page: 'InsuranceClaimDoc'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Detail',
+          page: 'ZipcodeDetail'
+        },
       }
     ]
   }

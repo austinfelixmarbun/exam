@@ -254,7 +254,8 @@ export class PathConstant {
     public static CUSTOM_CS_REF_TC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TC + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
-    
+    public static CUSTOM_CS_ZIPCODE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_ZIPCODE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
