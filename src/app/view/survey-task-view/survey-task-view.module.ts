@@ -20,10 +20,12 @@ import { SurveyTaskViewComponent } from './survey-task-view.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { ViewSurveyTaskDetailComponent } from './view-survey-task-detail/view-survey-task-detail.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { CustomDocumentSurveyTaskViewComponent } from './custom-document-survey-task-view/custom-document-survey-task-view.component';
 
 @NgModule({
     declarations: [SurveyTaskViewComponent,
-        ViewSurveyTaskDetailComponent],
+        ViewSurveyTaskDetailComponent,
+        CustomDocumentSurveyTaskViewComponent],
     imports: [
         CommonModule,
         SurveyTaskViewRoutingModule,
@@ -45,6 +47,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         SharedModule,
         AdInsSharedModule
     ],
-    exports: []
+    exports: [CustomDocumentSurveyTaskViewComponent]
 })
 export class SurveyTaskViewModule { }

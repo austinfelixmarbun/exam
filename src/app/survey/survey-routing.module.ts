@@ -16,6 +16,7 @@ import { SurveyResultReviewDetailComponent } from './survey-result-review-detail
 import { SurveyTaskResultDetailComponent } from './survey-task-result-detail/survey-task-result-detail.component';
 import { SurveyTaskResultPagingComponent } from './survey-task-result-paging/survey-task-result-paging.component';
 import { SurveyTaskResultPageComponent } from './survey-task-result-page/survey-task-result-page.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 
 const routes: Routes = [
@@ -119,7 +120,24 @@ const routes: Routes = [
         data:{
           title: 'Survey Task Result Detail'
         }
-      }   
+      },
+      //self custom uc template
+      {
+        path: PathConstant.CUSTOM_SRVY_ORDER_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Survey Order Inquiry',
+          page: 'SurveyOrderInquiry'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_SRVY_TASK_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Survey Task Inquiry',
+          page: 'SurveyTaskInquiry'
+        },
+      }
     ]
   }
 ];

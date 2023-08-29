@@ -17,6 +17,7 @@ import { SurveyOrderViewComponent } from "./survey-order-view/survey-order-view.
 import { SurveyOrderViewRoutingModule } from "./survey-order-routing.module";
 import { AdInsModule } from "app/components/adins-module/adins.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { UcTemplateModule } from "@adins/uctemplate";
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         ReactiveFormsModule,
         UcSubsectionModule,
         SharingComponentModule,
-        UcShowErrorsModule
+        UcShowErrorsModule,
+        UcTemplateModule
     ]
 })
 export class SurveyOrderViewModule { }

@@ -393,6 +393,9 @@ export class PathConstant {
     public static SRVY_TASK_RESULT_PAGING = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
     public static SRVY_TASK_RESULT_PAGE = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
     public static SRVY_TASK_RESULT_DETAIL = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.DETAIL;
+
+    public static CUSTOM_SRVY_TASK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
+    public static CUSTOM_SRVY_ORDER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_ORDER + "/" + PathConstant.PAGING;
     //#endregion
 
     //#region 
@@ -569,6 +572,8 @@ export class PathConstant {
 
     //#region View-Survey-Module
     public static VIEW_SRVY_ORDER = "SurveyOrder";
+    public static CUSTOM_VIEW_SRVY_ORDER = PathConstant.SELF_CUSTOM + "/" + "SurveyOrder";
+    public static CUSTOM_VIEW_SRVY_TASK = PathConstant.SELF_CUSTOM + "/" + "SurveyTask";
     //#endregion
 
     //#region View-Cust-Module

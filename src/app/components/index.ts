@@ -23,3 +23,5 @@ export { CustomCustomerCompanyAddressComponent } from 'app/customer/customer-com
 export{SelfCustomCustomerViewCoyFinancialComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component";
 export{SelfCustomContainerFamilyListingComponent} from "app/customer/sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component";
 export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component";
+export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view/custom-document-survey-task-view/custom-document-survey-task-view.component';
+export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
