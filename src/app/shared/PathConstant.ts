@@ -401,7 +401,9 @@ export class PathConstant {
     //#region 
     public static SURVEYOR = "Surveyor";
     public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
-    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD    
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD
+    public static CUSTOM_SURVEYOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING
+    public static CUSTOM_SURVEYOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.SURVEYOR + "/" + PathConstant.DETAIL   
     //#endregion
 
     //#region 

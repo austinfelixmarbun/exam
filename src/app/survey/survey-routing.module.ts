@@ -137,7 +137,23 @@ const routes: Routes = [
           title: 'Survey Task Inquiry',
           page: 'SurveyTaskInquiry'
         },
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_SURVEYOR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Surveyor Paging',
+          page: 'SurveyorPaging'
+        }
+      },   
+      {
+        path: PathConstant.CUSTOM_SURVEYOR_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Surveyor Detail',
+          page: 'SurveyorDetail'
+        }
+      },   
     ]
   }
 ];
