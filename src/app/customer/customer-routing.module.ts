@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 // import { CustomerComponent } from 'app/customer/customer.component';
 import { NegativeCustomerComponent } from './negative-customer/negative-customer.component';
@@ -29,6 +29,12 @@ import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-fa
 import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
 import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
+import { SelfCustomNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-negative-customer.component';
+import { SelfCustomNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-negative-customer-detail/self-custom-negative-customer-detail.component';
+import { SelfCustomUploadNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-upload-negative-customer/self-custom-upload-negative-customer.component';
+import { SelfCustomReviewUploadNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer-detail/self-custom-review-upload-negative-customer-detail.component';
+import { SelfCustomReviewUploadNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -224,6 +230,57 @@ const routes: Routes = [
           title: 'Customer Personal DuplicateCheck  '
         }
       },
+      {
+        path: PathConstant.CUSTOM_CUST_NEG_PAGING,
+        component: SelfCustomNegativeCustomerComponent,
+        data: {
+          title: 'Self Custom Negative Customer Paging'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_CUST_NEG_PERSONAL_DETAIL,
+        component: SelfCustomNegativeCustomerDetailComponent,
+        data: {
+          title: 'Self Custom Negative Customer Personal Detail Component'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_UPLOAD_NEG_CUST,
+        component: SelfCustomUploadNegativeCustomerComponent,
+        data: {
+          title: 'Self Custom Upload Negative Customer'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_CUST_NEG_RVW_UPLOAD_DETAIL,
+        component: SelfCustomReviewUploadNegativeCustomerDetailComponent,
+        data: {
+          title: 'Self Custom Review Upload Negative Customer Detail'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_CUST_NEG_RVW_UPLOAD_PAGING,
+        component: SelfCustomReviewUploadNegativeCustomerComponent,
+        data: {
+          title: 'Self Custom Review Upload Negative Customer Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_UPDATE_DATA_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Self Custom Review Update Data Customer Paging',
+          page: 'ReviewUpdateDataCustomer'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUST_UPDATE_DATA_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Self Custom Update Data Customer Detail',
+          page: 'UpdateDataCustomer'
+        }
+      }
     ]
   }
 ];

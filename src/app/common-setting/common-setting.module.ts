@@ -103,15 +103,15 @@ import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/pay
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 
-export const customCurrencyMaskConfig = {     
-  align: "right",     
-  allowNegative: true,     
-  allowZero: true,     
-  decimal: ".",     
-  precision: 0,  
-  prefix: "",     
-  suffix: "",     
-  thousands: ",",     
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ".",
+  precision: 0,
+  prefix: "",
+  suffix: "",
+  thousands: ",",
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };

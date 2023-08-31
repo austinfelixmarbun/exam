@@ -120,7 +120,7 @@ export class PathConstant {
     public static CUSTOM_ASSET_ATTR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.PAGING;
     public static CUSTOM_ASSET_ATTR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_ATTR + "/" + PathConstant.DETAIL;
     //#endregion
-    
+
     //#region Common-Setting
     public static CS_MASTER_TYPE = "MasterType";
     public static CS_MASTER_TYPE_DETAIL = PathConstant.CS_MASTER_TYPE + "/" + PathConstant.DETAIL;
@@ -213,7 +213,7 @@ export class PathConstant {
     public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
     public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
-    
+
     public static CS_CUSTOM_ECONOMIC_SECTOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.PAGING;
@@ -277,13 +277,22 @@ export class PathConstant {
     public static SELF_CUSTOM_CUST_SHRHLDR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_SHRHLDR + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_NEW_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.NEW_CUST;
     public static SELF_CUSTOM_CUST_PERSONAL_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
+    public static CUSTOM_CUST_NEG_PAGING = PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG + "/" + PathConstant.PAGING;
+    public static CUSTOM_CUST_NEG_PERSONAL_DETAIL = PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG + PathConstant.PERSONAL + "/" + PathConstant.DETAIL;
+    public static CUSTOM_UPLOAD_NEG_CUST = PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG + "/" + PathConstant.UPLOAD;
+    public static CUSTOM_CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG_RVW_UPLOAD_DETAIL;
+    public static CUSTOM_CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG_RVW_UPLOAD_PAGING;
+    public static SELF_CUSTOM_CUST_UPDATE_DATA_PAGING = PathConstant.SELF_CUSTOM + PathConstant.CUST_UPDATE_DATA_PAGING;
+    public static SELF_CUSTOM_CUST_UPDATE_DATA_DETAIL = PathConstant.SELF_CUSTOM + PathConstant.CUST_UPDATE_DATA_DETAIL;
+    public static VIEW_PERSONAL = "ViewPersonal";
+    public static VIEW_COMPANY = "ViewCompany";
     //#endregion
-    
+
     //#region Dashboard-Module
     public static DASHBOARD = "Dash-Board";
     public static DASHEMPTY = "Dash-Empty";
     //#endregion
-    
+
     //#region Document-Management-Module
     public static CABINET = "Cabinet";
     public static CABINET_PAGING = PathConstant.CABINET + "/" + PathConstant.PAGING;
@@ -309,11 +318,11 @@ export class PathConstant {
     public static EMP_BZ_UNIT_PAGING = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.PAGING;
     public static EMP_BZ_UNIT_ADD = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.ADD;
     //#endregion
-    
+
     //#region Integration-Module
     public static SEND_DAILY_MASTER = "SendDailyMaster";
     //#endregion
-    
+
     //#region Office-Module
     public static OFFICE_EMP_POS = "OfficeEmpPos";
     public static OFFICE_EMP_POS_ADD = "OfficeEmpPosAdd";
@@ -352,13 +361,13 @@ export class PathConstant {
     public static SRVY_TASK_RESULT_DETAIL = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.DETAIL;
     //#endregion
 
-    //#region 
+    //#region
     public static SURVEYOR = "Surveyor";
     public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
-    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD    
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD
     //#endregion
 
-    //#region 
+    //#region
     public static SURVEYOR_TASK_ASSIGNMENT = "SurveyTaskAssignment";
     public static SURVEYOR_TASK_ASSIGNMENT_PAGING = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
     public static SURVEYOR_TASK_ASSIGNMENT_DETAIL = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
@@ -440,7 +449,7 @@ export class PathConstant {
     public static VENDOR_CREDIT_INS = "creditinsurance"
     public static VENDOR_FUNDING_COY_PAGING = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; //FundingCompany/Paging
     public static VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT; //FundingCompany/AddEDit
-    public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW; 
+    public static VENDOR_FUNDING_COY_VIEW = PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.VIEW;
     public static VENDOR_CREDIT_INS_PAGING = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.PAGING;
     public static VENDOR_CREDIT_INS_BRANCH_PAGING = PathConstant.VENDOR_CREDIT_INS  + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.PAGING
     public static VENDOR_CREDIT_INS_BRANCH_ADD_EDIT = PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.ADD_EDIT
@@ -472,7 +481,7 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     //#endregion
-    
+
     //#region Verif-Module
     public static QA = "QuestionAnswer";
     public static QA_PAGING = PathConstant.QA + "/" + PathConstant.PAGING;
@@ -506,6 +515,7 @@ export class PathConstant {
     public static VIEW_PEFINDO = "Pefindo";
     public static CUSTOM_VIEW_NEG_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.VIEW_NEG_CUST;
     public static SELF_CUSTOM_VIEW_CUST = "SelfCustomCustomer";
+    public static CUSTOM_VIEW_NEG_CUST_PERSONAL = "SelfCustomNegativeCustomerViewPersonalComponent"
     //#endregion
 
     //#region View-Vendor-Module
@@ -515,7 +525,7 @@ export class PathConstant {
     public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
     public static VIEW_FUNDING_COMPANY = "FundingCompany";
 
-    
+
     public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = PathConstant.SELF_CUSTOM + "/" + "VendorHolding";
     public static SELF_CUSTOM_VIEW_VENDOR_HO = PathConstant.SELF_CUSTOM + "/" + "VendorHO";
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = PathConstant.SELF_CUSTOM + "/" + "VendorBranch";
@@ -604,7 +614,7 @@ export class PathConstant {
     public static VIEW_DISPUTES = "Disputes";
     public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
     //#endregion
-    
+
     //#region Notif-Engine
     public static NOTIF_TEMPLATE = "NotifTemplate";
     public static VIEW_NOTIF_TEMPLATE = "ViewNotifTemplate";
@@ -613,7 +623,7 @@ export class PathConstant {
     public static NOTIF_SOURCE = "NotifSource";
     public static NOTIF_ATTR_TEMPLATE_MAPPING = "NotifAttrTemplateMapping";
     //#endregion
-    
+
     //#region Notary
     public static NOTARY_COMPANY = "NotaryCompany";
     public static NOTARY_PERSONAL = "NotaryPersonal";

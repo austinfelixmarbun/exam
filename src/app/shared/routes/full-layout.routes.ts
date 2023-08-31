@@ -742,7 +742,7 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+
   {
     path: 'drawdown',
     loadChildren: () => {
