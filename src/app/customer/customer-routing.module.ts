@@ -234,11 +234,19 @@ const routes: Routes = [
         }
       },
       {
-        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK,
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK,
         component: UcTemplateComponent,
         data: {
           title: 'Customer Duplicate Checking',
           page: 'CustomerDuplicateCheckingMatchPersonal'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchCompany'
         }
       },
     ]

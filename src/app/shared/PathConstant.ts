@@ -311,7 +311,8 @@ export class PathConstant {
     public static SELF_CUSTOM_CS_REASON_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CS_REASON_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.DETAIL;
     public static CUSTOM_CUST_COY_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_PAGE;
-    public static SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerDuplicateChecking";
+    public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
+    public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
 
 
     //#endregion
