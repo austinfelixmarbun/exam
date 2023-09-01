@@ -790,6 +790,22 @@ const routes: Routes = [
           title: 'Insurance Claim Document Paging',
           page: 'InsuranceClaimDoc'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
       }
     ]
   }
