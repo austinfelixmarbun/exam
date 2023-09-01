@@ -20,3 +20,57 @@
     </tr>
   </table>
 </div>
+
+<div *ngIf="exposureType == 'CUST_OBLGR_EXPSR'">
+  <lib-ucSubsection [id]="'SummaryInfo' + exposureType + 'Id'" [title]="'Summary'" [panel]="'SummaryInfo' + exposureType">
+  </lib-ucSubsection>
+  <div [id]="'SummaryInfo' + exposureType">
+    <div class="row">
+      <div class="col-md-6 ">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="label-control"> Customer Exposure Amount </label>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <label class="label-control"> {{SummaryData.CustomerExposureAmt | number:'.2':'en-US'}} </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="label-control"> Family Exposure Amount </label>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <label class="label-control"> {{SummaryData.FamilyExposureAmt | number:'.2':'en-US'}} </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="label-control"> Guarantor Exposure Amount </label>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <label class="label-control"> {{SummaryData.GuarantorExposureAmt | number:'.2':'en-US'}} </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="label-control"> Shareholder Exposure Amount </label>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <label class="label-control"> {{SummaryData.ShareholderExposureAmt | number:'.2':'en-US'}} </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="label-control"> Obligor Exposure Amount </label>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <label class="label-control"> {{SummaryData.ObligorExposureAmt | number:'.2':'en-US'}} </label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6 ">
+      </div>
+    </div>
+  </div>
+</div>

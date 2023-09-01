@@ -36,7 +36,7 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
         return;
       }
       if (params["MrCustTypeCode"] == CommonConstant.CustTypeCompany && params["From"] != CommonConstant.CustFromCustShareholder) {
-        this.pageName = "CustomerMainDataRegistrationCompany"
+        this.pageName = "CustomerMainDataRegistration"
         return;
       }
     });

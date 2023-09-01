@@ -51,7 +51,6 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   @Input() custObj: CustObj = new CustObj();
 
   @Output() data: EventEmitter<any> = new EventEmitter<any>();
-  @Output() OutputUploadFile: EventEmitter<Array<CustDocFileFormObj>> = new EventEmitter<Array<CustDocFileFormObj>>();
 
   officeCode: string;
   IsUseDigitalization: string = "0";
@@ -82,7 +81,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     private cookieService: CookieService, private modalService: NgbModal,
     private thirdPartyUploadService: ThirdPartyUploadService, 
     private UrlConstantNew: UrlConstantNew,
-    private adInsHelperService: AdInsHelperService) { }
+    private adInsHelperService: AdInsHelperService,) { }
 
   async ngOnInit() {
     // if (this.CustId == 0)
@@ -176,8 +175,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
 
           this.CustDocFileFormObjs.push(custDocFileFormObj);
         }
-        // this.setDocFormCustMaritalTypeChanged();
-        // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+        this.setDocFormCustMaritalTypeChanged();
       }
     );
   }
@@ -403,19 +401,21 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     });
   }
 
-  HandleFileInput(files: FileList, i) {
+  async HandleFileInput(files: FileList, i) {
     this.CustDocFileFormObjs[i].File = files.item(0);
-    this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+
+    let CustDocFileObjs: Array<CustDocFileObj>;
+    CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
 
     const data = {
       "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-      "UploadFile": this.CustDocFileFormObjs
+      "UploadFile": CustDocFileObjs
     }
 
     this.data.emit(data)
   }
   
-  HandleFileInputAsliRI(files: FileList, img:any, i) {
+  async HandleFileInputAsliRI(files: FileList, img:any, i) {
     if(img.target.files && img.target.files.length)
     {
       let file = img.target.files[0];
@@ -432,10 +432,12 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
       }
     }
     this.CustDocFileFormObjs[i].File = files.item(0);
-    // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+    let CustDocFileObjs: Array<CustDocFileObj>;
+    CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+
     const data = {
       "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-      "UploadFile": this.CustDocFileFormObjs
+      "UploadFile": CustDocFileObjs
     }
     this.data.emit(data)
   }
@@ -458,8 +460,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
           // this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
 
           const data = {
-            "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-            "UploadFile": this.CustDocFileFormObjs
+            "ThirdPartyTrxNo": this.thirdPartyTrxNo
           }
           this.data.emit(data)
         }

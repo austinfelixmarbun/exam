@@ -236,6 +236,8 @@ export class PathConstant {
     public static CS_CUSTOM_INDUSTRY_TYPE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_INDUSTRY_TYPE + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_PROFESSION_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_PROFESSION_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.DETAIL;
+    public static CS_CUSTOM_PAYMENT_ALLOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.PAGING;
+    public static CS_CUSTOM_PAYMENT_ALLOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.DETAIL;
 
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
@@ -254,7 +256,8 @@ export class PathConstant {
     public static CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_REF_TAX_OFFICE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_REF_TAX_OFFICE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
-    
+    public static CUSTOM_CS_ZIPCODE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_ZIPCODE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Cust
@@ -310,7 +313,8 @@ export class PathConstant {
     public static SELF_CUSTOM_CS_REASON_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CS_REASON_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REASON + "/" + PathConstant.DETAIL;
     public static CUSTOM_CUST_COY_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_PAGE;
-    public static SELF_CUSTOM_CUSTOM_CUST_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerDuplicateChecking";
+    public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
+    public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
 
 
     //#endregion
@@ -392,12 +396,17 @@ export class PathConstant {
     public static SRVY_TASK_RESULT_PAGING = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
     public static SRVY_TASK_RESULT_PAGE = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
     public static SRVY_TASK_RESULT_DETAIL = PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.DETAIL;
+
+    public static CUSTOM_SRVY_TASK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
+    public static CUSTOM_SRVY_ORDER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_ORDER + "/" + PathConstant.PAGING;
     //#endregion
 
     //#region 
     public static SURVEYOR = "Surveyor";
     public static SURVEYOR_PAGING = PathConstant.SURVEYOR + "/" + PathConstant.PAGING
-    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD    
+    public static SURVEYOR_ADD = PathConstant.SURVEYOR + "/" + PathConstant.ADD
+    public static CUSTOM_SURVEYOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SURVEYOR + "/" + PathConstant.PAGING
+    public static CUSTOM_SURVEYOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.SURVEYOR + "/" + PathConstant.DETAIL   
     //#endregion
 
     //#region 
@@ -568,6 +577,8 @@ export class PathConstant {
 
     //#region View-Survey-Module
     public static VIEW_SRVY_ORDER = "SurveyOrder";
+    public static CUSTOM_VIEW_SRVY_ORDER = PathConstant.SELF_CUSTOM + "/" + "SurveyOrder";
+    public static CUSTOM_VIEW_SRVY_TASK = PathConstant.SELF_CUSTOM + "/" + "SurveyTask";
     //#endregion
 
     //#region View-Cust-Module

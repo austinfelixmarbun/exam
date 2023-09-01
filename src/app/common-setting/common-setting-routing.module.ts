@@ -776,6 +776,22 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Paging',
+          page: 'PaymentAllocationPaging'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Detail',
+          page: 'PaymentAllocationDetail'
+        },
+      },
+      {
         path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
         component: UcTemplateComponent,
         data: {
@@ -805,6 +821,22 @@ const routes: Routes = [
         data: {
           title: 'Tax Office Paging',
           page: 'TaxOffice'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Detail',
+          page: 'ZipcodeDetail'
         },
       }
     ]

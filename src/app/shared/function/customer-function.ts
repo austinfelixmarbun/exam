@@ -13,11 +13,52 @@ import { CustPersonalObj } from "../model/cust-personal-obj.model";
 import { CustAddrObj } from "../model/cust-addr-obj.model";
 import { CustDocFileObj } from "../model/cust-doc-file/cust-doc-file-obj.model";
 import { AdInsHelper } from "../AdInsHelper";
+import { ReqDupObj } from "../model/new-cust/req-dup-obj.model";
+import { AdInsConstant } from "../AdInstConstant";
+import { GenericObj } from "../model/generic/generic-obj.model";
+import { NavigationConstant } from "../NavigationConstant";
+import { RequestCustPersonalJobDataObj } from "../model/request-cust-personal-job-data-obj.model";
+import { CustDocFileFormObj } from "../model/cust-doc-file/cust-doc-file-form-obj.model";
+import { CookieService } from "ngx-cookie";
+import { ReqNegDupObj } from "../model/new-cust/req-neg-dup-obj.model";
+import { ReqCoyObj } from "../model/new-cust/req-coy-obj.model";
+import { CustCompanyObj } from "../model/cust-company-obj.model";
+import { ExceptionConstant } from "../constant/ExceptionConstant";
 
-function SetCustomerDataMode(reqSubmitObj: ReqPersonalObj, Mode: string, From: string) {
+function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
+{
+  let jobAddressObj = new CustAddrObj();
+  jobAddressObj.CustId = dicts.IdCust;
+  jobAddressObj.MrCustAddrTypeCode = addrType;
+  jobAddressObj.Addr = parentForm.Addr;
+  jobAddressObj.FullAddr = parentForm.Addr + " RT: " + parentForm.AreaCode4 + " RW: " + parentForm.AreaCode3 + " " + parentForm.AreaCode2 + ", " + parentForm.AreaCode1 + " " + parentForm.Zipcode;
+  jobAddressObj.AreaCode3 = parentForm.AreaCode3;
+  jobAddressObj.AreaCode4 = parentForm.AreaCode4;
+  jobAddressObj.Zipcode = parentForm.Zipcode;
+  jobAddressObj.AreaCode1 = parentForm.AreaCode1;
+  jobAddressObj.AreaCode2 = parentForm.AreaCode2;
+  jobAddressObj.City = parentForm.City;
+  jobAddressObj.PhnArea1 = parentForm.PhnArea1;
+  jobAddressObj.Phn1 = parentForm.Phn1;
+  jobAddressObj.PhnExt1 = parentForm.PhnExt1;
+  jobAddressObj.PhnArea2 = parentForm.PhnArea2;
+  jobAddressObj.Phn2 = parentForm.Phn2;
+  jobAddressObj.PhnExt2 = parentForm.PhnExt2;
+  jobAddressObj.PhnArea3 = parentForm.PhnArea3;
+  jobAddressObj.Phn3 = parentForm.Phn3;
+  jobAddressObj.PhnExt3 = parentForm.PhnExt3;
+  jobAddressObj.FaxArea = parentForm.FaxArea;
+  jobAddressObj.Fax = parentForm.Fax;
+  jobAddressObj.MrBuildingOwnershipCode = parentForm.MrHouseOwnershipCode;
+  jobAddressObj.Notes = Notes;
+
+  return jobAddressObj;
+}
+
+function SetCustomerPersonalDataMode(reqSubmitObj: ReqPersonalObj, Mode: string, From: string) {
     switch (Mode) {
       case CommonConstant.CustMainDataModeCust:
-        SetIsTypeDataMode(reqSubmitObj, From);
+        reqSubmitObj = SetIsTypeDataPersonalMode(reqSubmitObj, From);
         break;
       case CommonConstant.CustMainDataModeFamily:
         reqSubmitObj.CustObj.IsFamily = true;
@@ -29,10 +70,35 @@ function SetCustomerDataMode(reqSubmitObj: ReqPersonalObj, Mode: string, From: s
     return reqSubmitObj;
 }
 
-function SetIsTypeDataMode(reqSubmitObj: ReqPersonalObj, From: string) {
-  if (this.pageFrom == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
-  if (this.pageFrom == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
-  if (this.pageFrom == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
+function SetIsTypeDataPersonalMode(reqSubmitObj: ReqPersonalObj, From: string) {
+  if (From == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+  if (From == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
+  if (From == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
+
+  return reqSubmitObj;
+}
+
+function SetCustomerCompanyDataMode(reqSubmitObj: ReqCoyObj, Mode: string, From: string) {
+  switch (Mode) {
+    case CommonConstant.CustMainDataModeCust:
+      reqSubmitObj = SetIsTypeDataCompanyMode(reqSubmitObj, From);
+      break;
+    case CommonConstant.CustMainDataModeFamily:
+      reqSubmitObj.CustObj.IsFamily = true;
+      break;
+    case CommonConstant.CustMainDataModeMgmntShrholder:
+      reqSubmitObj.CustObj.IsShareholder = true;
+      break;
+  }
+  return reqSubmitObj;
+}
+
+function SetIsTypeDataCompanyMode(reqSubmitObj: ReqCoyObj, From: string) {
+if (From == CommonConstant.CustFromEditMainData) reqSubmitObj.CustObj.IsCustomer = true;
+if (From == CommonConstant.CustFromCustFamily) reqSubmitObj.CustObj.IsFamily = true;
+if (From == CommonConstant.CustFromCustShareholder) reqSubmitObj.CustObj.IsShareholder = true;
+
+return reqSubmitObj;
 }
 
 function SetCustPersonalFamilyData(dicts: Record<string, any>, MrCustRelationship: string) {
@@ -96,7 +162,523 @@ function SetCustAttrContent(parentForm: any) {
       tempAttr.push(tempAttrToPush);
     }
     return tempAttr;
+}
+
+function SaveCustPersonal(parentForm: any, dicts: Record<string, any>, Mode: string, From: string)
+{
+  let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+
+  reqSubmitObj.CustDocFileObjs = new Array<CustDocFileObj>();
+
+  reqSubmitObj.CustObj = new CustObj();
+  reqSubmitObj.CustObj.CustId = dicts.CustId;
+  reqSubmitObj.CustObj.CustNo = dicts.CustNo;
+  reqSubmitObj.CustObj.IsAffiliateWithMf = dicts.IsAffiliateWithMf;
+  reqSubmitObj.CustObj.IsCustomer = dicts.IsCustomer;
+  reqSubmitObj.CustObj.IsFamily = dicts.IsFamily;
+  reqSubmitObj.CustObj.IsGuarantor = dicts.IsGuarantor;
+  reqSubmitObj.CustObj.IsShareholder = dicts.IsShareholder;;
+  reqSubmitObj.CustObj.OriginalOfficeCode = dicts.OriginalOfficeCode;
+  reqSubmitObj.CustObj.RowVersion = dicts.RowVersionCust;
+  reqSubmitObj.CustObj.IsVip = dicts.IsVip;
+  reqSubmitObj.CustObj.VipNotes = dicts.VipNotes;
+
+  reqSubmitObj.CustObj.CustName = parentForm.CustName;
+  reqSubmitObj.CustObj.MrIdTypeCode = parentForm.MrIdTypeCode;
+  reqSubmitObj.CustObj.IdNo = parentForm.IdNo;
+  reqSubmitObj.CustObj.IdExpiredDt = parentForm.IdExpiredDt;
+  reqSubmitObj.CustObj.TaxIdNo = parentForm.TaxIdNo;
+  reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
+  reqSubmitObj.CustObj.MrCustModelCode = parentForm.MrCustModelCode;
+  reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
+  
+  reqSubmitObj.CustPersonalObj = new CustPersonalObj();
+  reqSubmitObj.CustPersonalObj.CustId = dicts.CustId;
+  reqSubmitObj.CustPersonalObj.CustPersonalId = dicts.CustPersonalId;
+  reqSubmitObj.CustPersonalObj.CustPrefixName = dicts.CustPrefixName;
+  reqSubmitObj.CustPersonalObj.CustSuffixName = dicts.CustSuffixName;
+  reqSubmitObj.CustPersonalObj.Email2 = dicts.Email2;
+  reqSubmitObj.CustPersonalObj.Email3 = dicts.Email3;
+  reqSubmitObj.CustPersonalObj.FamilyCardNo = dicts.FamilyCardNo;
+  reqSubmitObj.CustPersonalObj.IsRestInPeace = dicts.IsRestInPeace;
+
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = dicts.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = dicts.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.MrEducationCode = dicts.MrEducationCode;
+  reqSubmitObj.CustPersonalObj.MrReligionCode = dicts.MrReligionCode;
+  reqSubmitObj.CustPersonalObj.MrSalutationCode = dicts.MrSalutationCode;
+  reqSubmitObj.CustPersonalObj.NickName = dicts.NickName;
+  reqSubmitObj.CustPersonalObj.NoOfDependents = dicts.NoOfDependents;
+  reqSubmitObj.CustPersonalObj.NoOfResidence = dicts.NoOfResidence;
+  reqSubmitObj.CustPersonalObj.RowVersion = dicts.RowVersionCustPersonal;
+
+  reqSubmitObj.CustPersonalObj.CustFullName = parentForm.CustName;
+  reqSubmitObj.CustPersonalObj.MrGenderCode = parentForm.MrGenderCode;
+  reqSubmitObj.CustPersonalObj.BirthPlace = parentForm.BirthPlace;
+  reqSubmitObj.CustPersonalObj.BirthDt = parentForm.BirthDt;
+  reqSubmitObj.CustPersonalObj.MotherMaidenName = parentForm.MotherMaidenName;
+  reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
+  reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
+  if (Mode == CommonConstant.CustMainDataModeFamily) {
+    reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
+    reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
+    reqSubmitObj.CustPersonalFamilyObj = SetCustPersonalFamilyData(dicts, parentForm.MrCustRelationship);
   }
+
+  reqSubmitObj.CustAddr = new CustAddrObj();
+  reqSubmitObj.CustAddr.CustAddrId = dicts.CustAddrId;
+  reqSubmitObj.CustAddr.Fax = dicts.Fax;
+  reqSubmitObj.CustAddr.FaxArea = dicts.FaxArea;
+  reqSubmitObj.CustAddr.Notes = dicts.Notes;
+  reqSubmitObj.CustAddr.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustAddr.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustAddr.Phn3 = dicts.Phn3;
+  reqSubmitObj.CustAddr.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustAddr.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustAddr.PhnArea3 = dicts.PhnArea3;
+  reqSubmitObj.CustAddr.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustAddr.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustAddr.PhnExt3 = dicts.PhnExt3;
+  reqSubmitObj.CustAddr.RowVersion = dicts.RowVersionAddress;
+  reqSubmitObj.CustAddr.StayLength = dicts.StayLength;
+  reqSubmitObj.CustAddr.StaySince = dicts.StaySince;
+
+  reqSubmitObj.CustAddr.CustId = dicts.CustId;
+  reqSubmitObj.CustAddr.Addr = parentForm.UcAddress.Addr;
+  reqSubmitObj.CustAddr.AreaCode1 = parentForm.UcAddress.AreaCode1;
+  reqSubmitObj.CustAddr.AreaCode2 = parentForm.UcAddress.AreaCode2;
+  reqSubmitObj.CustAddr.AreaCode3 = parentForm.UcAddress.AreaCode3;
+  reqSubmitObj.CustAddr.AreaCode4 = parentForm.UcAddress.AreaCode4;
+  reqSubmitObj.CustAddr.City = parentForm.UcAddress.City;
+  reqSubmitObj.CustAddr.MrBuildingOwnershipCode = parentForm.UcAddress.MrHouseOwnershipCode;
+  reqSubmitObj.CustAddr.Zipcode = parentForm.UcAddress.Zipcode;
+  reqSubmitObj.CustAddr.SubZipcode = parentForm.UcAddress.SubZipcode;
+  reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+  if (Mode != CommonConstant.CustMainDataModeCust) {
+    reqSubmitObj.CustPersonalJobObj = new CustPersonalJobDataObj();
+    reqSubmitObj.CustPersonalJobObj = SetCustPersonalJobData(parentForm, dicts, Mode);
+
+    reqSubmitObj.CustAttrContentObjs = new Array<CustAttrContentObj>();
+    reqSubmitObj.CustAttrContentObjs = SetCustAttrContent(parentForm);
+  }
+
+  reqSubmitObj = SetCustomerPersonalDataMode(reqSubmitObj, Mode, From);
+  if (dicts.UploadFile != undefined)
+  {
+    reqSubmitObj.CustDocFileObjs = dicts.UploadFile;
+  }
+
+  return reqSubmitObj;
+}
+
+function SaveCustCompany(parentForm: any, dicts: Record<string, any>, Mode: string, From: string)
+{
+  let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+
+  reqSubmitObj.CustObj = new CustObj();
+  reqSubmitObj.CustObj.CustId = dicts.CustId;
+  reqSubmitObj.CustObj.CustNo = dicts.CustNo;
+  reqSubmitObj.CustObj.IsAffiliateWithMf = dicts.IsAffiliateWithMf;
+  reqSubmitObj.CustObj.IsCustomer = dicts.IsCustomer;
+  reqSubmitObj.CustObj.IsFamily = dicts.IsFamily;
+  reqSubmitObj.CustObj.IsGuarantor = dicts.IsGuarantor;
+  reqSubmitObj.CustObj.IsShareholder = dicts.IsShareholder;;
+  reqSubmitObj.CustObj.OriginalOfficeCode = dicts.OriginalOfficeCode;
+  reqSubmitObj.CustObj.RowVersion = dicts.RowVersionCust;
+  reqSubmitObj.CustObj.IsVip = dicts.IsVip;
+  reqSubmitObj.CustObj.VipNotes = dicts.VipNotes;
+
+  reqSubmitObj.CustObj.CustName = parentForm.CoyCustName;
+  reqSubmitObj.CustObj.TaxIdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.IdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.MrCustModelCode = parentForm.CoyMrCustModelCode;
+  reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
+  reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
+
+  reqSubmitObj.CustCompanyObj = new CustCompanyObj();
+  reqSubmitObj.CustCompanyObj.CustCompanyId = dicts.CustCompanyId;
+  reqSubmitObj.CustCompanyObj.CustId = dicts.CustId;
+  reqSubmitObj.CustCompanyObj.Email1 = dicts.Email1;
+  reqSubmitObj.CustCompanyObj.Email2 = dicts.Email2;
+  reqSubmitObj.CustCompanyObj.EstablishmentDt = dicts.EstablishmentDt;
+  reqSubmitObj.CustCompanyObj.IsAffiliated = dicts.IsAffiliated;
+  reqSubmitObj.CustCompanyObj.IsSkt = dicts.IsSkt;
+  reqSubmitObj.CustCompanyObj.LicenseNo = dicts.LicenseNo;
+  reqSubmitObj.CustCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
+  reqSubmitObj.CustCompanyObj.NumOfEmp = dicts.NumOfEmp;
+  reqSubmitObj.CustCompanyObj.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustCompanyObj.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustCompanyObj.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustCompanyObj.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustCompanyObj.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustCompanyObj.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId;
+  reqSubmitObj.CustCompanyObj.RegistrationNo = dicts.RegistrationNo;
+  reqSubmitObj.CustCompanyObj.Website = dicts.Website;
+
+  reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+
+  reqSubmitObj.CustAddr = new CustAddrObj();
+  reqSubmitObj.CustAddr.CustAddrId = dicts.CustAddrId;
+  reqSubmitObj.CustAddr.Fax = dicts.Fax;
+  reqSubmitObj.CustAddr.FaxArea = dicts.FaxArea;
+  reqSubmitObj.CustAddr.Notes = dicts.Notes;
+  reqSubmitObj.CustAddr.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustAddr.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustAddr.Phn3 = dicts.Phn3;
+  reqSubmitObj.CustAddr.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustAddr.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustAddr.PhnArea3 = dicts.PhnArea3;
+  reqSubmitObj.CustAddr.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustAddr.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustAddr.PhnExt3 = dicts.PhnExt3;
+  reqSubmitObj.CustAddr.RowVersion = dicts.RowVersionAddress;
+  reqSubmitObj.CustAddr.StayLength = dicts.StayLength;
+  reqSubmitObj.CustAddr.StaySince = dicts.StaySince;
+
+  reqSubmitObj.CustAddr.CustId = dicts.CustId;
+  reqSubmitObj.CustAddr.Addr = parentForm.UcAddress.Addr;
+  reqSubmitObj.CustAddr.AreaCode1 = parentForm.UcAddress.AreaCode1;
+  reqSubmitObj.CustAddr.AreaCode2 = parentForm.UcAddress.AreaCode2;
+  reqSubmitObj.CustAddr.AreaCode3 = parentForm.UcAddress.AreaCode3;
+  reqSubmitObj.CustAddr.AreaCode4 = parentForm.UcAddress.AreaCode4;
+  reqSubmitObj.CustAddr.City = parentForm.UcAddress.City;
+  reqSubmitObj.CustAddr.MrBuildingOwnershipCode = parentForm.UcAddress.MrHouseOwnershipCode;
+  reqSubmitObj.CustAddr.Zipcode = parentForm.UcAddress.Zipcode;
+  reqSubmitObj.CustAddr.SubZipcode = parentForm.UcAddress.SubZipcode;
+  reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+  reqSubmitObj = SetCustomerCompanyDataMode(reqSubmitObj, Mode, From);
+
+  if (dicts.UploadFile != undefined)
+  {
+    reqSubmitObj.CustDocFileObjs = dicts.UploadFile;
+  }
+
+  return reqSubmitObj;
+}
+
+function separateFileUpload(obj:any, prop:string='CustDocFileObjs')
+{
+  var reqCustDocFileListObj: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>} = {CustId: 0, CustDocFileObjs:[]};
+  if(obj[prop])
+  {
+    reqCustDocFileListObj.CustDocFileObjs = obj[prop];
+    obj[prop] = []
+  }
+  return {forApi: obj, forUpload: reqCustDocFileListObj};
+}
+
+function redirectSaveEditMainData(custId: number, custType: string, Mode: string, From: string, router: Router) {
+  if (Mode == CommonConstant.CustMainDataModeCust) {
+    let param = { "IdCust": custId, Page: 'Edit', From: From };
+    if (custType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE], param);
+    if (custType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(router, [NavigationConstant.CUST_COY_PAGE], param);
+    return;
+  }
+}
+
+function SaveCustomerData(dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  let url = environment.FoundationR3Url + api;
+
+  let reqPayload = separateFileUpload(dicts.ReqSubmitObj);
+  let resSave: GenericObj;
+  http.post(url, reqPayload.forApi).subscribe(
+    (response: any) => {
+      resSave = response
+      uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, dicts.ReqSubmitObj.CustObj.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+  })
+}
+
+function uploadDocFileMultipart(objDoc: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>}, successMsg:string, custId:number, custType: string, Mode:string, From: string, toastr: NGXToastrService,  router: Router, cookieService: CookieService)
+{
+    let urlUpload = environment.FoundationR3Url + "/v2.1/Cust/SaveCustDocFile";
+
+    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId) 
+    {
+      toastr.successMessage(successMsg);
+      redirectSaveEditMainData(custId, custType, Mode, From, router);
+      return;
+    }
+
+    // if (environment.SpinnerOnHttpPost) this.spinner.show();
+
+    objDoc.CustId = custId;
+    var formData: any = new FormData();
+    formData.append('reqPayload', JSON.stringify(objDoc));
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = evnt => {
+      if (xhr.readyState !== 4) return;
+
+      // if (environment.SpinnerOnHttpPost) this.spinner.hide();
+      if (xhr.status !== 200 && xhr.status !== 201) {
+        toastr.errorMessage('Upload Failed !');
+        return;
+      }
+      else {
+        var response = JSON.parse(xhr.response);
+        if (response.HeaderObj.StatusCode != '200') {
+          toastr.errorMessage('Upload Failed ! '+  + response.HeaderObj.Message);
+          return
+        }
+      }
+
+      if (xhr.status === 200) {
+        toastr.successMessage(successMsg);
+        redirectSaveEditMainData(custId, custType, Mode, From, router);
+        return;
+      }
+    };
+
+    xhr.onerror = evnt => {
+      toastr.errorMessage('Upload Failed !');
+      return;
+    };
+    xhr.open('POST', urlUpload, true);
+    let value = cookieService.get('XSRF-TOKEN');
+    let token = DecryptString(value, environment.ChipperKeyCookie);
+    xhr.setRequestHeader('AdInsKey', `${token}`);
+    xhr.send(formData);
+}
+
+function DecryptString(chipperText: string, chipperKey: string) {
+    if (
+      chipperKey == undefined || chipperKey.trim() == '' ||
+      chipperText == undefined || chipperText.trim() == ''
+    ) return chipperText;
+    var chipperKeyArr = CryptoJS.enc.Utf8.parse(chipperKey);
+    var iv = CryptoJS.lib.WordArray.create([0x00, 0x00, 0x00, 0x00]);
+    var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, { iv: iv });
+    var plainText = decrypted.toString(CryptoJS.enc.Utf8);
+    return plainText;
+}
+
+export function editCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
+{
+    let url = environment.FoundationR3Url + api;
+
+    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+
+    if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+    {
+      reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
+    }
+
+    http.post(url, reqSubmitObj).subscribe(
+      (response: any) => {
+          toastr.successMessage(response["message"]);
+          AdInsHelper.RedirectUrl(router, [next]);
+      })
+}
+
+export function addCustToDuplicate(parentForm: any, dicts: Record<string, any>, next: string, router: Router)
+{
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+  {
+    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+    reqSubmitObj = SaveCustPersonal(parentForm, dicts, "CUST", "EditMainData")
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+  }
+
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypeCompany)
+  {
+    let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+    reqSubmitObj = SaveCustCompany(parentForm, dicts, "CUST", "EditMainData")
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+  }
+
+  dicts["AddCustForm"] = parentForm;
+  dicts["CustDuplicate"] = dicts.ReturnObject.CustDuplicate;
+  dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
+
+  localStorage.setItem('dicts', JSON.stringify(dicts)); // notes: set dicts ke localStorage dulu untuk kirim dicts ke page yang berbeda
+  AdInsHelper.RedirectUrl(router, [next], {}, true);
+}
+
+export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  let url = environment.FoundationR3Url + api;
+  
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+  {
+    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+    reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    if (dicts.CustId != 0)
+    {
+      var reqPayload = separateFileUpload(reqSubmitObj);
+      var resSave;
+      http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          resSave = response;
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+        });
+    }
+    else
+    {
+      SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+    }
+  }
+
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypeCompany)
+  {
+    let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+    reqSubmitObj = SaveCustCompany(parentForm, dicts, Mode, From)
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    if (dicts.CustId != 0)
+    {
+      var reqPayload = separateFileUpload(reqSubmitObj);
+      var resSave;
+      http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          resSave = response;
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+        });
+    }
+    else
+    {
+      SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+    }
+  }
+}
+
+export function addCustomerPersonalAfterDuplicate(dicts: Record<string, any>, RowObj: any, key: string, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  console.log(RowObj)
+
+  let url = environment.FoundationR3Url + api;
+
+  if (key == "SAVE")
+  {
+    SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+  }
+
+  if (key == "SAVE_DUP")
+  {
+    let reqEditDupCheck: ReqDupObj = new ReqDupObj();
+    reqEditDupCheck.CustNo = RowObj.CustNo;
+    reqEditDupCheck.CustDataMode = Mode;
+    reqEditDupCheck.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
+
+    if (Mode == CommonConstant.CustMainDataModeFamily) {
+      reqEditDupCheck.CustPersonalFamilyObj = dicts.ReqSubmitObj.CustPersonalFamilyObj;
+    }
+    if (Mode == CommonConstant.CustMainDataModeMgmntShrholder) {
+      reqEditDupCheck.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
+    }
+
+    reqEditDupCheck.CustPersonalJobObj = dicts.ReqSubmitObj.CustPersonalJobObj;
+    reqEditDupCheck.CustAttrContentObjs = dicts.ReqSubmitObj.CustAttrContentObjs;
+    reqEditDupCheck.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
+
+    let reqPayload = separateFileUpload(reqEditDupCheck);
+    let resSave: GenericObj;
+    http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response: GenericObj) => {
+        resSave = response;
+        uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, dicts.AddCustForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+      }
+    );
+  }
+
+  if (key == "SAVE_DUP_NEG")
+  {
+    let NegativeCustObj: ReqNegDupObj = new ReqNegDupObj();
+    NegativeCustObj.NegativeCustId = RowObj.NegativeCustId;
+    NegativeCustObj.CustDataMode = Mode;
+    NegativeCustObj.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
+
+    if (Mode == CommonConstant.CustMainDataModeFamily) {
+      NegativeCustObj.CustPersonalFamilyObj = dicts.ReqSubmitObj.CustPersonalFamilyObj;
+    }
+    if (Mode == CommonConstant.CustMainDataModeMgmntShrholder) {
+      NegativeCustObj.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
+    }
+    NegativeCustObj.CustPersonalJobObj = dicts.ReqSubmitObj.CustPersonalJobObj;
+    NegativeCustObj.CustAttrContentObjs = dicts.ReqSubmitObj.CustAttrContentObjs;
+    NegativeCustObj.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
+    
+    http.post<GenericObj>(url, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      redirectSaveEditMainData(response.Id, dicts.AddCustForm.MrCustTypeCode, Mode, From, router);
+    }); 
+  }
+
+}
+
+export function addCustomerCompanyAfterDuplicate(dicts: Record<string, any>, RowObj: any, key: string, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  console.log(RowObj)
+
+  let url = environment.FoundationR3Url + api;
+
+  if (key == "SAVE")
+  {
+    SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+  }
+
+  if (key == "SAVE_DUP")
+  {
+    let reqEditDupCheck: ReqDupObj = new ReqDupObj();
+    reqEditDupCheck.CustNo = RowObj.CustNo;
+    reqEditDupCheck.CustDataMode = Mode;
+    reqEditDupCheck.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
+
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
+      reqEditDupCheck.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
+    }
+    reqEditDupCheck.CustDocFileObjs = this.DupCheckCoyObj.CustDocFileObjs;
+
+    let reqPayload = separateFileUpload(reqEditDupCheck);
+    let resSave: GenericObj;
+    http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response: GenericObj) => {
+        resSave = response;
+        uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, dicts.AddCustForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+      }
+    );
+  }
+
+  if (key == "SAVE_DUP_NEG")
+  {
+    let NegativeCustObj: ReqNegDupObj = new ReqNegDupObj();
+    NegativeCustObj.NegativeCustId = RowObj.NegativeCustId;
+    NegativeCustObj.CustDataMode = Mode;
+    NegativeCustObj.MrCompanyTypeCode = dicts.ReqSubmitObj.CustCompanyObj.MrCompanyTypeCode;
+    NegativeCustObj.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
+    NegativeCustObj.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
+
+    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
+      NegativeCustObj.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
+    }
+
+    NegativeCustObj.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
+    
+    http.post<GenericObj>(url, NegativeCustObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      redirectSaveEditMainData(response.Id, dicts.AddCustForm.MrCustTypeCode, Mode, From, router);
+    }); 
+  }
+
+}
+
+export function backCust(dicts: Record<string, any>, router: Router)
+{
+  if (dicts.From == "" || dicts.From == undefined)
+  {
+    AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING]);
+  }
+
+  if (dicts.From == CommonConstant.CustFromEditMainData)
+  {
+    AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING]);
+  }
+}
 
 export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService, DialogRef: MatDialogRef<any>)
 {
@@ -161,119 +743,64 @@ export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: num
     })
 }
 
-export function editCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
+export function addEditCustJobData(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-    let url = environment.FoundationR3Url + api;
+  let url = environment.FoundationR3Url + api;
 
-    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+  let reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
+  let custPersonalJobDataObj = new CustPersonalJobDataObj();
+  let jobAddressObj = new CustAddrObj();
+  let othBizAddrObj = new CustAddrObj();
+  let preJobAddressObj = new CustAddrObj;
 
-    reqSubmitObj.CustDocFileObjs = new Array<CustDocFileObj>();
+  if (parentForm.MrCustModelCode == CommonConstant.CUST_MODEL_NONPROF)
+  {
+    custPersonalJobDataObj.CustId = dicts.IdCust;
+    custPersonalJobDataObj.RefProfessionId = parentForm.NonProfRefProfessionId;
+    custPersonalJobDataObj.JobTitleName = parentForm.NonProfJobTitleName;
+    custPersonalJobDataObj.CustPersonalJobDataId = dicts.CustPersonalJobDataId;
+    custPersonalJobDataObj.RowVersion = dicts.RowVersionJob;
+    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
+  }
+  else
+  {
+    reqCustPersonalJobDataObj.JobAddr = setJobAddress(parentForm.Address, dicts, CommonConstant.CustAddrTypeJob, parentForm.NotesAddr);
+    reqCustPersonalJobDataObj.PreJobAddr = setJobAddress(parentForm.PrevAddress, dicts, CommonConstant.CustAddrTypePreJob, parentForm.NotesPrevAddr);
+    reqCustPersonalJobDataObj.OthBizAddr = setJobAddress(parentForm.OthBizAddress, dicts, CommonConstant.CustAddrTypeOthBiz, parentForm.NotesOthBiz);
+  }
 
-    reqSubmitObj.CustObj = new CustObj();
-    reqSubmitObj.CustObj.CustId = dicts.CustId;
-    reqSubmitObj.CustObj.CustNo = dicts.CustNo;
-    reqSubmitObj.CustObj.IsAffiliateWithMf = dicts.IsAffiliateWithMf;
-    reqSubmitObj.CustObj.IsCustomer = dicts.IsCustomer;
-    reqSubmitObj.CustObj.IsFamily = dicts.IsFamily;
-    reqSubmitObj.CustObj.IsGuarantor = dicts.IsGuarantor;
-    reqSubmitObj.CustObj.IsShareholder = dicts.IsShareholder;;
-    reqSubmitObj.CustObj.OriginalOfficeCode = dicts.OriginalOfficeCode;
-    reqSubmitObj.CustObj.RowVersion = dicts.RowVersionCust;
-    reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
-    reqSubmitObj.CustObj.VipNotes = dicts.VipNotes;
+  if (parentForm.MrCustModelCode == CommonConstant.CUST_MODEL_PROF)
+  {
+    custPersonalJobDataObj.CustId = dicts.IdCust;
+    custPersonalJobDataObj.RefProfessionId = parentForm.ProfRefProfessionId;
+    custPersonalJobDataObj.ProfessionalNo = parentForm.ProfProfessionalNo;
+    custPersonalJobDataObj.JobTitleName = parentForm.ProfJobTitleName;
+    custPersonalJobDataObj.CoyName = parentForm.ProfIndustryName;
+    custPersonalJobDataObj.IsWellknownCoy = parentForm.ProfIsWellknownCoy;
+    custPersonalJobDataObj.MrWellknownCoyCode = parentForm.ProfMrWellknownCoyCode;
+    custPersonalJobDataObj.RefIndustryTypeId = parentForm.ProfRefIndustryTypeId;
+    custPersonalJobDataObj.EmploymentEstablishmentDt = parentForm.ProfEstablishmentDt;
+    custPersonalJobDataObj.PrevCoyName = parentForm.PrevIndustryName;
+    custPersonalJobDataObj.PrevEmploymentDt = parentForm.PrevEmploymentDate;
+    custPersonalJobDataObj.OthBizName = parentForm.OtherBusinessName;
+    custPersonalJobDataObj.OthBizType = parentForm.OtherBusinessType;
+    custPersonalJobDataObj.OthBizIndustryTypeCode = parentForm.OtherBusinessIndustry;
+    custPersonalJobDataObj.OthBizJobPosition = parentForm.OtherJobPosition;
+    custPersonalJobDataObj.OthBizEstablishmentDt = parentForm.OthBizEstablishmentDate;
+    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
 
-    reqSubmitObj.CustObj.CustName = parentForm.CustName;
-    reqSubmitObj.CustObj.MrIdTypeCode = parentForm.MrIdTypeCode;
-    reqSubmitObj.CustObj.IdNo = parentForm.IdNo;
-    reqSubmitObj.CustObj.IdExpiredDt = parentForm.IdExpiredDt;
-    reqSubmitObj.CustObj.TaxIdNo = parentForm.TaxIdNo;
-    reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
-    reqSubmitObj.CustObj.MrCustModelCode = parentForm.MrCustModelCode;
-    reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.thirdPartyTrxNo;
-    
-    reqSubmitObj.CustPersonalObj = new CustPersonalObj();
-    reqSubmitObj.CustPersonalObj.CustId = dicts.CustId;
-    reqSubmitObj.CustPersonalObj.CustPersonalId = dicts.CustPersonalId;
-    reqSubmitObj.CustPersonalObj.CustPrefixName = dicts.CustPrefixName;
-    reqSubmitObj.CustPersonalObj.CustSuffixName = dicts.CustSuffixName;
-    reqSubmitObj.CustPersonalObj.Email2 = dicts.Email2;
-    reqSubmitObj.CustPersonalObj.Email3 = dicts.Email3;
-    reqSubmitObj.CustPersonalObj.FamilyCardNo = dicts.FamilyCardNo;
-    reqSubmitObj.CustPersonalObj.IsRestInPeace = dicts.IsRestInPeace;
+    custPersonalJobDataObj.JobAddrId = dicts.CustAddrIdAddr;
+    custPersonalJobDataObj.PrevJobAddrId = dicts.CustAddrIdPrevAddr;
+    custPersonalJobDataObj.OthBizAddrId = dicts.CustAddrIdOthBiz;
+    custPersonalJobDataObj.CustPersonalJobDataId = dicts.CustPersonalJobDataId;
+    custPersonalJobDataObj.RowVersion = dicts.RowVersionJob;
+  }
 
-    reqSubmitObj.CustPersonalObj.MobilePhnNo2 = dicts.MobilePhnNo2;
-    reqSubmitObj.CustPersonalObj.MobilePhnNo3 = dicts.MobilePhnNo3;
-    reqSubmitObj.CustPersonalObj.MrEducationCode = dicts.MrEducationCode;
-    reqSubmitObj.CustPersonalObj.MrReligionCode = dicts.MrReligionCode;
-    reqSubmitObj.CustPersonalObj.MrSalutationCode = dicts.MrSalutationCode;
-    reqSubmitObj.CustPersonalObj.NickName = dicts.NickName;
-    reqSubmitObj.CustPersonalObj.NoOfDependents = dicts.NoOfDependents;
-    reqSubmitObj.CustPersonalObj.NoOfResidence = dicts.NoOfResidence;
-    reqSubmitObj.CustPersonalObj.RowVersion = dicts.RowVersionCustPersonal;
+  reqCustPersonalJobDataObj.CustPersonalJobData = custPersonalJobDataObj;
 
-    reqSubmitObj.CustPersonalObj.CustFullName = parentForm.CustName;
-    reqSubmitObj.CustPersonalObj.MrGenderCode = parentForm.MrGenderCode;
-    reqSubmitObj.CustPersonalObj.BirthPlace = parentForm.BirthPlace;
-    reqSubmitObj.CustPersonalObj.BirthDt = parentForm.BirthDt;
-    reqSubmitObj.CustPersonalObj.MotherMaidenName = parentForm.MotherMaidenName;
-    reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
-    reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
-    reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
-    if (Mode == CommonConstant.CustMainDataModeFamily) {
-      reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
-      reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
-      reqSubmitObj.CustPersonalFamilyObj = SetCustPersonalFamilyData(dicts, parentForm.MrCustRelationship);
+  http.post(url, reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      toastr.successMessage(response["message"]);
     }
-
-    reqSubmitObj.CustAddr = new CustAddrObj();
-    reqSubmitObj.CustAddr.CustAddrId = dicts.CustAddrId;
-    reqSubmitObj.CustAddr.Fax = dicts.Fax;
-    reqSubmitObj.CustAddr.FaxArea = dicts.FaxArea;
-    reqSubmitObj.CustAddr.Notes = dicts.Notes;
-    reqSubmitObj.CustAddr.Phn1 = dicts.Phn1;
-    reqSubmitObj.CustAddr.Phn2 = dicts.Phn2;
-    reqSubmitObj.CustAddr.Phn3 = dicts.Phn3;
-    reqSubmitObj.CustAddr.PhnArea1 = dicts.PhnArea1;
-    reqSubmitObj.CustAddr.PhnArea2 = dicts.PhnArea2;
-    reqSubmitObj.CustAddr.PhnArea3 = dicts.PhnArea3;
-    reqSubmitObj.CustAddr.PhnExt1 = dicts.PhnExt1;
-    reqSubmitObj.CustAddr.PhnExt2 = dicts.PhnExt2;
-    reqSubmitObj.CustAddr.PhnExt3 = dicts.PhnExt3;
-    reqSubmitObj.CustAddr.RowVersion = dicts.RowVersionAddress;
-    reqSubmitObj.CustAddr.StayLength = dicts.StayLength;
-    reqSubmitObj.CustAddr.StaySince = dicts.StaySince;
-
-    reqSubmitObj.CustAddr.CustId = dicts.CustId;
-    reqSubmitObj.CustAddr.Addr = parentForm.UcAddress.Addr;
-    reqSubmitObj.CustAddr.AreaCode1 = parentForm.UcAddress.AreaCode1;
-    reqSubmitObj.CustAddr.AreaCode2 = parentForm.UcAddress.AreaCode2;
-    reqSubmitObj.CustAddr.AreaCode3 = parentForm.UcAddress.AreaCode3;
-    reqSubmitObj.CustAddr.AreaCode4 = parentForm.UcAddress.AreaCode4;
-    reqSubmitObj.CustAddr.City = parentForm.UcAddress.City;
-    reqSubmitObj.CustAddr.MrBuildingOwnershipCode = parentForm.UcAddress.MrHouseOwnershipCode;
-    reqSubmitObj.CustAddr.Zipcode = parentForm.UcAddress.Zipcode;
-    reqSubmitObj.CustAddr.SubZipcode = parentForm.UcAddress.SubZipcode;
-    reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
-
-    if (Mode != CommonConstant.CustMainDataModeCust) {
-      reqSubmitObj.CustPersonalJobObj = new CustPersonalJobDataObj();
-      reqSubmitObj.CustPersonalJobObj = SetCustPersonalJobData(parentForm, dicts, Mode);
-
-      reqSubmitObj.CustAttrContentObjs = new Array<CustAttrContentObj>();
-      reqSubmitObj.CustAttrContentObjs = SetCustAttrContent(parentForm);
-    }
-
-    reqSubmitObj = SetCustomerDataMode(reqSubmitObj, Mode, From);
-
-    http.post(url, reqSubmitObj).subscribe(
-      (response: any) => {
-          toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(router, [next]);
-      })
-}
-
-export function addCustToDuplicate(parentForm: any, dicts: Record<string, any>, next: string, api: any, router: Router)
-{
-  dicts["AddCustForm"] = parentForm;
-  AdInsHelper.RedirectUrl(router, [next]);
+  );
 }
