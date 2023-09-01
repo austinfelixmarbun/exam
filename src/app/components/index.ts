@@ -17,6 +17,7 @@ export{SelfCustomContainerViewExposureBucketComponent} from "app/view/self-custo
 export{SelfCustomContainerDmsIframeComponent} from "app/shared/self-custom-container-dms-iframe/self-custom-container-dms-iframe.component";
 export { SelfCustomContainerCustAttrSectionComponent } from 'app/customer/self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
 export { CustomCustAttrSectionComponent } from 'app/customer/custom-cust-attr-section/custom-cust-attr-section.component';
+export { CustomAssetMasterAddEditParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component';
 export { CustomAssetMasterDetailParentComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component';
 export { CustomShareholderListingComponent } from 'app/customer/sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
 export { CustomCustomerCompanyAddressComponent } from 'app/customer/customer-company/custom-customer-company-address/custom-customer-company-address.component';
