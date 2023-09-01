@@ -165,10 +165,14 @@ export class PathConstant {
     public static CS_ECONOMIC_SECTOR_DETAIL = PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
     public static CS_REF_PROVINCE = "RefProvince";
     public static CS_REF_PROVINCE_PAGING = PathConstant.CS_REF_PROVINCE + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CS_REF_PROVINCE_PAGING = this.SELF_CUSTOM + "/" + PathConstant.CS_REF_PROVINCE + "/" + PathConstant.PAGING;
     public static CS_REF_PROVINCE_DETAIL = PathConstant.CS_REF_PROVINCE + "/" + PathConstant.DETAIL;
+    public static SELF_CUSTOM_CS_REF_PROVINCE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.CS_REF_PROVINCE + "/" + PathConstant.DETAIL;
     public static CS_DISTRICT = "District";
     public static CS_DISTRICT_PAGING = PathConstant.CS_DISTRICT + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_CS_DISTRICT_PAGING = this.SELF_CUSTOM + "/" + PathConstant.CS_DISTRICT + "/" + PathConstant.PAGING;
     public static CS_DISTRICT_DETAIL = PathConstant.CS_DISTRICT + "/" + PathConstant.DETAIL;
+    public static SELF_CUSTOM_CS_DISTRICT_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.CS_DISTRICT + "/" + PathConstant.DETAIL;
     public static CS_REF_STATUS = "RefStatus";
     public static CS_REF_STATUS_PAGING = PathConstant.CS_REF_STATUS + "/" + PathConstant.PAGING;
     public static CS_PROFESSION = "Profession";
@@ -539,6 +543,22 @@ export class PathConstant {
     public static QA_SCHM_MBR_PAGING = PathConstant.QA_SCHM_MBR + "/" + PathConstant.PAGING;
     public static QA_SCHM_MBR_ADD = PathConstant.QA_SCHM_MBR + "/" + PathConstant.ADD;
     public static QA_SCHM_MBR_EDIT = PathConstant.QA_SCHM_MBR + "/" + PathConstant.EDIT;
+
+    public static SELF_CUSTOM_QA_PAGING = this.SELF_CUSTOM + "/" + PathConstant.QA + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_QA_ADD = this.SELF_CUSTOM + "/" + PathConstant.QA + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_QA_EDIT = this.SELF_CUSTOM + "/" + PathConstant.QA + "/" + PathConstant.EDIT;
+    public static SELF_CUSTOM_QA_GRP_PAGING = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_QA_GRP_ADD = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_QA_GRP_EDIT = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP + "/" + PathConstant.EDIT;
+    public static SELF_CUSTOM_QA_GRP_MBR_PAGING = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP_MBR + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_QA_GRP_MBR_ADD = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP_MBR + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_QA_GRP_MBR_EDIT = this.SELF_CUSTOM + "/" + PathConstant.QA_GRP_MBR + "/" + PathConstant.EDIT;
+    public static SELF_CUSTOM_QA_SCHM_PAGING = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_QA_SCHM_ADD = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_QA_SCHM_EDIT = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM + "/" + PathConstant.EDIT;
+    public static SELF_CUSTOM_QA_SCHM_MBR_PAGING = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM_MBR + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_QA_SCHM_MBR_ADD = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM_MBR + "/" + PathConstant.ADD;
+    public static SELF_CUSTOM_QA_SCHM_MBR_EDIT = this.SELF_CUSTOM + "/" + PathConstant.QA_SCHM_MBR + "/" + PathConstant.EDIT;
     //#endregion
 
     //#region View-Module
@@ -606,6 +626,7 @@ export class PathConstant {
      //#region JOURNAL
     public static JOURNAL_MEDIA = "journalmedia";
     public static JOURNAL_RESULT = "journalresult";
+    public static SELF_CUSTOM_JOURNAL_RESULT = "selfcustomjournalresult";
     public static JOURNAL_RESULT_VIEW = "journalview";
     public static HEADER = "header";
     public static FACT = "fact";
@@ -625,6 +646,17 @@ export class PathConstant {
     public static JOURNAL_RECONCILE_PAGING = PathConstant.JOURNAL_RECONCILE + "/" + PathConstant.PAGING
     public static UPLOAD_JOURNAL_FILE_PAGING = PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.PAGING
     public static UPLOAD_JOURNAL_FILE_DETAIL = PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.DETAIL
+
+    public static SELF_CUSTOM_JOURNAL_MEDIA_PAGING = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.PAGING
+    public static SELF_CUSTOM_JOURNAL_MEDIA_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.DETAIL
+    public static SELF_CUSTOM_JOURNAL_MEDIA_HEADER_FACT = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.HEADER + PathConstant.FACT
+    public static SELF_CUSTOM_JOURNAL_MEDIA_GROUP = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP
+    public static SELF_CUSTOM_JOURNAL_MEDIA_GROUP_FACT = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + "/" + PathConstant.FACT
+    public static SELF_CUSTOM_JOURNAL_MEDIA_GROUP_ITEM_VALUE = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_MEDIA + "/" + PathConstant.GROUP + '/' + PathConstant.ITEM_VALUE
+    public static SELF_CUSTOM_FAILED_JOURNAL_RESULT_LIST_PAGING = this.SELF_CUSTOM + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST + "/" + PathConstant.PAGING
+    public static SELF_CUSTOM_JOURNAL_RECONCILE_PAGING = this.SELF_CUSTOM + "/" + PathConstant.JOURNAL_RECONCILE + "/" + PathConstant.PAGING
+    public static SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING = this.SELF_CUSTOM + "/" + PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.PAGING
+    public static SELF_CUSTOM_UPLOAD_JOURNAL_FILE_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.UPLOAD_JOURNAL + "/" + PathConstant.DETAIL
 
     //#endregion
 

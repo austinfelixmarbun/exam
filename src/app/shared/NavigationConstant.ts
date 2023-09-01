@@ -29,6 +29,7 @@ export class NavigationConstant {
     public static ASSET_SCHM_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_SCHM_PAGING; //'/Asset/Scheme/Paging'
     public static ASSET_SCHM_ADD_MBR = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_SCHM_ADD_MBR; //'/Asset/Scheme/AddMember'
     public static ASSET_SCHM_MBR_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_SCHM_MBR_DETAIL; //'/Asset/Scheme/MemberDetail'
+    public static SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL; //'/Asset/Scheme/MemberDetail'
     public static ASSET_SCHM_INFO_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_SCHM_INFO_DETAIL; //'/Asset/Scheme/InformationDetail'
     public static ASSET_TYPE_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_TYPE_PAGING; //'/Asset/Type/Paging'
     public static ASSET_TYPE_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_TYPE_DETAIL; //'/Asset/Type/Detail'
@@ -259,12 +260,14 @@ export class NavigationConstant {
     public static VERIF_QA_GRP_ADD = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_GRP_ADD; //'/Verification/QuestionGroup/Add'
     public static VERIF_QA_GRP_EDIT = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_GRP_EDIT; //'/Verification/QuestionGroup/Edit'
     public static VERIF_QA_GRP_MBR_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_GRP_MBR_PAGING; //'/Verification/QuestionGroupMember/Paging'
+    public static SELF_CUSTOM_VERIF_QA_GRP_MBR_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.SELF_CUSTOM_QA_GRP_MBR_PAGING; //'/Verification/QuestionGroupMember/Paging'
     public static VERIF_QA_GRP_MBR_ADD = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_GRP_MBR_ADD; //'/Verification/QuestionGroupMember/Add'
     public static VERIF_QA_GRP_MBR_EDIT = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_GRP_MBR_EDIT; //'/Verification/QuestionGroupMember/Edit'
     public static VERIF_QA_SCHM_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_PAGING; //'/Verification/QuestionScheme/Paging'
     public static VERIF_QA_SCHM_ADD = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_ADD; //'/Verification/QuestionScheme/Add'
     public static VERIF_QA_SCHM_EDIT = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_EDIT; //'/Verification/QuestionScheme/Edit'
     public static VERIF_QA_SCHM_MBR_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_MBR_PAGING; //'/Verification/QuestionSchemeMember/Paging'
+    public static SELF_CUSTOM_VERIF_QA_SCHM_MBR_PAGING = "/" + PathConstant.LR_VERIF + "/" + PathConstant.SELF_CUSTOM_QA_SCHM_MBR_PAGING; //'/Verification/QuestionSchemeMember/Paging'
     public static VERIF_QA_SCHM_MBR_ADD = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_MBR_ADD; //'/Verification/QuestionSchemeMember/Add'
     public static VERIF_QA_SCHM_MBR_EDIT = "/" + PathConstant.LR_VERIF + "/" + PathConstant.QA_SCHM_MBR_EDIT; //'/Verification/QuestionSchemeMember/Edit'
     //#endregion
@@ -364,8 +367,10 @@ export class NavigationConstant {
     public static JOURNAL_MEDIA_GROUP_ITEM_VALUE = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE;
     public static JOURNAL_RESULT = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RESULT;
     public static FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING;
+    public static SELF_CUSTOM_FAILED_JOURNAL_RESULT_LIST_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.SELF_CUSTOM_FAILED_JOURNAL_RESULT_LIST_PAGING;
     public static JOURNAL_RECONCILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.JOURNAL_RECONCILE_PAGING;
     public static UPLOAD_JOURNAL_FILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_PAGING;
+    public static SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING;
     public static UPLOAD_JOURNAL_FILE_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_DETAIL;
     //#endregion
 
