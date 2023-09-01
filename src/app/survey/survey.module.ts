@@ -32,6 +32,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ArchwizardModule } from 'angular-archwizard';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { UcTemplateModule } from '@adins/uctemplate';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     UclookupgenericModule,
     UcviewgenericModule,
     UcShowErrorsModule,
-    UcgridviewModule
+    UcgridviewModule,
+    UcTemplateModule
   ],
   declarations: [
     SurveyOrderComponent,

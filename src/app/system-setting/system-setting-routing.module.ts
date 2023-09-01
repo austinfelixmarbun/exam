@@ -166,7 +166,39 @@ const routes: Routes = [
           title: 'Attribute Detail',
           page: 'Sysattrdetail'
         },
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Paging',
+          page: 'Rolepaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Detail',
+          page: 'Roledetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_FORM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Form Paging',
+          page: 'Roleformpaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_FORM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Form Detail',
+          page: 'Roleformdetail'
+        },
+      },
     ]
   }
 ];

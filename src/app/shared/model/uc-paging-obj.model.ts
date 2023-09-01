@@ -25,7 +25,7 @@ export class UcPagingObj {
     isGetAllData: boolean;
     integrationObj: IntegrationObj;
     ListPageSize: number[];
-    dicts: Record<string, any>;
+    dicts: any
 
     constructor(private UrlConstantNew: UrlConstantNew) {
         this.dicts = {};

@@ -48,6 +48,7 @@ import { AdinsTemplateService } from './shared/services/adins-template.service';
 import { UcformModule } from '@adins/ucform';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsExecutorService } from './shared/services/adins-executor.service';
+import { UcformarrayModule } from '@adins/ucformarray';
 import { NewCustSetData } from './customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { ThirdPartyUploadService } from './customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
 
@@ -109,11 +110,13 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         UcformModule,
         NgMultiSelectDropDownModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production,
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000'
-        })
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the application is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        }),
+        UcformModule,
+        UcformarrayModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
@@ -144,7 +147,11 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
             provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
         },
         ErrorDialogService,
-        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+
+        { provide: UcTemplateService, useClass: AdinsTemplateService  },
+
+        {provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     bootstrap: [AppComponent]
 })

@@ -834,6 +834,38 @@ const routes: Routes = [
           title: 'Insurance Claim Document Paging',
           page: 'InsuranceClaimDoc'
         },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Detail',
+          page: 'ZipcodeDetail'
+        },
       }
     ]
   }
