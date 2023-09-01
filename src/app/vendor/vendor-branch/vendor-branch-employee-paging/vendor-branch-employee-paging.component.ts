@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
@@ -21,7 +22,7 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_EMP_DETAIL;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,private router:Router) { 
     this.route.queryParams.subscribe(params => {
       if (params["VendorId"] != null) {
         this.VendorId = params["VendorId"];
@@ -51,4 +52,7 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
     );
   }
 
+  back(){
+    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
+  }
 }

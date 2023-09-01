@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
@@ -18,9 +19,9 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
 
-  readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
+  CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_MBR_ADD;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,private router : Router) {
     this.route.queryParams.subscribe(params => {
       this.objPassing["VendorId"] = params['VendorId'];
       this.objPassing["VendorEmpId"] = params['VendorEmpId'];
@@ -47,8 +48,21 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
         if(this.MrVendorCategoryCode == CommonConstant.NOTARY){
           this.MrVendorCategoryCode = response["VendorObj"]["MrVendorTypeCode"] == 'P' ? CommonConstant.NOTARY_PERSONAL : CommonConstant.NOTARY_COMPANY;
         }
+
+        console.log(this.MrVendorCategoryCode)
+        console.log("HAIHAI")
       }
     );
+  }
+
+  back(){
+    if(this.MrVendorCategoryCode == "CRD_INSCO_BRANCH"){
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
+    }
+    else{
+      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING])
+
+    }
   }
 
 }

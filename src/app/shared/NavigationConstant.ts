@@ -303,6 +303,7 @@ export class NavigationConstant {
     public static OFFICE_EMP_POS_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_EMP_POS_ADD; //'/Office/OfficeEmpPosAdd'
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
+    public static CUSTOM_OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.CUSTOM_OFFICE_GROUP_MEMBER;
     //#endregion
 
     //#region
@@ -350,6 +351,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_CUST_FAMILY_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_FAMILY_PAGING; //'/Customer/SelfCustom/CustFamily/Paging'
     public static SELF_CUSTOM_CUST_NEW_FORM = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_NEW_CUST; //'/Customer/SelfCustom/NewCustomer'
     public static SELF_CUSTOM_CUST_PERSONAL_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE; //'/Customer/SelfCustom/CustomerPersonal/Page'
+    public static SELF_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerPersonalDuplicateChecking'
+    public static SELF_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerCompanyDuplicateChecking'
     //#endregion
 
     //#region Document Management

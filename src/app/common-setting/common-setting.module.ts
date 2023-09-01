@@ -221,7 +221,7 @@ export const customCurrencyMaskConfig = {
     PaymentAllocGroupHDetailComponent,
     PaymentAllocGroupHPagingComponent,
     PaymentAllocGroupDDetailComponent,
-    PaymentAllocGroupDPagingComponent
+    PaymentAllocGroupDPagingComponent,
   ],
   providers: [
     { provide: UcTemplateService, useClass: AdinsTemplateService }

@@ -20,7 +20,7 @@ export class VendorCreditInsuranceGroupPagingComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorGroup.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorGroup.json";
-
+    this.inputPagingObj.title = "Credit Insurance Group"
     var critObj = new CriteriaObj();
     critObj.propName = "VG.MR_VENDOR_CATEGORY_CODE";
     critObj.restriction = AdInsConstant.RestrictionEq;

@@ -47,6 +47,8 @@ import { CustomAssetSchemePagingComponent } from './custom/asset-scheme/asset-sc
 import { CustomAssetSchemeAddEditInformationComponent } from './custom/asset-scheme/asset-scheme-add-edit-information/custom-asset-scheme-add-edit-information.component';
 import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
 import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
+import { CustomAssetMasterAddEditParentComponent } from './custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,13 @@ const routes: Routes = [
     children: [
       {
         path: PathConstant.ASSET_TYPE_PAGING,
+        component: AssetTypePagingComponent,
+        data: {
+          title: 'Asset Type Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_TYPE_PAGING,
         component: CustomAssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
@@ -61,6 +70,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_TYPE_DETAIL,
+        component: AssetTypeAddEditComponent,
+        data: {
+          title: 'Asset Type Add Edit'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_TYPE_DETAIL,
         component: CustomAssetTypeAddEditComponent,
         data: {
           title: 'Asset Type Add Edit'
@@ -68,6 +84,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_PAGING,
+        component: AssetSchemePagingComponent,
+        data: {
+          title: 'Asset Scheme Paging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_PAGING,
         component: CustomAssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
@@ -75,6 +98,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_MBR_DETAIL,
+        component: AssetSchemeMemberComponent,
+        data: {
+          title: 'Asset Scheme Member Detail'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL,
         component: CustomAssetSchemeMemberComponent,
         data: {
           title: 'Asset Scheme Member Detail'
@@ -82,6 +112,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_ADD_MBR,
+        component: AddAssetSchemeComponent,
+        data: {
+          title: 'Asset Scheme Member Add'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_ADD_MBR,
         component: CustomAddAssetSchemeComponent,
         data: {
           title: 'Asset Scheme Member Add'
@@ -89,6 +126,13 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_INFO_DETAIL,
+        component: AssetSchemeAddEditInformationComponent,
+        data: {
+          title: 'Asset Scheme Information Add Edit'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_ASSET_SCHM_INFO_DETAIL,
         component: CustomAssetSchemeAddEditInformationComponent,
         data: {
           title: 'Asset Scheme Information Add Edit'
@@ -345,6 +389,53 @@ const routes: Routes = [
         component: CustomAssetAttributeAddEditComponent,
         data: {
           title: 'Asset Doc Master Detail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Asset Master',
+          page: 'AssetMaster'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_DETAIL,
+        component: CustomAssetMasterAddEditParentComponent,
+        data: {
+          title: 'Asset Master Add Edit Parent'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_CHILD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Asset Master Add Edit Child',
+          page: 'AssetMasterChild'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_UPLOAD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Upload Asset Master',
+          page: 'UploadAssetMaster'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Asset Master Paging',
+          page: 'ReviewUploadNegativeAsset'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Asset Master Detail',
+          page: 'ReviewUploadNegativeAssetDetail'
         },
       }
     ]

@@ -10,7 +10,11 @@
 </div>
 <div class="ucSearch-Button-Right">
   <span class="mr-1">
-    <button type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   translate>
+    <button *ngIf="this.MrVendorCategoryCode != 'CRD_INSCO_BRANCH'" type="button" class="backButton" [routerLink]="[CancelLink]" skipLocationChange [queryParams]= "{ MrVendorCategoryCode: this.MrVendorCategoryCode  }"   translate>
+      <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
+    </button>
+
+    <button *ngIf="this.MrVendorCategoryCode == 'CRD_INSCO_BRANCH'" type="button" class="backButton" (click)="back()" translate>
       <i class="fa fa-arrow-left"> </i>&nbsp;<span translate>Back</span>
     </button>
     <button type="button" class="addButton" [routerLink]="[AddLink]" skipLocationChange

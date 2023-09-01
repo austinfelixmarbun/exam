@@ -108,6 +108,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'agreementtransferinfo',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './AgrTransferModule'
+      })
+        .then(m => m.AgrTransferModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'writeoffview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -513,6 +525,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'partialprepaymentview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './PartialPrepaymentModule'
+      })
+        .then(m => m.PartialPrepaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'collateralreplacementview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -547,6 +571,30 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.SuspdRvsTrxModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+  {
+    path: 'autodebitview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './AutoDebitModule'
+      })
+        .then(m => m.AutoDebitModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'autodebitview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './AutoDebitPayModule'
+      })
+        .then(m => m.AutoDebitPayModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 ];

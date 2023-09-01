@@ -1,9 +1,10 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
 import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
-import { addEditCustAddr, addEditCustAsset } from "../function/customer-function";
+import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { addRefOfficeAreaMember } from "../function/office-area-function";
+import { saveOfficeGroupMember } from "../function/ref-office-function";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,13 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addRangeAssetSchmD", addRangeAssetSchmD);
     this.setExecutor("addEditCustAddr", addEditCustAddr);
     this.setExecutor("addRefOfficeAreaMember",addRefOfficeAreaMember);
+    this.setExecutor("addEditCustJobData", addEditCustJobData);
+    this.setExecutor("editCustomer", editCustomer);
+    this.setExecutor("addEditCustomer", addEditCustomer);
+    this.setExecutor("addCustToDuplicate", addCustToDuplicate);
+    this.setExecutor("addCustomerPersonalAfterDuplicate", addCustomerPersonalAfterDuplicate);
+    this.setExecutor("addCustomerCompanyAfterDuplicate", addCustomerCompanyAfterDuplicate);
+    this.setExecutor("backCust", backCust);
+    this.setExecutor("saveOfficeGroupMember", saveOfficeGroupMember)
   }
 }

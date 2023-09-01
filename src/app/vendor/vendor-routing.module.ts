@@ -52,6 +52,7 @@ import { SelfCustomVendorSchemeMemberAddComponent } from './vendor-scheme/vendor
 import { SelfCustomVendorGroupComponent } from './vendor-group/self-custom-vendor-group/self-custom-vendor-group.component';
 import { SelfCustomVendorGroupViewComponent } from './vendor-group/self-custom-vendor-group-view/self-custom-vendor-group-view.component';
 import { SelfCustomVendorGroupMemberAddComponent } from './vendor-group/self-custom-vendor-group-member-add/self-custom-vendor-group-member-add.component';
+import { SelfCustomVendorATPMAddEditComponent } from './vendor-ATPM/self-custom-vendor-atpm-add-edit/self-custom-vendor-atpm-add-edit.component';
 import { VendorCreditInsurancePagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-paging/vendor-credit-insurance-paging.component';
 import { VendorCreditInsuranceAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-add-edit/vendor-credit-insurance-add-edit.component';
 import { VendorCreditInsuranceBranchPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-branch-paging/vendor-credit-insurance-branch-paging.component';
@@ -241,7 +242,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VENDOR_ATPM_DETAIL,
-        component: VendorATPMAddEditComponent,
+        component: SelfCustomVendorATPMAddEditComponent,
         data: {
           title: 'Vendor ATPM Detail'
         },
@@ -488,6 +489,13 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           page: 'SupplierEmpDetail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        component: UcTemplateComponent,
+        data: {
+          page: 'SupplierHoldingDetail'
         },
       },
       {

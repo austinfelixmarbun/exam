@@ -63,16 +63,16 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUST_NEG_UPLOAD,
-        component: UploadNegativeCustomerComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Upload Negative Customer'
+          page: 'UploadCustomerNegative'
         }
       },
       {
         path: PathConstant.CUST_NEG_RVW_UPLOAD_PAGING,
-        component: ReviewUploadNegativeCustomerPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Review Upload Negative Customer Paging'
+          page: 'ReviewUploadNegativeCustomer'
         }
       },
       {
@@ -280,7 +280,31 @@ const routes: Routes = [
           title: 'Self Custom Update Data Customer Detail',
           page: 'UpdateDataCustomer'
         }
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_CUST_COY_PAGE,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Company Address',
+          page: 'CustomerCompony'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchPersonal'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchCompany'
+        }
+      },
     ]
   }
 ];

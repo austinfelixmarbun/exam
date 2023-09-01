@@ -63,6 +63,7 @@ export class VendorCreditInsurancePagingComponent implements OnInit {
   selectPage(){
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchVendorHO.json"; 
     this.inputPagingObj._url = "./assets/ucpaging/searchVendorHO.json";
+    this.inputPagingObj.title = "Credit Insurance HO";
 
 
     this.inputPagingObj.addCritInput = new Array();

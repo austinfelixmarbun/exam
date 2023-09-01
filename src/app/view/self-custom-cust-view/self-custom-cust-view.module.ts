@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SelfCustomCustViewRoutingModule } from './self-custom-cust-view-routing.module';
-import { UcTemplateModule } from '@adins/uctemplate';
+import { UcTemplateModule, UcTemplateService } from '@adins/uctemplate';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SelfCustomContainerCustViewDocComponent } from './self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component';
@@ -22,13 +22,21 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SelfCustomContainerCustViewFinDataAttrComponent } from './self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component';
 import { SelfCustomCustExposureViewComponent } from './self-custom-cust-exposure-view/self-custom-cust-exposure-view.component';
-
+import { SelfCustomCustomerViewIframeGenericComponent } from './self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component';
+import { SelfCustomContainerCustViewFinDataBankStmntComponent } from './self-custom-container-cust-view-fin-data-bank-stmnt/self-custom-container-cust-view-fin-data-bank-stmnt.component';
+import { SelfCustomContainerViewExposureBucketComponent } from './self-custom-container-view-exposure-bucket/self-custom-container-view-exposure-bucket.component';
+import { SelfCustomCustomerViewCoyFinancialComponent} from './self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component';
+import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
 
 @NgModule({
   declarations: [
     SelfCustomContainerCustViewDocComponent,
     SelfCustomContainerCustViewFinDataAttrComponent,
-    SelfCustomCustExposureViewComponent
+    SelfCustomCustExposureViewComponent,
+    SelfCustomCustomerViewIframeGenericComponent,
+    SelfCustomContainerCustViewFinDataBankStmntComponent,
+    SelfCustomContainerViewExposureBucketComponent,
+    SelfCustomCustomerViewCoyFinancialComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +60,8 @@ import { SelfCustomCustExposureViewComponent } from './self-custom-cust-exposure
     SelfCustomCustViewRoutingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+    { provide: UcTemplateService, useClass: AdinsTemplateService },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
 ]
 })
 export class SelfCustomCustViewModule { }

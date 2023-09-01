@@ -81,6 +81,7 @@ import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/pay
 import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/payment-alloc-group-d-paging/payment-alloc-group-d-paging.component';
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -660,6 +661,184 @@ const routes: Routes = [
           title: 'Payment Allocation Detail'
         },
       },
+      //Custom Page
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REASON_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Custom Reason  ',
+          page: 'Reason'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REASON_DETAIL,
+        component: ReasonAddEditComponent,
+        data: {
+          title: 'Reason Paging',
+          page: 'ReasonRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_GEN_SETTING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'General Setting Maintenance Paging',
+          page: 'Generalsetting'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_GEN_SETTING_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'General Setting Maintenance Add Edit',
+          page: 'GeneralSettingEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_CAT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Category Detail',
+          page: 'IndustryTypeCategoryDetail'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Paging',
+          page: 'IndustryTypePaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_INDUSTRY_TYPE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Industry Type Detail',
+          page: 'IndustryTypeDetail'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PROFESSION_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Profession Paging',
+          page: 'Professionpaging'
+        }
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PROFESSION_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Profession Detail',
+          page: 'ProfessionDetail'
+        }
+      },
+      {
+        
+        path: PathConstant.CUSTOM_CS_BANK_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Paging',
+          page: 'Fou-sysset-bank'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_BANK_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Bank Detail',
+          page: 'FouBankRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC',
+          page: 'Reftc'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Ref TC Add Edit',
+          page: 'ReftcDetail'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Paging',
+          page: 'PaymentAllocationPaging'
+        },
+      },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Payment Allocation Detail',
+          page: 'PaymentAllocationDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Detail',
+          page: 'Insuranceclaimdocdetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Insurance Claim Document Paging',
+          page: 'InsuranceClaimDoc'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Detail',
+          page: 'ZipcodeDetail'
+        },
+      }
     ]
   }
 ];
