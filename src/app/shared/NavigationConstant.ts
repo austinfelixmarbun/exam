@@ -430,4 +430,7 @@ export class NavigationConstant {
     public static CREDIT_INS_GROUP_ADD_EDIT = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.VENDOR_CREDIT_INS + "/" + PathConstant.GROUP + "/" + PathConstant.ADD_EDIT;
 
     //#endregiom
+
+
+    public static OFFICE_MEMBER_PAGING_TEST = "/BREAD/Officeareamember";
 }
