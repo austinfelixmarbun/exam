@@ -808,6 +808,22 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
+      },
+      {
         path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
         component: UcTemplateComponent,
         data: {
