@@ -447,6 +447,10 @@ export class PathConstant {
 
     public static CUSTOM_SYS_ATTR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SYS_ATTR + "/" + PathConstant.PAGING;
     public static CUSTOM_SYS_ATTR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.SYS_ATTR + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ROLE_PAGING = PathConstant.SELF_CUSTOM + "/" + "Role" + "/" + PathConstant.PAGING;
+    public static CUSTOM_ROLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ROLE_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + "RoleForm" + "/" + PathConstant.PAGING;
+    public static CUSTOM_ROLE_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Upload-Module
