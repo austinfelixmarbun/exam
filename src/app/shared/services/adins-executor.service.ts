@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";;
 import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
 import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
+import { saveOfficeGroupMember } from "../function/ref-office-function";
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addCustomerPersonalAfterDuplicate", addCustomerPersonalAfterDuplicate);
     this.setExecutor("addCustomerCompanyAfterDuplicate", addCustomerCompanyAfterDuplicate);
     this.setExecutor("backCust", backCust);
+    this.setExecutor("saveOfficeGroupMember", saveOfficeGroupMember)
   }
 }

@@ -67,6 +67,9 @@ export class PathConstant {
     public static RTN_PAGING = "ReturnPaging";
     public static GROUP = "Group";
     public static SELF_CUSTOM = "SelfCustom";
+
+    public static CUSTOM_PAGING = PathConstant.SELF_CUSTOM + "/" + "Paging";
+    public static CUSTOM_DETAIL = PathConstant.SELF_CUSTOM + "/" + "Detail";
     //#endregion
 
     //#region Asset
@@ -365,6 +368,10 @@ export class PathConstant {
     public static OFFICE_AREA_MEMBER_ADD = PathConstant.OFFICE_AREA + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
     public static OFFICE_GROUP_MEMBER = PathConstant.GROUP + "/" + PathConstant.MEMBER;
     public static OFFICE_GROUP_MEMBER_ADD = PathConstant.GROUP + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
+    
+    public static CUSTOM_OFFICE_EMP_VIEW = PathConstant.SELF_CUSTOM + "/" + "OfficeEmpView";
+    public static CUSTOM_OFFICE_GROUP_MEMBER = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.MEMBER;
+    public static CUSTOM_OFFICE_GROUP_MEMBER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.MEMBER + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Organization-Module
