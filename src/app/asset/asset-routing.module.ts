@@ -48,6 +48,7 @@ import { CustomAssetSchemeAddEditInformationComponent } from './custom/asset-sch
 import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-scheme-member/custom-asset-scheme-member.component';
 import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { CustomAssetMasterAddEditParentComponent } from './custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component';
 
 const routes: Routes = [
   {
@@ -400,10 +401,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUSTOM_ASSET_MASTER_DETAIL,
-        component: UcTemplateComponent,
+        component: CustomAssetMasterAddEditParentComponent,
         data: {
-          title: 'Asset Master Add Edit Parent',
-          page: 'AssetMasterDetail'
+          title: 'Asset Master Add Edit Parent'
         },
       },
       {
