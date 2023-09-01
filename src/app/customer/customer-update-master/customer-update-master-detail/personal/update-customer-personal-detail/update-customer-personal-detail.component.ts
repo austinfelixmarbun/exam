@@ -24,6 +24,7 @@ import { map, mergeMap } from 'rxjs/operators';
 export class UpdateCustomerPersonalDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppCustPersonalDetail: UpdateCustPersonalDetailObj;
   MrMaritalStatCodeList: Array<any>;
   MrNationalityCodeList: Array<any>;
@@ -72,7 +73,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.AppCustPersonalDetail = new UpdateCustPersonalDetailObj();
@@ -105,7 +106,7 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     let getDetail = this.http.post(this.UrlConstantNew.GetCustDataForUpdateMasterCustDetail, this.ReqCustDataTrxIdObj);
     let tempReqMarStat: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeMaritalStat, MappingCode: null };
     let getMaritalStat = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqMarStat);
-    
+
     let tempReqNationality: ReqRefMasterByTypeCodeAndMappingCodeObj = { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNationality, MappingCode: null };
     let getNationality = this.http.post(this.UrlConstantNew.GetListActiveRefMaster, tempReqNationality);
 
@@ -281,6 +282,20 @@ export class UpdateCustomerPersonalDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustomer, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
+        const actions = [
+          {
+            'result': {
+              'type': 'function',
+              'target': 'self',
+              'alias': '',
+              'methodName': 'NextStep',
+              'params': []
+            },
+            'conditions': []
+          }
+        ];
+
+        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {

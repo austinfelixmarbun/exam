@@ -18,6 +18,9 @@ import { NegativeCustomerViewRoutingModule } from "./negative-customer-view-rout
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { SelfCustomNegativeCustomerViewPersonalComponent } from './self-custom-negative-customer-view-personal/self-custom-negative-customer-view-personal.component';
+import { UcTemplateModule } from "@adins/uctemplate";
+import { SelfCustomNegativeCustomerViewCompanyComponent } from "./self-custom-negative-customer-view-personal/self-custom-negative-customer-view-company.component";
 
 @NgModule({
     imports: [
@@ -38,12 +41,15 @@ import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
         UcSubsectionModule,
         SharingComponentModule,
         UcShowErrorsModule,
+        UcTemplateModule
     ],
     declarations: [
-        NegativeCustomerViewComponent
+        NegativeCustomerViewComponent,
+        SelfCustomNegativeCustomerViewPersonalComponent,
+        SelfCustomNegativeCustomerViewCompanyComponent
     ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
     ]
 })
 export class NegativeCustomerViewModule { }

@@ -22,6 +22,7 @@ import { SharedModule } from "app/shared/shared.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { UcTemplateModule } from "@adins/uctemplate";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
         SharingComponentModule,
         UcShowErrorsModule,
         SharedModule,
-        AdInsSharedModule
+        AdInsSharedModule,
+        UcTemplateModule
     ],
     declarations: [
         CustomerViewComponent,

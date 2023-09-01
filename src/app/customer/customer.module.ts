@@ -88,6 +88,12 @@ import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/sel
 import { SelfCustomCustomerPersonalAddressComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-address/self-custom-customer-personal-address.component';
 import { SelfCustomContainerCustAttrComponent } from './sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component';
 import { SelfCustomCustViewModule } from 'app/view/self-custom-cust-view/self-custom-cust-view.module';
+import { SelfCustomNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-negative-customer.component';
+import { SelfCustomNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-negative-customer-detail/self-custom-negative-customer-detail.component';
+import { SelfCustomReviewUploadNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer-detail/self-custom-review-upload-negative-customer-detail.component';
+import { SelfCustomReviewUploadNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer.component';
+import { SelfCustomUploadNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-upload-negative-customer/self-custom-upload-negative-customer.component';
+import { SelfCustomCustFinDataTabComponent } from './cust-fin-data-tab/self-custom-fin-data-tab.component';
 import { SelfCustomContainerCustAttrSectionComponent } from './self-custom-container-cust-attr-section/self-custom-container-cust-attr-section.component';
 import { CustomCustAttrSectionComponent } from './custom-cust-attr-section/custom-cust-attr-section.component';
 import { SelfCustomCustomerEmergencyContactComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component';
@@ -95,15 +101,15 @@ import { SelfCustomContainerFamilyListingComponent } from './sharing-component/s
 import { CustomCustomerCompanyAddressComponent } from './customer-company/custom-customer-company-address/custom-customer-company-address.component';
 import { CustomShareholderListingComponent } from './sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
 
-export const customCurrencyMaskConfig = {     
-  align: "right",     
-  allowNegative: true,     
-  allowZero: true,     
-  decimal: ".",        
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ".",
   precision: 0,
-  prefix: "",     
-  suffix: "",     
-  thousands: ",",     
+  prefix: "",
+  suffix: "",
+  thousands: ",",
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };
@@ -202,6 +208,13 @@ export const customCurrencyMaskConfig = {
         SelfCustomCustomerPersonalPageComponent,
         SelfCustomCustomerPersonalAddressComponent,
         SelfCustomContainerCustAttrComponent,
+        SelfCustomNegativeCustomerComponent,
+        SelfCustomNegativeCustomerDetailComponent,
+        SelfCustomReviewUploadNegativeCustomerDetailComponent,
+        SelfCustomReviewUploadNegativeCustomerComponent,
+        SelfCustomUploadNegativeCustomerComponent,
+        SelfCustomCustFinDataTabComponent,
+
         SelfCustomContainerCustAttrSectionComponent,
         CustomCustAttrSectionComponent,
         SelfCustomCustomerEmergencyContactComponent,

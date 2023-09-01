@@ -39,43 +39,43 @@
             "position": "left",
             "label": "BIRTH PLACE",
             "name": "BIRTH_PLACE"
-        },        
+        },
 		{
             "type": "sort",
             "position": "center",
             "label": "BIRTH DATE",
             "name": "BIRTH_DT"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
             "label": "GENDER CODE",
             "name": "MR_GENDER_CODE"
-        },       
+        },
 		{
             "type": "sort",
             "position": "left",
             "label": "MOTHER MAIDEN NAME",
             "name": "MOTHER_MAIDEN_NAME"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
             "label": "LEGAL ADDRESS",
             "name": "LEGAL_ADDR"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
             "label": "MOBILE PHONE",
             "name": "MOBILE_PHN"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
             "label": "NEG CUSTOMER TYPE CODE",
             "name": "MR_NEG_CUST_TYPE_CODE"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
@@ -87,7 +87,7 @@
             "position": "left",
             "label": "UPLOAD STATUS",
             "name": "UPLOAD_STATUS"
-        },        
+        },
         {
             "type": "sort",
             "position": "left",
