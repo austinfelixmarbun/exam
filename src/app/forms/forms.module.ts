@@ -27,6 +27,8 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { UCSearchModule } from '@adins/ucsearch';
 import { UcgridfooterModule } from '@adins/ucgridfooter';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @NgModule({
     imports: [
@@ -59,6 +61,10 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         InputGridComponent,
         ArchwizardComponent,
 
+    ],
+    providers: [
+      AdInsHelperService,
+      UrlConstantNew
     ]
 
 })

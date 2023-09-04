@@ -19,18 +19,19 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class UpdateCustomerMgmntShareholderComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   AppShareholder: Array<UpdateCustCompanyShareholderObj>;
   MasterShareholder: Array<UpdateCustCompanyShareholderObj>;
   CustId: number;
 
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private UrlConstantNew: UrlConstantNew
-  ) { 
+  ) {
     this.ResponseTab = new EventEmitter<any>();
     this.MasterShareholder = new Array<UpdateCustCompanyShareholderObj>();
     this.AppShareholder = new Array<UpdateCustCompanyShareholderObj>();
@@ -97,5 +98,19 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
         console.log(error);
       }
     );
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    this.next.emit({Actions: actions});
   }
 }

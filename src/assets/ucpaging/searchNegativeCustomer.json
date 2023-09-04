@@ -27,10 +27,10 @@
             "datatype" : "text",
             "ddlType": "all",
             "items" : [],
-            "isFromURL" : true, 
-            "url" : "", 
+            "isFromURL" : true,
+            "url" : "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "itemsUrl" : [], 
+            "itemsUrl" : [],
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "CUST_TYPE",
             "environment": "FOU"
@@ -74,65 +74,65 @@
             "datatype" : "text",
             "ddlType": "all",
             "items" : [],
-            "isFromURL" : true, 
-            "url" : "", 
+            "isFromURL" : true,
+            "url" : "",
             "path": "/RefMaster/GetListKeyValueActiveByCode",
-            "itemsUrl" : [], 
+            "itemsUrl" : [],
             "criteriaPropName" : "RefMasterTypeCode",
             "criteriaPropValue" : "NEG_CUST_TYPE",
             "environment": "FOU"
         }
     ],
-    "querystring": { 
+    "querystring": {
         "name": "searchNegativeCustomer"
     },
-    "headerList" : [ 
+    "headerList" : [
         {
-            "type" : "sort", 
-            "position" : "left", 
+            "type" : "sort",
+            "position" : "left",
             "label" : "Negative Customer No",
-            "name" : "A.NEGATIVE_CUST_NO" 
+            "name" : "A.NEGATIVE_CUST_NO"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
+            "type" : "sort",
+            "position" : "left",
             "label" : "Customer No",
-            "name" : "A.CUST_NO" 
+            "name" : "A.CUST_NO"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Customer Name", 
-            "name" : "A.CUST_NAME" 
+            "type" : "sort",
+            "position" : "left",
+            "label" : "Customer Name",
+            "name" : "A.CUST_NAME"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Customer Type", 
+            "type" : "sort",
+            "position" : "left",
+            "label" : "Customer Type",
             "name" : "D.DESCR"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "ID No.", 
+            "type" : "sort",
+            "position" : "left",
+            "label" : "ID No.",
             "name" : "A.ID_NO"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Negative Cause", 
+            "type" : "sort",
+            "position" : "left",
+            "label" : "Negative Cause",
             "name" : "B.DESCR"
         },
         {
-            "type" : "sort", 
-            "position" : "left", 
-            "label" : "Negative Type", 
+            "type" : "sort",
+            "position" : "left",
+            "label" : "Negative Type",
             "name" : "C.DESCR"
         },
         {
-            "type" : "sort", 
+            "type" : "sort",
             "position" : "center",
-            "label" : "Active", 
+            "label" : "Active",
             "name" : "A.IS_ACTIVE"
         },
         {
@@ -143,64 +143,64 @@
     ],
     "bodyList" : [
         {
-            "type" : "text", 
-            "position" : "left", 
+            "type" : "text",
+            "position" : "left",
             "property" : "NegCustNo"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
+            "type" : "text",
+            "position" : "left",
             "property" : "custNo"
         },
         {
-            "type" : "link", 
-            "position" : "left", 
+            "type" : "link",
+            "position" : "left",
             "property" : "custName",
             "path": "VIEW_NEG_CUST",
             "target": "_blank",
             "param": [
                 {
-                    "type" : "negativeCustId", 
-                    "property" : "negativeCustId" 
+                    "type" : "negativeCustId",
+                    "property" : "negativeCustId"
                 }
             ]
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "mrCustTypeCode" 
+            "type" : "text",
+            "position" : "left",
+            "property" : "mrCustTypeCode"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "idNo" 
+            "type" : "text",
+            "position" : "left",
+            "property" : "idNo"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "mrNegCustSource" 
+            "type" : "text",
+            "position" : "left",
+            "property" : "mrNegCustSource"
         },
         {
-            "type" : "text", 
-            "position" : "left", 
-            "property" : "mrNegCustType" 
+            "type" : "text",
+            "position" : "left",
+            "property" : "mrNegCustType"
         },
         {
-            "type" : "boolean", 
-            "position" : "center", 
-            "property" : "isActive" 
-        },
-        {
-            "type" : "action", 
+            "type" : "boolean",
             "position" : "center",
-            "action" : [ 
+            "property" : "isActive"
+        },
+        {
+            "type" : "action",
+            "position" : "center",
+            "action" : [
                 {
-                    "type" : "edit", 
-                    "path" : "CUST_NEG_DETAIL", 
-                    "param" : [ 
+                    "type" : "edit",
+                    "path" : "CUST_NEG_DETAIL",
+                    "param" : [
                         {
-                            "type" : "negativeCustId", 
-                            "property" : "negativeCustId" 
+                            "type" : "negativeCustId",
+                            "property" : "negativeCustId"
                         },
                         {
                             "type": "param",

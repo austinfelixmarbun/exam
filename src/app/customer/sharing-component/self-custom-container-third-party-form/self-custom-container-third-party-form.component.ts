@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
@@ -33,26 +33,26 @@ import { ReqGenerateTrxNoObj } from 'app/shared/model/master-sequence/req-genera
 import { ResGenerateTrxNoObj } from 'app/shared/model/master-sequence/res-generate-trx-no-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { data } from 'jquery';
+import { UcTemplateService } from '@adins/uctemplate';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-self-custom-container-third-party-form',
   templateUrl: './self-custom-container-third-party-form.component.html',
   styleUrls: ['./self-custom-container-third-party-form.component.css']
 })
-export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
+export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDestroy {
 
   IsCustLoaded: boolean = true;
   @Input() CustId: number = 0;
   @Input() parentForm: FormGroup;
-  @Input() MrCustTypeCode: string = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
-
   @Input() thirdPartyTrxNo: string = null;
   @Input() custObj: CustObj = new CustObj();
-
+  
   @Output() data: EventEmitter<any> = new EventEmitter<any>();
-  @Output() OutputUploadFile: EventEmitter<Array<CustDocFileFormObj>> = new EventEmitter<Array<CustDocFileFormObj>>();
-
+  
+  MrCustTypeCode: string = CommonConstant.MR_CUST_TYPE_CODE_PERSONAL;
   officeCode: string;
   IsUseDigitalization: string = "0";
   IsUseTs: Boolean = false;
@@ -69,6 +69,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   CustDocFileObjs: Array<CustDocFileObj> = new Array<CustDocFileObj>();
   sysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
+  subscriber: Subscription;
 
   readonly CustDataModeMain: string = CommonConstant.CustMainDataModeCust;
   readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
@@ -82,16 +83,10 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     private cookieService: CookieService, private modalService: NgbModal,
     private thirdPartyUploadService: ThirdPartyUploadService, 
     private UrlConstantNew: UrlConstantNew,
-    private adInsHelperService: AdInsHelperService) { }
+    private adInsHelperService: AdInsHelperService,
+    private ucTemplateSvc: UcTemplateService) { }
 
   async ngOnInit() {
-    // if (this.CustId == 0)
-    // {
-    //   this.IsCustLoaded = true
-    // }
-    console.log(this.parentForm.getRawValue())
-    // alert(this.MrCustTypeCode)
-
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.officeCode = context[CommonConstant.OFFICE_CODE];
     await this.getIsUseDigitalization();
@@ -101,6 +96,26 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
         await this.getCustDocFiles();
       }
       await this.getListDocumentToBeUpload();
+    }
+    this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
+      if (!ev.hasOwnProperty("pageId")) {
+        if (ev === "MrCustTypeCode") {
+          console.log("======", ev);
+          console.log("=======", this.parentForm);
+          const _a = this.parentForm.get(ev).value;
+          if (_a) {
+            this.MrCustTypeCode = _a;
+            console.log("======", this.MrCustTypeCode);
+            this.getListDocumentToBeUpload();
+          }
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscriber) {
+      this.subscriber.unsubscribe();
     }
   }
 
@@ -150,6 +165,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
   }
 
   async getListDocumentToBeUpload() {
+    this.CustDocFileFormObjs = new Array<CustDocFileFormObj>();
     let tempReq: ReqRefMasterByTypeCodeAndMappingCodeObj = new ReqRefMasterByTypeCodeAndMappingCodeObj();
     tempReq.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeCustDocType;
     tempReq.MappingCode = this.MrCustTypeCode;
@@ -176,8 +192,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
 
           this.CustDocFileFormObjs.push(custDocFileFormObj);
         }
-        // this.setDocFormCustMaritalTypeChanged();
-        // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+        this.setDocFormCustMaritalTypeChanged();
       }
     );
   }
@@ -403,19 +418,20 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
     });
   }
 
-  HandleFileInput(files: FileList, i) {
+  async HandleFileInput(files: FileList, i) {
     this.CustDocFileFormObjs[i].File = files.item(0);
-    this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+
+    let CustDocFileObjs: Array<CustDocFileObj>;
+    CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
 
     const data = {
-      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-      "UploadFile": this.CustDocFileFormObjs
+      "UploadFile": CustDocFileObjs
     }
 
     this.data.emit(data)
   }
   
-  HandleFileInputAsliRI(files: FileList, img:any, i) {
+  async HandleFileInputAsliRI(files: FileList, img:any, i) {
     if(img.target.files && img.target.files.length)
     {
       let file = img.target.files[0];
@@ -432,10 +448,11 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
       }
     }
     this.CustDocFileFormObjs[i].File = files.item(0);
-    // this.OutputUploadFile.emit(this.CustDocFileFormObjs);
+    let CustDocFileObjs: Array<CustDocFileObj>;
+    CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
+
     const data = {
-      "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-      "UploadFile": this.CustDocFileFormObjs
+      "UploadFile": CustDocFileObjs
     }
     this.data.emit(data)
   }
@@ -458,8 +475,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit {
           // this.OutputThirdPartyTrxNo.emit(this.thirdPartyTrxNo);
 
           const data = {
-            "ThirdPartyTrxNo": this.thirdPartyTrxNo,
-            "UploadFile": this.CustDocFileFormObjs
+            "ThirdPartyTrxNo": this.thirdPartyTrxNo
           }
           this.data.emit(data)
         }

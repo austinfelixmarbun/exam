@@ -284,6 +284,20 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvincePaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvinceDetail"
+        },
+      },
+      {
         path: PathConstant.CS_DISTRICT_PAGING,
         component: DistrictComponent,
         data: {
@@ -295,6 +309,20 @@ const routes: Routes = [
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictPaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictDetail"
         },
       },
       {
@@ -805,6 +833,38 @@ const routes: Routes = [
         data: {
           title: 'Insurance Claim Document Paging',
           page: 'InsuranceClaimDoc'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_ZIPCODE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Zipcode Detail',
+          page: 'ZipcodeDetail'
         },
       }
     ]

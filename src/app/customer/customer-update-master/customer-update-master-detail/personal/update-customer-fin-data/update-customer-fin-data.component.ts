@@ -23,6 +23,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Input() WfTaskListId: any;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   SourceIncomeList: Array<any>;
   AppCustFinData: UpdateCustPersonalFinDataObj;
   MainCustBankAcc: Array<any>;
@@ -53,7 +54,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.SourceIncomeList = new Array<any>();
@@ -336,6 +337,7 @@ export class UpdateCustomerFinDataComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustFinDataV2, formValue, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
+        this.router.navigate([NavigationConstant.SELF_CUSTOM_CUST_UPDATE_DATA_PAGING]);
       }
     ).catch(
       (error) => {
