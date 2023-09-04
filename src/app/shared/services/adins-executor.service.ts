@@ -9,6 +9,7 @@ import { addListVerfQuestionGrpD } from "../function/verification-function";
 import { addRefOfficeAreaMember } from "../function/office-area-function";
 import { saveOfficeGroupMember } from "../function/ref-office-function";
 import { saveListAuthForm } from "../function/role-function";
+import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("backCust", backCust);
     this.setExecutor("saveOfficeGroupMember", saveOfficeGroupMember);
     this.setExecutor("saveListAuthForm", saveListAuthForm)
+    this.setExecutor("addHolidaySchmDUntilYear", addHolidaySchmDUntilYear)
   }
 }

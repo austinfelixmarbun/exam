@@ -922,6 +922,37 @@ const routes: Routes = [
           title: 'OFFICE BANK ACCOUNT' ,
           page: 'Officebankaccaddress'
         } 
+      },      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday',
+          page: 'HolidaySchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Registration',
+          page: 'HolidaySchemeAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail',
+          page: 'HolidaySchemeDetailAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail Registration',
+          page: 'HolidaySchemeDetailRegistation'
+        },
       },
     ]
   }
