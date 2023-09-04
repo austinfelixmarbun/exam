@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: PathConstant.SELF_CUSTOM_VIEW_CUST,
         loadChildren: () => import('./self-custom-cust-view/self-custom-cust-view.module').then(m => m.SelfCustomCustViewModule)
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_PEFINDO,
+        loadChildren: () => import('./self-custom-pefindo-view/self-custom-pefindo-view.module').then(m => m.SelfCustomPefindoViewModule)
       }
     ]
   }
