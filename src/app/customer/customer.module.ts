@@ -100,6 +100,7 @@ import { SelfCustomCustomerEmergencyContactComponent } from './customer-personal
 import { SelfCustomContainerFamilyListingComponent } from './sharing-component/self-custom-container-family-listing/self-custom-container-family-listing.component';
 import { CustomCustomerCompanyAddressComponent } from './customer-company/custom-customer-company-address/custom-customer-company-address.component';
 import { CustomShareholderListingComponent } from './sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
+import { SelfCustomPefindoViewModule } from 'app/view/self-custom-pefindo-view/self-custom-pefindo-view.module';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -145,6 +146,7 @@ export const customCurrencyMaskConfig = {
         NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
         UcdropdownlistModule,
         SelfCustomCustViewModule,
+        SelfCustomPefindoViewModule,
         UcTemplateModule
     ],
     declarations: [

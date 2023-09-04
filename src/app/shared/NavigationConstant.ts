@@ -140,6 +140,7 @@ export class NavigationConstant {
     public static VIEW_SRVY_ORDER = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_SRVY + "/" + PathConstant.VIEW_SRVY_ORDER; //'/View/Survey/SurveyOrder'
     public static VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.VIEW_CUST; //'View/Customer'
     public static SELF_CUSTOM_VIEW_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST; //'View/SelfCustomCustomer'
+    public static SELF_CUSTOM_VIEW_PEFINDO = "/" + PathConstant.CR_VIEW + "/" + PathConstant.SELF_CUSTOM_VIEW_PEFINDO; //View/SelfCustomPefindo'
     public static VIEW_CUST_ADDR = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_ADDR; //'/View/Customer/Address'
     public static VIEW_CUST_GRP = NavigationConstant.VIEW_CUST + "/" + PathConstant.VIEW_CUST_GRP; //'/View/Customer/CustomerGroup'
     public static VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.VIEW_CUST + "/" +PathConstant.VIEW_CUST_PERSONAL_DETAIL; //'/View/Customer/PersonalDetail'
@@ -407,6 +408,8 @@ export class NavigationConstant {
     public static PEFINDO_INQUIRIES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_INQUIRIES; //'/View/Pefindo/Inquiries'
     public static PEFINDO_DISPUTES = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_DISPUTES; //'/View/Pefindo/Disputes'
     public static PEFINDO_FINANCIAL_STATEMENTS = "/" + NavigationConstant.VIEW_PEFINDO + "/" + PathConstant.VIEW_FINANCIAL_STATEMENTS; //'/View/Pefindo/FinancialStatements'
+
+    public static SELF_CUSTOM_VIEW_PEFINDO_VIEW = "/" + NavigationConstant.SELF_CUSTOM_VIEW_PEFINDO + "/" + PathConstant.SELF_CUSTOM_VIEW_PEFINDO_VIEW; //View/SelfCustomPefindo/SelfCustom/Pefindo'
     //#endregion
 
     //#region System User

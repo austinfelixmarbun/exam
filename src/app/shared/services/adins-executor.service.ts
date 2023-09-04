@@ -1,7 +1,7 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
 import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
-import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, editCustomer } from "../function/customer-function";
+import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { rerunJournal } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
@@ -31,6 +31,7 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("rerunJournal", rerunJournal);
     this.setExecutor("addListVerfSchemeD", addListVerfSchemeD);
     this.setExecutor("addListVerfQuestionGrpD", addListVerfQuestionGrpD)
+    this.setExecutor("backFromCustDuplicate", backFromCustDuplicate);
     this.setExecutor("addCustomerPersonalAfterDuplicate", addCustomerPersonalAfterDuplicate);
     this.setExecutor("addCustomerCompanyAfterDuplicate", addCustomerCompanyAfterDuplicate);
     this.setExecutor("backCust", backCust);

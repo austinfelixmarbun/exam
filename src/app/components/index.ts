@@ -1,7 +1,6 @@
 export {BankComponent} from '../bank/bank.component';
 export {EmployeeAddComponent} from '../employee/employee-add/employee-add.component';
 export{SelfCustomContainerNewCustHeaderComponent} from "app/customer/sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component";
-export{ThirdPartyFormComponent} from "app/customer/sharing-component/new-cust-component/component/third-party-form/third-party-form.component";
 export{SelfCustomContainerThirdPartyFormComponent} from "app/customer/sharing-component/self-custom-container-third-party-form/self-custom-container-third-party-form.component";
 export{SelfCustomContainerCustAttrComponent} from "app/customer/sharing-component/self-custom-container-cust-attr/self-custom-container-cust-attr.component";
 export{SelfCustomCustomerPersonalAddressComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-personal-address/self-custom-customer-personal-address.component";
@@ -39,3 +38,4 @@ export{SelfCustomContainerFamilyListingComponent} from "app/customer/sharing-com
 export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component";
 export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view/custom-document-survey-task-view/custom-document-survey-task-view.component';
 export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
+export { PefindoViewPefindoScoreComponent } from 'app/view/pefindo-view/pefindo-view-pefindo-score/pefindo-view-pefindo-score.component';

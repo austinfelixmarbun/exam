@@ -605,6 +605,7 @@ export class PathConstant {
     public static CUSTOM_VIEW_NEG_CUST = PathConstant.SELF_CUSTOM + "/" + PathConstant.VIEW_NEG_CUST;
     public static SELF_CUSTOM_VIEW_CUST = "SelfCustomCustomer";
     public static CUSTOM_VIEW_NEG_CUST_PERSONAL = "SelfCustomNegativeCustomerViewPersonalComponent"
+    public static SELF_CUSTOM_VIEW_PEFINDO = "SelfCustomPefindo";
     //#endregion
 
     //#region View-Vendor-Module
@@ -703,6 +704,7 @@ export class PathConstant {
     //#endRegion
 
     //#region PEFINDO view
+    public static SELF_CUSTOM_VIEW_PEFINDO_VIEW = PathConstant.SELF_CUSTOM + "/" + "Pefindo";
     public static VIEW_SUBJECT_INFO_PERSONAL = "SubjectInfoPersonal";
     public static VIEW_SUBJECT_INFO_COMPANY = "SubjectInfoCompany";
     public static VIEW_MO_SUMMARY = "MoSummary";
