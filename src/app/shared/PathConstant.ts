@@ -258,6 +258,14 @@ export class PathConstant {
     public static CUSTOM_CS_REF_TAX_OFFICE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_ZIPCODE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_ZIPCODE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_CURRENCY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_CURRENCY_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;
+    public static CUSTOM_CS_COA_SCHM_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA_SCHM + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_COA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/AccDetail";
+
     //#endregion
 
     //#region Cust

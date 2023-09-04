@@ -838,7 +838,63 @@ const routes: Routes = [
           title: 'Zipcode Detail',
           page: 'ZipcodeDetail'
         },
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_CS_CURRENCY_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Currency',
+          page: 'Currency'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_CURRENCY_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Currency add',
+          page: 'CurrencyRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_SCHM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA Scheme',
+          page: 'CoaScheme'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coa'
+        },
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_PAGING,
+         component: UcTemplateComponent,
+          data: { 
+            title: 'OFFICE BANK ACCOUNT' ,
+            page: 'OfficeBankAcc'
+        } 
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_DETAIL, 
+        component: UcTemplateComponent, 
+        data: { 
+          title: 'OFFICE BANK ACCOUNT' ,
+          page: 'Officebankaccdetail'
+        } 
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL, 
+        component: UcTemplateComponent, 
+        data: { 
+          title: 'OFFICE BANK ACCOUNT' ,
+          page: 'OfficeBankAccDetail'
+        } 
+      },
     ]
   }
 ];
