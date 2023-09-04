@@ -920,7 +920,7 @@ const routes: Routes = [
         component: UcTemplateComponent, 
         data: { 
           title: 'OFFICE BANK ACCOUNT' ,
-          page: 'OfficeBankAccDetail'
+          page: 'Officebankaccaddress'
         } 
       },
     ]
