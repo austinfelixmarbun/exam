@@ -132,6 +132,7 @@ export class NavigationConstant {
     public static SYSTEM_SETTING_REF_USER = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_USER; //'/SystemSetting/RefUser'
     public static SYSTEM_SETTING_ATTR_MSTR_PAGING = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.SYS_ATTR_PAGING; //'/SystemSetting/Attribute/Paging'
     public static CUSTOM_SYSTEM_SETTING_ROLE_FORM = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CUSTOM_ROLE_FORM_PAGING; //'/SystemSetting/RoleForm'
+    public static CUSTOM_SYSTEM_SETTING_FORM_ROLE = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CUSTOM_REF_FORM_ROLE_MAP_PAGING; //'/SystemSetting/RefForm/RoleMapping/Add'
     //#endregion
 
     //#region View

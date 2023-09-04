@@ -209,7 +209,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUSTOM_REF_FORM_DETAIL,
-        component: RefFormDetailComponent,
+        component: UcTemplateComponent,
         data: {
           title: 'Form Detail',
           page: 'FormDetail'
@@ -217,7 +217,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUSTOM_REF_FORM_ROLE_MAP_PAGING,
-        component: RefFormRolePagingComponent,
+        component: UcTemplateComponent,
         data: {
           title: 'Form Role Paging',
           page: 'FormRolePaging'
@@ -225,7 +225,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUSTOM_REF_FORM_ROLE_MAP_DETAIL,
-        component: RefFormRoleMappingComponent,
+        component: UcTemplateComponent,
         data: {
           title: 'Form Role Detail',
           page: 'FormRoleDetail'
