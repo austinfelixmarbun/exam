@@ -45,6 +45,10 @@ export class AdInsHelperService {
 			window.open(this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
 	}
 
+  public OpenViewNegativeCustomerPersonal(negativeCustId: number){
+    window.open(NavigationConstant.VIEW_CUSTOM_CUST_NEG_PERSONAL + "?negativeCustId=" + negativeCustId, "_blank");
+  }
+
 	public ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
         var url = this.UrlConstantNew.LogoutAuth;
         http.post(url, {}).subscribe();

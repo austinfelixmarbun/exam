@@ -31,11 +31,7 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
         this.pageName = "CustomerShareholderCompanyMainDataRegistration"
         return;
       }
-      if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && params["From"] != CommonConstant.CustFromCustFamily && params["From"] != CommonConstant.CustFromCustShareholder) {
-        this.pageName = "CustomerMainDataRegistration"
-        return;
-      }
-      if (params["MrCustTypeCode"] == CommonConstant.CustTypeCompany && params["From"] != CommonConstant.CustFromCustShareholder) {
+      if (params["From"] != CommonConstant.CustFromCustFamily && params["From"] != CommonConstant.CustFromCustShareholder) {
         this.pageName = "CustomerMainDataRegistration"
         return;
       }

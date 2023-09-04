@@ -166,7 +166,71 @@ const routes: Routes = [
           title: 'Attribute Detail',
           page: 'Sysattrdetail'
         },
-      }
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Paging',
+          page: 'Rolepaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Detail',
+          page: 'Roledetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_FORM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Form Paging',
+          page: 'Roleformpaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ROLE_FORM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Form Detail',
+          page: 'Roleformdetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Form Paging',
+          page: 'FormPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_DETAIL,
+        component: RefFormDetailComponent,
+        data: {
+          title: 'Form Detail',
+          page: 'FormDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_ROLE_MAP_PAGING,
+        component: RefFormRolePagingComponent,
+        data: {
+          title: 'Form Role Paging',
+          page: 'FormRolePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_ROLE_MAP_DETAIL,
+        component: RefFormRoleMappingComponent,
+        data: {
+          title: 'Form Role Detail',
+          page: 'FormRoleDetail'
+        },
+      },
     ]
   }
 ];

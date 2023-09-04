@@ -13,7 +13,7 @@ import { VerificationQuestionSchemeMemberEditComponent } from './verification-qu
 import { VerificationQuestionGroupPagingComponent } from './verification-question-group/verification-question-group-paging/verification-question-group-paging.component';
 import { VerificationQuestionAnswerPagingComponent } from './verification-question-answer/verification-question-answer-paging/verification-question-answer-paging.component';
 import { PathConstant } from 'app/shared/PathConstant';
-
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -122,6 +122,112 @@ const routes: Routes = [
         component: VerificationQuestionSchemeMemberEditComponent,
         data: {
           title: 'Verification Question Scheme Member Edit'
+        },
+      },
+
+      {
+        path: PathConstant.SELF_CUSTOM_QA_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionAnswer"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionAnswerDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionAnswerDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionGroup"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionGroupDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionGroupDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_MBR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionGroupMember"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_MBR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionGroupMemberAdd"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_GRP_MBR_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          page: "Verificationquestiongroupmembereditseqno"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionScheme"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionSchemeDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionSchemeDetail"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_MBR_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionSchemeMember"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_MBR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionSchemeMemberAdd"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_QA_SCHM_MBR_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          page: "VerificationQuestionSchemeMemberEditSeqNo"
         },
       }
     ]

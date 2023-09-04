@@ -25,7 +25,7 @@ export function addRangeAssetSchmD(AssetSchmHId: any, listTemp: any[], api: any,
   http.post(url, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
     response => {
       toastr.successMessage(response['message']);
-      AdInsHelper.RedirectUrl(router,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": AssetSchmHId });
+      AdInsHelper.RedirectUrl(router,[NavigationConstant.SELF_CUSTOM_ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": AssetSchmHId });
     }
   );
 }

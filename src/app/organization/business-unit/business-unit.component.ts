@@ -17,6 +17,6 @@ export class BusinessUnitComponent implements OnInit {
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchBusinessUnit.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchBusinessUnit.json";
-    
+
   }
 }

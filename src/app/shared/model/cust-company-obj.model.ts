@@ -25,4 +25,5 @@ export class CustCompanyObj {
   IsAffiliateWithMf: boolean;
   RefSectorEconomySlikId: number;
   ParentCustId: number;
+  RowVersion: string;
 }

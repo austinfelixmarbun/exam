@@ -284,6 +284,20 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvincePaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvinceDetail"
+        },
+      },
+      {
         path: PathConstant.CS_DISTRICT_PAGING,
         component: DistrictComponent,
         data: {
@@ -295,6 +309,20 @@ const routes: Routes = [
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictPaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictDetail"
         },
       },
       {
