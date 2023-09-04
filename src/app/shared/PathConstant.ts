@@ -233,6 +233,11 @@ export class PathConstant {
     public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
 
+    public static CS_SELF_CUSTOM_HOLIDAY = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY;
+    public static CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY + "/" + PathConstant.ADD_EDIT;
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL;
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL + "/" + PathConstant.ADD_EDIT;
+
     public static CS_CUSTOM_ECONOMIC_SECTOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_MASTER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_MASTER + "/" + PathConstant.PAGING;
@@ -265,6 +270,14 @@ export class PathConstant {
     public static CUSTOM_CS_REF_TAX_OFFICE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_ZIPCODE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_ZIPCODE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ZIPCODE + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_CURRENCY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_CURRENCY + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_CURRENCY_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_CURRENCY + "/" + PathConstant.ADD;
+    public static CUSTOM_CS_COA_SCHM_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA_SCHM + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_COA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.PAGING;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/AccDetail";
+
     //#endregion
 
     //#region Cust

@@ -112,6 +112,11 @@ export class NavigationConstant {
     public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
     public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
     public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
+
+    public static CS_SELF_CUSTOM_HOLIDAY = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY; //'/CommonSetting/SelfCustom/Holiday'
+    public static CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/AddEdit'
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL; //'/CommonSetting/SelfCustom/Holiday/Detail'
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/Detail/AddEdit'
     //#endregion
 
     //#region System Setting

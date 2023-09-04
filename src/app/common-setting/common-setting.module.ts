@@ -102,6 +102,7 @@ import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/pay
 import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
+import { SelfCustomContainerHolidayDetailComponent } from './holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -222,6 +223,7 @@ export const customCurrencyMaskConfig = {
     PaymentAllocGroupHPagingComponent,
     PaymentAllocGroupDDetailComponent,
     PaymentAllocGroupDPagingComponent,
+    SelfCustomContainerHolidayDetailComponent,
   ],
   providers: [
     { provide: UcTemplateService, useClass: AdinsTemplateService }
