@@ -464,6 +464,10 @@ export class PathConstant {
     public static CUSTOM_ROLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE + "/" + PathConstant.DETAIL;
     public static CUSTOM_ROLE_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + "RoleForm" + "/" + PathConstant.PAGING;
     public static CUSTOM_ROLE_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.PAGING;
+    public static CUSTOM_REF_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_ROLE_MAP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.PAGING;
+    public static CUSTOM_REF_FORM_ROLE_MAP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region Upload-Module
