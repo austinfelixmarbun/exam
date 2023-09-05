@@ -888,7 +888,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'autodebit',
+    path: 'autodebitpay',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
