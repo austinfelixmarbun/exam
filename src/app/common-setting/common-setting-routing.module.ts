@@ -922,12 +922,68 @@ const routes: Routes = [
           title: 'OFFICE BANK ACCOUNT' ,
           page: 'Officebankaccaddress'
         } 
-      },{
+      },
+      {
         path: PathConstant.CUSTOM_CS_COA_DETAIL,
         component: UcTemplateComponent,
         data: {
           title: 'COA',
           page: 'Coadetail'
+        }
+      },      
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday',
+          page: 'HolidaySchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Registration',
+          page: 'HolidaySchemeAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail',
+          page: 'HolidaySchemeDetailAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail Registration',
+          page: 'HolidaySchemeDetailRegistation'
+        },
+      },      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour',
+          page: 'WorkingHourSchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Add Edit',
+          page: 'WorkingHourHDetail'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Detail',
+          page: 'WorkingHourDDetail'
         },
       },
       {

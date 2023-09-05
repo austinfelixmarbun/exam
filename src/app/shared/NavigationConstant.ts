@@ -112,6 +112,14 @@ export class NavigationConstant {
     public static CS_REF_TAX_OFFICE_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_TAX_OFFICE + "/" + PathConstant.DETAIL; //'/CommonSetting/TaxOffice/Detail'
     public static CS_REF_INS_CLAIM_DOC_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_PAGING; //'/CommonSetting/RefInsClaimDoc/Paging'
     public static CS_REF_INS_CLAIM_DOC_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_REF_INS_CLAIM_DOC_DETAIL; //'/CommonSetting/RefInsClaimDoc/Detail'
+
+    public static CS_SELF_CUSTOM_HOLIDAY = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY; //'/CommonSetting/SelfCustom/Holiday'
+    public static CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/AddEdit'
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL; //'/CommonSetting/SelfCustom/Holiday/Detail'
+    public static CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/Detail/AddEdit'
+    public static CS_SELF_CUSTOM_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR; //'/CommonSetting/SelfCustom/WorkingHour'
+    public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD; //'/CommonSetting/SelfCustom/WorkingHour/Add'
+    public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL; //'/CommonSetting/SelfCustom/WorkingHour/Detail'
     //#endregion
 
     //#region System Setting
@@ -132,6 +140,7 @@ export class NavigationConstant {
     public static SYSTEM_SETTING_REF_USER = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.REF_USER; //'/SystemSetting/RefUser'
     public static SYSTEM_SETTING_ATTR_MSTR_PAGING = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.SYS_ATTR_PAGING; //'/SystemSetting/Attribute/Paging'
     public static CUSTOM_SYSTEM_SETTING_ROLE_FORM = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CUSTOM_ROLE_FORM_PAGING; //'/SystemSetting/RoleForm'
+    public static CUSTOM_SYSTEM_SETTING_FORM_ROLE = "/" + PathConstant.LR_SYSTEM_SETTING + "/" + PathConstant.CUSTOM_REF_FORM_ROLE_MAP_PAGING; //'/SystemSetting/RefForm/RoleMapping/Add'
     //#endregion
 
     //#region View
