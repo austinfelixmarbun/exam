@@ -165,6 +165,22 @@ const routes: Routes = [
           page: "SurveyTaskAssignmentDetail"
         }
       },
+      {
+        path: PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGING,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Task Result Paging',
+          page: 'SurveyTaskResultPaging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGE,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Task Result Detail',
+          page: 'SurveyTaskResultPage'
+        }
+      },
     ]
   }
 ];

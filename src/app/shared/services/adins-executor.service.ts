@@ -13,6 +13,7 @@ import { saveListAuthForm_Form } from "../function/form-function";
 import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 import { ApprovalTaskService } from "./ApprovalTask.service";
 import { callBackVendorPagingApproval } from "../function/approval-function";
+import { endStepperSrvyTaskDetail } from "../function/survey-function";
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveListAuthForm_Form", saveListAuthForm_Form);
     this.setExecutor("addHolidaySchmDUntilYear", addHolidaySchmDUntilYear);
     this.setExecutor("callBackVendorPagingApproval", callBackVendorPagingApproval);
+    this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
   }
 }
