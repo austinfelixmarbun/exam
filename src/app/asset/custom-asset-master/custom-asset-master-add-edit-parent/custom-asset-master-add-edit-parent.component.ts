@@ -40,15 +40,7 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
 
   constructor(private http: HttpClient, private templateService: UcTemplateService, private UrlConstantNew: UrlConstantNew, private fb: FormBuilder, private ddlSvc: FormDropDownListService) {}
 
-  // ngOnDestroy(): void {
-  //   if (this.valueSub) {
-  //     this.valueSub.unsubscribe();
-  //   }
-  // }
-
   ngAfterViewInit(): void {
-    // console.log("masook: ", this.data.emit({ListAssetScheme: []}));
-    // this.data.emit({ListAssetScheme: []});
   }
 
   onFormCreate(ev) {
@@ -56,18 +48,7 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
   }
 
   ngOnInit(): void {
-    console.log("masook");
-
-    // this.pageName = ''
-    // this.valueSub = this.templateService.callback.subscribe(key => {
-    //   if (!event.hasOwnProperty('pageId')) {
-    //     console.log('event', key);
-    //     const value = this.parentForm.get(key).value;
-    //     this.checkFinal(value);
-    //     this.getListAssetCategory(value);
-    //   }
-    // });
-    
+    console.log("masook");    
   }
 
   callback(ev: any) {
@@ -105,40 +86,8 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
       (response) => {
         this.resultAssetCategory = response[CommonConstant.ReturnObj];
         console.log("resultAssetCategory", this.resultAssetCategory)
-        // if (this.resultAssetCategory.length == 0) {
-        //   this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
-        // } else {
-        //   this.AssetMasterParentForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
-        // }
         this.ddlSvc.SetDictDDL("AssetCategoryId", this.resultAssetCategory);
       });
   }
-  
-  // checkFinal(key: string){
-  //   if (this.AssetTypeId === key && key !== '') {
-  //     return;
-  //   }
-    
-  //   this.AssetTypeId = key;
-  //   const request = {
-  //     Id: this.AssetTypeId
-  //   };
-  //   console.log("checkFinal");
-  //   this.http.post(this.UrlConstantNew.GetAssetTypeById, request)
-  //   .subscribe(res => {
-  //     console.log('MaxHierarchyLevel', res['MaxHierarchyLevel']);
-
-  //       if ( res['MaxHierarchyLevel'] == 1) {
-  //         this.isFinal = true;
-  //         // this.AssetMasterParentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
-  //         // this.AssetMasterParentForm.controls['AssetCategoryId'].updateValueAndValidity();
-  //       }
-  //       else {
-  //         this.isFinal = false;
-  //       }
-  //     this.parentForm.get('IsFinal').setValue(this.isFinal);
-
-  //   })
-  // }
 
 }
