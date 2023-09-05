@@ -38,7 +38,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
       this.requestTaskModel.OfficeRoleCodes = [UserAccess[CommonConstant.ROLE_CODE],
                                                UserAccess[CommonConstant.OFFICE_CODE],
                                                UserAccess[CommonConstant.ROLE_CODE] + "-" + UserAccess[CommonConstant.OFFICE_CODE]];
-      
+
       this.IntegrationObj.baseUrl = this.UrlConstantNew.GetAllTaskWorkflow;
       this.IntegrationObj.requestObj = this.requestTaskModel;
       this.IntegrationObj.leftColumnToJoin = "UploadNo";
@@ -51,7 +51,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
       this.inputPagingObj.pagingJson = "./assets/ucpaging/searchReviewUploadNegativeCustomer.json";
     }
   }
-  
+
   cancel(ev) {
     var wfObj = new WorkflowApiObj();
     wfObj.TaskListId = ev.RowObj.ProcessInstanceId;
@@ -62,7 +62,7 @@ export class ReviewUploadNegativeCustomerPagingComponent implements OnInit {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
-      }); 
+      });
       }
     );
   }

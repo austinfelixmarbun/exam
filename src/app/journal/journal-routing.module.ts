@@ -12,6 +12,9 @@ import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-rec
 import { JournalResultComponent } from "./journal-result/journal-result.component";
 import { UploadJournalPagingComponent } from './upload-journal/upload-journal-paging.component';
 import {UploadJournalDetailComponent} from './upload-journal/upload-journal-detail.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
+import { SelfCustomUploadJournalPagingComponent} from './self-custom-upload-journal/self-custom-upload-journal-paging.component';
+import { SelfCustomUploadJournalDetailComponent } from './self-custom-upload-journal/self-custom-upload-journal-detail.component';
 
 const routes: Routes = [
     { path: PathConstant.JOURNAL_MEDIA_PAGING, component: JournalMediaPagingComponent },
@@ -24,7 +27,19 @@ const routes: Routes = [
     { path: PathConstant.JOURNAL_RESULT, component: JournalResultComponent },
     { path: PathConstant.JOURNAL_RECONCILE_PAGING, component: JournalReconcilePagingComponent },
     { path: PathConstant.UPLOAD_JOURNAL_FILE_PAGING, component: UploadJournalPagingComponent },
-    { path: PathConstant.UPLOAD_JOURNAL_FILE_DETAIL, component: UploadJournalDetailComponent }
+    { path: PathConstant.UPLOAD_JOURNAL_FILE_DETAIL, component: UploadJournalDetailComponent },
+
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_PAGING, component: UcTemplateComponent, data: { page: "JournalMediaSetting" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_DETAIL, component: UcTemplateComponent, data: { page: "JournalMediaEntitySetting" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_HEADER_FACT, component: UcTemplateComponent, data: { page: "JournalMediaHeaderFactSetting" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_GROUP, component: UcTemplateComponent, data: { page: "JournalMediaGroupSetting" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_GROUP_FACT, component: UcTemplateComponent, data: { page: "JournalMediaGroupFactSetting" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_GROUP_ITEM_VALUE, component: UcTemplateComponent, data: { page: "JournalMediaItemValueSetting" } },
+    { path: PathConstant.SELF_CUSTOM_FAILED_JOURNAL_RESULT_LIST_PAGING, component: UcTemplateComponent, data: { page: "FailedJournalResultList" } },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_RESULT, component: UcTemplateComponent, data: { page: "JournalResult"} },
+    { path: PathConstant.SELF_CUSTOM_JOURNAL_RECONCILE_PAGING, component: UcTemplateComponent, data: { page: "JournalReconcile" } },
+    { path: PathConstant.SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING, component: SelfCustomUploadJournalPagingComponent, data: { page: "JournalExcelFiles" } },
+    { path: PathConstant.SELF_CUSTOM_UPLOAD_JOURNAL_FILE_DETAIL, component: SelfCustomUploadJournalDetailComponent, data: { page: "JournalExcelFilesDetail" } }
 ];
 @NgModule({
     imports: [RouterModule.forChild(routes)],

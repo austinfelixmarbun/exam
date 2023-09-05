@@ -21,6 +21,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 export class UpdateCustomerCompanyFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppCompanyFinData: UpdateCustCompanyFinDataObj;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   MainCustBankAcc: Array<any>;
@@ -60,15 +61,15 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
     CurrRatio: [0],
     RowVersion: ['']
   });
-  
+
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
   constructor(
-    private http: HttpClient, 
-    private toastr: NGXToastrService, 
+    private http: HttpClient,
+    private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private router: Router, 
+    private router: Router,
     private UrlConstantNew: UrlConstantNew
-  ) { 
+  ) {
     this.ResponseTab = new EventEmitter<any>();
     this.MainCustBankAcc = new Array<any>();
     this.AppCustBankAcc = new Array<any>();
@@ -114,7 +115,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
           });
           for (const main of this.MainCustBankAcc) {
             if(item["RefBankId"] == main["RefBankId"] &&
-                item["BankAccNo"] == main["BankAccNo"] && 
+                item["BankAccNo"] == main["BankAccNo"] &&
                 item["BankAccName"] == main["BankAccName"]){
                 isMasterData = true;
 
@@ -136,7 +137,7 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
                         isMasterStmnt = false;
                         break;
                       }
-                    } 
+                    }
                   }
                 }
                 else{
@@ -271,6 +272,20 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
         console.log(error);
       }
     );
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    this.next.emit({Actions: actions});
   }
 
 }

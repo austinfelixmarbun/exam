@@ -102,18 +102,18 @@ import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/pay
 import { PaymentAllocGroupDDetailComponent } from './payment-alloc-group-new/payment-alloc-group-d-detail/payment-alloc-group-d-detail.component';
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
+import { SelfCustomContainerHolidayDetailComponent } from './holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
+import { SelfCustomContainerWorkingHourDDetailComponent } from './working-hour-scheme/self-custom-container-working-hour-d-detail/self-custom-container-working-hour-d-detail.component';
 
-
-
-export const customCurrencyMaskConfig = {     
-  align: "right",     
-  allowNegative: true,     
-  allowZero: true,     
-  decimal: ".",     
-  precision: 0,  
-  prefix: "",     
-  suffix: "",     
-  thousands: ",",     
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: true,
+  allowZero: true,
+  decimal: ".",
+  precision: 0,
+  prefix: "",
+  suffix: "",
+  thousands: ",",
   nullable: false,
   inputMode: CurrencyMaskInputMode.NATURAL
 };
@@ -224,6 +224,8 @@ export const customCurrencyMaskConfig = {
     PaymentAllocGroupHPagingComponent,
     PaymentAllocGroupDDetailComponent,
     PaymentAllocGroupDPagingComponent,
+    SelfCustomContainerHolidayDetailComponent,
+    SelfCustomContainerWorkingHourDDetailComponent,
   ],
   providers: [
     { provide: UcTemplateService, useClass: AdinsTemplateService }

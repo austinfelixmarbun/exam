@@ -51,9 +51,36 @@
         },
         {
             "type": "datepicker",
+            "label": "AP Due Date >=",
+            "name": "AP.ACC_PAYABLE_DUE_DT",
+            "id": "AccPayableDueDt",
+            "value": "",
+            "restriction": "gte",
+            "datatype": "date"
+        },
+        {
+            "type": "datepicker",
             "label": "AP Due Date <=",
             "name": "AP.ACC_PAYABLE_DUE_DT",
             "id": "AccPayableDueDt",
+            "value": "",
+            "restriction": "lte",
+            "datatype": "date"
+        },
+        {
+            "type": "datepicker",
+            "label": "Invoice Date >=",
+            "name": "AP.INVOICE_DT",
+            "id": "InvoiceDt",
+            "value": "",
+            "restriction": "gte",
+            "datatype": "date"
+        },
+        {
+            "type": "datepicker",
+            "label": "Invoice Date <=",
+            "name": "AP.INVOICE_DT",
+            "id": "InvoiceDt",
             "value": "",
             "restriction": "lte",
             "datatype": "date"
@@ -72,15 +99,6 @@
             "path": "/RefCurr/GetListKvpActiveRefCurr",
             "items": [],
             "itemsUrl": []
-        },
-        {
-            "type": "datepicker",
-            "label": "Invoice Date <=",
-            "name": "AP.INVOICE_DT",
-            "id": "InvoiceDt",
-            "value": "",
-            "restriction": "lte",
-            "datatype": "date"
         },
         {
             "type": "textbox",

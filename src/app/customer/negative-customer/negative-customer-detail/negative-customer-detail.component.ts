@@ -98,7 +98,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
-    private cookieService: CookieService, 
+    private cookieService: CookieService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {

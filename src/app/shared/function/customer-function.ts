@@ -24,6 +24,8 @@ import { ReqNegDupObj } from "../model/new-cust/req-neg-dup-obj.model";
 import { ReqCoyObj } from "../model/new-cust/req-coy-obj.model";
 import { CustCompanyObj } from "../model/cust-company-obj.model";
 import { ExceptionConstant } from "../constant/ExceptionConstant";
+import { FormGroup } from "@angular/forms";
+import { UcTemplateService } from "@adins/uctemplate";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -317,6 +319,7 @@ function SaveCustCompany(parentForm: any, dicts: Record<string, any>, Mode: stri
   reqSubmitObj.CustCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId;
   reqSubmitObj.CustCompanyObj.RegistrationNo = dicts.RegistrationNo;
   reqSubmitObj.CustCompanyObj.Website = dicts.Website;
+  reqSubmitObj.CustCompanyObj.RowVersion = dicts.RowVersionCustCompany;
 
   reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
 
@@ -352,6 +355,7 @@ function SaveCustCompany(parentForm: any, dicts: Record<string, any>, Mode: stri
 
   reqSubmitObj = SetCustomerCompanyDataMode(reqSubmitObj, Mode, From);
 
+  reqSubmitObj.CustDocFileObjs = new Array<CustDocFileObj>();
   if (dicts.UploadFile != undefined)
   {
     reqSubmitObj.CustDocFileObjs = dicts.UploadFile;
@@ -493,6 +497,16 @@ export function addCustToDuplicate(parentForm: any, dicts: Record<string, any>, 
   dicts["AddCustForm"] = parentForm;
   dicts["CustDuplicate"] = dicts.ReturnObject.CustDuplicate;
   dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
+  dicts["mode"] = "edit";
+
+  localStorage.setItem('dicts', JSON.stringify(dicts)); // notes: set dicts ke localStorage dulu untuk kirim dicts ke page yang berbeda
+  AdInsHelper.RedirectUrl(router, [next], {}, true);
+}
+
+export function backFromCustDuplicate(dicts: Record<string, any>, next: string, router: Router)
+{
+  dicts["mode"] = dicts.ReqSubmitObj.CustObj.MrCustTypeCode == CommonConstant.CustTypePersonal? "addeditPersonal" : "addeditCompany";
+  dicts["MrCustTypeCode"] = dicts.ReqSubmitObj.CustObj.MrCustTypeCode;
 
   localStorage.setItem('dicts', JSON.stringify(dicts)); // notes: set dicts ke localStorage dulu untuk kirim dicts ke page yang berbeda
   AdInsHelper.RedirectUrl(router, [next], {}, true);
@@ -510,12 +524,13 @@ export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mod
 
     if (dicts.CustId != 0)
     {
+
       var reqPayload = separateFileUpload(reqSubmitObj);
       var resSave;
       http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           resSave = response;
-          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], dicts.CustId, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
         });
     }
     else
@@ -537,7 +552,7 @@ export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mod
       http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           resSave = response;
-          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], resSave.Id, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], dicts.CustId, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
         });
     }
     else
@@ -629,10 +644,10 @@ export function addCustomerCompanyAfterDuplicate(dicts: Record<string, any>, Row
     reqEditDupCheck.CustDataMode = Mode;
     reqEditDupCheck.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
 
-    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
+    if (Mode == CommonConstant.CustMainDataModeMgmntShrholder) {
       reqEditDupCheck.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
     }
-    reqEditDupCheck.CustDocFileObjs = this.DupCheckCoyObj.CustDocFileObjs;
+    reqEditDupCheck.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
 
     let reqPayload = separateFileUpload(reqEditDupCheck);
     let resSave: GenericObj;
@@ -653,7 +668,7 @@ export function addCustomerCompanyAfterDuplicate(dicts: Record<string, any>, Row
     NegativeCustObj.ThirdPartyTrxNo = dicts.ReqSubmitObj.CustObj.ThirdPartyTrxNo;
     NegativeCustObj.CustDocFileObjs = dicts.ReqSubmitObj.CustDocFileObjs;
 
-    if (this.CustDataMode == CommonConstant.CustMainDataModeMgmntShrholder) {
+    if (Mode == CommonConstant.CustMainDataModeMgmntShrholder) {
       NegativeCustObj.CustCompanyMgmntShrholderObj = dicts.ReqSubmitObj.CustCompanyMgmntShrholderObj;
     }
 
@@ -743,64 +758,112 @@ export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: num
     })
 }
 
-export function addEditCustJobData(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
+export function addEditCustJobData(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, templateService: UcTemplateService)
 {
   let url = environment.FoundationR3Url + api;
 
   let reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
   let custPersonalJobDataObj = new CustPersonalJobDataObj();
-  let jobAddressObj = new CustAddrObj();
-  let othBizAddrObj = new CustAddrObj();
-  let preJobAddressObj = new CustAddrObj;
 
-  if (parentForm.MrCustModelCode == CommonConstant.CUST_MODEL_NONPROF)
+  if (dicts.formRaw.MrCustModelCode == CommonConstant.CUST_MODEL_NONPROF)
   {
-    custPersonalJobDataObj.CustId = dicts.IdCust;
-    custPersonalJobDataObj.RefProfessionId = parentForm.NonProfRefProfessionId;
-    custPersonalJobDataObj.JobTitleName = parentForm.NonProfJobTitleName;
-    custPersonalJobDataObj.CustPersonalJobDataId = dicts.CustPersonalJobDataId;
-    custPersonalJobDataObj.RowVersion = dicts.RowVersionJob;
+    custPersonalJobDataObj.RefProfessionId = dicts.formRaw.NonProfRefProfessionId;
+    custPersonalJobDataObj.JobTitleName = dicts.formRaw.NonProfJobTitleName;
+    
     custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_NONPROF;
   }
   else
   {
-    reqCustPersonalJobDataObj.JobAddr = setJobAddress(parentForm.Address, dicts, CommonConstant.CustAddrTypeJob, parentForm.NotesAddr);
-    reqCustPersonalJobDataObj.PreJobAddr = setJobAddress(parentForm.PrevAddress, dicts, CommonConstant.CustAddrTypePreJob, parentForm.NotesPrevAddr);
-    reqCustPersonalJobDataObj.OthBizAddr = setJobAddress(parentForm.OthBizAddress, dicts, CommonConstant.CustAddrTypeOthBiz, parentForm.NotesOthBiz);
-  }
-
-  if (parentForm.MrCustModelCode == CommonConstant.CUST_MODEL_PROF)
-  {
-    custPersonalJobDataObj.CustId = dicts.IdCust;
-    custPersonalJobDataObj.RefProfessionId = parentForm.ProfRefProfessionId;
-    custPersonalJobDataObj.ProfessionalNo = parentForm.ProfProfessionalNo;
-    custPersonalJobDataObj.JobTitleName = parentForm.ProfJobTitleName;
-    custPersonalJobDataObj.CoyName = parentForm.ProfIndustryName;
-    custPersonalJobDataObj.IsWellknownCoy = parentForm.ProfIsWellknownCoy;
-    custPersonalJobDataObj.MrWellknownCoyCode = parentForm.ProfMrWellknownCoyCode;
-    custPersonalJobDataObj.RefIndustryTypeId = parentForm.ProfRefIndustryTypeId;
-    custPersonalJobDataObj.EmploymentEstablishmentDt = parentForm.ProfEstablishmentDt;
-    custPersonalJobDataObj.PrevCoyName = parentForm.PrevIndustryName;
-    custPersonalJobDataObj.PrevEmploymentDt = parentForm.PrevEmploymentDate;
-    custPersonalJobDataObj.OthBizName = parentForm.OtherBusinessName;
-    custPersonalJobDataObj.OthBizType = parentForm.OtherBusinessType;
-    custPersonalJobDataObj.OthBizIndustryTypeCode = parentForm.OtherBusinessIndustry;
-    custPersonalJobDataObj.OthBizJobPosition = parentForm.OtherJobPosition;
-    custPersonalJobDataObj.OthBizEstablishmentDt = parentForm.OthBizEstablishmentDate;
-    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
-
-    custPersonalJobDataObj.JobAddrId = dicts.CustAddrIdAddr;
+    custPersonalJobDataObj.JobAddrId = dicts.JobAddrId;
     custPersonalJobDataObj.PrevJobAddrId = dicts.CustAddrIdPrevAddr;
-    custPersonalJobDataObj.OthBizAddrId = dicts.CustAddrIdOthBiz;
-    custPersonalJobDataObj.CustPersonalJobDataId = dicts.CustPersonalJobDataId;
-    custPersonalJobDataObj.RowVersion = dicts.RowVersionJob;
+    custPersonalJobDataObj.OthBizAddrId = dicts.OthBizAddrId;
+
+    custPersonalJobDataObj.PrevCoyName = dicts.formRaw.PrevIndustryName;
+    custPersonalJobDataObj.PrevEmploymentDt = dicts.formRaw.PrevEmploymentDate;
+    custPersonalJobDataObj.OthBizName = dicts.formRaw.OtherBusinessName;
+    custPersonalJobDataObj.OthBizType = dicts.formRaw.OtherBusinessType;
+    custPersonalJobDataObj.OthBizIndustryTypeCode = dicts.formRaw.OtherBusinessIndustry;
+    custPersonalJobDataObj.OthBizJobPosition = dicts.formRaw.OtherJobPosition;
+    custPersonalJobDataObj.OthBizEstablishmentDt = dicts.formRaw.OthBizEstablishmentDate;
+    
+    reqCustPersonalJobDataObj.JobAddr = setJobAddress(dicts.formRaw.Address, dicts, CommonConstant.CustAddrTypeJob, dicts.formRaw.NotesAddr);
+    reqCustPersonalJobDataObj.PreJobAddr = setJobAddress(dicts.formRaw.PrevAddress, dicts, CommonConstant.CustAddrTypePreJob, dicts.formRaw.NotesPrevAddr);
+    reqCustPersonalJobDataObj.OthBizAddr = setJobAddress(dicts.formRaw.OthBizAddress, dicts, CommonConstant.CustAddrTypeOthBiz, dicts.formRaw.NotesOthBiz);
   }
+
+  if (dicts.formRaw.MrCustModelCode == CommonConstant.CUST_MODEL_PROF)
+  {
+    custPersonalJobDataObj.RefProfessionId = dicts.formRaw.ProfRefProfessionId;
+    custPersonalJobDataObj.ProfessionalNo = dicts.formRaw.ProfProfessionalNo;
+    custPersonalJobDataObj.JobTitleName = dicts.formRaw.ProfJobTitleName;
+    custPersonalJobDataObj.CoyName = dicts.formRaw.ProfIndustryName;
+    custPersonalJobDataObj.IsWellknownCoy = dicts.formRaw.ProfIsWellknownCoy;
+    custPersonalJobDataObj.MrWellknownCoyCode = dicts.formRaw.ProfMrWellknownCoyCode;
+    custPersonalJobDataObj.RefIndustryTypeId = dicts.formRaw.ProfRefIndustryTypeId;
+    custPersonalJobDataObj.EmploymentEstablishmentDt = dicts.formRaw.ProfEstablishmentDt;
+
+    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_PROF;
+  }
+
+  if (dicts.formRaw.MrCustModelCode == CommonConstant.CUST_MODEL_EMP)
+  {
+    custPersonalJobDataObj.RefProfessionId = dicts.formRaw.EmpRefProfessionId;
+    custPersonalJobDataObj.MrJobPositionCode = dicts.formRaw.EmpJobPosition;
+    custPersonalJobDataObj.JobTitleName = dicts.formRaw.EmpJobTitleName;
+    custPersonalJobDataObj.MrJobStatCode = dicts.formRaw.EmpJobStatus;
+    custPersonalJobDataObj.CoyName = dicts.formRaw.EmpIndustryName;
+    custPersonalJobDataObj.IsMfEmp = dicts.formRaw.EmpInternalEmployee;
+    custPersonalJobDataObj.IsWellknownCoy = dicts.formRaw.EmpIsWellknownCoy;
+    custPersonalJobDataObj.MrWellknownCoyCode = dicts.formRaw.EmpMrWellknownCoyCode;
+    custPersonalJobDataObj.RefIndustryTypeId = dicts.formRaw.EmpRefIndustryTypeId;
+    custPersonalJobDataObj.NoOfEmploy = dicts.formRaw.EmpNoOfEmploy;
+    custPersonalJobDataObj.MrCoyScaleCode = dicts.formRaw.EmpCompanyScale;
+    custPersonalJobDataObj.EmploymentEstablishmentDt = dicts.formRaw.EmpEstablishmentDt;
+
+    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_EMP;
+  }
+
+  if (dicts.formRaw.MrCustModelCode == CommonConstant.CUST_MODEL_SME)
+  {
+    custPersonalJobDataObj.RefProfessionId = dicts.formRaw.SmeRefProfessionId;
+    custPersonalJobDataObj.MrJobPositionCode = dicts.formRaw.SmeJobPosition;
+    custPersonalJobDataObj.JobTitleName = dicts.formRaw.SmeJobTitleName;
+    custPersonalJobDataObj.CoyName = dicts.formRaw.SmeIndustryName;
+    custPersonalJobDataObj.RefIndustryTypeId = dicts.formRaw.SmeRefIndustryTypeId;
+    custPersonalJobDataObj.MrCoyScaleCode = dicts.formRaw.SmeCompanyScale;
+    custPersonalJobDataObj.NoOfEmploy = dicts.formRaw.SmeNoOfEmploy;
+    custPersonalJobDataObj.EmploymentEstablishmentDt = dicts.formRaw.SmeEstablishmentDt;
+    custPersonalJobDataObj.IsWellknownCoy = dicts.formRaw.SmeIsWellknownCoy;
+    custPersonalJobDataObj.MrWellknownCoyCode = dicts.formRaw.SmeMrWellknownCoyCode;
+    custPersonalJobDataObj.MrInvestmentTypeCode = dicts.formRaw.SmeMrInvestmentTypeCode;
+
+    custPersonalJobDataObj.MrCustModelCode = CommonConstant.CUST_MODEL_SME;
+  }
+
+  custPersonalJobDataObj.CustId = dicts.IdCust;
+  custPersonalJobDataObj.CustPersonalJobDataId = dicts.CustPersonalJobDataId;
+  custPersonalJobDataObj.RowVersion = dicts.RowVersionJob;
 
   reqCustPersonalJobDataObj.CustPersonalJobData = custPersonalJobDataObj;
 
   http.post(url, reqCustPersonalJobDataObj, AdInsConstant.SpinnerOptions).subscribe(
     (response) => {
       toastr.successMessage(response["message"]);
+      const actions = [
+        {
+          'result': {
+            'type': 'function',
+            'target': 'self',
+            'alias': '',
+            'methodName': 'NextStep',
+            'params': []
+          },
+          'conditions': []
+        }
+      ];
+
+      templateService.publish({Actions: actions});
+      // NextStep();
     }
   );
 }

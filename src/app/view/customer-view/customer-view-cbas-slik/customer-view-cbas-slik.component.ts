@@ -16,10 +16,10 @@ import { ResGenerateTrxNoObj } from 'app/shared/model/master-sequence/res-genera
 export class CustomerViewCbasSlikComponent implements OnInit {
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private route: ActivatedRoute,
     private UrlConstantNew: UrlConstantNew
-  ) 
+  )
   {
     this.route.queryParams.subscribe(params => {
       if (params['CustId'] != null) this.CustId = params['CustId'];
@@ -51,14 +51,14 @@ export class CustomerViewCbasSlikComponent implements OnInit {
   IsResultReady: boolean = false;
   ResultErrorMsg: string = "";
   ResultCbasSlikObj: ResultCbasSlikObj = null;
-  
+
   NikNpwp: string = "";
   ResIndvd: object = {};
   ResIndvdPokok: object = {};
   ResRingkasanFasilitas: object = {};
   ResFasilitasKreditPembiayan: Array<object> = [];
 
-  async ngOnInit() 
+  async ngOnInit()
   {
     if (this.InputTrxNo) this.TrxNo = this.InputTrxNo;
     if (this.InputKtpNo) this.KtpNo = this.InputKtpNo;
@@ -67,7 +67,7 @@ export class CustomerViewCbasSlikComponent implements OnInit {
     if (this.CustId) await this.getDataByCustId();
     else if (this.TrxNo) await this.getDataByTrxNo();
     else if (this.KtpNo || this.Npwp) await this.getDataByKtpNpwp();
-    
+
     this.resultErrorHandling();
     if (this.ResultErrorMsg) return;
 
@@ -100,7 +100,7 @@ export class CustomerViewCbasSlikComponent implements OnInit {
   {
     await this.http.post(this.UrlConstantNew.GetCbasSlikLatestTrxNoByKtpNoNpwp, { KtpNo: this.KtpNo, Npwp: this.Npwp }, this.embeddOptions).toPromise().then(
       async (response:ResGenerateTrxNoObj) => {
-        if (response && response.TrxNo) 
+        if (response && response.TrxNo)
         {
           this.TrxNo = response.TrxNo
           await this.getDataByTrxNo();
@@ -139,7 +139,7 @@ export class CustomerViewCbasSlikComponent implements OnInit {
   }
 }
 
-class ResultCbasSlikObj 
+class ResultCbasSlikObj
 {
   RequestTrxStat: string = '';
   ResultErrorMessage: string = '';

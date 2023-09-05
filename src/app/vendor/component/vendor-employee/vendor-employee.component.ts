@@ -175,7 +175,7 @@ export class VendorEmployeeComponent implements OnInit {
       }
     );
 
-   
+
     this.http.post(this.UrlConstantNew.GetVendorByVendorId, {Id : this.objInput.VendorId}).subscribe(
       (response) => {
         this.result = response;
@@ -201,7 +201,7 @@ export class VendorEmployeeComponent implements OnInit {
     critObj.restriction = AdInsConstant.RestrictionEq;
     critObj.value = this.objInput.VendorId;
     this.inputLookupSpvObj.addCritInput.push(critObj);
-    
+
     if (this.mode == "edit") {
       var critObj = new CriteriaObj();
       critObj.propName = 'VENDOR_EMP_ID';
@@ -310,7 +310,7 @@ export class VendorEmployeeComponent implements OnInit {
       }
       );
     }
-    
+
     NpwpCheck(isGetData: boolean = false) {
       if (this.VendorEmpForm.controls.IsNpwpExist.value == true) {
         this.SetValidatorsIfNpwpCheck(true);
@@ -436,7 +436,7 @@ export class VendorEmployeeComponent implements OnInit {
 
   //START URS-LOS-041
 
-  onOptionsSelected(event){  
+  onOptionsSelected(event){
     this.setValidatorPattern();
   }
 
@@ -455,7 +455,7 @@ export class VendorEmployeeComponent implements OnInit {
           for (let i = 0; i < this.resultPattern.length; i++) {
             let patternObj: CustomPatternObj = new CustomPatternObj();
             let pattern: string = this.resultPattern[i].Value;
-    
+
             patternObj.pattern = pattern;
             patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
             this.customPattern.push(patternObj);

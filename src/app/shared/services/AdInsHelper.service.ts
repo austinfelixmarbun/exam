@@ -29,6 +29,11 @@ export class AdInsHelperService {
 		window.open(url, "_blank");
 	}
 
+	public OpenPefindoViewForTemplate(TrxNo: string, MrCustTypeCode: string) {
+		var url = this.UrlConstantNew.env.FoundationR3Web + "/View/SelfCustomPefindo/SelfCustom/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+		window.open(url, "_blank");
+	}
+
 	public OpenProdOfferingViewByCodeAndVersion(Code, Version) {
 		window.open(this.UrlConstantNew.env.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
 	}
@@ -44,6 +49,10 @@ export class AdInsHelperService {
 	public OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number) {
 			window.open(this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
 	}
+
+  public OpenViewNegativeCustomerPersonal(negativeCustId: number){
+    window.open(NavigationConstant.VIEW_CUSTOM_CUST_NEG_PERSONAL + "?negativeCustId=" + negativeCustId, "_blank");
+  }
 
 	public ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
         var url = this.UrlConstantNew.LogoutAuth;
