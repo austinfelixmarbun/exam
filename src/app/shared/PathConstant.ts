@@ -550,6 +550,10 @@ export class PathConstant {
     public static VENDOR_GRADING_REQUEST_PAGING = PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;
     public static VENDOR_GRADING_REQUEST_APPROVAL_DETAIL = PathConstant.VENDOR_GRADING + "/" + PathConstant.APPRV + "/" + PathConstant.DETAIL;
 
+    public static CUSTOM_VENDOR_GRADING_INQUIRY = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRADING + "/" + PathConstant.INQUIRY;
+    public static CUSTOM_VENDOR_GRADING_REQUEST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.PAGING;
+    public static CUSTOM_VENDOR_GRADING_REQUEST_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRADING + "/" + PathConstant.REQUEST + "/" + PathConstant.DETAIL;
+
     public static SELF_CUSTOM_VENDOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HOLDING_DETAIL;
     public static SELF_CUSTOM_VENDOR_HO_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HO_DETAIL;
