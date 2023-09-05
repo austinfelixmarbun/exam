@@ -40,3 +40,4 @@ export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view
 export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
 export { PefindoViewPefindoScoreComponent } from 'app/view/pefindo-view/pefindo-view-pefindo-score/pefindo-view-pefindo-score.component';
 export { SelfCustomContainerHolidayDetailComponent } from 'app/common-setting/holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
+export { SelfCustomContainerWorkingHourDDetailComponent } from 'app/common-setting/working-hour-scheme/self-custom-container-working-hour-d-detail/self-custom-container-working-hour-d-detail.component';

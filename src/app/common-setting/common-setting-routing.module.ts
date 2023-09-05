@@ -953,6 +953,29 @@ const routes: Routes = [
           title: 'Holiday Detail Registration',
           page: 'HolidaySchemeDetailRegistation'
         },
+      },      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour',
+          page: 'WorkingHourSchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Add Edit',
+          page: 'WorkingHourHDetail'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Detail',
+          page: 'WorkingHourDDetail'
+        },
       },
     ]
   }

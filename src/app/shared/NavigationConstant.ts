@@ -117,6 +117,9 @@ export class NavigationConstant {
     public static CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/AddEdit'
     public static CS_SELF_CUSTOM_HOLIDAY_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL; //'/CommonSetting/SelfCustom/Holiday/Detail'
     public static CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT; //'/CommonSetting/SelfCustom/Holiday/Detail/AddEdit'
+    public static CS_SELF_CUSTOM_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR; //'/CommonSetting/SelfCustom/WorkingHour'
+    public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD; //'/CommonSetting/SelfCustom/WorkingHour/Add'
+    public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL; //'/CommonSetting/SelfCustom/WorkingHour/Detail'
     //#endregion
 
     //#region System Setting
