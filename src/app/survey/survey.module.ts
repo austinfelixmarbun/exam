@@ -33,7 +33,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
-
+import { SelfCustomSurveyorTaskAssignmentPagingComponent } from './self-custom/surveyor-task-assignment-paging/self-custom-surveyor-task-assignment-paging.component';
 
 @NgModule({
   imports: [
@@ -72,7 +72,8 @@ import { UcTemplateModule } from '@adins/uctemplate';
     SurveyResultReviewDetailComponent,
     SurveyTaskResultDetailComponent,
     SurveyTaskResultPagingComponent,
-    SurveyTaskResultPageComponent
+    SurveyTaskResultPageComponent,
+    SelfCustomSurveyorTaskAssignmentPagingComponent
   ],
   providers: [
     NGXToastrService

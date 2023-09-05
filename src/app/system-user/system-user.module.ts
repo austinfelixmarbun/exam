@@ -10,9 +10,11 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { SystemUserComponent } from './system-user.component';
 import { SystemUserAddComponent } from './system-user-add/system-user-add.component';
+import { SelfCustomSystemUserComponent } from './self-custom-system-user/self-custom-system-user.component';
+import { UcTemplateModule } from '@adins/uctemplate';
 
 @NgModule({
-  declarations: [SystemUserComponent, SystemUserAddComponent],
+  declarations: [SystemUserComponent, SystemUserAddComponent, SelfCustomSystemUserComponent],
   imports: [
     CommonModule,
     SystemUserRoutingModule,
@@ -20,7 +22,8 @@ import { SystemUserAddComponent } from './system-user-add/system-user-add.compon
     NgbModule,
     AdInsSharedModule,
     SharingComponentModule,
-    AdInsModule
+    AdInsModule,
+    UcTemplateModule
   ],
   providers: [
     NGXToastrService
