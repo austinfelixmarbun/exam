@@ -585,7 +585,7 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
-    path: 'autodebitview',
+    path: 'autodebitpayview',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',

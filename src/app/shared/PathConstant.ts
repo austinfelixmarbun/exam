@@ -280,6 +280,9 @@ export class PathConstant {
     public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.PAGING;
     public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LR_OFFICE_BANK_ACC + "/AccDetail";
+    public static CUSTOM_CS_COA_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA + "/" + PathConstant.DETAIL;
+    public static CUSTOM_CS_COA_DETAIL_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA + "/" + PathConstant.DETAIL + "/" + PathConstant.EDIT;
+    public static CUSTOM_CS_COA_SCHM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA_SCHM + "/" + PathConstant.DETAIL;
 
     //#endregion
 
@@ -347,7 +350,6 @@ export class PathConstant {
     public static CUSTOM_CUST_COY_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_PAGE;
     public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
     public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
-
 
     //#endregion
 
