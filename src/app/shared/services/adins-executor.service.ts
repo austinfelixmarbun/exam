@@ -11,13 +11,15 @@ import { saveOfficeGroupMember } from "../function/ref-office-function";
 import { saveListAuthForm } from "../function/role-function";
 import { saveListAuthForm_Form } from "../function/form-function";
 import { addHolidaySchmDUntilYear } from "../function/holiday-function";
+import { ApprovalTaskService } from "./ApprovalTask.service";
+import { callBackVendorPagingApproval } from "../function/approval-function";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AdInsExecutorService extends ExecutorService {
-  constructor() {
+  constructor(private apvTaskService: ApprovalTaskService) {
     super();
     this.setExecutor("addRangeVendorMbr", addRangeVendorMbr);
     this.setExecutor("addRangeOfficeMbr", addRangeOfficeMbr);
@@ -41,5 +43,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveListAuthForm", saveListAuthForm);
     this.setExecutor("saveListAuthForm_Form", saveListAuthForm_Form);
     this.setExecutor("addHolidaySchmDUntilYear", addHolidaySchmDUntilYear);
+    this.setExecutor("callBackVendorPagingApproval", callBackVendorPagingApproval);
   }
 }

@@ -259,6 +259,7 @@ export class NavigationConstant {
     public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING; //'/View/Vendor/SelfCustom/VendorHolding'
     public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
+    public static CUSTOM_VENDOR_GRD_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
     //#endregion
 
     //#region Organization

@@ -521,6 +521,30 @@ const routes: Routes = [
           page: 'VendorGradingRequestPaging'
         },
       },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_REQUEST_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Request Detail",
+          page: 'VendorGradingRequestDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Approval Paging",
+          page: 'VendorGradingApprovalPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Approval Detail",
+          page: 'VendorGradingApprovalDetail'
+        },
+      },
     ]
 
   }

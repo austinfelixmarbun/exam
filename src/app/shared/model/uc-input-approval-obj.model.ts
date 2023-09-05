@@ -17,7 +17,7 @@ export class UcInputApprovalObj {
     EnableRequiredNotes: boolean;
     constructor(private UrlConstantNew: UrlConstantNew) { 
         this.TaskId = 0;
-        this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
+        this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "";
         this.PathUrlGetLevelVoting = this.UrlConstantNew.GetLevelVoting;
         this.PathUrlGetPossibleResult = this.UrlConstantNew.GetPossibleResult;
         this.PathUrlSubmitApproval = this.UrlConstantNew.SubmitApproval;
