@@ -9,7 +9,7 @@ export class SelfCustomVendorGroupViewComponent implements OnInit {
   pageName: string;
 
   constructor() {
-    this.pageName = "SupplierGroupMember"
+    this.pageName = "SupplierGroupMemberVendor"
   }
 
   ngOnInit(): void {

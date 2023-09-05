@@ -1,6 +1,6 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
-import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
+import { addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, test } from "../function/supplier-function";
 import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { rerunJournal } from "../function/journal-function";
@@ -23,6 +23,7 @@ export class AdInsExecutorService extends ExecutorService {
   constructor(private apvTaskService: ApprovalTaskService) {
     super();
     this.setExecutor("addRangeVendorMbr", addRangeVendorMbr);
+    this.setExecutor("addRangeVendorGrpMbr", addRangeVendorGrpMbr);
     this.setExecutor("addRangeOfficeMbr", addRangeOfficeMbr);
     this.setExecutor("test", test);
     this.setExecutor("addEditCustAsset", addEditCustAsset);

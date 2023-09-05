@@ -14,7 +14,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
   isReady = false;
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    // this.subscribeParam();
+    this.subscribeParam();
     // this.navigationSubscription = this.router.events.subscribe((e: any) => {
     //   // If it is a NavigationEnd event re-initalise the component
     //   if (e instanceof NavigationEnd) {
@@ -70,6 +70,12 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
         case CommonConstant.SUPPLIER:
           this.pageName = 'SupplierGroupComponent'
           break;
+        case CommonConstant.AGENCY_PERSONAL:
+          this.pageName = 'AgencyPersonalPaging'
+          break;
+        case CommonConstant.AGENCY_COMPANY:
+            this.pageName = 'AgencyCompanyPaging'
+            break;
       }
     }
     else if (this.Type == "Default") {
