@@ -39,3 +39,6 @@ export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-
 export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view/custom-document-survey-task-view/custom-document-survey-task-view.component';
 export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
 export { PefindoViewPefindoScoreComponent } from 'app/view/pefindo-view/pefindo-view-pefindo-score/pefindo-view-pefindo-score.component';
+export { CoaDetailComponent } from 'app/common-setting/coa/coa-detail/coa-detail.component';
+export { CustomCoaSchemeDetailComponent } from 'app/common-setting/custom-coa-scheme/custom-coa-scheme-detail/custom-coa-scheme-detail.component';
+
