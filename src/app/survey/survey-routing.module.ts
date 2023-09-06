@@ -153,7 +153,23 @@ const routes: Routes = [
           title: 'Surveyor Detail',
           page: 'SurveyorDetail'
         }
-      },   
+      }, 
+      {
+        path: PathConstant.CUSTOM_SRVY_RESULT_REVIEW_PAGING,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Result Review',
+          page: 'SurveyResultReview'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_SRVY_RESULT_REVIEW_DETAIL,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Result Review Detail',
+          page: 'SurveyResultReviewDetail'
+        }
+      }  
     ]
   }
 ];

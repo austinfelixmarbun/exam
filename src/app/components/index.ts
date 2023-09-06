@@ -43,3 +43,4 @@ export { CoaDetailComponent } from 'app/common-setting/coa/coa-detail/coa-detail
 export { CustomCoaSchemeDetailComponent } from 'app/common-setting/custom-coa-scheme/custom-coa-scheme-detail/custom-coa-scheme-detail.component';
 export { SelfCustomContainerHolidayDetailComponent } from 'app/common-setting/holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
 export { SelfCustomContainerWorkingHourDDetailComponent } from 'app/common-setting/working-hour-scheme/self-custom-container-working-hour-d-detail/self-custom-container-working-hour-d-detail.component';
+export { CustomSurveyResultReviewDetailComponent } from 'app/survey/custom-survey-result-review-detail/custom-survey-result-review-detail.component';

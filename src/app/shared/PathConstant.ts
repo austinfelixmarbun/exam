@@ -437,6 +437,8 @@ export class PathConstant {
 
     public static CUSTOM_SRVY_TASK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
     public static CUSTOM_SRVY_ORDER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_ORDER + "/" + PathConstant.PAGING;
+    public static CUSTOM_SRVY_RESULT_REVIEW_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.PAGING;
+    public static CUSTOM_SRVY_RESULT_REVIEW_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region

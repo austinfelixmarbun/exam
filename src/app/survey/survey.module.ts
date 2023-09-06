@@ -33,6 +33,7 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
+import { CustomSurveyResultReviewDetailComponent } from './custom-survey-result-review-detail/custom-survey-result-review-detail.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { UcTemplateModule } from '@adins/uctemplate';
     SurveyResultReviewDetailComponent,
     SurveyTaskResultDetailComponent,
     SurveyTaskResultPagingComponent,
-    SurveyTaskResultPageComponent
+    SurveyTaskResultPageComponent,
+    CustomSurveyResultReviewDetailComponent
   ],
   providers: [
     NGXToastrService
