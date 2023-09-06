@@ -96,7 +96,11 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
-        this.pageName = 'SupplierHoComponent'
+        switch (this.MrVendorCategoryCode) {
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'LifeInsuranceHoPaging'
+            break;
+        }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
         this.pageName = 'SupplierHoldingComponent'
