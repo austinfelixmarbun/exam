@@ -79,6 +79,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
         case CommonConstant.ASSET_INSCO_BRANCH:
           this.pageName = 'InsuranceBranchGroupPaging'
           break;
+        case CommonConstant.LIFE_INSCO_BRANCH:
+          this.pageName = 'LifeInsuranceGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
