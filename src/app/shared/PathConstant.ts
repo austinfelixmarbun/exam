@@ -71,6 +71,11 @@ export class PathConstant {
     public static CUSTOM_PAGING = PathConstant.SELF_CUSTOM + "/" + "Paging";
     public static CUSTOM_DETAIL = PathConstant.SELF_CUSTOM + "/" + "Detail";
     //#endregion
+    
+    //#region System User
+    public static SELF_CUSTOM_SYSTEM_USER_PAGING = this.SELF_CUSTOM + "/" + this.PAGING;
+    public static SELF_CUSTOM_SYSTEM_USER_DETAIL = this.SELF_CUSTOM + "/" + this.DETAIL;
+    //#endregion
 
     //#region Asset
     public static ASSET_TYPE_PAGING = PathConstant.TYPE + "/" + PathConstant.PAGING;
@@ -437,6 +442,8 @@ export class PathConstant {
 
     public static CUSTOM_SRVY_TASK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK + "/" + PathConstant.PAGING;
     public static CUSTOM_SRVY_ORDER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_ORDER + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_SRVY_TASK_RESULT_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_SRVY_TASK_RESULT_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
     //#endregion
 
     //#region
@@ -451,6 +458,8 @@ export class PathConstant {
     public static SURVEYOR_TASK_ASSIGNMENT = "SurveyTaskAssignment";
     public static SURVEYOR_TASK_ASSIGNMENT_PAGING = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
     public static SURVEYOR_TASK_ASSIGNMENT_DETAIL = PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
+    public static SELF_CUSTOM_SURVEYOR_TASK_ASSIGNMENT_PAGING = this.SELF_CUSTOM + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_SURVEYOR_TASK_ASSIGNMENT_DETAIL = this.SELF_CUSTOM + "/" + PathConstant.SURVEYOR_TASK_ASSIGNMENT + "/" + PathConstant.DETAIL;
     //#endregion
 
     //#region System-Setting-Module

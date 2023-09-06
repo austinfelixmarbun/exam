@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { PathConstant } from 'app/shared/PathConstant';
 import { SystemUserComponent } from './system-user.component';
 import { SystemUserAddComponent } from './system-user-add/system-user-add.component';
+import { SelfCustomSystemUserComponent } from './self-custom-system-user/self-custom-system-user.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -20,6 +22,17 @@ const routes: Routes = [
         component: SystemUserAddComponent,
         data: {
           title: 'System User Detail'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SYSTEM_USER_PAGING,
+        component: SelfCustomSystemUserComponent
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SYSTEM_USER_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "SystemUserDetail"
         }
       }
     ]

@@ -335,6 +335,9 @@ export class NavigationConstant {
     public static SURVEY_RESULT_REVIEW_DETAIL = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_RESULT_REVIEW + "/" + PathConstant.DETAIL;
     public static SURVEY_TASK_RESULT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.PAGING;
     public static SURVEY_TASK_RESULT_PAGE = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SRVY_TASK_RESULT + "/" + PathConstant.SRVY_TASK_PAGE;
+
+    public static SELF_CUSTOM_SURVEY_TASK_RESULT_PAGING = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGING; //'/Survey/SelfCustom/SurveyTaskResult/Paging'
+    public static SELF_CUSTOM_SURVEY_TASK_RESULT_PAGE = "/" + PathConstant.LR_SRVY + "/" + PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGE; //'/Survey/SelfCustom/SurveyTaskResult/Page'
     //#endregion
 
     //#region Cust
