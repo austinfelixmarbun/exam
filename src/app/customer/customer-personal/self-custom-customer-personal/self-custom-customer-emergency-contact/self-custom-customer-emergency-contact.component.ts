@@ -40,8 +40,6 @@ export class SelfCustomCustomerEmergencyContactComponent implements OnInit {
 
   manageCbLookupManual(ev: any)
   {
-    console.log(ev)
-    console.log(this.Form)
     this.Form.get("MrGenderCode").enable();
     this.Form.get("MrIdTypeCode").enable();
     this.Form.get("BirthPlace").enable();
@@ -52,26 +50,53 @@ export class SelfCustomCustomerEmergencyContactComponent implements OnInit {
     this.Form.get("MobilePhnNo2").enable();
     this.Form.get("Email").enable();
 
+    this.Form.patchValue({
+      MrIdTypeCode: "",
+      IdNo: "",
+      IdExpiredDt: "",
+      BirthPlace: "",
+      BirthDt: "",
+      MobilePhnNo1: "",
+      MobilePhnNo2: "",
+      Email: "",
+      MrCustRelationshipCode: "",
+      MrGenderCode: "",
+      ContactPersonCustNo: ""
+    })
+
+    this.Form.controls.UcAddress.patchValue({
+      Addr: "",
+      AreaCode1: "", 
+      AreaCode2: "", 
+      AreaCode3: "",
+      AreaCode4: "",
+      City: "",
+      Phn1: "",
+      Phn2: "",
+      Phn3: "",
+      PhnArea1: "",
+      PhnArea2: "",
+      PhnArea3: "",
+      PhnExt1: "",
+      PhnExt2: "",
+      PhnExt3: "",
+      Zipcode: ""
+    })
+
     this.formAddress.GetInputAddressObj("UcAddress").isReadonly = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhn1 = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhn2 = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhn3 = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhnExt1 = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhnExt2 = false;
+    this.formAddress.GetInputAddressObj("UcAddress").readonlyPhnExt3 = false;
+
+    this.formAddress.GetInputAddressObj("UcAddress").inputField.inputLookupObj.nameSelect = "";
+    this.formAddress.GetInputAddressObj("UcAddress").inputField.inputLookupObj.isDisable = false;
     let temp = this.formAddress.GetInputAddressObj("UcAddress")
-    console.log(temp)
   }
 
   onNext(event) {
-    console.log(event);
-    // const actions = [
-    //   {
-    //     'result': {
-    //       'type': 'function',
-    //       'target': 'self',
-    //       'alias': '',
-    //       'methodName': 'NextStep',
-    //       'params': []
-    //     },
-    //     'conditions': []
-    //   }
-    // ];
-
     this.next.emit(event);
   }
 
