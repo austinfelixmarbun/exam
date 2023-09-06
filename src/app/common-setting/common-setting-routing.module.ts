@@ -922,7 +922,16 @@ const routes: Routes = [
           title: 'OFFICE BANK ACCOUNT' ,
           page: 'Officebankaccaddress'
         } 
-      },      {
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coadetail'
+        }
+      },      
+      {
         path: PathConstant.CS_SELF_CUSTOM_HOLIDAY,
         component: UcTemplateComponent,
         data: {
@@ -977,6 +986,22 @@ const routes: Routes = [
           page: 'WorkingHourDDetail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_CS_COA_DETAIL_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coaedit'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_SCHM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA Scheme',
+          page: 'Coaschemedetail'
+        },
+      }
     ]
   }
 ];

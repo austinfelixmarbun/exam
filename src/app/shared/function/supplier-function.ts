@@ -77,6 +77,29 @@ export function addRangeVendorMbr(listTemp: any, VendorId: number, api: any, nex
     })
 }
 
+export function addRangeVendorGrpMbr(listTemp: any, VendorId: number, api: any, next: string, MrVendorCategoryCode: string, http: HttpClient, toastr: NGXToastrService, router: Router) {
+    let listId = getVendorId(listTemp);
+    let obj = {};
+    let param = {};
+    let url = environment.FoundationR3Url + api;
+  
+    obj = {
+        "VendorId": listId,
+        "VendorGrpId": VendorId,
+    }
+
+    param = {
+        "VendorGrpId": VendorId,
+        "MrVendorCategoryCode": MrVendorCategoryCode
+    }
+  
+    http.post(url, obj).subscribe(
+      (response: any) => {
+          toastr.successMessage("Success!");
+          AdInsHelper.RedirectUrl(router, [next], param);
+      })
+  }
+
 export function addRangeOfficeMbr(listTemp: any, VendorId: number, api: any, next: string, http: HttpClient, toastr: NGXToastrService, router: Router) {
     let listId = getRefOfficeId(listTemp);
     let obj = {};

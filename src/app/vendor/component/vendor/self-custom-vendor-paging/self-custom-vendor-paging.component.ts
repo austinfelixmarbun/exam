@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
@@ -6,25 +6,32 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
   selector: 'app-self-custom-vendor-paging',
   templateUrl: './self-custom-vendor-paging.component.html'
 })
-export class SelfCustomVendorPagingComponent implements OnInit {
+export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
   pageName: string;
   MrVendorCategoryCode: string;
   Type: string = "Default";
-
   navigationSubscription;
+  isReady = false;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.subscribeParam();
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        this.RefetchData();
-      }
-    });
+    // this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    //   // If it is a NavigationEnd event re-initalise the component
+    //   if (e instanceof NavigationEnd) {
+    //     // this.RefetchData();
+    //   }
+    // });
     this.pageName = 'SupplierHoComponent'
   }
 
   ngOnInit(): void {
+    this.selectPage();
+  }
+
+  ngOnDestroy(): void {
+    // if (this.navigationSubscription) {
+    //   this.navigationSubscription.unsubscribe();
+    // }
   }
 
   RefetchData() {
@@ -50,6 +57,7 @@ export class SelfCustomVendorPagingComponent implements OnInit {
   }
 
   selectPage() {
+    this.isReady = false;
     if (this.Type == "Scheme") {
       switch (this.MrVendorCategoryCode) {
         case CommonConstant.SUPPLIER:
@@ -62,13 +70,32 @@ export class SelfCustomVendorPagingComponent implements OnInit {
         case CommonConstant.SUPPLIER:
           this.pageName = 'SupplierGroupComponent'
           break;
+        case CommonConstant.AGENCY_PERSONAL:
+          this.pageName = 'AgencyPersonalPaging'
+          break;
+        case CommonConstant.AGENCY_COMPANY:
+          this.pageName = 'AgencyCompanyPaging'
+          break;
+        case CommonConstant.ASSET_INSCO_BRANCH:
+          this.pageName = 'InsuranceBranchGroupPaging'
+          break;
+        case CommonConstant.LIFE_INSCO_BRANCH:
+          this.pageName = 'LifeInsuranceGroupPaging'
+          break;
+        case CommonConstant.SURVEYOR_BRANCH:
+          this.pageName = 'SurveyorBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
         this.pageName = 'SupplierComponent'
       }
-      else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO) {
+      else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
+               this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
+               this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO ||
+               this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
+               this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
         this.pageName = 'SupplierHoComponent'
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
@@ -78,6 +105,10 @@ export class SelfCustomVendorPagingComponent implements OnInit {
         this.pageName = 'SupplierAtmpComponent'
       }
     }
+
+    setTimeout(() => {
+      this.isReady = true;
+    }, 10);
   }
 
 }
