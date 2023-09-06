@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";;
 import { addRangeOfficeMbr, addRangeVendorMbr, test } from "../function/supplier-function";
 import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomer } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
-import { rerunJournal } from "../function/journal-function";
+import { rerunJournal, saveJrMHeaderFact } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
 import { addListVerfQuestionGrpD } from "../function/verification-function";
 import { addRefOfficeAreaMember } from "../function/office-area-function";
@@ -44,5 +44,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveListAuthForm_Form", saveListAuthForm_Form);
     this.setExecutor("addHolidaySchmDUntilYear", addHolidaySchmDUntilYear);
     this.setExecutor("callBackVendorPagingApproval", callBackVendorPagingApproval);
+    this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
   }
 }
