@@ -74,8 +74,11 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
           this.pageName = 'AgencyPersonalPaging'
           break;
         case CommonConstant.AGENCY_COMPANY:
-            this.pageName = 'AgencyCompanyPaging'
-            break;
+          this.pageName = 'AgencyCompanyPaging'
+          break;
+        case CommonConstant.ASSET_INSCO_BRANCH:
+          this.pageName = 'InsuranceBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
