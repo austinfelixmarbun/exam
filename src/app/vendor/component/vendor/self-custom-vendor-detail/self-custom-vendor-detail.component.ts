@@ -3,10 +3,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 
 @Component({
-  selector: 'app-self-custom-vendor-registration',
-  templateUrl: './self-custom-vendor-registration.component.html'
+  selector: 'app-self-custom-vendor-detail',
+  templateUrl: './self-custom-vendor-detail.component.html'
 })
-export class SelfCustomVendorRegistrationComponent implements OnInit, OnDestroy {
+export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
   pageName: string;
   MrVendorCategoryCode: string;
   Type: string = "Default";
