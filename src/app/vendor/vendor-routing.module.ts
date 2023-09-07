@@ -60,6 +60,7 @@ import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-ins
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { SelfCustomVendorRegistrationComponent } from './component/vendor/self-custom-vendor-registration/self-custom-vendor-registration.component';
 
 const routes: Routes = [
   {
@@ -459,9 +460,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
-        component: UcTemplateComponent,
+        component: SelfCustomVendorRegistrationComponent,
         data: {
-          page: 'SupplierHoDetail'
+          title: 'Vendor HO Registration'
         },
       },{
         path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING,
