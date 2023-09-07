@@ -1,7 +1,7 @@
 <div class="px-3">
-  <lib-ucSubsection [id]="'BucketInfo' + exposureType + 'Id'" [title]="'Bucket'" [panel]="'BucketInfo' + exposureType">
+  <lib-ucSubsection [id]="'BucketInfo' + ExposureType + 'Id'" [title]="'Bucket'" [panel]="'BucketInfo' + ExposureType">
   </lib-ucSubsection>
-  <div [id]="'BucketInfo' + exposureType" style="overflow-x: auto;">
+  <div [id]="'BucketInfo' + ExposureType" style="overflow-x: auto;">
     <table class="table table-responsive-md text-center table-hover">
       <tr class="table-header">
         <th style="text-align: left;">
@@ -22,10 +22,10 @@
     </table>
   </div>
   
-  <div *ngIf="exposureType == 'CUST_OBLGR_EXPSR'">
-    <lib-ucSubsection [id]="'SummaryInfo' + exposureType + 'Id'" [title]="'Summary'" [panel]="'SummaryInfo' + exposureType">
+  <div *ngIf="ExposureType == 'CUST_OBLGR_EXPSR'">
+    <lib-ucSubsection [id]="'SummaryInfo' + ExposureType + 'Id'" [title]="'Summary'" [panel]="'SummaryInfo' + exposureType">
     </lib-ucSubsection>
-    <div [id]="'SummaryInfo' + exposureType">
+    <div [id]="'SummaryInfo' + ExposureType">
       <div class="row">
         <div class="col-md-6 ">
           <div class="row">

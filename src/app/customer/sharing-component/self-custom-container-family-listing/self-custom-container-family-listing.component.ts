@@ -50,7 +50,11 @@ export class SelfCustomContainerFamilyListingComponent implements OnInit {
       }
     ];
 
-    this.next.emit({Actions: actions});
+    const Data = {
+      "stepCode": "EmergencyCntcPerson"
+    }
+
+    this.next.emit({Actions: actions, Data: {"stepCode": "EmergencyCntcPerson"}});
   }
 
 }

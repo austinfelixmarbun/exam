@@ -32,7 +32,7 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
       }
     ];
 
-    this.next.emit({Actions: actions});
+    this.next.emit({Actions: actions, Data: {"stepCode": ""}});
   }
 
 }

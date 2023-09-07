@@ -57,6 +57,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
   }
 
   selectPage() {
+    console.log("logg")
     this.isReady = false;
     if (this.Type == "Scheme") {
       switch (this.MrVendorCategoryCode) {
@@ -74,8 +75,17 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
           this.pageName = 'AgencyPersonalPaging'
           break;
         case CommonConstant.AGENCY_COMPANY:
-            this.pageName = 'AgencyCompanyPaging'
-            break;
+          this.pageName = 'AgencyCompanyPaging'
+          break;
+        case CommonConstant.ASSET_INSCO_BRANCH:
+          this.pageName = 'InsuranceBranchGroupPaging'
+          break;
+        case CommonConstant.LIFE_INSCO_BRANCH:
+          this.pageName = 'LifeInsuranceGroupPaging'
+          break;
+        case CommonConstant.SURVEYOR_BRANCH:
+          this.pageName = 'SurveyorBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
@@ -87,7 +97,14 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
-        this.pageName = 'SupplierHoComponent'
+        switch (this.MrVendorCategoryCode) {
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'LifeInsuranceHoPaging'
+            break;
+          case CommonConstant.SURVEYOR_HO:
+            this.pageName = 'Vendorsurveyorhopaging'
+            break;
+        }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
         this.pageName = 'SupplierHoldingComponent'
@@ -101,9 +118,14 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
         this.pageName = 'Vendoragencypersonal'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
+        this.pageName = 'VendorSurveyorPaging'
+      }
       else {
         this.pageName = 'Vendorpaging'
       }
+      
+              
     }
     
 
