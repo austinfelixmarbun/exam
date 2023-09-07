@@ -40,7 +40,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     {
       this.pageName = 'VendorHoRegistration'
     }
-    else if (this.MrVendorCategoryCode != CommonConstant.SUPPLIER_HO)
+    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
     {
       this.pageName = 'SupplierHoRegistration'
     }

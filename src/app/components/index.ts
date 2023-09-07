@@ -46,3 +46,4 @@ export { SelfCustomContainerWorkingHourDDetailComponent } from 'app/common-setti
 export { CustomSurveyResultReviewDetailComponent } from 'app/survey/custom-survey-result-review-detail/custom-survey-result-review-detail.component';
 export { SelfCustomContainerSurveyTaskResultDetailComponent } from 'app/survey/self-custom-container-survey-task-result-detail/self-custom-container-survey-task-result-detail.component';
 export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/survey/self-custom-container-survey-task-result-upload-doc/self-custom-container-survey-task-result-upload-doc.component';
+export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
