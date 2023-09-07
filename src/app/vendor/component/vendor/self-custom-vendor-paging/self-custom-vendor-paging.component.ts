@@ -95,7 +95,17 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
         this.pageName = 'SupplierAtmpComponent'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.CUSTODY) {
+        this.pageName = 'Vendorcustody'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+        this.pageName = 'Vendoragencypersonal'
+      }
+      else {
+        this.pageName = 'Vendorpaging'
+      }
     }
+    
 
     setTimeout(() => {
       this.isReady = true;

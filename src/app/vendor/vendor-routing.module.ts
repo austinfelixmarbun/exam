@@ -545,6 +545,14 @@ const routes: Routes = [
           page: 'VendorGradingApprovalDetail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Vendor Branch Registration',
+          page: 'Vendorbranchregistration'
+        },
+      }
     ]
 
   }
