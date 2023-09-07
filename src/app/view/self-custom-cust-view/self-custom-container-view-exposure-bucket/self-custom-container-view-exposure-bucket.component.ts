@@ -13,7 +13,7 @@ import { CrdExpsrAppAgrHistObj } from 'app/shared/model/credit-review/crd-expsr-
 export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
 
   @Input() CustId: number;
-  @Input() exposureType: string = CommonConstant.ExposureCustTypeCode;
+  @Input() ExposureType: string = CommonConstant.ExposureCustTypeCode;
 
   CustExpsrInfo: any;
 
@@ -39,10 +39,15 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
     await this.GetCustExpsrInfoByCustId();
     await this.GetListCustExpsrBucketByCustExpsrDId();
     await this.initSummaryData();
+
+    if (this.ExposureType == CommonConstant.ExposureObligorTypeCode)
+    {
+      await this.GetListCustExpsrAppAgrHistByCustExpsrHId()
+    }
   }
 
   async GetCustExpsrInfoByCustId() {
-    await this.http.post<CustExpsrInfoObj>(this.UrlConstantNew.GetCustExpsrInfoByCustIdAndExposureTypeForTemplate, { Id: this.CustId, Code: this.exposureType }).toPromise().then(
+    await this.http.post<CustExpsrInfoObj>(this.UrlConstantNew.GetCustExpsrInfoByCustIdAndExposureTypeForTemplate, { Id: this.CustId, Code: this.ExposureType }).toPromise().then(
       (response) => {
         this.CustExpsrInfo = response;
       }
