@@ -60,7 +60,7 @@ import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-ins
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
-import { SelfCustomVendorRegistrationComponent } from './component/vendor/self-custom-vendor-registration/self-custom-vendor-registration.component';
+import { SelfCustomVendorDetailComponent } from './component/vendor/self-custom-vendor-detail/self-custom-vendor-detail.component';
 
 const routes: Routes = [
   {
@@ -460,9 +460,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
-        component: SelfCustomVendorRegistrationComponent,
+        component: SelfCustomVendorDetailComponent,
         data: {
-          title: 'Vendor HO Registration'
+          title: 'Vendor HO Detail'
         },
       },{
         path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING,
@@ -543,6 +543,14 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: "Vendor Grading Approval Detail",
+          page: 'VendorGradingApprovalDetail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Branch Registration",
           page: 'VendorGradingApprovalDetail'
         },
       },

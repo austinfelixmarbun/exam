@@ -57,6 +57,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
   }
 
   selectPage() {
+    console.log("logg")
     this.isReady = false;
     if (this.Type == "Scheme") {
       switch (this.MrVendorCategoryCode) {
@@ -111,6 +112,10 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
         this.pageName = 'SupplierAtmpComponent'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
+        this.pageName = 'VendorSurveyorPaging'
+      }
+              
     }
 
     setTimeout(() => {
