@@ -57,6 +57,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
   }
 
   selectPage() {
+    console.log("logg")
     this.isReady = false;
     if (this.Type == "Scheme") {
       switch (this.MrVendorCategoryCode) {
@@ -96,7 +97,14 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
-        this.pageName = 'SupplierHoComponent'
+        switch (this.MrVendorCategoryCode) {
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'LifeInsuranceHoPaging'
+            break;
+          case CommonConstant.SURVEYOR_HO:
+            this.pageName = 'Vendorsurveyorhopaging'
+            break;
+        }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
         this.pageName = 'SupplierHoldingComponent'
@@ -104,7 +112,22 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
         this.pageName = 'SupplierAtmpComponent'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.CUSTODY) {
+        this.pageName = 'Vendorcustody'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL) {
+        this.pageName = 'Vendoragencypersonal'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
+        this.pageName = 'VendorSurveyorPaging'
+      }
+      else {
+        this.pageName = 'Vendorpaging'
+      }
+      
+              
     }
+    
 
     setTimeout(() => {
       this.isReady = true;

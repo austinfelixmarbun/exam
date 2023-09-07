@@ -399,6 +399,7 @@ export class NavigationConstant {
     public static SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.SELF_CUSTOM_UPLOAD_JOURNAL_FILE_PAGING;
     public static UPLOAD_JOURNAL_FILE_DETAIL = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.UPLOAD_JOURNAL_FILE_DETAIL;
     public static CUSTOM_JOURNAL_MEDIA_PAGING = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_PAGING;
+    public static CUSTOM_JOURNAL_MEDIA_GROUP = "/" + PathConstant.LR_JOURNAL + "/" + PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_GROUP;
     //#endregion
 
     //#region License

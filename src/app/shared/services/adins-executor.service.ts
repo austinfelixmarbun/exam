@@ -1,9 +1,9 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
-import { addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, test } from "../function/supplier-function";
-import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomer } from "../function/customer-function";
+import { addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
+import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomer, saveDataOrSaveAndSync } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
-import { rerunJournal, saveJrMHeaderFact } from "../function/journal-function";
+import { rerunJournal, saveJrMGroupDFact, saveJrMHeaderFact } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
 import { addListVerfQuestionGrpD } from "../function/verification-function";
 import { addRefOfficeAreaMember } from "../function/office-area-function";
@@ -25,11 +25,13 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addRangeVendorMbr", addRangeVendorMbr);
     this.setExecutor("addRangeVendorGrpMbr", addRangeVendorGrpMbr);
     this.setExecutor("addRangeOfficeMbr", addRangeOfficeMbr);
-    this.setExecutor("test", test);
+    this.setExecutor("addEditvendorHO", addEditvendorHO);
+    this.setExecutor("cancelHORegistration", cancelHORegistration);
     this.setExecutor("addEditCustAsset", addEditCustAsset);
     this.setExecutor("addRangeAssetSchmD", addRangeAssetSchmD);
     this.setExecutor("addEditCustAddr", addEditCustAddr);
     this.setExecutor("addRefOfficeAreaMember",addRefOfficeAreaMember);
+    this.setExecutor("saveDataOrSaveAndSync", saveDataOrSaveAndSync);
     this.setExecutor("addEditCustJobData", addEditCustJobData);
     this.setExecutor("editCustomer", editCustomer);
     this.setExecutor("addEditCustomer", addEditCustomer);
@@ -48,5 +50,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("callBackVendorPagingApproval", callBackVendorPagingApproval);
     this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
     this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
+    this.setExecutor("saveJrMGroupDFact", saveJrMGroupDFact);
   }
 }

@@ -522,6 +522,18 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'editapdestination',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.apR3Web + '/remoteEntry.js',
+        exposedModule: './EditApDestinationModule'
+      })
+        .then(m => m.EditApDestinationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 
   //#region FINOPS
