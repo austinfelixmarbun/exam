@@ -135,11 +135,11 @@ export function cancelHORegistration(dicts: Record<string, any>, router: Router)
 {
     if (dicts.mode != undefined && dicts.mode == "edit")
     {
-        AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_VENDOR_HO_REG], { "VendorId": dicts.VendorId, "mode": "edit", "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_VENDOR_HO_REG], { "VendorId": dicts.VendorId, "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
     }
     else
     {
-        AdInsHelper.RedirectUrl(router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_VENDOR_PAGING], { "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
     }
 }
 
@@ -238,6 +238,6 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
     http.post<GenericObj>(url, vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
     (response) => {
         toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode });
     });
 }

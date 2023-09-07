@@ -7,6 +7,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { FormDropDownListService } from '@adins/ucform';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-self-custom-vendor-ho-add-edit',
@@ -15,8 +16,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class SelfCustomVendorHoAddEditComponent implements OnInit {
   pageName: string;
   MrVendorCategoryCode: string;
+  MrIdTypeCode: string;
   itemIdType: Array<KeyValueObj>;
   MrVendorTypeCode: string;
+  VendorId: number = 0;
 
   Form: FormGroup = this.fb.group({});
 
@@ -25,7 +28,10 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
           this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
 
+      if (params["VendorId"] != null) {
+        this.VendorId = params["VendorId"];
       }
     });
 
@@ -40,7 +46,16 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (this.VendorId > 0)
+    {
+      let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
+      ReqGetVendorAndVendorAddr.Id = this.VendorId;
+      await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
+        (response: any) => {
+        this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
+      })
+    }
   }
 
   onFormCreate(fg: FormGroup)
@@ -56,9 +71,10 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
   };
 
   callback(ev) {
-    if (this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL)
+
+    if (this.Form.controls.MrVendorTypeCode != undefined)
     {
-      this.MrVendorTypeCode = "PERSONAL"
+      this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
     }
     else
     {
@@ -75,6 +91,12 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
         this.itemIdType = response[CommonConstant.ReturnObj];
 
         this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
+
+        let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
+        
+        this.Form.patchValue({
+          MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
+        })
       }
     );
   }
