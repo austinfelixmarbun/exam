@@ -1,3 +1,5 @@
+import { NewCustHeaderComponent } from 'app/customer/sharing-component/new-cust-header/new-cust-header.component';
+
 export {BankComponent} from '../bank/bank.component';
 export {EmployeeAddComponent} from '../employee/employee-add/employee-add.component';
 export{SelfCustomContainerNewCustHeaderComponent} from "app/customer/sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component";
@@ -47,3 +49,5 @@ export { CustomSurveyResultReviewDetailComponent } from 'app/survey/custom-surve
 export { SelfCustomContainerSurveyTaskResultDetailComponent } from 'app/survey/self-custom-container-survey-task-result-detail/self-custom-container-survey-task-result-detail.component';
 export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/survey/self-custom-container-survey-task-result-upload-doc/self-custom-container-survey-task-result-upload-doc.component';
 export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
+export { SelfCustomNewCustHeaderComponent } from 'app/customer/sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component'
+

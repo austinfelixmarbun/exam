@@ -101,6 +101,7 @@ import { SelfCustomContainerFamilyListingComponent } from './sharing-component/s
 import { CustomCustomerCompanyAddressComponent } from './customer-company/custom-customer-company-address/custom-customer-company-address.component';
 import { CustomShareholderListingComponent } from './sharing-component/custom-shareholder-listing/custom-shareholder-listing.component';
 import { SelfCustomPefindoViewModule } from 'app/view/self-custom-pefindo-view/self-custom-pefindo-view.module';
+import { MatRadioModule } from '@angular/material/radio';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -147,7 +148,8 @@ export const customCurrencyMaskConfig = {
         UcdropdownlistModule,
         SelfCustomCustViewModule,
         SelfCustomPefindoViewModule,
-        UcTemplateModule
+        UcTemplateModule,
+        MatRadioModule
     ],
     declarations: [
         CustomerPagingComponent, CustAssetDetailComponent,

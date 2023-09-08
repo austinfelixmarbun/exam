@@ -136,6 +136,38 @@ const routes: Routes = [
           page: 'OfficeMemberDetail'
         }
       },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Paging',
+          page: 'Officeareapaging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_MEMBER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Member',
+          page: 'Officeareamember'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_MEMBER_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Member Add',
+          page: 'Officelistsearch'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Detail',
+          page: 'Officeareadetail'
+        }
+      },
     ]
   }
 ];

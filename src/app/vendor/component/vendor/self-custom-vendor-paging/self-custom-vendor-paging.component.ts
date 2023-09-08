@@ -124,10 +124,10 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else {
         this.pageName = 'Vendorpaging'
       }
-      
-              
+
+
     }
-    
+
 
     setTimeout(() => {
       this.isReady = true;
