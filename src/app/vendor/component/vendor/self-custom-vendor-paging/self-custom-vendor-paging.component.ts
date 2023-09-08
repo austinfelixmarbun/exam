@@ -98,6 +98,12 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
         switch (this.MrVendorCategoryCode) {
+          case CommonConstant.SUPPLIER_HO:
+            this.pageName = 'SupplierHoComponent'
+            break;
+          case CommonConstant.ASSET_INSCO_HO:
+            this.pageName = 'AssetInsuranceHoPaging'
+            break;
           case CommonConstant.LIFE_INSCO_HO:
             this.pageName = 'LifeInsuranceHoPaging'
             break;
