@@ -169,8 +169,12 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
     vendorHoObj.VendorObj.RegistrationNo = dicts.formRaw.RegistrationNo;
     vendorHoObj.VendorObj.VendorCode = dicts.formRaw.VendorCode;
     vendorHoObj.VendorObj.VendorName = dicts.formRaw.VendorName;
-    // vendorHoObj.VendorObj.VendorParentId = dicts.VendorParentId;
     vendorHoObj.VendorObj.VendorRating = dicts.formRaw.VendorRating;
+
+    if (dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
+    {
+        vendorHoObj.VendorObj.VendorParentId = dicts.formRaw.VendorParentId;
+    }
 
     vendorHoObj.VendorAddrObj = new VendorAddrObj();
     vendorHoObj.VendorAddrObj.MrAddrTypeCode = "";
@@ -223,7 +227,7 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
         let vendorAtpmMappingObj = new VendorAtpmMappingObj();
         vendorAtpmMappingObj.VendorAtpmId = dicts.vendorAtpmList[i].VendorAtpmId;
 
-        this.vendorHoObj.VendorAtpmMappingObjs.push(vendorAtpmMappingObj);
+        vendorHoObj.VendorAtpmMappingObjs.push(vendorAtpmMappingObj);
       }
     }
     

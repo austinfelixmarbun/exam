@@ -547,6 +547,14 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Vendor Branch Registration',
+          page: 'Vendorbranchregistration'
+        },
+      },
+      {
         path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
         component: SelfCustomVendorDetailComponent,
         data: {
