@@ -74,7 +74,7 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
       }
     ];
 
-    this.next.emit({Actions: actions, Data: {"stepCode": ""}});
+    this.next.emit({Actions: actions});
   }
 
 }
