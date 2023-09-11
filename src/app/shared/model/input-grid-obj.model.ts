@@ -8,9 +8,11 @@ export class InputGridObj{
     pageSize: any;
     pagingJson: any;
     navigationConst: any;
+    isSeq: boolean;
 
     constructor()
     {
         this.navigationConst = NavigationConstant;
+        this.isSeq = false;
     }
 }

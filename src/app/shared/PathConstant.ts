@@ -71,7 +71,7 @@ export class PathConstant {
     public static CUSTOM_PAGING = PathConstant.SELF_CUSTOM + "/" + "Paging";
     public static CUSTOM_DETAIL = PathConstant.SELF_CUSTOM + "/" + "Detail";
     //#endregion
-    
+
     //#region System User
     public static SELF_CUSTOM_SYSTEM_USER_PAGING = this.SELF_CUSTOM + "/" + this.PAGING;
     public static SELF_CUSTOM_SYSTEM_USER_DETAIL = this.SELF_CUSTOM + "/" + this.DETAIL;
@@ -388,6 +388,8 @@ export class PathConstant {
     public static EMP_BZ_UNIT_PAGING = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.PAGING;
     public static EMP_BZ_UNIT_ADD = PathConstant.EMP_BZ_UNIT + "/" + PathConstant.ADD;
 
+    public static SELF_CUSTOM_EMP_BZ_UNIT_PAGING = PathConstant.SELF_CUSTOM + PathConstant.EMP_BZ_UNIT_PAGING;
+    public static SELF_CUSTOM_EMP_BZ_UNIT_ADD = PathConstant.SELF_CUSTOM + PathConstant.EMP_BZ_UNIT_ADD;
     public static CUSTOM_LEAVE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.LEAVE + "/" + PathConstant.PAGING;
     public static CUSTOM_LEAVE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.LEAVE + "/" + PathConstant.DETAIL;
     //#endregion
@@ -407,6 +409,10 @@ export class PathConstant {
     public static OFFICE_GROUP_MEMBER = PathConstant.GROUP + "/" + PathConstant.MEMBER;
     public static OFFICE_GROUP_MEMBER_ADD = PathConstant.GROUP + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
 
+    public static SELF_CUSTOM_OFFICE_AREA = PathConstant.SELF_CUSTOM + PathConstant.OFFICE_AREA;
+    public static SELF_CUSTOM_OFFICE_AREA_MEMBER = PathConstant.SELF_CUSTOM + PathConstant.OFFICE_AREA_MEMBER;
+    public static SELF_CUSTOM_OFFICE_AREA_MEMBER_ADD = PathConstant.SELF_CUSTOM + PathConstant.OFFICE_AREA_MEMBER_ADD;
+    public static SELF_CUSTOM_OFFICE_AREA_DETAIL = PathConstant.SELF_CUSTOM + PathConstant.OFFICE_AREA_DETAIL;
     public static CUSTOM_OFFICE_EMP_VIEW = PathConstant.SELF_CUSTOM + "/" + "OfficeEmpView";
     public static CUSTOM_OFFICE_GROUP_MEMBER = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.MEMBER;
     public static CUSTOM_OFFICE_GROUP_MEMBER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.GROUP + "/" + PathConstant.MEMBER + "/" + PathConstant.DETAIL;
@@ -420,6 +426,9 @@ export class PathConstant {
     public static BZ_UNIT_EDIT = PathConstant.BZ_UNIT + "/" + PathConstant.EDIT;
     public static BZ_UNIT_MEMBER = PathConstant.BZ_UNIT + "/" + PathConstant.MEMBER;
 
+    public static SELF_CUSTOM_BZ_UNIT = PathConstant.SELF_CUSTOM + PathConstant.BZ_UNIT;
+    public static SELF_CUSTOM_BZ_UNIT_MEMBER = PathConstant.SELF_CUSTOM + PathConstant.BZ_UNIT_MEMBER;
+    public static SELF_CUSTOM_BZ_UNIT_DETAIL = PathConstant.SELF_CUSTOM + PathConstant.BZ_UNIT_DETAIL;
     public static CUSTOM_JOB_TITLE_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.JOB_TITLE + "/" + PathConstant.PAGING;
     public static CUSTOM_JOB_TITLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.JOB_TITLE + "/" + PathConstant.DETAIL;
     //#endregion
@@ -652,7 +661,7 @@ export class PathConstant {
     public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
     public static VIEW_FUNDING_COMPANY = "FundingCompany";
 
-
+    public static SELF_CUSTOM_VIEW_VENDOR_COLL_COMPANY = PathConstant.SELF_CUSTOM + PathConstant.VIEW_VENDOR_COLL_COMPANY;
     public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = PathConstant.SELF_CUSTOM + "/" + "VendorHolding";
     public static SELF_CUSTOM_VIEW_VENDOR_HO = PathConstant.SELF_CUSTOM + "/" + "VendorHO";
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = PathConstant.SELF_CUSTOM + "/" + "VendorBranch";
@@ -694,6 +703,7 @@ export class PathConstant {
     public static CUSTOM_VIEW_CUST_OTH_INFO = PathConstant.SELF_CUSTOM + "/" + "CustOthInfo";
     public static SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL = PathConstant.SELF_CUSTOM + "/" + "PersonalDetail";
     public static SELF_CUSTOM_VIEW_CUST_EXPOSURE = PathConstant.SELF_CUSTOM + "/" + "CustExposureView";
+    public static SELF_CUSTOM_VIEW_CUST_COY_DETAIL = PathConstant.SELF_CUSTOM + "/" + "CoyDetail"
 
     //#endregion
 

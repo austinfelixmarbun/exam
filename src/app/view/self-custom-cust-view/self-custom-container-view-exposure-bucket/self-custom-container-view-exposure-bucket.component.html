@@ -22,7 +22,7 @@
     </table>
   </div>
   
-  <div *ngIf="ExposureType == 'CUST_OBLGR_EXPSR'">
+  <div *ngIf="ExposureType == 'CUST_OBLGR_EXPSR' && isReady">
     <lib-ucSubsection [id]="'SummaryInfo' + ExposureType + 'Id'" [title]="'Summary'" [panel]="'SummaryInfo' + exposureType">
     </lib-ucSubsection>
     <div [id]="'SummaryInfo' + ExposureType">

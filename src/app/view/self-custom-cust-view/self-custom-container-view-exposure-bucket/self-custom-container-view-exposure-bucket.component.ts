@@ -16,6 +16,7 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
   @Input() ExposureType: string = CommonConstant.ExposureCustTypeCode;
 
   CustExpsrInfo: any;
+  isReady: boolean = false;
 
   SummaryData: {
     CustomerExposureAmt: number,
@@ -75,7 +76,11 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
   }
 
   async GetListCustExpsrAppAgrHistByCustExpsrHId() {
-    if (this.CustExpsrInfo.CustExpsrHId == 0) return;
+    if (this.CustExpsrInfo.CustExpsrHId == 0)
+    {
+      this.isReady = true;
+      return;
+    }
     await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(this.UrlConstantNew.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.CustExpsrInfo.CustExpsrHId }).toPromise().then(
       (response) => {
         console.log(response);

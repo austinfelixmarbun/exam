@@ -179,6 +179,7 @@ export class NavigationConstant {
     public static CUSTOM_VIEW_NEG_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.CUSTOM_VIEW_NEG_CUST;
     public static SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL; //'/View/SelfCustomCustomer/SelfCustom/PersonalDetail'
     public static SELF_CUSTOM_VIEW_CUST_EXPOSURE = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_EXPOSURE; //'/View/SelfCustomCustomer/SelfCustom/CustExposureView'
+    public static SELF_CUSTOM_VIEW_CUST_COY_DETAIL = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_COY_DETAIL;
 
     public static CUSTOM_CUST_NEG_PERSONAL_DETAIL = PathConstant.LR_CUST +"/" + PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG + PathConstant.PERSONAL + "/" + PathConstant.DETAIL;
     public static VIEW_CUSTOM_CUST_NEG_PERSONAL = NavigationConstant.VIEW_NEG_CUST + "/" + PathConstant.VIEW_PERSONAL;

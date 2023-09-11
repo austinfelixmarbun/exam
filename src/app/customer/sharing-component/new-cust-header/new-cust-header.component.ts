@@ -512,7 +512,7 @@ export class NewCustHeaderComponent implements OnInit {
 
   uploadDocFileMultipart(objDoc: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>} , successMsg:string, custId:number)
   {
-    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId) 
+    if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId)
     {
       this.toastr.successMessage(successMsg);
       this.redirectSaveEditMainData(custId);
