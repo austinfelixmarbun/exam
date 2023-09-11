@@ -368,7 +368,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD,
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
         component: SelfCustomVendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
@@ -544,14 +544,6 @@ const routes: Routes = [
         data: {
           title: "Vendor Grading Approval Detail",
           page: 'VendorGradingApprovalDetail'
-        },
-      },
-      {
-        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Vendor Branch Registration',
-          page: 'Vendorbranchregistration'
         },
       },
       {

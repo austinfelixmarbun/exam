@@ -88,6 +88,12 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
         this.pageName = 'VendorLifeInsuranceBranchDetail'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.pageName = 'VendorInsuranceDetail'
+      }
+      else{
+        this.pageName = 'Vendorbranchregistration'
+      }
     }
 
     setTimeout(() => {
