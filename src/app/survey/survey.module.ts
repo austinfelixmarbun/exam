@@ -33,7 +33,10 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
-
+import { CustomSurveyResultReviewDetailComponent } from './custom-survey-result-review-detail/custom-survey-result-review-detail.component';
+import { SelfCustomSurveyorTaskAssignmentPagingComponent } from './self-custom/surveyor-task-assignment-paging/self-custom-surveyor-task-assignment-paging.component';
+import { SelfCustomContainerSurveyTaskResultDetailComponent } from './self-custom-container-survey-task-result-detail/self-custom-container-survey-task-result-detail.component';
+import { SelfCustomContainerSurveyTaskResultUploadDocComponent } from './self-custom-container-survey-task-result-upload-doc/self-custom-container-survey-task-result-upload-doc.component';
 
 @NgModule({
   imports: [
@@ -72,7 +75,11 @@ import { UcTemplateModule } from '@adins/uctemplate';
     SurveyResultReviewDetailComponent,
     SurveyTaskResultDetailComponent,
     SurveyTaskResultPagingComponent,
-    SurveyTaskResultPageComponent
+    SurveyTaskResultPageComponent,
+    CustomSurveyResultReviewDetailComponent,
+    SelfCustomSurveyorTaskAssignmentPagingComponent,
+    SelfCustomContainerSurveyTaskResultDetailComponent,
+    SelfCustomContainerSurveyTaskResultUploadDocComponent
   ],
   providers: [
     NGXToastrService

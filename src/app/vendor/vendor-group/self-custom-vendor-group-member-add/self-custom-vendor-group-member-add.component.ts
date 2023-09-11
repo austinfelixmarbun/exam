@@ -11,7 +11,7 @@ export class SelfCustomVendorGroupMemberAddComponent implements OnInit {
   onBtnClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
-    this.pageName = "SupplierGroupMemberAdd"
+    this.pageName = "SupplierGroupMemberAddVendor"
   }
   ngOnInit(): void {
   }

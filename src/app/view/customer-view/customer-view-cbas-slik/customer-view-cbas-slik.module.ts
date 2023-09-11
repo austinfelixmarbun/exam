@@ -10,6 +10,7 @@ import { CustomerViewCbasSlikComponent } from "./customer-view-cbas-slik.compone
 import { CustomerViewCbasSlikRoutingModule } from "./customer-view-cbas-slik-routing.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
+import { UcTemplateModule } from "@adins/uctemplate";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpConfigInterceptor } from "app/interceptor/httpconfig.interceptor";
     AdInsSharedModule,
     SharingModule,
     UcSubsectionModule,
-    SharingComponentModule
+    SharingComponentModule,
+    UcTemplateModule,
   ],
   declarations: [
    CustomerViewCbasSlikComponent

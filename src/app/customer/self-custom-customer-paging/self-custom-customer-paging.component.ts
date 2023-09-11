@@ -36,7 +36,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
       }
       else
       {
-        this.adInsHelperService.OpenCustomerCoyViewByCustId(row.CustId);
+        this.adInsHelperService.OpenCustomerCoyViewByCustIdForTemplate(row.CustId);
       }
     }
 

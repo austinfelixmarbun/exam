@@ -8,7 +8,7 @@ import { NavigationConstant } from "../NavigationConstant";
 @Injectable()
 export class AdInsHelperService {
   constructor(private UrlConstantNew: UrlConstantNew){ }
-  
+
 	public OpenCustomerViewByCustId(CustId) {
     	let url = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_CUST_PERSONAL_DETAIL + "?CustId=" + CustId;
     	window.open(url, "_blank");
@@ -24,8 +24,18 @@ export class AdInsHelperService {
 		window.open(url, "_blank");
 	}
 
+  public OpenCustomerCoyViewByCustIdForTemplate(CustId) {
+		let url = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.SELF_CUSTOM_VIEW_CUST_COY_DETAIL + "?CustId=" + CustId;
+		window.open(url, "_blank");
+	}
+
 	public OpenPefindoView(TrxNo: string, MrCustTypeCode: string) {
 		var url = this.UrlConstantNew.env.FoundationR3Web + "/View/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+		window.open(url, "_blank");
+	}
+
+	public OpenPefindoViewForTemplate(TrxNo: string, MrCustTypeCode: string) {
+		var url = this.UrlConstantNew.env.FoundationR3Web + "/View/SelfCustomPefindo/SelfCustom/Pefindo?TrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
 		window.open(url, "_blank");
 	}
 
@@ -44,6 +54,10 @@ export class AdInsHelperService {
 	public OpenSurveyTaskViewBySrvyTaskId(SrvyTaskId: number) {
 			window.open(this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_SRVY_TASK + "?SrvyTaskId=" + SrvyTaskId, "_blank");
 	}
+
+  public OpenViewNegativeCustomerPersonal(negativeCustId: number){
+    window.open(NavigationConstant.VIEW_CUSTOM_CUST_NEG_PERSONAL + "?negativeCustId=" + negativeCustId, "_blank");
+  }
 
 	public ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
         var url = this.UrlConstantNew.LogoutAuth;

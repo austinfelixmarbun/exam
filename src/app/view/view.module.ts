@@ -10,6 +10,8 @@ import { SurveyTaskViewModule } from "./survey-task-view/survey-task-view.module
 import { SharedModule } from "app/shared/shared.module";
 import { AdInsModule } from "app/components/adins-module/adins.module";
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { SelfCustomCustomerViewCoyComponent } from './self-custom-customer-view-coy/self-custom-customer-view-coy.component';
+import { UcTemplateModule } from "@adins/uctemplate";
 @NgModule({
     imports: [
         AdInsModule,
@@ -24,7 +26,7 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         SurveyTaskViewModule,
         SharedModule,
         AdInsSharedModule,
-        
+        UcTemplateModule,
         //   TranslateModule.forRoot({
         //     loader: {
         //         provide: TranslateLoader,
@@ -33,6 +35,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         //     }
         // }),
     ],
-    declarations: []
+    declarations: [
+    SelfCustomCustomerViewCoyComponent
+  ]
 })
 export class ViewModule { }

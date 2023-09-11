@@ -583,6 +583,18 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.AutoDebitModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
+  {
+    path: 'autodebitpayview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './AutoDebitPayModule'
+      })
+        .then(m => m.AutoDebitPayModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   //#endregion
 ];

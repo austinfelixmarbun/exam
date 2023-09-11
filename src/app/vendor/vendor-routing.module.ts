@@ -60,6 +60,7 @@ import { VendorCreditInsuranceBranchAddEditComponent } from './vendor-credit-ins
 import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-paging/vendor-credit-insurance-group-paging.component';
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { SelfCustomVendorDetailComponent } from './component/vendor/self-custom-vendor-detail/self-custom-vendor-detail.component';
 
 const routes: Routes = [
   {
@@ -360,7 +361,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
         component: SelfCustomVendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
@@ -458,10 +459,10 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
-        component: UcTemplateComponent,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        component: SelfCustomVendorDetailComponent,
         data: {
-          page: 'SupplierHoDetail'
+          title: 'Vendor HO Detail'
         },
       },{
         path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING,
@@ -505,6 +506,77 @@ const routes: Routes = [
           page: 'SupplierHoldingDetail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_INQUIRY,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Inquiry",
+          page: 'VendorGradingInquiry'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_REQUEST_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Request Paging",
+          page: 'VendorGradingRequestPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_REQUEST_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Request Detail",
+          page: 'VendorGradingRequestDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Approval Paging",
+          page: 'VendorGradingApprovalPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: "Vendor Grading Approval Detail",
+          page: 'VendorGradingApprovalDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Vendor Branch Registration',
+          page: 'Vendorbranchregistration'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
+        component: SelfCustomVendorDetailComponent,
+        data: {
+          title: "Vendor Branch Detail"
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Funding Company Paging',
+          page: 'Vendorfundingcoy'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Funding Company Addedit',
+          page: 'Vendorfundingcoydetail'
+        },
+      }
     ]
 
   }

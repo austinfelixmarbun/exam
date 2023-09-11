@@ -20,6 +20,10 @@ import { JournalReconcilePagingComponent } from "./journal-reconcile/journal-rec
 import { UploadJournalPagingComponent } from './upload-journal/upload-journal-paging.component';
 import {UploadJournalDetailComponent} from './upload-journal/upload-journal-detail.component';
 import { AdInsSharedModule } from "app/components/adins-module/adins-shared.module";
+import { SelfCustomUploadJournalPagingComponent } from "./self-custom-upload-journal/self-custom-upload-journal-paging.component";
+import { UcTemplateModule } from '@adins/uctemplate';
+import { SelfCustomUploadJournalDetailComponent } from "app/journal/self-custom-upload-journal/self-custom-upload-journal-detail.component";
+
 @NgModule({
     imports: [
         JournalRoutingModule,
@@ -30,7 +34,8 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
         UcSubsectionModule,
         SharingModule,
         UcaddtotempModule,
-        UcdropdownlistModule
+        UcdropdownlistModule,
+        UcTemplateModule
     ],
     exports: [],
     declarations: [
@@ -45,8 +50,9 @@ import { AdInsSharedModule } from "app/components/adins-module/adins-shared.modu
     JournalGroupComponent,
     UploadJournalPagingComponent,
     UploadJournalDetailComponent,
-
-    JournalReconcilePagingComponent],
+    JournalReconcilePagingComponent,
+    SelfCustomUploadJournalPagingComponent,
+    SelfCustomUploadJournalDetailComponent],
     // providers: [
     //     NGXToastrService,
     // ]

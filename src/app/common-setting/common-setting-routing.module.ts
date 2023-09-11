@@ -284,6 +284,20 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvincePaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_REF_PROVINCE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "ProvinceDetail"
+        },
+      },
+      {
         path: PathConstant.CS_DISTRICT_PAGING,
         component: DistrictComponent,
         data: {
@@ -295,6 +309,20 @@ const routes: Routes = [
         component: DistrictAddEditComponent,
         data: {
           title: 'District Add Edit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictPaging"
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_CS_DISTRICT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "DistrictDetail"
         },
       },
       {
@@ -808,6 +836,22 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Detail',
+          page: 'Taxofficedetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_REF_TAX_OFFICE_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
+        },
+      },
+      {
         path: PathConstant.CUSTOM_CS_ZIPCODE_PAGING,
         component: UcTemplateComponent,
         data: {
@@ -821,6 +865,141 @@ const routes: Routes = [
         data: {
           title: 'Zipcode Detail',
           page: 'ZipcodeDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_CURRENCY_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Currency',
+          page: 'Currency'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_CURRENCY_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Currency add',
+          page: 'CurrencyRegistration'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_SCHM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA Scheme',
+          page: 'CoaScheme'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coa'
+        },
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_PAGING,
+         component: UcTemplateComponent,
+          data: { 
+            title: 'OFFICE BANK ACCOUNT' ,
+            page: 'OfficeBankAcc'
+        } 
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_DETAIL, 
+        component: UcTemplateComponent, 
+        data: { 
+          title: 'OFFICE BANK ACCOUNT' ,
+          page: 'Officebankaccdetail'
+        } 
+      },
+      { 
+        path: PathConstant.CUSTOM_CS_OFFICE_BANK_ACCOUNT_ACC_DETAIL, 
+        component: UcTemplateComponent, 
+        data: { 
+          title: 'OFFICE BANK ACCOUNT' ,
+          page: 'Officebankaccaddress'
+        } 
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coadetail'
+        }
+      },      
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday',
+          page: 'HolidaySchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Registration',
+          page: 'HolidaySchemeAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail',
+          page: 'HolidaySchemeDetailAddEdit'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Holiday Detail Registration',
+          page: 'HolidaySchemeDetailRegistation'
+        },
+      },      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour',
+          page: 'WorkingHourSchemePaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Add Edit',
+          page: 'WorkingHourHDetail'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Working Hour Detail',
+          page: 'WorkingHourDDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_DETAIL_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA',
+          page: 'Coaedit'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_CS_COA_SCHM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'COA Scheme',
+          page: 'Coaschemedetail'
         },
       }
     ]

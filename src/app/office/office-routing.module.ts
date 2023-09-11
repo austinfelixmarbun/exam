@@ -12,6 +12,7 @@ import { OfficeAreaMemberPagingComponent } from './office-area/office-area-membe
 import { OfficeAreaMemberAddComponent } from './office-area/office-area-member/office-area-member-add/office-area-member-add.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { OfficeEmpViewComponent } from './office-emp-view/office-emp-view.component';
+import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
@@ -93,7 +94,80 @@ const routes: Routes = [
         data: {
           title: 'Office Employee View'
         }
-      }
+      },
+      //uc template
+      {
+        path: PathConstant.CUSTOM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office',
+          page: 'Officepaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Add Office',
+          page: 'OfficeDetail'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_OFFICE_EMP_VIEW,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Employee View',
+          page: 'OfficeEmpView'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_OFFICE_GROUP_MEMBER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Group Member',
+          page: 'OfficeMemberPaging'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_OFFICE_GROUP_MEMBER_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Group Member Detail',
+          page: 'OfficeMemberDetail'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Paging',
+          page: 'Officeareapaging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_MEMBER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Member',
+          page: 'Officeareamember'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_MEMBER_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Member Add',
+          page: 'Officelistsearch'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_OFFICE_AREA_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Office Area Detail',
+          page: 'Officeareadetail'
+        }
+      },
     ]
   }
 ];
