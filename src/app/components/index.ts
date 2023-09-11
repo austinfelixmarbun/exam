@@ -22,6 +22,7 @@ export{UpdateCustomerCompanyFinDataComponent} from "app/customer/customer-update
 export{UpdateCustomerCompanyLegalDocComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component";
 export{SelfCustomCustFinDataTabComponent} from "app/customer/cust-fin-data-tab/self-custom-fin-data-tab.component"
 export{CustFinDataTabComponent} from "app/customer/cust-fin-data-tab/cust-fin-data-tab.component"
+export{SelfCustomCustFinDataComponent} from "app/customer/cust-fin-data-tab/self-custom-cust-fin-data.component"
 export{CustomerViewAsliRiComponent} from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.component';
 export{ CustomerViewCbasSlikComponent } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.component';
 export{SelfCustomCustomerViewIframeGenericComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component";
