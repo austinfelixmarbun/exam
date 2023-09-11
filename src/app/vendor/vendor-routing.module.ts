@@ -543,7 +543,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: "Vendor Grading Approval Detail",
-          page: 'VendorGradingApprovalDetail'
+          page: 'Vendorbranchregistration'
         },
       },
       {
@@ -551,7 +551,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Vendor Branch Registration',
-          page: 'Vendorbranchregistration'
+          page: 'VendorGradingApprovalDetail'
         },
       },
       {
