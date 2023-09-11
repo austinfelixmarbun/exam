@@ -22,6 +22,13 @@ const routes: Routes = [
             page: 'CustomerExposureView'
           },
         },
+        {
+          path: PathConstant.SELF_CUSTOM_VIEW_CUST_COY_DETAIL,
+          component: UcTemplateComponent,
+          data: {
+            page: 'CustomerCompany'
+          },
+        },
   ]}
 ];
 

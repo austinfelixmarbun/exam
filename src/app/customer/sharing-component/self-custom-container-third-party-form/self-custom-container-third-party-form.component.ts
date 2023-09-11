@@ -46,6 +46,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDes
   IsCustLoaded: boolean = true;
   @Input() CustId: number = 0;
   @Input() parentForm: FormGroup;
+  @Input() dicts: Record<string, any>;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust;
   @Input() thirdPartyTrxNo: string = null;
   @Input() custObj: CustObj = new CustObj();
@@ -96,17 +97,23 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDes
         await this.getCustDocFiles();
       }
       await this.getListDocumentToBeUpload();
+      this.setAfterDuplicate();
     }
     this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
       if (!ev.hasOwnProperty("pageId")) {
         if (ev === "MrCustTypeCode") {
-          console.log("======", ev);
-          console.log("=======", this.parentForm);
-          const _a = this.parentForm.get(ev).value;
-          if (_a) {
-            this.MrCustTypeCode = _a;
-            console.log("======", this.MrCustTypeCode);
+          const _MrCustTypeCode = this.parentForm.get(ev).value;
+          if (_MrCustTypeCode) {
+            this.MrCustTypeCode = _MrCustTypeCode;
             this.getListDocumentToBeUpload();
+          }
+        }
+
+        if (ev === "MrMaritalStatCode")
+        {
+          const _MrMaritalStatCode = this.parentForm.get(ev).value;
+          if (_MrMaritalStatCode) {
+            this.setDocFormCustMaritalTypeChanged();
           }
         }
       }
@@ -199,11 +206,26 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDes
 
   setDocFormCustMaritalTypeChanged(){
     let idxObj = this.CustDocFileFormObjs.findIndex(x => x.MrCustDocTypeCode == CommonConstant.MasterCodeCustDocTypeSpouseId);
-    if(this.parentForm.controls.MrMaritalStatCode.value == CommonConstant.MR_MARITAL_STAT_CODE_SINGLE){
-      this.CustDocFileFormObjs[idxObj].IsRequired = false;
+
+    if (this.parentForm.controls.MrMaritalStatCode != undefined)
+    {
+      if(this.parentForm.controls.MrMaritalStatCode.value == CommonConstant.MR_MARITAL_STAT_CODE_SINGLE){
+        this.CustDocFileFormObjs[idxObj].IsRequired = false;
+      }
+      else{
+        this.CustDocFileFormObjs[idxObj].IsRequired = true;
+      }
     }
-    else{
-      this.CustDocFileFormObjs[idxObj].IsRequired = true;
+  }
+
+  setAfterDuplicate()
+  {
+    if (this.dicts.ReqSubmitObj != null && this.dicts.ReqSubmitObj != undefined)
+    {
+      this.dicts.ReqSubmitObj.CustDocFileObjs.forEach(x => {
+        let idxObj = this.CustDocFileFormObjs.findIndex(y => y.MrCustDocTypeCode == x.MrCustDocTypeCode);
+        this.CustDocFileFormObjs[idxObj].IsRequired = false;
+      });
     }
   }
 
@@ -271,7 +293,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDes
 
   ViewPefindo() {
     let TrxNo = this.thirdPartyTrxNo;
-    this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+    this.adInsHelperService.OpenPefindoViewForTemplate(TrxNo, this.MrCustTypeCode);
   }
 
   async ReqTrustingSocial() {

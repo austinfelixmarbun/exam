@@ -13,9 +13,10 @@ import { CrdExpsrAppAgrHistObj } from 'app/shared/model/credit-review/crd-expsr-
 export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
 
   @Input() CustId: number;
-  @Input() exposureType: string = CommonConstant.ExposureCustTypeCode;
+  @Input() ExposureType: string = CommonConstant.ExposureCustTypeCode;
 
   CustExpsrInfo: any;
+  isReady: boolean = false;
 
   SummaryData: {
     CustomerExposureAmt: number,
@@ -39,10 +40,15 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
     await this.GetCustExpsrInfoByCustId();
     await this.GetListCustExpsrBucketByCustExpsrDId();
     await this.initSummaryData();
+
+    if (this.ExposureType == CommonConstant.ExposureObligorTypeCode)
+    {
+      await this.GetListCustExpsrAppAgrHistByCustExpsrHId()
+    }
   }
 
   async GetCustExpsrInfoByCustId() {
-    await this.http.post<CustExpsrInfoObj>(this.UrlConstantNew.GetCustExpsrInfoByCustIdAndExposureTypeForTemplate, { Id: this.CustId, Code: this.exposureType }).toPromise().then(
+    await this.http.post<CustExpsrInfoObj>(this.UrlConstantNew.GetCustExpsrInfoByCustIdAndExposureTypeForTemplate, { Id: this.CustId, Code: this.ExposureType }).toPromise().then(
       (response) => {
         this.CustExpsrInfo = response;
       }
@@ -70,7 +76,11 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
   }
 
   async GetListCustExpsrAppAgrHistByCustExpsrHId() {
-    if (this.CustExpsrInfo.CustExpsrHId == 0) return;
+    if (this.CustExpsrInfo.CustExpsrHId == 0)
+    {
+      this.isReady = true;
+      return;
+    }
     await this.http.post<{ ListCrdExpsrAppAgrHistObj: Array<CrdExpsrAppAgrHistObj> }>(this.UrlConstantNew.GetListCustExpsrAppAgrHistByCustExpsrHId, { Id: this.CustExpsrInfo.CustExpsrHId }).toPromise().then(
       (response) => {
         console.log(response);

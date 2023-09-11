@@ -7,6 +7,7 @@ import * as _moment from 'moment';
 import {URLConstant, envi} from '../constant/URLConstant';
 import * as Module from 'app/components';
 import { NavigationConstant } from '../NavigationConstant';
+import { UrlConstantNew } from '../constant/URLConstantNew';
 
 const listEnvironments = [
   { environment: 'FOU', url: envi.FoundationR3Url},
@@ -22,8 +23,9 @@ const listEnvironments = [
 })
 export class AdinsTemplateService extends UcTemplateService {
 
-  constructor() {
+  constructor(private UrlConstant: UrlConstantNew) {
     super();
+    this.UrlConstant = UrlConstant;
     this.configure();
   }
 
@@ -34,7 +36,7 @@ export class AdinsTemplateService extends UcTemplateService {
   private configure() {
     this.environment  = environment;
     this.envConfig    = envi;
-    this.urlConstant  = URLConstant;
+    this.urlConstant  = this.UrlConstant;
     this.listEnvironments = listEnvironments;
     this.moment = _moment;
     this.module = Module;

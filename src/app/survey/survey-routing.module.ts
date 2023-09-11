@@ -17,7 +17,7 @@ import { SurveyTaskResultDetailComponent } from './survey-task-result-detail/sur
 import { SurveyTaskResultPagingComponent } from './survey-task-result-paging/survey-task-result-paging.component';
 import { SurveyTaskResultPageComponent } from './survey-task-result-page/survey-task-result-page.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
-
+import { SelfCustomSurveyorTaskAssignmentPagingComponent } from './self-custom/surveyor-task-assignment-paging/self-custom-surveyor-task-assignment-paging.component';
 
 const routes: Routes = [
   {
@@ -153,7 +153,50 @@ const routes: Routes = [
           title: 'Surveyor Detail',
           page: 'SurveyorDetail'
         }
-      },   
+      }, 
+      {
+        path: PathConstant.CUSTOM_SRVY_RESULT_REVIEW_PAGING,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Result Review',
+          page: 'SurveyResultReview'
+        }
+      },
+      {
+        path: PathConstant.CUSTOM_SRVY_RESULT_REVIEW_DETAIL,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Result Review Detail',
+          page: 'SurveyResultReviewDetail'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SURVEYOR_TASK_ASSIGNMENT_PAGING,
+        component: SelfCustomSurveyorTaskAssignmentPagingComponent,
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SURVEYOR_TASK_ASSIGNMENT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          page: "SurveyTaskAssignmentDetail"
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGING,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Task Result Paging',
+          page: 'SurveyTaskResultPaging'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_SRVY_TASK_RESULT_PAGE,
+        component: UcTemplateComponent,
+        data:{
+          title: 'Survey Task Result Detail',
+          page: 'SurveyTaskResultPage'
+        }
+      },
     ]
   }
 ];

@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ListRequestCriteriaObj } from 'app/shared/model/list-request-criteria-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
@@ -18,9 +14,6 @@ import { UcTemplateService } from '@adins/uctemplate';
   templateUrl: './custom-asset-master-detail-parent.component.html'
 })
 export class CustomAssetMasterDetailParentComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  // @Input()
-  // ListAssetScheme: any[];
 
   @Input()
   parentForm: FormGroup;
@@ -77,45 +70,7 @@ export class CustomAssetMasterDetailParentComponent implements OnInit, AfterView
         this.getListAssetScheme(value);
       }
     });
-
-    // this.valueSub = this.parentForm.valueChanges.subscribe(values => {
-    //   // this.Show(values['AssetTypeId']);
-    //   this.getListAssetScheme(values['AssetTypeId']);
-    //   // this.listAssetScheme = this.dicts?.ListAssetScheme || [];
-    //   console.log('formValues', values);
-    // });
   }
-
-  // Show(key: string){
-  //   if (this.AssetTypeId === key && key !== '') {
-  //     return;
-  //   }
-    
-  //   this.AssetTypeId = key;
-  //   const request = {
-  //     Id: this.AssetTypeId
-  //   };
-  //   var critObj = new CriteriaObj();
-  //       critObj.DataType = 'text';
-  //       critObj.restriction = AdInsConstant.RestrictionEq;
-  //       critObj.propName = 'ASSET_TYPE_CODE';
-  //       critObj.value = this.AssetTypeCode;
-  //       console.log("crit val: ", critObj.value);
-    
-  //   this.listRequest = new ListRequestCriteriaObj();
-  //   this.listRequest.criteria = new Array();
-  //   this.listRequest.criteria.push(critObj);
-
-  //   this.http.post<GenericKeyValueListObj>(this.UrlConstantNew.GetListAssetCategory, this.listRequest).subscribe(
-  //     (response) => {
-  //       this.resultAssetCategory = response[CommonConstant.ReturnObj];
-  //       if (this.resultAssetCategory.length == 0) {
-  //         this.AssetMasterParentForm.patchValue({ AssetCategoryId: null });
-  //       } else {
-  //         this.AssetMasterParentForm.patchValue({ AssetCategoryId: response[CommonConstant.ReturnObj][0]['Key'] });
-  //       }
-  //     });
-  // }
 
   Checked(AssetSchmHIdFromH: number, isChecked: boolean): void {
     if (isChecked) {

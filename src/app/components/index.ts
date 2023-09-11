@@ -1,3 +1,5 @@
+import { NewCustHeaderComponent } from 'app/customer/sharing-component/new-cust-header/new-cust-header.component';
+
 export {BankComponent} from '../bank/bank.component';
 export {EmployeeAddComponent} from '../employee/employee-add/employee-add.component';
 export{SelfCustomContainerNewCustHeaderComponent} from "app/customer/sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component";
@@ -20,6 +22,7 @@ export{UpdateCustomerCompanyFinDataComponent} from "app/customer/customer-update
 export{UpdateCustomerCompanyLegalDocComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component";
 export{SelfCustomCustFinDataTabComponent} from "app/customer/cust-fin-data-tab/self-custom-fin-data-tab.component"
 export{CustFinDataTabComponent} from "app/customer/cust-fin-data-tab/cust-fin-data-tab.component"
+export{SelfCustomCustFinDataComponent} from "app/customer/cust-fin-data-tab/self-custom-cust-fin-data.component"
 export{CustomerViewAsliRiComponent} from 'app/view/customer-view/customer-view-asli-ri/customer-view-asli-ri.component';
 export{ CustomerViewCbasSlikComponent } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.component';
 export{SelfCustomCustomerViewIframeGenericComponent} from "app/view/self-custom-cust-view/self-custom-customer-view-iframe-generic/self-custom-customer-view-iframe-generic.component";
@@ -39,3 +42,13 @@ export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-
 export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view/custom-document-survey-task-view/custom-document-survey-task-view.component';
 export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
 export { PefindoViewPefindoScoreComponent } from 'app/view/pefindo-view/pefindo-view-pefindo-score/pefindo-view-pefindo-score.component';
+export { CoaDetailComponent } from 'app/common-setting/coa/coa-detail/coa-detail.component';
+export { CustomCoaSchemeDetailComponent } from 'app/common-setting/custom-coa-scheme/custom-coa-scheme-detail/custom-coa-scheme-detail.component';
+export { SelfCustomContainerHolidayDetailComponent } from 'app/common-setting/holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
+export { SelfCustomContainerWorkingHourDDetailComponent } from 'app/common-setting/working-hour-scheme/self-custom-container-working-hour-d-detail/self-custom-container-working-hour-d-detail.component';
+export { CustomSurveyResultReviewDetailComponent } from 'app/survey/custom-survey-result-review-detail/custom-survey-result-review-detail.component';
+export { SelfCustomContainerSurveyTaskResultDetailComponent } from 'app/survey/self-custom-container-survey-task-result-detail/self-custom-container-survey-task-result-detail.component';
+export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/survey/self-custom-container-survey-task-result-upload-doc/self-custom-container-survey-task-result-upload-doc.component';
+export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
+export { SelfCustomNewCustHeaderComponent } from 'app/customer/sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component'
+
