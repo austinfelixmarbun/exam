@@ -121,6 +121,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH){
         this.pageName = 'VendorSurveyorPaging'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL){
+        this.pageName = 'VendorpagingNotorypersonal'
+      }
       else {
         this.pageName = 'Vendorpaging'
       }

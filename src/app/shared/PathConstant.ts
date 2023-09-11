@@ -590,6 +590,8 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     public static CUSTOM_VENDOR_BRANCH_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_REG;
     public static SELF_CUSTOM_VENDOR_BRANCH_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.DETAIL;
+    public static CUSTOM_VENDOR_FUNDING_COY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; 
+    public static CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT;
     //#endregion
 
     //#region Verif-Module
