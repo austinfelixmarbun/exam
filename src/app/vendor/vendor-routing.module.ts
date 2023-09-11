@@ -561,6 +561,22 @@ const routes: Routes = [
           title: "Vendor Branch Detail"
         },
       },
+      {
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Funding Company Paging',
+          page: 'Vendorfundingcoy'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Funding Company Addedit',
+          page: 'Vendorfundingcoydetail'
+        },
+      }
     ]
 
   }
