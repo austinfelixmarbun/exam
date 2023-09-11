@@ -1,5 +1,15 @@
-<form class="form form-horizontal" [formGroup]="OtherInformationForm" #enjiForm="ngForm">
+<form class="form form-horizontal" [formGroup]="OtherInformationForm" #enjiForm="ngForm" (ngSubmit)="SaveForm(true)">
 
   <app-cust-attr-form [Label]="'List'" [CustId]="CustId" [AttrGroup]="attrGroup" [parentForm]="OtherInformationForm" [identifier]="identifierCustAttr" [enjiForm]="enjiForm" [IsVertical]="true" #CustAttrForm></app-cust-attr-form>
 
+  <div class="form-group row">
+    <div class="col-md-12" style="text-align: right">
+      <!-- <button type="button" class="btn btn-raised btn-warning mr-1" translate>
+        <i class="far fa-window-close"></i> Back
+      </button> -->
+      <button class="btn btn-raised btn-primary" type="submit">
+        <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
+      </button>
+    </div>
+  </div>
 </form>

@@ -61,10 +61,33 @@ export class CustomCustAttrSectionComponent implements OnInit {
         LbppmsBizSclId: this.CustOtherInfo.LbppmsBizSclId
       });
     }
+    
     console.log("FormGroup: ", this.OtherInformationForm.value);
     console.log("IdentifierCustAttr: ", this.identifierCustAttr);
     console.log("AttrGroup: ", this.attrGroup);
 
+  }
+
+  SaveForm(isRedirectAfterSuccess:boolean = false){
+    // this.http.post(this.getUrlSave(), RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).then(
+    //   (response) => {
+    //     this.toastr.successMessage(response["Message"]);
+
+    //     if(isRedirectAfterSuccess)
+    //     {
+    //       if (this.From === "EditMainData") {
+    //         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+    //       }
+    //       else if (this.From === "CustFamily") {
+    //         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_FAMILY_PAGING], {});
+    //       }
+    //       else if (this.From === "CustShareholder") {
+    //         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
+    //       } else {
+    //         AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+    //       }
+    //     }
+    //   });
   }
 
 }
