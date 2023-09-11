@@ -71,6 +71,30 @@ const routes: Routes = [
           title: 'Job Title Detail',
           page: 'JobTitleDetail'
         },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BZ_UNIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Business Unit',
+          page: 'Businessunitpaging'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BZ_UNIT_MEMBER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Business Unit Member',
+          page: 'Businessunitmember'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BZ_UNIT_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Business Unit Detail',
+          page: 'BusinessUnitDetail'
+        },
       }
     ]
   }

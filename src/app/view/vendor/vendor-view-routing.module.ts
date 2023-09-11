@@ -31,14 +31,14 @@ const routes: Routes = [
         data: {
           title: 'Vendor HO View'
         }
-      }, 
+      },
       {
         path: PathConstant.VIEW_VENDOR_COLL_COMPANY,
         component: VendorCollCompanyViewComponent,
         data: {
           title: 'Vendor Coll Company View'
         }
-      }, 
+      },
       {
         path: PathConstant.VIEW_FUNDING_COMPANY,
         component: FundingCompanyDetailComponent,
@@ -67,6 +67,14 @@ const routes: Routes = [
           page: 'ViewVendorBranch'
         }
       },
+      {
+        path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_COLL_COMPANY,
+        component: UcTemplateComponent,
+        data: {
+          title: 'View Vendor Collection Company',
+          page: 'ViewvendorCollectionCompany'
+        },
+      }
     ]
   }
 ];

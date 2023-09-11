@@ -98,6 +98,12 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_HO ||
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
         switch (this.MrVendorCategoryCode) {
+          case CommonConstant.SUPPLIER_HO:
+            this.pageName = 'SupplierHoComponent'
+            break;
+          case CommonConstant.ASSET_INSCO_HO:
+            this.pageName = 'AssetInsuranceHoPaging'
+            break;
           case CommonConstant.LIFE_INSCO_HO:
             this.pageName = 'LifeInsuranceHoPaging'
             break;
@@ -124,13 +130,19 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL){
         this.pageName = 'VendorpagingNotorypersonal'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY){
+        this.pageName = 'VendorCollectionCompanyPaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY){
+        this.pageName = 'VendorAuctionCompanyPaging'
+      }
       else {
         this.pageName = 'Vendorpaging'
       }
-      
-              
+
+
     }
-    
+
 
     setTimeout(() => {
       this.isReady = true;

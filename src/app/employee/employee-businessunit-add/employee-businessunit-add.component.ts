@@ -43,11 +43,11 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   result: any;
   userRole = new RefUserRole;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
-  
+
   readonly CancelLink: string = NavigationConstant.EMP_BZ_UNIT_PAGING;
   constructor(private route: ActivatedRoute,
     private router: Router, private http: HttpClient,
-    private fb: FormBuilder, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private toastr: NGXToastrService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       this.RefUserId = params["RefUserId"];

@@ -361,7 +361,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
         component: SelfCustomVendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
@@ -459,7 +459,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
         component: SelfCustomVendorDetailComponent,
         data: {
           title: 'Vendor HO Detail'
@@ -556,10 +556,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
-        component: UcTemplateComponent,
+        component: SelfCustomVendorDetailComponent,
         data: {
-          title: "Vendor Branch Registration",
-          page: 'VendorGradingApprovalDetail'
+          title: "Vendor Branch Detail"
         },
       },
       {

@@ -8,6 +8,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { FormDropDownListService } from '@adins/ucform';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-self-custom-vendor-ho-add-edit',
@@ -20,6 +21,8 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
   itemIdType: Array<KeyValueObj>;
   MrVendorTypeCode: string;
   VendorId: number = 0;
+
+  VatForPersonal: boolean = false;
 
   Form: FormGroup = this.fb.group({});
 
@@ -40,7 +43,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     {
       this.pageName = 'VendorHoRegistration'
     }
-    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
+    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO)
     {
       this.pageName = 'SupplierHoRegistration'
     }
@@ -56,6 +59,14 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
         this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
       })
     }
+
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      }
+    );
   }
 
   onFormCreate(fg: FormGroup)
@@ -70,35 +81,54 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
 
   };
 
-  callback(ev) {
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
 
-    if (this.Form.controls.MrVendorTypeCode != undefined)
+    return new Promise(vote);
+  }
+
+  async callback(ev) {
+
+    if (ev == "MrVendorTypeCode" || ev == "MrVendorCategoryCode")
     {
+      await this.waitFor(_ => this.Form.controls.MrVendorTypeCode != undefined);
       this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
-    }
-    else
-    {
-      this.MrVendorTypeCode = "COMPANY"
-    }
-
-    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      MappingCode: this.MrVendorTypeCode
-    }
-    this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
-      (response) => {
-        this.itemIdType = new Array<KeyValueObj>();
-        this.itemIdType = response[CommonConstant.ReturnObj];
-
-        this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
-
-        let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
-        
-        this.Form.patchValue({
-          MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
-        })
+  
+      let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+        MappingCode: this.MrVendorTypeCode
       }
-    );
+      this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+        (response) => {
+          this.itemIdType = new Array<KeyValueObj>();
+          this.itemIdType = response[CommonConstant.ReturnObj];
+  
+          this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
+  
+          let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
+          
+          this.Form.patchValue({
+            MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
+          })
+      });
+
+      if (!this.VatForPersonal){
+        if(this.MrVendorTypeCode == "PERSONAL")
+        {
+          this.Form.get("IsVat").disable();
+          this.Form.patchValue({
+            IsVat : false
+          })
+        }
+        else
+        {
+          this.Form.get("IsVat").enable();
+        }
+      }
+    }
   }
 
 }
