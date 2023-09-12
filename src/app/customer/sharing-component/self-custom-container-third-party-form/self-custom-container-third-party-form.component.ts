@@ -100,7 +100,7 @@ export class SelfCustomContainerThirdPartyFormComponent implements OnInit, OnDes
       this.setAfterDuplicate();
     }
     this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
-      if (!ev.hasOwnProperty("pageId")) {
+      if (ev!= null && !ev.hasOwnProperty("pageId")) {
         if (ev === "MrCustTypeCode") {
           const _MrCustTypeCode = this.parentForm.get(ev).value;
           if (_MrCustTypeCode) {

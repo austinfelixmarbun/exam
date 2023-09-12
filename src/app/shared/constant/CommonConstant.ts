@@ -80,6 +80,7 @@ export class CommonConstant {
     public static ASSET_INSCO_HO = "ASSET_INSCO_HO";
     public static LIFE_INSCO_HO = "LIFE_INSCO_HO";
     public static CRD_INSCO_HO = "CRD_INSCO_HO";
+    public static CRD_INSCO_BRANCH = "CRD_INSCO_BRANCH";
     public static SUPPLIER_HO = "SUPPLIER_HO";
     public static SURVEYOR_HO = "SURVEYOR_HO";
     public static SUPPLIER_HOLDING = "SUPPLIER_HOLDING";
@@ -219,7 +220,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeVendorCollCompanyPosition = "VENDOR_COLL_COMPANY_POSITION";
     public static RefMasterTypeCodeVendorCategoryGeneral = "VENDOR_CATEGORY_GENERAL";
     public static RefMasterTypeCodeCbasSlikPurposeCode = "CBAS_SLIK_PURPOSE_CODE";
-    
+
     //MASTER CODE
     public static MasterCodeCustDocTypeSpouseId = "APGEN03";
 
