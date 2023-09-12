@@ -142,6 +142,12 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
         this.pageName = 'VendorInsurancePaging'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_BRANCH){
+        this.pageName = 'VendorCreditInsurancePaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.pageName = 'VendorAgencyCompanyPaging'
+      }
       else {
         this.pageName = 'Vendorpaging'
       }
