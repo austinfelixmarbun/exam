@@ -98,7 +98,6 @@ export class CommonConstant {
     public static LOGISTIC = "LOGISTIC";
     public static COURIER = "COURIER";
     public static IT_INFRA_SOLUTION = "IT_INFRA_SOLUTION";
-    public static CRD_INSCO_BRANCH = "CRD_INSCO_BRANCH";
 
     public static TITLE_SUPPLIER_ATPM = "Supplier ATPM";
     public static TITLE_SUPPLIER_BRANCH = "Supplier";
