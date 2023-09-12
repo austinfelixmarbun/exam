@@ -461,16 +461,13 @@ function DecryptString(chipperText: string, chipperKey: string) {
     return plainText;
 }
 
-export function editCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
+export function editCustomerFamily(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
     let url = environment.FoundationR3Url + api;
 
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
 
-    if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
-    {
-      reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
-    }
+    reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
 
     http.post(url, reqSubmitObj).subscribe(
       (response: any) => {
