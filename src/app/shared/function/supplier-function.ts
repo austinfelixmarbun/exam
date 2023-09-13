@@ -135,7 +135,7 @@ export function cancelHORegistration(dicts: Record<string, any>, router: Router)
 {
     if (dicts.mode != undefined && dicts.mode == "edit")
     {
-        AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_VENDOR_HO_REG], { "VendorId": dicts.VendorId, "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_VENDOR_HO_DETAIL], { "VendorId": dicts.VendorId, "MrVendorCategoryCode": dicts.MrVendorCategoryCode });
     }
     else
     {
@@ -202,17 +202,19 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
   
     if (dicts.formRaw.VendorAttrList != undefined)
     {
-        if (dicts.formRaw.VendorAttrList.length > 0) {
+        let formValue = dicts.formRaw.VendorAttrList;
+        if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
             let vendorAttrRequest = new Array<VendorAttrContentObj>();
 
-            dicts.formRaw.VendorAttrList.forEach(x => {
+            for (const x in formValue)
+            {
                 let vendorAttr = new VendorAttrContentObj();
-                vendorAttr.VendorAttrContentId = x.VendorAttrContentId;
+                vendorAttr.VendorAttrContentId = formValue[x]["VendorAttrContentId"];
                 vendorAttr.VendorId = dicts.VendorId;
-                vendorAttr.AttrContent = x.VendorAttrValue;
-                vendorAttr.AttrCode = x.AttrCode;
+                vendorAttr.AttrContent = formValue[x]["VendorAttrValue"];
+                vendorAttr.AttrCode = formValue[x]["AttrCode"];
                 vendorAttrRequest.push(vendorAttr);
-            });
+            }
 
             vendorHoObj.VendorAttrContentObjs = vendorAttrRequest;
         }
