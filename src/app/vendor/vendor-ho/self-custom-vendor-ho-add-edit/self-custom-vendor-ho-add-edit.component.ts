@@ -57,7 +57,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
       await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
         (response: any) => {
         this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
-      })
+      });
     }
 
     this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
@@ -65,14 +65,27 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;
         }
-      }
-    );
+      });
   }
 
   onFormCreate(fg: FormGroup)
   {
     this.Form = fg;
 
+  }
+
+  async manageCbLookupManual(ev: any)
+  {
+    await this.http.post(this.UrlConstantNew.GetZipcodeDataByZipCode, {"Zipcode": this.Form.controls.Zipcode.value}).toPromise().then(
+      (response: any) => {
+        this.Form.patchValue(
+          {
+            AreaCode2: response["AreaCode2"],
+            AreaCode1: response["AreaCode1"],
+            City: response["City"],
+            Province: response["ProvDistrictName"]
+          });
+    });
   }
 
   handler = {
