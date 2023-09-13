@@ -27,7 +27,6 @@ import { SelfCustomCustomerPagingComponent } from './self-custom-customer-paging
 import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
 import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
 import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
-import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
 import { SelfCustomNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-negative-customer.component';
 import { SelfCustomNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-negative-customer-detail/self-custom-negative-customer-detail.component';
@@ -35,6 +34,7 @@ import { SelfCustomUploadNegativeCustomerComponent } from './self-custom-negativ
 import { SelfCustomReviewUploadNegativeCustomerDetailComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer-detail/self-custom-review-upload-negative-customer-detail.component';
 import { SelfCustomReviewUploadNegativeCustomerComponent } from './self-custom-negative-customer/self-custom-review-upload-negative-customer/self-custom-review-upload-negative-customer.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
 
 const routes: Routes = [
   {
@@ -303,6 +303,14 @@ const routes: Routes = [
         data: {
           title: 'Customer Duplicate Checking',
           page: 'CustomerDuplicateCheckingMatchCompany'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_NEW_CUST_SHAREHOLDER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Self Custom New Cust Shareholder',
+          page: 'Customershareholderdetail'
         }
       },
     ]
