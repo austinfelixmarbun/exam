@@ -150,6 +150,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
         this.pageName = 'VendorAgencyCompanyPaging'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
+        this.pageName = 'VendorNotaryCompanyPaging2'
+      }
       else {
         this.pageName = 'Vendorpaging'
       }
