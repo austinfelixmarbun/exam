@@ -91,8 +91,11 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
         this.pageName = 'VendorInsuranceDetail'
       }
-      else{
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY){
         this.pageName = 'Vendorbranchregistration'
+      }
+      else{
+        this.pageName = 'VendorbranchregistrationwithParam'
       }
     }
 
