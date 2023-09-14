@@ -415,4 +415,10 @@ export class SelfCustomContainerVendorBranchInfoComponent implements OnInit {
     });
   }
 
+  getLookUpAttr(e, VendorAttrCode) {
+    this.parentForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
+      VendorAttrValue: e.MasterCode
+    });
+  }
+
 }

@@ -68,8 +68,9 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
     console.log("===========isStatScs", this.isStatScs)
 
     this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
+      // this.callbackSubscribe(ev)
       console.log("===========MrVerfResultHStatCode")
-      if (!ev.hasOwnProperty("pageId")) {
+      if (ev != undefined && !ev.hasOwnProperty("pageId")) {
         if (ev === "MrVerfResultHStatCode") {
           const _MrVerfResultHStatCode = this.dicts.formRaw.MrVerfResultHStatCode;
           if (_MrVerfResultHStatCode) {
@@ -80,6 +81,32 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
       }
     });
   }
+
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
+
+    return new Promise(vote);
+  }
+
+  async callbackSubscribe(ev)
+  {
+    console.log("===========MrVerfResultHStatCode")
+    if (ev != undefined && !ev.hasOwnProperty("pageId")) {
+      if (ev === "MrVerfResultHStatCode") {
+        await this.waitFor(_ => this.dicts.formRaw != undefined);
+        await this.waitFor(_ => this.dicts.formRaw.MrVerfResultHStatCode != undefined);
+        const _MrVerfResultHStatCode = this.dicts.formRaw.MrVerfResultHStatCode;
+        if (_MrVerfResultHStatCode) {
+          this.isStatScs = _MrVerfResultHStatCode == "SCS"? true : false;
+          console.log("===========isStatScs", this.isStatScs)
+        }
+      }
+    }
+  }
+  
 
   ngOnDestroy(): void {
     if(this.subscriber) {
