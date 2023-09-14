@@ -1,5 +1,13 @@
+import { FormDropDownListService } from '@adins/ucform';
 import { Component, OnInit } from '@angular/core';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-self-custom-vendor-branch-add-edit',
@@ -9,15 +17,28 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   pageName: string;
   MrVendorCategoryCode: string;
   Type: string = "Default";
+  MrIdTypeCode: string;
   navigationSubscription;
+  VatForPersonal: boolean = false;
   isReady = false;
+  MrVendorTypeCode: string = "COMPANY";
+  Form: FormGroup = this.fb.group({});
+  itemIdType: Array<KeyValueObj>;
+  VendorId: number = 0;
 
-  constructor() {
+  constructor(private ddlSvc: FormDropDownListService, private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
     this.pageName = "SupplierRegistration";
   }
 
   ngOnInit(): void {
     this.selectPage();
+
+    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+      (result: GeneralSettingObj) => {
+        if (result.GeneralSettingId == 0 || result.GsValue == '1') {
+          this.VatForPersonal = true;
+        }
+      });
   }
 
   selectPage() {
@@ -37,5 +58,80 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       this.isReady = true;
     }, 10);
   }
+
+  onFormCreate(ev) {
+    this.Form = ev;
+  }
+
+  handler = {
+    callback: ($event) => this.callback($event)
+  };
+
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
+
+    return new Promise(vote);
+  }
+
+  async callback(ev) {
+
+    if (ev == "MrVendorTypeCode" || ev == "MrVendorCategoryCode")
+    {
+      await this.waitFor(_ => this.Form.controls.MrVendorTypeCode != undefined);
+      this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
+  
+      let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
+        MappingCode: this.MrVendorTypeCode
+      }
+      this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+        (response) => {
+          this.itemIdType = new Array<KeyValueObj>();
+          this.itemIdType = response[CommonConstant.ReturnObj];
+  
+          this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
+  
+          let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
+          
+          this.Form.patchValue({
+            MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
+          })
+
+          this.Form.controls.IdNo.clearValidators();
+    
+          if(this.Form.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
+          {
+            this.Form.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+            this.Form.controls.IdNo.updateValueAndValidity();
+            return
+          }
+        
+          if(this.Form.controls.MrVendorTypeCode.value == 'P')
+          {
+            this.Form.controls.IdNo.setValidators([Validators.required])
+          }
+        
+          this.Form.controls.IdNo.updateValueAndValidity();
+      });
+
+      if (!this.VatForPersonal){
+        if(this.MrVendorTypeCode == "PERSONAL")
+        {
+          this.Form.get("IsVat").disable();
+          this.Form.patchValue({
+            IsVat : false
+          })
+        }
+        else
+        {
+          this.Form.get("IsVat").enable();
+        }
+      }
+    }
+  }
+
 
 }

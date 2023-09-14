@@ -32,7 +32,7 @@ const routes: Routes = [
         path: PathConstant.SELF_CUSTOM_SYSTEM_USER_DETAIL,
         component: UcTemplateComponent,
         data: {
-          page: "SystemUserDetail"
+          page: "OrganizationemployeedetailForSystemUser"
         }
       }
     ]
