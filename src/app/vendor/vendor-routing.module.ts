@@ -354,7 +354,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
         component: SelfCustomVendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
@@ -493,14 +493,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
-        component: UcTemplateComponent,
-        data: {
-          page: 'SupplierHoldingDetail'
-        },
-      },
-      {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
         component: UcTemplateComponent,
         data: {
           page: 'SupplierHoldingDetail'

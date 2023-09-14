@@ -86,6 +86,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
         case CommonConstant.SURVEYOR_BRANCH:
           this.pageName = 'SurveyorBranchGroupPaging'
           break;
+        case CommonConstant.CRD_INSCO_BRANCH:
+          this.pageName = 'CreditInsuranceBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
@@ -149,6 +152,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
         this.pageName = 'VendorAgencyCompanyPaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
+        this.pageName = 'VendorNotaryCompanyPaging2'
       }
       else {
         this.pageName = 'Vendorpaging'
