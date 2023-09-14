@@ -354,7 +354,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
         component: SelfCustomVendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
@@ -368,7 +368,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD,
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
         component: SelfCustomVendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
@@ -493,14 +493,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
-        component: UcTemplateComponent,
-        data: {
-          page: 'SupplierHoldingDetail'
-        },
-      },
-      {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
         component: UcTemplateComponent,
         data: {
           page: 'SupplierHoldingDetail'
@@ -544,14 +537,6 @@ const routes: Routes = [
         data: {
           title: "Vendor Grading Approval Detail",
           page: 'VendorGradingApprovalDetail'
-        },
-      },
-      {
-        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Vendor Branch Registration',
-          page: 'Vendorbranchregistration'
         },
       },
       {

@@ -355,6 +355,7 @@ export class PathConstant {
     public static CUSTOM_CUST_COY_PAGE = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_COY + "/" + PathConstant.CUST_PAGE;
     public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
     public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
+    public static SELF_CUSTOM_NEW_CUST_SHAREHOLDER = PathConstant.SELF_CUSTOM_NEW_CUST + "Shareholder"
 
     //#endregion
 
@@ -599,7 +600,7 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_BRANCH_EMP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.DETAIL;
     public static CUSTOM_VENDOR_BRANCH_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_REG;
     public static SELF_CUSTOM_VENDOR_BRANCH_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.DETAIL;
-    public static CUSTOM_VENDOR_FUNDING_COY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING; 
+    public static CUSTOM_VENDOR_FUNDING_COY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING;
     public static CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT;
     //#endregion
 

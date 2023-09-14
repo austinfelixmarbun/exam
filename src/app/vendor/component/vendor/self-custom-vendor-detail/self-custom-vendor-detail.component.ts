@@ -85,6 +85,25 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       else if (this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY){
         this.pageName = 'VendoRauctionCompanyDetail'
       }
+      else if (this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
+        this.pageName = 'VendorLifeInsuranceBranchDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.pageName = 'VendorInsuranceDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.pageName = 'VendorAgencyCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
+        this.pageName = 'VendorNotaryCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY)
+      {
+        this.pageName = 'Vendorbranchregistration'
+      }
+      else{
+        this.pageName = 'VendorbranchregistrationwithParam'
+      }
     }
 
     setTimeout(() => {

@@ -10,6 +10,8 @@ import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { DashEmptyComponent } from './dash-empty/dash-empty.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 
 @NgModule({
     imports: [
@@ -26,6 +28,8 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         DashBoardComponent,
         DashEmptyComponent
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+    ]
 })
 export class DashboardModule { }

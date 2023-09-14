@@ -238,7 +238,7 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestr
     this.setLookup();
 
     this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
-      if (!ev.hasOwnProperty("pageId")) {
+      if (ev != null && !ev.hasOwnProperty("pageId")) {
         if (ev === "MrVendorTypeCode") {
           const _MrVendorTypeCode = this.parentForm.get(ev).value;
           if (_MrVendorTypeCode) {

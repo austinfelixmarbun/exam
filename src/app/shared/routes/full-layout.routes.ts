@@ -443,6 +443,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'partialprepayment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.amendmentR3Web + '/remoteEntry.js',
+        exposedModule: './PartialPrepaymentModule'
+      })
+        .then(m => m.PartialPrepaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'report',
     loadChildren: () => {
       return loadRemoteModule({
@@ -925,5 +937,5 @@ export const Full_ROUTES: Routes = [
   },
   // #endregion
 
-  
+
 ];

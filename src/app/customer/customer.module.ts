@@ -81,7 +81,6 @@ import { UcTemplateModule } from '@adins/uctemplate';
 import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
 import { SelfCustomCustomerShareholderMenuComponent } from './self-custom-customer-shareholder-menu/self-custom-customer-shareholder-menu.component';
 import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
-import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
 import { SelfCustomContainerNewCustHeaderComponent } from './sharing-component/self-custom-container-new-cust-header/self-custom-container-new-cust-header.component';
 import { SelfCustomContainerThirdPartyFormComponent } from './sharing-component/self-custom-container-third-party-form/self-custom-container-third-party-form.component';
 import { SelfCustomCustomerPersonalPageComponent } from './customer-personal/self-custom-customer-personal/self-custom-customer-personal-page/self-custom-customer-personal-page.component';
@@ -103,6 +102,8 @@ import { CustomShareholderListingComponent } from './sharing-component/custom-sh
 import { SelfCustomPefindoViewModule } from 'app/view/self-custom-pefindo-view/self-custom-pefindo-view.module';
 import { MatRadioModule } from '@angular/material/radio';
 import { SelfCustomCustFinDataComponent } from './cust-fin-data-tab/self-custom-cust-fin-data.component';
+import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custom-new-cust-header/self-custom-new-cust-header.component';
+import { SelfCustomNewCustHeaderShareholderComponent } from './sharing-component/new-cust-header/self-custom-new-cust-header.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -226,6 +227,7 @@ export const customCurrencyMaskConfig = {
         SelfCustomContainerFamilyListingComponent,
         CustomCustomerCompanyAddressComponent,
         CustomShareholderListingComponent,
+        SelfCustomNewCustHeaderShareholderComponent
     ],
     providers: [
         CustAssetComponent,

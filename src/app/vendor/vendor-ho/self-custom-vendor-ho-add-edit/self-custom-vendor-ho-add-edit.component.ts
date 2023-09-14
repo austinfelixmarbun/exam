@@ -6,7 +6,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { FormDropDownListService } from '@adins/ucform';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
@@ -57,7 +57,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
       await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
         (response: any) => {
         this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
-      })
+      });
     }
 
     this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
@@ -65,14 +65,27 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;
         }
-      }
-    );
+      });
   }
 
   onFormCreate(fg: FormGroup)
   {
     this.Form = fg;
 
+  }
+
+  async manageCbLookupManual(ev: any)
+  {
+    await this.http.post(this.UrlConstantNew.GetZipcodeDataByZipCode, {"Zipcode": this.Form.controls.Zipcode.value}).toPromise().then(
+      (response: any) => {
+        this.Form.patchValue(
+          {
+            AreaCode2: response["AreaCode2"],
+            AreaCode1: response["AreaCode1"],
+            City: response["City"],
+            Province: response["ProvDistrictName"]
+          });
+    });
   }
 
   handler = {
@@ -113,6 +126,22 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
           this.Form.patchValue({
             MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
           })
+
+          this.Form.controls.IdNo.clearValidators();
+    
+          if(this.Form.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
+          {
+            this.Form.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+            this.Form.controls.IdNo.updateValueAndValidity();
+            return
+          }
+        
+          if(this.Form.controls.MrVendorTypeCode.value == 'P')
+          {
+            this.Form.controls.IdNo.setValidators([Validators.required])
+          }
+        
+          this.Form.controls.IdNo.updateValueAndValidity();
       });
 
       if (!this.VatForPersonal){

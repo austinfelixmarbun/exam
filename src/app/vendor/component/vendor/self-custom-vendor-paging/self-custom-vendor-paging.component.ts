@@ -86,6 +86,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
         case CommonConstant.SURVEYOR_BRANCH:
           this.pageName = 'SurveyorBranchGroupPaging'
           break;
+        case CommonConstant.CRD_INSCO_BRANCH:
+          this.pageName = 'CreditInsuranceBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
@@ -110,6 +113,8 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
           case CommonConstant.SURVEYOR_HO:
             this.pageName = 'Vendorsurveyorhopaging'
             break;
+          case CommonConstant.CRD_INSCO_HO:
+            this.pageName = 'CreditInsuranceHo'
         }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
@@ -135,6 +140,21 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY){
         this.pageName = 'VendorAuctionCompanyPaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
+        this.pageName = 'VendorLifeInsuranceBranch'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.pageName = 'VendorInsurancePaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_BRANCH){
+        this.pageName = 'Creditinsurancebranch'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.pageName = 'VendorAgencyCompanyPaging'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
+        this.pageName = 'VendorNotaryCompanyPaging2'
       }
       else {
         this.pageName = 'Vendorpaging'
