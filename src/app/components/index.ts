@@ -50,4 +50,5 @@ export { CustomSurveyResultReviewDetailComponent } from 'app/survey/custom-surve
 export { SelfCustomContainerSurveyTaskResultDetailComponent } from 'app/survey/self-custom-container-survey-task-result-detail/self-custom-container-survey-task-result-detail.component';
 export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/survey/self-custom-container-survey-task-result-upload-doc/self-custom-container-survey-task-result-upload-doc.component';
 export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
+export { SelfCustomContainerVendorBranchInfoComponent } from 'app/vendor/vendor-branch/self-custom-container-vendor-branch-info/self-custom-container-vendor-branch-info.component';
 export { SelfCustomNewCustHeaderShareholderComponent } from 'app/customer/sharing-component/new-cust-header/self-custom-new-cust-header.component';
