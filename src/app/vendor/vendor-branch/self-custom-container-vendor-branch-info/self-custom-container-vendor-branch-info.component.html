@@ -7,7 +7,7 @@
 <div
   *ngIf="MrVendorCategoryCode=='SUPPLIER_HO' || MrVendorCategoryCode=='SUPPLIER_HOLDING' || MrVendorCategoryCode=='SUPPLIER'"
   id="HOInformation">
-  <div class="form-body" *ngIf="inputLookupParentObj.isReady">
+  <div class="form-body px-3" *ngIf="inputLookupParentObj.isReady">
     <div class="form-group row">
       <label class="col-md-3">Supplier HO</label>
       <div class="col-md-6">
@@ -147,7 +147,7 @@
 <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_BRANCH' || MrVendorCategoryCode=='VENDOR_CATEGORY_GENERAL' || MrVendorCategoryCode == 'CONSULTANT'
 || MrVendorCategoryCode == 'LOGISTIC' || MrVendorCategoryCode == 'COURIER'
 || MrVendorCategoryCode == 'IT_INFRA_SOLUTION'" id="HOInformation2">
-  <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
+  <div class="form-body px-3" formGroupName="VendorAttrList" *ngIf="isFormReady">
     <ng-container *ngFor="let attr of VendorAttrList">
       <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">
         <label class="col-md-3 adInsLabel ">{{attr.AttrName}}</label>
