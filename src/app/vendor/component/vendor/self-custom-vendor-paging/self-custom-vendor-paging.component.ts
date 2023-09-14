@@ -86,6 +86,9 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
         case CommonConstant.SURVEYOR_BRANCH:
           this.pageName = 'SurveyorBranchGroupPaging'
           break;
+        case CommonConstant.CRD_INSCO_BRANCH:
+          this.pageName = 'CreditInsuranceBranchGroupPaging'
+          break;
       }
     }
     else if (this.Type == "Default") {
