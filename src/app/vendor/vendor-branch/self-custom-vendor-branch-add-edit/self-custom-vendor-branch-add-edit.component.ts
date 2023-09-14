@@ -1,13 +1,14 @@
 import { FormDropDownListService } from '@adins/ucform';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 
 @Component({
   selector: 'app-self-custom-vendor-branch-add-edit',
@@ -26,12 +27,37 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   itemIdType: Array<KeyValueObj>;
   VendorId: number = 0;
 
-  constructor(private ddlSvc: FormDropDownListService, private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    this.route.queryParams.subscribe(params => {
+      if (params["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      }
+
+      if (params["VendorId"] != null) {
+        this.VendorId = params["VendorId"];
+      }
+    });
+
     this.pageName = "SupplierRegistration";
+
+    this.selectPage();
   }
 
-  ngOnInit(): void {
-    this.selectPage();
+  async ngOnInit() {
+    if (this.VendorId > 0)
+    {
+      let ReqGetVendorAndVendorAddr : GenericObj = new GenericObj();
+      ReqGetVendorAndVendorAddr.Id = this.VendorId;
+      await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
+        (response: any) => {
+        this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
+      });
+    }
+    else
+    {
+      await this.callback("MrVendorTypeCode")
+    }
 
     this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
@@ -132,6 +158,5 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       }
     }
   }
-
-
+  
 }
