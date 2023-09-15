@@ -9,7 +9,7 @@ export class SelfCustomCustomerPersonalPageComponent implements OnInit {
   pageName: string;
 
   constructor() {
-    this.pageName = "CustPersonalPageViewHeader"
+    this.pageName = "CustPersonalPageViewHeaderV2"
   }
 
   ngOnInit(): void {

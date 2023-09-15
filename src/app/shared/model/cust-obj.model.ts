@@ -21,6 +21,7 @@ export class CustObj {
     IsGuarantor: boolean;
     IsShareholder: boolean;
     ThirdPartyTrxNo: string;
+    IsCustGrp: boolean;
 
     constructor() {
         this.CustId = 0;

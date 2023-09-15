@@ -12,7 +12,7 @@ const routes: Routes = [
           path: PathConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL,
           component: UcTemplateComponent,
           data: {
-            page: 'ViewCustomerPersonal'
+            page: 'ViewCustomerPersonalV2'
           },
         },
         {
