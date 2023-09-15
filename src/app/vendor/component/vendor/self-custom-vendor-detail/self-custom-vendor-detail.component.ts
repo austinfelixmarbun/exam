@@ -88,7 +88,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
 
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
-
+        this.pageName = "SupplierAtpmDetail"
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
         this.pageName = 'VendorSurveyorDetail'
