@@ -61,10 +61,6 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestr
     }
 
   async ngOnInit() {
-    console.log(this.VendorId)
-    console.log(this.MrVendorCategoryCode)
-    console.log(this.parentForm)
-
     this.SetTitleHoInfo();
 
     if (this.VendorId > 0)
