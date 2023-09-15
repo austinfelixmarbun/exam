@@ -286,7 +286,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Customer Company Address',
-          page: 'CustomerCompony'
+          page: 'CustomerComponyV2'
         }
       },
       {
