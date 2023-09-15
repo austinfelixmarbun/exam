@@ -101,10 +101,10 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY)
       {
-        this.pageName = 'Vendorbranchregistration'
+        this.pageName = 'VendorbranchregistrationwithParam'
       }
       else{
-        this.pageName = 'VendorbranchregistrationwithParam'
+        this.pageName = 'Vendorbranchregistration'
       }
     }
 
