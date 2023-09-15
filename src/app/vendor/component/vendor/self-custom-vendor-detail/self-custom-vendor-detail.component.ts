@@ -104,7 +104,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
         this.pageName = 'VendorbranchregistrationwithParam'
       }
       else{
-        this.pageName = 'Vendorbranchregistration'
+        this.pageName = 'VendorbranchregistrationwithParamWithNoParam'
       }
     }
 
