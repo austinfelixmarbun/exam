@@ -301,7 +301,7 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
       vendorBranchObj.VendorObj.ReservedField4 = dicts.formRaw.ReservedField4;
       vendorBranchObj.VendorObj.ReservedField5 = dicts.formRaw.ReservedField5;
       if (dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV != null) {
-        vendorBranchObj.VendorObj.ReservedField6 = dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV.controls.VendorAttrValue;
+        vendorBranchObj.VendorObj.ReservedField6 = dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV.VendorAttrValue;
       }
     }
 
@@ -310,7 +310,7 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
       vendorBranchObj.VendorObj.ReservedField9 = dicts.formRaw.ReservedField9;
     }
   
-    if (dicts.formRaw.IsNpwpExist.value == true) {
+    if (dicts.formRaw.IsNpwpExist == true) {
       vendorBranchObj.VendorObj.TaxIdNo = dicts.formRaw.TaxIdNo;
       vendorBranchObj.VendorObj.TaxpayerName = dicts.formRaw.TaxpayerName;
 
@@ -324,7 +324,7 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
       vendorBranchObj.VendorAddrObj.City = dicts.formRaw.City;
       vendorBranchObj.VendorAddrObj.Province = dicts.formRaw.Province;
     }
-    else if (dicts.mode == null)
+    else if (dicts.mode == "edit")
     {
       vendorBranchObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
       vendorBranchObj.VendorAddrObj.Addr = dicts.VendorAddrObj.Addr;
@@ -348,7 +348,7 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
             let vendorAttr = new VendorAttrContentObj();
 
             vendorAttr.VendorAttrContentId = formValue[x]["VendorAttrContentId"];
-            vendorAttr.VendorId = this.VendorId;
+            vendorAttr.VendorId = dicts.VendorId;
             vendorAttr.AttrContent = formValue[x]["VendorAttrValue"];
             vendorAttr.AttrCode = formValue[x]["AttrCode"];
             vendorAttrRequest.push(vendorAttr);
@@ -359,11 +359,11 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
     }
   
     if (dicts.mode == "edit") {
-        if (dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
-          vendorBranchObj.VendorObj.MrVendorTypeCode = this.result.VendorObj.MrVendorTypeCode;
+        if (dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
+          vendorBranchObj.VendorObj.MrVendorTypeCode = dicts.MrVendorCategoryCode;
         }
         vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
-        vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrId;
+        vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
         vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
         vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
 
