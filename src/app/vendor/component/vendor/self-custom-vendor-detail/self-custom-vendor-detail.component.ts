@@ -15,7 +15,9 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.subscribeParam();
-    this.pageName = 'SupplierHoDetail'
+
+    this.pageName = 'SupplierDetail'
+    this.selectPage();
   }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-
+        this.pageName = "SupplierDetail"
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
                this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
@@ -67,6 +69,18 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
         switch (this.MrVendorCategoryCode) {
           case CommonConstant.SURVEYOR_HO:
             this.pageName = 'VendorSurveyorHoDetail'
+            break;
+          case CommonConstant.SUPPLIER_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.ASSET_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.SURVEYOR_HO:
+            this.pageName = 'SupplierHoDetail'
             break;
         }
       }
@@ -102,10 +116,10 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY)
       {
-        this.pageName = 'Vendorbranchregistration'
+        this.pageName = 'VendorbranchregistrationwithParam'
       }
       else{
-        this.pageName = 'VendorbranchregistrationwithParam'
+        this.pageName = 'VendorbranchregistrationwithParamWithNoParam'
       }
     }
 

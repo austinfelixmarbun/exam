@@ -1,7 +1,7 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
-import { addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
-import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync } from "../function/customer-function";
+import { addEditvendorBranch, addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
+import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncCompany } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { rerunJournal, saveJrMGroupDFact, saveJrMHeaderFact } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
@@ -26,12 +26,14 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addRangeVendorGrpMbr", addRangeVendorGrpMbr);
     this.setExecutor("addRangeOfficeMbr", addRangeOfficeMbr);
     this.setExecutor("addEditvendorHO", addEditvendorHO);
+    this.setExecutor("addEditvendorBranch", addEditvendorBranch);
     this.setExecutor("cancelHORegistration", cancelHORegistration);
     this.setExecutor("addEditCustAsset", addEditCustAsset);
     this.setExecutor("addRangeAssetSchmD", addRangeAssetSchmD);
     this.setExecutor("addEditCustAddr", addEditCustAddr);
     this.setExecutor("addRefOfficeAreaMember",addRefOfficeAreaMember);
     this.setExecutor("saveDataOrSaveAndSync", saveDataOrSaveAndSync);
+    this.setExecutor("saveDataOrSaveAndSyncCompany", saveDataOrSaveAndSyncCompany);
     this.setExecutor("addEditCustJobData", addEditCustJobData);
     this.setExecutor("editCustomerFamily", editCustomerFamily);
     this.setExecutor("addEditCustomer", addEditCustomer);
