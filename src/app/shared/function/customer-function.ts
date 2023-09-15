@@ -1372,8 +1372,8 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
 
   if (StepIndex == 1)
   {
-    api = "/v1/CustPersonal/EditCustPersonal";
-    await saveCustPersonalDetail(dicts, api, http, toastr)
+      api = "/v1/CustPersonal/EditCustPersonal";
+      await saveCustPersonalDetail(dicts, api, http, toastr)
   }
 
   if (StepIndex == 4)
