@@ -179,6 +179,7 @@ export class NavigationConstant {
     public static CUSTOM_VIEW_NEG_CUST = "/" + PathConstant.CR_VIEW + "/" + PathConstant.CUSTOM_VIEW_NEG_CUST;
     public static SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_PERSONAL_DETAIL; //'/View/SelfCustomCustomer/SelfCustom/PersonalDetail'
     public static SELF_CUSTOM_VIEW_CUST_EXPOSURE = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_EXPOSURE; //'/View/SelfCustomCustomer/SelfCustom/CustExposureView'
+    public static SELF_CUSTOM_VIEW_CUST_COY_DETAIL = NavigationConstant.SELF_CUSTOM_VIEW_CUST + "/" + PathConstant.SELF_CUSTOM_VIEW_CUST_COY_DETAIL;
 
     public static CUSTOM_CUST_NEG_PERSONAL_DETAIL = PathConstant.LR_CUST +"/" + PathConstant.SELF_CUSTOM + PathConstant.CUST_NEG + PathConstant.PERSONAL + "/" + PathConstant.DETAIL;
     public static VIEW_CUSTOM_CUST_NEG_PERSONAL = NavigationConstant.VIEW_NEG_CUST + "/" + PathConstant.VIEW_PERSONAL;
@@ -371,6 +372,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_CUST_PERSONAL_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE; //'/Customer/SelfCustom/CustomerPersonal/Page'
     public static SELF_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerPersonalDuplicateChecking'
     public static SELF_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerCompanyDuplicateChecking'
+    public static CUSTOM_CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUSTOM_CUST_COY_PAGE; //'/Customer/CustomerCompany/Page'
+
     //#endregion
 
     //#region Document Management

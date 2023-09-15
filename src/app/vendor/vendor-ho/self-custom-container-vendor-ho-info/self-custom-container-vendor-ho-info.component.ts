@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
@@ -19,16 +18,19 @@ import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-se
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { VendorAtpmMappingObj } from 'app/shared/model/vendor-atpm-mapping-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { Subscription } from 'rxjs';
+import { UcTemplateService } from '@adins/uctemplate';
 
 @Component({
   selector: 'app-self-custom-container-vendor-ho-info',
   templateUrl: './self-custom-container-vendor-ho-info.component.html'
 })
-export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
+export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestroy {
 
   @Input() MrVendorCategoryCode: string;
-  @Input() VendorId: number = 0;
   @Input() parentForm: FormGroup;
+
+  @Output() data: EventEmitter<any> = new EventEmitter<any>();
 
   enjiForm: NgForm;
 
@@ -39,19 +41,26 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
   vendorAtpmList = new Array();
   resultAtpmMapping: Array<VendorAtpmMappingObj> = new Array();
 
+  VendorId: number = 0;
+  MrVendorTypeCode: string = "C";
   inputLookupParentObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
 
   isFormReady: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) { }
+  subscriber: Subscription;
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew,
+    private ucTemplateSvc: UcTemplateService) {
+      this.route.queryParams.subscribe(params => {
+        if (params["VendorId"] != null) {
+          this.VendorId = params["VendorId"];
+        }
+      });
+    }
 
   async ngOnInit() {
-    console.log(this.VendorId)
-    console.log(this.MrVendorCategoryCode)
-    console.log(this.parentForm)
-
     this.SetTitleHoInfo();
 
     if (this.VendorId > 0)
@@ -59,6 +68,10 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
       await this.getData();
     }
 
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
+    {
+      this.parentForm.addControl("VendorParentId", this.fb.control(''));
+    }
 
     await this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).toPromise().then(
       (response) => {
@@ -217,6 +230,25 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
         }
       }
     );
+
+    this.setLookup();
+
+    this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
+      if (ev != null && !ev.hasOwnProperty("pageId")) {
+        if (ev === "MrVendorTypeCode") {
+          const _MrVendorTypeCode = this.parentForm.get(ev).value;
+          if (_MrVendorTypeCode) {
+            this.MrVendorTypeCode = _MrVendorTypeCode;
+          }
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscriber) {
+      this.subscriber.unsubscribe();
+    }
   }
 
   HoTitle: string = "";
@@ -247,6 +279,12 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
         this.resultAtpmMapping = response.ReturnObject;
 
         this.vendorAtpmList = this.resultAtpmMapping;
+
+        const data = {
+          "vendorAtpmList": this.vendorAtpmList
+        }
+    
+        this.data.emit(data)
       });
   }
 
@@ -275,7 +313,14 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
       }
     }
 
+    this.inputLookupParentObj.isRequired = true;
     this.inputLookupParentObj.isReady = true;
+  }
+
+  getLookupParent(event) {
+    this.parentForm.patchValue({
+      VendorParentId: event.VendorId
+    });
   }
 
   AddAtpmClick()
@@ -310,6 +355,12 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
       };
 
       this.vendorAtpmList.push(obj);
+
+      const data = {
+        "vendorAtpmList": this.vendorAtpmList
+      }
+  
+      this.data.emit(data)
     })
   }
 
@@ -319,6 +370,12 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit {
     {
       let index = this.vendorAtpmList.map(function(e) { return e.VendorAtpmCode; }).indexOf(item.VendorAtpmCode);
       this.vendorAtpmList.splice(index,1);
+
+      const data = {
+        "vendorAtpmList": this.vendorAtpmList
+      }
+  
+      this.data.emit(data)
     }
   }
 

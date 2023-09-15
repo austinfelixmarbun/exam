@@ -15,7 +15,9 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.subscribeParam();
-    this.pageName = 'SupplierHoDetail'
+
+    this.pageName = 'SupplierDetail'
+    this.selectPage();
   }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-
+        this.pageName = "SupplierDetail"
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
                this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
@@ -68,6 +70,18 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
           case CommonConstant.SURVEYOR_HO:
             this.pageName = 'VendorSurveyorHoDetail'
             break;
+          case CommonConstant.SUPPLIER_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.ASSET_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.SURVEYOR_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
         }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
@@ -75,6 +89,34 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_ATPM) {
 
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
+        this.pageName = 'VendorSurveyorDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY){
+        this.pageName = 'VendorCollectionCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY){
+        this.pageName = 'VendoRauctionCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH){
+        this.pageName = 'VendorLifeInsuranceBranchDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH){
+        this.pageName = 'VendorInsuranceDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY){
+        this.pageName = 'VendorAgencyCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY){
+        this.pageName = 'VendorNotaryCompanyDetail'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY)
+      {
+        this.pageName = 'VendorbranchregistrationwithParam'
+      }
+      else{
+        this.pageName = 'VendorbranchregistrationwithParamWithNoParam'
       }
     }
 

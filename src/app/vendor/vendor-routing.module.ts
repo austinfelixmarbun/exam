@@ -354,21 +354,21 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
         component: SelfCustomVendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
         component: SelfCustomVendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_ADD,
+        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
         component: SelfCustomVendorBranchAddEditComponent,
         data: {
           title: 'Vendor Branch Add'
@@ -459,7 +459,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HO_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HO_DETAIL,
         component: SelfCustomVendorDetailComponent,
         data: {
           title: 'Vendor HO Detail'
@@ -493,14 +493,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
-        component: UcTemplateComponent,
-        data: {
-          page: 'SupplierHoldingDetail'
-        },
-      },
-      {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
         component: UcTemplateComponent,
         data: {
           page: 'SupplierHoldingDetail'
@@ -547,21 +540,28 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.CUSTOM_VENDOR_BRANCH_REG,
-        component: UcTemplateComponent,
+        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
+        component: SelfCustomVendorDetailComponent,
         data: {
-          title: 'Vendor Branch Registration',
-          page: 'Vendorbranchregistration'
+          title: "Vendor Branch Detail"
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_BRANCH_DETAIL,
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_PAGING,
         component: UcTemplateComponent,
         data: {
-          title: "Vendor Branch Registration",
-          page: 'VendorGradingApprovalDetail'
+          title: 'Funding Company Paging',
+          page: 'Vendorfundingcoy'
         },
       },
+      {
+        path: PathConstant.CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Funding Company Addedit',
+          page: 'Vendorfundingcoydetail'
+        },
+      }
     ]
 
   }
