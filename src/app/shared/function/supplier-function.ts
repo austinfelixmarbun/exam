@@ -364,8 +364,8 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
         }
         vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
         vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
-        vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
-        vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
+        vendorBranchObj.VendorObj.RowVersion = dicts.form.RowVersionVendor;
+        vendorBranchObj.VendorAddrObj.RowVersion = dicts.form.RowVersionAddr;
 
         http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
