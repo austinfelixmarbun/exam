@@ -70,6 +70,18 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
           case CommonConstant.SURVEYOR_HO:
             this.pageName = 'VendorSurveyorHoDetail'
             break;
+          case CommonConstant.SUPPLIER_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.ASSET_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.LIFE_INSCO_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.SURVEYOR_HO:
+            this.pageName = 'SupplierHoDetail'
+            break;
         }
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HOLDING) {
@@ -101,10 +113,10 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
       }
       else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY)
       {
-        this.pageName = 'Vendorbranchregistration'
+        this.pageName = 'VendorbranchregistrationwithParam'
       }
       else{
-        this.pageName = 'VendorbranchregistrationwithParam'
+        this.pageName = 'VendorbranchregistrationwithParamWithNoParam'
       }
     }
 

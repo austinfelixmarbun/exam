@@ -2,13 +2,13 @@ import { FormDropDownListService } from '@adins/ucform';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
+import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 
 @Component({
   selector: 'app-self-custom-vendor-branch-add-edit',
@@ -18,16 +18,14 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   pageName: string;
   MrVendorCategoryCode: string;
   Type: string = "Default";
-  navigationSubscription;
-  isReady = false;
-
   MrIdTypeCode: string;
-  itemIdType: Array<KeyValueObj>;
-  MrVendorTypeCode: string;
-  VendorId: number = 0;
+  navigationSubscription;
   VatForPersonal: boolean = false;
-
+  isReady = false;
+  MrVendorTypeCode: string = "COMPANY";
   Form: FormGroup = this.fb.group({});
+  itemIdType: Array<KeyValueObj>;
+  VendorId: number = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
     private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
@@ -69,16 +67,15 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       });
   }
 
-  onFormCreate(fg: FormGroup)
-  {
-    this.Form = fg;
-  }
-
   selectPage() {
     this.isReady = false;
     if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
         this.pageName = 'SupplierRegistration'
+      }
+      else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH)
+      {
+        this.pageName = "VendorBranchRegistration"
       }
       // else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY) {
       else{  
@@ -92,10 +89,12 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
     }, 10);
   }
 
+  onFormCreate(ev) {
+    this.Form = ev;
+  }
+
   handler = {
-
     callback: ($event) => this.callback($event)
-
   };
 
   waitFor(conditions) {
@@ -173,5 +172,5 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   
     this.Form.controls.IdNo.updateValueAndValidity();
   }
-
+  
 }

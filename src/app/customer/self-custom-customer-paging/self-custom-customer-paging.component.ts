@@ -50,7 +50,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
       }
       else
       {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], param);
+        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUSTOM_CUST_COY_PAGE], param);
       }
     }
   }
