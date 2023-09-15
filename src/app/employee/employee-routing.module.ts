@@ -108,6 +108,38 @@ const routes: Routes = [
           page: 'EmployeeLeaveManagementDetail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Paging',
+          page: 'EmployeePaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Detail',
+          page: 'Organizationemployeedetail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_EMP_BZ_UNIT_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Business Unit Paging',
+          page: 'EmployeeBusinessUnit'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_EMP_BZ_UNIT_ADD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Employee Business Unit Detail',
+          page: 'Empbusinessunitdetail'
+        },
+      },
     ]
   }
 ];

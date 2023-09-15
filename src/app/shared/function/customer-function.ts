@@ -461,16 +461,13 @@ function DecryptString(chipperText: string, chipperKey: string) {
     return plainText;
 }
 
-export function editCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
+export function editCustomerFamily(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
     let url = environment.FoundationR3Url + api;
 
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
 
-    if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
-    {
-      reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
-    }
+    reqSubmitObj = SaveCustPersonal(parentForm, dicts, Mode, From)
 
     http.post(url, reqSubmitObj).subscribe(
       (response: any) => {
@@ -1058,53 +1055,53 @@ async function saveAddEditCustJobData(dicts: Record<string, any>, api: any, http
   );
 }
 
-export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: any, isSaveAndSync: boolean, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService)
+export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
 {
+  if (!dicts.formValid) return;
+
   let next = ""
   let api = ""
-  console.log(dicts.form)
-  console.log(dicts.formRaw)
 
-  if (dicts.stepCode == "CustDetail")
+  if (StepIndex == 1)
   {
     api = "/v1/CustPersonal/EditCustPersonal";
     await saveCustPersonalDetail(dicts, api, http, toastr)
   }
 
-  if (dicts.stepCode == "EmergencyCntcPerson")
+  if (StepIndex == 4)
   {
     api = dicts.CustPersonalContactPersonId == 0? "/v1/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v1/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
     await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
     next = "CustJobData"
   }
 
-  if (dicts.stepCode == "CustJobData")
+  if (StepIndex == 5)
   {
     api = dicts.CustPersonalJobDataId == 0? "/v1/CustPersonalJobData/AddCustPersonalJobData" : "/v1/CustPersonalJobData/EditCustPersonalJobData";
     await saveAddEditCustJobData(dicts, api, http, toastr)
     next = "CustFinData"
   }
   
-  if (dicts.stepCode == "CustFinData")
+  if (StepIndex == 6)
   {
     alert("CustFinData")
   }
 
-  if (dicts.stepCode == "CustAttrData")
+  if (StepIndex == 9)
   {
     alert("CustAttrData")
   }
 
-  if (isSaveAndSync == true)
+  if (isSaveAndSync == "true")
   {
     let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
     if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
 
     let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
-    this.http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+    http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
-          this.toastr.successMessage("Sync Customer Succses");
+          toastr.successMessage("Sync Customer Succses");
           AdInsHelper.RedirectUrl(router, [UrlBack], {});
         }
       }

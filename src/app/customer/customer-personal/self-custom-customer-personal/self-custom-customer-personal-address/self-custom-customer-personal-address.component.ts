@@ -1,6 +1,12 @@
-import { UcTemplateService } from '@adins/uctemplate';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 
 @Component({
   selector: 'app-self-custom-customer-personal-address',
@@ -11,13 +17,49 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
   @Output()
   next: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private http: HttpClient, private uctemplateService: UcTemplateService) {
+  IdCust: number = 0;
+  CustNo: string;
+
+  mode: string;
+  AddrId: number;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService,
+    private UrlConstantNew: UrlConstantNew) {
+    this.route.queryParams.subscribe(params => {
+      if (params["IdCust"] != null) {
+        this.IdCust = params["IdCust"];
+      }
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.mode = "check";
+
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
+      (response: CustObj) => {
+        this.CustNo = response.CustNo;
+      }
+    );
   }
 
-  getValue(ev: any)
+  terimaValue(ev) {
+    this.mode = ev.mode;
+    this.AddrId = ev.AddrId;
+  }
+
+  SaveAndSync()
+  {
+    this.http.post(this.UrlConstantNew.SendCustomerDataToRabbitMq, { CustNo: this.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          this.toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+        }
+      }
+    )
+  }
+
+  SaveAndContinue(ev: any)
   {
     const actions = [
       {
@@ -32,7 +74,7 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
       }
     ];
 
-    this.next.emit({Actions: actions, Data: {"stepCode": ""}});
+    this.next.emit({Actions: actions});
   }
 
 }

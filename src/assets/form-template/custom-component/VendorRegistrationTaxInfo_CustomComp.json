@@ -1,0 +1,327 @@
+{
+  "id": "VendorRegistrationTaxInfo_CustomComp",
+  "name": "Vendor Registration Tax Info Custom Component",
+  "saveState": false,
+  "customComponent": [
+    {
+      "form": {
+        "subsection": {
+          "title": "Tax Info",
+          "isVertical": true,
+          "isSubsection": true,
+          "isModeAdd": true,
+          "formInput": [
+            {
+              "Action": [],
+              "Type": "DDL",
+              "Label": "Tax Calculation Method",
+              "Variable": "MrTaxCalcMethodCode",
+              "IsRequired": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": false,
+              "IsEditable": true,
+              "UseDefaultValue": true,
+              "isUseAPI": true,
+              "DdlItemsObj": null,
+              "DdlReqObj": {
+                "Environment": "FOU",
+                "Url": "/v1/RefMaster/GetListKeyValueActiveByCode",
+                "CustomObjName": "ReturnObject",
+                "CustomKeyName": "Key",
+                "CustomValueName": "Value",
+                "ReqObj": {
+                  "RefMasterTypeCode": "TAX_CALC_METHOD"
+                }
+              }
+            },
+            {
+              "Action": [],
+              "Type": "DDL",
+              "Label": "VAT",
+              "Variable": "IsVat",
+              "IsRequired": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": false,
+              "IsEditable": true,
+              "UseDefaultValue": true,
+              "isUseAPI": false,
+              "DdlItemsObj": [
+                {
+                  "Key": "false",
+                  "Value": "No"
+                },
+                {
+                  "Key": "true",
+                  "Value": "Yes"
+                }
+              ],
+              "DdlReqObj": null
+            },
+            {
+              "Action": [
+                {
+                  "type": "hideField",
+                  "condition": {
+                    "variable": "IsNpwpExist",
+                    "restriction": "NEQ",
+                    "value": "true"
+                  },
+                  "listField": [
+                    "TaxIdNo",
+                    "TaxpayerName",
+                    "Zipcode",
+                    "Addr",
+                    "AreaCode4",
+                    "AreaCode3",
+                    "AreaCode2",
+                    "AreaCode1",
+                    "City",
+                    "Province"
+                  ]
+                },
+                {
+                  "type": "requiredField",
+                  "condition": {
+                    "variable": "IsNpwpExist",
+                    "restriction": "Eq",
+                    "value": "true"
+                  },
+                  "listField": [
+                    "TaxIdNo",
+                    "TaxpayerName"
+                  ]
+                }
+              ],
+              "Type": "BOOL",
+              "Label": "Tax Id No Exist",
+              "Variable": "IsNpwpExist",
+              "Value": false,
+              "IsRequired": false,
+              "IsCallback": true,
+              "IsReadonly": false,
+              "IsHide": false,
+              "IsEditable": true
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "Tax Id No",
+              "Variable": "TaxIdNo",
+              "Value": "",
+              "Pattern": "^[0-9]+$",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Min": "15",
+              "Max": "15",
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "Tax Payer Name",
+              "Variable": "TaxpayerName",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXTAREA",
+              "Label": "Tax Address",
+              "Variable": "Addr",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "RT",
+              "Variable": "AreaCode4",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "RW",
+              "Variable": "AreaCode3",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "LOOKUP",
+              "Label": "Zip Code",
+              "Variable": "Zipcode",
+              "IsRequired": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "LookupName": "${Lookupzipcode}",
+              "Criteria": []
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "Kelurahan",
+              "Variable": "AreaCode2",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "Kecamatan",
+              "Variable": "AreaCode1",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "City",
+              "Variable": "City",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            },
+            {
+              "Action": [],
+              "Type": "TEXT",
+              "Label": "Province",
+              "Variable": "Province",
+              "Value": "",
+              "Pattern": "",
+              "IsRequired": false,
+              "IsUppercase": false,
+              "IsCallback": false,
+              "IsReadonly": false,
+              "IsHide": true,
+              "IsEditable": true,
+              "Placeholder": ""
+            }
+          ],
+          "onLoad": [
+            {
+              "environment": "FoundationR3Url",
+              "apiPath": "/v1/Vendor/GetVendorBranchAndVendorTaxAddrByVendorId",
+              "reqObj": [
+                {
+                  "propName": "Id",
+                  "propValue": "VendorId",
+                  "isFromDict": false
+                }
+              ],
+              "mapRes": [
+                {
+                  "accessorName": "VendorObj.MrTaxCalcMethodCode",
+                  "variableName": "MrTaxCalcMethodCode"
+                },
+                {
+                  "accessorName": "VendorObj.IsVat",
+                  "variableName": "IsVat"
+                },
+                {
+                  "accessorName": "VendorObj.IsNpwpExist",
+                  "variableName": "IsNpwpExist"
+                },
+                {
+                  "accessorName": "VendorObj.TaxIdNo",
+                  "variableName": "TaxIdNo"
+                },
+                {
+                  "accessorName": "VendorObj.TaxpayerName",
+                  "variableName": "TaxpayerName"
+                },
+                {
+                  "accessorName": "VendorAddrObj.Addr",
+                  "variableName": "Addr"
+                },
+                {
+                  "accessorName": "VendorAddrObj.AreaCode3",
+                  "variableName": "AreaCode3"
+                },
+                {
+                  "accessorName": "VendorAddrObj.AreaCode4",
+                  "variableName": "AreaCode4"
+                },
+                {
+                  "accessorName": "VendorAddrObj.Zipcode",
+                  "variableName": "Zipcode"
+                },
+                {
+                  "accessorName": "VendorAddrObj.AreaCode1",
+                  "variableName": "AreaCode1"
+                },
+                {
+                  "accessorName": "VendorAddrObj.AreaCode2",
+                  "variableName": "AreaCode2"
+                },
+                {
+                  "accessorName": "VendorAddrObj.City",
+                  "variableName": "City"
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "mapCookie": []
+        }
+      },
+      "id": "3f925ce9-8c7f-4142-bef1-7efba156ecad"
+    }
+  ]
+}
