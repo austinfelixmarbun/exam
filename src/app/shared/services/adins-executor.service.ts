@@ -2,7 +2,6 @@ import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";;
 import { addEditvendorBranch, addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
 import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, addEditCustomerV2, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncV2 } from "../function/customer-function";
-import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncCompany } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { rerunJournal, saveJrMGroupDFact, saveJrMHeaderFact } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
@@ -35,7 +34,7 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addRefOfficeAreaMember",addRefOfficeAreaMember);
     this.setExecutor("saveDataOrSaveAndSync", saveDataOrSaveAndSync);
     this.setExecutor("saveDataOrSaveAndSyncV2", saveDataOrSaveAndSyncV2);
-    this.setExecutor("saveDataOrSaveAndSyncCompany", saveDataOrSaveAndSyncCompany);
+    this.setExecutor("saveDataOrSaveAndSyncCompany", saveDataOrSaveAndSync);
     this.setExecutor("addEditCustJobData", addEditCustJobData);
     this.setExecutor("editCustomerFamily", editCustomerFamily);
     this.setExecutor("addEditCustomer", addEditCustomer);
