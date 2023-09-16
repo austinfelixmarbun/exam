@@ -27,6 +27,7 @@ import { ExceptionConstant } from "../constant/ExceptionConstant";
 import { FormGroup } from "@angular/forms";
 import { UcTemplateService } from "@adins/uctemplate";
 import { CustPersonalContactPersonObj } from "../model/cust-personal-contact-person-obj.model";
+import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cust-company-legal-doc-file-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -1211,4 +1212,80 @@ export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, f
 
     templateService.publish({Actions: actions, Data: {"stepCode": next}});
   }
+}
+
+export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, RowObj: any, key: string, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
+  let url: string;
+
+  let reqObj = { ...parentForm };
+  reqObj.CustCompanyId = dicts.CustCompanyId;
+  let isAddMode: Boolean = false;
+  if (dicts.CustCompanyLegalDocId == 0) {
+    url = this.UrlConstantNew.AddCustCompanyLegalDoc;
+    reqObj.CustCompanyLegalDocId = 0;
+    isAddMode = true;
+  } else {
+    url = this.UrlConstantNew.EditCustCompanyLegalDoc;
+    reqObj.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
+    reqObj.RowVersion = dicts.RowVersion;
+    isAddMode = false;
+  }
+
+  this.http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      var resSave;
+      resSave = response;
+      if (dicts.DocUploadName == "") {
+        toastr.successMessage(resSave["Message"]);
+        DialogRef.close()
+        return;
+      }
+
+      let reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
+      reqFileUpl.ByteBase64 = dicts.ByteBase64;
+      reqFileUpl.DocUploadName = dicts.DocUploadName;
+      reqFileUpl.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
+
+      uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
+    }
+  );
+}
+
+function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
+  let urlUpload = this.UrlConstantNew.UploadCustCompanyLegalDoc;
+
+  var formData: any = new FormData();
+  formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = evnt => {
+    if (xhr.readyState !== 4) return;
+
+    if (xhr.status !== 200 && xhr.status !== 201) {
+      toastr.errorMessage('Upload Failed !');
+      return;
+    }
+    else {
+      var response = JSON.parse(xhr.response);
+      if (response.HeaderObj.StatusCode != '200') {
+        toastr.errorMessage('Upload Failed ! ' + + response.HeaderObj.Message);
+        return
+      }
+    }
+
+    if (xhr.status === 200) {
+      toastr.successMessage(successMsg);
+      DialogRef.close()
+      return;
+    }
+  };
+
+  xhr.onerror = evnt => {
+    toastr.errorMessage('Upload Failed !');
+    return;
+  };
+  xhr.open('POST', urlUpload, true);
+  let value = cookieService.get('XSRF-TOKEN');
+  let token = DecryptString(value, environment.ChipperKeyCookie);
+  xhr.setRequestHeader('AdInsKey', `${token}`);
+  xhr.send(formData);
 }

@@ -1,0 +1,12 @@
+<!-- <lib-ucSubsection [id]="'documentId'" [title]="'Document'" [panel]="'document'">
+</lib-ucSubsection> -->
+<div id="document">
+  <div class="form-group row">
+    <label class="col-md-2" translate>DOCUMENT UPLOAD</label>
+    <div class="col-md-4">
+      <label [for]="'doc'" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
+      <input type="file" [id]="'doc'" style="display: none" (change)="HandleFileInput($event.target.files)"
+        [accept]="ExtStr" />
+    </div>
+  </div>
+</div>

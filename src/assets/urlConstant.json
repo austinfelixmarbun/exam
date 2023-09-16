@@ -532,6 +532,7 @@
     "DeleteCustCompanyLegalDoc": "/v1/CustCompanyLegalDoc/DeleteCustCompanyLegalDoc",
     "AddCustCompanyLegalDoc": "/v1/CustCompanyLegalDoc/AddCustCompanyLegalDoc",
     "EditCustCompanyLegalDoc": "/v1/CustCompanyLegalDoc/EditCustCompanyLegalDoc",
+    "UploadCustCompanyLegalDoc": "v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc",
     "AddCustGrpBothWays": "/v1/CustGrp/AddCustGrpBothWays",
     "AddCustGrp": "/v1/CustGrp/AddCustGrp",
     "EditCustGrp": "/v1/CustGrp/EditCustGrp",
