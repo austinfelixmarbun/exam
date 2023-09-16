@@ -14,7 +14,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
   pageName: string;
 
   constructor(private adInsHelperService: AdInsHelperService, private router: Router) {
-    this.pageName = "CustomerPaging"
+    this.pageName = "CustomerPagingV2"
   }
 
   ngOnInit(): void {
