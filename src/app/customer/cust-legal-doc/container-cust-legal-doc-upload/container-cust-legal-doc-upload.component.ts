@@ -13,10 +13,10 @@ import { CustCompanylegalDocFile } from 'app/shared/model/cust-company-legal-doc
 
 @Component({
   selector: 'app-container-cust-legal-doc-upload',
-  templateUrl: './container-app-cust-legal-doc-upload.component.html',
-  styleUrls: ['./container-app-cust-legal-doc-upload.component.css']
+  templateUrl: './container-cust-legal-doc-upload.component.html',
+  styleUrls: ['./container-cust-legal-doc-upload.component.css']
 })
-export class ContainerCustLegalDocUploadComponent implements OnInit, OnDestroy {
+export class ContainerCustLegalDocUploadComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
   @Input() dicts: Record<string, any>;
@@ -40,12 +40,6 @@ export class ContainerCustLegalDocUploadComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscriber) {
-      this.subscriber.unsubscribe();
-    }
   }
 
   async HandleFileInput(files: FileList) {
