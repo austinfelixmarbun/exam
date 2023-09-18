@@ -284,7 +284,14 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
     vendorBranchObj.VendorObj.EstablishmentDt = dicts.formRaw.EstablishmentDt;
     vendorBranchObj.VendorObj.PartnershipDt = dicts.formRaw.PartnershipDt;
     vendorBranchObj.VendorObj.IsActive = dicts.formRaw.IsActive;
+
     vendorBranchObj.VendorObj.VendorParentId = dicts.formRaw.VendorParentId;
+    if (dicts.MrVendorCategoryCode != CommonConstant.SUPPLIER || dicts.MrVendorCategoryCode != CommonConstant.ASSET_INSCO_BRANCH || dicts.MrVendorCategoryCode != CommonConstant.LIFE_INSCO_BRANCH ||
+      dicts.MrVendorCategoryCode != CommonConstant.SURVEYOR_BRANCH || dicts.MrVendorCategoryCode != CommonConstant.CRD_INSCO_BRANCH)
+    {
+      vendorBranchObj.VendorObj.VendorParentId = "";
+    }
+
     vendorBranchObj.VendorObj.ReservedField2 = "";
     vendorBranchObj.VendorObj.ReservedField3 = "";
     vendorBranchObj.VendorObj.ReservedField4 = "";
@@ -364,8 +371,8 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
         }
         vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
         vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
-        vendorBranchObj.VendorObj.RowVersion = dicts.form.RowVersionVendor;
-        vendorBranchObj.VendorAddrObj.RowVersion = dicts.form.RowVersionAddr;
+        vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
+        vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
 
         http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
