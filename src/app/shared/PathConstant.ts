@@ -139,6 +139,12 @@ export class PathConstant {
     public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static CUSTOM_ASSET_MASTER_CHILD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/Child";
+    public static CUSTOM_ASSET_NEG_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_NEG_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_NEG_UPLOAD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.UPLOAD;
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
+
     //#endregion
 
     //#region Common-Setting
