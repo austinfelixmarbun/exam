@@ -123,6 +123,14 @@
                 </div>
               </div>
 
+              <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
+                <label class="col-md-4 adins-required-label" translate>Customer Model</label>
+                <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
+                  <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
+                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+                </div>
+              </div>
+
               <div class="form-group row">
                 <label class="col-md-4 adins-required-label" translate>Mobile Phone 1</label>
                 <div class="col-md-8">
@@ -153,8 +161,7 @@
                 </div>
               </div>
 
-          </div>
-
+            </div>
           <div class="col-md-6">
 
             <div class="form-group row">
@@ -250,7 +257,7 @@
                   <input type="checkbox" formControlName="IsWaMobilePhnNo3" />
                 </div>
               </div>
-            </div>
+        </div>
         </div>
         <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
           [enjiForm]="enjiForm" [CustId]="CustId" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
