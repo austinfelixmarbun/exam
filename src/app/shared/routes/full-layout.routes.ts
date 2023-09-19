@@ -586,7 +586,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'staffclaim',
+    path: 'staff-claim',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
