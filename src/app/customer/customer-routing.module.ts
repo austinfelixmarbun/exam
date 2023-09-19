@@ -302,7 +302,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Customer Duplicate Checking',
-          page: 'CustomerDuplicateCheckingMatchCompany'
+          page: 'CustomerDuplicateCheckingMatchCompanyV2'
         }
       },
       {
