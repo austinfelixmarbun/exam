@@ -47,7 +47,7 @@
     "@adins/ucform": "^3.6.21-canary.0",
     "@adins/ucformarray": "^3.1.8-canary.0",
     "@adins/ucgridfooter": "^3.1.2-canary.0",
-    "@adins/ucgridview": "^3.6.2-canary.0",
+    "@adins/ucgridview": "^3.6.3",
     "@adins/uclookupgeneric": "^3.1.1-canary.0",
     "@adins/ucmoduleselection": "^3.0.3",
     "@adins/ucnotification": "^3.0.0",

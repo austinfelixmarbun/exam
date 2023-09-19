@@ -746,7 +746,12 @@ export class UrlConstantNew{
     public DeleteCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.DeleteCustCompanyLegalDoc;
     public AddCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.AddCustCompanyLegalDoc;
     public EditCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.EditCustCompanyLegalDoc;
-
+    
+    //CUSTOMER COMPANY INDUSTRY INFO
+    public GetListCustCompanyIndustryInfoByCustId = this.env.FoundationR3Url + this.url.GetListCustCompanyIndustryInfoByCustId;
+    public AddEditCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditCustCompanyIndustryInfo;
+    public DeleteCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteCustCompanyIndustryInfo;
+ 
     // CUSTOMER GROUP
     public AddCustGrpBothWays = this.env.FoundationR3Url + this.url.AddCustGrpBothWays;
     public AddCustGrp = this.env.FoundationR3Url + this.url.AddCustGrp;
@@ -1289,5 +1294,9 @@ export class UrlConstantNew{
     public AddRefInsClaimDoc = this.env.FoundationR3Url + this.url.AddRefInsClaimDoc;
     public EditRefInsClaimDoc = this.env.FoundationR3Url + this.url.EditRefInsClaimDoc;
     public GetRefInsClaimDocByRefInsClaimDocCode = this.env.FoundationR3Url + this.url.GetRefInsClaimDocByRefInsClaimDocCode;
+
+    //Bouwheer
+    public GetBouwheerCompanyIndustryInfoByBouwheerNo = this.env.FoundationR3Url + this.url.GetBouwheerCompanyIndustryInfoByBouwheerNo;
+    public AddEditBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditBouwheerCompanyIndustryInfo;
 
 }

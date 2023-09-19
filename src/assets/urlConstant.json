@@ -943,5 +943,10 @@
     "AddRefInsClaimDoc": "/v1/RefInsClaimDoc/AddRefInsClaimDoc",
     "EditRefInsClaimDoc": "/v1/RefInsClaimDoc/EditRefInsClaimDoc",
     "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode",
-    "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile"
+    "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile",
+    "GetBouwheerCompanyIndustryInfoByBouwheerNo" : "/v1/BouwheerCompanyIndustryInfo/GetBouwheerCompanyIndustryInfoByBouwheerNo",
+    "AddEditBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/AddEditBouwheerCompanyIndustryInfo",
+    "GetListCustCompanyIndustryInfoByCustId" : "/v1/CustCompanyIndustryInfo/GetListCustCompanyIndustryInfoByCustId",
+    "AddEditCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/AddEditCustCompanyIndustryInfo",
+    "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo"
 }
