@@ -1235,9 +1235,9 @@ export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string
     (response) => {
       var resSave;
       resSave = response;
+      // toastr.successMessage(resSave["Message"]);
+      DialogRef.close()
       if (dicts.UploadFile && dicts.UploadFile.DocUploadName === "") {
-        toastr.successMessage(resSave["Message"]);
-        DialogRef.close()
         return;
       }
 
@@ -1274,7 +1274,7 @@ export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile,
 
     if (xhr.status === 200) {
       toastr.successMessage(successMsg);
-      DialogRef.close()
+      // DialogRef.close()
       return;
     }
   };
