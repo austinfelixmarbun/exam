@@ -10,7 +10,7 @@
     <br>
     <br>
     <div class="col-md-12">
-      <div class="px-1 form-group row" *ngIf="CustDataMode != CustDataModeFamily">
+      <div class="px-1 form-group row" *ngIf="CustDataMode != CustDataModeFamily && !IsAddSpouse ">
         <label class="col-md-2" translate>{{subjectTitle}} Type</label>
         <div class="col-md-10">
           <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()" [disabled]="CustId!=0">
@@ -26,7 +26,7 @@
       [CustId]="CustId" [ParentCustId]="ParentCustId" [listCustNoToExclude]="listCustNoToExclude"
       [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"
       [CustDataMode]="CustDataMode" (outputCancel)="Cancel()" (outputAfterSave)="ClickSavePersonal($event)"
-      [isMarried]="isMarried" [CustPersonalFamilyId]="CustPersonalFamilyId" [isSubmit]="isSubmit" (outputIsSubmit)="ClickSubmit($event)"></app-new-cust-personal-main-data>
+      [isMarried]="isMarried" [CustPersonalFamilyId]="CustPersonalFamilyId" [isSubmit]="isSubmit" (outputIsSubmit)="ClickSubmit($event)" [SelectedCustSpouseId]="SelectedCustSpouseId" [IsAddSpouse]="IsAddSpouse" ></app-new-cust-personal-main-data>
     <app-new-cust-company-main-data *ngIf="CustType == CustTypeCoy" [hidden]="PageType != CustPageTypeHeader"
       [CustId]="CustId" [ParentCustId]="ParentCustId" [listCustNoToExclude]="listCustNoToExclude"
       [tempTotalSharePrct]="tempTotalSharePrct" [CustCompanyMgmntShrholderId]="CustCompanyMgmntShrholderId"

@@ -38,6 +38,7 @@ export class ShareholderFormComponent implements OnInit {
   @Output() outputChange: EventEmitter<{ Key: string, Code: string }> = new EventEmitter();
 
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
+  readonly CustTypeCompany: string = CommonConstant.CustomerCompany;
 
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
@@ -58,9 +59,15 @@ export class ShareholderFormComponent implements OnInit {
 
   UserAccess: CurrentUserContext;
   MaxDate: Date;
+  businessDtMin: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
   async ngOnInit() {
+    var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    this.MaxDate = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
+    this.businessDtMin.setDate(this.businessDtMin.getDate() - 1);
+
     this.InitData();
     await this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
@@ -81,12 +88,14 @@ export class ShareholderFormComponent implements OnInit {
     this.parentForm.get("SharePrcnt").updateValueAndValidity();
     this.parentForm.addControl("IsActive", this.fb.control(true));
     this.parentForm.addControl("IsOwner", this.fb.control(false));
+    this.parentForm.addControl("BusinessStartDt", this.fb.control(''));
     if (this.CustType == this.CustTypePersonal) {
       this.parentForm.addControl("MrJobPositionCode", this.fb.control(''));
       this.parentForm.addControl("IsSigner", this.fb.control(false));
       this.parentForm.addControl("EstablishmentDt", this.fb.control(''));
       this.parentForm.addControl("RefProfessionId", this.fb.control(0));
       this.parentForm.addControl("MrJobProfessionCode", this.fb.control(''));
+      this.parentForm.addControl("SignerEndDt", this.fb.control(''));
     }
     this.positionSlikLookUpObj = this.newCustService.BindLookupPositionSlik();
     this.BindLookupProfession();
@@ -126,13 +135,13 @@ export class ShareholderFormComponent implements OnInit {
 
   async GetExistingShareholder(custCompanyMgmntShrholderId: number = this.CustCompanyMgmntShrholderId) {
     if (custCompanyMgmntShrholderId == 0) return;
-    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId, { Id: custCompanyMgmntShrholderId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdV2, { Id: custCompanyMgmntShrholderId }).toPromise().then(
       async (response: CustCompanyMgmntShrholderObj) => {
         this.parentForm.patchValue({
           MrPositionSlikCode: response.MrPositionSlikCode,
           SharePrcnt: response.SharePrcnt,
           IsActive: response.IsActive,
-          IsOwner: response.IsOwner,
+          IsOwner: response.IsOwner
         });
         let tempDesc: string = await this.PatchValueDesc(response.MrPositionSlikCode, CommonConstant.RefMasterTypeCodePositionSlik);
         this.positionSlikLookUpObj.nameSelect = tempDesc;
@@ -142,6 +151,12 @@ export class ShareholderFormComponent implements OnInit {
           this.parentForm.patchValue({
             IsSigner: response.IsSigner,
             EstablishmentDt: datePipe.transform(response.EstablishmentDt, 'yyyy-MM-dd'),
+            SignerEndDt: datePipe.transform(response.SignerEndDt, 'yyyy-MM-dd'),
+          });
+        }else if(this.CustType == this.CustTypeCompany){
+          let datePipe = new DatePipe("en-US");
+          this.parentForm.patchValue({
+            BusinessStartDt: datePipe.transform(response.BusinessStartDt, 'yyyy-MM-dd'),
           });
         }
         this.tempExisting.CustCompanyMgmntShrholder = response;

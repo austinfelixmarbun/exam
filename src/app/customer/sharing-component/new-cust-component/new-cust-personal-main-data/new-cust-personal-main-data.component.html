@@ -116,24 +116,44 @@
               </div>
             </div>
 
-            <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Mobile Phone</label>
-              <div class="col-md-12">
-                <input type="text" class="form-control adInsInput input-field-2" formControlName="MobilePhnNo1"
-                  [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
-                <div class="message-box">
+              <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
+                <label class="col-md-4 adins-required-label" translate>Customer Model</label>
+                <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
+                  <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
+                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4 adins-required-label" translate>Mobile Phone 1</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo1"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
                   <lib-uc-show-errors [control]="CustomerForm.controls.MobilePhnNo1" [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
-              <label class="col-md-12 label-field-2" translate>Customer Model</label>
-              <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
-                <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
-                  [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
+              <div class="form-group row">
+                <label class="col-md-4" translate>Mobile Phone 2</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo2"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo2.invalid}">
+                  <lib-uc-show-errors [control]="CustomerForm.controls.MobilePhnNo2" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
               </div>
+
+              <div class="form-group row">
+                <label class="col-md-4" translate>Mobile Phone 3</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control adInsInput" formControlName="MobilePhnNo3"
+                    [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo3.invalid}">
+                  <lib-uc-show-errors [control]="CustomerForm.controls.MobilePhnNo3" [submit]="enjiForm.submitted">
+                  </lib-uc-show-errors>
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -213,6 +233,28 @@
               </div>
             </div>
 
+              <div class="form-group row">
+                <label class="col-md-4" translate>Is Wa Mobile Phone 1</label>
+                <div class="col-md-8">
+                  <input type="checkbox" formControlName="IsWaMobilePhnNo1" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4" translate>Is Wa Mobile Phone 2</label>
+                <div class="col-md-8">
+                  <input type="checkbox" formControlName="IsWaMobilePhnNo2" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-4" translate>Is Wa Mobile Phone 3</label>
+                <div class="col-md-8">
+                  <input type="checkbox" formControlName="IsWaMobilePhnNo3" />
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
         <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
