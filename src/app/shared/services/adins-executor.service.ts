@@ -14,6 +14,7 @@ import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 import { ApprovalTaskService } from "./ApprovalTask.service";
 import { callBackVendorPagingApproval } from "../function/approval-function";
 import { endStepperSrvyTaskDetail } from "../function/survey-function";
+import { addeditAttributeMaster } from "../function/attribute-master-function";
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
     this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
     this.setExecutor("saveJrMGroupDFact", saveJrMGroupDFact);
+    this.setExecutor("addeditAttributeMaster", addeditAttributeMaster);
   }
 }

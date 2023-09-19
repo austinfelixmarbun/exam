@@ -20,6 +20,7 @@ import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { SelfCustomAttributeDetailComponent } from './self-custom-attribute-detail/self-custom-attribute-detail.component';
 
 const routes: Routes = [
   {
@@ -161,10 +162,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CUSTOM_SYS_ATTR_DETAIL,
-        component: UcTemplateComponent,
+        component: SelfCustomAttributeDetailComponent,
         data: {
-          title: 'Attribute Detail',
-          page: 'Sysattrdetail'
+          title: 'Attribute Detail'
         },
       },
       {
