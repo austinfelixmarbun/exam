@@ -16,7 +16,7 @@ export class SelfCustomCustomerEmergencyContactComponent implements OnInit {
   Form: FormGroup = this.fb.group({});
 
   constructor(private fb: FormBuilder, private formAddress:FormAddressService) {
-    this.pageName = "EmergencyCntcPerson"
+    this.pageName = "EmergencyCntcPersonV2"
   }
 
   ngOnInit(): void {

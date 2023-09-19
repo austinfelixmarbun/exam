@@ -971,6 +971,10 @@ async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: a
   custPersonalContactPersonObj.IdNo = dicts.formRaw.IdNo;
   custPersonalContactPersonObj.MobilePhnNo1 = dicts.formRaw.MobilePhnNo1;
   custPersonalContactPersonObj.MobilePhnNo2 = dicts.formRaw.MobilePhnNo2;
+  custPersonalContactPersonObj.MobilePhnNo3 = dicts.formRaw.MobilePhnNo3;
+  custPersonalContactPersonObj.IsWaMobilePhnNo1 = dicts.formRaw.IsWaMobilePhnNo1;
+  custPersonalContactPersonObj.IsWaMobilePhnNo2 = dicts.formRaw.IsWaMobilePhnNo2;
+  custPersonalContactPersonObj.IsWaMobilePhnNo3 = dicts.formRaw.IsWaMobilePhnNo3;
   custPersonalContactPersonObj.MrCustRelationshipCode = dicts.formRaw.MrCustRelationshipCode;
   custPersonalContactPersonObj.MrGenderCode = dicts.formRaw.MrGenderCode;
   custPersonalContactPersonObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
@@ -1110,7 +1114,7 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
 
   if (StepIndex == 4)
   {
-    api = dicts.CustPersonalContactPersonId == 0? "/v1/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v1/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    api = dicts.CustPersonalContactPersonId == 0? "/v2/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v2/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
     await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
     next = "CustJobData"
   }
