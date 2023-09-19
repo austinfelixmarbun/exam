@@ -42,19 +42,25 @@ export class ContainerCustLegalDocUploadComponent implements OnInit {
     let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
   }
 
+  reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
   async HandleFileInput(files: FileList) {
     let File: File = files.item(0);
-
-    let reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
-    reqFileUpl.DocUploadName = File.name;
-    reqFileUpl.ByteBase64 = await this.readFileAsDataURL(File);
-    reqFileUpl.ByteBase64 = reqFileUpl.ByteBase64.substring(reqFileUpl.ByteBase64.lastIndexOf(',') + 1)
+    this.reqFileUpl.File = File;
+    this.reqFileUpl.DocUploadName = File.name;
+    this.reqFileUpl.ByteBase64 = await this.readFileAsDataURL(File);
+    this.reqFileUpl.ByteBase64 = this.reqFileUpl.ByteBase64.substring(this.reqFileUpl.ByteBase64.lastIndexOf(',') + 1)
 
     const data = {
-      "UploadFile": reqFileUpl
+      "UploadFile": this.reqFileUpl
     }
 
     this.data.emit(data)
+  }
+  
+  ConvertSize(fileSize: number) {
+    return fileSize < 1024000
+      ? (fileSize / 1024).toFixed(2) + ' KB'
+      : (fileSize / 1024000).toFixed(2) + ' MB';
   }
 
   async readFileAsDataURL(file) {

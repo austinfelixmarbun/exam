@@ -7,6 +7,12 @@
       <label [for]="'doc'" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
       <input type="file" [id]="'doc'" style="display: none" (change)="HandleFileInput($event.target.files)"
         [accept]="ExtStr" />
+        <div [hidden]="!reqFileUpl.File" style="padding-left: 15px" class="row afu-valid-file">
+          <p class="col-xs-3 textOverflow"><span class="text-primary">{{reqFileUpl?.File?.name}}</span></p>
+          <p class="col-xs-3 padMarg sizeC">
+            <strong>({{ConvertSize(reqFileUpl?.File?.size)}})</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </p>
+        </div>
     </div>
   </div>
 </div>

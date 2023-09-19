@@ -1214,45 +1214,45 @@ export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, f
   }
 }
 
-export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, RowObj: any, key: string, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
-  let url: string;
+export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
+  let url = environment.FoundationR3Url;
 
   let reqObj = { ...parentForm };
   reqObj.CustCompanyId = dicts.CustCompanyId;
   let isAddMode: Boolean = false;
-  if (dicts.CustCompanyLegalDocId == 0) {
-    url = this.UrlConstantNew.AddCustCompanyLegalDoc;
+  if (typeof dicts.CustCompanyLegalDocId === "undefined" || dicts.CustCompanyLegalDocId === 0) {
+    url += '/v1/CustCompanyLegalDoc/AddCustCompanyLegalDoc';
     reqObj.CustCompanyLegalDocId = 0;
     isAddMode = true;
   } else {
-    url = this.UrlConstantNew.EditCustCompanyLegalDoc;
+    url += '/v1/CustCompanyLegalDoc/EditCustCompanyLegalDoc';
     reqObj.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
     reqObj.RowVersion = dicts.RowVersion;
     isAddMode = false;
   }
 
-  this.http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+  http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
     (response) => {
       var resSave;
       resSave = response;
-      if (dicts.DocUploadName == "") {
+      if (dicts.UploadFile && dicts.UploadFile.DocUploadName === "") {
         toastr.successMessage(resSave["Message"]);
         DialogRef.close()
         return;
       }
 
       let reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
-      reqFileUpl.ByteBase64 = dicts.ByteBase64;
-      reqFileUpl.DocUploadName = dicts.DocUploadName;
-      reqFileUpl.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
+      reqFileUpl.ByteBase64 = dicts.UploadFile.ByteBase64;
+      reqFileUpl.DocUploadName = dicts.UploadFile.DocUploadName;
+      reqFileUpl.CustCompanyLegalDocId = resSave["Id"];
 
       uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
     }
   );
 }
 
-function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
-  let urlUpload = this.UrlConstantNew.UploadCustCompanyLegalDoc;
+export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
+  let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
 
   var formData: any = new FormData();
   formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
