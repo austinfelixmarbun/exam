@@ -261,6 +261,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
     public static CUSTOM_VENDOR_GRD_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
+    public static SELF_CUSTOM_VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_DETAIL; //'/Vendor/SelfCustom/ATPM/Detail'
+    public static SELF_CUSTOM_VENDOR_ATPM_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_REG; //'/Vendor/SelfCustom/ATPM/Registration'
     //#endregion
 
     //#region Organization

@@ -171,7 +171,8 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
     vendorHoObj.VendorObj.RegistrationNo = dicts.formRaw.RegistrationNo;
     vendorHoObj.VendorObj.VendorCode = dicts.formRaw.VendorCode;
     vendorHoObj.VendorObj.VendorName = dicts.formRaw.VendorName;
-    vendorHoObj.VendorObj.VendorRating = dicts.formRaw.VendorRating;
+
+    vendorHoObj.VendorObj.VendorRating = dicts.formRaw.VendorRating != 0? dicts.formRaw.VendorRating : ""; 
 
     if (dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
     {
@@ -279,12 +280,19 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
     vendorBranchObj.VendorObj.MobilePhnNo1 = dicts.formRaw.MobilePhnNo1;
     vendorBranchObj.VendorObj.MobilePhnNo2 = dicts.formRaw.MobilePhnNo2;
     vendorBranchObj.VendorObj.Email = dicts.formRaw.Email;
-    vendorBranchObj.VendorObj.VendorRating = dicts.formRaw.VendorRating;
+    vendorBranchObj.VendorObj.VendorRating = dicts.formRaw.VendorRating != 0? dicts.formRaw.VendorRating : "";
     vendorBranchObj.VendorObj.VendorRatingAlias = dicts.formRaw.VendorRatingAlias;
     vendorBranchObj.VendorObj.EstablishmentDt = dicts.formRaw.EstablishmentDt;
     vendorBranchObj.VendorObj.PartnershipDt = dicts.formRaw.PartnershipDt;
     vendorBranchObj.VendorObj.IsActive = dicts.formRaw.IsActive;
+
     vendorBranchObj.VendorObj.VendorParentId = dicts.formRaw.VendorParentId;
+    if (dicts.MrVendorCategoryCode != CommonConstant.SUPPLIER || dicts.MrVendorCategoryCode != CommonConstant.ASSET_INSCO_BRANCH || dicts.MrVendorCategoryCode != CommonConstant.LIFE_INSCO_BRANCH ||
+      dicts.MrVendorCategoryCode != CommonConstant.SURVEYOR_BRANCH || dicts.MrVendorCategoryCode != CommonConstant.CRD_INSCO_BRANCH)
+    {
+      vendorBranchObj.VendorObj.VendorParentId = "";
+    }
+
     vendorBranchObj.VendorObj.ReservedField2 = "";
     vendorBranchObj.VendorObj.ReservedField3 = "";
     vendorBranchObj.VendorObj.ReservedField4 = "";
