@@ -102,6 +102,8 @@ export class SelfCustomContainerViewExposureBucketComponent implements OnInit {
           }
           this.SummaryData.ObligorExposureAmt += element.OsPrincipal;
         }
+
+        this.isReady = true
       }
     );
   }
