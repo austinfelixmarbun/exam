@@ -41,7 +41,7 @@ export{SelfCustomContainerFamilyListingComponent} from "app/customer/sharing-com
 export{SelfCustomCustomerEmergencyContactComponent} from "app/customer/customer-personal/self-custom-customer-personal/self-custom-customer-emergency-contact/self-custom-customer-emergency-contact.component";
 export { CustomDocumentSurveyTaskViewComponent } from 'app/view/survey-task-view/custom-document-survey-task-view/custom-document-survey-task-view.component';
 export { ViewSurveyTaskDetailComponent } from 'app/view/survey-task-view/view-survey-task-detail/view-survey-task-detail.component';
-export { PefindoViewPefindoScoreComponent } from 'app/view/pefindo-view/pefindo-view-pefindo-score/pefindo-view-pefindo-score.component';
+export { SelfCustomViewPefindoScoreComponent } from 'app/view/self-custom-pefindo-view/self-custom-view-pefindo-score/self-custom-view-pefindo-score.component';
 export { CoaDetailComponent } from 'app/common-setting/coa/coa-detail/coa-detail.component';
 export { CustomCoaSchemeDetailComponent } from 'app/common-setting/custom-coa-scheme/custom-coa-scheme-detail/custom-coa-scheme-detail.component';
 export { SelfCustomContainerHolidayDetailComponent } from 'app/common-setting/holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
