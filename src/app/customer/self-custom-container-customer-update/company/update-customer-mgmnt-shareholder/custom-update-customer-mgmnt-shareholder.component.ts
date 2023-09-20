@@ -11,14 +11,13 @@ import { UpdateCustCompanyShareholderObj } from 'app/shared/model/update-master-
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
-  selector: 'app-update-customer-mgmnt-shareholder',
-  templateUrl: './update-customer-mgmnt-shareholder.component.html',
-  styles: [],
- // providers: [NGXToastrService]
+  selector: 'app-custom-update-customer-mgmnt-shareholder',
+  templateUrl: './custom-update-customer-mgmnt-shareholder.component.html',
 })
-export class UpdateCustomerMgmntShareholderComponent implements OnInit {
+export class CustomUpdateCustomerMgmntShareholderComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   AppShareholder: Array<UpdateCustCompanyShareholderObj>;
   MasterShareholder: Array<UpdateCustCompanyShareholderObj>;
@@ -97,5 +96,19 @@ export class UpdateCustomerMgmntShareholderComponent implements OnInit {
         console.log(error);
       }
     );
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    this.next.emit({Actions: actions});
   }
 }

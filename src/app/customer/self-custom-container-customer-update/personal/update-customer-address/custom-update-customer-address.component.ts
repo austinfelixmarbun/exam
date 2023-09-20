@@ -15,14 +15,15 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-update-customer-address',
-  templateUrl: './update-customer-address.component.html',
-  styles: []
+  selector: 'app-custom-update-customer-address',
+  templateUrl: './custom-update-customer-address.component.html',
 })
-export class UpdateCustomerAddressComponent implements OnInit {
+
+export class CustomUpdateCustomerAddressComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Input() SubjectType: string;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   CustId: number;
   ZipcodeLookupObj: InputLookupObj;
   OwnershipList: Array<any>;
@@ -315,6 +316,20 @@ export class UpdateCustomerAddressComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustAddr, { CustAddrList: requestList, CustId: this.CustId }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
+        const actions = [
+          {
+            'result': {
+              'type': 'function',
+              'target': 'self',
+              'alias': '',
+              'methodName': 'NextStep',
+              'params': []
+            },
+            'conditions': []
+          }
+        ];
+
+        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {

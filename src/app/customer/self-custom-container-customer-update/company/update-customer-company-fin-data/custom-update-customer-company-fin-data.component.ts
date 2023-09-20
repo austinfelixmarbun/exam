@@ -13,14 +13,13 @@ import { UpdateCustCompanyFinDataObj } from 'app/shared/model/update-master-cust
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
 @Component({
-  selector: 'app-update-customer-company-fin-data',
-  templateUrl: './update-customer-company-fin-data.component.html',
-  styles: [],
- // providers: [NGXToastrService]
+  selector: 'app-custom-update-customer-company-fin-data',
+  templateUrl: './custom-update-customer-company-fin-data.component.html',
 })
-export class UpdateCustomerCompanyFinDataComponent implements OnInit {
+export class CustomUpdateCustomerCompanyFinDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppCompanyFinData: UpdateCustCompanyFinDataObj;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   MainCustBankAcc: Array<any>;
@@ -271,6 +270,20 @@ export class UpdateCustomerCompanyFinDataComponent implements OnInit {
         console.log(error);
       }
     );
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    this.next.emit({Actions: actions});
   }
 
 }

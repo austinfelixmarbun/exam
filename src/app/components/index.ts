@@ -52,3 +52,18 @@ export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/surve
 export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
 export { SelfCustomContainerVendorBranchInfoComponent } from 'app/vendor/vendor-branch/self-custom-container-vendor-branch-info/self-custom-container-vendor-branch-info.component';
 export { SelfCustomNewCustHeaderShareholderComponent } from 'app/customer/sharing-component/new-cust-header/self-custom-new-cust-header.component';
+export { CustomUpdateCustomerPersonalDetailComponent} from 'app/customer/self-custom-container-customer-update/personal/update-customer-personal-detail/custom-update-customer-personal-detail.component';
+export { CustomUpdateCustomerJobDataComponent } from 'app/customer/self-custom-container-customer-update/personal/update-customer-job-data/custom-update-customer-job-data.component';
+export { CustomUpdateCustomerFinDataComponent } from 'app/customer/self-custom-container-customer-update/personal/update-customer-fin-data/custom-update-customer-fin-data.component';
+export { CustomUpdateCustomerFamilyComponent } from 'app/customer/self-custom-container-customer-update/personal/update-customer-family/custom-update-customer-family.component';
+export { CustomUpdateCustomerEmergencyComponent } from 'app/customer/self-custom-container-customer-update/personal/update-customer-emergency/custom-update-customer-emergency.component';
+export { CustomUpdateCustomerAddressComponent } from 'app/customer/self-custom-container-customer-update/personal/update-customer-address/custom-update-customer-address.component';
+export { CustomUpdateCustomerMgmntShareholderComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-mgmnt-shareholder/custom-update-customer-mgmnt-shareholder.component';
+export { CustomUpdateCustomerContactInfoComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-contact-info/custom-update-customer-contact-info.component';
+export { CustomUpdateCustomerCompanyLegalDocComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-legal-doc/custom-update-customer-company-legal-doc.component';
+export { CustomUpdateCustomerCompanyFinDataComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
+export { CustomUpdateCustomerCompanyDetailComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
+
+
+
+

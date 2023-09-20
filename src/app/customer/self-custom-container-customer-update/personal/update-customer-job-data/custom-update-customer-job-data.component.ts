@@ -17,13 +17,13 @@ import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-update-customer-job-data',
-  templateUrl: './update-customer-job-data.component.html',
-  styles: []
+  selector: 'app-custom-update-customer-job-data',
+  templateUrl: './custom-update-customer-job-data.component.html',
 })
-export class UpdateCustomerJobDataComponent implements OnInit {
+export class CustomUpdateCustomerJobDataComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppJobData: UpdateMasterCustJobDataObj;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   CustModelList: Array<any>;
@@ -365,6 +365,20 @@ export class UpdateCustomerJobDataComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustJobData, this.CustomerJobForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
+        const actions = [
+          {
+            'result': {
+              'type': 'function',
+              'target': 'self',
+              'alias': '',
+              'methodName': 'NextStep',
+              'params': []
+            },
+            'conditions': []
+          }
+        ];
+
+        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {

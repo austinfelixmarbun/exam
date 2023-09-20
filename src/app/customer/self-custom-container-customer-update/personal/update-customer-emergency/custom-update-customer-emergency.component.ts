@@ -22,13 +22,14 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
-  selector: 'app-update-customer-emergency-detail',
-  templateUrl: './update-customer-emergency-detail.component.html',
-  styles: []
+  selector: 'app-custom-update-customer-emergency',
+  templateUrl: './custom-update-customer-emergency.component.html',
 })
-export class UpdateCustomerEmergencyDetailComponent implements OnInit {
+
+export class CustomUpdateCustomerEmergencyComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
+  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppEmergencyData: UpdateCustEmergencyObj;
   MasterCustEmergencyData: UpdateCustEmergencyObj;
   lookupObj: Record<string, any>;
@@ -283,6 +284,20 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
+        const actions = [
+          {
+            'result': {
+              'type': 'function',
+              'target': 'self',
+              'alias': '',
+              'methodName': 'NextStep',
+              'params': []
+            },
+            'conditions': []
+          }
+        ];
+
+        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {
