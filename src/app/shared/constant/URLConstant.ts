@@ -1143,6 +1143,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static AddTrxSrcDataForPefindoMultiResult = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindoMultiResult";
+    public static AddTrxSrcDataForPefindoMultiResultV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindoMultiResult";
     public static GetPefindoMultiResultByGroupTrxNo = environment.FoundationR3Url + "/v1" + "/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo";
     public static AddTrxScrDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/AddTrxSrcDataForAsliRi";
     public static GetTrxSrcDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/GetTrxResultDataForAsliRi";
@@ -1163,6 +1164,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetViewDisputes = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewDisputes";
     public static GetViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewFinancialStatements";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Pefindo/PefindoSmartSearch";
+    public static PefindoSmartSearchV2 = environment.FoundationR3Url + "/v2" + "/Pefindo/PefindoSmartSearch";
     public static GetPefindoContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoContracts";
     public static GetPefindoTrxSrcData = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoTrxSrcData";
 

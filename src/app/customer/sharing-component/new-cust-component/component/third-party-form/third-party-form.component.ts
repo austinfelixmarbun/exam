@@ -28,6 +28,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AsliRiReqHeaderComponent } from './asli-ri/request/asli-ri-req-header.component';
 import { AsliRiViewComponent } from './asli-ri/view/asli-ri-view/asli-ri-view.component';
+import { ReqPefindoSmartSearchV2Obj } from 'app/shared/model/digitalization/req-pefindo-smart-search-v2-obj.model';
 import { CbasSlikViewComponent } from './cbas-slik/cbas-slik-view.component';
 import { CbasSlikReqHeaderComponent } from './cbas-slik/cbas-slik-req-header.component';
 import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
@@ -206,6 +207,7 @@ export class ThirdPartyFormComponent implements OnInit {
       });
   }
 
+  inqPefindoCustReq: string = "";
   async ReqPefindo() {
     this.markFormGroupTouched(this.parentForm);
     if (!this.thirdPartyUploadService.ValidateFileUpload(this.CustDocFileFormObjs)) {
@@ -220,7 +222,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
     let tempForm = this.parentForm.getRawValue();
 
-    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchObj();
+    let reqPefindoSmartSearchObj = new ReqPefindoSmartSearchV2Obj();
     if (this.CustDataMode == this.CustDataModeMain) {
       reqPefindoSmartSearchObj.CustName = tempForm["CustName"];
     } else {
@@ -228,6 +230,13 @@ export class ThirdPartyFormComponent implements OnInit {
     }
     reqPefindoSmartSearchObj.CustType = this.MrCustTypeCode;
     reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
+
+    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsInqPefindoCustReq }).toPromise().then(
+      (result) => {
+        this.inqPefindoCustReq = result["GsValue"];
+      }
+    );
+    reqPefindoSmartSearchObj.MrPefindoInquiryReasonCode = this.inqPefindoCustReq;
 
     if (this.MrCustTypeCode == CommonConstant.MR_CUST_TYPE_CODE_PERSONAL) {
       reqPefindoSmartSearchObj.IdType = tempForm["MrIdTypeCode"];

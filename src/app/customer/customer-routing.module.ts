@@ -23,6 +23,7 @@ import { CustomerUpdateMasterComponent } from './customer-update-master/customer
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
+import { CustPefindoReqComponent } from './cust-pefindo-req/cust-pefindo-req.component';
 import { SelfCustomCustomerPagingComponent } from './self-custom-customer-paging/self-custom-customer-paging.component';
 import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
 import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
@@ -186,6 +187,13 @@ const routes: Routes = [
         component: NewCustHeaderComponent,
         data: {
           title: 'New Cust'
+        }
+      },
+      {
+        path: PathConstant.CUST_PEFINDO_REQ,
+        component: CustPefindoReqComponent,
+        data: {
+          title: 'Cust Pefindo Req'
         }
       },
       {

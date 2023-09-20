@@ -20,6 +20,10 @@ import { CurrentUserContext } from 'app/shared/model/current-user-context.model'
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { ReqPefindoSmartSearchV2Obj } from 'app/shared/model/digitalization/req-pefindo-smart-search-v2-obj.model';
+import { ReqAddTrxSrcDataForPefindoMultiResultV2Obj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-multi-result-v2-obj.model';
+import { ReqAddTrxSrcDataForPefindoV2Obj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-v2-obj-model';
+import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 
 
 @Component({
@@ -28,18 +32,22 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class PefindoReqComponent implements OnInit {
 
-  @Input() ReqPefindoSmartSearchObj: ReqPefindoSmartSearchObj;
+  @Input() ReqPefindoSmartSearchObj: ReqPefindoSmartSearchV2Obj;
   @Input() ThirdPartyTrxNo: string;
   @Input() RowVersion: string;
+  @Input() IsCustPefindoReq: boolean;
 
   PefindoSmartSearchPersonalObjs: Array<PefindoSmartSearchPersonalObj> = new Array<PefindoSmartSearchPersonalObj>();
   PefindoSmartSearchCoyObjs: Array<PefindoSmartSearchCoyObj> = new Array<PefindoSmartSearchCoyObj>();
+  slikReferenceCode: string = "";
   
   readonly CustTypePersonal: string = CommonConstant.CustomerPersonal;
   readonly CustTypeCompany: string = CommonConstant.CustomerCompany;
+  readonly RefMasterTypeCodePefindoInquiryReason: string = CommonConstant.RefMasterTypeCodePefindoInquiryReason;
 
   PefindoForm: FormGroup = this.fb.group({
-    PefindoArr: this.fb.array([])
+    PefindoArr: this.fb.array([]),
+    PefindoInquiryReason: ['']
   });
 
   constructor(
@@ -53,19 +61,32 @@ export class PefindoReqComponent implements OnInit {
 
   }
 
+  DictUcDDLObj: { [id: string]: Array<KeyValueObj> } = {};
   async ngOnInit() {
     await this.getGenSet();
-    await this.initGrid();
+    if (this.IsCustPefindoReq == undefined) {
+      await this.initGrid();
+    }
+    
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: this.RefMasterTypeCodePefindoInquiryReason }).toPromise().then(
+      (response) => {
+          this.DictUcDDLObj[this.RefMasterTypeCodePefindoInquiryReason] = response["ReturnObject"];
+      }
+    );
   }
 
   async initGrid(){
-    this.http.post(this.UrlConstantNew.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).toPromise().then(
+    if (this.IsCustPefindoReq) {
+      this.ReqPefindoSmartSearchObj.MrPefindoInquiryReasonCode = this.PefindoForm.controls.PefindoInquiryReason.value;
+    }
+    this.http.post(URLConstant.PefindoSmartSearchV2, this.ReqPefindoSmartSearchObj).toPromise().then(
       (response) => {
+        this.slikReferenceCode = response["SlikReferenceCode"];
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal){
-          this.PefindoSmartSearchPersonalObjs = response["ReturnObject"];
+          this.PefindoSmartSearchPersonalObjs = response["ReturnObject"]["ReturnObject"];
         }
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypeCompany){
-          this.PefindoSmartSearchCoyObjs = response["ReturnObject"];
+          this.PefindoSmartSearchCoyObjs = response["ReturnObject"]["ReturnObject"];
         }
 
         if (this.pefindoMultiResMax > 0) this.setData();
@@ -123,7 +144,7 @@ export class PefindoReqComponent implements OnInit {
 
   async Request()
   {
-    var reqAddTrxSrcDataForPefindoMultiResultObj = new ReqAddTrxSrcDataForPefindoMultiResultObj();
+    var reqAddTrxSrcDataForPefindoMultiResultV2Obj = new ReqAddTrxSrcDataForPefindoMultiResultV2Obj();
 
     let PefindoArr = this.PefindoForm.value.PefindoArr.filter(x => x.IsChecked);
 
@@ -142,12 +163,13 @@ export class PefindoReqComponent implements OnInit {
 
     if (this.CustId)
     {
-      reqAddTrxSrcDataForPefindoMultiResultObj.CustId = this.CustId;
-      reqAddTrxSrcDataForPefindoMultiResultObj.RowVersion = this.RowVersion;
+      reqAddTrxSrcDataForPefindoMultiResultV2Obj.CustId = this.CustId;
+      reqAddTrxSrcDataForPefindoMultiResultV2Obj.RowVersion = this.RowVersion;
     }
-    reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoObj>();
+    reqAddTrxSrcDataForPefindoMultiResultV2Obj.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoV2Obj>();
+    reqAddTrxSrcDataForPefindoMultiResultV2Obj.SlikReferenceCode = this.slikReferenceCode;
     PefindoArr.forEach(x => {
-      let reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
+      let reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoV2Obj();
 
       reqAddTrxSrcDataForPefindoObj.PefindoId = x.PefindoId;
       reqAddTrxSrcDataForPefindoObj.IdNo = x.IdCardNumber;
@@ -167,10 +189,10 @@ export class PefindoReqComponent implements OnInit {
         reqAddTrxSrcDataForPefindoObj.IdType = CommonConstant.MrIdTypeCodeNPWP;
       }
 
-      reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj.push(reqAddTrxSrcDataForPefindoObj);
+      reqAddTrxSrcDataForPefindoMultiResultV2Obj.ReqAddTrxSrcDataForPefindoObj.push(reqAddTrxSrcDataForPefindoObj);
     });
 
-    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoMultiResult, reqAddTrxSrcDataForPefindoMultiResultObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.AddTrxSrcDataForPefindoMultiResultV2, reqAddTrxSrcDataForPefindoMultiResultV2Obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.thirdPartyGroupTrxNo.emit(response['ThirdPartyRsltHGroupNo'])
         this.toastr.successMessage(response["Message"]);
@@ -182,7 +204,7 @@ export class PefindoReqComponent implements OnInit {
   async RequestPersonal(pefindoSmartSearchPersonalObj: PefindoSmartSearchPersonalObj){
     await this.checkThirdPartyTrxNo();
 
-    var reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
+    var reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoV2Obj();
 
     reqAddTrxSrcDataForPefindoObj.TrxNo = this.ThirdPartyTrxNo;
     reqAddTrxSrcDataForPefindoObj.Addr = pefindoSmartSearchPersonalObj.Address;
@@ -192,6 +214,7 @@ export class PefindoReqComponent implements OnInit {
     reqAddTrxSrcDataForPefindoObj.IdNo = pefindoSmartSearchPersonalObj.KTP;
     reqAddTrxSrcDataForPefindoObj.IdType = this.ReqPefindoSmartSearchObj.IdType;
     reqAddTrxSrcDataForPefindoObj.PefindoId = pefindoSmartSearchPersonalObj.PefindoId;
+    reqAddTrxSrcDataForPefindoObj.SlikReferenceCode = this.slikReferenceCode;
 
     if (pefindoSmartSearchPersonalObj.KTP == null)
     {
@@ -287,4 +310,27 @@ export class PefindoReqComponent implements OnInit {
       );
     }
   }
+
+  toDisplay: boolean = false;
+  async viewData() {
+    if (this.PefindoForm.controls.PefindoInquiryReason.value == ""){
+      this.toastr.warningMessage(ExceptionConstant.PLEASE_CHOOSE_INQUIRY_REASON_FIRST)
+      return;
+    } else {
+      while (this.PefindoForm.controls.PefindoArr.value.length != 0) {
+        let formArray = this.PefindoForm.get('PefindoArr') as FormArray;
+        formArray.removeAt(0);
+      }
+      await this.initGrid();
+      this.toDisplay = !this.toDisplay;
+    }
+  }
+
+  changeDDL(){
+    this.toDisplay = false;
+    while (this.PefindoForm.controls.PefindoArr.value.length != 0) {
+      let formArray = this.PefindoForm.get('PefindoArr') as FormArray;
+      formArray.removeAt(0);
+    }
+  }  
 }
