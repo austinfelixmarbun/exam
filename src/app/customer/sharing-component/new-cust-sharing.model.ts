@@ -43,6 +43,7 @@ import { CustomerViewAsliRiModule } from 'app/view/customer-view/customer-view-a
 import { CustomerViewCbasSlikModule } from 'app/view/customer-view/customer-view-cbas-slik/customer-view-cbas-slik.module';
 import { CbasSlikViewComponent } from './new-cust-component/component/third-party-form/cbas-slik/cbas-slik-view.component';
 import { CbasSlikReqHeaderComponent } from './new-cust-component/component/third-party-form/cbas-slik/cbas-slik-req-header.component';
+import { SelfCustomCustAttrFormComponent } from './new-cust-component/component/self-custom-cust-attr-form/self-custom-cust-attr-form.component';
 
 export const customCurrencyMaskConfig = {
     align: "right",
@@ -70,6 +71,7 @@ export const customCurrencyMaskConfig = {
         NewCustPublicComponent,
         ShareholderFormComponent,
         CustAttrFormComponent,
+        SelfCustomCustAttrFormComponent,
         FamilyFormComponent,
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
@@ -114,6 +116,7 @@ export const customCurrencyMaskConfig = {
         NewCustPublicComponent,
         ShareholderFormComponent,
         CustAttrFormComponent,
+        SelfCustomCustAttrFormComponent,
         FamilyFormComponent,
         CustPersonalJobDataComponent,
         JobAddrSectionComponent,
