@@ -58,6 +58,10 @@ export class CustomerViewCbasSlikComponent implements OnInit {
   ResRingkasanFasilitas: object = {};
   ResFasilitasKreditPembiayan: Array<object> = [];
 
+  IsCoy: boolean = false;
+  ResCoy: object = {};
+  ResCoyPokok: object = {};
+
   async ngOnInit()
   {
     if (this.InputTrxNo) this.TrxNo = this.InputTrxNo;
@@ -128,6 +132,17 @@ export class CustomerViewCbasSlikComponent implements OnInit {
       this.ResRingkasanFasilitas = this.ResIndvd['individual']['ringkasanFasilitas'];
       this.ResFasilitasKreditPembiayan = this.ResIndvd['individual']['fasilitas']['kreditPembiayan'];
     }
+    else if(this.ResultCbasSlikObj.ResultObj.ResultIdeb[i]['Ideb'] && this.ResultCbasSlikObj.ResultObj.ResultIdeb[i]['Ideb']['IdebPerusahaan'])
+    {
+      this.IsCoy = true;
+      this.ResCoy = this.ResultCbasSlikObj.ResultObj.ResultIdeb[i]['Ideb']['IdebPerusahaan'];
+      this.ResCoyPokok = this.ResCoy['perusahaan']['dataPokokDebitur'][0];
+      this.ResRingkasanFasilitas = this.ResCoy['perusahaan']['ringkasanFasilitas'];
+      this.ResFasilitasKreditPembiayan = this.ResCoy['perusahaan']['fasilitas']['kreditPembiayan'];
+    }
+
+    if (this.ResFasilitasKreditPembiayan) 
+      this.ResFasilitasKreditPembiayan = this.ResFasilitasKreditPembiayan.sort((a, b) => (a['tanggalDibentuk'] > b['tanggalDibentuk'] ? -1 : 1));
 
     this.IsResultReady = true;
   }
