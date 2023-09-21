@@ -982,7 +982,32 @@ export const Full_ROUTES: Routes = [
       })
         .then(m => m.CostAllocMasterModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
+    },
+    
+  },
+  {
+    path: 'limitstaffclaim',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './LimitStaffClaimModule'
+      })
+        .then(m => m.LimitStaffClaimModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
+  {
+    path: 'limitoperationalemployee',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './LimitOperationalEmployeeModule'
+      })
+        .then(m => m.LimitOperationalEmployeeModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
   },
   // #endregion
 
