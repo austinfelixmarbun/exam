@@ -1,5 +1,5 @@
 import { ExecutorService } from "@adins/uctemplate";
-import { Injectable } from "@angular/core";;
+import { Injectable } from "@angular/core";
 import { addEditvendorBranch, addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
 import { addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncCompany } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
@@ -14,6 +14,9 @@ import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 import { ApprovalTaskService } from "./ApprovalTask.service";
 import { callBackVendorPagingApproval } from "../function/approval-function";
 import { endStepperSrvyTaskDetail } from "../function/survey-function";
+import { addEditFundingCoy } from "../function/funding-function";
+import { addeditAttributeMaster } from "../function/attribute-master-function";
+import { submitCoa } from "../function/coa-scheme-function";
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +56,8 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
     this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
     this.setExecutor("saveJrMGroupDFact", saveJrMGroupDFact);
+    this.setExecutor("addEditFundingCoy", addEditFundingCoy);
+    this.setExecutor("addeditAttributeMaster", addeditAttributeMaster);
+    this.setExecutor("submitCoa", submitCoa);
   }
 }

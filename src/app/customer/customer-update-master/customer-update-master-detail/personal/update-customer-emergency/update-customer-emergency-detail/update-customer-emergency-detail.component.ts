@@ -29,7 +29,6 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 export class UpdateCustomerEmergencyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppEmergencyData: UpdateCustEmergencyObj;
   MasterCustEmergencyData: UpdateCustEmergencyObj;
   lookupObj: Record<string, any>;
@@ -284,20 +283,6 @@ export class UpdateCustomerEmergencyDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustEmergency, this.CustomerEmergencyForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
-        const actions = [
-          {
-            'result': {
-              'type': 'function',
-              'target': 'self',
-              'alias': '',
-              'methodName': 'NextStep',
-              'params': []
-            },
-            'conditions': []
-          }
-        ];
-
-        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {

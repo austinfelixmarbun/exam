@@ -45,28 +45,28 @@ export function saveJrMHeaderFact(JrMHeaderId: Number, form: any, api: any, http
     let temp = ListJrMEntity.find(x => {
       return x.EntityType == string
     });
-  
+
     let temp2 = form.ListJrMHeaderFact.filter(x => {
       return x.HFactAlias == form.ListJrMHeaderFact[i].HFactAlias
     });
-  
+
     if (lastdotIdx >= form.ListJrMHeaderFact[i].HFactProperty.length - 1 || dotIdx <= 0) {
       toastr.warningMessage('Invalid Fact Property format' + message)
       return;
     }
-  
+
     if (temp == undefined) {
       toastr.warningMessage('Entity Type not found' + message)
       return;
     }
-  
+
     if (temp2.length > 1) {
       toastr.warningMessage('Alias is duplicated' + message)
       return;
     }
   }
 
-  
+
   let request = {
     JrMHeaderId: JrMHeaderId,
     ListJrMHeaderFact: form.ListJrMHeaderFact
@@ -79,7 +79,7 @@ export function saveJrMHeaderFact(JrMHeaderId: Number, form: any, api: any, http
         AdInsHelper.RedirectUrl(router,[NavigationConstant.CUSTOM_JOURNAL_MEDIA_PAGING],{});
       }
     );
-    
+
 }
 
 export function saveJrMGroupDFact(JrMGroupId: Number, form: any, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, ListJrMEntity: any, JrMHeaderId: number) {
@@ -91,28 +91,28 @@ export function saveJrMGroupDFact(JrMGroupId: Number, form: any, api: any, http:
     let temp = ListJrMEntity.find(x => {
       return x.EntityType == string
     });
-  
+
     let temp2 = form.ListJrMGroupDFact.filter(x => {
       return x.DFactAlias == form.ListJrMGroupDFact[i].DFactAlias
     });
-  
+
     if (lastdotIdx >= form.ListJrMGroupDFact[i].DFactProperty.length - 1 || dotIdx <= 0) {
       toastr.warningMessage('Invalid Fact Property format' + message)
       return;
     }
-  
+
     if (temp == undefined) {
       toastr.warningMessage('Entity Type not found' + message)
       return;
     }
-  
+
     if (temp2.length > 1) {
       toastr.warningMessage('Alias is duplicated' + message)
       return;
     }
   }
 
-  
+
   let request = {
     JrMGroupId: JrMGroupId,
     ListJrMGroupDFact: form.ListJrMGroupDFact
@@ -125,5 +125,5 @@ export function saveJrMGroupDFact(JrMGroupId: Number, form: any, api: any, http:
         AdInsHelper.RedirectUrl(router,[NavigationConstant.CUSTOM_JOURNAL_MEDIA_GROUP],{ "JrMHeaderId" : JrMHeaderId, "mode" : "edit"});
       }
     );
-    
+
 }

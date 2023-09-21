@@ -427,7 +427,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Review Upload Asset Master Paging',
-          page: 'ReviewUploadNegativeAsset'
+          page: 'ReviewUploadAssetMaster'
         },
       },
       {
@@ -435,6 +435,45 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Review Upload Asset Master Detail',
+          page: 'ReviewUploadAssetMasterDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_NEG_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Negative Asset',
+          page: 'AssetNegative'
+        },
+      },{
+        path: PathConstant.CUSTOM_ASSET_NEG_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Negative Asset',
+          page: 'Negativeassetdetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_NEG_UPLOAD,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Upload Negative Asset',
+          page: 'UploadAssetNegative'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Negative Asset Paging',
+          page: 'ReviewUploadNegativeAsset'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_ASSET_NEG_RVW_UPLOAD_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Review Upload Negative Asset Detail',
           page: 'ReviewUploadNegativeAssetDetail'
         },
       }

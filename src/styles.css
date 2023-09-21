@@ -2,9 +2,168 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* START CSS FOR NEW UI */
 *{
     font-family: 'Manrope', Arial, Helvetica, sans-serif;
 }
+
+/*css for button*/
+.button-text, .button-icon{
+    font-size: 11px;
+    vertical-align: middle;
+}
+
+/*css for primary button*/
+.btn-primary-2{
+    border: 1px solid var(--blue-primary, #246CFE)!important;
+    background: var(--blue-primary, #246CFE)!important;
+    color :var(--white, #FDFEFF)!important;
+    border-radius: 7px !important;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.btn-primary-2:hover{
+    background: var(--blue-primary-darker, #0010F7)!important;
+    border: 1px solid var(--blue-primary-darker, #0010F7)!important;
+}
+
+/*css for outline button*/
+.btn-outline-2{
+    border: 1px solid var(--blue-primary, #246CFE)!important;
+    background: var(--white, #FDFEFF)!important;
+    color :var(--blue-primary, #246CFE)!important;
+    border-radius: 7px !important;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.btn-outline-2:hover{
+  color: var(--blue-primary-darker, #0010F7)!important;
+  background: var(--light-grey, #F4F8FB)!important;
+  border: 1px solid var(--blue-primary-darker, #0010F7)!important;
+}
+
+/*css for link button*/
+.btn-link-2{
+    border: none!important;
+    background: var(--white, #FDFEFF)!important;
+    color :var(--blue-primary, #246CFE)!important;
+    border-radius: 7px !important;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.btn-link-2:hover{
+    background: var(--light-grey, #F4F8FB)!important;
+    color: var(--blue-primary-darker, #0010F7)!important;
+}
+
+/*warna background card*/
+.bg-light-blue-card {
+    background: var(--light-blue-bg, #f8fcff);
+}
+
+/*label input form*/
+.label-field-2{
+    margin-bottom: 8px;
+    color: var(--black-1, #3A4060);
+    font-weight: 600;
+}
+
+/*label field optional*/
+.optional-text{
+    color: #B2BEC3;
+    font-size: 9px;
+    line-height: 12px;
+    vertical-align: text-top;
+    text-transform: lowercase;
+}
+
+/*field input box*/
+form .input-field-2{
+    text-align: left;
+    border: 1px solid var(--gray-line, #DFE6E9);
+    height: 31px !important;
+    border-radius: 8px !important;
+    background: var(--white-1, #FDFEFF);
+}
+
+/*field input box*/
+form .textarea-field-2{
+    text-align: left;
+    border: 1px solid var(--gray-line, #DFE6E9);
+    height: 50px !important;
+    border-radius: 8px !important;
+    background: var(--white-1, #FDFEFF);
+}
+
+/*kotak message form invalid*/
+.message-box{
+    height: 18px !important;
+    margin: 0 !important;
+    padding: 0px!important;
+    align-items: center;
+}
+
+/*css for ui switch*/
+.custom-switches {
+    color: #ffffff;
+}
+
+.custom-switches .switch {
+  background: #B2BEC3;
+}
+
+.custom-switches .switch.checked {
+  background: #246CFE;
+}
+
+/* table */
+.table-header-2{
+    background: #EEF8FF;
+}
+
+.table-new thead th{
+    border-bottom: 0px !important;
+    border-top: 1px solid #bfd4ff !important;
+}
+
+.table-new>tbody>tr:nth-child(odd)>td,
+.table-new>tbody>tr:nth-child(odd)>th {
+    background-color: #F4F8FB;
+    border-top: 1px solid #e4eefb;
+    border-bottom: 1px solid #e4eefb;
+}
+
+/* view */
+.label-field {
+    color: var(--gray-font-2, #A1A3A5);
+    font-size: 10px !important;
+    font-weight: 500;
+}
+
+.label-value > a {
+    color: var(--blue, #246CFE)!important;
+}
+
+@media (min-width: 1366px) {
+    .col-xxl-2 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 20%;
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+}
+
+/*css for ui switch*/
+.custom-switches {
+    color: #ffffff;
+}
+
+.custom-switches .switch {
+    background: #B2BEC3;
+}
+
+.custom-switches .switch.checked {
+  background: #246CFE;
+}
+
+/* END CSS FOR NEW UI */
 
 .number {
     width: 30%;
@@ -256,8 +415,8 @@ label.custom-control-label {
     line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
-    color: #fff !important;
-    background-color: #009DA0 !important;
+    color: #fff;
+    background-color: #009DA0;
     border: 1px solid transparent;
     border-color: #009DA0;
     border-radius: 0.2rem;
@@ -276,8 +435,8 @@ label.custom-control-label {
     line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
-    background-color: #FF8D60 !important;
-    color: #fff !important;
+    background-color: #FF8D60;
+    color: #fff;
     border-color: #FF8D60;
     border: 1px solid transparent;
     border-radius: 0.2rem;
