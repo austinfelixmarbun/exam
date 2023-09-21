@@ -1298,5 +1298,6 @@ export class UrlConstantNew{
     //Bouwheer
     public GetBouwheerCompanyIndustryInfoByBouwheerNo = this.env.FoundationR3Url + this.url.GetBouwheerCompanyIndustryInfoByBouwheerNo;
     public AddEditBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditBouwheerCompanyIndustryInfo;
+    public DeleteBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteBouwheerCompanyIndustryInfo;
 
 }

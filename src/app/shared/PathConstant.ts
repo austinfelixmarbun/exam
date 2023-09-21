@@ -340,6 +340,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
+    public static BOUWHEER = "Bouwheer";
 
     public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
@@ -362,14 +363,16 @@ export class PathConstant {
     public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
     public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
     public static SELF_CUSTOM_NEW_CUST_SHAREHOLDER = PathConstant.SELF_CUSTOM_NEW_CUST + "Shareholder"
-
+    public static SELF_CUSTOM_BOUWHEER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_BOUWHEER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.DETAIL;
+    
     //#endregion
-
+    
     //#region Dashboard-Module
     public static DASHBOARD = "Dash-Board";
     public static DASHEMPTY = "Dash-Empty";
     //#endregion
-
+    
     //#region Document-Management-Module
     public static CABINET = "Cabinet";
     public static CABINET_PAGING = PathConstant.CABINET + "/" + PathConstant.PAGING;

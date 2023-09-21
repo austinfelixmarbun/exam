@@ -15,6 +15,7 @@ import { ReqAddEditBouwheerCompanyIndustryInfoObj } from 'app/shared/model/req-a
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { DatePipe } from '@angular/common';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-self-custom-bouwheer-company-industry-info',
@@ -22,7 +23,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: []
 })
 export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
-  ListCustPersonalFinData: Array<CustPersonalFinDataObj> = [];
   ListBouwheerIndustryInfo: Array<ResBouwheerCompanyIncustryInfoObj> = [];
   ReqBouwheerIndustryInfoObj = new ReqAddEditBouwheerCompanyIndustryInfoObj;
   industryInfo: ResBouwheerCompanyIncustryInfoObj;
@@ -36,7 +36,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   
   @Input() BwrNo: string;
   @Input() BwrId: number;
-  @Input() MdParent: string;
+  @Input() dicts: any;
   @ViewChild('ModalPersonalFinData') ModalPersonalFinData;
   @ViewChild('ModalIndustryList') ModalIndustryList;
 
@@ -108,7 +108,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   }
 
   async SaveIndustryInfo(){  
-    if(this.MdParent === 'edit'){
+    if(this.BwrId > 0){
       this.ReqBouwheerIndustryInfoObj = new ReqAddEditBouwheerCompanyIndustryInfoObj
       this.ReqBouwheerIndustryInfoObj.BouwheerId = this.BwrId,
       this.ReqBouwheerIndustryInfoObj.RefIndustryTypeCode =this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
@@ -139,11 +139,28 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
         RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
         RowVersion: undefined
       });
-      
+      this.dicts['ListBouwheerIndustryInfo'] = this.ListBouwheerIndustryInfo;
       this.currentModal.close("");
     }
   }
 
+  async deleteModalIndustryInfo(i : number){
+    if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {       
+         if (this.ListBouwheerIndustryInfo[i].IsMain == true && this.ListBouwheerIndustryInfo.length > 1){
+          this.toastr.warningMessage("Cannot Delete Main Industry");
+         }else{
+           var ReqIdForDelete = { 
+            BouwheerCompanyIndustryInfoId : this.ListBouwheerIndustryInfo[i].BouwheerCompanyIndustryInfoId,
+            IsMain : this.ListBouwheerIndustryInfo[i].IsMain
+           };
+           await this.http.post(this.UrlConstantNew.DeleteBouwheerCompanyIndustryInfo, ReqIdForDelete, AdInsConstant.SpinnerOptions).toPromise().then(
+             (response) => {
+               this.ListBouwheerIndustryInfo.splice(i, 1);
+             }
+           );
+         }
+    }
+  }
 
 
 }

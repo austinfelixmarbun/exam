@@ -379,6 +379,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerPersonalDuplicateChecking'
     public static SELF_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerCompanyDuplicateChecking'
     public static CUSTOM_CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUSTOM_CUST_COY_PAGE; //'/Customer/CustomerCompany/Page'
+    public static SELF_CUSTOM_BOUWHEER_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_BOUWHEER_PAGING; //'/Customer/SelfCustom/Bouwheer/Paging'
+    public static SELF_CUSTOM_BOUWHEER_DETAIL = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_BOUWHEER_DETAIL; //'/Customer/SelfCustom/Bouwheer/Detail'
 
     //#endregion
 
