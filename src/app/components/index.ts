@@ -52,3 +52,6 @@ export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/surve
 export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
 export { SelfCustomContainerVendorBranchInfoComponent } from 'app/vendor/vendor-branch/self-custom-container-vendor-branch-info/self-custom-container-vendor-branch-info.component';
 export { SelfCustomNewCustHeaderShareholderComponent } from 'app/customer/sharing-component/new-cust-header/self-custom-new-cust-header.component';
+export { CustomFundingCompanyAddEditComponent } from 'app/vendor/funding-company/custom-funding-company-add-edit/custom-funding-company-add-edit.component';
+export { CustomAssetMasterAddEditChildComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-child/custom-asset-master-add-edit-child.component';
+export { CustomAssetMasterDetailChildComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-child/custom-asset-master-detail-child/custom-asset-master-detail-child.component';

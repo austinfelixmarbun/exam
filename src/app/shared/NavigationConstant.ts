@@ -263,6 +263,8 @@ export class NavigationConstant {
     public static CUSTOM_VENDOR_GRD_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
     public static SELF_CUSTOM_VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_DETAIL; //'/Vendor/SelfCustom/ATPM/Detail'
     public static SELF_CUSTOM_VENDOR_ATPM_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_REG; //'/Vendor/SelfCustom/ATPM/Registration'
+    public static CUSTOM_VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
+
     //#endregion
 
     //#region Organization
