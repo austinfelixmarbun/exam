@@ -313,6 +313,22 @@ const routes: Routes = [
           page: 'Customershareholderdetail'
         }
       },
+      {
+        path: PathConstant.SELF_CUSTOM_BOUWHEER_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Self Custom New Cust Shareholder',
+          page: 'Ricadpagingbouwheer'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BOUWHEER_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Self Custom New Cust Shareholder',
+          page: 'Ricaddetailbouwheer'
+        }
+      },
     ]
   }
 ];
