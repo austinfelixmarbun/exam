@@ -96,6 +96,7 @@ import { SelfCustomVendorATPMAddEditComponent } from './vendor-ATPM/self-custom-
 import { SelfCustomVendorDetailComponent } from './component/vendor/self-custom-vendor-detail/self-custom-vendor-detail.component';
 import { SelfCustomContainerVendorHoInfoComponent } from './vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
 import { SelfCustomContainerVendorBranchInfoComponent } from './vendor-branch/self-custom-container-vendor-branch-info/self-custom-container-vendor-branch-info.component';
+import { CustomFundingCompanyAddEditComponent } from './funding-company/custom-funding-company-add-edit/custom-funding-company-add-edit.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -207,7 +208,8 @@ export const customCurrencyMaskConfig = {
         SelfCustomVendorATPMAddEditComponent,
         SelfCustomVendorDetailComponent,
         SelfCustomContainerVendorHoInfoComponent,
-        SelfCustomContainerVendorBranchInfoComponent
+        SelfCustomContainerVendorBranchInfoComponent,
+        CustomFundingCompanyAddEditComponent
     ],
     providers: [
         VendorService,
