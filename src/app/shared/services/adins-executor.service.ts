@@ -14,12 +14,9 @@ import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 import { ApprovalTaskService } from "./ApprovalTask.service";
 import { callBackVendorPagingApproval } from "../function/approval-function";
 import { endStepperSrvyTaskDetail } from "../function/survey-function";
-<<<<<<< HEAD
 import { addEditFundingCoy } from "../function/funding-function";
-=======
 import { addeditAttributeMaster } from "../function/attribute-master-function";
 import { submitCoa } from "../function/coa-scheme-function";
->>>>>>> origin/MASTER_TECH
 
 @Injectable({
   providedIn: 'root'
@@ -59,11 +56,8 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
     this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
     this.setExecutor("saveJrMGroupDFact", saveJrMGroupDFact);
-<<<<<<< HEAD
     this.setExecutor("addEditFundingCoy", addEditFundingCoy);
-=======
     this.setExecutor("addeditAttributeMaster", addeditAttributeMaster);
     this.setExecutor("submitCoa", submitCoa);
->>>>>>> origin/MASTER_TECH
   }
 }
