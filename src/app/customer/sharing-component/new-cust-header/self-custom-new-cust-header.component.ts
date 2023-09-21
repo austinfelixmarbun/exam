@@ -310,7 +310,7 @@ export class SelfCustomNewCustHeaderShareholderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.AddCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;
@@ -323,7 +323,7 @@ export class SelfCustomNewCustHeaderShareholderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.EditCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;

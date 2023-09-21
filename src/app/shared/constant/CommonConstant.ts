@@ -158,6 +158,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeInvestmentType = "INVESTMENT_TYPE"
     public static RefMasterTypeCodeCompanyType = "COMPANY_TYPE";
     public static RefMasterTypeCodeIdType = "ID_TYPE";
+    public static RefMasterTypeCodeIdTypeCompany = "ID_TYPE_COMPANY";
     public static RefMasterTypeCodeNationality = "NATIONALITY";
     public static RefMasterTypeCodeMaritalStat = "MARITAL_STAT";
     public static RefMasterTypeCodeEducation = "EDUCATION";

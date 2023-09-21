@@ -9,7 +9,7 @@ export class SelfCustomNegativeCustomerDetailComponent implements OnInit {
   pageName: string
 
   constructor(){
-    this.pageName = "NegativeCustomerDetail"
+    this.pageName = "NegativeCustomerDetailV2"
   }
 
 

@@ -732,6 +732,7 @@ export class UrlConstantNew{
     public SaveCustPersonalShareholderMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainDataV2;
     public SaveCustCompanyShareholderMainData = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainData;
     public SaveCustCompanyShareholderMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV2;
+    public SaveCustCompanyShareholderMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV3;
     public SaveCustPersonalFamilyMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainData;
     public SaveCustPersonalFamilyMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV2;
 
@@ -1300,4 +1301,7 @@ export class UrlConstantNew{
     public AddEditBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditBouwheerCompanyIndustryInfo;
     public DeleteBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteBouwheerCompanyIndustryInfo;
 
+    //OCR 
+    public GetOCRKTPData = this.env.FoundationR3Url + this.url.GetOCRKTPData;
+    public GetOCRNPWPData = this.env.FoundationR3Url + this.url.GetOCRNPWPData;
 }
