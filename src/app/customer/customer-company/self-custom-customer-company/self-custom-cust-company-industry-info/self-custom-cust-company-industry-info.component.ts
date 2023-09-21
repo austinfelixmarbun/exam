@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 import { ResCustCompanyIndustryInfoObj } from 'app/shared/model/res-cust-company-industry-info-obj.model';
 import { ReqAddEditCustCompanyIndustryInfoObj } from 'app/shared/model/req-add-edit-cust-company-industry-info-obj.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 
 @Component({
   selector: 'app-self-custom-cust-company-industry-info',
@@ -120,10 +121,24 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
       );
       this.currentModal.close("Success");
       this.getListCustIndustryInfo();
-      AdInsHelper.RedirectUrl(this.router,["/BREAD/CustomerComponyV2"],{ IdCust : this.CustId});   
+      AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/CustomerCompany/Page"],{ IdCust : this.CustId});   
     }
   
-
+    async deleteModalIndustryInfo(i : number){
+      if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
+          var ReqIdForDelete = { 
+            CustCompanyIndustryInfoId : this.ListCustIndustryInfo[i].CustCompanyIndustryInfoId,
+            CustNo : this.CustNo
+           };
+          await this.http.post(this.UrlConstantNew.DeleteCustCompanyIndustryInfo, ReqIdForDelete, AdInsConstant.SpinnerOptions).toPromise().then(
+            (response) => {
+              if(response['Message'] === 'Success'){
+                this.ListCustIndustryInfo.splice(i, 1);
+              }
+            }
+          );
+      }
+    }
 
 
 }
