@@ -1,5 +1,5 @@
 <span class="mr-1 pull-right">
-  <button type="button" class="addButton" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;"
+  <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;"
     translate>
     <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
   </button>
@@ -16,22 +16,22 @@
           - {{item.BankName}} - {{item.BankBranch}} - {{item.BankAccNo}} - {{item.BankAccName}}
         </h5>
         <div class="col-md-5" style="display: inline-block; text-align: right;">
-          <button type="button" class="addButton" (click)="custBankHandler('editStmnt', item.CustBankAccId)" translate>
+          <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('editStmnt', item.CustBankAccId)" translate>
             Add Bank Statement
           </button>
-          <button type="button" class="addButton" (click)="custBankHandler('edit', item.CustBankAccId)" translate>
+          <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('edit', item.CustBankAccId)" translate>
             Edit Bank Account
           </button>
-          <button type="button" class="backButton" (click)="custBankHandler('delete', item.CustBankAccId)" translate>
+          <button type="button" class="backButton btn-outline-2" (click)="custBankHandler('delete', item.CustBankAccId)" translate>
             Delete Bank Account
           </button>
         </div>
       </div>
       <div class="col-md-12" style="padding: 0;">
         <div class="col-md-12" style="overflow-x:auto;">
-          <table class="table table-responsive-md text-center table-hover">
+          <table class="table table-responsive-md text-center table-hover table-new">
             <thead>
-              <tr class="table-header">
+              <tr class="table-header-2">
                 <th style="text-align: left;">
                   <span class="thead-header" name='month' translate>MONTH</span>
                 </th>

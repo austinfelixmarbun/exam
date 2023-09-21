@@ -115,6 +115,7 @@ import { CustomUpdateCustomerContactInfoComponent } from './self-custom-containe
 import { CustomUpdateCustomerCompanyLegalDocComponent } from './self-custom-container-customer-update/company/update-customer-company-legal-doc/custom-update-customer-company-legal-doc.component';
 import { CustomUpdateCustomerCompanyFinDataComponent } from './self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
 import { CustomUpdateCustomerCompanyDetailComponent } from './self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -162,7 +163,8 @@ export const customCurrencyMaskConfig = {
         SelfCustomCustViewModule,
         SelfCustomPefindoViewModule,
         UcTemplateModule,
-        MatRadioModule
+        MatRadioModule,
+        UiSwitchModule
     ],
     declarations: [
       CustomerPagingComponent, CustAssetDetailComponent,

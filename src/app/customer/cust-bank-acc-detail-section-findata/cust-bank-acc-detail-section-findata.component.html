@@ -1,8 +1,9 @@
-<form class="form form-horizontal" [formGroup]="CustBankAccForm" #enjiForm="ngForm" novalidate
+<div class="bg-light-blue-card">
+  <form class="form form-horizontal" [formGroup]="CustBankAccForm" #enjiForm="ngForm" novalidate
   (ngSubmit)="CustBankAccForm.valid && Save(enjiForm)">
   <div class="modal-header">
     <h4 class="modal-title">{{modalTitle}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('0')">
+    <button type="button" class="close btn-outline-2" aria-label="Close" (click)="activeModal.dismiss('0')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -14,60 +15,75 @@
             <div class="form-body">
               <div id="CustBankAccSection">
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="BankName" translate>Bank Name</label>
-                  <div class="col-md-9" *ngIf="pageType != 'editStmnt'">
+                  <label class="col-md-12 adInsLabel label-field-2" for="BankName" translate>Bank Name</label>
+                  <div class="col-md-12" *ngIf="pageType != 'editStmnt'">
                     <lib-uclookupgeneric [lookupInput]="inputLookupBank" [parentForm]='CustBankAccForm' [enjiForm]='enjiForm' [identifier]="'RefBankLookup'"
                       (lookup)="getLookupRefBankResponse($event)"></lib-uclookupgeneric>
                   </div>
-                  <div class="col-md-9" *ngIf="pageType == 'editStmnt'">
+                  <div class="col-md-12" *ngIf="pageType == 'editStmnt'">
                     {{bankName}}
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="BankBranch" translate>Bank Branch</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="BankBranch" 
+                  <label class="col-md-12 adInsLabel label-field-2" for="BankBranch" translate>Bank Branch</label>
+                  <div class="col-md-12">
+                    <input type="text" class="form-control adInsInput input-field-2" formControlName="BankBranch" 
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankBranch.invalid }"
                       [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
-                    <lib-uc-show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    <div class="message-box">
+                      <lib-uc-show-errors [control]="CustBankAccForm.controls.BankBranch" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="BankAccName" translate>Account Name</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="BankAccName" 
+                  <label class="col-md-12 adInsLabel label-field-2" for="BankAccName" translate>Account Name</label>
+                  <div class="col-md-12">
+                    <input type="text" class="form-control adInsInput input-field-2" formControlName="BankAccName" 
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankAccName.invalid }"
                       [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
-                    <lib-uc-show-errors [control]="CustBankAccForm.controls.BankAccName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    <div class="message-box">
+                      <lib-uc-show-errors [control]="CustBankAccForm.controls.BankAccName" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel adins-required-label" for="BankAccNo" translate>Account No</label>
-                  <div class="col-md-9">
-                    <input type="text" class="form-control adInsInput" formControlName="BankAccNo" 
+                  <label class="col-md-12 adInsLabel label-field-2" for="BankAccNo" translate>Account No</label>
+                  <div class="col-md-12">
+                    <input type="text" class="form-control adInsInput input-field-2" formControlName="BankAccNo" 
                       [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BankAccNo.invalid }"
                       [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
-                    <lib-uc-show-errors [control]="CustBankAccForm.controls.BankAccNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    <div class="message-box">
+                      <lib-uc-show-errors [control]="CustBankAccForm.controls.BankAccNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel" for="IsDefault" translate>Is Default</label>
-                  <div class="col-md-9">
-                    <input type="checkbox" formControlName="IsDefault" (change)="CheckDefault()" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
+                  <label class="col-md-12 adInsLabel label-field-2" for="IsDefault" translate>Is Default</label>
+                  <div class="col-md-12">
+                    <ui-switch class="custom-switches" [disabled]="pageType == 'editStmnt' ? true : false"
+                      uncheckedLabel="no" checkedLabel="yes" size="small"   
+                      (change)="CheckDefault()"
+                      [formControlName]="'IsDefault'">
+                    </ui-switch>
+                    <!-- <input type="checkbox" formControlName="IsDefault" (change)="CheckDefault()" [attr.disabled]="pageType == 'editStmnt' ? '' : null" /> -->
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 adInsLabel" for="IsActive" translate>Is Active</label>
-                  <div class="col-md-9">
-                    <input type="checkbox" formControlName="IsActive" [attr.disabled]="pageType == 'editStmnt' ? '' : null" />
+                  <label class="col-md-12 adInsLabel label-field-2" for="IsActive" translate>Is Active</label>
+                  <div class="col-md-12">
+                    <ui-switch class="custom-switches" [disabled]="pageType == 'editStmnt' ? 'true' : 'false'"
+                      uncheckedLabel="no" checkedLabel="yes" size="small"
+                      [formControlName]="'IsActive'">
+                    </ui-switch>
+                    <!-- <input type="checkbox" formControlName="IsActive" [attr.disabled]="pageType == 'editStmnt' ? '' : null" /> -->
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="isAddBankStatement"> 
                   <div class="col-md-12" style="text-align: right; margin-top: 10px;">
-                    <button type="button" class="btn btn-raised btn-primary mr-1" (click)="calculate()">
+                    <button type="button" class="btn btn-raised btn-primary-2 mr-1" (click)="calculate()">
                       Calculate
                     </button>
-                    <button type="button" class="btn btn-raised btn-primary" (click)="addRowCustBankStmnt()" [disabled]="rowCustBankStmnt >= '12'">
+                    <button type="button" class="btn btn-raised btn-primary-2" (click)="addRowCustBankStmnt()" [disabled]="rowCustBankStmnt >= '12'">
                       Add New Row
                     </button>
                   </div>
@@ -111,9 +127,11 @@
                             <td style="text-align: left;"></td>
                             <td style="text-align: left;">
 
-                              <input type="" currencyMask class="form-control adInsInput" formControlName="BegBalanceAmt" (keyup)="onBegBalanceAmtChange($event)"
+                              <input type="" currencyMask class="form-control adInsInput input-field-2" formControlName="BegBalanceAmt" (keyup)="onBegBalanceAmtChange($event)"
                               [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.controls.BegBalanceAmt.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.controls.BegBalanceAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.controls.BegBalanceAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             
                             </td>
                             <td style="text-align: right;">
@@ -126,40 +144,52 @@
                         <tbody formArrayName="CustBankStmnts">
                           <tr *ngFor="let stmntControl of CustBankAccForm.get('CustBankStmnts').controls; index as i" [formGroupName]="i">
                             <td style="text-align: left;">
-                              <select (change)="onMonthChange()" class="form-control adInsInput" formControlName="Month"
+                              <select (change)="onMonthChange()" class="form-control adInsInput input-field-2" formControlName="Month"
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.Month.invalid }">
                                 <option *ngFor="let monthItem of monthOfYear; index as j" [value]="j">{{monthItem}}</option>
                               </select>
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Month" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Month" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: left;">
-                              <input type="text" class="form-control adInsInput" formControlName="Year" 
+                              <input type="text" class="form-control adInsInput input-field-2" formControlName="Year" 
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.Year.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Year" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.Year" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: left;">
-                              <input type="number" (change)="ChangeTrxCountDebit(i)" (keyup)="ChangeTrxCountDebit(i)"  class="form-control adInsInput" formControlName="DebitTrxCount" 
+                              <input type="number" (change)="ChangeTrxCountDebit(i)" (keyup)="ChangeTrxCountDebit(i)"  class="form-control adInsInput input-field-2" formControlName="DebitTrxCount" 
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitTrxCount.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: left;">
-                              <input type="" currencyMask class="form-control adInsInput" formControlName="DebitAmt" (keyup)="onDebitAmtChange($event)"
+                              <input type="" currencyMask class="form-control adInsInput input-field-2" formControlName="DebitAmt" (keyup)="onDebitAmtChange($event)"
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.DebitAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: left;">
-                              <input type="number" (change)="ChangeTrxCountCredit(i)" (keyup)="ChangeTrxCountCredit(i)"  class="form-control adInsInput" formControlName="CreditTrxCount" 
+                              <input type="number" (change)="ChangeTrxCountCredit(i)" (keyup)="ChangeTrxCountCredit(i)"  class="form-control adInsInput input-field-2" formControlName="CreditTrxCount" 
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditTrxCount.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditTrxCount" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: left;">
-                              <input type="" currencyMask class="form-control adInsInput" formControlName="CreditAmt" (keyup)="onCreditAmtChange($event)"
+                              <input type="" currencyMask class="form-control adInsInput input-field-2" formControlName="CreditAmt" (keyup)="onCreditAmtChange($event)"
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt.invalid }" />
-                              <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              <div class="message-box">
+                                <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.CreditAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+                              </div>
                             </td>
                             <td style="text-align: right;">
                               {{stmntControl.value.BalanceAmt | number:'.2':'en-US'}}
-                              <!-- <input type="" currencyMask class="form-control adInsInput" formControlName="BalanceAmt" 
+                              <!-- <input type="" currencyMask class="form-control adInsInput input-field-2" formControlName="BalanceAmt" 
                                 [ngClass]="{ 'is-invalid': enjiForm.submitted && CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt.invalid }" />
                               <lib-uc-show-errors [control]="CustBankAccForm.get('CustBankStmnts').at(i).controls.BalanceAmt" [submit]="enjiForm.submitted"></lib-uc-show-errors> -->
                             </td>
@@ -182,11 +212,12 @@
     </div>
   </div>
   <div class="modal-footer"> 
-    <button type="button" class="btn btn-warning btn-raised" (click)="activeModal.dismiss('0')"><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
-    <button type="submit" class="btn btn-raised btn-primary">
+    <button type="button" class="btn btn-outline-2 btn-raised" (click)="activeModal.dismiss('0')"><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
+    <button type="submit" class="btn btn-raised btn-primary-2">
       <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
     </button>
   </div>
 </form>
+</div>
 
 
