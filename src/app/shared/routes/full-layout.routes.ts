@@ -586,7 +586,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'staffclaim',
+    path: 'staff-claim',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -972,7 +972,19 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'costallocationmaster',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './CostAllocMasterModule'
+      })
+        .then(m => m.CostAllocMasterModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
   // #endregion
 
-
+  
 ];

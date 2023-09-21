@@ -19,14 +19,28 @@
         <tr><td translate>Birth Date</td><td> : </td><td>{{ReqObj.BirthDate}}</td></tr>
         <tr><td translate>Gender</td><td> : </td><td>{{ParentForm.get('MrGenderCode').value}}</td></tr>
         <tr><td translate>Mother Name</td><td> : </td><td>{{ReqObj.MotherName}}</td></tr>
+        <tr><td translate>Address</td><td> : </td><td>{{ReqObj.Address}}</td></tr>
+
       </ng-container>
 
       <ng-container *ngIf="MrCustTypeCode == 'COMPANY'">
-        <tr><td translate>Akta No</td><td> : </td><td>{{ReqObj.AktaNo}}</td></tr>
-        <tr><td translate>Birth Date</td><td> : </td><td>{{ReqObj.BirthDate}}</td></tr>
+        <tr><td translate>Address</td><td> : </td><td>{{ReqObj.Address}}</td></tr>
+        <tr>
+          <td><label class="adins-required-label" translate>Akta No</label></td><td> : </td>
+          <td>
+            <input type="text" class="form-control adInsInput" formControlName="AktaNo" [ngClass]="{ 'is-invalid': enjiForm.submitted && CbasSlikReqForm.controls.AktaNo.invalid }" />
+            <lib-uc-show-errors [control]="CbasSlikReqForm.controls.AktaNo" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+          </td>
+        </tr>
+        <tr>
+          <td><label class="adins-required-label" translate>Estabislhment Date</label></td><td> : </td>
+          <td>
+            <input type="date" class="form-control adInsInput" formControlName="BirthDate" [ngClass]="{ 'is-invalid': enjiForm.submitted && CbasSlikReqForm.controls.BirthDate.invalid }" />
+            <lib-uc-show-errors [control]="CbasSlikReqForm.controls.BirthDate" [submit]="enjiForm.submitted"></lib-uc-show-errors>
+          </td>
+        </tr>
       </ng-container>
 
-      <tr><td translate>Address</td><td> : </td><td>{{ReqObj.Address}}</td></tr>
       <tr><td><label class="adins-required-label" translate>Purpose</label></td><td> : </td><td>
         <lib-ucdropdownlist [dropdownListObj]="DdlCbasSlikPurposeObj" [parentForm]="CbasSlikReqForm" [enjiForm]="enjiForm" [identifier]="'PurposeCode'">
         </lib-ucdropdownlist>

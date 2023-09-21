@@ -20,7 +20,6 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Input() WfTaskListId: any;
   @Output() ResponseTab: EventEmitter<any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppLegalDoc: Array<UpdateCustLegalDocObj>;
   MasterLegalDoc: Array<UpdateCustLegalDocObj>;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
@@ -92,14 +91,12 @@ export class UpdateCustomerCompanyLegalDocComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyLegalDocv2, { CustCompanyId: this.CustCompanyId, TaskListId: this.WfTaskListId, LegalDocList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
-        this.router.navigate([NavigationConstant.SELF_CUSTOM_CUST_UPDATE_DATA_PAGING]);
       }
     ).catch(
       (error) => {
         console.log(error);
       }
     );
-
   }
 
 }

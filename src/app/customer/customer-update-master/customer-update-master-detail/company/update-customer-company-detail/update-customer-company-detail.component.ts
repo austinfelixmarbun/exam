@@ -24,7 +24,6 @@ import { map, mergeMap } from 'rxjs/operators';
 export class UpdateCustomerCompanyDetailComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppCustCompanyDetail: UpdateCustCompanyDetailObj;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   AppIndustryName: string;
@@ -133,20 +132,6 @@ export class UpdateCustomerCompanyDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustCompanyDetail, this.CustomerDetailForm.value, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
-        const actions = [
-          {
-            'result': {
-              'type': 'function',
-              'target': 'self',
-              'alias': '',
-              'methodName': 'NextStep',
-              'params': []
-            },
-            'conditions': []
-          }
-        ];
-
-        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {

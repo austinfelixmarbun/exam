@@ -29,6 +29,8 @@ export class CbasSlikReqHeaderComponent implements OnInit {
 
 
   CbasSlikReqForm = this.fb.group({
+    AktaNo: [''],
+    BirthDate: [''],
     PurposeCode: ['', [Validators.required]]
   });
   ReqObj: ReqAddTrxSrcDataForCbasSlik = new ReqAddTrxSrcDataForCbasSlik();
@@ -49,11 +51,22 @@ export class CbasSlikReqHeaderComponent implements OnInit {
       this.ReqObj.KtpNo = formValue.MrIdTypeCode == CommonConstant.MrIdTypeCodeEKTP ? formValue.IdNo : "";
       this.ReqObj.Gender = formValue.MrGenderCode == CommonConstant.GENDER_MALE ? "M" : "F";
       this.ReqObj.MotherName = formValue.MotherMaidenName;
+      this.CbasSlikReqForm.get('AktaNo').clearValidators();
+      this.CbasSlikReqForm.get('BirthDate').clearValidators();
     }
     else
     {
+      this.ReqObj.CustType = 2;
       this.ReqObj.AktaNo = formValue.MrIdTypeCode == CommonConstant.MrIdTypeCodeAKTA ? formValue.IdNo : "";
+      this.CbasSlikReqForm.patchValue({
+        'AktaNo': this.ReqObj.AktaNo,
+      });
+      this.CbasSlikReqForm.get('AktaNo').setValidators(Validators.required);
+      this.CbasSlikReqForm.get('BirthDate').setValidators(Validators.required);
     }
+    this.CbasSlikReqForm.get('AktaNo').updateValueAndValidity();
+    this.CbasSlikReqForm.get('BirthDate').updateValueAndValidity();
+
     this.initDropdownListObj();
   }
 
@@ -73,6 +86,11 @@ export class CbasSlikReqHeaderComponent implements OnInit {
 
   Submit(){
     this.ReqObj.PurposeCode = this.CbasSlikReqForm.get('PurposeCode').value;
+    if (this.MrCustTypeCode == CommonConstant.CustTypeCompany) 
+    {
+      this.ReqObj.AktaNo = this.CbasSlikReqForm.get('AktaNo').value;
+      this.ReqObj.BirthDate = this.CbasSlikReqForm.get('BirthDate').value;
+    }
     this.http.post(this.UrlConstantNew.AddTrxSrcDataForCbasSlik, this.ReqObj, AdInsConstant.SpinnerOptions).subscribe(
       (response:ResGenerateTrxNoObj) => {
         this.TrxNo = response.TrxNo;

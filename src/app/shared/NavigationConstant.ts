@@ -120,6 +120,8 @@ export class NavigationConstant {
     public static CS_SELF_CUSTOM_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR; //'/CommonSetting/SelfCustom/WorkingHour'
     public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD; //'/CommonSetting/SelfCustom/WorkingHour/Add'
     public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL; //'/CommonSetting/SelfCustom/WorkingHour/Detail'
+    public static CUSTOM_CS_COA_SCHM_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CUSTOM_CS_COA_SCHM_PAGING;
+
     //#endregion
 
     //#region System Setting
