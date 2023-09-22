@@ -66,7 +66,4 @@ export { CustomUpdateCustomerContactInfoComponent } from 'app/customer/self-cust
 export { CustomUpdateCustomerCompanyLegalDocComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-legal-doc/custom-update-customer-company-legal-doc.component';
 export { CustomUpdateCustomerCompanyFinDataComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
 export { CustomUpdateCustomerCompanyDetailComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
-
-
-
-
+export { ContainerCustLegalDocUploadComponent } from "app/customer/cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component";

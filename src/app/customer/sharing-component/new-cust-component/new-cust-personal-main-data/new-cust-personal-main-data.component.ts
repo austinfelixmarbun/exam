@@ -67,6 +67,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   @Input() isMarried: boolean = false;
   @Input() CustDataMode: string = CommonConstant.CustMainDataModeCust; // Cust Mode
   @Input() isSubmit: boolean = false;
+  @Input() IsAddSpouse: boolean = false;
+  @Input() SelectedCustSpouseId: number = 0;
   @Output() outputAfterSave: EventEmitter<ReqPersonalObj> = new EventEmitter();
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
   @Output() outputIsSubmit: EventEmitter<boolean> = new EventEmitter();
@@ -241,6 +243,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
       MrCustRelationship: [''],
       MrCustModelCode: ['', [Validators.required]],
       MobilePhnNo1: ['', [Validators.required, Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
+      MobilePhnNo2: ['', [Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
+      MobilePhnNo3: ['', [Validators.pattern(ValidatorPattern.NUMBER_ONLY_REQUIRED)]],
+      IsWaMobilePhnNo1: [false],
+      IsWaMobilePhnNo2: [false],
+      IsWaMobilePhnNo3: [false],
       Email1: ['', [Validators.required, Validators.pattern(ValidatorPattern.EMAIL_ALL_CASE)]]
     });
 
@@ -408,7 +415,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   tempCustPersonalObj: CustPersonalObj = new CustPersonalObj();
   async GetCustPersonalData(custId: number = this.CustId) {
     let datePipe = new DatePipe("en-US");
-    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustId, { Id: custId }).toPromise().then(
+    await this.http.post<CustPersonalObj>(this.UrlConstantNew.GetCustPersonalbyCustIdV2, { Id: custId }).toPromise().then(
       (response) => {
         this.tempCustPersonalObj = response;
         this.CustomerForm.patchValue({
@@ -419,6 +426,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
           IsRestInPeace: response.IsRestInPeace,
           MrMaritalStatCode: response.MrMaritalStatCode,
           MobilePhnNo1: response.MobilePhnNo1,
+          MobilePhnNo2: response.MobilePhnNo2,
+          MobilePhnNo3: response.MobilePhnNo3,
+          IsWaMobilePhnNo1: response.IsWaMobilePhnNo1,
+          IsWaMobilePhnNo2: response.IsWaMobilePhnNo2,
+          IsWaMobilePhnNo3: response.IsWaMobilePhnNo3,
           Email1: response.Email1
         });
         if (this.CustDataMode == this.CustDataModeFamily) this.familyForm.PatchExistingPersonalData(response);
@@ -602,6 +614,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.CustomerForm.get("MrMaritalStatCode").disable();
     this.CustomerForm.get("MotherMaidenName").disable();
     this.CustomerForm.get("MobilePhnNo1").disable();
+    this.CustomerForm.get("MobilePhnNo2").disable();
+    this.CustomerForm.get("MobilePhnNo3").disable();
+    this.CustomerForm.get("IsWaMobilePhnNo1").disable();
+    this.CustomerForm.get("IsWaMobilePhnNo2").disable();
+    this.CustomerForm.get("IsWaMobilePhnNo3").disable();
     this.CustomerForm.get("Email1").disable();
     this.IsLockCopyAddrBtn = true;
   }
@@ -687,10 +704,22 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustPersonalObj.MrMaritalStatCode = tempForm["MrMaritalStatCode"];
     reqSubmitObj.CustPersonalObj.Email1 = tempForm["Email1"];
     reqSubmitObj.CustPersonalObj.MobilePhnNo1 = tempForm["MobilePhnNo1"];
+    reqSubmitObj.CustPersonalObj.MobilePhnNo2 = tempForm["MobilePhnNo2"];
+    reqSubmitObj.CustPersonalObj.MobilePhnNo3 = tempForm["MobilePhnNo3"];
+    reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo1 = tempForm["IsWaMobilePhnNo1"];
+    reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo2 = tempForm["IsWaMobilePhnNo2"];
+    reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo3 = tempForm["IsWaMobilePhnNo3"];
     if (this.CustDataMode == this.CustDataModeFamily) {
       reqSubmitObj.CustPersonalObj.MrNationalityCode = tempForm["MrNationalityCode"];
       reqSubmitObj.CustPersonalObj.WnaCountryCode = tempForm["WnaCountryCode"];
-      reqSubmitObj.CustPersonalFamilyObj = this.SetCustPersonalFamilyData();
+      reqSubmitObj.CustPersonalFamilyObj = this.SetCustPersonalFamilyData(this.ParentCustId, this.CustId);
+    }
+
+    if (this.CustDataMode == this.CustDataModeShareholder && this.IsAddSpouse) {
+      // reqSubmitObj.CustPersonalObj.MrNationalityCode = tempForm["MrNationalityCode"];
+      // reqSubmitObj.CustPersonalObj.WnaCountryCode = tempForm["WnaCountryCode"];
+      reqSubmitObj.IsAddSpouse = true;
+      reqSubmitObj.CustPersonalFamilyObj = this.SetCustPersonalFamilyData(this.SelectedCustSpouseId, this.CustId);
     }
 
     reqSubmitObj.CustAddr = this.tempCustAddr;
@@ -751,6 +780,9 @@ export class NewCustPersonalMainDataComponent implements OnInit {
         break;
       case this.CustDataModeShareholder:
         reqSubmitObj.CustObj.IsShareholder = true;
+        if(this.IsAddSpouse){
+          reqSubmitObj.CustObj.IsFamily = true;
+        }
         break;
     }
     return reqSubmitObj;
@@ -788,6 +820,8 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     tempReqObj.IsSigner = tempForm["IsSigner"];
     tempReqObj.EstablishmentDt = tempForm["EstablishmentDt"];
     tempReqObj.MrJobPositionCode = tempForm["MrJobPositionCode"];
+    tempReqObj.BusinessStartDt = tempForm["BusinessStartDt"];
+    tempReqObj.SignerEndDt = tempForm["SignerEndDt"];
     tempReqObj.RowVersion = CustCompanyMgmntShrholder.RowVersion;
 
     return tempReqObj
@@ -824,15 +858,20 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     return tempAttr;
   }
 
-  SetCustPersonalFamilyData(): CustPersonalFamilyObj {
+  SetCustPersonalFamilyData(ParentCustId: number, CustId: number): CustPersonalFamilyObj {
     let tempFamilyData: CustPersonalFamilyObj = this.tempCustPersonalFamilyObj;
-
-    tempFamilyData.CustId = this.ParentCustId;
-    tempFamilyData.FamilyId = this.CustId;
-    tempFamilyData.MrCustRelationship = this.CustomerForm.get("MrCustRelationship").value;
+    tempFamilyData.CustId = ParentCustId;
+    tempFamilyData.FamilyId = CustId;
+    if(this.IsAddSpouse)
+    {
+      tempFamilyData.MrCustRelationship = CommonConstant.MasteCodeRelationshipSpouse;
+    }else{
+      tempFamilyData.MrCustRelationship = this.CustomerForm.get("MrCustRelationship").value;
+    }
 
     return tempFamilyData;
   }
+  
   //#endregion
 
   SetThirdPartyTrxNo(e){

@@ -116,6 +116,7 @@ import { CustomUpdateCustomerCompanyLegalDocComponent } from './self-custom-cont
 import { CustomUpdateCustomerCompanyFinDataComponent } from './self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
 import { CustomUpdateCustomerCompanyDetailComponent } from './self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { ContainerCustLegalDocUploadComponent } from './cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -252,7 +253,8 @@ export const customCurrencyMaskConfig = {
       CustomUpdateCustomerContactInfoComponent,
       CustomUpdateCustomerCompanyLegalDocComponent,
       CustomUpdateCustomerCompanyFinDataComponent,
-      CustomUpdateCustomerCompanyDetailComponent
+      CustomUpdateCustomerCompanyDetailComponent,
+      ContainerCustLegalDocUploadComponent
     ],
 
     providers: [

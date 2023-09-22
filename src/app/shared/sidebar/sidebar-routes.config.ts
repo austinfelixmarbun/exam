@@ -70,6 +70,17 @@ export const ROUTES: RouteInfo[] = [
     ], Params: []
   },
   {
+    Path: '', Title: 'Asset Self CUSTOM', Icon: 'ft-aperture', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
+    Submenu: [
+      { Path: NavigationConstant.CUSTOM_ASSET_NEG_PAGING, Title: 'Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CUSTOM_ASSET_MASTER_PAGING, Title: 'Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CUSTOM_ASSET_MASTER_UPLOAD, Title: 'Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING, Title: 'Review Upload Asset Master', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CUSTOM_ASSET_NEG_UPLOAD, Title: 'Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+      { Path: NavigationConstant.CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING, Title: 'Review Upload Negative Asset', Icon: '', Class: '', Badge: '', BadgeClass: '', IsExternalLink: false, Submenu: [], Params: [] },
+    ], Params: []
+  },
+  {
     Path: '', Title: 'Vendor', Icon: 'ft-users', Class: 'has-sub', Badge: '', BadgeClass: '', IsExternalLink: false,
     Submenu: [
       {

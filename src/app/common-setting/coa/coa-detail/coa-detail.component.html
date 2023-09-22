@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="card">
+  <div class="card bg-light-blue-card">
 
     <div class="card-header">
       <h4 class="card-title" id="horz-layout-colored-controls" translate>COA</h4>
@@ -19,7 +19,7 @@
                 <label class="col-md-3" translate>Entity Type</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control" #entityselect>
+                    <select class="form-control input-field-2" #entityselect>
                       <option value="">-Select One-</option>
                       <option *ngFor="let item of entityTypeList" [value]="item.Key">
                         {{item.Value}}
@@ -28,7 +28,7 @@
 
                     <div class="input-group-append">
                       <span class="input-group-btn">
-                        <button class="btn btn-raised btn-primary" type="button" (click)="Show(entityselect)">
+                        <button class="btn btn-raised btn-primary-2" type="button" (click)="Show(entityselect)">
                           <em class="fa fa-check-square-o"></em>Show
                         </button>
                       </span>
@@ -48,7 +48,7 @@
                   <label class="col-md-3" translate>Currency Code</label>
                   <div class="col-md-3">
                     <div class="input-group mb-0">
-                      <select class="form-control" #currselect>
+                      <select class="form-control input-field-2" #currselect>
                         <option disabled>-Select One-</option>
                         <option *ngFor="let item of ListCurrCode" [value]="item.Key">
                           {{item.Value}}
@@ -57,7 +57,7 @@
 
                       <div class="input-group-append">
                         <span class="input-group-btn">
-                          <button class="btn btn-raised btn-primary" [disabled]="!isReady" type="button" (click)="Add(currselect)">
+                          <button class="btn btn-raised btn-primary-2" [disabled]="!isReady" type="button" (click)="Add(currselect)">
                             <em class="fa fa-check-square-o"></em>Add
                           </button>
                         </span>
@@ -73,10 +73,10 @@
               <div id='CoaDetailInfo'>
 
                 <div class="table-responsive" style="overflow-x: auto;">
-                  <table class="table table-responsive-md text-center table-hover">
+                  <table class="table table-responsive-md text-center table-hover table-new">
                     <caption></caption>
                     <thead>
-                      <tr class="table-header">
+                      <tr class="table-header-2">
                         <th id="no">
                           <span class="thead-header" translate>No</span>
                         </th>
@@ -103,7 +103,7 @@
                           <td class="text-left">{{item.coa[0].EntityCode}}</td>
                           <ng-container formArrayName="DataCOA" *ngIf="ListCurr.length > 0">
                             <td class="text-center" *ngFor="let currs of ListCurr; let x = index" [formGroupName]="x">
-                              <input type="text" class="form-control" formControlName="COA">
+                              <input type="text" class="form-control input-field-2" formControlName="COA">
                             </td>
                           </ng-container>
                         </ng-container>
@@ -118,10 +118,10 @@
           </div>
 
           <div class="form-actions right">
-            <button type="button" [routerLink]="[CancelLink]" class="btn btn-raised btn-warning mr-1" translate>
+            <button type="button" [routerLink]="[CancelLink]" class="btn btn-raised btn-outline-2 mr-1" translate>
               <em class="fa fa-arrow-circle-left"></em> Back
             </button>
-            <button type="submit" class="btn btn-raised btn-primary" translate>Submit</button>
+            <button type="submit" class="btn btn-raised btn-primary-2" translate>Submit</button>
           </div>
 
         </form>

@@ -76,7 +76,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH ||
         this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY || this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY)
       {
-        this.pageName = "VendorBranchRegistration"
+        this.pageName = "VendorBranchRegistrationV2"
       }
       // else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY) {
       else{  

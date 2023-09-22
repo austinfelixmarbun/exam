@@ -4,7 +4,7 @@
   <lib-ucSubsection [id]="'CustFinAttributeId'" [title]="title" [panel]="'CustFinAttribute'">
   </lib-ucSubsection> 
   <div id="CustFinAttribute">  
-    <div class="form-body"> 
+    <div class="form-body px-3"> 
       <div *ngFor="let attr of RefAttrList; let i = index">
         <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode" >
           <label class="col-md-12 adInsLabel label-field-2 "  translate>{{attr.AttrName}}

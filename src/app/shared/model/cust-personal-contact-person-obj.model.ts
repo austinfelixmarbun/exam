@@ -21,6 +21,10 @@ export class CustPersonalContactPersonObj {
     IsFamily: boolean;
     MobilePhnNo1: string;
     MobilePhnNo2: string;
+    MobilePhnNo3: string;
+    IsWaMobilePhnNo1: boolean;
+    IsWaMobilePhnNo2: boolean;
+    IsWaMobilePhnNo3: boolean;
     Email: string;
     Addr: string;
     AreaCode1: string;

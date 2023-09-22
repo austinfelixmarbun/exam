@@ -18,7 +18,7 @@ import { FormDropDownListService } from '@adins/ucform';
 })
 export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterViewInit {
 
-  parentForm: FormGroup;
+  parentForm: FormGroup = this.fb.group({});
   data: EventEmitter<any> = new EventEmitter<any>();
   listRequest: ListRequestCriteriaObj;
   resultAssetCategory: Array<KeyValueObj>;

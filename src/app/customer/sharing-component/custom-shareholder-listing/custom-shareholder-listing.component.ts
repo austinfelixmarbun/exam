@@ -63,7 +63,7 @@ export class CustomShareholderListingComponent implements OnInit {
   tempIsSigner: boolean = false;
   listCustNoToExclude: Array<string> = new Array();
   GetListPaging() {
-    this.http.post(this.UrlConstantNew.GetListManagementShareholderForListPagingByCustId, { Id: this.CustId }).subscribe(
+    this.http.post(this.UrlConstantNew.GetListManagementShareholderForListPagingByCustIdV2, { Id: this.CustId }).subscribe(
       (response: GenericListObj) => {
         this.tempShareholderListingObj = response.ReturnObject;
         let tempTotalSharePrct: number = 0;
@@ -102,6 +102,8 @@ export class CustomShareholderListingComponent implements OnInit {
     this.inputGridObj.resultData = { Data: [] };
   }
 
+  IsAddSpouse: boolean = false;
+  SelectedCustSpouseId: number = 0;
   addCustShareHolder(isAdd: boolean = true) {
     this.PageType = this.CustPageTypeHeader;
     if (isAdd) {
@@ -117,7 +119,14 @@ export class CustomShareholderListingComponent implements OnInit {
     this.selectedCustId = ev.RowObj.ShareholderId;
     this.CustType = ev.RowObj.ShareholderType;
     this.tempTotalSharePrct = Math.round((this.tempTotalSharePrct - ev.RowObj.SharePrcnt) * 1000000) / 1000000;
-    this.addCustShareHolder(false);
+    if(ev.Key == "addspouse")
+    {
+      this.IsAddSpouse = true;
+      this.SelectedCustSpouseId = ev.RowObj.ShareholderId;
+      this.addCustShareHolder();
+    }else{
+      this.addCustShareHolder(false);
+    }
   }
 
   ReloadPaging() {
