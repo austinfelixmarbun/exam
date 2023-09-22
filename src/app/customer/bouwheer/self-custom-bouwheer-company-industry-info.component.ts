@@ -127,7 +127,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       );
       this.currentModal.close("Success");
       this.getListBouwheerIndustryInfo();
-      AdInsHelper.RedirectUrl(this.router,["/BREAD/Ricaddetailbouwheer"],{ BwrNo : this.BwrNo, CustType : CommonConstant.CustTypeCompany, mode : 'edit'});
+      AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/Bouwheer/Detail"],{ BwrNo : this.BwrNo, CustType : CommonConstant.CustTypeCompany, mode : 'edit'});
     }else{
       this.ListBouwheerIndustryInfo.push({
         RefIndustryTypeCode: this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
