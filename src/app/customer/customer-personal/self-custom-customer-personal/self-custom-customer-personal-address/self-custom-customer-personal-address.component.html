@@ -1,4 +1,4 @@
-<div class="px-3">
+<div class="card">
     <app-customer-personal-address-check *ngIf="mode == 'check'" (outputValue)="terimaValue($event)"> </app-customer-personal-address-check>
     <app-customer-personal-address-add *ngIf="mode == 'add' || mode =='edit'" [mode] = "this.mode"  [AddrId] = "this.AddrId" (outputValue)="terimaValue($event)"> </app-customer-personal-address-add>
 

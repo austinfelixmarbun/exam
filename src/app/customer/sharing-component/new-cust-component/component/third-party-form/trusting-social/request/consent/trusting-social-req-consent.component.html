@@ -1,4 +1,5 @@
-<form class="form-horizontal" [formGroup]="ConsentForm"
+<div class="bg-light-blue-card">
+  <form class="form-horizontal" [formGroup]="ConsentForm"
   (ngSubmit)="ConsentForm.valid && UploadConsent()" #enjiForm="ngForm">
   <div class="modal-header">
     <h4 class="modal-title" translate>Consent</h4>
@@ -9,25 +10,25 @@
   <div class="modal-body">
     <div class="form-body">
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>Customer Type</label>
-        <label class="col-md-4 adInsLabel" translate>{{CustTypeName}}</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>Customer Type</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>{{CustTypeName}}</label>
       </div>
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>NPWP</label>
-        <label class="col-md-4 adInsLabel" translate>{{CustObj.TaxIdNo}}</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>NPWP</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>{{CustObj.TaxIdNo}}</label>
       </div>
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>Customer Name</label>
-        <label class="col-md-4 adInsLabel" translate>{{CustObj.CustName}}</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>Customer Name</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>{{CustObj.CustName}}</label>
       </div>
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>FPP</label>
-        <label class="col-md-4 adInsLabel" translate>{{CustObj.CustNo == "" ? CustObj.ThirdPartyTrxNo : CustObj.CustNo}}</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>FPP</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>{{CustObj.CustNo == "" ? CustObj.ThirdPartyTrxNo : CustObj.CustNo}}</label>
       </div>
       <div class="form-group row">
-        <label class="col-md-4 adInsLabel" translate>Upload Consent</label>
+        <label class="col-md-4 adInsLabel label-field-2" translate>Upload Consent</label>
         <div class="col-md-4">
-          <label for="consent" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
+          <label for="consent" class="btn btn-primary-2 btn-sm afu-select-btn">Choose File</label>
           <input type="file" id="consent" style="display: none" (change)="HandleFileInput($event.target.files)"
             formControlName="Consent" [accept]="'.doc, .docx, .pdf'"/>
           <lib-uc-show-errors [control]="ConsentForm.controls.Consent" [submit]="enjiForm.submitted">
@@ -43,11 +44,12 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-raised btn-warning mr-1" (click)="activeModal.close('Close click')">
+    <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="activeModal.close('Close click')">
       <i class="ft-x"></i>&nbsp;<span translate>Cancel</span>
     </button>
-    <button type="submit" class="btn btn-raised btn-primary">
+    <button type="submit" class="btn btn-raised btn-primary-2">
       <i class="far fa-check-square"></i>&nbsp;<span translate>Next</span>
     </button>
   </div>
 </form>
+</div>
