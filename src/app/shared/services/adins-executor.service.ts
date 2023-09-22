@@ -34,7 +34,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addRefOfficeAreaMember",addRefOfficeAreaMember);
     this.setExecutor("saveDataOrSaveAndSync", saveDataOrSaveAndSync);
     this.setExecutor("saveDataOrSaveAndSyncV2", saveDataOrSaveAndSyncV2);
-    this.setExecutor("saveDataOrSaveAndSyncCompany", saveDataOrSaveAndSync);
     this.setExecutor("addEditCustJobData", addEditCustJobData);
     this.setExecutor("editCustomerFamily", editCustomerFamily);
     this.setExecutor("addEditCustomer", addEditCustomer);
