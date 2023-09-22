@@ -6,7 +6,7 @@
   <lib-ucSubsection [id]="'CustFinDataId'" [title]="'Financial Data'" [panel]="'CustFinData'"></lib-ucSubsection>
   <div id="CustFinData">
     <br>
-    <div id="ListCustFinData" class="mb-3" style="overflow-x: auto;"> 
+    <div id="ListCustFinData" class="mb-3 px-3" style="overflow-x: auto;"> 
       <table class="table table-stripped table-bordered table-new">
         <thead>
           <tr class="table-header-2">
@@ -47,7 +47,7 @@
           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <div class="form-body">
+          <div class="form-body px-3">
             <div class="form-group row">
               <label class="col-md-12 adInsLabel label-field-2" for="DateAsOf" translate>Date As Of</label>
               <div class="col-md-12">
@@ -181,8 +181,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-2 btn-raised" (click)="modal.dismiss()" translate><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
-          <button type="submit" class="btn btn-raised btn-primary-2" translate><i class="far fa-check-square"></i>&nbsp;<span translate>Save</span></button>
+           <div class="px-3">
+            <button type="button" class="btn btn-outline-2 btn-raised" (click)="modal.dismiss()" translate><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
+            <button type="submit" class="btn btn-raised btn-primary-2" translate><i class="far fa-check-square"></i>&nbsp;<span translate>Save</span></button>
+           </div>
         </div>
       </form>
       </div>
@@ -200,7 +202,7 @@
         </div>
         <div class="modal-body">
           
-          <div class="form-body">
+          <div class="form-body px-3">
             <div class="form-group row">
               <label class="col-md-12 adInsLabel label-field-2" for="DateAsOf" translate>Date As Of</label>
               <div class="col-md-12">
@@ -547,8 +549,10 @@
   
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-2 btn-raised" (click)="modal.dismiss()" translate><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
-          <button type="submit" class="btn btn-raised btn-primary-2" translate><i class="far fa-check-square"></i>&nbsp;<span translate>Save</span></button>
+          <div class="px-3">
+            <button type="button" class="btn btn-outline-2 btn-raised" (click)="modal.dismiss()" translate><i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span></button>
+            <button type="submit" class="btn btn-raised btn-primary-2" translate><i class="far fa-check-square"></i>&nbsp;<span translate>Save</span></button>
+          </div>
         </div>
       </form>
       </div>
@@ -567,12 +571,14 @@
     <app-cust-bank-acc-section-findata [CustId]="this.CustId"></app-cust-bank-acc-section-findata>
     
     <div class="form-actions right text-right mt-3">
+      <div class="px-3">
         <button type="button" class="btn btn-raised btn-primary-2 mr-1" (click)="SaveAndSync()" translate>
-            <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Sync</span>
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Sync</span>
         </button>
         <button type="submit" class="btn btn-raised btn-primary-2" translate>
-            <i class="far fa-check-square"></i>&nbsp;<span translate>Submit</span>
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Submit</span>
         </button>
+      </div>
     </div>
   </form>
   

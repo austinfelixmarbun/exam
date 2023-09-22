@@ -7,7 +7,7 @@
           <lib-ucSubsection [id]="'grpName'+i+'id'" [title]="QuestionGrpList.value.VerfQuestionGrpName"
             [panel]="'grpName'+i">
           </lib-ucSubsection>
-          <div id="grpName{{i}}">
+          <div id="grpName{{i}}" class="px-3">
             <span formArrayName="VerfQuestionAnswerList">
               <div class= "row">
                 <label class="col-md-3 label-field-2" tanslate><h4 class="modal-title">Question</h4></label>
@@ -74,6 +74,7 @@
         </div>
     </div>
     <div class="form-actions right">
+      <div class="px-3">
         <button type="button" class="btn btn-raised btn-outline-2 mr-1 margin-r-5" (click)="Cancel()">
           <i class="ft-x"></i>&nbsp;<span translate>Cancel</span>
         </button>
@@ -81,6 +82,7 @@
         <button type="submit" class="btn btn-raised btn-primary-2">
           <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
         </button>
+      </div>
       </div>
     </form>
 </div>>

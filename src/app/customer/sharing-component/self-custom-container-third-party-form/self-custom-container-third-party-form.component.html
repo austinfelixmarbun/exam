@@ -2,7 +2,7 @@
 <div *ngIf="IsUseDigitalization == '1' && (IsUseTs || IsUsePefindo)">
     <lib-ucSubsection [id]="'documentId'" [title]="'Document'" [panel]="'document'">
     </lib-ucSubsection>
-    <div id="document">
+    <div id="document" class="px-3">
       <div *ngFor="let item of CustDocFileFormObjs; let i=index" class="form-group row">
         <label class="col-md-2 label-field-2" translate>{{item.DocTypeName}}
           <span *ngIf="CustDocFileFormObjs[i].IsRequired == false" class="optional-text">(Optional)</span>
@@ -25,7 +25,7 @@
     </div>
     <lib-ucSubsection [id]="'thirdPartyCheckingId'" [title]="'3rd Party Checking'" [panel]="'thirdPartyChecking'">
     </lib-ucSubsection>
-    <div id="thirdPartyChecking">
+    <div id="thirdPartyChecking" class="px-3">
       <div *ngIf="IsUsePefindo" class="form-group row">
         <label class="col-md-2 label-field-2" translate>Pefindo
           <span class="optional-text">(Optional)</span>

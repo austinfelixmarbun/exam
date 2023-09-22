@@ -6,7 +6,7 @@
         [panel]="'MainInfoPers'">
       </lib-ucSubsection>
       <div class="form-body" id="MainInfoPers">
-        <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
+        <div class="form-group row px-3" *ngIf="CustDataMode == CustDataModeMain && CustId == 0">
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-md-12 adInsLabel label-field-2" translate>Is Supplier
@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group row" *ngIf="CustDataMode == CustDataModeFamily">
+        <div class="form-group row px-3" *ngIf="CustDataMode == CustDataModeFamily">
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-md-12 label-field-2" translate>Family Relationship</label>
@@ -46,7 +46,7 @@
             </div>
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row px-3">
           <div class="col-md-6">
             <div class="form-group row">
               <label class="col-md-12 label-field-2" translate>{{CustNameLabel}} Name</label>
@@ -265,14 +265,12 @@
       </div>
       <lib-ucSubsection [id]="'LegalAddr'" [title]="'Legal Address'" [panel]="'LegalAddrSection'">
       </lib-ucSubsection>
-      <div class="form-body" id="LegalAddrSection">
+      <div class="form-body px-3" id="LegalAddrSection">
         <div class="form-group row" *ngIf="!IsLockCopyAddrBtn && CustDataMode != CustDataModeMain">
-          <label class="col-md-12 adInsLabel label-field-2" translate>Copy Address From Legal Customer</label>
-          <div class="col-md-12">
-            <button type="button" class="btn btn-raised btn-primary-2" (click)="CopyLegalAddr()">
-              <i class="far"></i>&nbsp;<span translate>Copy</span>
-            </button>
-          </div>
+          <label class="col-md-3 adInsLabel label-field-2" translate>Copy Address From Legal Customer</label>
+          <button type="button" class="btn btn-raised btn-primary-2" (click)="CopyLegalAddr()">
+            <i class="far"></i>&nbsp;<span translate>Copy</span>
+          </button>
         </div>
         <lib-ucaddress [addressObj]="inputAddressObj" [UCAddrForm]="CustomerForm" [enjiForm]="enjiForm"
           [identifier]="'UcAddress'" *ngIf="isReady">
@@ -282,10 +280,12 @@
         <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo" [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypePersonal" (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"></app-third-party-form>
       </div>
       <div class="form-actions right">
-        <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="Cancel()">
-          <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span> </button>
-        <button type="submit" class="btn btn-raised btn-primary-2" [attr.disabled]="isSubmit? true : null">
-          <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span> </button>
+        <div class="px-3">
+          <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="Cancel()">
+            <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span> </button>
+          <button type="submit" class="btn btn-raised btn-primary-2" [attr.disabled]="isSubmit? true : null">
+            <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span> </button>
+        </div>
       </div>
     </form>
   </div>

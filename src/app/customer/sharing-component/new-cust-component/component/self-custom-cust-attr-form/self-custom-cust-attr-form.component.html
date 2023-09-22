@@ -1,7 +1,7 @@
 <div class="bg-light-blue-card">
     <lib-ucSubsection [id]="'CustAttrSectionId'" [title]="Label + ' Attribute'" [panel]="'CustAttrSection'">
     </lib-ucSubsection>
-    <div class="form-body" id="CustAttrSection">
+    <div class="form-body" id="CustAttrSection" class="px-3">
       <div class="form-group" formGroupName="{{identifier}}" [ngClass]="{'row': !IsVertical}">
         <div *ngFor="let item of parentForm.controls[identifier]['controls']; let idx = index" [ngClass]="{'col-md-6': !IsVertical}">
           <div [formGroupName]="idx">

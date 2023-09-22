@@ -4,7 +4,7 @@
     <div class="form-body">
       <lib-ucSubsection [id]="'custAddrId'" [title]="'Customer Address'" [panel]="'customerAddr'">
       </lib-ucSubsection>
-      <div id="customerAddr">
+      <div id="customerAddr" class="px-3">
         <div class="form-group row">
           <label class="col-md-12  adInsLabel label-field-2" translate>Address Type Name </label>
           <div class="col-md-12">
@@ -53,12 +53,14 @@
       </div>
     </div>
     <div class="form-actions right">
-      <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="back()" translate>
-        <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
-      </button>
-      <button type="submit" class="btn btn-raised btn-primary-2" translate>
-        <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
-      </button>
+      <div class="px-3">
+        <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="back()" translate>
+          <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-raised btn-primary-2" translate>
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
+        </button>
+      </div>
     </div>
   </form>
 </div>

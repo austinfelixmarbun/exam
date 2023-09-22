@@ -1,9 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CustObj } from 'app/shared/model/cust-obj.model';
 import { InputGridObj } from 'app/shared/model/input-grid-obj.model';
 import { FamilyListingObj } from 'app/shared/model/new-cust/family/family-listing-obj.model';
 
@@ -18,15 +23,29 @@ export class FamilyListingComponent implements OnInit {
   @Output() outputTab: EventEmitter<object> = new EventEmitter();
 
   PageType: string = CommonConstant.CustPageTypePaging;
+  IdCust: number = 0;
+  CustNo: string;
 
   readonly CustDataModeFamily: string = CommonConstant.CustMainDataModeFamily;
 
   readonly CustPageTypeHeader = CommonConstant.CustPageTypeHeader;
   readonly CustPageTypePaging = CommonConstant.CustPageTypePaging;
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute,
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+      this.route.queryParams.subscribe(params => {
+        if (params["IdCust"] != null) {
+          this.IdCust = params["IdCust"];
+        }
+      });
+    }
 
   async ngOnInit() {
+    this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
+      (response: CustObj) => {
+        this.CustNo = response.CustNo;
+      });
+
     this.BindGridViewObj();
     await this.GetListPaging();
   }
@@ -92,5 +111,17 @@ export class FamilyListingComponent implements OnInit {
       return;
     }
     this.outputTab.emit({ stepMode: 'next' });
+  }
+
+  SaveAndSync()
+  {
+    this.http.post(this.UrlConstantNew.SendCustomerDataToRabbitMq, { CustNo: this.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          this.toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+        }
+      }
+    )
   }
 }
