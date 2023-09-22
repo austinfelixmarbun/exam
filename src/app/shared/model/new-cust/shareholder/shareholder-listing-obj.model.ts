@@ -14,6 +14,7 @@ export class ShareholderListingObj{
     IsActive: boolean;
     NegCustTypeCode: string;
     NegCustTypeCodeDesc: string;
+    IsNeedInputSpouseShareholderData: boolean;
     constructor(){
         
     }

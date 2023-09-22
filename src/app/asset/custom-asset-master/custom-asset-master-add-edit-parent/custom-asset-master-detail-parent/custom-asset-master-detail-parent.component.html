@@ -1,15 +1,15 @@
 <div style="overflow-x: auto;">
-  <table *ngIf="isFinal == true" class="table table-responsive-md text-center table-hover">
+  <table *ngIf="isFinal == true" class="table table-responsive-md text-center table-hover table-new">
     <thead>
-      <tr class="table-header">
+      <tr class="table-header-2">
         <th><input type="checkbox" [checked]="checkboxAll" (change)="SelectAll($event.target.checked)"
             id="checkAll" name="CheckAll" hidden>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='assetSchemeCode' translate>ASSET
+        <th style="text-align: left;"><span class="thead-header-2" name='assetSchemeCode' translate>ASSET
             SCHEME CODE
           </span>
         </th>
-        <th style="text-align: left;"><span class="thead-header" name='assetSchemeName' translate>ASSET
+        <th style="text-align: left;"><span class="thead-header-2" name='assetSchemeName' translate>ASSET
             SCHEME NAME
           </span>
         </th>

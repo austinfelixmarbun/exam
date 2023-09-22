@@ -3,7 +3,7 @@
     <div *ngIf="MrVendorCategoryCode=='SUPPLIER_HO'">
         <lib-ucSubsection [id]="'HOIdOne'" [title]="HoTitle + 'HO Info'" [panel]="'HOInformation'">
         </lib-ucSubsection>
-        <div id="HOInformation">
+        <div id="HOInformation" class="px-3">
           <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
             <ng-container *ngFor="let attr of VendorAttrList">
               <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">
@@ -142,7 +142,8 @@
         <lib-ucSubsection [id]="'ATPMInfo'" [title]="'ATPM Info'" [panel]="'ATPMInformation'">
         </lib-ucSubsection>
         <div id="ATPMInformation">
-          <div class="col-md-12" style="padding: 0;">
+          <br>
+          <div class="col-md-12">
             <div class="col-md-12" style="overflow-x: auto;">
               <table class="table table-responsive-md text-center table-hover table-new">
                 <thead>
@@ -186,7 +187,7 @@
     <div *ngIf="MrVendorCategoryCode=='ASSET_INSCO_HO' && isFormReady">
         <lib-ucSubsection [id]="'HOIdOne'" [title]="HoTitle + 'Info'" [panel]="'HOInformation'">
         </lib-ucSubsection>
-        <div id="HOInformation">
+        <div id="HOInformation" class="px-3">
           <div class="form-body" formGroupName="VendorAttrList" *ngIf="isFormReady">
             <ng-container *ngFor="let attr of VendorAttrList">
               <div class="form-group row" *ngIf="attr.AttrInputType == 'T'" [formGroupName]="attr.AttrCode">

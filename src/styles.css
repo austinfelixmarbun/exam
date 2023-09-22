@@ -150,6 +150,19 @@ form .textarea-field-2{
     }
 }
 
+/*css for ui switch*/
+.custom-switches {
+    color: #ffffff;
+}
+
+.custom-switches .switch {
+    background: #B2BEC3;
+}
+
+.custom-switches .switch.checked {
+  background: #246CFE;
+}
+
 /* END CSS FOR NEW UI */
 
 .number {
@@ -402,8 +415,8 @@ label.custom-control-label {
     line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
-    color: #fff !important;
-    background-color: #009DA0 !important;
+    color: #fff;
+    background-color: #009DA0;
     border: 1px solid transparent;
     border-color: #009DA0;
     border-radius: 0.2rem;
@@ -422,8 +435,8 @@ label.custom-control-label {
     line-height: 1.5;
     white-space: nowrap;
     vertical-align: middle;
-    background-color: #FF8D60 !important;
-    color: #fff !important;
+    background-color: #FF8D60;
+    color: #fff;
     border-color: #FF8D60;
     border: 1px solid transparent;
     border-radius: 0.2rem;

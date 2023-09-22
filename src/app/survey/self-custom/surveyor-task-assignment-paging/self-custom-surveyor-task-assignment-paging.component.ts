@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { CookieService } from 'ngx-cookie';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-self-custom-surveyor-task-assignment-paging',
@@ -9,10 +12,12 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class SelfCustomSurveyorTaskAssignmentPagingComponent implements OnInit {
   pageName: string;
+  TransactionNo: string;
   AppId: number;
-  AppNo: number;
 
-  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  token: string = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
+
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew, private cookieService: CookieService) {
     this.pageName = "SurveyTaskAssignment"
   }
 
@@ -24,9 +29,26 @@ export class SelfCustomSurveyorTaskAssignmentPagingComponent implements OnInit {
   };
 
   callback(event) {
+    let row = event.RowObj;
+    
     if (event.Key === "view") {
-      this.AppNo = event['RowObj'].TransactionRefNo;
-    window.open(this.UrlConstantNew.env.losR3Web + "/View/AppView?AppId=" + this.AppId + "&AppNo=" + this.AppNo, "_blank");
+      if (row.SurveyInitial == "MOU")
+      {
+        this.TransactionNo = row.TransactionRefNo;
+        window.open(this.UrlConstantNew.env.losR3Web + "/View/Mou/CustView?MouNo=" + this.TransactionNo +"&Token=" + this.token, "_blank");
+      }
+
+      if (row.SurveyInitial == "LEAD")
+      {
+        this.TransactionNo = row.TransactionRefNo;
+        window.open(this.UrlConstantNew.env.losR3Web + "/View/Lead?LeadNo=" + this.TransactionNo +"&Token=" + this.token, "_blank");
+      }
+
+      if (row.SurveyInitial == "NAP")
+      {
+        this.TransactionNo = row.TransactionRefNo;
+        window.open(this.UrlConstantNew.env.losR3Web + "/View/AppView?AppNo=" + this.TransactionNo +"&Token=" + this.token, "_blank");
+      }
     }
   }
 }

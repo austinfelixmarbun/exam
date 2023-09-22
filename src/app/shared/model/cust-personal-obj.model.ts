@@ -17,6 +17,9 @@ export class CustPersonalObj {
   MobilePhnNo1: string;
   MobilePhnNo2: string;
   MobilePhnNo3: string;
+  IsWaMobilePhnNo1: boolean;
+  IsWaMobilePhnNo2: boolean;
+  IsWaMobilePhnNo3: boolean;
   Email1: string;
   Email2: string;
   Email3: string;
@@ -50,6 +53,9 @@ export class CustPersonalObj {
     this.MobilePhnNo1 = "";
     this.MobilePhnNo2 = "";
     this.MobilePhnNo3 = "";
+    this.IsWaMobilePhnNo1 = false;
+    this.IsWaMobilePhnNo2 = false;
+    this.IsWaMobilePhnNo3 = false;
     this.Email1 = "";
     this.Email2 = "";
     this.Email3 = "";

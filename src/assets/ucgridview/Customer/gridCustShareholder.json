@@ -21,6 +21,12 @@
         },
         {
             "type": "sort",
+            "position": "left",
+            "label": "Job Position",
+            "name": "JobPositionDesc"
+        },
+        {
+            "type": "sort",
             "position": "right",
             "label": "Share(%)",
             "name": "SharePrcnt"
@@ -42,6 +48,12 @@
             "position": "center",
             "label": "Is Active",
             "name": "IsActive"
+        },
+        {
+            "type": "sort",
+            "position": "center",
+            "label": "Spouse",
+            "name": "IsNeedInputSpouseShareholderData"
         },
         {
           "type": "sort",
@@ -66,6 +78,11 @@
             "property": "ShareholderTypeDesc"
         },
         {
+            "type": "text",
+            "position": "left",
+            "property": "JobPositionDesc"
+        },
+        {
             "type": "decimal",
             "position": "right",
             "property": "SharePrcnt",
@@ -86,6 +103,42 @@
             "type": "boolean",
             "position": "center",
             "property": "IsActive"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "switch",
+                    "case": [
+                        {
+                            "conditions": [
+                                {
+                                    "property": "IsNeedInputSpouseShareholderData",
+                                    "value": false,
+                                    "restriction": "NEQ"
+                                }
+                            ],
+                            "result": {
+                                "type": "callback",
+                                "key": "addspouse",
+                                "icon": "ft-edit-2",
+                                "property": [
+                                    {
+                                        "type": "CustId",
+                                        "property": "ShareholderId"
+                                    },
+                                    {
+                                        "type": "CustCompanyMgmntShrholderId",
+                                        "property": "CustCompanyMgmntShrholderId"
+                                    }
+                                ]
+                            },
+                            "isHide": false
+                        }
+                    ]
+                }
+            ]
         },
         {
             "type": "action",
