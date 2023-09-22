@@ -4,9 +4,11 @@
     </lib-ucSubsection>
     <div id="document">
       <div *ngFor="let item of CustDocFileFormObjs; let i=index" class="form-group row">
-        <label [ngClass]="{'adins-required-label': CustDocFileFormObjs[i]?.IsRequired}" class="col-md-2" translate>{{item.DocTypeName}}</label>
+        <label class="col-md-2 label-field-2" translate>{{item.DocTypeName}}
+          <span *ngIf="CustDocFileFormObjs[i].IsRequired == false" class="optional-text">(Optional)</span>
+        </label>
         <div class="col-md-4">
-          <label [for]="'doc' + i" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
+          <label [for]="'doc' + i" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2">Choose File</label>
           <input type="file" [id]="'doc' + i" style="display: none" (change)="HandleFileInput($event.target.files, i)"
           *ngIf="item.DocTypeName != 'PHOTO SELFIE'" [accept]="ExtStr"/>
           <input type="file" [id]="'doc' + i" style="display: none" (change)="HandleFileInputAsliRI($event.target.files, $event, i)"
@@ -19,52 +21,60 @@
           </div>
         </div>
       </div>
-      <p style="color:red;font-size:8.5px;">* Only Mandatory For 3rd Party Checking</p>
+      <!-- <p style="color:red;font-size:8.5px;">* Only Mandatory For 3rd Party Checking</p> -->
     </div>
     <lib-ucSubsection [id]="'thirdPartyCheckingId'" [title]="'3rd Party Checking'" [panel]="'thirdPartyChecking'">
     </lib-ucSubsection>
     <div id="thirdPartyChecking">
       <div *ngIf="IsUsePefindo" class="form-group row">
-        <label class="col-md-2" translate>Pefindo</label>
+        <label class="col-md-2 label-field-2" translate>Pefindo
+          <span class="optional-text">(Optional)</span>
+        </label>
         <div class="col-md-4">
-          <button type="button" (click)="ReqPefindo()" class="btn btn-raised btn-primary mr-1" translate>
+          <button type="button" (click)="ReqPefindo()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
           </button>
-          <button type="button" (click)="ViewPefindo()" class="btn btn-raised btn-primary" translate>
+          <button type="button" (click)="ViewPefindo()" class="btn btn-raised btn-primary-2" translate>
             View
           </button>
         </div>
       </div>
       <div *ngIf="IsUseTs" class="form-group row">
-        <label class="col-md-2" translate>Trusting Social</label>
+        <label class="col-md-2 label-field-2" translate>Trusting Social
+          <span class="optional-text">(Optional)</span>
+        </label>
         <div class="col-md-4">
-          <button type="button" (click)="ReqTrustingSocial()" class="btn btn-raised btn-primary mr-1" translate>
+          <button type="button" (click)="ReqTrustingSocial()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
           </button>
-          <button type="button" (click)="ViewTrustingSocial()" class="btn btn-raised btn-primary" translate>
+          <button type="button" (click)="ViewTrustingSocial()" class="btn btn-raised btn-primary-2" translate>
             View
           </button>
         </div>
       </div>
       <div *ngIf="IsUseAsliRI" class="form-group row">
-        <label class="col-md-2" translate>Asli RI</label>
+        <label class="col-md-2 label-field-2" translate>Asli RI
+          <span class="optional-text">(Optional)</span>
+        </label>
         <div class="col-md-4">
-          <button type="button" (click)="ReqASLIRI()" class="btn btn-raised btn-primary mr-1" translate>
+          <button type="button" (click)="ReqASLIRI()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
           </button>
-          <button type="button" (click)="ViewASLIRI()" class="btn btn-raised btn-primary" translate>
+          <button type="button" (click)="ViewASLIRI()" class="btn btn-raised btn-primary-2" translate>
             View
           </button>
         </div>
       </div>
   
       <div *ngIf="IsUseCbasSlik" class="form-group row">
-        <label class="col-md-2" translate>CBAS SLIK</label>
+        <label class="col-md-2 label-field-2" translate>CBAS SLIK
+          <span class="optional-text">(Optional)</span>
+        </label>
         <div class="col-md-4">
-          <button type="button" (click)="ReqCbasSlik()" class="btn btn-raised btn-primary mr-1" translate>
+          <button type="button" (click)="ReqCbasSlik()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
           </button>
-          <button type="button" (click)="ViewCbasSlik()" class="btn btn-raised btn-primary" translate>
+          <button type="button" (click)="ViewCbasSlik()" class="btn btn-raised btn-primary-2" translate>
             View
           </button>
         </div>

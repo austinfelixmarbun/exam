@@ -1,6 +1,6 @@
 <div class="row text-left">
   <div class="col-md-12">
-    <div class="card">
+    <div class="card bg-light-blue-card">
       <div class="card-body">
         <div class="card-header header-title">
           <div class="row">
@@ -9,10 +9,10 @@
                 {{CustType}} </h4>
             </div>
             <div class="col-md-4" style="text-align-last: right">
-              <button type="button" class="btn btn-raised btn-warning mr-1" (click)="Back()">
+              <button type="button" class="btn btn-raised btn-outline-2 mr-1" (click)="Back()">
                 <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
               </button>
-              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary" (click)="SaveForm()">
+              <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary-2" (click)="SaveForm()">
                 <i class="far fa-check-square"></i>&nbsp;<span translate>New Customer</span>
               </button>
             </div>
