@@ -6,9 +6,9 @@
                 </lib-ucSubsection>
                 <div id="SrvyTaskListId">
                   <div style="overflow-x: auto;">
-                    <table class="table table-responsive text-center table-hover">
+                    <table class="table table-responsive text-center table-hover table-new">
                       <thead>
-                        <tr class="table-header">
+                        <tr class="table-header table-header-2">
                           <th><span translate class="thead-header text-center">Survey Task No / Resurvey Ref</span></th>
                           <th><span translate class="thead-header text-center">Survey Object</span></th>
                           <th><span translate class="thead-header text-center">Surveyee Name</span></th>
@@ -62,7 +62,7 @@
                             {{SurveyTaskForm.controls['ListSurveyTask']['controls'][i]['controls']["ResultDate"].value}}
                           </td>
                           <td [formGroupName]="i" class="text-center">
-                            <input type="text" formControlName="ReviewComment" class="form-control" name="SurveyForm">
+                            <input type="text" formControlName="ReviewComment" class="form-control input-field-2" name="SurveyForm">
                           </td>
                         </tr>
                       </tbody>
@@ -70,10 +70,10 @@
                   </div>
   
                   <div class="form-actions right">
-                    <button type="button" class="btn btn-raised btn-warning mr-1" [routerLink]="[CancelLink]" skipLocationChange>
+                    <button type="button" class="btn btn-raised btn-outline-2 mr-1" [routerLink]="[CancelLink]" skipLocationChange>
                       <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
                     </button>                  
-                    <button type="submit" class="btn btn-raised btn-primary">
+                    <button type="submit" class="btn btn-raised btn-primary-2">
                       <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
                     </button>
                   </div>

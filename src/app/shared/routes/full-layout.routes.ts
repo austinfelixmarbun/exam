@@ -586,7 +586,19 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'staffclaim',
+    path: 'advance-payment-alloc',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './AdvPayAllocModule'
+      })
+        .then(m => m.AdvPayAllocModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'staff-claim',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -606,6 +618,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './Reimbursement'
       })
         .then(m => m.ReimbursementModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'costcontrol',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './costcontrol'
+      })
+        .then(m => m.CostControlModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
@@ -960,7 +984,44 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
+  {
+    path: 'costallocationmaster',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './CostAllocMasterModule'
+      })
+        .then(m => m.CostAllocMasterModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+    
+  },
+  {
+    path: 'limitstaffclaim',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './LimitStaffClaimModule'
+      })
+        .then(m => m.LimitStaffClaimModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
+  {
+    path: 'limitoperationalemployee',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './LimitOperationalEmployeeModule'
+      })
+        .then(m => m.LimitOperationalEmployeeModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
   // #endregion
 
-
+  
 ];

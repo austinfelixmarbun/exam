@@ -16,8 +16,8 @@ export class ReqPersonalObj {
     CustPersonalJobObj: CustPersonalJobDataObj;
     CustAttrContentObjs: Array<CustAttrContentObj>;
     CustDocFileObjs: Array<CustDocFileObj>;
-
+    IsAddSpouse: boolean;
     constructor() {
-
+        this.IsAddSpouse = false;
     }
 }

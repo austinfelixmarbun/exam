@@ -79,7 +79,7 @@ export class CoaSchemeDetailComponent implements OnInit {
       this.ListCoa = this.GetListCoaFormArray();
     }
   }
-  
+
   GetListCoaInfoDataCoaInfoCoa(idxListCoa: number, idxDtCoa: number): FormControl{
     let ListCoaInfo: FormArray = this.CoaSchemeForm.get("ListCoa") as FormArray;
     let ListCoaInfoIdxAt = ListCoaInfo.get(idxListCoa.toString()) as FormGroup;
@@ -88,7 +88,7 @@ export class CoaSchemeDetailComponent implements OnInit {
 
     return ListDataCoaInfoIxAt.get("COA") as FormControl;
   }
-  
+
   GetListCoaInfoListDataCoa(idxListCoa: number): FormArray{
     let ListCoaInfo: FormArray = this.CoaSchemeForm.get("ListCoa") as FormArray;
     let ListCoaInfoIdxAt = ListCoaInfo.get(idxListCoa.toString()) as FormGroup;
@@ -105,7 +105,7 @@ export class CoaSchemeDetailComponent implements OnInit {
 
     return ListDataCoaInfoIxAt;
   }
-  
+
   GetListCoaFormArray(): FormArray {
     return this.CoaSchemeForm.get("ListCoa") as FormArray
   }

@@ -1,7 +1,7 @@
 <div *ngIf="PageType == CustPageTypePaging">
   <form class="form form-horizontal">
     <span class="mr-1 pull-right">
-      <button type="button" class="addButton" (click)="addCustFamily()">
+      <button type="button" class="addButton btn-primary-2" (click)="addCustFamily()">
         <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
       </button>
     </span>
@@ -12,9 +12,14 @@
     <lib-ucgridview [gridInput]="inputGridObj" (callback)="event($event)" (isRefresh)="GetListPaging()"></lib-ucgridview>
    
     <div class="form-actions right" style="text-align: right;">
-        <button type="submit" class="btn btn-raised btn-primary" (click)="next()">
+      <div class="px-3">
+        <button type="submit" class="btn btn-raised btn-primary-2 mr-1" (click)="SaveAndSync()">
+          <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Sync</span>
+        </button>
+        <button type="submit" class="btn btn-raised btn-primary-2" (click)="next()">
           <i class="far fa-check-square"></i>&nbsp;<span translate>Save and Continue</span>
         </button>
+      </div>
     </div>
   </div>
 </div>

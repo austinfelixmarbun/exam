@@ -103,7 +103,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             IsActive: response.CustBankAccObj.IsActive,
             RowVersion: response.CustBankAccObj.RowVersion
           });
-          this.CheckDefault();
+          this.CheckDefault(this.CustBankAccForm.controls.IsDefault.value);
         }
       );
     }
@@ -135,7 +135,7 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
             //BegBalanceAmt: response.CustBankStmntHObj.BegBalanceAmt,
             RowVersion: response.CustBankAccObj.RowVersion
           });
-          this.CheckDefault();
+          this.CheckDefault(this.CustBankAccForm.controls.IsDefault.value);
           if (response.CustBankAccObj.IsBankStmnt) {
             // if(response.CustBankStmntObjs != undefined){ //perubahan cara baca ke cust bank stmnt obj bukan dari H&D
             //   if(response.CustBankStmntObjs.length > 0)
@@ -390,8 +390,8 @@ export class CustBankAccDetailSectionFindataComponent implements OnInit {
     }
   }
   
-  CheckDefault() {
-    if (this.CustBankAccForm.controls.IsDefault.value) {
+  CheckDefault(ev) {
+    if (ev) {
       this.CustBankAccForm.patchValue({
         IsActive: true
       });

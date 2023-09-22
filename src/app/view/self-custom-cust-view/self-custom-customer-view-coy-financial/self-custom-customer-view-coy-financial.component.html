@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card bg-light-blue-card">
   <div class="card-body">
     <div class="px-3">
       <lib-ucSubsection [id]="'BankId'" [title]="'Customer Bank Account'" [panel]="'CustBankAccId'">
@@ -6,9 +6,9 @@
       <div id="CustBankAccId">
         <div *ngFor="let item of responseCBAObj" style="overflow-x: auto;">
           <br>
-          <table class="table table-responsive-md text-center table-hover" *ngIf="item.BankStmntList.length > 0">
+          <table class="table table-responsive-md text-center table-hover table-new" *ngIf="item.BankStmntList.length > 0">
             <thead>
-              <tr class="table-header">
+              <tr class="table-header-2">
                 <th class="text-left"><span class="thead-header" name='fullAssetCode' translate>BANK NAME</span> </th>
                 <th class="text-left"><span class="thead-header" name='fullAssetBranchName' translate>BANK BRANCH</span> </th>
                 <th class="text-left"><span class="thead-header" name='fullAssetName' translate>ACCOUNT NAME</span>
@@ -40,6 +40,7 @@
                 <td style="text-align: center;"></td>
                 <td style="text-align: left;"></td>
                 <td style="text-align: right;">{{item.BegBalanceAmt | number:'.2':'en-US'}}</td>
+                <td style="text-align: left;"></td>
               </tr>
               <ng-container *ngFor="let temp of item.BankStmntList">
                 <tr>

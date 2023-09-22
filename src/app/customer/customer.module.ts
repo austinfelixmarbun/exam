@@ -107,6 +107,19 @@ import { SelfCustomNewCustHeaderShareholderComponent } from './sharing-component
 import { SelfCustomBouwheerCompanyIndustryInfo } from './bouwheer/self-custom-bouwheer-company-industry-info.component';
 import { SelfCustomCustCompanyIndustryInfo } from './customer-company/self-custom-customer-company/self-custom-cust-company-industry-info/self-custom-cust-company-industry-info.component';
 import { SelfCustomContainerOcrCustPersonalComponent } from './sharing-component/self-custom-container-ocr-cust-personal/self-custom-container-ocr-cust-personal.component';
+import { CustomUpdateCustomerEmergencyComponent } from './self-custom-container-customer-update/personal/update-customer-emergency/custom-update-customer-emergency.component';
+import { CustomUpdateCustomerPersonalDetailComponent } from './self-custom-container-customer-update/personal/update-customer-personal-detail/custom-update-customer-personal-detail.component';
+import { CustomUpdateCustomerJobDataComponent } from './self-custom-container-customer-update/personal/update-customer-job-data/custom-update-customer-job-data.component';
+import { CustomUpdateCustomerFinDataComponent } from './self-custom-container-customer-update/personal/update-customer-fin-data/custom-update-customer-fin-data.component';
+import { CustomUpdateCustomerFamilyComponent } from './self-custom-container-customer-update/personal/update-customer-family/custom-update-customer-family.component';
+import { CustomUpdateCustomerAddressComponent } from './self-custom-container-customer-update/personal/update-customer-address/custom-update-customer-address.component';
+import { CustomUpdateCustomerMgmntShareholderComponent } from './self-custom-container-customer-update/company/update-customer-mgmnt-shareholder/custom-update-customer-mgmnt-shareholder.component';
+import { CustomUpdateCustomerContactInfoComponent } from './self-custom-container-customer-update/company/update-customer-contact-info/custom-update-customer-contact-info.component';
+import { CustomUpdateCustomerCompanyLegalDocComponent } from './self-custom-container-customer-update/company/update-customer-company-legal-doc/custom-update-customer-company-legal-doc.component';
+import { CustomUpdateCustomerCompanyFinDataComponent } from './self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
+import { CustomUpdateCustomerCompanyDetailComponent } from './self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
+import { ContainerCustLegalDocUploadComponent } from './cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -154,7 +167,8 @@ export const customCurrencyMaskConfig = {
         SelfCustomCustViewModule,
         SelfCustomPefindoViewModule,
         UcTemplateModule,
-        MatRadioModule
+        MatRadioModule,
+        UiSwitchModule
     ],
     declarations: [
         CustomerPagingComponent, CustAssetDetailComponent,
@@ -233,8 +247,25 @@ export const customCurrencyMaskConfig = {
         SelfCustomNewCustHeaderShareholderComponent,
         SelfCustomBouwheerCompanyIndustryInfo,
         SelfCustomCustCompanyIndustryInfo,
+        SelfCustomContainerOcrCustPersonalComponent,
+        //new sign
+        CustomUpdateCustomerPersonalDetailComponent,
+        CustomUpdateCustomerJobDataComponent,
+        CustomUpdateCustomerFinDataComponent,
+        CustomUpdateCustomerFamilyComponent,
+        CustomUpdateCustomerEmergencyComponent,
+        CustomUpdateCustomerAddressComponent,
+        CustomUpdateCustomerMgmntShareholderComponent,
+        CustomUpdateCustomerContactInfoComponent,
+        CustomUpdateCustomerCompanyLegalDocComponent,
+        CustomUpdateCustomerCompanyFinDataComponent,
+        CustomUpdateCustomerCompanyDetailComponent,
+        ContainerCustLegalDocUploadComponent,
+        SelfCustomBouwheerCompanyIndustryInfo,
+        SelfCustomCustCompanyIndustryInfo,
         SelfCustomContainerOcrCustPersonalComponent
     ],
+
     providers: [
         CustAssetComponent,
         CustAssetDetailComponent,

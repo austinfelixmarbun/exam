@@ -11,7 +11,7 @@ export class SelfCustomEditMainDataPagingComponent implements OnInit {
   pageName: string;
 
   constructor(private adInsHelperService: AdInsHelperService) {
-    this.pageName = "EditMainDataPaging"
+    this.pageName = "EditMainDataPagingV2"
   }
 
   ngOnInit(): void {

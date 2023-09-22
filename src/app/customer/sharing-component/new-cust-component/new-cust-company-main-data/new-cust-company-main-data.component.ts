@@ -443,7 +443,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     tempReqObj.MrPositionSlikCode = tempForm["MrPositionSlikCode"];
     tempReqObj.IsActive = tempForm["IsActive"];
     tempReqObj.IsOwner = tempForm["IsOwner"];
-
+    tempReqObj.BusinessStartDt = tempForm["BusinessStartDt"];
+    tempReqObj.SignerEndDt = tempForm["SignerEndDt"];
     return tempReqObj
   }
 

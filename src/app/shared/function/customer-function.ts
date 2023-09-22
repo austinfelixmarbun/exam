@@ -28,6 +28,7 @@ import { FormGroup } from "@angular/forms";
 import { UcTemplateService } from "@adins/uctemplate";
 import { CustPersonalContactPersonObj } from "../model/cust-personal-contact-person-obj.model";
 import { CustPersonalObjV2 } from "../model/cust-personal-obj-v2.model";
+import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cust-company-legal-doc-file-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -1239,6 +1240,10 @@ async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: a
   custPersonalContactPersonObj.IdNo = dicts.formRaw.IdNo;
   custPersonalContactPersonObj.MobilePhnNo1 = dicts.formRaw.MobilePhnNo1;
   custPersonalContactPersonObj.MobilePhnNo2 = dicts.formRaw.MobilePhnNo2;
+  custPersonalContactPersonObj.MobilePhnNo3 = dicts.formRaw.MobilePhnNo3;
+  custPersonalContactPersonObj.IsWaMobilePhnNo1 = dicts.formRaw.IsWaMobilePhnNo1;
+  custPersonalContactPersonObj.IsWaMobilePhnNo2 = dicts.formRaw.IsWaMobilePhnNo2;
+  custPersonalContactPersonObj.IsWaMobilePhnNo3 = dicts.formRaw.IsWaMobilePhnNo3;
   custPersonalContactPersonObj.MrCustRelationshipCode = dicts.formRaw.MrCustRelationshipCode;
   custPersonalContactPersonObj.MrGenderCode = dicts.formRaw.MrGenderCode;
   custPersonalContactPersonObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
@@ -1378,7 +1383,7 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
 
   if (StepIndex == 4)
   {
-    api = dicts.CustPersonalContactPersonId == 0? "/v1/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v1/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    api = dicts.CustPersonalContactPersonId == 0? "/v2/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v2/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
     await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
     next = "CustJobData"
   }
@@ -1503,4 +1508,80 @@ export async function saveDataOrSaveAndSyncV2(dicts: Record<string, any>, from: 
 
     templateService.publish({Actions: actions, Data: {"stepCode": next}});
   }
+}
+
+export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
+  let url = environment.FoundationR3Url;
+
+  let reqObj = { ...parentForm };
+  reqObj.CustCompanyId = dicts.CustCompanyId;
+  let isAddMode: Boolean = false;
+  if (typeof dicts.CustCompanyLegalDocId === "undefined" || dicts.CustCompanyLegalDocId === 0) {
+    url += '/v1/CustCompanyLegalDoc/AddCustCompanyLegalDoc';
+    reqObj.CustCompanyLegalDocId = 0;
+    isAddMode = true;
+  } else {
+    url += '/v1/CustCompanyLegalDoc/EditCustCompanyLegalDoc';
+    reqObj.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
+    reqObj.RowVersion = dicts.RowVersion;
+    isAddMode = false;
+  }
+
+  http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      var resSave;
+      resSave = response;
+      // toastr.successMessage(resSave["Message"]);
+      DialogRef.close()
+      if (dicts.UploadFile && dicts.UploadFile.DocUploadName === "") {
+        return;
+      }
+
+      let reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
+      reqFileUpl.ByteBase64 = dicts.UploadFile.ByteBase64;
+      reqFileUpl.DocUploadName = dicts.UploadFile.DocUploadName;
+      reqFileUpl.CustCompanyLegalDocId = resSave["Id"];
+
+      uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
+    }
+  );
+}
+
+export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
+  let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
+
+  var formData: any = new FormData();
+  formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = evnt => {
+    if (xhr.readyState !== 4) return;
+
+    if (xhr.status !== 200 && xhr.status !== 201) {
+      toastr.errorMessage('Upload Failed !');
+      return;
+    }
+    else {
+      var response = JSON.parse(xhr.response);
+      if (response.HeaderObj.StatusCode != '200') {
+        toastr.errorMessage('Upload Failed ! ' + + response.HeaderObj.Message);
+        return
+      }
+    }
+
+    if (xhr.status === 200) {
+      toastr.successMessage(successMsg);
+      // DialogRef.close()
+      return;
+    }
+  };
+
+  xhr.onerror = evnt => {
+    toastr.errorMessage('Upload Failed !');
+    return;
+  };
+  xhr.open('POST', urlUpload, true);
+  let value = cookieService.get('XSRF-TOKEN');
+  let token = DecryptString(value, environment.ChipperKeyCookie);
+  xhr.setRequestHeader('AdInsKey', `${token}`);
+  xhr.send(formData);
 }

@@ -21,7 +21,6 @@ export class UpdateCustomerFamilyComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Input() isMarried: boolean = false;
   @Output() ResponseTab: EventEmitter<any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   ListAppFamily: Array<UpdateCustFamilyObj>;
   ListCustFamily: Array<UpdateCustFamilyObj>;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
@@ -99,20 +98,6 @@ export class UpdateCustomerFamilyComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMasterCustFamily, { CustFamilyList: request }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         this.ResponseTab.emit(response);
-        const actions = [
-          {
-            'result': {
-              'type': 'function',
-              'target': 'self',
-              'alias': '',
-              'methodName': 'NextStep',
-              'params': []
-            },
-            'conditions': []
-          }
-        ];
-
-        this.next.emit({Actions: actions});
       }
     ).catch(
       (error) => {
