@@ -38,6 +38,7 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
+import { SelfCustomAttributeDetailComponent } from './self-custom-attribute-detail/self-custom-attribute-detail.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { UcTemplateModule } from '@adins/uctemplate';
         RefFormRolePagingComponent,
         RoleFormPagingComponent,
         AttributeComponent,
-        AttributeDetailComponent
+        AttributeDetailComponent,
+        SelfCustomAttributeDetailComponent
     ],
     providers: [
         NGXToastrService

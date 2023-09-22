@@ -1,6 +1,6 @@
 <div class="row text-left">
   <div class="col-md-12">
-    <div class="card">
+    <div class="card bg-light-blue-card">
       <div class="card-body" [hidden]="PageType != CustPageTypeHeader">
         <div class="card-header header-title">
           <div class="row">
@@ -11,10 +11,12 @@
         </div>
         <br>
         <br>
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="px-1 form-group row" *ngIf="CustDataMode != CustDataModeFamily">
-            <label class="col-md-2" translate>{{subjectTitle}} Type</label>
-            <div class="col-md-10">
+            <label class="col-md-12" translate>{{subjectTitle}} Type
+              <span class="optional-text">(Optional)</span>
+            </label>
+            <div class="col-md-12">
               <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()" [disabled]="CustId!=0">
                 <mat-radio-button class="custom-control custom-radio display-inline-block"
                   *ngFor="let item of listCustType" [value]="item.Key">

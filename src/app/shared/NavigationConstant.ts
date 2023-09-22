@@ -48,6 +48,14 @@ export class NavigationConstant {
     public static ASSET_DOC_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_DETAIL; //'/Asset/Document/Detail'
     public static ASSET_DOC_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_PAGING; //'/Asset/DocumentMaster/Paging'
     public static ASSET_DOC_MASTER_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_DETAIL; //'/Asset/DocumentMaster/Detail'
+
+    public static CUSTOM_ASSET_NEG_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_PAGING; //'/Asset/SelfCustom/NegativeAsset/Paging'
+    public static CUSTOM_ASSET_NEG_UPLOAD = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_UPLOAD; //'/Asset/SelfCustom/NegativeAsset/Upload'
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING; //'/Asset/SelfCustom/NegativeAsset/ReviewUploadPaging'
+    public static CUSTOM_ASSET_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_PAGING; //'/Asset/SelfCustom/AssetMaster/Paging'
+    public static CUSTOM_ASSET_MASTER_UPLOAD = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_UPLOAD; //'/Asset/SelfCustom/AssetMaster/Upload'
+    public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING; //'/Asset/SelfCustom/AssetMaster/ReviewUploadPaging'
+    
     //#endregion
 
     //#region Common Setting
@@ -120,6 +128,8 @@ export class NavigationConstant {
     public static CS_SELF_CUSTOM_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR; //'/CommonSetting/SelfCustom/WorkingHour'
     public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD; //'/CommonSetting/SelfCustom/WorkingHour/Add'
     public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL; //'/CommonSetting/SelfCustom/WorkingHour/Detail'
+    public static CUSTOM_CS_COA_SCHM_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CUSTOM_CS_COA_SCHM_PAGING;
+
     //#endregion
 
     //#region System Setting
@@ -261,6 +271,10 @@ export class NavigationConstant {
     public static SELF_CUSTOM_VIEW_VENDOR_HO = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO; //'/View/Vendor/SelfCustom/VendorHO'
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = NavigationConstant.VIEW_VENDOR + "/" + PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH; //'/View/Vendor/SelfCustom/VendorBranch'
     public static CUSTOM_VENDOR_GRD_APV_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_GRADING_APPROVAL_DETAIL; //'/Vendor/VendorGrading/Request/Paging'
+    public static SELF_CUSTOM_VENDOR_ATPM_DETAIL = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_DETAIL; //'/Vendor/SelfCustom/ATPM/Detail'
+    public static SELF_CUSTOM_VENDOR_ATPM_REG = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.SELF_CUSTOM_VENDOR_ATPM_REG; //'/Vendor/SelfCustom/ATPM/Registration'
+    public static CUSTOM_VENDOR_FUNDING_COY_PAGING = "/" + PathConstant.LR_VENDOR + "/" + PathConstant.CUSTOM_VENDOR_FUNDING_COY_PAGING; //'/Vendor/FundingCompany/Paging'
+
     //#endregion
 
     //#region Organization
@@ -372,6 +386,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_CUST_PERSONAL_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE; //'/Customer/SelfCustom/CustomerPersonal/Page'
     public static SELF_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerPersonalDuplicateChecking'
     public static SELF_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerCompanyDuplicateChecking'
+    public static CUSTOM_CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUSTOM_CUST_COY_PAGE; //'/Customer/CustomerCompany/Page'
+
     //#endregion
 
     //#region Document Management

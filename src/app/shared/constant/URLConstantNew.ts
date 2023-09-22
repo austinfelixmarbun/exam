@@ -700,6 +700,7 @@ export class UrlConstantNew{
     public EditCustPersonal = this.env.FoundationR3Url + this.url.EditCustPersonal;
     public GetCustPersonalbyCustPersonalId = this.env.FoundationR3Url + this.url.GetCustPersonalbyCustPersonalId;
     public GetCustPersonalbyCustId = this.env.FoundationR3Url + this.url.GetCustPersonalbyCustId;
+    public GetCustPersonalbyCustIdV2 = this.env.FoundationR3Url + this.url.GetCustPersonalbyCustIdV2;
 
     // CUSTOMER
     public AddNewCust = this.env.FoundationR3Url + this.url.AddNewCust;
@@ -730,8 +731,10 @@ export class UrlConstantNew{
 
     public SaveCustPersonalShareholderMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainData;
     public SaveCustPersonalShareholderMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainDataV2;
+    public SaveCustPersonalShareholderMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustPersonalShareholderMainDataV3;
     public SaveCustCompanyShareholderMainData = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainData;
     public SaveCustCompanyShareholderMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV2;
+    public SaveCustCompanyShareholderMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV3;
     public SaveCustPersonalFamilyMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainData;
     public SaveCustPersonalFamilyMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV2;
 
@@ -746,6 +749,7 @@ export class UrlConstantNew{
     public DeleteCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.DeleteCustCompanyLegalDoc;
     public AddCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.AddCustCompanyLegalDoc;
     public EditCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.EditCustCompanyLegalDoc;
+    public UploadCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.UploadCustCompanyLegalDoc;
 
     // CUSTOMER GROUP
     public AddCustGrpBothWays = this.env.FoundationR3Url + this.url.AddCustGrpBothWays;
@@ -819,9 +823,11 @@ export class UrlConstantNew{
     public GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = this.env.FoundationR3Url + this.url.GetCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
     public GetListCustCompanyMgmntShrholderByCustId = this.env.FoundationR3Url + this.url.GetListCustCompanyMgmntShrholderByCustId;
     public GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId = this.env.FoundationR3Url + this.url.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderId;
+    public GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdV2 = this.env.FoundationR3Url + this.url.GetNewCustCompanyMgmntShrholderByCustCompanyMgmntShrholderIdV2;
     public AddCustCompanyMgmntShrholderPublic = this.env.FoundationR3Url + this.url.AddCustCompanyMgmntShrholderPublic;
     public EditCustCompanyMgmntShrholderPublic = this.env.FoundationR3Url + this.url.EditCustCompanyMgmntShrholderPublic;
     public GetListManagementShareholderForListPagingByCustId = this.env.FoundationR3Url + this.url.GetListManagementShareholderForListPagingByCustId;
+    public GetListManagementShareholderForListPagingByCustIdV2 = this.env.FoundationR3Url + this.url.GetListManagementShareholderForListPagingByCustIdV2;
     public GetCustCompanyMgmntShrholderByCustIdAndShrholderId = this.env.FoundationR3Url + this.url.GetCustCompanyMgmntShrholderByCustIdAndShrholderId;
     public GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId = this.env.FoundationR3Url + this.url.GetCustCompanyMgmntShrholderJobInfoByCustIdAndShareholderId;
 

@@ -27,6 +27,7 @@ import { ExceptionConstant } from "../constant/ExceptionConstant";
 import { FormGroup } from "@angular/forms";
 import { UcTemplateService } from "@adins/uctemplate";
 import { CustPersonalContactPersonObj } from "../model/cust-personal-contact-person-obj.model";
+import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cust-company-legal-doc-file-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -915,6 +916,45 @@ async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http
   );
 }
 
+async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
+{
+  let url = environment.FoundationR3Url + api;
+
+  let custCompanyObj = new CustCompanyObj();
+  custCompanyObj.CustCompanyId = dicts.CustCompanyId;
+  custCompanyObj.CustId = dicts.IdCust;
+  custCompanyObj.Email1 = dicts.Email1;
+  custCompanyObj.Email2 = dicts.Email2;
+  custCompanyObj.EstablishmentDt = dicts.form.EstablishmentDt;
+  custCompanyObj.IsAffiliateWithMf = dicts.form.IsAffiliateWithMf;
+  custCompanyObj.IsAffiliated = dicts.IsAffiliated;
+  custCompanyObj.IsSkt = dicts.form.IsSkt;
+  custCompanyObj.IsVip = dicts.form.IsVip;
+  custCompanyObj.LicenseNo = dicts.LicenseNo;
+  custCompanyObj.MrCompanyTypeCode = dicts.MrCompanyTypeCode;
+  custCompanyObj.MrCustModelCode = dicts.MrCustModelCode;
+  custCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
+  custCompanyObj.NumOfEmp = dicts.form.NumOfEmp;
+  custCompanyObj.ParentCustId = dicts.form.ParentCustId;
+  custCompanyObj.Phn1 = dicts.Phn1;
+  custCompanyObj.Phn2 = dicts.Phn2;
+  custCompanyObj.PhnArea1 = dicts.PhnArea1;
+  custCompanyObj.PhnArea2 = dicts.PhnArea2;
+  custCompanyObj.PhnExt1 = dicts.PhnExt1;
+  custCompanyObj.PhnExt2 = dicts.PhnExt2;
+  custCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId
+  custCompanyObj.RegistrationNo = dicts.RegistrationNo;
+  custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
+  custCompanyObj.RowVersion = dicts.form.RowVersion;
+  custCompanyObj.Website = dicts.Website;
+
+  await http.post(url, custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    response => {
+      toastr.successMessage(response["Message"]);
+    }
+  );
+}
+
 async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
   let url = environment.FoundationR3Url + api;
@@ -931,6 +971,10 @@ async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: a
   custPersonalContactPersonObj.IdNo = dicts.formRaw.IdNo;
   custPersonalContactPersonObj.MobilePhnNo1 = dicts.formRaw.MobilePhnNo1;
   custPersonalContactPersonObj.MobilePhnNo2 = dicts.formRaw.MobilePhnNo2;
+  custPersonalContactPersonObj.MobilePhnNo3 = dicts.formRaw.MobilePhnNo3;
+  custPersonalContactPersonObj.IsWaMobilePhnNo1 = dicts.formRaw.IsWaMobilePhnNo1;
+  custPersonalContactPersonObj.IsWaMobilePhnNo2 = dicts.formRaw.IsWaMobilePhnNo2;
+  custPersonalContactPersonObj.IsWaMobilePhnNo3 = dicts.formRaw.IsWaMobilePhnNo3;
   custPersonalContactPersonObj.MrCustRelationshipCode = dicts.formRaw.MrCustRelationshipCode;
   custPersonalContactPersonObj.MrGenderCode = dicts.formRaw.MrGenderCode;
   custPersonalContactPersonObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
@@ -1064,13 +1108,13 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
 
   if (StepIndex == 1)
   {
-    api = "/v1/CustPersonal/EditCustPersonal";
-    await saveCustPersonalDetail(dicts, api, http, toastr)
+      api = "/v1/CustPersonal/EditCustPersonal";
+      await saveCustPersonalDetail(dicts, api, http, toastr)
   }
 
   if (StepIndex == 4)
   {
-    api = dicts.CustPersonalContactPersonId == 0? "/v1/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v1/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    api = dicts.CustPersonalContactPersonId == 0? "/v2/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v2/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
     await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
     next = "CustJobData"
   }
@@ -1124,4 +1168,128 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
 
     templateService.publish({Actions: actions, Data: {"stepCode": next}});
   }
+}
+
+export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
+{
+  if (!dicts.formValid) return;
+
+  let next = ""
+  let api = ""
+
+  if (StepIndex == 1)
+  {
+      api = "/v1/CustCompany/EditCustCompany";
+      await saveCustCompanyDetail(dicts, api, http, toastr)
+    
+  }
+
+  if (isSaveAndSync == "true")
+  {
+    let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
+    if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
+
+    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  else
+  {
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    templateService.publish({Actions: actions, Data: {"stepCode": next}});
+  }
+}
+
+export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
+  let url = environment.FoundationR3Url;
+
+  let reqObj = { ...parentForm };
+  reqObj.CustCompanyId = dicts.CustCompanyId;
+  let isAddMode: Boolean = false;
+  if (typeof dicts.CustCompanyLegalDocId === "undefined" || dicts.CustCompanyLegalDocId === 0) {
+    url += '/v1/CustCompanyLegalDoc/AddCustCompanyLegalDoc';
+    reqObj.CustCompanyLegalDocId = 0;
+    isAddMode = true;
+  } else {
+    url += '/v1/CustCompanyLegalDoc/EditCustCompanyLegalDoc';
+    reqObj.CustCompanyLegalDocId = dicts.CustCompanyLegalDocId;
+    reqObj.RowVersion = dicts.RowVersion;
+    isAddMode = false;
+  }
+
+  http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      var resSave;
+      resSave = response;
+      // toastr.successMessage(resSave["Message"]);
+      DialogRef.close()
+      if (dicts.UploadFile && dicts.UploadFile.DocUploadName === "") {
+        return;
+      }
+
+      let reqFileUpl: CustCompanylegalDocFile = new CustCompanylegalDocFile();
+      reqFileUpl.ByteBase64 = dicts.UploadFile.ByteBase64;
+      reqFileUpl.DocUploadName = dicts.UploadFile.DocUploadName;
+      reqFileUpl.CustCompanyLegalDocId = resSave["Id"];
+
+      uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
+    }
+  );
+}
+
+export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
+  let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
+
+  var formData: any = new FormData();
+  formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = evnt => {
+    if (xhr.readyState !== 4) return;
+
+    if (xhr.status !== 200 && xhr.status !== 201) {
+      toastr.errorMessage('Upload Failed !');
+      return;
+    }
+    else {
+      var response = JSON.parse(xhr.response);
+      if (response.HeaderObj.StatusCode != '200') {
+        toastr.errorMessage('Upload Failed ! ' + + response.HeaderObj.Message);
+        return
+      }
+    }
+
+    if (xhr.status === 200) {
+      toastr.successMessage(successMsg);
+      // DialogRef.close()
+      return;
+    }
+  };
+
+  xhr.onerror = evnt => {
+    toastr.errorMessage('Upload Failed !');
+    return;
+  };
+  xhr.open('POST', urlUpload, true);
+  let value = cookieService.get('XSRF-TOKEN');
+  let token = DecryptString(value, environment.ChipperKeyCookie);
+  xhr.setRequestHeader('AdInsKey', `${token}`);
+  xhr.send(formData);
 }

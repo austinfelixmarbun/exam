@@ -139,6 +139,12 @@ export class PathConstant {
     public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static CUSTOM_ASSET_MASTER_CHILD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_MASTER + "/Child";
+    public static CUSTOM_ASSET_NEG_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.PAGING;
+    public static CUSTOM_ASSET_NEG_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ASSET_NEG_UPLOAD = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.UPLOAD;
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ASSET_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
+
     //#endregion
 
     //#region Common-Setting
@@ -585,6 +591,7 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_VENDOR_HOLDING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HOLDING_DETAIL;
     public static SELF_CUSTOM_VENDOR_HO_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HO_DETAIL;
+    public static SELF_CUSTOM_VENDOR_ATPM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_ATPM + "/" + PathConstant.DETAIL;
     public static SELF_CUSTOM_VENDOR_BRANCH_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH_ADD;
     public static SELF_CUSTOM_VENDOR_SCHM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM_DETAIL;
     public static SELF_CUSTOM_VENDOR_SCHM_MBR = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_SCHM + "/" + PathConstant.MEMBER;
@@ -594,6 +601,7 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_GRP_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_GRP_MBR + "/" + PathConstant.ADD;
     public static SELF_CUSTOM_VENDOR_HOLDING_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HOLDING + "/" + PathConstant.VENDOR_REG;
     public static SELF_CUSTOM_VENDOR_HO_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_HO + "/" + PathConstant.VENDOR_REG;
+    public static SELF_CUSTOM_VENDOR_ATPM_REG = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_ATPM + "/" + PathConstant.VENDOR_REG;
     public static SELF_CUSTOM_VENDOR_BRANCH_MBR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_VENDOR_BRANCH_MBR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.MEMBER + "/" + PathConstant.ADD;
     public static SELF_CUSTOM_VENDOR_BRANCH_EMP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.VENDOR_EMP + "/" + PathConstant.PAGING;

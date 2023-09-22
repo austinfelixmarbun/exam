@@ -51,6 +51,9 @@ export class NewCustHeaderComponent implements OnInit {
   @Input() tempTotalSharePrct: number = 0;
   @Input() isMarried: boolean = false;
   @Input() listCustNoToExclude: Array<string> = new Array();
+  @Input() SelectedCustSpouseId: number = 0;
+  @Input() IsAddSpouse: boolean = false;
+
   @Output() outputCancel: EventEmitter<string> = new EventEmitter();
   isSubmit: boolean = false;
 
@@ -97,7 +100,12 @@ export class NewCustHeaderComponent implements OnInit {
         custLabel = "Family";
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        custLabel = "Shareholder";
+        if(this.IsAddSpouse)
+        {
+          custLabel = "Spouse Shareholder";
+        }else{
+          custLabel = "Shareholder";
+        }
         break;
     }
 
@@ -310,7 +318,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.AddCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;
@@ -323,7 +331,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.EditCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;
@@ -339,7 +347,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV3;
         break;
     }
     return urlAdd;
@@ -355,7 +363,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV3;
         break;
     }
     return urlAdd;

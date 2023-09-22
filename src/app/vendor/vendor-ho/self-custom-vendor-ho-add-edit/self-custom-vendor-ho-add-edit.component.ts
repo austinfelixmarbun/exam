@@ -45,7 +45,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     }
     else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO)
     {
-      this.pageName = 'SupplierHoRegistration'
+      this.pageName = 'SupplierHoRegistrationV2'
     }
   }
 
@@ -127,21 +127,7 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
             MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
           })
 
-          this.Form.controls.IdNo.clearValidators();
-    
-          if(this.Form.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
-          {
-            this.Form.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
-            this.Form.controls.IdNo.updateValueAndValidity();
-            return
-          }
-        
-          if(this.Form.controls.MrVendorTypeCode.value == 'P')
-          {
-            this.Form.controls.IdNo.setValidators([Validators.required])
-          }
-        
-          this.Form.controls.IdNo.updateValueAndValidity();
+          this.setValidatorIdNo();
       });
 
       if (!this.VatForPersonal){
@@ -158,6 +144,30 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
         }
       }
     }
+
+    if (ev == "MrIdTypeCode")
+    {
+      this.setValidatorIdNo();
+    }
+  }
+
+  setValidatorIdNo()
+  {
+    this.Form.controls.IdNo.clearValidators();
+    
+    if(this.Form.controls.MrIdTypeCode.value == CommonConstant.MrIdTypeCodeEKTP)
+    {
+      this.Form.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(16), Validators.maxLength(16)])
+      this.Form.controls.IdNo.updateValueAndValidity();
+      return
+    }
+  
+    if(this.Form.controls.MrVendorTypeCode.value == 'P')
+    {
+      this.Form.controls.IdNo.setValidators([Validators.required, Validators.pattern("^[0-9]+$")])
+    }
+  
+    this.Form.controls.IdNo.updateValueAndValidity();
   }
 
 }

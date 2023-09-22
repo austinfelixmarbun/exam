@@ -12,6 +12,8 @@ import { VendorAtpmMappingObj } from "../model/vendor-atpm-mapping-obj.model";
 import { GenericObj } from "../model/generic/generic-obj.model";
 import { AdInsConstant } from "../AdInstConstant";
 import { NavigationConstant } from "../NavigationConstant";
+import { formatDate } from "@angular/common";
+import { VendorBranchObj } from "../model/vendor-branch-obj.model";
 
 function getVendorId(listTemp: any)
 {
@@ -169,6 +171,7 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
     vendorHoObj.VendorObj.RegistrationNo = dicts.formRaw.RegistrationNo;
     vendorHoObj.VendorObj.VendorCode = dicts.formRaw.VendorCode;
     vendorHoObj.VendorObj.VendorName = dicts.formRaw.VendorName;
+
     vendorHoObj.VendorObj.VendorRating = dicts.formRaw.VendorRating;
 
     if (dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
@@ -246,4 +249,143 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
         toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode });
     });
+}
+
+export function addEditvendorBranch(dicts: Record<string, any>, api: string, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
+{
+    let url = environment.FoundationR3Url + api;
+
+    let vendorBranchObj: any;
+    vendorBranchObj = new VendorBranchObj();
+    vendorBranchObj.VendorObj = new VendorObj();
+    vendorBranchObj.VendorAddrObj = new VendorAddrObj();
+
+    vendorBranchObj.VendorObj.MrVendorCategoryCode = dicts.formRaw.MrVendorCategoryCode;
+    vendorBranchObj.VendorObj.VendorCode = dicts.formRaw.VendorCode;
+    vendorBranchObj.VendorObj.VendorName = dicts.formRaw.VendorName;
+    vendorBranchObj.VendorObj.MrVendorTypeCode = dicts.formRaw.MrVendorTypeCode;
+    
+    if (vendorBranchObj.VendorObj.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL) {
+      vendorBranchObj.VendorObj.IdNo = dicts.formRaw.IdNo;
+      vendorBranchObj.VendorObj.RegistrationNo = "";
+      vendorBranchObj.VendorObj.LicenseNo = "";
+    }
+    else {
+      vendorBranchObj.VendorObj.IdNo = "";
+      vendorBranchObj.VendorObj.RegistrationNo = dicts.formRaw.RegistrationNo;
+      vendorBranchObj.VendorObj.LicenseNo = dicts.formRaw.LicenseNo;
+    }
+
+    vendorBranchObj.VendorObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
+    vendorBranchObj.VendorObj.MobilePhnNo1 = dicts.formRaw.MobilePhnNo1;
+    vendorBranchObj.VendorObj.MobilePhnNo2 = dicts.formRaw.MobilePhnNo2;
+    vendorBranchObj.VendorObj.Email = dicts.formRaw.Email;
+    vendorBranchObj.VendorObj.VendorRating = dicts.formRaw.VendorRating; 
+    vendorBranchObj.VendorObj.VendorRatingAlias = dicts.formRaw.VendorRatingAlias;
+    vendorBranchObj.VendorObj.EstablishmentDt = dicts.formRaw.EstablishmentDt;
+    vendorBranchObj.VendorObj.PartnershipDt = dicts.formRaw.PartnershipDt;
+    vendorBranchObj.VendorObj.IsActive = dicts.formRaw.IsActive;
+
+    vendorBranchObj.VendorObj.VendorParentId = dicts.formRaw.VendorParentId;
+    if (dicts.MrVendorCategoryCode != CommonConstant.SUPPLIER && dicts.MrVendorCategoryCode != CommonConstant.ASSET_INSCO_BRANCH && dicts.MrVendorCategoryCode != CommonConstant.LIFE_INSCO_BRANCH &&
+      dicts.MrVendorCategoryCode != CommonConstant.SURVEYOR_BRANCH && dicts.MrVendorCategoryCode != CommonConstant.CRD_INSCO_BRANCH)
+    {
+      vendorBranchObj.VendorObj.VendorParentId = "";
+    }
+
+    vendorBranchObj.VendorObj.ReservedField2 = "";
+    vendorBranchObj.VendorObj.ReservedField3 = "";
+    vendorBranchObj.VendorObj.ReservedField4 = "";
+    vendorBranchObj.VendorObj.ReservedField5 = "";
+    vendorBranchObj.VendorObj.ReservedField6 = "";
+    vendorBranchObj.VendorObj.ReservedField9 = "";
+    vendorBranchObj.VendorObj.MrTaxCalcMethodCode = dicts.formRaw.MrTaxCalcMethodCode;
+    vendorBranchObj.VendorObj.IsVat = dicts.formRaw.IsVat;
+    vendorBranchObj.VendorObj.IsNpwpExist = dicts.formRaw.IsNpwpExist;
+    vendorBranchObj.VendorObj.IsOneAffiliate = dicts.formRaw.IsOneAffiliate;
+  
+    if (vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
+      vendorBranchObj.VendorObj.ReservedField3 = dicts.formRaw.ReservedField3;
+      vendorBranchObj.VendorObj.ReservedField4 = dicts.formRaw.ReservedField4;
+      vendorBranchObj.VendorObj.ReservedField5 = dicts.formRaw.ReservedField5;
+      if (dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV != null) {
+        vendorBranchObj.VendorObj.ReservedField6 = dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV.VendorAttrValue;
+      }
+    }
+
+    if (vendorBranchObj.VendorObj.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH) {
+      vendorBranchObj.VendorObj.ReservedField2 = dicts.formRaw.ReservedField2;
+      vendorBranchObj.VendorObj.ReservedField9 = dicts.formRaw.ReservedField9;
+    }
+  
+    if (dicts.formRaw.IsNpwpExist == true) {
+      vendorBranchObj.VendorObj.TaxIdNo = dicts.formRaw.TaxIdNo;
+      vendorBranchObj.VendorObj.TaxpayerName = dicts.formRaw.TaxpayerName;
+
+      vendorBranchObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
+      vendorBranchObj.VendorAddrObj.Addr = dicts.formRaw.Addr;
+      vendorBranchObj.VendorAddrObj.Zipcode = dicts.formRaw.Zipcode;
+      vendorBranchObj.VendorAddrObj.AreaCode2 = dicts.formRaw.AreaCode2;
+      vendorBranchObj.VendorAddrObj.AreaCode1 = dicts.formRaw.AreaCode1;
+      vendorBranchObj.VendorAddrObj.AreaCode3 = dicts.formRaw.AreaCode3;
+      vendorBranchObj.VendorAddrObj.AreaCode4 = dicts.formRaw.AreaCode4;
+      vendorBranchObj.VendorAddrObj.City = dicts.formRaw.City;
+      vendorBranchObj.VendorAddrObj.Province = dicts.formRaw.Province;
+    }
+    else if (dicts.mode == "edit")
+    {
+      vendorBranchObj.VendorAddrObj.MrAddrTypeCode = CommonConstant.AddrTypeTax;
+      vendorBranchObj.VendorAddrObj.Addr = dicts.VendorAddrObj.Addr;
+      vendorBranchObj.VendorAddrObj.Zipcode = dicts.VendorAddrObj.Zipcode;
+      vendorBranchObj.VendorAddrObj.AreaCode2 = dicts.VendorAddrObj.AreaCode2;
+      vendorBranchObj.VendorAddrObj.AreaCode1 = dicts.VendorAddrObj.AreaCode1;
+      vendorBranchObj.VendorAddrObj.AreaCode3 = dicts.VendorAddrObj.AreaCode3;
+      vendorBranchObj.VendorAddrObj.AreaCode4 = dicts.VendorAddrObj.AreaCode4;
+      vendorBranchObj.VendorAddrObj.City = dicts.VendorAddrObj.City;
+      vendorBranchObj.VendorAddrObj.Province = dicts.VendorAddrObj.Province;
+    }
+
+    if (dicts.formRaw.VendorAttrList != undefined) {
+      var formValue = dicts.formRaw.VendorAttrList;
+
+      if (Object.keys(formValue).length > 0 && formValue.constructor === Object) {
+        let vendorAttrRequest = new Array<VendorAttrContentObj>();
+
+        for (const x in formValue) {
+          if (formValue[x]["VendorAttrValue"] != null) {
+            let vendorAttr = new VendorAttrContentObj();
+
+            vendorAttr.VendorAttrContentId = formValue[x]["VendorAttrContentId"];
+            vendorAttr.VendorId = dicts.VendorId;
+            vendorAttr.AttrContent = formValue[x]["VendorAttrValue"];
+            vendorAttr.AttrCode = formValue[x]["AttrCode"];
+            vendorAttrRequest.push(vendorAttr);
+          }
+        }
+        vendorBranchObj.VendorAttrContentObjs = vendorAttrRequest;
+      }
+    }
+  
+    if (dicts.mode == "edit") {
+        if (dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
+          vendorBranchObj.VendorObj.MrVendorTypeCode = dicts.MrVendorCategoryCode;
+        }
+        vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
+        vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
+        vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
+        vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
+
+        http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
+          (response) => {
+            toastr.successMessage(response["message"]);
+            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode, "mode": "edit" });
+          });
+    }
+    else {
+        http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
+            (response) => {
+            toastr.successMessage(response["message"]);
+            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode });
+        });
+    }
 }

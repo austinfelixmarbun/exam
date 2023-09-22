@@ -22,7 +22,6 @@ import { forkJoin } from 'rxjs';
 export class UpdateCustomerContactInfoComponent implements OnInit {
   @Input() CustDataTrxId: number;
   @Output() ResponseTab: EventEmitter<any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
   AppContactInfo: UpdateCustContactInfoObj;
   ReqCustDataTrxIdObj: GenericObj = new GenericObj();
   ZipcodeLookupObj: InputLookupObj;
@@ -231,20 +230,6 @@ export class UpdateCustomerContactInfoComponent implements OnInit {
         console.log(error);
       }
     );
-    const actions = [
-      {
-        'result': {
-          'type': 'function',
-          'target': 'self',
-          'alias': '',
-          'methodName': 'NextStep',
-          'params': []
-        },
-        'conditions': []
-      }
-    ];
-
-    this.next.emit({Actions: actions});
   }
 
 }

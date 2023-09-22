@@ -16,7 +16,7 @@ export class SelfCustomCustomerFamilyMenuComponent implements OnInit {
 
   constructor(private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew,
     private adInsHelperService: AdInsHelperService) {
-    this.pageName = "CustomerFamilyPaging"
+    this.pageName = "CustomerFamilyPagingV2"
   }
 
   ngOnInit(): void {

@@ -10,7 +10,8 @@ export class CustCompanyMgmntShrholderObj {
     IsSigner: boolean;
     SharePrcnt: number;
     EstablishmentDt: Date;
-
+    SignerEndDt: Date;
+    BusinessStartDt: Date;
     constructor() {
         this.CustId = 0;
         this.ShareholderId = 0;
@@ -38,7 +39,8 @@ export class ResCustCompanyMgmntShrholderObj {
     IsSigner: boolean;
     SharePrcnt: number;
     EstablishmentDt: Date;
-
+    SignerEndDt: Date;
+    BusinessStartDt: Date;
     constructor() {
         this.CustCompanyMgmntShrholderId = 0;
         this.CustId = 0;

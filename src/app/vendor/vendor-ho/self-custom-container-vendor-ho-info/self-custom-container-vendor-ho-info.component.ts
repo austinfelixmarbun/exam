@@ -14,12 +14,12 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
-import { VendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/vendor-atpm-select/vendor-atpm-select.component';
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { VendorAtpmMappingObj } from 'app/shared/model/vendor-atpm-mapping-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { Subscription } from 'rxjs';
 import { UcTemplateService } from '@adins/uctemplate';
+import { SelfCustomVendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/self-custom-vendor-atpm-select/self-custom-vendor-atpm-select.component';
 
 @Component({
   selector: 'app-self-custom-container-vendor-ho-info',
@@ -61,10 +61,6 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestr
     }
 
   async ngOnInit() {
-    console.log(this.VendorId)
-    console.log(this.MrVendorCategoryCode)
-    console.log(this.parentForm)
-
     this.SetTitleHoInfo();
 
     if (this.VendorId > 0)
@@ -329,7 +325,7 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestr
 
   AddAtpmClick()
   {
-    const modalAddAtpm = this.modalService.open(VendorAtpmSelectComponent);
+    const modalAddAtpm = this.modalService.open(SelfCustomVendorAtpmSelectComponent);
 
     if(this.vendorAtpmList.length > 0)
       modalAddAtpm.componentInstance.listExistingAtpmCode = this.vendorAtpmList.map(a => a.VendorAtpmCode);

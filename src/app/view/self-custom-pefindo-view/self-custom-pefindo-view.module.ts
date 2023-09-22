@@ -20,10 +20,13 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
+import { SelfCustomViewPefindoScoreComponent } from './self-custom-view-pefindo-score/self-custom-view-pefindo-score.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SelfCustomViewPefindoScoreComponent
+  ],
   imports: [
     CommonModule,
     UcTemplateModule,

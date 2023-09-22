@@ -39,7 +39,7 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
 
       if (params["From"] != CommonConstant.CustFromCustFamily && params["From"] != CommonConstant.CustFromCustShareholder) {
 
-        this.pageName = "CustomerMainDataRegistration"
+        this.pageName = "CustomerMainDataRegistrationV2"
         return;
       }
     });

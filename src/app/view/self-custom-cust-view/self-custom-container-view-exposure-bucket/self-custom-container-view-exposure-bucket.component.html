@@ -1,9 +1,10 @@
-<div class="px-3">
+<div class="bg-light-blue-card">
   <lib-ucSubsection [id]="'BucketInfo' + ExposureType + 'Id'" [title]="'Bucket'" [panel]="'BucketInfo' + ExposureType">
   </lib-ucSubsection>
-  <div [id]="'BucketInfo' + ExposureType" style="overflow-x: auto;">
-    <table class="table table-responsive-md text-center table-hover">
-      <tr class="table-header">
+  <div [id]="'BucketInfo' + ExposureType" style="overflow-x: auto;" class="px-3">
+    <br>
+    <table class="table table-responsive-md text-center table-hover table-new">
+      <tr class="table-header-2">
         <th style="text-align: left;">
           <span name='Bucket'>
             <label class="label-control" translate>Bucket</label>
@@ -19,58 +20,81 @@
         <th style="text-align: left;" translate>Total Past Due</th>
         <td style="text-align: right;" *ngFor="let item of ListCustExpsrBucketObj; let i = index;"> {{item.Value | number:'.2':'en-US'}} </td>
       </tr>
-    </table>
+    </table><br>
   </div>
   
   <div *ngIf="ExposureType == 'CUST_OBLGR_EXPSR' && isReady">
     <lib-ucSubsection [id]="'SummaryInfo' + ExposureType + 'Id'" [title]="'Summary'" [panel]="'SummaryInfo' + exposureType">
     </lib-ucSubsection>
     <div [id]="'SummaryInfo' + ExposureType">
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control"> Customer Exposure Amount </label>
-            </div>
-            <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{SummaryData.CustomerExposureAmt | number:'.2':'en-US'}} </label>
-            </div>
+      <div class="form-body p-3 border-top border-bottom">
+        <div class="form-group row">
+
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-xs-12 py-2">
+            <span>
+              <div class="col-md-12">
+                <label class="label-control label-field"> Customer Exposure Amount </label>
+              </div>
+              <div class="col-md-12 text-right">
+                <span>
+                  <label class="label-control label-value breakword">{{SummaryData.CustomerExposureAmt | number:'.2':'en-US'}} </label>
+                </span>
+              </div>
+            </span>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control"> Family Exposure Amount </label>
-            </div>
-            <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{SummaryData.FamilyExposureAmt | number:'.2':'en-US'}} </label>
-            </div>
+
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-xs-12 py-2">
+            <span>
+              <div class="col-md-12">
+                <label class="label-control label-field"> Family Exposure Amount </label>
+              </div>
+              <div class="col-md-12 text-right">
+                <span>
+                  <label class="label-control label-value breakword"> {{SummaryData.FamilyExposureAmt | number:'.2':'en-US'}} </label>
+                </span>
+              </div>
+            </span>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control"> Guarantor Exposure Amount </label>
-            </div>
-            <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{SummaryData.GuarantorExposureAmt | number:'.2':'en-US'}} </label>
-            </div>
+
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-xs-12 py-2">
+            <span>
+              <div class="col-md-12">
+                <label class="label-control label-field"> Guarantor Exposure Amount </label>
+              </div>
+              <div class="col-md-12 text-right">
+                <span>
+                  <label class="label-control label-value breakword"> {{SummaryData.GuarantorExposureAmt | number:'.2':'en-US'}} </label>
+                </span>
+              </div>
+            </span>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control"> Shareholder Exposure Amount </label>
-            </div>
-            <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{SummaryData.ShareholderExposureAmt | number:'.2':'en-US'}} </label>
-            </div>
+
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-xs-12 py-2">
+            <span>
+              <div class="col-md-12">
+                <label class="label-control label-field"> Shareholder Exposure Amount </label>
+              </div>
+              <div class="col-md-12 text-right">
+                <span>
+                  <label class="label-control label-value breakword"> {{SummaryData.ShareholderExposureAmt | number:'.2':'en-US'}} </label>
+                </span>
+              </div>
+            </span>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label class="label-control"> Obligor Exposure Amount </label>
-            </div>
-            <div class="col-md-6" style="text-align: right;">
-              <label class="label-control"> {{SummaryData.ObligorExposureAmt | number:'.2':'en-US'}} </label>
-            </div>
+          
+          <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-xs-12 py-2">
+            <span>
+              <div class="col-md-12">
+                <label class="label-control label-field"> Obligor Exposure Amount </label>
+              </div>
+              <div class="col-md-12 text-right">
+                <span>
+                  <label class="label-control label-value breakword"> {{SummaryData.ObligorExposureAmt | number:'.2':'en-US'}} </label>
+                </span>
+              </div>
+            </span>
           </div>
-        </div>
-    
-        <div class="col-md-6 ">
+
         </div>
       </div>
     </div>

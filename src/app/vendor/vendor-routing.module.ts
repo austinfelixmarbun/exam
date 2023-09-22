@@ -243,7 +243,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VENDOR_ATPM_DETAIL,
-        component: SelfCustomVendorATPMAddEditComponent,
+        component: VendorATPMAddEditComponent,
         data: {
           title: 'Vendor ATPM Detail'
         },
@@ -354,7 +354,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
         component: SelfCustomVendorHoldingAddEditComponent,
         data: {
           title: 'Vendor Holding Add Edit'
@@ -365,6 +365,20 @@ const routes: Routes = [
         component: SelfCustomVendorHoAddEditComponent,
         data: {
           title: 'Vendor HO Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_ATPM_REG,
+        component: SelfCustomVendorATPMAddEditComponent,
+        data: {
+          title: 'Vendor ATPM Detail'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_VENDOR_ATPM_DETAIL,
+        component: SelfCustomVendorDetailComponent,
+        data: {
+          title: 'Vendor ATPM Registration'
         },
       },
       {
@@ -493,14 +507,7 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
-        component: UcTemplateComponent,
-        data: {
-          page: 'SupplierHoldingDetail'
-        },
-      },
-      {
-        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_REG,
+        path: PathConstant.SELF_CUSTOM_VENDOR_HOLDING_DETAIL,
         component: UcTemplateComponent,
         data: {
           page: 'SupplierHoldingDetail'
