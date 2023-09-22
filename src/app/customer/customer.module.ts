@@ -106,6 +106,7 @@ import { SelfCustomNewCustHeaderComponent } from './sharing-component/self-custo
 import { SelfCustomNewCustHeaderShareholderComponent } from './sharing-component/new-cust-header/self-custom-new-cust-header.component';
 import { SelfCustomBouwheerCompanyIndustryInfo } from './bouwheer/self-custom-bouwheer-company-industry-info.component';
 import { SelfCustomCustCompanyIndustryInfo } from './customer-company/self-custom-customer-company/self-custom-cust-company-industry-info/self-custom-cust-company-industry-info.component';
+import { SelfCustomContainerOcrCustPersonalComponent } from './sharing-component/self-custom-container-ocr-cust-personal/self-custom-container-ocr-cust-personal.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -231,7 +232,8 @@ export const customCurrencyMaskConfig = {
         CustomShareholderListingComponent,
         SelfCustomNewCustHeaderShareholderComponent,
         SelfCustomBouwheerCompanyIndustryInfo,
-        SelfCustomCustCompanyIndustryInfo
+        SelfCustomCustCompanyIndustryInfo,
+        SelfCustomContainerOcrCustPersonalComponent
     ],
     providers: [
         CustAssetComponent,

@@ -798,6 +798,7 @@
     "SaveCustPersonalShareholderMainDataV2": "/v2/Cust/SaveCustPersonalShareholderMainData",
     "SaveCustCompanyShareholderMainData": "/v1/Cust/SaveCustCompanyShareholderMainData",
     "SaveCustCompanyShareholderMainDataV2": "/v2/Cust/SaveCustCompanyShareholderMainData",
+    "SaveCustCompanyShareholderMainDataV3": "/v3/Cust/SaveCustCompanyShareholderMainData",
     "SaveCustPersonalFamilyMainData": "/v1/Cust/SaveCustPersonalFamilyMainData",
     "SaveCustPersonalFamilyMainDataV2": "/v2/Cust/SaveCustPersonalFamilyMainData",
     "NewEditDuplicateCust": "/v1/Cust/NewEditDuplicateCust",
@@ -949,5 +950,7 @@
     "DeleteBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/DeleteBouwheerCompanyIndustryInfo",
     "GetListCustCompanyIndustryInfoByCustId" : "/v1/CustCompanyIndustryInfo/GetListCustCompanyIndustryInfoByCustId",
     "AddEditCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/AddEditCustCompanyIndustryInfo",
-    "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo"
+    "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo",
+    "GetOCRKTPData" : "/v1/OCR/GetOCRKTPData",
+    "GetOCRNPWPData" : "/v1/OCR/GetOCRNPWPData"
 }

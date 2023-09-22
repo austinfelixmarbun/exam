@@ -61,6 +61,7 @@ export class CommonConstant {
 
     public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
+    public static MR_MARITAL_STAT_CODE_WIDOW = "WIDOW";
     public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
     public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
 

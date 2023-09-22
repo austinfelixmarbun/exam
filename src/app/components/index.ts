@@ -54,3 +54,5 @@ export { SelfCustomContainerVendorBranchInfoComponent } from 'app/vendor/vendor-
 export { SelfCustomNewCustHeaderShareholderComponent } from 'app/customer/sharing-component/new-cust-header/self-custom-new-cust-header.component';
 export { SelfCustomBouwheerCompanyIndustryInfo } from 'app/customer/bouwheer/self-custom-bouwheer-company-industry-info.component';
 export { SelfCustomCustCompanyIndustryInfo } from 'app/customer//customer-company/self-custom-customer-company/self-custom-cust-company-industry-info/self-custom-cust-company-industry-info.component';
+export { SelfCustomContainerOcrCustPersonalComponent } from 'app/customer/sharing-component/self-custom-container-ocr-cust-personal/self-custom-container-ocr-cust-personal.component';
+export { SelfCustomContainerOcrVendorComponent } from 'app/vendor/self-custom-container-npwp-vendor/self-custom-container-ocr-vendor.component';
