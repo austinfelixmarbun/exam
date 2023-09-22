@@ -48,6 +48,14 @@ export class NavigationConstant {
     public static ASSET_DOC_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_DETAIL; //'/Asset/Document/Detail'
     public static ASSET_DOC_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_PAGING; //'/Asset/DocumentMaster/Paging'
     public static ASSET_DOC_MASTER_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_DETAIL; //'/Asset/DocumentMaster/Detail'
+
+    public static CUSTOM_ASSET_NEG_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_PAGING; //'/Asset/SelfCustom/NegativeAsset/Paging'
+    public static CUSTOM_ASSET_NEG_UPLOAD = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_UPLOAD; //'/Asset/SelfCustom/NegativeAsset/Upload'
+    public static CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_NEG_RVW_UPLOAD_PAGING; //'/Asset/SelfCustom/NegativeAsset/ReviewUploadPaging'
+    public static CUSTOM_ASSET_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_PAGING; //'/Asset/SelfCustom/AssetMaster/Paging'
+    public static CUSTOM_ASSET_MASTER_UPLOAD = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_UPLOAD; //'/Asset/SelfCustom/AssetMaster/Upload'
+    public static CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.CUSTOM_ASSET_MASTER_RVW_UPLOAD_PAGING; //'/Asset/SelfCustom/AssetMaster/ReviewUploadPaging'
+    
     //#endregion
 
     //#region Common Setting
