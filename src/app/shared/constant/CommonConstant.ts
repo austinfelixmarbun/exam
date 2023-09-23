@@ -366,6 +366,7 @@ export class CommonConstant {
     public static DmsKey = "PHL7KV8RR0VG30K4";
     public static DmsIV = "0G7HFV96AVWXUQ51";
     public static DmsNoCust = "No Customer";
+    public static DmsNoProject = "Project No";
     public static DmsNoApp = "No Application";
     public static DmsNoAgr = "No Agreement";
     public static DmsMouId = "Mou Id";
@@ -377,6 +378,7 @@ export class CommonConstant {
     public static DmsOverideViewDownload = "View,Download";
     public static DmsOverideUploadDownloadView = "Upload,Delete,Download,View";
     public static DmsViewCodeCust = "ConfinsCust";
+    public static DmsViewCodeProject = "Project";
     public static DmsViewCodeApp = "ConfinsApp";
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";

@@ -71,3 +71,4 @@ export { CustomUpdateCustomerCompanyLegalDocComponent } from 'app/customer/self-
 export { CustomUpdateCustomerCompanyFinDataComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
 export { CustomUpdateCustomerCompanyDetailComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
 export { ContainerCustLegalDocUploadComponent } from "app/customer/cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component";
+export { SelfCustomContainerDmsIframeProjectComponent } from 'app/common-setting/Project/self-custom-container-dms-iframe-project/self-custom-container-dms-iframe-project.component';
