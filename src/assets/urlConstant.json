@@ -953,6 +953,7 @@
     "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile",
     "GetBouwheerCompanyIndustryInfoByBouwheerNo" : "/v1/BouwheerCompanyIndustryInfo/GetBouwheerCompanyIndustryInfoByBouwheerNo",
     "AddEditBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/AddEditBouwheerCompanyIndustryInfo",
+    "UploadBouwheerCompanyIndustryDoc" : "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
     "DeleteBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/DeleteBouwheerCompanyIndustryInfo",
     "GetListCustCompanyIndustryInfoByCustId" : "/v1/CustCompanyIndustryInfo/GetListCustCompanyIndustryInfoByCustId",
     "AddEditCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/AddEditCustCompanyIndustryInfo",

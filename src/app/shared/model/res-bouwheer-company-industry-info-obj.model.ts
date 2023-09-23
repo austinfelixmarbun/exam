@@ -6,9 +6,10 @@ export class ResBouwheerCompanyIndustryInfoObj {
     BusinessStartDate: Date;
     IsMain: boolean;
     Notes: string;
-    FileUpload: any;
     RowVersion: any;
-    
+    ByteBase64: any;
+    DocUploadName: any;
+
     constructor(){
         this.BouwheerCompanyIndustryInfoId = 0, 
         this.BouwheerCompanyId = 0,

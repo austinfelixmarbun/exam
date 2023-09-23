@@ -1598,7 +1598,7 @@ export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile,
   xhr.send(formData);
 }
 
-export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+export async function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
   let url = environment.FoundationR3Url + api;
   let reqSubmitObj: ReqBouwheerCompanyObj = new ReqBouwheerCompanyObj();
@@ -1616,12 +1616,78 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
   reqSubmitObj.rAddBouwheerCompanyObj = new BouwheerCompanyObj()
   reqSubmitObj.rAddBouwheerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
 
+  const forAddApi = dicts.ListBouwheerIndustryInfo.map(item => ({
+    RefIndustryTypeCode: item.RefIndustryTypeCode,
+    BusinessStartDate: item.BusinessStartDate,
+    IsMain: item.IsMain,
+    Notes: item.Notes,
+    BouwheerCompanyIndustryInfoId: item.BouwheerCompanyIndustryInfoId,
+    BouwheerCompanyId: item.BouwheerCompanyId
+  }));
+
+  const forUpload = dicts.ListBouwheerIndustryInfo.map(item => ({
+    RefIndustryTypeCode: item.RefIndustryTypeCode,
+    ByteBase64: item.ByteBase64,
+    DocUploadName: item.DocUploadName,
+  }));
+
+  reqSubmitObj.rAddBouwheerCompanyIndustryInfoObj = forAddApi;
+
+
+  
   var resSave;
   http.post(url, reqSubmitObj, AdInsConstant.SpinnerOptions).subscribe(
-    (response) => {
+    async (response) => {
       resSave = response;
+
+      let reqObj = {
+        BouwheerId: resSave["Id"] ,
+        uploadIndustryDocs: forUpload
+      };
+
+      let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
+      // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
+      
+      try {
+        if (environment.SpinnerOnHttpPost) this.spinner.show();
+    
+        const formData: any = new FormData();
+        formData.append('reqObj', JSON.stringify(reqObj));
+    
+        const xhr = new XMLHttpRequest();
+    
+        const xhrPromise = new Promise<void>((resolve, reject) => {
+          xhr.onreadystatechange = evnt => {
+            if (xhr.readyState === 4) {
+              if (xhr.status === 200 || xhr.status === 201) {
+                resolve();
+              } else {
+                reject(new Error('Upload Failed !'));
+              }
+            }
+          };
+    
+          xhr.onerror = evnt => {
+            reject(new Error('Upload Failed !'));
+          };
+    
+          xhr.open('POST', urlUpload, true);
+          const value = cookieService.get('XSRF-TOKEN');
+          const token = DecryptString(value, environment.ChipperKeyCookie);
+          xhr.setRequestHeader('AdInsKey', `${token}`);
+          xhr.send(formData);
+        });
+    
+        await xhrPromise; // Tunggu sampai permintaan XHR selesai
+    
+      } catch (error) {
+        toastr.errorMessage(error.message || 'An error occurred during upload.');
+      } finally {
+        if (environment.SpinnerOnHttpPost) this.spinner.hide();
+        toastr.successMessage(resSave["Message"])
+        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']); // Pengalihan halaman sekarang seharusnya berada di sini
+      }
     });
-  
-  AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/Bouwheer/Paging"]);
 
 }
+
