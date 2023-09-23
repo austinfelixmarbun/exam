@@ -29,6 +29,9 @@ import { UcTemplateService } from "@adins/uctemplate";
 import { CustPersonalContactPersonObj } from "../model/cust-personal-contact-person-obj.model";
 import { CustPersonalObjV2 } from "../model/cust-personal-obj-v2.model";
 import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cust-company-legal-doc-file-obj.model";
+import { ReqBouwheerCompanyObj } from "../model/req-bouwheer-company-obj.model";
+import { BouwheerObj } from "../model/bouwheer-obj.model";
+import { BouwheerCompanyObj } from "../model/bouwheer-company-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -1584,4 +1587,32 @@ export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile,
   let token = DecryptString(value, environment.ChipperKeyCookie);
   xhr.setRequestHeader('AdInsKey', `${token}`);
   xhr.send(formData);
+}
+
+export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  let url = environment.FoundationR3Url + api;
+  let reqSubmitObj: ReqBouwheerCompanyObj = new ReqBouwheerCompanyObj();
+  reqSubmitObj.rAddBouwheerObj = new BouwheerObj();
+  reqSubmitObj.rAddBouwheerObj.BouwheerName = parentForm.BouwheerNameCompany;
+  reqSubmitObj.rAddBouwheerObj.IdNo = parentForm.IdNoCompany;
+  reqSubmitObj.rAddBouwheerObj.MrIdTypeCode = parentForm.MrIdTypeCodeCompany;
+  reqSubmitObj.rAddBouwheerObj.IdExpiredDt = parentForm.IdExpiredDtCompany;
+  reqSubmitObj.rAddBouwheerObj.TaxIdNo = parentForm.TaxIdNoCompany;
+  reqSubmitObj.rAddBouwheerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+  reqSubmitObj.rAddBouwheerObj.BouwheerAsCustNo = parentForm.BouwheerAsCustNoCompany;;
+  reqSubmitObj.rAddBouwheerObj.LimitPlafondAmt = parentForm.LimitPlafondAmtCompany;
+  reqSubmitObj.rAddBouwheerObj.IsDebtor = parentForm.IsDebtorCompanyEdit;
+  
+  reqSubmitObj.rAddBouwheerCompanyObj = new BouwheerCompanyObj()
+  reqSubmitObj.rAddBouwheerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+
+  var resSave;
+  http.post(url, reqSubmitObj, AdInsConstant.SpinnerOptions).subscribe(
+    (response) => {
+      resSave = response;
+    });
+  
+  AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/Bouwheer/Paging"],{ BwrNo : this.BwrNo, CustType : CommonConstant.CustTypeCompany, mode : 'edit'});
+
 }

@@ -1,4 +1,4 @@
-export class ResBouwheerCompanyIncustryInfoObj {
+export class ResBouwheerCompanyIndustryInfoObj {
     BouwheerCompanyIndustryInfoId: number;
     BouwheerCompanyId: number;
     RefIndustryTypeCode: string;
@@ -6,6 +6,7 @@ export class ResBouwheerCompanyIncustryInfoObj {
     BusinessStartDate: Date;
     IsMain: boolean;
     Notes: string;
+    FileUpload: any;
     RowVersion: any;
     
     constructor(){

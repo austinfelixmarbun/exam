@@ -1,3 +1,4 @@
+<div id="BouwheerIndustryInfo" *ngIf="dicts.formRaw.MrCustTypeCode=='COMPANY'">
 <div class="pull-right">
     <button type="button" class="addButton" translate (click)="showModalIndustryInfo(ListBouwheerIndustryInfo.length)"><i class="ft-plus-circle"></i> Add</button>
 </div>
@@ -74,7 +75,7 @@
         <div class="form-group row">
           <label class="col-md-3" for="myfile" translate>Industry File Upload</label>
           <div class="col-md-4">
-            <input type="file" id="myfile" name="myfile"><br><br>
+            <input type="file" id="myfile" name="myfile" (change)="onFileChange($event)"><br><br>
           </div>
         </div>
     
@@ -98,4 +99,4 @@
     </form>
     </ng-template> 
 </div>
-  
+</div> 
