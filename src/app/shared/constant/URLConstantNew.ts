@@ -756,7 +756,8 @@ export class UrlConstantNew{
     public AddEditCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditCustCompanyIndustryInfo;
     public DeleteCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteCustCompanyIndustryInfo;
     public UploadCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.UploadCustCompanyLegalDoc;
-
+    public UploadCustCompanyIndustryDoc = this.env.FoundationR3Url + this.url.UploadCustCompanyIndustryDoc;
+    
     // CUSTOMER GROUP
     public AddCustGrpBothWays = this.env.FoundationR3Url + this.url.AddCustGrpBothWays;
     public AddCustGrp = this.env.FoundationR3Url + this.url.AddCustGrp;
