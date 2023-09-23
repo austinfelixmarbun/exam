@@ -228,6 +228,11 @@ function SaveCustPersonal(parentForm: any, dicts: Record<string, any>, Mode: str
   reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
   reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
   reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = parentForm.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = parentForm.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo1 = parentForm.IsWaMobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo2 = parentForm.IsWaMobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo3 = parentForm.IsWaMobilePhnNo3;
   if (Mode == CommonConstant.CustMainDataModeFamily) {
     reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
     reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
@@ -340,6 +345,11 @@ function SaveCustPersonalV2(parentForm: any, dicts: Record<string, any>, Mode: s
   reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
   reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
   reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = parentForm.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = parentForm.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo1 = parentForm.IsWaMobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo2 = parentForm.IsWaMobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo3 = parentForm.IsWaMobilePhnNo3;
   if (Mode == CommonConstant.CustMainDataModeFamily) {
     reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
     reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
@@ -1187,13 +1197,12 @@ async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, ht
   custPersonalObj.MobilePhnNo1 = dicts.MobilePhnNo1;
   custPersonalObj.MobilePhnNo2 = dicts.MobilePhnNo2;
   custPersonalObj.MobilePhnNo3 = dicts.MobilePhnNo3;
+  custPersonalObj.IsWaMobilePhnNo1 = dicts.IsWaMobilePhnNo1;
+  custPersonalObj.IsWaMobilePhnNo2 = dicts.IsWaMobilePhnNo2;
+  custPersonalObj.IsWaMobilePhnNo3 = dicts.IsWaMobilePhnNo3;
   custPersonalObj.MotherMaidenName = dicts.MotherMaidenName;
   custPersonalObj.MrGenderCode = dicts.MrGenderCode;
   custPersonalObj.MrMaritalStatCode = dicts.MrMaritalStatCode;
-  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
-  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
-  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
-  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
   custPersonalObj.MrGenderCode = dicts.MrGenderCode;
 
   custPersonalObj.CustPrefixName = dicts.formRaw.CustPrefixName;
@@ -1457,7 +1466,7 @@ export async function saveDataOrSaveAndSyncV2(dicts: Record<string, any>, from: 
 
   if (StepIndex == 4)
   {
-    api = dicts.CustPersonalContactPersonId == 0? "/v1/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v1/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    api = dicts.CustPersonalContactPersonId == 0? "/v2/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v2/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
     await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
     next = "CustJobData"
   }

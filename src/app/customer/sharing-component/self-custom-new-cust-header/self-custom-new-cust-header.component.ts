@@ -27,7 +27,7 @@ export class SelfCustomNewCustHeaderComponent implements OnInit {
 
       if (params["MrCustTypeCode"] == CommonConstant.CustTypePersonal && (params["From"] == CommonConstant.CustFromCustFamily || params["CustDataMode"] == CommonConstant.CustMainDataModeFamily)) {
 
-        this.pageName = "CustomerFamilyMainDataRegistration"
+        this.pageName = "CustomerFamilyMainDataRegistrationV2"
         return;
       }
 

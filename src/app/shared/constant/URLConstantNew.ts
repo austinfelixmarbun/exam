@@ -694,6 +694,7 @@ export class UrlConstantNew{
     public GetCustomerDuplicateCheck = this.env.FoundationR3Url + this.url.GetCustomerDuplicateCheck;
     public GetNegativeCustomerDuplicateCheck = this.env.FoundationR3Url + this.url.GetNegativeCustomerDuplicateCheck;
     public GetCustomerAndNegativeCustDuplicateCheck = this.env.FoundationR3Url + this.url.GetCustomerAndNegativeCustDuplicateCheck;
+    public GetCustomerAndNegativeCustDuplicateCheckV2 = this.env.FoundationR3Url + this.url.GetCustomerAndNegativeCustDuplicateCheckV2;
 
     // CUSTOMER PERSONAL
     public AddNewCustPersonal = this.env.FoundationR3Url + this.url.AddNewCustPersonal;

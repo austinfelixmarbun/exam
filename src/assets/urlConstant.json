@@ -497,6 +497,7 @@
     "GetCustomerDuplicateCheck": "/v1/CustDuplicateCheck/GetCustomerDuplicateCheck",
     "GetNegativeCustomerDuplicateCheck": "/v1/CustDuplicateCheck/GetNegativeCustomerDuplicateCheck",
     "GetCustomerAndNegativeCustDuplicateCheck": "/v1/CustDuplicateCheck/GetCustomerAndNegativeCustDuplicateCheck",
+    "GetCustomerAndNegativeCustDuplicateCheckV2": "/v2/CustDuplicateCheck/GetCustomerAndNegativeCustDuplicateCheck",
     "AddNewCustPersonal": "/v1/CustPersonal/AddCustPersonal",
     "EditCustPersonal": "/v1/CustPersonal/EditCustPersonal",
     "GetCustPersonalbyCustPersonalId": "/v1/CustPersonal/GetCustPersonalByCustPersonalId",
