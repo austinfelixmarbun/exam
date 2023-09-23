@@ -958,6 +958,7 @@
     "GetListCustCompanyIndustryInfoByCustId" : "/v1/CustCompanyIndustryInfo/GetListCustCompanyIndustryInfoByCustId",
     "AddEditCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/AddEditCustCompanyIndustryInfo",
     "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo",
+    "UploadCustCompanyIndustryDoc" : "/v1/CustCompanyIndustryInfo/UploadCustCompanyIndustryDoc",
     "GetOCRKTPData" : "/v1/OCR/GetOCRKTPData",
     "GetOCRNPWPData" : "/v1/OCR/GetOCRNPWPData"
 }
