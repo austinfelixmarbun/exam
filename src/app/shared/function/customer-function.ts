@@ -1613,6 +1613,6 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
       resSave = response;
     });
   
-  AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/Bouwheer/Paging"],{ BwrNo : this.BwrNo, CustType : CommonConstant.CustTypeCompany, mode : 'edit'});
+  AdInsHelper.RedirectUrl(this.router,["/Customer/SelfCustom/Bouwheer/Paging"]);
 
 }
