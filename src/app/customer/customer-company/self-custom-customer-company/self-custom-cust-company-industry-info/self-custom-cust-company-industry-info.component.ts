@@ -103,7 +103,23 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
   }
 
   async SaveIndustryInfo(){  
-   
+    if(this.ListCustIndustryInfo.length == 0){
+      if(this.IndustryInfoForm.controls['IsMain'].value == false){
+        this.toastr.warningMessage("The first input must be the main industry!")
+        return;
+      }
+    }else{
+      if(this.IndustryInfoForm.controls['IsMain'].value == true){
+        this.toastr.warningMessage("There can only be one main industry!")
+        return;
+      }
+      let duplicateIndustryTypeCode = this.ListCustIndustryInfo.find(x => x.RefIndustryTypeCode ===  this.IndustryInfoForm.controls['RefIndustryTypeCode'].value);
+      if (duplicateIndustryTypeCode){
+        this.toastr.warningMessage("Industry type already exists!")
+        return;
+      }
+    } 
+    
       this.ReqCustIndustryInfoObj = new ReqAddEditCustCompanyIndustryInfoObj
       this.ReqCustIndustryInfoObj.CustNo = this.CustNo,
       this.ReqCustIndustryInfoObj.RefIndustryTypeCode =this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
