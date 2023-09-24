@@ -82,6 +82,7 @@ import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/pay
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { PaymentAllocDetailNewComponent } from './payment-alloc/payment-alloc-detail-new/payment-alloc-detail-attr.component';
 
 const routes: Routes = [
   {
@@ -811,22 +812,22 @@ const routes: Routes = [
           page: 'PaymentAllocationPaging'
         },
       },
-      {
-        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Payment Allocation Detail',
-          page: 'Paymentallocationdetailnew',
-          dataEvent: 'dataEvent'
-        },
-      },
       // {
       //   path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
-      //   component: SelfCustomPaymentAllocDetailComponent,
+      //   component: UcTemplateComponent,
       //   data: {
-      //     title: 'Payment Allocation Detail'
+      //     title: 'Payment Allocation Detail',
+      //     page: 'Paymentallocationdetailnew',
+      //     dataEvent: 'dataEvent'
       //   },
       // },
+      {
+        path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
+        component: PaymentAllocDetailNewComponent,
+        data: {
+          title: 'Payment Allocation Detail'
+        },
+      },
       {
         path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
         component: UcTemplateComponent,

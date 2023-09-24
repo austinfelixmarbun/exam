@@ -959,5 +959,7 @@
     "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo",
     "GetOCRKTPData" : "/v1/OCR/GetOCRKTPData",
     "GetOCRNPWPData" : "/v1/OCR/GetOCRNPWPData",
-    "GetRefPaymentAllocAttrByRefPaymentAllocId" : "/v1/RefPaymentAlloc/GetRefPaymentAllocAttrByRefPaymentAllocId"
+    "GetRefPaymentAllocAttrByRefPaymentAllocId" : "/v1/RefPaymentAlloc/GetRefPaymentAllocAttrByRefPaymentAllocId",
+    "SubmitAddRefAttr" : "/v1/RefPaymentAlloc/SubmitAddRefAttr",
+    "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
 }

@@ -607,7 +607,7 @@ mat-dialog-container#role-modal {
     height: auto;
 }
 
-mat-dialog-container#role-dialog {
+.modal-container {
     display: block;
     padding: 24px;
     border-radius: 4px;
@@ -618,6 +618,13 @@ mat-dialog-container#role-dialog {
     height: 100%;
     min-height: inherit;
     max-height: inherit;
+}
+
+.label-input {
+    margin-bottom: 8px;
+    color: var(--black-1, #3A4060);
+    font-weight: 600;
+    font-size: 11px;
 }
 
 .custom-card {
