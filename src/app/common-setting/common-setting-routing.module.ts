@@ -484,7 +484,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_PAYMENT_ALLOC_GRP_DETAIL,
-        component: PaymentAllocGroupDetailComponent,
+        component: PaymentAllocDetailNewComponent,
         data: {
           title: 'Payment Allocation Group'
         },
@@ -812,20 +812,12 @@ const routes: Routes = [
           page: 'PaymentAllocationPaging'
         },
       },
-      // {
-      //   path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
-      //   component: UcTemplateComponent,
-      //   data: {
-      //     title: 'Payment Allocation Detail',
-      //     page: 'Paymentallocationdetailnew',
-      //     dataEvent: 'dataEvent'
-      //   },
-      // },
       {
         path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
-        component: PaymentAllocDetailNewComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Payment Allocation Detail'
+          title: 'Payment Allocation Detail',
+          page: 'Paymentallocationdetailnew'
         },
       },
       {
