@@ -16,7 +16,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 @Component({
   selector: 'app-payment-alloc-detail-new',
   templateUrl: './payment-alloc-detail-new.component.html',
-  styles: ["input, select, textarea {height: 31px !important; border-radius: 8px  !important;border: 1px solid var(--gray-line, #DFE6E9);background: var(--white-1, #FDFEFF)  !important;}",
+  styles: ["input, select, textarea {height: 31px !important; border-radius: 8px  !important;border: 1px solid var(--gray-line, #DFE6E9);background: var(--white-1, #FDFEFF);}",
   ".header-title {padding-left: 20px!important;margin-bottom: 15px!important;}"]
 })
 export class PaymentAllocDetailNewComponent implements OnInit {
