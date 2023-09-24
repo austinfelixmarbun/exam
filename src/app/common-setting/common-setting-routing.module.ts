@@ -82,6 +82,7 @@ import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/pay
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { PaymentAllocDetailNewComponent } from './payment-alloc/payment-alloc-detail-new/payment-alloc-detail-attr.component';
 
 const routes: Routes = [
   {
@@ -483,7 +484,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_PAYMENT_ALLOC_GRP_DETAIL,
-        component: PaymentAllocGroupDetailComponent,
+        component: PaymentAllocDetailNewComponent,
         data: {
           title: 'Payment Allocation Group'
         },
@@ -816,7 +817,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Payment Allocation Detail',
-          page: 'PaymentAllocationDetail'
+          page: 'Paymentallocationdetailnew'
         },
       },
       {

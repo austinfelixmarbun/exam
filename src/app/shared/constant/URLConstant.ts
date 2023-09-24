@@ -1012,6 +1012,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetRefPaymentAllocByID = environment.FoundationR3Url + "/v1" + "/RefPaymentAlloc/GetRefPaymentAllocById";
     public static GetListKeyValueRefPaymentAllocByPayAllocGrpCode = environment.FoundationR3Url + "/v1" + "/RefPaymentAlloc/GetListKeyValueRefPaymentAllocByPayAllocGrpCode";
     public static SubmitRefPaymentAlloc = environment.FoundationR3Url + "/v1" + "/RefPaymentAlloc/SubmitRefPaymentAlloc";
+    public static GetRefPaymentAllocAttrByRefPaymentAllocId = environment.FoundationR3Url + urlConstant.GetRefPaymentAllocAttrByRefPaymentAllocId;
 
     // REF PAYMENT ALLOC GRP
     public static GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate = environment.FoundationR3Url + "/v1" + "/RefPaymentAllocGrp/GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate";

@@ -125,9 +125,20 @@ form .textarea-field-2{
 
 .table-new>tbody>tr:nth-child(odd)>td,
 .table-new>tbody>tr:nth-child(odd)>th {
-    background-color: #F4F8FB;
+    background-color: #F4F8FB !important;
     border-top: 1px solid #e4eefb;
     border-bottom: 1px solid #e4eefb;
+}
+
+.table-responsive{
+    padding: 0 16px;
+}
+
+.result-text{
+    color: var(--black-1, #3A4060);
+    font-size: 10px;
+    font-weight: 500;
+    padding-bottom: 8px;
 }
 
 /* view */
@@ -191,6 +202,11 @@ form .textarea-field-2{
     padding-left: 0px !important;
     padding-right: 0px !important;
     padding-bottom: 0px !important;
+}
+
+.header-title-modal{
+    padding-left: 20px!important;
+    margin-bottom: 15px!important;
 }
 
 .form-actions {
@@ -275,7 +291,13 @@ form label {
 
 .table-header {
     font-size: 12px !important;
-    background-color: lightgray;
+    background: #EEF8FF;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #f4f8fb;
+    border-top: 1px solid #e4eefb;
+    border-bottom: 1px solid #e4eefb;
 }
 
 .table {
@@ -583,6 +605,26 @@ input[type=date].form-control.is-invalid {
 
 mat-dialog-container#role-modal {
     height: auto;
+}
+
+.modal-container {
+    display: block;
+    padding: 24px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+}
+
+.label-input {
+    margin-bottom: 8px;
+    color: var(--black-1, #3A4060);
+    font-weight: 600;
+    font-size: 11px;
 }
 
 .custom-card {
