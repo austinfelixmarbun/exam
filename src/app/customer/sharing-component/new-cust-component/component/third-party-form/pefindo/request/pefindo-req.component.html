@@ -52,7 +52,10 @@
                       </tr>
                     </thead>
                     <tbody *ngIf="PefindoSmartSearchPersonalObjs.length == 0">
-                      <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                         <td colspan="100%">No Data Available</td>
                       </tr>
                     </tbody>
@@ -81,7 +84,10 @@
                       </tr>
                     </thead>
                     <tbody *ngIf="PefindoSmartSearchCoyObjs.length == 0">
-                      <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                         <td colspan="100%">No Data Available</td>
                       </tr>
                     </tbody>
@@ -116,7 +122,10 @@
                       </tr>
                     </thead>
                     <tbody *ngIf="PefindoSmartSearchPersonalObjs.length == 0">
-                      <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                         <td colspan="100%">No Data Available</td>
                       </tr>
                     </tbody>
@@ -145,7 +154,10 @@
                       </tr>
                     </thead>
                     <tbody *ngIf="PefindoSmartSearchCoyObjs.length == 0">
-                      <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                         <td colspan="100%">No Data Available</td>
                       </tr>
                     </tbody>
@@ -203,7 +215,10 @@
                       </tr>
                     </thead>
                     <tbody *ngIf="PefindoForm.controls.PefindoArr.length == 0">
-                      <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                         <td colspan="100%">No Data Available</td>
                       </tr>
                     </tbody>
@@ -240,7 +255,10 @@
                   </tr>
                 </thead>
                 <tbody *ngIf="PefindoForm.controls.PefindoArr.length == 0">
-                  <tr>
+                      <tr *ngIf="!IsSmartSearchResultReady">
+                        <td colspan="100%"><i class="fa fa-spinner fa-spin"></i>&nbsp; <span translate>Please Wait...</span></td>
+                      </tr>
+                      <tr *ngIf="IsSmartSearchResultReady">
                     <td colspan="100%">No Data Available</td>
                   </tr>
                 </tbody>

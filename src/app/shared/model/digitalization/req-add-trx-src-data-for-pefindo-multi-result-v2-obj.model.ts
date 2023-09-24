@@ -5,11 +5,13 @@ export class ReqAddTrxSrcDataForPefindoMultiResultV2Obj {
     CustId: number;
     RowVersion: string;
     SlikReferenceCode: string;
+    MrPefindoInquiryReasonCode: string;
 
     constructor() {
         this.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoV2Obj>();
         this.CustId = 0;
         this.RowVersion = "";
         this.SlikReferenceCode = "";
+        this.MrPefindoInquiryReasonCode = "";
     }
 }

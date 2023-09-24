@@ -37,6 +37,7 @@ export class PefindoReqComponent implements OnInit {
   @Input() RowVersion: string;
   @Input() IsCustPefindoReq: boolean;
 
+  IsSmartSearchResultReady: boolean = false;
   PefindoSmartSearchPersonalObjs: Array<PefindoSmartSearchPersonalObj> = new Array<PefindoSmartSearchPersonalObj>();
   PefindoSmartSearchCoyObjs: Array<PefindoSmartSearchCoyObj> = new Array<PefindoSmartSearchCoyObj>();
   slikReferenceCode: string = "";
@@ -79,8 +80,11 @@ export class PefindoReqComponent implements OnInit {
     if (this.IsCustPefindoReq) {
       this.ReqPefindoSmartSearchObj.MrPefindoInquiryReasonCode = this.PefindoForm.controls.PefindoInquiryReason.value;
     }
-    this.http.post(URLConstant.PefindoSmartSearchV2, this.ReqPefindoSmartSearchObj).toPromise().then(
+
+    this.IsSmartSearchResultReady = false;
+    await this.http.post(URLConstant.PefindoSmartSearchV2, this.ReqPefindoSmartSearchObj).toPromise().then(
       (response) => {
+        this.IsSmartSearchResultReady = true;
         this.slikReferenceCode = response["SlikReferenceCode"];
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal){
           this.PefindoSmartSearchPersonalObjs = response["ReturnObject"]["ReturnObject"];
@@ -92,6 +96,7 @@ export class PefindoReqComponent implements OnInit {
         if (this.pefindoMultiResMax > 0) this.setData();
       }
     );
+    this.IsSmartSearchResultReady = true;
   }
 
   pefindoMultiResMax: number = 0;
@@ -168,6 +173,8 @@ export class PefindoReqComponent implements OnInit {
     }
     reqAddTrxSrcDataForPefindoMultiResultV2Obj.ReqAddTrxSrcDataForPefindoObj = new Array<ReqAddTrxSrcDataForPefindoV2Obj>();
     reqAddTrxSrcDataForPefindoMultiResultV2Obj.SlikReferenceCode = this.slikReferenceCode;
+    reqAddTrxSrcDataForPefindoMultiResultV2Obj.MrPefindoInquiryReasonCode = this.ReqPefindoSmartSearchObj.MrPefindoInquiryReasonCode;
+
     PefindoArr.forEach(x => {
       let reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoV2Obj();
 
