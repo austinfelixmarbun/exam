@@ -816,9 +816,17 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Payment Allocation Detail',
-          page: 'PaymentAllocationDetail'
+          page: 'Paymentallocationdetailnew',
+          dataEvent: 'dataEvent'
         },
       },
+      // {
+      //   path: PathConstant.CS_CUSTOM_PAYMENT_ALLOC_DETAIL,
+      //   component: SelfCustomPaymentAllocDetailComponent,
+      //   data: {
+      //     title: 'Payment Allocation Detail'
+      //   },
+      // },
       {
         path: PathConstant.CUSTOM_CS_REF_INS_CLAIM_DOC_DETAIL,
         component: UcTemplateComponent,
