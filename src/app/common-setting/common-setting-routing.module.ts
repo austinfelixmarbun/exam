@@ -461,24 +461,16 @@ const routes: Routes = [
       // PAYMENT ALLOCATION
       {
         path: PathConstant.CS_PAYMENT_ALLOC_PAGING,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Payment Allocation Paging',
-          page: 'PaymentAllocationPaging'
-        },
-      },
-      // {
-      //   path: PathConstant.CS_PAYMENT_ALLOC_PAGING,
-      //   component: PaymentAllocPagingComponent,
-      //   data: {
-      //     title: 'Payment Allocation'
-      //   },
-      // },
-      {
-        path: PathConstant.CS_PAYMENT_ALLOC_DETAIL,
-        component: PaymentAllocDetailComponent,
+        component: PaymentAllocPagingComponent,
         data: {
           title: 'Payment Allocation'
+        },
+      },
+      {
+        path: PathConstant.CS_PAYMENT_ALLOC_DETAIL,
+        component: PaymentAllocDetailNewComponent,
+        data: {
+          title: 'Payment Allocation Detail'
         },
       },
 
