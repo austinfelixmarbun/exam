@@ -243,7 +243,7 @@ select {
 }
 
 div {
-    text-transform: uppercase !important;    
+    text-transform: uppercase !important;
 }
 
 a {
@@ -671,7 +671,7 @@ mat-dialog-container#role-modal {
     margin-left: 1.5rem;
 }
 
-.custom-button-adins:hover { 
+.custom-button-adins:hover {
     filter: brightness(90%);
 }
 
