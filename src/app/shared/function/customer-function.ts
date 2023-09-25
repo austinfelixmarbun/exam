@@ -32,6 +32,8 @@ import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cu
 import { ReqBouwheerCompanyObj } from "../model/req-bouwheer-company-obj.model";
 import { BouwheerObj } from "../model/bouwheer-obj.model";
 import { BouwheerCompanyObj } from "../model/bouwheer-company-obj.model";
+import { base64StringToBlob } from "blob-util";
+import { saveAs } from 'file-saver';
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -1689,5 +1691,33 @@ export async function addBouwheerCompany(parentForm: any, dicts: Record<string, 
       }
     });
 
+}
+
+export async function downloadDmsDocument(
+  http: HttpClient, 
+  toastr: NGXToastrService, 
+  RowObj: any) 
+  {
+  let DocumentId = RowObj.DocDmsId;
+  http.post(this.UrlConstantNew.DownloadDmsDocument, { DocumentId: DocumentId }).subscribe(
+    response => {
+      if (response && Array.isArray(response['data']) && response['data'].length > 0) {
+        const content = response['data'][0]['content'];
+        const contentType = 'application/pdf';
+        const blob = base64StringToBlob(content, contentType);
+
+        const metadata = response['data'][0]['metadata'];
+        const fileName = metadata.find(item => item.label === 'Document Name').value;
+        saveAs(blob, fileName);
+      } else {
+        // Handle invalid response from the server.
+        // this.toastr.errorMessage('Invalid response from the server.');
+      }
+    },
+    error => {
+      // Handle error occurred while downloading the document.
+      // this.toastr.errorMessage('An error occurred while downloading the document.');
+    }
+  );
 }
 
