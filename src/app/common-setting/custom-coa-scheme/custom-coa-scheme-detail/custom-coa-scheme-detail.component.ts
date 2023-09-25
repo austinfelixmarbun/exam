@@ -134,12 +134,12 @@ export class CustomCoaSchemeDetailComponent  implements OnInit {
   Add(ev) {
     if (ev.value == "null" || ev.value == "" || ev.value == null || ev.value == undefined) {
       this.cekHead = true;
-      this.toastr.errorMessage("Can not add Currency Code, Please select currency first!");
+      this.toastr.warningMessage("Can not add Currency Code, Please select currency first!");
       return;
     }
     for (let i = 0; i < this.colHeadTable.length; i++) {
       if (this.colHeadTable[i].newHead == 'COA ' + ev.value) {
-        this.toastr.errorMessage("This Currency Code already exists !");
+        this.toastr.warningMessage("This Currency Code already exists !");
         this.cekHead = true;
         break;
       }
@@ -181,7 +181,7 @@ export class CustomCoaSchemeDetailComponent  implements OnInit {
     this.CoaValue = "COA SHEME";
     if (ev.value == "null" || ev.value == "" || ev.value == null || ev.value == undefined)
     {
-      this.toastr.errorMessage("Can not Copy Coa Scheme, Please select Coa Scheme first!");
+      this.toastr.warningMessage("Can not Copy Coa Scheme, Please select Coa Scheme first!");
       return;
     }
     var done = false;
@@ -220,11 +220,11 @@ export class CustomCoaSchemeDetailComponent  implements OnInit {
 
     if(this.ListSelectedCurr.length === 0 )
     {
-      this.toastr.errorMessage("Can not Submit Coa Scheme, Please select Currency First!");
+      this.toastr.warningMessage("Can not Submit Coa Scheme, Please select Currency First!");
     }
     else if(CountCoaNull == this.ListPaymentAlloc.length * this.ListSelectedCurr.length)
     {
-      this.toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
+      this.toastr.warningMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
     }
     else
     {
@@ -254,7 +254,7 @@ export class CustomCoaSchemeDetailComponent  implements OnInit {
 
   async GetListPaymentAlloc() {
     this.parentForm.addControl("ListCoa", this.fb.array([]));
-    
+
     await this.http.post<any>(this.UrlConstantNew.GetListKeyValueRefPaymentAllocByPayAllocGrpCode, { Code: this.MrPayAllocGrpCode }).toPromise().then(
       (response: any) => {
         this.ListPaymentAlloc = response.ReturnObject;

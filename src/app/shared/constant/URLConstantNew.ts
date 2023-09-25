@@ -1003,6 +1003,9 @@ export class UrlConstantNew{
     public GetRefPaymentAllocByID = this.env.FoundationR3Url + this.url.GetRefPaymentAllocByID;
     public GetListKeyValueRefPaymentAllocByPayAllocGrpCode = this.env.FoundationR3Url + this.url.GetListKeyValueRefPaymentAllocByPayAllocGrpCode;
     public SubmitRefPaymentAlloc = this.env.FoundationR3Url + this.url.SubmitRefPaymentAlloc;
+    public SubmitAddRefAttr = this.env.FoundationR3Url + this.url.SubmitAddRefAttr;
+    public SubmitEditRefAttr = this.env.FoundationR3Url + this.url.SubmitEditRefAttr;
+    public GetRefPaymentAllocAttrByRefPaymentAllocId = this.env.FoundationR3Url + this.url.GetRefPaymentAllocAttrByRefPaymentAllocId;
 
     // REF PAYMENT ALLOC GRP
     public GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate = this.env.FoundationR3Url + this.url.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate;

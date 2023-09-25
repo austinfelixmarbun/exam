@@ -1,20 +1,21 @@
 <div class="form-body">
   <lib-ucSubsection [id]="'ShareholderId'" [title]="'Shareholder'" [panel]="'ShareholderSection'">
   </lib-ucSubsection>
+  <div class="p-3">
   <div id="ShareholderSection">
     <div class="form-group row">
-      <div class="col-md-6">
+      <div class="col-md-6 label-field-2">
         Application Data
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 label-field-2">
         Master Customer Data
       </div>
     </div>
     <div class="form-group row">
       <div class="col-md-6" style="overflow-x: auto;">
-        <table class="table table-responsive-md text-center table-hover">
+        <table class="table table-responsive-md text-center table-hover table-new">
           <thead>
-            <tr class="table-header">
+            <tr class="table-header-2">
               <th style="text-align: left;">
                 <span class="thead-header" name='ShareholderName' translate>SHAREHOLDER NAME</span>
               </th>
@@ -53,9 +54,9 @@
         </table>
       </div>
       <div class="col-md-6" style="overflow-x: auto;">
-        <table class="table table-responsive-md text-center table-hover">
+        <table class="table table-responsive-md text-center table-hover table-new">
           <thead>
-            <tr class="table-header">
+            <tr class="table-header-2">
               <th style="text-align: left;">
                 <span class="thead-header" name='ShareholderName' translate>SHAREHOLDER NAME</span>
               </th>
@@ -95,12 +96,15 @@
       </div>
     </div>
   </div>
+  </div>
+  <div class="p-3">
   <div class="form-actions right" style="text-align: right;">
-    <button type="button" class="btn btn-raised btn-warning mr-1" (click)="back()">
-      <i class="far fa-window-close"></i>&nbsp;<span translate>Cancel</span>
+    <button type="button" class="btn btn-raised mr-1 btn-outline-2" (click)="back()">
+      <i class="far fa-window-close button-icon"></i>&nbsp;<span class="button-text" translate>Cancel</span>
     </button>
-    <button type="button" class="btn btn-raised btn-primary" (click)="SaveValue()">
-      <i class="far fa-check-square"></i>&nbsp;<span translate>Save</span>
+    <button type="button" class="btn btn-raised btn-primary-2" (click)="SaveValue()">
+      <i class="far fa-check-square button-icon"></i>&nbsp;<span class="button-text" translate>Save</span>
     </button>
+  </div>
   </div>
 </div>

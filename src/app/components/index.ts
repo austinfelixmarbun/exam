@@ -10,16 +10,6 @@ export{SelfCustomContainerViewVendorAttrComponent} from "app/view/vendor/self-cu
 export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component";
 export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";
 export{UpdateCustomerPersonalDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-personal-detail/update-customer-personal-detail.component";
-export{UpdateCustomerAddressComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-address/update-customer-address.component";
-export{UpdateCustomerFamilyComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-family/update-customer-family.component";
-export{UpdateCustomerEmergencyDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component";
-export{UpdateCustomerJobDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-job-data/update-customer-job-data.component";
-export{UpdateCustomerFinDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-fin-data/update-customer-fin-data.component";
-export{UpdateCustomerCompanyDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-detail/update-customer-company-detail.component";
-export{UpdateCustomerMgmntShareholderComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-mgmnt-shareholder/update-customer-mgmnt-shareholder.component";
-export{UpdateCustomerContactInfoComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component";
-export{UpdateCustomerCompanyFinDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component";
-export{UpdateCustomerCompanyLegalDocComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component";
 export{SelfCustomCustFinDataTabComponent} from "app/customer/cust-fin-data-tab/self-custom-fin-data-tab.component"
 export{CustFinDataTabComponent} from "app/customer/cust-fin-data-tab/cust-fin-data-tab.component"
 export{SelfCustomCustFinDataComponent} from "app/customer/cust-fin-data-tab/self-custom-cust-fin-data.component"

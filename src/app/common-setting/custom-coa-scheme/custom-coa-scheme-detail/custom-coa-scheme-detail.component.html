@@ -1,8 +1,8 @@
 <!-- <div class="col-md-12"> -->
-  <div class="card">
-    <div class="card-header">
+  <div class="card bg-light-blue-card">
+    <!-- <div class="card-header">
       <h4 class="card-title" id="horz-layout-colored-controls" translate>COA Scheme</h4>
-    </div>
+    </div> -->
 
     <div class="card-body">
       <div class="px-3">
@@ -49,7 +49,7 @@
                 <label class="col-md-3" translate>Copy</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control" #coaSchmSelect>
+                    <select class="form-control input-field-2" #coaSchmSelect>
                       <option value="">-Select One-</option>
                       <option *ngFor="let item of ListCopy" [value]="item.Key">
                         {{item.Value}}
@@ -58,8 +58,8 @@
 
                     <div class="input-group-append">
                       <span class="input-group-btn">
-                        <button class="btn btn-raised btn-primary" type="button" (click)="copy(coaSchmSelect)">
-                          <i class="fa fa-check-square-o"></i>&nbsp;<span translate>Copy</span>
+                        <button class="btn btn-raised btn-primary-2" type="button" (click)="copy(coaSchmSelect)">
+                          <i class="fa fa-check-square-o button-icon"></i>&nbsp;<span class="button-text" translate>Copy</span>
                         </button>
                       </span>
                     </div>
@@ -70,7 +70,7 @@
                 <label class="col-md-3" translate>Currency Code</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
-                    <select class="form-control" #currselect>
+                    <select class="form-control input-field-2"  #currselect>
                       <option disabled [value]="null">-Select One-</option>
                       <option *ngFor="let item of ListCurr" [value]="item.Key">
                         {{item.Value}}
@@ -78,8 +78,8 @@
                     </select>
                     <div class="input-group-append">
                       <span class="input-group-btn">
-                        <button class="btn btn-raised btn-primary" type="button" (click)="Add(currselect)">
-                          <i class="fa fa-check-square-o"></i>&nbsp;<span translate>Add</span>
+                        <button class="btn btn-raised btn-primary-2" type="button" (click)="Add(currselect)">
+                          <i class="fa fa-check-square-o button-icon"></i>&nbsp;<span class="button-text" translate>Add</span>
                         </button>
                       </span>
                     </div>
@@ -88,9 +88,9 @@
               </div>
 
               <div class="table-responsive" style="overflow-x: auto;">
-                <table class="table table-responsive-md text-center table-hover">
+                <table class="table table-responsive-md text-center table-hover table-new">
                   <thead>
-                    <tr class="table-header">
+                    <tr class="table-header-2">
                       <th>
                         <span class="thead-header" translate>No</span>
                       </th>
@@ -109,7 +109,7 @@
                       <td class="text-left">{{item.Value}}</td>
                       <ng-container formArrayName = "DataCOA" *ngIf="this.isTableReady">
                         <td class="text-center" *ngFor="let currs of ListSelectedCurr; let x = index" [formGroupName]="x">
-                          <input type="text" class="form-control" formControlName="COA"
+                          <input type="text" class="form-control input-field-2" formControlName="COA"
                           [ngClass]="{ 'is-invalid': enjiForm.submitted && CoaSchemeForm.controls.ListCoa['controls'][i]['controls'].DataCOA['controls'][x]['controls'].COA.invalid }"
                           >
                         </td>
@@ -124,9 +124,9 @@
 
           <!-- <div class="form-actions right">
             <button type="button" [routerLink]="[CancelLink]" class="btn btn-raised btn-warning mr-1">
-              <i class="fa fa-arrow-circle-left"></i>&nbsp;<span translate>Back</span>
+              <i class="fa fa-arrow-circle-l button-iconeft"></i>&nbsp;<span translate>Back</span>
             </button>
-            <button type="submit" class="btn btn-raised btn-primary" translate>
+            <button type="submit" class="btn btn-raised btn-primary-2" translate>
               Submit
             </button>
           </div> -->
