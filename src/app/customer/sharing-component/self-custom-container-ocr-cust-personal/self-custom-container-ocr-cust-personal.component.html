@@ -1,10 +1,12 @@
-<!-- <lib-ucSubsection [id]="'documentId'" [title]="'Document'" [panel]="'document'">
-</lib-ucSubsection> -->
-<div id="document" *ngIf="dicts.formRaw.MrCustTypeCode=='PERSONAL' && dicts.mode != 'edit'">
+<div id="documentId" *ngIf="dicts.formRaw.MrCustTypeCode=='PERSONAL' && dicts.mode != 'edit'">
+<lib-ucSubsection [id]="'OcrKtpId'" [title]="'OCR FOR KTP'" [panel]="'OcrKtp'"></lib-ucSubsection>
+<div id="OcrKtp" class="px-3">
   <div class="form-group row">
-    <label class="col-md-2" translate>KTP UPLOAD</label>
+    <label class="col-md-2 label-field-2" translate>KTP UPLOAD
+      <span class="optional-text">(Optional)</span>
+    </label>
     <div class="col-md-4">
-      <label [for]="'doc'" class="btn btn-primary btn-sm afu-select-btn" >Choose File</label>
+      <label [for]="'doc'" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2" >Choose File</label>
       <input type="file" [id]="'doc'" style="display: none" (change)="HandleFileInput($event.target.files)"
         [accept]="ExtStr" [disabled]="isDisableButton"/>
         <div [hidden]="!reqOcrKtpObj.img" style="padding-left: 15px" class="row afu-valid-file">
@@ -15,4 +17,5 @@
         </div>
     </div>
   </div>
+</div>
 </div>
