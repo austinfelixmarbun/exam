@@ -1182,6 +1182,8 @@ async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http
   );
 }
 
+
+
 async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
   let url = environment.FoundationR3Url + api;
@@ -1230,6 +1232,46 @@ async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, ht
   custPersonalObj.CustApuPptObj.RowVersion = dicts.formRaw.RowVersionCustApuPpt;
 
   await http.post(url, custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    response => {
+      toastr.successMessage(response["Message"]);
+    }
+  );
+}
+
+
+async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
+{
+  let url = environment.FoundationR3Url + api;
+
+  let custCompanyObj = new CustCompanyObj();
+  custCompanyObj.CustCompanyId = dicts.CustCompanyId;
+  custCompanyObj.CustId = dicts.IdCust;
+  custCompanyObj.Email1 = dicts.Email1;
+  custCompanyObj.Email2 = dicts.Email2;
+  custCompanyObj.EstablishmentDt = dicts.form.EstablishmentDt;
+  custCompanyObj.IsAffiliateWithMf = dicts.form.IsAffiliateWithMf;
+  custCompanyObj.IsAffiliated = dicts.IsAffiliated;
+  custCompanyObj.IsSkt = dicts.form.IsSkt;
+  custCompanyObj.IsVip = dicts.form.IsVip;
+  custCompanyObj.LicenseNo = dicts.LicenseNo;
+  custCompanyObj.MrCompanyTypeCode = dicts.MrCompanyTypeCode;
+  custCompanyObj.MrCustModelCode = dicts.MrCustModelCode;
+  custCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
+  custCompanyObj.NumOfEmp = dicts.form.NumOfEmp;
+  custCompanyObj.ParentCustId = dicts.form.ParentCustId;
+  custCompanyObj.Phn1 = dicts.Phn1;
+  custCompanyObj.Phn2 = dicts.Phn2;
+  custCompanyObj.PhnArea1 = dicts.PhnArea1;
+  custCompanyObj.PhnArea2 = dicts.PhnArea2;
+  custCompanyObj.PhnExt1 = dicts.PhnExt1;
+  custCompanyObj.PhnExt2 = dicts.PhnExt2;
+  custCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId
+  custCompanyObj.RegistrationNo = dicts.RegistrationNo;
+  custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
+  custCompanyObj.RowVersion = dicts.form.RowVersion;
+  custCompanyObj.Website = dicts.Website;
+
+  await http.post(url, custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
     response => {
       toastr.successMessage(response["Message"]);
     }
@@ -1415,6 +1457,55 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
   if (StepIndex == 9)
   {
     alert("CustAttrData")
+  }
+
+  if (isSaveAndSync == "true")
+  {
+    let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
+    if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
+
+    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  else
+  {
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    templateService.publish({Actions: actions, Data: {"stepCode": next}});
+  }
+}
+
+
+export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
+{
+  if (!dicts.formValid) return;
+
+  let next = ""
+  let api = ""
+
+  if (StepIndex == 1)
+  {
+      api = "/v1/CustCompany/EditCustCompany";
+      await saveCustCompanyDetail(dicts, api, http, toastr)
+    
   }
 
   if (isSaveAndSync == "true")
