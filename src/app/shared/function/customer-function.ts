@@ -1803,76 +1803,85 @@ export async function addBouwheerCompany(parentForm: any, dicts: Record<string, 
   reqSubmitObj.rAddBouwheerCompanyObj = new BouwheerCompanyObj()
   reqSubmitObj.rAddBouwheerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
 
-  const forAddApi = dicts.ListBouwheerIndustryInfo.map(item => ({
-    RefIndustryTypeCode: item.RefIndustryTypeCode,
-    BusinessStartDate: item.BusinessStartDate,
-    IsMain: item.IsMain,
-    Notes: item.Notes,
-    BouwheerCompanyIndustryInfoId: item.BouwheerCompanyIndustryInfoId,
-    BouwheerCompanyId: item.BouwheerCompanyId
-  }));
+  let forAddApi: any ;
+  let forUpload: any ;
 
-  const forUpload = dicts.ListBouwheerIndustryInfo.map(item => ({
-    RefIndustryTypeCode: item.RefIndustryTypeCode,
-    ByteBase64: item.ByteBase64,
-    DocUploadName: item.DocUploadName,
-  }));
-
-  reqSubmitObj.rAddBouwheerCompanyIndustryInfoObj = forAddApi;
-
-
+  if(dicts.ListBouwheerIndustryInfo != undefined)
+  {
+    forAddApi = dicts.ListBouwheerIndustryInfo.map(item => ({
+      RefIndustryTypeCode: item.RefIndustryTypeCode,
+      BusinessStartDate: item.BusinessStartDate,
+      IsMain: item.IsMain,
+      Notes: item.Notes,
+      BouwheerCompanyIndustryInfoId: item.BouwheerCompanyIndustryInfoId,
+      BouwheerCompanyId: item.BouwheerCompanyId
+    }));
   
+    forUpload = dicts.ListBouwheerIndustryInfo.map(item => ({
+      RefIndustryTypeCode: item.RefIndustryTypeCode,
+      ByteBase64: item.ByteBase64,
+      DocUploadName: item.DocUploadName,
+    }));
+  
+    reqSubmitObj.rAddBouwheerCompanyIndustryInfoObj = forAddApi;
+  }
+
   var resSave;
   http.post(url, reqSubmitObj, AdInsConstant.SpinnerOptions).subscribe(
     async (response) => {
       resSave = response;
 
-      let reqObj = {
-        BouwheerId: resSave["Id"] ,
-        uploadIndustryDocs: forUpload
-      };
-
-      let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
-      // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
+      if (Array.isArray(forUpload) && forUpload.length > 0) {
+        let reqObj = {
+          BouwheerId: resSave["Id"] ,
+          uploadIndustryDocs: forUpload
+        };
+  
+        let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
+        // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
+        
+        try {
+          if (environment.SpinnerOnHttpPost) this.spinner.show();
       
-      try {
-        if (environment.SpinnerOnHttpPost) this.spinner.show();
-    
-        const formData: any = new FormData();
-        formData.append('reqObj', JSON.stringify(reqObj));
-    
-        const xhr = new XMLHttpRequest();
-    
-        const xhrPromise = new Promise<void>((resolve, reject) => {
-          xhr.onreadystatechange = evnt => {
-            if (xhr.readyState === 4) {
-              if (xhr.status === 200 || xhr.status === 201) {
-                resolve();
-              } else {
-                reject(new Error('Upload Failed !'));
+          const formData: any = new FormData();
+          formData.append('reqObj', JSON.stringify(reqObj));
+      
+          const xhr = new XMLHttpRequest();
+      
+          const xhrPromise = new Promise<void>((resolve, reject) => {
+            xhr.onreadystatechange = evnt => {
+              if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                  resolve();
+                } else {
+                  reject(new Error('Upload Failed !'));
+                }
               }
-            }
-          };
-    
-          xhr.onerror = evnt => {
-            reject(new Error('Upload Failed !'));
-          };
-    
-          xhr.open('POST', urlUpload, true);
-          const value = cookieService.get('XSRF-TOKEN');
-          const token = DecryptString(value, environment.ChipperKeyCookie);
-          xhr.setRequestHeader('AdInsKey', `${token}`);
-          xhr.send(formData);
-        });
-    
-        await xhrPromise; // Tunggu sampai permintaan XHR selesai
-    
-      } catch (error) {
-        toastr.errorMessage(error.message || 'An error occurred during upload.');
-      } finally {
-        if (environment.SpinnerOnHttpPost) this.spinner.hide();
+            };
+      
+            xhr.onerror = evnt => {
+              reject(new Error('Upload Failed !'));
+            };
+      
+            xhr.open('POST', urlUpload, true);
+            const value = cookieService.get('XSRF-TOKEN');
+            const token = DecryptString(value, environment.ChipperKeyCookie);
+            xhr.setRequestHeader('AdInsKey', `${token}`);
+            xhr.send(formData);
+          });
+      
+          await xhrPromise; // Tunggu sampai permintaan XHR selesai
+      
+        } catch (error) {
+          toastr.errorMessage(error.message || 'An error occurred during upload.');
+        } finally {
+          if (environment.SpinnerOnHttpPost) this.spinner.hide();
+          toastr.successMessage(resSave["Message"])
+          await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+        }
+      }else{
         toastr.successMessage(resSave["Message"])
-        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']); // Pengalihan halaman sekarang seharusnya berada di sini
+        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
       }
     });
 

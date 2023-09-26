@@ -39,6 +39,7 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
   @ViewChild('ModalIndustryList') ModalIndustryList;
 
   IndustryInfoForm = this.fb.group({
+    CustCompanyIndustryInfoId: [0],
     BusinessStartDate: ['', [Validators.required]],
     Notes: [''],
     IsMain: [false],
@@ -98,7 +99,8 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
         BusinessStartDate: datePipe.transform(this.industryInfo.BusinessStartDate, 'yyyy-MM-dd'),
         Notes: this.industryInfo.Notes,
         IsMain: this.industryInfo.IsMain,
-        RefIndustryTypeCode: this.industryInfo.RefIndustryTypeCode
+        RefIndustryTypeCode: this.industryInfo.RefIndustryTypeCode,
+        CustCompanyIndustryInfoId: this.industryInfo.CustCompanyIndustryInfoId
       });
   }
 
@@ -116,11 +118,13 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
         return;
       }
     }else{
-      if(this.IndustryInfoForm.controls['IsMain'].value == true){
+      let duplicateMainIndustry = this.ListCustIndustryInfo.find(x => x.IsMain === true && x.CustCompanyIndustryInfoId != this.IndustryInfoForm.controls['CustCompanyIndustryInfoId'].value
+      && this.IndustryInfoForm.controls['IsMain'].value === true);
+      if(duplicateMainIndustry){
         this.toastr.warningMessage("There can only be one main industry!")
         return;
       }
-      let duplicateIndustryTypeCode = this.ListCustIndustryInfo.find(x => x.RefIndustryTypeCode ===  this.IndustryInfoForm.controls['RefIndustryTypeCode'].value);
+      let duplicateIndustryTypeCode = this.ListCustIndustryInfo.find(x => x.RefIndustryTypeCode === this.IndustryInfoForm.controls['RefIndustryTypeCode'].value && x.CustCompanyIndustryInfoId != this.IndustryInfoForm.controls['CustCompanyIndustryInfoId'].value);
       if (duplicateIndustryTypeCode){
         this.toastr.warningMessage("Industry type already exists!")
         return;
@@ -139,7 +143,7 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
       }
       await this.http.post(this.UrlConstantNew.AddEditCustCompanyIndustryInfo, this.ReqCustIndustryInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         async (response) => {
-          this.toastr.successMessage(response["Message"]);
+          // this.toastr.successMessage(response["Message"]);
 
           if (this.IndustryInfoForm.controls['DocUploadName'].value == "") {
             this.currentModal.close("Success");
@@ -152,18 +156,15 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
             ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
             DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
           };
-    
-          let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
-          // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
-          
+
           try {
             if (environment.SpinnerOnHttpPost) this.spinner.show();
-        
+
             const formData: any = new FormData();
             formData.append('reqObj', JSON.stringify(reqObj));
-        
+
             const xhr = new XMLHttpRequest();
-        
+
             const xhrPromise = new Promise<void>((resolve, reject) => {
               xhr.onreadystatechange = evnt => {
                 if (xhr.readyState === 4) {
@@ -174,30 +175,29 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
                   }
                 }
               };
-        
+
               xhr.onerror = evnt => {
                 reject(new Error('Upload Failed !'));
               };
-        
+
               xhr.open('POST', this.UrlConstantNew.UploadCustCompanyIndustryDoc, true);
               const value = this.cookieService.get('XSRF-TOKEN');
               const token = this.DecryptString(value, environment.ChipperKeyCookie);
               xhr.setRequestHeader('AdInsKey', `${token}`);
               xhr.send(formData);
             });
-        
+
             await xhrPromise; // Tunggu sampai permintaan XHR selesai
-        
+
           } catch (error) {
             this.toastr.errorMessage(error.message || 'An error occurred during upload.');
           } finally {
             if (environment.SpinnerOnHttpPost) this.spinner.hide();
-            this.currentModal.close(response["Message"]);
-            this.getListCustIndustryInfo();
           }
-        }
-      );
-      
+        });
+        this.currentModal.close("Success");
+        this.toastr.successMessage("Success");
+        this.getListCustIndustryInfo();
     }
 
     DecryptString(chipperText: string, chipperKey: string) {
