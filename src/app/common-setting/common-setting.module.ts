@@ -105,6 +105,10 @@ import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim
 import { CustomCoaSchemeDetailComponent } from './custom-coa-scheme/custom-coa-scheme-detail/custom-coa-scheme-detail.component';
 import { SelfCustomContainerHolidayDetailComponent } from './holiday-scheme/self-custom-container-holiday-detail/self-custom-container-holiday-detail.component';
 import { SelfCustomContainerWorkingHourDDetailComponent } from './working-hour-scheme/self-custom-container-working-hour-d-detail/self-custom-container-working-hour-d-detail.component';
+import { SelfCustomContainerDmsIframeProjectComponent } from './Project/self-custom-container-dms-iframe-project/self-custom-container-dms-iframe-project.component';
+import { PaymentAllocDetailNewComponent } from './payment-alloc/payment-alloc-detail-new/payment-alloc-detail-attr.component';
+import { PaymentAllocDetailAttributeComponent } from './payment-alloc/payment-alloc-detail-new/payment-alloc-detail-attribute/payment-alloc-detail-attribute.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -125,6 +129,11 @@ export const customCurrencyMaskConfig = {
     CommonModule,
     FormsModule,
     NgbModule,
+    UiSwitchModule.forRoot({
+      size: 'small',
+      checkedLabel: 'on',
+      uncheckedLabel: 'off'
+    }),
     UCSearchModule,
     UcgridfooterModule,
     SharingComponentModule,
@@ -150,6 +159,7 @@ export const customCurrencyMaskConfig = {
     MasterTypePagingComponent,
     MasterTypeAddEditComponent,
     GeneralSettingAddEditComponent,
+    PaymentAllocDetailNewComponent,
     GeneralSettingPagingComponent,
     CurrencyComponent,
     CurrencyAddComponent,
@@ -227,7 +237,9 @@ export const customCurrencyMaskConfig = {
     PaymentAllocGroupDPagingComponent,
     SelfCustomContainerHolidayDetailComponent,
     SelfCustomContainerWorkingHourDDetailComponent,
-    CustomCoaSchemeDetailComponent
+    CustomCoaSchemeDetailComponent,
+    SelfCustomContainerDmsIframeProjectComponent,
+    PaymentAllocDetailAttributeComponent
   ],
   providers: [
     { provide: UcTemplateService, useClass: AdinsTemplateService }

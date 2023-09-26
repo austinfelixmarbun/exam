@@ -27,7 +27,14 @@ import { ExceptionConstant } from "../constant/ExceptionConstant";
 import { FormGroup } from "@angular/forms";
 import { UcTemplateService } from "@adins/uctemplate";
 import { CustPersonalContactPersonObj } from "../model/cust-personal-contact-person-obj.model";
+import { CustPersonalObjV2 } from "../model/cust-personal-obj-v2.model";
 import { CustCompanylegalDocFile } from "../model/cust-company-legal-doc-file/cust-company-legal-doc-file-obj.model";
+import { ReqBouwheerCompanyObj } from "../model/req-bouwheer-company-obj.model";
+import { BouwheerObj } from "../model/bouwheer-obj.model";
+import { BouwheerCompanyObj } from "../model/bouwheer-company-obj.model";
+import { base64StringToBlob } from "blob-util";
+import { saveAs } from 'file-saver';
+import { CustCompanyObjV2 } from "../model/cust-company-obj-v2.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -224,6 +231,128 @@ function SaveCustPersonal(parentForm: any, dicts: Record<string, any>, Mode: str
   reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
   reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
   reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = parentForm.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = parentForm.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo1 = parentForm.IsWaMobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo2 = parentForm.IsWaMobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo3 = parentForm.IsWaMobilePhnNo3;
+  if (Mode == CommonConstant.CustMainDataModeFamily) {
+    reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
+    reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
+    reqSubmitObj.CustPersonalFamilyObj = SetCustPersonalFamilyData(dicts, parentForm.MrCustRelationship);
+  }
+
+  reqSubmitObj.CustAddr = new CustAddrObj();
+  reqSubmitObj.CustAddr.CustAddrId = dicts.CustAddrId;
+  reqSubmitObj.CustAddr.Fax = dicts.Fax;
+  reqSubmitObj.CustAddr.FaxArea = dicts.FaxArea;
+  reqSubmitObj.CustAddr.Notes = dicts.Notes;
+  reqSubmitObj.CustAddr.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustAddr.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustAddr.Phn3 = dicts.Phn3;
+  reqSubmitObj.CustAddr.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustAddr.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustAddr.PhnArea3 = dicts.PhnArea3;
+  reqSubmitObj.CustAddr.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustAddr.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustAddr.PhnExt3 = dicts.PhnExt3;
+  reqSubmitObj.CustAddr.RowVersion = dicts.RowVersionAddress;
+  reqSubmitObj.CustAddr.StayLength = dicts.StayLength;
+  reqSubmitObj.CustAddr.StaySince = dicts.StaySince;
+
+  reqSubmitObj.CustAddr.CustId = dicts.CustId;
+  reqSubmitObj.CustAddr.Addr = parentForm.UcAddress.Addr;
+  reqSubmitObj.CustAddr.AreaCode1 = parentForm.UcAddress.AreaCode1;
+  reqSubmitObj.CustAddr.AreaCode2 = parentForm.UcAddress.AreaCode2;
+  reqSubmitObj.CustAddr.AreaCode3 = parentForm.UcAddress.AreaCode3;
+  reqSubmitObj.CustAddr.AreaCode4 = parentForm.UcAddress.AreaCode4;
+  reqSubmitObj.CustAddr.City = parentForm.UcAddress.City;
+  reqSubmitObj.CustAddr.MrBuildingOwnershipCode = parentForm.UcAddress.MrHouseOwnershipCode;
+  reqSubmitObj.CustAddr.Zipcode = parentForm.UcAddress.Zipcode;
+  reqSubmitObj.CustAddr.SubZipcode = parentForm.UcAddress.SubZipcode;
+  reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+  if (Mode != CommonConstant.CustMainDataModeCust) {
+    reqSubmitObj.CustPersonalJobObj = new CustPersonalJobDataObj();
+    reqSubmitObj.CustPersonalJobObj = SetCustPersonalJobData(parentForm, dicts, Mode);
+
+    reqSubmitObj.CustAttrContentObjs = new Array<CustAttrContentObj>();
+    reqSubmitObj.CustAttrContentObjs = SetCustAttrContent(parentForm);
+  }
+
+  reqSubmitObj = SetCustomerPersonalDataMode(reqSubmitObj, Mode, From);
+  if (dicts.UploadFile != undefined)
+  {
+    reqSubmitObj.CustDocFileObjs = dicts.UploadFile;
+  }
+
+  return reqSubmitObj;
+}
+
+function SaveCustPersonalV2(parentForm: any, dicts: Record<string, any>, Mode: string, From: string)
+{
+  let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+
+  reqSubmitObj.CustDocFileObjs = new Array<CustDocFileObj>();
+
+  reqSubmitObj.CustObj = new CustObj();
+  reqSubmitObj.CustObj.CustId = dicts.CustId;
+  reqSubmitObj.CustObj.CustNo = dicts.CustNo;
+  reqSubmitObj.CustObj.IsAffiliateWithMf = dicts.IsAffiliateWithMf;
+  reqSubmitObj.CustObj.IsCustomer = dicts.IsCustomer;
+  reqSubmitObj.CustObj.IsFamily = dicts.IsFamily;
+  reqSubmitObj.CustObj.IsGuarantor = dicts.IsGuarantor;
+  reqSubmitObj.CustObj.IsShareholder = dicts.IsShareholder;;
+  reqSubmitObj.CustObj.OriginalOfficeCode = dicts.OriginalOfficeCode;
+  reqSubmitObj.CustObj.RowVersion = dicts.RowVersionCust;
+  reqSubmitObj.CustObj.IsVip = dicts.IsVip;
+  reqSubmitObj.CustObj.VipNotes = dicts.VipNotes;
+
+  
+
+  reqSubmitObj.CustObj.CustName = parentForm.CustName;
+  reqSubmitObj.CustObj.MrIdTypeCode = parentForm.MrIdTypeCode;
+  reqSubmitObj.CustObj.IdNo = parentForm.IdNo;
+  reqSubmitObj.CustObj.IdExpiredDt = parentForm.IdExpiredDt;
+  reqSubmitObj.CustObj.TaxIdNo = parentForm.TaxIdNo;
+  reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
+  reqSubmitObj.CustObj.MrCustModelCode = parentForm.MrCustModelCode;
+  reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
+  reqSubmitObj.CustObj.IsCustGrp = parentForm.IsCustGrp;
+  
+  reqSubmitObj.CustPersonalObj = new CustPersonalObj();
+  reqSubmitObj.CustPersonalObj.CustId = dicts.CustId;
+  reqSubmitObj.CustPersonalObj.CustPersonalId = dicts.CustPersonalId;
+  reqSubmitObj.CustPersonalObj.CustPrefixName = dicts.CustPrefixName;
+  reqSubmitObj.CustPersonalObj.CustSuffixName = dicts.CustSuffixName;
+  reqSubmitObj.CustPersonalObj.Email2 = dicts.Email2;
+  reqSubmitObj.CustPersonalObj.Email3 = dicts.Email3;
+  reqSubmitObj.CustPersonalObj.FamilyCardNo = dicts.FamilyCardNo;
+  reqSubmitObj.CustPersonalObj.IsRestInPeace = dicts.IsRestInPeace;
+
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = dicts.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = dicts.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.MrEducationCode = dicts.MrEducationCode;
+  reqSubmitObj.CustPersonalObj.MrReligionCode = dicts.MrReligionCode;
+  reqSubmitObj.CustPersonalObj.MrSalutationCode = dicts.MrSalutationCode;
+  reqSubmitObj.CustPersonalObj.NickName = dicts.NickName;
+  reqSubmitObj.CustPersonalObj.NoOfDependents = dicts.NoOfDependents;
+  reqSubmitObj.CustPersonalObj.NoOfResidence = dicts.NoOfResidence;
+  reqSubmitObj.CustPersonalObj.RowVersion = dicts.RowVersionCustPersonal;
+
+  reqSubmitObj.CustPersonalObj.CustFullName = parentForm.CustName;
+  reqSubmitObj.CustPersonalObj.MrGenderCode = parentForm.MrGenderCode;
+  reqSubmitObj.CustPersonalObj.BirthPlace = parentForm.BirthPlace;
+  reqSubmitObj.CustPersonalObj.BirthDt = parentForm.BirthDt;
+  reqSubmitObj.CustPersonalObj.MotherMaidenName = parentForm.MotherMaidenName;
+  reqSubmitObj.CustPersonalObj.MrMaritalStatCode = parentForm.MrMaritalStatCode;
+  reqSubmitObj.CustPersonalObj.Email1 = parentForm.Email1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo1 = parentForm.MobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo2 = parentForm.MobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.MobilePhnNo3 = parentForm.MobilePhnNo3;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo1 = parentForm.IsWaMobilePhnNo1;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo2 = parentForm.IsWaMobilePhnNo2;
+  reqSubmitObj.CustPersonalObj.IsWaMobilePhnNo3 = parentForm.IsWaMobilePhnNo3;
   if (Mode == CommonConstant.CustMainDataModeFamily) {
     reqSubmitObj.CustPersonalObj.MrNationalityCode = parentForm.MrNationalityCode;
     reqSubmitObj.CustPersonalObj.WnaCountryCode = parentForm.WnaCountryCode;
@@ -300,6 +429,96 @@ function SaveCustCompany(parentForm: any, dicts: Record<string, any>, Mode: stri
   reqSubmitObj.CustObj.MrCustModelCode = parentForm.CoyMrCustModelCode;
   reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
   reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
+
+  reqSubmitObj.CustCompanyObj = new CustCompanyObj();
+  reqSubmitObj.CustCompanyObj.CustCompanyId = dicts.CustCompanyId;
+  reqSubmitObj.CustCompanyObj.CustId = dicts.CustId;
+  reqSubmitObj.CustCompanyObj.Email1 = dicts.Email1;
+  reqSubmitObj.CustCompanyObj.Email2 = dicts.Email2;
+  reqSubmitObj.CustCompanyObj.EstablishmentDt = dicts.EstablishmentDt;
+  reqSubmitObj.CustCompanyObj.IsAffiliated = dicts.IsAffiliated;
+  reqSubmitObj.CustCompanyObj.IsSkt = dicts.IsSkt;
+  reqSubmitObj.CustCompanyObj.LicenseNo = dicts.LicenseNo;
+  reqSubmitObj.CustCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
+  reqSubmitObj.CustCompanyObj.NumOfEmp = dicts.NumOfEmp;
+  reqSubmitObj.CustCompanyObj.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustCompanyObj.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustCompanyObj.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustCompanyObj.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustCompanyObj.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustCompanyObj.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId;
+  reqSubmitObj.CustCompanyObj.RegistrationNo = dicts.RegistrationNo;
+  reqSubmitObj.CustCompanyObj.Website = dicts.Website;
+  reqSubmitObj.CustCompanyObj.RowVersion = dicts.RowVersionCustCompany;
+
+  reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+
+  reqSubmitObj.CustAddr = new CustAddrObj();
+  reqSubmitObj.CustAddr.CustAddrId = dicts.CustAddrId;
+  reqSubmitObj.CustAddr.Fax = dicts.Fax;
+  reqSubmitObj.CustAddr.FaxArea = dicts.FaxArea;
+  reqSubmitObj.CustAddr.Notes = dicts.Notes;
+  reqSubmitObj.CustAddr.Phn1 = dicts.Phn1;
+  reqSubmitObj.CustAddr.Phn2 = dicts.Phn2;
+  reqSubmitObj.CustAddr.Phn3 = dicts.Phn3;
+  reqSubmitObj.CustAddr.PhnArea1 = dicts.PhnArea1;
+  reqSubmitObj.CustAddr.PhnArea2 = dicts.PhnArea2;
+  reqSubmitObj.CustAddr.PhnArea3 = dicts.PhnArea3;
+  reqSubmitObj.CustAddr.PhnExt1 = dicts.PhnExt1;
+  reqSubmitObj.CustAddr.PhnExt2 = dicts.PhnExt2;
+  reqSubmitObj.CustAddr.PhnExt3 = dicts.PhnExt3;
+  reqSubmitObj.CustAddr.RowVersion = dicts.RowVersionAddress;
+  reqSubmitObj.CustAddr.StayLength = dicts.StayLength;
+  reqSubmitObj.CustAddr.StaySince = dicts.StaySince;
+
+  reqSubmitObj.CustAddr.CustId = dicts.CustId;
+  reqSubmitObj.CustAddr.Addr = parentForm.UcAddress.Addr;
+  reqSubmitObj.CustAddr.AreaCode1 = parentForm.UcAddress.AreaCode1;
+  reqSubmitObj.CustAddr.AreaCode2 = parentForm.UcAddress.AreaCode2;
+  reqSubmitObj.CustAddr.AreaCode3 = parentForm.UcAddress.AreaCode3;
+  reqSubmitObj.CustAddr.AreaCode4 = parentForm.UcAddress.AreaCode4;
+  reqSubmitObj.CustAddr.City = parentForm.UcAddress.City;
+  reqSubmitObj.CustAddr.MrBuildingOwnershipCode = parentForm.UcAddress.MrHouseOwnershipCode;
+  reqSubmitObj.CustAddr.Zipcode = parentForm.UcAddress.Zipcode;
+  reqSubmitObj.CustAddr.SubZipcode = parentForm.UcAddress.SubZipcode;
+  reqSubmitObj.CustAddr.MrCustAddrTypeCode = CommonConstant.AddrTypeLegal;
+
+  reqSubmitObj = SetCustomerCompanyDataMode(reqSubmitObj, Mode, From);
+
+  reqSubmitObj.CustDocFileObjs = new Array<CustDocFileObj>();
+  if (dicts.UploadFile != undefined)
+  {
+    reqSubmitObj.CustDocFileObjs = dicts.UploadFile;
+  }
+
+  return reqSubmitObj;
+}
+
+function SaveCustCompanyV2(parentForm: any, dicts: Record<string, any>, Mode: string, From: string)
+{
+  let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+
+  reqSubmitObj.CustObj = new CustObj();
+  reqSubmitObj.CustObj.CustId = dicts.CustId;
+  reqSubmitObj.CustObj.CustNo = dicts.CustNo;
+  reqSubmitObj.CustObj.IsAffiliateWithMf = dicts.IsAffiliateWithMf;
+  reqSubmitObj.CustObj.IsCustomer = dicts.IsCustomer;
+  reqSubmitObj.CustObj.IsFamily = dicts.IsFamily;
+  reqSubmitObj.CustObj.IsGuarantor = dicts.IsGuarantor;
+  reqSubmitObj.CustObj.IsShareholder = dicts.IsShareholder;;
+  reqSubmitObj.CustObj.OriginalOfficeCode = dicts.OriginalOfficeCode;
+  reqSubmitObj.CustObj.RowVersion = dicts.RowVersionCust;
+  reqSubmitObj.CustObj.IsVip = dicts.IsVip;
+  reqSubmitObj.CustObj.VipNotes = dicts.VipNotes;
+
+  reqSubmitObj.CustObj.CustName = parentForm.CoyCustName;
+  reqSubmitObj.CustObj.TaxIdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.IdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.MrCustModelCode = parentForm.CoyMrCustModelCode;
+  reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
+  reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
+  reqSubmitObj.CustObj.IsCustGrp = parentForm.CoyIsCustGrp;
 
   reqSubmitObj.CustCompanyObj = new CustCompanyObj();
   reqSubmitObj.CustCompanyObj.CustCompanyId = dicts.CustCompanyId;
@@ -542,6 +761,56 @@ export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mod
   {
     let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
     reqSubmitObj = SaveCustCompany(parentForm, dicts, Mode, From)
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    if (dicts.CustId != 0)
+    {
+      var reqPayload = separateFileUpload(reqSubmitObj);
+      var resSave;
+      http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          resSave = response;
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], dicts.CustId, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+        });
+    }
+    else
+    {
+      SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+    }
+  }
+}
+
+export function addEditCustomerV2(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  let url = environment.FoundationR3Url + api;
+  
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+  {
+    let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
+    reqSubmitObj = SaveCustPersonalV2(parentForm, dicts, Mode, From)
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    if (dicts.CustId != 0)
+    {
+
+      var reqPayload = separateFileUpload(reqSubmitObj);
+      var resSave;
+      http.post(url, reqPayload.forApi, AdInsConstant.SpinnerOptions).subscribe(
+        (response) => {
+          resSave = response;
+          uploadDocFileMultipart(reqPayload.forUpload, resSave["Message"], dicts.CustId, parentForm.MrCustTypeCode, Mode, From, toastr, router, cookieService)
+        });
+    }
+    else
+    {
+      SaveCustomerData(dicts, Mode, From, api, http, toastr, router, cookieService)
+    }
+  }
+
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypeCompany)
+  {
+    let reqSubmitObj: ReqCoyObj = new ReqCoyObj();
+    reqSubmitObj = SaveCustCompanyV2(parentForm, dicts, Mode, From)
     dicts["ReqSubmitObj"] = reqSubmitObj;
 
     if (dicts.CustId != 0)
@@ -916,6 +1185,63 @@ async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http
   );
 }
 
+
+
+async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
+{
+  let url = environment.FoundationR3Url + api;
+
+  let custPersonalObj = new CustPersonalObjV2();
+  custPersonalObj.BirthDt = dicts.BirthDt;
+  custPersonalObj.BirthPlace = dicts.BirthPlace;
+  custPersonalObj.CustFullName = dicts.CustName;
+  custPersonalObj.CustPersonalId = dicts.CustPersonalId;
+  custPersonalObj.Email1 = dicts.Email1;
+  custPersonalObj.Email2 = dicts.Email2;
+  custPersonalObj.Email3 = dicts.Email3;
+  custPersonalObj.MobilePhnNo1 = dicts.MobilePhnNo1;
+  custPersonalObj.MobilePhnNo2 = dicts.MobilePhnNo2;
+  custPersonalObj.MobilePhnNo3 = dicts.MobilePhnNo3;
+  custPersonalObj.IsWaMobilePhnNo1 = dicts.IsWaMobilePhnNo1;
+  custPersonalObj.IsWaMobilePhnNo2 = dicts.IsWaMobilePhnNo2;
+  custPersonalObj.IsWaMobilePhnNo3 = dicts.IsWaMobilePhnNo3;
+  custPersonalObj.MotherMaidenName = dicts.MotherMaidenName;
+  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
+  custPersonalObj.MrMaritalStatCode = dicts.MrMaritalStatCode;
+  custPersonalObj.MrGenderCode = dicts.MrGenderCode;
+
+  custPersonalObj.CustPrefixName = dicts.formRaw.CustPrefixName;
+  custPersonalObj.CustSuffixName = dicts.formRaw.CustSuffixName;
+  custPersonalObj.FamilyCardNo = dicts.formRaw.FamilyCardNo;
+  custPersonalObj.IsAffiliateWithMf = dicts.formRaw.IsAffiliateWithMf;
+  custPersonalObj.IsRestInPeace = dicts.formRaw.IsRestInPeace;
+  custPersonalObj.IsVip = dicts.formRaw.IsVip;
+  custPersonalObj.MrMaritalStatCode = dicts.MrMaritalStatCode
+  custPersonalObj.MrEducationCode = dicts.formRaw.MrEducationCode;
+  custPersonalObj.MrNationalityCode = dicts.formRaw.MrNationalityCode;
+  custPersonalObj.MrReligionCode = dicts.formRaw.MrReligionCode;
+  custPersonalObj.MrSalutationCode = dicts.formRaw.MrSalutationCode;
+  custPersonalObj.NickName = dicts.formRaw.NickName;
+  custPersonalObj.NoOfResidence = dicts.formRaw.NoOfResidence;
+  custPersonalObj.VipNotes = dicts.formRaw.VipNotes;
+  custPersonalObj.WnaCountryCode = dicts.formRaw.WnaCountryCode;
+  custPersonalObj.RowVersion = dicts.RowVersionPersonal;
+  custPersonalObj.ParentCustId = dicts.formRaw.ParentCustId;
+  custPersonalObj.CustApuPptObj.IsEdd = dicts.formRaw.IsEdd;
+  custPersonalObj.CustApuPptObj.MrCategory1TypeCode = dicts.formRaw.MrCategory1TypeCode;
+  custPersonalObj.CustApuPptObj.MrCategory2TypeCode = dicts.formRaw.MrCategory2TypeCode;
+  custPersonalObj.CustApuPptObj.MrCategory3TypeCode = dicts.formRaw.MrCategory3TypeCode;
+  custPersonalObj.CustApuPptObj.reason = dicts.formRaw.Reason;
+  custPersonalObj.CustApuPptObj.RowVersion = dicts.formRaw.RowVersionCustApuPpt;
+
+  await http.post(url, custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    response => {
+      toastr.successMessage(response["Message"]);
+    }
+  );
+}
+
+
 async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
   let url = environment.FoundationR3Url + api;
@@ -947,6 +1273,51 @@ async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http:
   custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
   custCompanyObj.RowVersion = dicts.form.RowVersion;
   custCompanyObj.Website = dicts.Website;
+
+  await http.post(url, custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
+    response => {
+      toastr.successMessage(response["Message"]);
+    }
+  );
+}
+
+async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
+{
+  let url = environment.FoundationR3Url + api;
+
+  let custCompanyObj = new CustCompanyObjV2();
+  custCompanyObj.CustCompanyId = dicts.CustCompanyId;
+  custCompanyObj.CustId = dicts.IdCust;
+  custCompanyObj.Email1 = dicts.Email1;
+  custCompanyObj.Email2 = dicts.Email2;
+  custCompanyObj.EstablishmentDt = dicts.form.EstablishmentDt;
+  custCompanyObj.IsAffiliateWithMf = dicts.form.IsAffiliateWithMf;
+  custCompanyObj.IsAffiliated = dicts.IsAffiliated;
+  custCompanyObj.IsSkt = dicts.form.IsSkt;
+  custCompanyObj.IsVip = dicts.form.IsVip;
+  custCompanyObj.LicenseNo = dicts.LicenseNo;
+  custCompanyObj.MrCompanyTypeCode = dicts.MrCompanyTypeCode;
+  custCompanyObj.MrCustModelCode = dicts.MrCustModelCode;
+  custCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
+  custCompanyObj.NumOfEmp = dicts.form.NumOfEmp;
+  custCompanyObj.ParentCustId = dicts.form.ParentCustId;
+  custCompanyObj.Phn1 = dicts.Phn1;
+  custCompanyObj.Phn2 = dicts.Phn2;
+  custCompanyObj.PhnArea1 = dicts.PhnArea1;
+  custCompanyObj.PhnArea2 = dicts.PhnArea2;
+  custCompanyObj.PhnExt1 = dicts.PhnExt1;
+  custCompanyObj.PhnExt2 = dicts.PhnExt2;
+  custCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId
+  custCompanyObj.RegistrationNo = dicts.RegistrationNo;
+  custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
+  custCompanyObj.RowVersion = dicts.form.RowVersion;
+  custCompanyObj.Website = dicts.Website;
+  custCompanyObj.CustApuPptObj.IsEdd = dicts.formRaw.IsEdd;
+  custCompanyObj.CustApuPptObj.MrCategory1TypeCode = dicts.formRaw.MrCategory1TypeCode;
+  custCompanyObj.CustApuPptObj.MrCategory2TypeCode = dicts.formRaw.MrCategory2TypeCode;
+  custCompanyObj.CustApuPptObj.MrCategory3TypeCode = dicts.formRaw.MrCategory3TypeCode;
+  custCompanyObj.CustApuPptObj.reason = dicts.formRaw.Reason;
+  custCompanyObj.CustApuPptObj.RowVersion = dicts.formRaw.RowVersionCustApuPpt;
 
   await http.post(url, custCompanyObj, AdInsConstant.SpinnerOptions).toPromise().then(
     response => {
@@ -1170,6 +1541,7 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
   }
 }
 
+
 export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
 {
   if (!dicts.formValid) return;
@@ -1182,6 +1554,125 @@ export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, f
       api = "/v1/CustCompany/EditCustCompany";
       await saveCustCompanyDetail(dicts, api, http, toastr)
     
+  }
+
+  if (isSaveAndSync == "true")
+  {
+    let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
+    if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
+
+    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  else
+  {
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    templateService.publish({Actions: actions, Data: {"stepCode": next}});
+  }
+}
+
+export async function saveDataOrSaveAndSyncCompanyV2(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
+{
+  if (!dicts.formValid) return;
+
+  let next = ""
+  let api = ""
+
+  if (StepIndex == 1)
+  {
+      api = "/v2/CustCompany/EditCustCompany";
+      await saveCustCompanyDetailV2(dicts, api, http, toastr)
+    
+  }
+
+  if (isSaveAndSync == "true")
+  {
+    let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
+    if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
+
+    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        if (response["StatusCode"] == 200) {
+          toastr.successMessage("Sync Customer Succses");
+          AdInsHelper.RedirectUrl(router, [UrlBack], {});
+        }
+      }
+    )
+  }
+  else
+  {
+    const actions = [
+      {
+        'result': {
+          'type': 'function',
+          'target': 'self',
+          'alias': '',
+          'methodName': 'NextStep',
+          'params': []
+        },
+        'conditions': []
+      }
+    ];
+
+    templateService.publish({Actions: actions, Data: {"stepCode": next}});
+  }
+}
+
+export async function saveDataOrSaveAndSyncV2(dicts: Record<string, any>, from: any, isSaveAndSync: string, http: HttpClient, toastr: NGXToastrService, router: Router, templateService: UcTemplateService, StepIndex: number )
+{
+  if (!dicts.formValid) return;
+
+  let next = ""
+  let api = ""
+
+  if (StepIndex == 1)
+  {
+    api = "/v2/CustPersonal/EditCustPersonal";
+    await saveCustPersonalDetailV2(dicts, api, http, toastr)
+  }
+
+  if (StepIndex == 4)
+  {
+    api = dicts.CustPersonalContactPersonId == 0? "/v2/CustPersonalContactPerson/AddCustPersonalEmergencyContact" : "/v2/CustPersonalContactPerson/EditCustPersonalEmergencyContact";
+    await saveAddEditEmergencyCntcPerson(dicts, api, http, toastr);
+    next = "CustJobData"
+  }
+
+  if (StepIndex == 5)
+  {
+    api = dicts.CustPersonalJobDataId == 0? "/v1/CustPersonalJobData/AddCustPersonalJobData" : "/v1/CustPersonalJobData/EditCustPersonalJobData";
+    await saveAddEditCustJobData(dicts, api, http, toastr)
+    next = "CustFinData"
+  }
+  
+  if (StepIndex == 6)
+  {
+    alert("CustFinData")
+  }
+
+  if (StepIndex == 9)
+  {
+    alert("CustAttrData")
   }
 
   if (isSaveAndSync == "true")
@@ -1293,3 +1784,134 @@ export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile,
   xhr.setRequestHeader('AdInsKey', `${token}`);
   xhr.send(formData);
 }
+
+export async function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+{
+  let url = environment.FoundationR3Url + api;
+  let reqSubmitObj: ReqBouwheerCompanyObj = new ReqBouwheerCompanyObj();
+  reqSubmitObj.rAddBouwheerObj = new BouwheerObj();
+  reqSubmitObj.rAddBouwheerObj.BouwheerName = parentForm.BouwheerNameCompany;
+  reqSubmitObj.rAddBouwheerObj.IdNo = parentForm.IdNoCompany;
+  reqSubmitObj.rAddBouwheerObj.MrIdTypeCode = parentForm.MrIdTypeCodeCompany;
+  reqSubmitObj.rAddBouwheerObj.IdExpiredDt = parentForm.IdExpiredDtCompany;
+  reqSubmitObj.rAddBouwheerObj.TaxIdNo = parentForm.TaxIdNoCompany;
+  reqSubmitObj.rAddBouwheerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+  reqSubmitObj.rAddBouwheerObj.BouwheerAsCustNo = parentForm.BouwheerAsCustNoCompany;;
+  reqSubmitObj.rAddBouwheerObj.LimitPlafondAmt = parentForm.LimitPlafondAmtCompany;
+  reqSubmitObj.rAddBouwheerObj.IsDebtor = parentForm.IsDebtorCompanyEdit;
+  
+  reqSubmitObj.rAddBouwheerCompanyObj = new BouwheerCompanyObj()
+  reqSubmitObj.rAddBouwheerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+
+  let forAddApi: any ;
+  let forUpload: any ;
+
+  if(dicts.ListBouwheerIndustryInfo != undefined)
+  {
+    forAddApi = dicts.ListBouwheerIndustryInfo.map(item => ({
+      RefIndustryTypeCode: item.RefIndustryTypeCode,
+      BusinessStartDate: item.BusinessStartDate,
+      IsMain: item.IsMain,
+      Notes: item.Notes,
+      BouwheerCompanyIndustryInfoId: item.BouwheerCompanyIndustryInfoId,
+      BouwheerCompanyId: item.BouwheerCompanyId
+    }));
+  
+    forUpload = dicts.ListBouwheerIndustryInfo.map(item => ({
+      RefIndustryTypeCode: item.RefIndustryTypeCode,
+      ByteBase64: item.ByteBase64,
+      DocUploadName: item.DocUploadName,
+    }));
+  
+    reqSubmitObj.rAddBouwheerCompanyIndustryInfoObj = forAddApi;
+  }
+
+  var resSave;
+  http.post(url, reqSubmitObj, AdInsConstant.SpinnerOptions).subscribe(
+    async (response) => {
+      resSave = response;
+
+      if (Array.isArray(forUpload) && forUpload.length > 0) {
+        let reqObj = {
+          BouwheerId: resSave["Id"] ,
+          uploadIndustryDocs: forUpload
+        };
+  
+        let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
+        // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
+        
+        try {
+          if (environment.SpinnerOnHttpPost) this.spinner.show();
+      
+          const formData: any = new FormData();
+          formData.append('reqObj', JSON.stringify(reqObj));
+      
+          const xhr = new XMLHttpRequest();
+      
+          const xhrPromise = new Promise<void>((resolve, reject) => {
+            xhr.onreadystatechange = evnt => {
+              if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                  resolve();
+                } else {
+                  reject(new Error('Upload Failed !'));
+                }
+              }
+            };
+      
+            xhr.onerror = evnt => {
+              reject(new Error('Upload Failed !'));
+            };
+      
+            xhr.open('POST', urlUpload, true);
+            const value = cookieService.get('XSRF-TOKEN');
+            const token = DecryptString(value, environment.ChipperKeyCookie);
+            xhr.setRequestHeader('AdInsKey', `${token}`);
+            xhr.send(formData);
+          });
+      
+          await xhrPromise; // Tunggu sampai permintaan XHR selesai
+      
+        } catch (error) {
+          toastr.errorMessage(error.message || 'An error occurred during upload.');
+        } finally {
+          if (environment.SpinnerOnHttpPost) this.spinner.hide();
+          toastr.successMessage(resSave["Message"])
+          await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+        }
+      }else{
+        toastr.successMessage(resSave["Message"])
+        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+      }
+    });
+
+}
+
+export async function downloadDmsDocument(
+  http: HttpClient, 
+  toastr: NGXToastrService, 
+  RowObj: any) 
+  {
+  let DocumentId = RowObj.DocDmsId;
+  http.post(this.UrlConstantNew.DownloadDmsDocument, { DocumentId: DocumentId }).subscribe(
+    response => {
+      if (response && Array.isArray(response['data']) && response['data'].length > 0) {
+        const content = response['data'][0]['content'];
+        const contentType = 'application/pdf';
+        const blob = base64StringToBlob(content, contentType);
+
+        const metadata = response['data'][0]['metadata'];
+        const fileName = metadata.find(item => item.label === 'Document Name').value;
+        saveAs(blob, fileName);
+      } else {
+        // Handle invalid response from the server.
+        // this.toastr.errorMessage('Invalid response from the server.');
+      }
+    },
+    error => {
+      // Handle error occurred while downloading the document.
+      // this.toastr.errorMessage('An error occurred while downloading the document.');
+    }
+  );
+}
+

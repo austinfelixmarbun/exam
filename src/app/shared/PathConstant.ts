@@ -171,6 +171,8 @@ export class PathConstant {
     public static CS_HOLIDAY_DETAIL = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL;
     public static CS_HOLIDAY_DETAIL_ADD = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL + "/" + PathConstant.ADD;
     public static CS_HOLIDAY_DETAIL_EDIT = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL  + "/" + PathConstant.EDIT;
+    public static CS_BENEFICIARY_OWNER = "BeneficiaryOwner";
+    public static CS_PROJECT = "Project";
     public static CS_OFFICE_ZIPCODE_MBR = "OfficeZipcodeMember";
     public static CS_OFFICE_ZIPCODE_MBR_PAGING = PathConstant.CS_OFFICE_ZIPCODE_MBR + "/" + PathConstant.PAGING;
     public static CS_OFFICE_ZIPCODE_MBR_ADD = PathConstant.CS_OFFICE_ZIPCODE_MBR + "/" + PathConstant.ADD;
@@ -243,7 +245,7 @@ export class PathConstant {
     public static CS_REF_INS_CLAIM_DOC = "RefInsClaimDoc";
     public static CS_REF_INS_CLAIM_DOC_PAGING = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.PAGING;
     public static CS_REF_INS_CLAIM_DOC_DETAIL = PathConstant.CS_REF_INS_CLAIM_DOC + "/" + PathConstant.DETAIL;
-
+    
     public static CS_SELF_CUSTOM_HOLIDAY = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY;
     public static CS_SELF_CUSTOM_HOLIDAY_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY + "/" + PathConstant.ADD_EDIT;
     public static CS_SELF_CUSTOM_HOLIDAY_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL;
@@ -251,6 +253,10 @@ export class PathConstant {
     public static CS_SELF_CUSTOM_WORKING_HOUR = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR;
     public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR + "/" + PathConstant.ADD;
     public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR + "/" + PathConstant.DETAIL;
+    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BENEFICIARY_OWNER;
+    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BENEFICIARY_OWNER + "/" + PathConstant.ADD_EDIT;
+    public static CS_SELF_CUSTOM_PROJECT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROJECT;
+    public static CS_SELF_CUSTOM_PROJECT_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROJECT + "/" + PathConstant.ADD_EDIT;
 
     public static CS_CUSTOM_ECONOMIC_SECTOR_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_ECONOMIC_SECTOR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_ECONOMIC_SECTOR + "/" + PathConstant.DETAIL;
@@ -264,7 +270,7 @@ export class PathConstant {
     public static CS_CUSTOM_PROFESSION_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROFESSION + "/" + PathConstant.DETAIL;
     public static CS_CUSTOM_PAYMENT_ALLOC_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.PAGING;
     public static CS_CUSTOM_PAYMENT_ALLOC_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PAYMENT_ALLOC + "/" + PathConstant.DETAIL;
-
+    
     public static CS_REF_AMRTZ_ITEM = "RefAmrtzItem";
     public static CS_REF_AMRTZ_ITEM_PAGING = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.PAGING;
     public static CS_REF_AMRTZ_ITEM_DETAIL = PathConstant.CS_REF_AMRTZ_ITEM + "/" + PathConstant.DETAIL;
@@ -296,7 +302,7 @@ export class PathConstant {
     public static CUSTOM_CS_COA_SCHM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_COA_SCHM + "/" + PathConstant.DETAIL;
 
     //#endregion
-
+    
     //#region Cust
     public static CUST_COY = "CustomerCompany";
     public static CUST_PERSONAL = "CustomerPersonal";
@@ -340,6 +346,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_PAGING = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_PAGING;
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
+    public static BOUWHEER = "Bouwheer";
 
     public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
@@ -362,14 +369,16 @@ export class PathConstant {
     public static SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerPersonalDuplicateChecking";
     public static SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "CustomerCompanyDuplicateChecking";
     public static SELF_CUSTOM_NEW_CUST_SHAREHOLDER = PathConstant.SELF_CUSTOM_NEW_CUST + "Shareholder"
-
+    public static SELF_CUSTOM_BOUWHEER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.PAGING;
+    public static SELF_CUSTOM_BOUWHEER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.DETAIL;
+    
     //#endregion
-
+    
     //#region Dashboard-Module
     public static DASHBOARD = "Dash-Board";
     public static DASHEMPTY = "Dash-Empty";
     //#endregion
-
+    
     //#region Document-Management-Module
     public static CABINET = "Cabinet";
     public static CABINET_PAGING = PathConstant.CABINET + "/" + PathConstant.PAGING;

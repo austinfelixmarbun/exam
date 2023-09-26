@@ -497,6 +497,7 @@
     "GetCustomerDuplicateCheck": "/v1/CustDuplicateCheck/GetCustomerDuplicateCheck",
     "GetNegativeCustomerDuplicateCheck": "/v1/CustDuplicateCheck/GetNegativeCustomerDuplicateCheck",
     "GetCustomerAndNegativeCustDuplicateCheck": "/v1/CustDuplicateCheck/GetCustomerAndNegativeCustDuplicateCheck",
+    "GetCustomerAndNegativeCustDuplicateCheckV2": "/v2/CustDuplicateCheck/GetCustomerAndNegativeCustDuplicateCheck",
     "AddNewCustPersonal": "/v1/CustPersonal/AddCustPersonal",
     "EditCustPersonal": "/v1/CustPersonal/EditCustPersonal",
     "GetCustPersonalbyCustPersonalId": "/v1/CustPersonal/GetCustPersonalByCustPersonalId",
@@ -949,5 +950,18 @@
     "AddRefInsClaimDoc": "/v1/RefInsClaimDoc/AddRefInsClaimDoc",
     "EditRefInsClaimDoc": "/v1/RefInsClaimDoc/EditRefInsClaimDoc",
     "GetRefInsClaimDocByRefInsClaimDocCode": "/v1/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode",
-    "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile"
+    "GetUrlViewSurveyFromMobile": "/v1/SrvyTask/GetUrlViewSurveyFromMobile",
+    "GetBouwheerCompanyIndustryInfoByBouwheerNo" : "/v1/BouwheerCompanyIndustryInfo/GetBouwheerCompanyIndustryInfoByBouwheerNo",
+    "AddEditBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/AddEditBouwheerCompanyIndustryInfo",
+    "UploadBouwheerCompanyIndustryDoc" : "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
+    "DeleteBouwheerCompanyIndustryInfo" : "/v1/BouwheerCompanyIndustryInfo/DeleteBouwheerCompanyIndustryInfo",
+    "GetListCustCompanyIndustryInfoByCustId" : "/v1/CustCompanyIndustryInfo/GetListCustCompanyIndustryInfoByCustId",
+    "AddEditCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/AddEditCustCompanyIndustryInfo",
+    "DeleteCustCompanyIndustryInfo" : "/v1/CustCompanyIndustryInfo/DeleteCustCompanyIndustryInfo",
+    "UploadCustCompanyIndustryDoc" : "/v1/CustCompanyIndustryInfo/UploadCustCompanyIndustryDoc",
+    "GetOCRKTPData" : "/v1/OCR/GetOCRKTPData",
+    "GetOCRNPWPData" : "/v1/OCR/GetOCRNPWPData",
+    "GetRefPaymentAllocAttrByRefPaymentAllocId" : "/v1/RefPaymentAlloc/GetRefPaymentAllocAttrByRefPaymentAllocId",
+    "SubmitAddRefAttr" : "/v1/RefPaymentAlloc/SubmitAddRefAttr",
+    "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
 }

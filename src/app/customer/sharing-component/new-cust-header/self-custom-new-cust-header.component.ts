@@ -232,7 +232,7 @@ export class SelfCustomNewCustHeaderShareholderComponent implements OnInit {
   DuplicateStatus: string = "";
   GetDuplicateCust() {
     let DuplicateCustObj = this.SetDuplicateCustObj();
-    this.http.post(this.UrlConstantNew.GetCustomerAndNegativeCustDuplicateCheck, DuplicateCustObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustomerAndNegativeCustDuplicateCheckV2, DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response[CommonConstant.Status];
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {
@@ -310,7 +310,7 @@ export class SelfCustomNewCustHeaderShareholderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.AddCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;
@@ -323,7 +323,7 @@ export class SelfCustomNewCustHeaderShareholderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.EditCustCompanyMainDataV2;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
-        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustCompanyShareholderMainDataV3;
         break;
     }
     return urlAdd;

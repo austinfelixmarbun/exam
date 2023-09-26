@@ -10,16 +10,6 @@ export{SelfCustomContainerViewVendorAttrComponent} from "app/view/vendor/self-cu
 export{SelfCustomContainerCustViewDocComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-doc/self-custom-container-cust-view-doc.component";
 export{SelfCustomContainerCustViewFinDataAttrComponent} from "app/view/self-custom-cust-view/self-custom-container-cust-view-fin-data-attr/self-custom-container-cust-view-fin-data-attr.component";
 export{UpdateCustomerPersonalDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-personal-detail/update-customer-personal-detail.component";
-export{UpdateCustomerAddressComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-address/update-customer-address.component";
-export{UpdateCustomerFamilyComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-family/update-customer-family.component";
-export{UpdateCustomerEmergencyDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-emergency/update-customer-emergency-detail/update-customer-emergency-detail.component";
-export{UpdateCustomerJobDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-job-data/update-customer-job-data.component";
-export{UpdateCustomerFinDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/personal/update-customer-fin-data/update-customer-fin-data.component";
-export{UpdateCustomerCompanyDetailComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-detail/update-customer-company-detail.component";
-export{UpdateCustomerMgmntShareholderComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-mgmnt-shareholder/update-customer-mgmnt-shareholder.component";
-export{UpdateCustomerContactInfoComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-contact-info/update-customer-contact-info.component";
-export{UpdateCustomerCompanyFinDataComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-fin-data/update-customer-company-fin-data.component";
-export{UpdateCustomerCompanyLegalDocComponent} from "app/customer/customer-update-master/customer-update-master-detail/company/update-customer-company-legal-doc/update-customer-company-legal-doc.component";
 export{SelfCustomCustFinDataTabComponent} from "app/customer/cust-fin-data-tab/self-custom-fin-data-tab.component"
 export{CustFinDataTabComponent} from "app/customer/cust-fin-data-tab/cust-fin-data-tab.component"
 export{SelfCustomCustFinDataComponent} from "app/customer/cust-fin-data-tab/self-custom-cust-fin-data.component"
@@ -52,6 +42,10 @@ export { SelfCustomContainerSurveyTaskResultUploadDocComponent } from 'app/surve
 export { SelfCustomContainerVendorHoInfoComponent } from 'app/vendor/vendor-ho/self-custom-container-vendor-ho-info/self-custom-container-vendor-ho-info.component';
 export { SelfCustomContainerVendorBranchInfoComponent } from 'app/vendor/vendor-branch/self-custom-container-vendor-branch-info/self-custom-container-vendor-branch-info.component';
 export { SelfCustomNewCustHeaderShareholderComponent } from 'app/customer/sharing-component/new-cust-header/self-custom-new-cust-header.component';
+export { SelfCustomBouwheerCompanyIndustryInfo } from 'app/customer/bouwheer/self-custom-bouwheer-company-industry-info.component';
+export { SelfCustomCustCompanyIndustryInfo } from 'app/customer//customer-company/self-custom-customer-company/self-custom-cust-company-industry-info/self-custom-cust-company-industry-info.component';
+export { SelfCustomContainerOcrCustPersonalComponent } from 'app/customer/sharing-component/self-custom-container-ocr-cust-personal/self-custom-container-ocr-cust-personal.component';
+export { SelfCustomContainerOcrVendorComponent } from 'app/vendor/self-custom-container-npwp-vendor/self-custom-container-ocr-vendor.component';
 export { CustomFundingCompanyAddEditComponent } from 'app/vendor/funding-company/custom-funding-company-add-edit/custom-funding-company-add-edit.component';
 export { CustomAssetMasterAddEditChildComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-child/custom-asset-master-add-edit-child.component';
 export { CustomAssetMasterDetailChildComponent } from 'app/asset/custom-asset-master/custom-asset-master-add-edit-child/custom-asset-master-detail-child/custom-asset-master-detail-child.component';
@@ -67,3 +61,4 @@ export { CustomUpdateCustomerCompanyLegalDocComponent } from 'app/customer/self-
 export { CustomUpdateCustomerCompanyFinDataComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-fin-data/custom-update-customer-company-fin-data.component';
 export { CustomUpdateCustomerCompanyDetailComponent } from 'app/customer/self-custom-container-customer-update/company/update-customer-company-detail/custom-update-customer-company-detail.component';
 export { ContainerCustLegalDocUploadComponent } from "app/customer/cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component";
+export { SelfCustomContainerDmsIframeProjectComponent } from 'app/common-setting/Project/self-custom-container-dms-iframe-project/self-custom-container-dms-iframe-project.component';

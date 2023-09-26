@@ -128,6 +128,10 @@ export class NavigationConstant {
     public static CS_SELF_CUSTOM_WORKING_HOUR = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR; //'/CommonSetting/SelfCustom/WorkingHour'
     public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_ADD; //'/CommonSetting/SelfCustom/WorkingHour/Add'
     public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_WORKING_HOUR_DETAIL; //'/CommonSetting/SelfCustom/WorkingHour/Detail'
+    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER; //'/CommonSetting/SelfCustom/BeneficiaryOwner'
+    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT; //'/CommonSetting/SelfCustom/BeneficiaryOwner/AddEdit'
+    public static CS_SELF_CUSTOM_PROJECT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_PROJECT; //'/CommonSetting/SelfCustom/Project'
+    public static CS_SELF_CUSTOM_PROJECT_ADD_EDIT = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CS_SELF_CUSTOM_PROJECT_ADD_EDIT; //'/CommonSetting/SelfCustom/Project/AddEdit'
     public static CUSTOM_CS_COA_SCHM_PAGING = "/" + PathConstant.LR_COMMON_SETTING + "/" + PathConstant.CUSTOM_CS_COA_SCHM_PAGING;
 
     //#endregion
@@ -387,6 +391,8 @@ export class NavigationConstant {
     public static SELF_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerPersonalDuplicateChecking'
     public static SELF_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_CUSTOM_CUST_COMPANY_DUPLICATE_CHECK; //'/Customer/SelfCustom/CustomerCompanyDuplicateChecking'
     public static CUSTOM_CUST_COY_PAGE = "/" + PathConstant.LR_CUST + "/" + PathConstant.CUSTOM_CUST_COY_PAGE; //'/Customer/CustomerCompany/Page'
+    public static SELF_CUSTOM_BOUWHEER_PAGING = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_BOUWHEER_PAGING; //'/Customer/SelfCustom/Bouwheer/Paging'
+    public static SELF_CUSTOM_BOUWHEER_DETAIL = "/" + PathConstant.LR_CUST + "/" + PathConstant.SELF_CUSTOM_BOUWHEER_DETAIL; //'/Customer/SelfCustom/Bouwheer/Detail'
 
     //#endregion
 

@@ -73,6 +73,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     }
 
   //#region Readonly
+  readonly RefMasterTypeCodeIdTypeCompany: string = CommonConstant.RefMasterTypeCodeIdTypeCompany;
   readonly RefMasterTypeCodeCompanyType: string = CommonConstant.RefMasterTypeCodeCompanyType;
   readonly RefMasterTypeCodeCustModel: string = CommonConstant.RefMasterTypeCodeCustModel;
 
@@ -94,6 +95,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     await this.InitCustAddr();
     this.buildingOwnership();
     this.BindLookupSupplier();
+    this.DictUcDDLObj[this.RefMasterTypeCodeIdTypeCompany] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeIdTypeCompany);
     this.DictUcDDLObj[this.RefMasterTypeCodeCompanyType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCompanyType);
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypeCompany, false, this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll);
     await this.GetExistingData();
@@ -145,7 +147,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
       CustName: ['', [Validators.required, Validators.maxLength(500)]],
       MrCompanyTypeCode: ['', [Validators.required]],
       TaxIdNo: ['', [Validators.required, Validators.pattern("^[0-9]+$"), Validators.minLength(15), Validators.maxLength(15)]],
-
+      MrIdTypeCode : ['', [Validators.required]],
+      IdNo : ['', [Validators.required]],
       IsSupplier: [false],
       SupplCode: [''],
       SupplName: [''],
@@ -229,6 +232,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     this.CustomerForm.get("MrCustModelCode").disable();
     this.CustomerForm.get("MrCompanyTypeCode").disable();
     this.CustomerForm.get("TaxIdNo").disable();
+    this.CustomerForm.get("MrIdTypeCode").disable();
+    this.CustomerForm.get("IdNo").disable();
     this.IsLockCopyAddrBtn = true;
   }
 
@@ -299,6 +304,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
           MrCustTypeCode: this.custObj.MrCustTypeCode,
           TaxIdNo: this.custObj.TaxIdNo,
           MrCustModelCode: this.custObj.MrCustModelCode,
+          MrIdTypeCode: this.custObj.MrIdTypeCode,
+          IdNo: this.custObj.IdNo
         });
         this.existingCustomerLookUpObj.nameSelect = response.CustName;
         this.existingCustomerLookUpObj.jsonSelect = { CustName: response.CustName };
@@ -367,7 +374,8 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj = this.custObj;
     reqSubmitObj.CustObj.CustName = tempForm["CustName"];
     reqSubmitObj.CustObj.TaxIdNo = tempForm["TaxIdNo"];
-    reqSubmitObj.CustObj.IdNo = tempForm["TaxIdNo"];
+    reqSubmitObj.CustObj.IdNo = tempForm["IdNo"];
+    reqSubmitObj.CustObj.MrIdTypeCode = tempForm["MrIdTypeCode"];
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
     reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
@@ -486,5 +494,49 @@ export class NewCustCompanyMainDataComponent implements OnInit {
           }
         }
       });
+  }
+
+  customPattern: Array<CustomPatternObj> = new Array<CustomPatternObj>();
+  getInitPattern() {
+    this.customPattern = new Array<CustomPatternObj>();
+    this.regexService.getListPattern().subscribe(
+      (response) => {
+        this.resultPattern = response[CommonConstant.ReturnObj];
+        if (this.resultPattern != undefined) {
+          for (let i = 0; i < this.resultPattern.length; i++) {
+            let patternObj: CustomPatternObj = new CustomPatternObj();
+            let pattern: string = this.resultPattern[i].Value;
+
+            patternObj.pattern = pattern;
+            patternObj.invalidMsg = this.regexService.getErrMessage(pattern);
+            this.customPattern.push(patternObj);
+          }
+          this.setValidatorPattern();
+        }
+      }
+    )
+  }
+
+  resultPattern: Array<KeyValueObj> = new Array();
+  setValidatorPattern() {
+    let idTypeValue: string = this.CustomerForm.get("MrIdTypeCode").value;
+    let pattern: string = '';
+    if (idTypeValue != undefined) {
+      if (this.resultPattern != undefined) {
+        let result = this.resultPattern.find(x => x.Key == idTypeValue)
+        if (result != undefined) {
+          pattern = result.Value;
+        }
+      }
+    }
+    this.setValidator(pattern);
+  }
+
+  setValidator(pattern: string) {
+    let tempIdNo = this.CustomerForm.get("IdNo");
+    if (pattern != undefined) {
+      tempIdNo.setValidators([Validators.required, Validators.pattern(pattern)]);
+      tempIdNo.updateValueAndValidity();
+    }
   }
 }

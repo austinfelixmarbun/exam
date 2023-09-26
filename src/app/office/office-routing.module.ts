@@ -109,7 +109,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Add Office',
-          page: 'OfficeDetail'
+          page: 'OfficeDetailV2'
         }
       },
       {

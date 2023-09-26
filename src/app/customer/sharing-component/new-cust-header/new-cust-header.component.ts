@@ -240,7 +240,7 @@ export class NewCustHeaderComponent implements OnInit {
   DuplicateStatus: string = "";
   GetDuplicateCust() {
     let DuplicateCustObj = this.SetDuplicateCustObj();
-    this.http.post(this.UrlConstantNew.GetCustomerAndNegativeCustDuplicateCheck, DuplicateCustObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetCustomerAndNegativeCustDuplicateCheckV2, DuplicateCustObj).subscribe(
       (response) => {
         this.DuplicateStatus = response[CommonConstant.Status];
         if (this.DuplicateStatus != null && this.DuplicateStatus != undefined) {

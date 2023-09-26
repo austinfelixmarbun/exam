@@ -694,6 +694,7 @@ export class UrlConstantNew{
     public GetCustomerDuplicateCheck = this.env.FoundationR3Url + this.url.GetCustomerDuplicateCheck;
     public GetNegativeCustomerDuplicateCheck = this.env.FoundationR3Url + this.url.GetNegativeCustomerDuplicateCheck;
     public GetCustomerAndNegativeCustDuplicateCheck = this.env.FoundationR3Url + this.url.GetCustomerAndNegativeCustDuplicateCheck;
+    public GetCustomerAndNegativeCustDuplicateCheckV2 = this.env.FoundationR3Url + this.url.GetCustomerAndNegativeCustDuplicateCheckV2;
 
     // CUSTOMER PERSONAL
     public AddNewCustPersonal = this.env.FoundationR3Url + this.url.AddNewCustPersonal;
@@ -749,8 +750,14 @@ export class UrlConstantNew{
     public DeleteCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.DeleteCustCompanyLegalDoc;
     public AddCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.AddCustCompanyLegalDoc;
     public EditCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.EditCustCompanyLegalDoc;
+    
+    //CUSTOMER COMPANY INDUSTRY INFO
+    public GetListCustCompanyIndustryInfoByCustId = this.env.FoundationR3Url + this.url.GetListCustCompanyIndustryInfoByCustId;
+    public AddEditCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditCustCompanyIndustryInfo;
+    public DeleteCustCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteCustCompanyIndustryInfo;
     public UploadCustCompanyLegalDoc = this.env.FoundationR3Url + this.url.UploadCustCompanyLegalDoc;
-
+    public UploadCustCompanyIndustryDoc = this.env.FoundationR3Url + this.url.UploadCustCompanyIndustryDoc;
+    
     // CUSTOMER GROUP
     public AddCustGrpBothWays = this.env.FoundationR3Url + this.url.AddCustGrpBothWays;
     public AddCustGrp = this.env.FoundationR3Url + this.url.AddCustGrp;
@@ -996,6 +1003,9 @@ export class UrlConstantNew{
     public GetRefPaymentAllocByID = this.env.FoundationR3Url + this.url.GetRefPaymentAllocByID;
     public GetListKeyValueRefPaymentAllocByPayAllocGrpCode = this.env.FoundationR3Url + this.url.GetListKeyValueRefPaymentAllocByPayAllocGrpCode;
     public SubmitRefPaymentAlloc = this.env.FoundationR3Url + this.url.SubmitRefPaymentAlloc;
+    public SubmitAddRefAttr = this.env.FoundationR3Url + this.url.SubmitAddRefAttr;
+    public SubmitEditRefAttr = this.env.FoundationR3Url + this.url.SubmitEditRefAttr;
+    public GetRefPaymentAllocAttrByRefPaymentAllocId = this.env.FoundationR3Url + this.url.GetRefPaymentAllocAttrByRefPaymentAllocId;
 
     // REF PAYMENT ALLOC GRP
     public GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate = this.env.FoundationR3Url + this.url.GetRefPaymentAllocGrpByRefPaymentAllocGrpIdForUpdate;
@@ -1296,4 +1306,13 @@ export class UrlConstantNew{
     public EditRefInsClaimDoc = this.env.FoundationR3Url + this.url.EditRefInsClaimDoc;
     public GetRefInsClaimDocByRefInsClaimDocCode = this.env.FoundationR3Url + this.url.GetRefInsClaimDocByRefInsClaimDocCode;
 
+    //Bouwheer
+    public GetBouwheerCompanyIndustryInfoByBouwheerNo = this.env.FoundationR3Url + this.url.GetBouwheerCompanyIndustryInfoByBouwheerNo;
+    public AddEditBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.AddEditBouwheerCompanyIndustryInfo;
+    public UploadBouwheerCompanyIndustryDoc = this.env.FoundationR3Url + this.url.UploadBouwheerCompanyIndustryDoc;
+    public DeleteBouwheerCompanyIndustryInfo = this.env.FoundationR3Url + this.url.DeleteBouwheerCompanyIndustryInfo;
+
+    //OCR 
+    public GetOCRKTPData = this.env.FoundationR3Url + this.url.GetOCRKTPData;
+    public GetOCRNPWPData = this.env.FoundationR3Url + this.url.GetOCRNPWPData;
 }

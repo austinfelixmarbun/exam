@@ -61,6 +61,7 @@ export class CommonConstant {
 
     public static MR_MARITAL_STAT_CODE_MARRIED = "MARRIED";
     public static MR_MARITAL_STAT_CODE_SINGLE = "SINGLE";
+    public static MR_MARITAL_STAT_CODE_WIDOW = "WIDOW";
     public static MR_CUST_TYPE_CODE_PERSONAL = "PERSONAL";
     public static MR_CUST_TYPE_CODE_COMPANY = "COMPANY";
 
@@ -158,6 +159,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeInvestmentType = "INVESTMENT_TYPE"
     public static RefMasterTypeCodeCompanyType = "COMPANY_TYPE";
     public static RefMasterTypeCodeIdType = "ID_TYPE";
+    public static RefMasterTypeCodeIdTypeCompany = "ID_TYPE_COMPANY";
     public static RefMasterTypeCodeNationality = "NATIONALITY";
     public static RefMasterTypeCodeMaritalStat = "MARITAL_STAT";
     public static RefMasterTypeCodeEducation = "EDUCATION";
@@ -364,6 +366,7 @@ export class CommonConstant {
     public static DmsKey = "PHL7KV8RR0VG30K4";
     public static DmsIV = "0G7HFV96AVWXUQ51";
     public static DmsNoCust = "No Customer";
+    public static DmsNoProject = "Project No";
     public static DmsNoApp = "No Application";
     public static DmsNoAgr = "No Agreement";
     public static DmsMouId = "Mou Id";
@@ -375,6 +378,7 @@ export class CommonConstant {
     public static DmsOverideViewDownload = "View,Download";
     public static DmsOverideUploadDownloadView = "Upload,Delete,Download,View";
     public static DmsViewCodeCust = "ConfinsCust";
+    public static DmsViewCodeProject = "Project";
     public static DmsViewCodeApp = "ConfinsApp";
     public static DmsViewCodeAgr = "ConfinsAgr";
     public static DmsViewCodeMou = "ConfinsMou";

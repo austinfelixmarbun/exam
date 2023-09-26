@@ -82,6 +82,7 @@ import { PaymentAllocGroupDPagingComponent } from './payment-alloc-group-new/pay
 import { RefInsClaimDocAddEditComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-add-edit/ref-ins-claim-doc-add-edit.component';
 import { RefInsClaimDocPagingComponent } from './ref-ins-claim-doc/ref-ins-claim-doc-paging/ref-ins-claim-doc-paging.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
+import { PaymentAllocDetailNewComponent } from './payment-alloc/payment-alloc-detail-new/payment-alloc-detail-attr.component';
 
 const routes: Routes = [
   {
@@ -467,9 +468,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_PAYMENT_ALLOC_DETAIL,
-        component: PaymentAllocDetailComponent,
+        component: PaymentAllocDetailNewComponent,
         data: {
-          title: 'Payment Allocation'
+          title: 'Payment Allocation Detail'
         },
       },
 
@@ -483,7 +484,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_PAYMENT_ALLOC_GRP_DETAIL,
-        component: PaymentAllocGroupDetailComponent,
+        component: PaymentAllocDetailNewComponent,
         data: {
           title: 'Payment Allocation Group'
         },
@@ -816,7 +817,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Payment Allocation Detail',
-          page: 'PaymentAllocationDetail'
+          page: 'Paymentallocationdetailnew'
         },
       },
       {
@@ -1000,6 +1001,38 @@ const routes: Routes = [
         data: {
           title: 'COA Scheme',
           page: 'Coaschemedetail'
+        },
+      },      
+      {
+        path: PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner',
+          page: 'Hsbpagingbeneficiaryowner'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner Add Edit',
+          page: 'Addeditbeneficiaryowner'
+        },
+      },      
+      {
+        path: PathConstant.CS_SELF_CUSTOM_PROJECT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Project',
+          page: 'Hsbprojectpaging'
+        },
+      },
+      {
+        path: PathConstant.CS_SELF_CUSTOM_PROJECT_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Project Add Edit',
+          page: 'HsbProjectDetail   '
         },
       }
     ]
