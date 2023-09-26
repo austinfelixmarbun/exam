@@ -35,6 +35,8 @@ import { BouwheerCompanyObj } from "../model/bouwheer-company-obj.model";
 import { base64StringToBlob } from "blob-util";
 import { saveAs } from 'file-saver';
 import { CustCompanyObjV2 } from "../model/cust-company-obj-v2.model";
+import { ReqAddBeneficiaryOwnerPersonalObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-personal-obj.model";
+import { ReqAddBeneficiaryOwnerCompanyObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-company-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -714,6 +716,70 @@ export function addCustToDuplicate(parentForm: any, dicts: Record<string, any>, 
 
   dicts["AddCustForm"] = parentForm;
   dicts["CustDuplicate"] = dicts.ReturnObject.CustDuplicate;
+  dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
+  dicts["mode"] = "edit";
+
+  localStorage.setItem('dicts', JSON.stringify(dicts)); // notes: set dicts ke localStorage dulu untuk kirim dicts ke page yang berbeda
+  AdInsHelper.RedirectUrl(router, [next], {}, true);
+}
+
+export function addBeneficiaryOwnerToDuplicate(parentForm: any, dicts: Record<string, any>, next: string, router: Router)
+{
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+  {
+    let reqSubmitObj: ReqAddBeneficiaryOwnerPersonalObj = new ReqAddBeneficiaryOwnerPersonalObj();
+    reqSubmitObj.rAddBeneficiaryOwnerObj.BeneficiaryOwnerName = parentForm.BeneficiaryOwnerNamePersonal;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrIdTypeCode = parentForm.MrIdTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdNo = parentForm.IdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdExpiredDt = parentForm.IdExpiredDt;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.TaxIdNo = parentForm.TaxIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.BirthDt = parentForm.BirthDt;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.BirthPlace = parentForm.BirthPlace;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.MrGenderCode = parentForm.MrGenderCode;
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    let customObj = {
+      BeneficiaryOwnerName: parentForm.BeneficiaryOwnerNamePersonal,
+      MrCustTypeCode: parentForm.MrCustTypeCode,
+      MrIdTypeCode: parentForm.MrIdTypeCode,
+      IdNo: parentForm.IdNo,
+      IdExpiredDt: parentForm.IdExpiredDt,
+      TaxIdNo: parentForm.TaxIdNo,
+      BirthDt: parentForm.BirthDt,
+      BirthPlace: parentForm.BirthPlace,
+      MrGenderCode: parentForm.MrGenderCode,
+    };
+
+  dicts["AddCustForm"] = customObj;
+  }
+
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypeCompany)
+  {
+    let reqSubmitObj: ReqAddBeneficiaryOwnerCompanyObj = new ReqAddBeneficiaryOwnerCompanyObj();
+    reqSubmitObj.rAddBeneficiaryOwnerObj.BeneficiaryOwnerName = parentForm.BeneficiaryOwnerNameCompany;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrIdTypeCode = parentForm.CoyMrIdTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdNo = parentForm.CoyIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdExpiredDt = parentForm.CoyIdExpiredDt;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.TaxIdNo = parentForm.CoyTaxIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    
+    let customObj = {
+      BeneficiaryOwnerName: parentForm.BeneficiaryOwnerNameCompany,
+      MrCustTypeCode: parentForm.MrCustTypeCode,
+      MrIdTypeCode: parentForm.CoyMrIdTypeCode,
+      IdNo: parentForm.CoyIdNo,
+      IdExpiredDt: parentForm.CoyIdExpiredDt,
+      TaxIdNo: parentForm.CoyTaxIdNo,
+      MrCompanyTypeCode: parentForm.MrCompanyTypeCode,
+    };
+    dicts["AddCustForm"] = customObj;
+  }
+
+  // dicts["AddCustForm"] = parentForm;
   dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
   dicts["mode"] = "edit";
 

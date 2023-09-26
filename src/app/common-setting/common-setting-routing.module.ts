@@ -1002,23 +1002,7 @@ const routes: Routes = [
           title: 'COA Scheme',
           page: 'Coaschemedetail'
         },
-      },      
-      {
-        path: PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Beneficiary Owner',
-          page: 'Hsbpagingbeneficiaryowner'
-        },
-      },
-      {
-        path: PathConstant.CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT,
-        component: UcTemplateComponent,
-        data: {
-          title: 'Beneficiary Owner Add Edit',
-          page: 'Addeditbeneficiaryowner'
-        },
-      },      
+      },     
       {
         path: PathConstant.CS_SELF_CUSTOM_PROJECT,
         component: UcTemplateComponent,

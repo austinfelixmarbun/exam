@@ -1,7 +1,7 @@
 import { ExecutorService } from "@adins/uctemplate";
 import { Injectable } from "@angular/core";
 import { addEditvendorBranch, addEditvendorHO, addRangeOfficeMbr, addRangeVendorGrpMbr, addRangeVendorMbr, cancelHORegistration } from "../function/supplier-function";
-import { downloadDmsDocument, addBouwheerCompany, addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, addEditCustomerV2, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncCompany, saveDataOrSaveAndSyncV2, saveDataOrSaveAndSyncCompanyV2 } from "../function/customer-function";
+import { downloadDmsDocument, addBouwheerCompany, addCustToDuplicate, addCustomerCompanyAfterDuplicate, addCustomerPersonalAfterDuplicate, addEditCustAddr, addEditCustAsset, addEditCustJobData, addEditCustomer, addEditCustomerV2, backCust, backFromCustDuplicate, editCustomerFamily, saveDataOrSaveAndSync, saveDataOrSaveAndSyncCompany, saveDataOrSaveAndSyncV2, saveDataOrSaveAndSyncCompanyV2, addBeneficiaryOwnerToDuplicate } from "../function/customer-function";
 import { addRangeAssetSchmD } from "../function/asset-function";
 import { rerunJournal, saveJrMGroupDFact, saveJrMHeaderFact } from "../function/journal-function";
 import { addListVerfSchemeD } from "../function/verification-function";
@@ -67,5 +67,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addEditCustCompanyLegalDoc", addEditCustCompanyLegalDoc);
     this.setExecutor("uploadDocFileLegalMultipart", uploadDocFileLegalMultipart);
     this.setExecutor("addBouwheerCompany", addBouwheerCompany);
+    this.setExecutor("addBeneficiaryOwnerToDuplicate", addBeneficiaryOwnerToDuplicate);
   }
 }

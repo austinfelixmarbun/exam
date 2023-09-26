@@ -290,6 +290,22 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner',
+          page: 'Hsbpagingbeneficiaryowner'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner Add Edit',
+          page: 'Addeditbeneficiaryowner'
+        },
+      }, 
+      {
         path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK,
         component: UcTemplateComponent,
         data: {
@@ -303,6 +319,22 @@ const routes: Routes = [
         data: {
           title: 'Customer Duplicate Checking',
           page: 'CustomerDuplicateCheckingMatchCompanyV2'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_PERSONAL_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchPersonalForBO'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_COMPANY_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchCompanyV2ForBO'
         }
       },
       {
