@@ -36,6 +36,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   currentModal: any;
   lookUpObj: InputLookupObj;
   mode: string;
+  showDownload : boolean = false;
 
   @Input() BwrNo: string;
   @Input() BwrId: number;
@@ -71,6 +72,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.isReady = true
+    if (this.BwrId > 0){
+      this.showDownload = true;
+    }
     await this.getListBouwheerIndustryInfo();
   }
 
@@ -220,6 +224,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
         RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
         ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
         DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
+        DocDmsId: 0,
         RowVersion: undefined
       });
       this.dicts['ListBouwheerIndustryInfo'] = this.ListBouwheerIndustryInfo;
@@ -278,5 +283,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       ByteBase64: ByteBase64.substring(ByteBase64.lastIndexOf(',') + 1),
       DocUploadName: file.name
     });
+  }
+
+  DownloadFileIndustryInfo(i:number){
+
   }
 }

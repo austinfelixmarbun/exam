@@ -13,7 +13,8 @@
               <th class="text-left" translate>Industry Type</th>
               <th class="text-center" translate>Main Industry</th>
               <th class="text-center" translate>Industry Start Date</th>
-              <th class="text-center" translate>Action</th>
+              <th class="text-center" translate>Action</th>              
+              <th class="text-center" *ngIf="showDownload" translate>Download Document</th>              
             </tr>
           </thead>
           <tbody>
@@ -27,6 +28,9 @@
                 <a href="javascript:;" (click)="showModalIndustryInfo(i)"><i class="ft-edit-2 font-medium-3 mr-1"></i></a>
                 <a href="javascript:;" (click)="deleteModalIndustryInfo(i)" class="danger p-0"><i class="ft-trash-2 font-medium-3 ml-1"></i></a>
               </td>
+              <td class="text-center" *ngIf="showDownload">
+                <a href="javascript:;" (click)="DownloadFileIndustryInfo(i)" class="danger p-0"><i class="ft-edit-2 font-medium-3 mr-1"></i></a>
+              </td>                           
             </tr>
   
             <tr *ngIf="(ListBouwheerIndustryInfo.length <= 0)">
