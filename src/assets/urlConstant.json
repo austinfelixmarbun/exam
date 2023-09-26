@@ -805,6 +805,7 @@
     "SaveCustCompanyShareholderMainDataV3": "/v3/Cust/SaveCustCompanyShareholderMainData",
     "SaveCustPersonalFamilyMainData": "/v1/Cust/SaveCustPersonalFamilyMainData",
     "SaveCustPersonalFamilyMainDataV2": "/v2/Cust/SaveCustPersonalFamilyMainData",
+    "SaveCustPersonalFamilyMainDataV3": "/v3/Cust/SaveCustPersonalFamilyMainData",
     "NewEditDuplicateCust": "/v1/Cust/NewEditDuplicateCust",
     "NewEditDuplicateCustV2": "/v2/Cust/NewEditDuplicateCust",
     "GetCustCompanyMgmntShrholderForCustViewByCustId": "/v1/CustCompanyMgmntShrholder/GetCustCompanyMgmntShrholderForCustViewByCustId",
