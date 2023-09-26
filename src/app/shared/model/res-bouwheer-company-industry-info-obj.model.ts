@@ -8,6 +8,7 @@ export class ResBouwheerCompanyIndustryInfoObj {
     Notes: string;
     RowVersion: any;
     ByteBase64: any;
+    DocDmsId : number;
     DocUploadName: any;
 
     constructor(){
@@ -17,6 +18,7 @@ export class ResBouwheerCompanyIndustryInfoObj {
         this.RefIndustryTypeName = '',
         this.IsMain = false,
         this.Notes = '',
+        this.DocDmsId = 0;
         this.RowVersion = ""
     }
 }

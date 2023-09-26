@@ -516,7 +516,8 @@ function SaveCustCompanyV2(parentForm: any, dicts: Record<string, any>, Mode: st
 
   reqSubmitObj.CustObj.CustName = parentForm.CoyCustName;
   reqSubmitObj.CustObj.TaxIdNo = parentForm.CoyTaxIdNo;
-  reqSubmitObj.CustObj.IdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.IdNo = parentForm.CoyIdNo;
+  reqSubmitObj.CustObj.MrIdTypeCode = parentForm.CoyMrIdTypeCode;
   reqSubmitObj.CustObj.MrCustModelCode = parentForm.CoyMrCustModelCode;
   reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
   reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
