@@ -13,7 +13,7 @@
                   <div class="form-group row">
                     <label class="col-md-12  adInsLabel" translate>Address Type Name </label>
                     <div class="col-md-12 ">
-                      <select class="form-control adInsInput input-field-2" formControlName="MrCustAddrTypeCode"
+                      <select class="form-control adInsInput input-field-2" style="width: 100%;" formControlName="MrCustAddrTypeCode"
                         (change)="checkCustAddrType()">
                         <option *ngFor="let ram of listAddressType" [value]="ram.Key">
                           {{ram.Value}}
@@ -25,19 +25,19 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 px-3">
                   <div class="form-group row">
                     <label class="col-md-12  adInsLabel" translate>Copy Address From 
                       <span class="optional-text">(Optional)</span>
                     </label>
-                    <div class="col-md-12">
-                      <select class="form-control adInsInput input-field-2" formControlName="CopyAddrFrom">
+                    <div class="col-md-9">
+                      <select class="form-control adInsInput input-field-2" style="width: 100%;" formControlName="CopyAddrFrom">
                         <option *ngFor="let ram of listCustAddr" [value]="ram.CustAddrId">
                           {{ram.MrCustAddrTypeCode}}
                         </option>
                       </select>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-2">
                       <button type="button" class="btn btn-raised btn-primary-2" (click)="copyAddress()">
                         <i class="fa fa-files-o"></i>&nbsp;<span translate>Copy</span>
                       </button>
