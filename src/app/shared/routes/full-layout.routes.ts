@@ -1021,6 +1021,18 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
   },
+  {
+    path: 'costallocationscheme',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './CostAllocSchmModule'
+      })
+        .then(m => m.CostAllocSchmModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
   // #endregion
 
   

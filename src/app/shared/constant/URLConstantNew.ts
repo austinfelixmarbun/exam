@@ -738,6 +738,7 @@ export class UrlConstantNew{
     public SaveCustCompanyShareholderMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV3;
     public SaveCustPersonalFamilyMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainData;
     public SaveCustPersonalFamilyMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV2;
+    public SaveCustPersonalFamilyMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV3;
 
     public NewEditDuplicateCust = this.env.FoundationR3Url  + this.url.NewEditDuplicateCust;
     public NewEditDuplicateCustV2 = this.env.FoundationR3Url  + this.url.NewEditDuplicateCustV2;
