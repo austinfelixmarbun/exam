@@ -1016,7 +1016,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Project Add Edit',
-          page: 'HsbProjectDetail   '
+          page: 'Addeditproject'
         },
       }
     ]
