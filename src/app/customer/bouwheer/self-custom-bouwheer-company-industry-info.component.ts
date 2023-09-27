@@ -37,6 +37,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   lookUpObj: InputLookupObj;
   mode: string;
   showDownload : boolean = false;
+  Id : number = 0;
 
   @Input() BwrNo: string;
   @Input() BwrId: number;
@@ -54,6 +55,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
     ByteBase64: [''],
     DocUploadName: [''],
     RowVersion: [''],
+    index : [0]
   });
   constructor(
     private http: HttpClient,
@@ -109,7 +111,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       Notes: this.industryInfo.Notes,
       IsMain: this.industryInfo.IsMain,
       RefIndustryTypeCode: this.industryInfo.RefIndustryTypeCode,
-      BouwheerCompanyIndustryInfoId: this.industryInfo.BouwheerCompanyIndustryInfoId
+      RefIndustryTypeName: this.industryInfo.RefIndustryTypeName,
+      BouwheerCompanyIndustryInfoId: this.industryInfo.BouwheerCompanyIndustryInfoId,
+      index : i
     });
   }
 
@@ -121,24 +125,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   }
 
   async SaveIndustryInfo() {
-    if (this.ListBouwheerIndustryInfo.length == 0) {
-      if (this.IndustryInfoForm.controls['IsMain'].value == false) {
-        this.toastr.warningMessage("The first input must be the main industry!")
-        return;
-      }
-    } else {
-      let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain === true && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value
-      && this.IndustryInfoForm.controls['IsMain'].value === true);
-      if (duplicateMainIndustry) {
-        this.toastr.warningMessage("There can only be one main industry!")
-        return;
-      }
-      let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode === this.IndustryInfoForm.controls['RefIndustryTypeCode'].value && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
-      if (duplicateIndustryTypeCode) {
-        this.toastr.warningMessage("Industry type already exists!")
-        return;
-      }
-    }
+    
     if (this.BwrId > 0) {
       this.ReqBouwheerIndustryInfoObj = new ReqAddEditBouwheerCompanyIndustryInfoObj
       this.ReqBouwheerIndustryInfoObj.BouwheerId = this.BwrId,
@@ -214,19 +201,64 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       this.toastr.successMessage("Success");
       this.getListBouwheerIndustryInfo();
     } else {
-      this.ListBouwheerIndustryInfo.push({
-        RefIndustryTypeCode: this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
-        BusinessStartDate: this.IndustryInfoForm.controls['BusinessStartDate'].value,
-        IsMain: this.IndustryInfoForm.controls['IsMain'].value,
-        Notes: this.IndustryInfoForm.controls['Notes'].value,
-        BouwheerCompanyIndustryInfoId: 0,
-        BouwheerCompanyId: 0,
-        RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
-        ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
-        DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
-        DocDmsId: 0,
-        RowVersion: undefined
-      });
+      if (this.mode == 'edit'){
+        if (this.ListBouwheerIndustryInfo.length == 0) {
+          if (this.IndustryInfoForm.controls['IsMain'].value == false) {
+            this.toastr.warningMessage("The first input must be the main industry!")
+            return;
+          }
+        } else {      
+          let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode === this.IndustryInfoForm.controls['RefIndustryTypeCode'].value && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
+          if (duplicateIndustryTypeCode) {
+            this.toastr.warningMessage("Industry type already exists!")
+            return;
+          }
+          let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain === true && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
+          if (duplicateMainIndustry && this.IndustryInfoForm.controls['IsMain'].value == true) {
+            this.toastr.warningMessage("There can only be one main industry!")
+            return;
+          }
+        }
+        let index =  this.IndustryInfoForm.controls['index'].value
+        this.ListBouwheerIndustryInfo[index].RefIndustryTypeCode = this.IndustryInfoForm.controls['RefIndustryTypeCode'].value
+        this.ListBouwheerIndustryInfo[index].BusinessStartDate = this.IndustryInfoForm.controls['BusinessStartDate'].value
+        this.ListBouwheerIndustryInfo[index].IsMain = this.IndustryInfoForm.controls['IsMain'].value
+        this.ListBouwheerIndustryInfo[index].Notes = this.IndustryInfoForm.controls['Notes'].value
+        this.ListBouwheerIndustryInfo[index].RefIndustryTypeName = this.IndustryInfoForm.controls['RefIndustryTypeName'].value
+      }
+      else{
+        if (this.ListBouwheerIndustryInfo.length == 0) {
+          if (this.IndustryInfoForm.controls['IsMain'].value == false) {
+            this.toastr.warningMessage("The first input must be the main industry!")
+            return;
+          }
+        } else {      
+          let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode == this.IndustryInfoForm.controls['RefIndustryTypeCode'].value);
+          if (duplicateIndustryTypeCode) {
+            this.toastr.warningMessage("Industry type already exists!")
+            return;
+          }
+          let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain == true);
+          if (duplicateMainIndustry && this.IndustryInfoForm.controls['IsMain'].value == true) {
+            this.toastr.warningMessage("There can only be one main industry!")
+            return;
+          }
+        }
+        this.Id = this.Id + 1;        
+        this.ListBouwheerIndustryInfo.push({
+          RefIndustryTypeCode: this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
+          BusinessStartDate: this.IndustryInfoForm.controls['BusinessStartDate'].value,
+          IsMain: this.IndustryInfoForm.controls['IsMain'].value,
+          Notes: this.IndustryInfoForm.controls['Notes'].value,
+          BouwheerCompanyIndustryInfoId: this.Id,
+          BouwheerCompanyId: 0,
+          RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
+          ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
+          DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
+          DocDmsId: 0,
+          RowVersion: undefined
+        });
+      }
       this.dicts['ListBouwheerIndustryInfo'] = this.ListBouwheerIndustryInfo;
       this.currentModal.close("");
     }
