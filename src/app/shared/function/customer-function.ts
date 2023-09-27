@@ -1377,7 +1377,7 @@ async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, htt
   custCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId
   custCompanyObj.RegistrationNo = dicts.RegistrationNo;
   custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
-  custCompanyObj.RowVersion = dicts.form.RowVersion;
+  custCompanyObj.RowVersion = dicts.form.RowVersionCoy;
   custCompanyObj.Website = dicts.Website;
   custCompanyObj.CustApuPptObj.IsEdd = dicts.formRaw.IsEdd;
   custCompanyObj.CustApuPptObj.MrCategory1TypeCode = dicts.formRaw.MrCategory1TypeCode;
