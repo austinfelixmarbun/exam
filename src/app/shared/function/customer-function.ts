@@ -1957,28 +1957,40 @@ export async function addBouwheerCompany(parentForm: any, dicts: Record<string, 
 export async function downloadDmsDocument(
   http: HttpClient, 
   toastr: NGXToastrService, 
-  RowObj: any) 
-  {
-  let DocumentId = RowObj.DocDmsId;
-  http.post(this.UrlConstantNew.DownloadDmsDocument, { DocumentId: DocumentId }).subscribe(
-    response => {
-      if (response && Array.isArray(response['data']) && response['data'].length > 0) {
-        const content = response['data'][0]['content'];
-        const contentType = 'application/pdf';
-        const blob = base64StringToBlob(content, contentType);
+  RowObj: any) {
+  const url = `${environment.FoundationR3Url}/v1/DMS/DownloadDmsDocument`;
+  const documentId = RowObj.DocDmsId;
 
-        const metadata = response['data'][0]['metadata'];
-        const fileName = metadata.find(item => item.label === 'Document Name').value;
+  if(documentId == null)
+  {
+    toastr.errorMessage('There are no documents uploaded for this record.');
+    return;
+  }
+
+  try {
+    const response = await http.post(url, { DocumentId: documentId }).toPromise();
+
+    if (response && Array.isArray(response['Data']) && response['Data'].length > 0) {
+      const content = response['Data'][0]['Content'];
+      const contentType = 'application/pdf';
+      const blob = base64StringToBlob(content, contentType);
+
+      const metadata = response['Data'][0]['Metadata'];
+      const fileName = metadata.find((item: { label: string; value: string }) => item.label === 'Document Name')?.value;
+
+      if (fileName) {
         saveAs(blob, fileName);
       } else {
-        // Handle invalid response from the server.
-        // this.toastr.errorMessage('Invalid response from the server.');
+        toastr.errorMessage('File name not found in metadata.');
+        return;
       }
-    },
-    error => {
-      // Handle error occurred while downloading the document.
-      // this.toastr.errorMessage('An error occurred while downloading the document.');
+    } else {
+      toastr.errorMessage('Invalid response from the server.');
+      return;
     }
-  );
+  } catch (error) {
+    toastr.errorMessage('An error occurred while downloading the document.');
+    return;
+  }
 }
 

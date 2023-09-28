@@ -19,6 +19,7 @@ import { ResBouwheerCompanyIndustryInfoObj } from 'app/shared/model/res-bouwheer
 import { CookieService } from 'ngx-cookie';
 import { environment } from 'environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { downloadDmsDocument } from 'app/shared/function/customer-function';
 
 @Component({
   selector: 'app-self-custom-bouwheer-company-industry-info',
@@ -318,6 +319,6 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   }
 
   DownloadFileIndustryInfo(i:number){
-
+    downloadDmsDocument(this.http, this.toastr, this.ListBouwheerIndustryInfo[i]);
   }
 }
