@@ -1,0 +1,257 @@
+{
+    "title": "Termination Inquiry",
+    "hideTitle": false,
+    "id": "TerminationInquiry",
+    "addButton": false,
+    "addLink": "",
+    "pathOption": "",
+    "backButton": false,
+    "component": [
+        {
+            "paging": {
+                "environment": "PayoutUrl",
+                "apiVersion": "v1",
+                "pagingInput": {
+                    "title": "",
+                    "sectionTitle": "Search",
+                    "querystring": {
+                        "name": "TerminationInquiry"
+                    },
+                    "exportExcel": false,
+                    "component": [
+                        {
+                            "id": "groupedbatchvendorNameSearchId",
+                            "type": "textbox",
+                            "label": "funding Company",
+                            "name": "GROUPEDBATCH.VENDOR_NAME",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text"
+                        },
+                        {
+                            "id": "groupedbatchjfContractNameSearchId",
+                            "type": "textbox",
+                            "label": "Funding Contract",
+                            "name": "GROUPEDBATCH.JF_CONTRACT_NAME",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text"
+                        },
+                        {
+                            "id": "groupedbatchjfContractNoSearchId",
+                            "type": "textbox",
+                            "label": "Funding Contract No",
+                            "name": "GROUPEDBATCH.JF_CONTRACT_NO",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text"
+                        },
+                        {
+                            "id": "groupedbatchjfBatchNoSearchId",
+                            "type": "dropdown",
+                            "label": "Funding Batch No",
+                            "name": "GROUPEDBATCH.JF_BATCH_NO",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": false,
+                            "ddlType": "all",
+                            "isEvent": false,
+                            "items": []
+                        },
+                        {
+                            "id": "groupedbatchbatchDtSearchId",
+                            "type": "datepicker",
+                            "label": "Batch Prepare Date Start Date",
+                            "name": "GROUPEDBATCH.BATCH_DT",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "date",
+                            "restriction": "gte",
+                            "useDefVal": false
+                        },
+                        {
+                            "id": "groupedbatchbatchDtSearchId",
+                            "type": "datepicker",
+                            "label": "Batch Prepare Date End Date",
+                            "name": "GROUPEDBATCH.BATCH_DT",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "date",
+                            "restriction": "lte",
+                            "useDefVal": false
+                        },
+                        {
+                            "id": "groupedbatchterminationTypeSearchId",
+                            "type": "dropdown",
+                            "label": "Batch Type",
+                            "name": "GROUPEDBATCH.TERMINATION_TYPE",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text",
+                            "isFromURL": false,
+                            "ddlType": "one",
+                            "isEvent": false,
+                            "items": [
+                                {
+                                    "key": "BB",
+                                    "value": "Buy Back"
+                                },
+                                {
+                                    "key": "ET",
+                                    "value": "Early Termination"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "groupedbatchtrxNoSearchId",
+                            "type": "textbox",
+                            "label": "ET Batch No",
+                            "name": "GROUPEDBATCH.TRX_NO",
+                            "value": "",
+                            "placeholder": "",
+                            "datatype": "text"
+                        }
+                    ],
+                    "headerList": [
+                        {
+                            "type": "sort",
+                            "label": "funding Company",
+                            "position": "center",
+                            "name": "VT.VENDOR_NAME"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Funding Contract",
+                            "position": "center",
+                            "name": "JC.JF_CONTRACT_NAME"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Payment Batch No",
+                            "position": "center",
+                            "name": "BTTH.TRX_NO"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Type",
+                            "position": "center",
+                            "name": "BTTH.TERMINATION_TYPE"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Prepare Date",
+                            "position": "center",
+                            "name": "JB.BATCH_DT"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Status",
+                            "position": "center",
+                            "name": "JB.JF_BATCH_STAT"
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Batch Executed Date",
+                            "position": "center",
+                            "name": "BTTH.BATCH_EXECUTION_DT"
+                        }
+                    ],
+                    "bodyList": [
+                        {
+                            "type": "callback",
+                            "position": "center",
+                            "property": "FundingCompanyname",
+                            "isFlagColor": false,
+                            "key": "ViewVendor"
+                        },
+                        {
+                            "type": "callback",
+                            "position": "center",
+                            "property": "FundingContractName",
+                            "isFlagColor": false,
+                            "key": "ViewFundingContract"
+                        },
+                        {
+                            "type": "link",
+                            "position": "center",
+                            "property": "PaymentBatchNo",
+                            "isFlagColor": false,
+                            "target": "_blank",
+                            "path": "/Termination/Inquiry/View",
+                            "param": [
+                                {
+                                    "type": "TerminationBatchNo",
+                                    "property": "PaymentBatchNo"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "position": "center",
+                            "property": "BatchType",
+                            "isFlagColor": false
+                        },
+                        {
+                            "type": "date",
+                            "position": "right",
+                            "property": "BatchPrepareDate",
+                            "isFlagColor": false
+                        },
+                        {
+                            "type": "text",
+                            "position": "center",
+                            "property": "BatchStatus",
+                            "isFlagColor": false
+                        },
+                        {
+                            "type": "date",
+                            "position": "right",
+                            "property": "BatchExecutedDt",
+                            "isFlagColor": false
+                        }
+                    ]
+                },
+                "criteria": [],
+                "whereValue": [],
+                "fromValue": [],
+                "useIntegration": false,
+                "isHideSearch": false,
+                "isSearched": false,
+                "delay": 1,
+                "isUseCustomApi": false,
+                "customApiQryPaging": ""
+            },
+            "id": "bbf866fb-e863-4afa-842f-02c269b4d7a9"
+        }
+    ],
+    "serviceUrl": {
+        "add": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "edit": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "createRfa": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        }
+    },
+    "isRedirect": false,
+    "redirectOption": "",
+    "redirectLink": "",
+    "hideSubmitButton": false,
+    "hideCancelButton": false,
+    "listBtn": [],
+    "onInit": [],
+    "isOverrideSubmit": false,
+    "onSubmit": [],
+    "isOverrideCancel": false,
+    "onCancel": {},
+    "conditionalTitle": []
+}
