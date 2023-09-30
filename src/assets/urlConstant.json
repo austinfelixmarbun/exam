@@ -968,6 +968,8 @@
     "GetViewSubjectInfoAllHistory" : "/v1/Pefindo/GetViewSubjectInfoAllHistory",
     "GetPefindoMultiResultByGroupTrxNo" : "/v1/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo",
     "AddTrxSrcDataForPefindoMultiResult" : "/v1/Digitalization/AddTrxSrcDataForPefindoMultiResult",
+    "AddTrxSrcDataForPefindoMultiResultV2" : "/v2/Digitalization/AddTrxSrcDataForPefindoMultiResult",
     "GetPefindoTrxSrcData" : "/v1/Pefindo/GetPefindoTrxSrcData",
+    "PefindoSmartSearchV2" : "/v2/Pefindo/PefindoSmartSearch",
     "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
 }

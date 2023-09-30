@@ -12,16 +12,21 @@ import { ReqPefindoSmartSearchV2Obj } from 'app/shared/model/digitalization/req-
 import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-file-obj.model';
 import { CustDocFileFormObj } from 'app/shared/model/cust-doc-file/cust-doc-file-form-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
 
 @Component({
   selector: 'app-cust-pefindo-req',
   templateUrl: './cust-pefindo-req.component.html'
 })
 export class CustPefindoReqComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj();
+  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
 
-  constructor(private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal, private thirdPartyUploadService: ThirdPartyUploadService) { }
+  constructor(
+    private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal, 
+    private thirdPartyUploadService: ThirdPartyUploadService, private UrlConstantNew: UrlConstantNew,
+    private adInsHelperService: AdInsHelperService) { }
 
   async ngOnInit() {
     
@@ -47,7 +52,7 @@ export class CustPefindoReqComponent implements OnInit {
 
       if (event.CustId > 0)
       {
-        await this.http.post(URLConstant.GetCustByCustId, { Id: event.CustId }).toPromise().then(
+        await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: event.CustId }).toPromise().then(
           (response) => {
             TrxNo = response["ThirdPartyGroupTrxNo"];
           });
@@ -59,7 +64,7 @@ export class CustPefindoReqComponent implements OnInit {
         return;
       }
 
-      AdInsHelper.OpenPefindoMultiResultView(TrxNo, event.MrCustTypeCode);
+      this.adInsHelperService.OpenPefindoMultiResultView(TrxNo, event.MrCustTypeCode);
     }
     else
     {
@@ -69,14 +74,14 @@ export class CustPefindoReqComponent implements OnInit {
         this.toastr.warningMessage("Please request Pefindo first!");
         return;
       }
-      AdInsHelper.OpenPefindoView(TrxNo, event.MrCustTypeCode);
+      this.adInsHelperService.OpenPefindoView(TrxNo, event.MrCustTypeCode);
     }
   }
 
   pefindoMultiResMax: number = 0;
   async checkIsPefindoMulti()
   {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
       (response) => {
         this.pefindoMultiResMax = parseInt(response["GsValue"]);
       });
@@ -100,7 +105,7 @@ export class CustPefindoReqComponent implements OnInit {
     reqPefindoSmartSearchObj.CustType = event.MrCustTypeCode;
     reqPefindoSmartSearchObj.BirthDt = event.BirthDt;
 
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsInqPefindoCustReq }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GsInqPefindoCustReq }).toPromise().then(
       (result) => {
         this.inqPefindoCustReq = result["GsValue"];
       }
@@ -115,7 +120,7 @@ export class CustPefindoReqComponent implements OnInit {
       reqPefindoSmartSearchObj.IdNo = event.TaxIdNo;
     }
 
-    await this.http.post(URLConstant.GetCustByCustId, { Id: event.CustId }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: event.CustId }).toPromise().then(
       (response) => {
         this.RowVersion = response["RowVersion"];
     })
@@ -124,7 +129,7 @@ export class CustPefindoReqComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = event.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(URLConstant.SaveCustDocFile, custDocFileObjs).subscribe(
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs).subscribe(
         (response) => {
           const modalRef = this.modalService.open(PefindoReqComponent);
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;

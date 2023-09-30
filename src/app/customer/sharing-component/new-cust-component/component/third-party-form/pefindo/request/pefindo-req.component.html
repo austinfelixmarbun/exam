@@ -285,6 +285,7 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-raised btn-warning" (click)="Request()" *ngIf="pefindoMultiResMax > 0 && IsCustPefindoReq && toDisplay && this.PefindoForm.controls.PefindoInquiryReason.value != ''">Request</button>
   <button type="button" class="btn btn-raised btn-warning" (click)="Request()" *ngIf="pefindoMultiResMax > 0 && !IsCustPefindoReq">Request</button>
+  <button type="button" class="btn btn-raised btn-warning" (click)="activeModal.dismiss()">
     <i class="ft-x"></i>&nbsp;<span translate>Cancel</span>
   </button>
 </div>

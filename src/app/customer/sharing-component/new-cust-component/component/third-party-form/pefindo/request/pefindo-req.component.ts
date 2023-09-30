@@ -69,7 +69,7 @@ export class PefindoReqComponent implements OnInit {
       await this.initGrid();
     }
     
-    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: this.RefMasterTypeCodePefindoInquiryReason }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: this.RefMasterTypeCodePefindoInquiryReason }).toPromise().then(
       (response) => {
           this.DictUcDDLObj[this.RefMasterTypeCodePefindoInquiryReason] = response["ReturnObject"];
       }
@@ -82,7 +82,7 @@ export class PefindoReqComponent implements OnInit {
     }
 
     this.IsSmartSearchResultReady = false;
-    await this.http.post(URLConstant.PefindoSmartSearchV2, this.ReqPefindoSmartSearchObj).toPromise().then(
+    await this.http.post(this.UrlConstantNew.PefindoSmartSearchV2, this.ReqPefindoSmartSearchObj).toPromise().then(
       (response) => {
         this.IsSmartSearchResultReady = true;
         this.slikReferenceCode = response["SlikReferenceCode"];
@@ -199,7 +199,7 @@ export class PefindoReqComponent implements OnInit {
       reqAddTrxSrcDataForPefindoMultiResultV2Obj.ReqAddTrxSrcDataForPefindoObj.push(reqAddTrxSrcDataForPefindoObj);
     });
 
-    this.http.post(URLConstant.AddTrxSrcDataForPefindoMultiResultV2, reqAddTrxSrcDataForPefindoMultiResultV2Obj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoMultiResultV2, reqAddTrxSrcDataForPefindoMultiResultV2Obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.thirdPartyGroupTrxNo.emit(response['ThirdPartyRsltHGroupNo'])
         this.toastr.successMessage(response["Message"]);

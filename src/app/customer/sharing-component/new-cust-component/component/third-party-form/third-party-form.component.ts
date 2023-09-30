@@ -231,7 +231,7 @@ export class ThirdPartyFormComponent implements OnInit {
     reqPefindoSmartSearchObj.CustType = this.MrCustTypeCode;
     reqPefindoSmartSearchObj.BirthDt = tempForm["BirthDt"];
 
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsInqPefindoCustReq }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GsInqPefindoCustReq }).toPromise().then(
       (result) => {
         this.inqPefindoCustReq = result["GsValue"];
       }

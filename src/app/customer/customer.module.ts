@@ -220,8 +220,7 @@ export const customCurrencyMaskConfig = {
         UpdateCustomerCompanyLegalDocComponent,
         CustBankAccComponent,
         CustAssetComponent,
-    CustomerViewCustomerAssetComponent,
-    CustPefindoReqComponent
+        CustPefindoReqComponent,
         CustomerViewHeaderPersonalComponent,
         CustomerViewHeaderCompanyComponent,
         SelfCustomCustomerPagingComponent,
