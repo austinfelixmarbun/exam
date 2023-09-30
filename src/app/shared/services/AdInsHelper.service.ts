@@ -39,6 +39,11 @@ export class AdInsHelperService {
 		window.open(url, "_blank");
 	}
 
+	public OpenPefindoMultiResultView(TrxNo: string, MrCustTypeCode: string) {
+		var url = this.UrlConstantNew.env.FoundationR3Web + "/View/Pefindo?GroupTrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+		window.open(url, "_blank");
+}
+
 	public OpenProdOfferingViewByCodeAndVersion(Code, Version) {
 		window.open(this.UrlConstantNew.env.FoundationR3Web + "/View/Offering?prodOfferingHId=0&prodOfferingCode=" + Code + "&prodOfferingVersion=" + Version, "_blank");
 	}

@@ -8,17 +8,18 @@ import { CustObj } from 'app/shared/model/cust-obj.model';
 import { MultiChartsObj } from 'app/shared/model/charts/multi-charts-obj.model';
 import { ResForChartsObj } from 'app/shared/model/charts/res-for-charts-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
-import { ResViewContractsObj } from 'app/shared/model/response/pefindo/res-view-contracts-obj.model';
 import { ResViewSubjectInfoCompanyObj } from 'app/shared/model/response/pefindo/res-view-subject-info-company-obj.model';
-import { ResViewPefindoContractsObj } from 'app/shared/model/response/pefindo/res-view-pefindo-contracts-obj.model';
 import { ResViewSubjectInfoPersonalObj } from 'app/shared/model/response/pefindo/res-view-subject-info-personal-obj.model';
-import { ResContractObj } from 'app/shared/model/response/pefindo/res-contract-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { CookieService } from 'ngx-cookie';
-import { ResPefindoContractForExportObj } from 'app/shared/model/response/pefindo/res-pefindo-contract-for-export-obj.model';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { ResViewContractsObj } from 'app/shared/model/Response/pefindo/res-view-contracts-obj.model';
+import { ResContractObj } from 'app/shared/model/Response/pefindo/res-contract-obj.model';
+import { ResViewPefindoContractsObj } from 'app/shared/model/Response/pefindo/res-view-pefindo-contracts-obj.model';
+import { ChartsObj } from 'app/shared/model/charts/charts-obj.model';
+import { ResPefindoContractForExportObj } from 'app/shared/model/Response/pefindo/res-pefindo-contract-for-export-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
@@ -39,7 +40,7 @@ export class PefindoViewContractsComponent implements OnInit {
   MrCustTypeCode: string;
   CustObj: CustObj = new CustObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["TrxNo"] != null) {
         this.TrxNo = params["TrxNo"];
@@ -59,10 +60,11 @@ export class PefindoViewContractsComponent implements OnInit {
     this.getSubjectInfo();
 
     this.initYears.push("All");
+    this.Quarters.push("All");
 
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    await this.http.post(URLConstant.GetViewContracts, reqByTrxNo).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetViewContracts, reqByTrxNo).toPromise().then(
       (response: ResViewContractsObj) => {
         this.ResViewContractsObj = response;
       }
@@ -80,7 +82,7 @@ export class PefindoViewContractsComponent implements OnInit {
     {
       let reqByCustNo: GenericObj = new GenericObj();
       reqByCustNo.CustNo = this.CustNo;
-      this.http.post(URLConstant.GetCustByCustNo, reqByCustNo).subscribe(
+      this.http.post(this.UrlConstantNew.GetCustByCustNo, reqByCustNo).subscribe(
         (response: CustObj) => {
           this.MrCustTypeCode = this.CustObj.MrCustTypeCode;
         })
@@ -92,7 +94,7 @@ export class PefindoViewContractsComponent implements OnInit {
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal)
     {
       reqByTrxNo.TrxNo = this.TrxNo;
-      this.http.post(URLConstant.GetViewSubjectInfoPersonal, reqByTrxNo).subscribe(
+      this.http.post(this.UrlConstantNew.GetViewSubjectInfoPersonal, reqByTrxNo).subscribe(
       (response: ResViewSubjectInfoPersonalObj) => {
         this.TempDetailContract.PefindoId = response.PefindoId;
         this.TempDetailContract.Name = response.FullName;
@@ -103,7 +105,7 @@ export class PefindoViewContractsComponent implements OnInit {
     }
     else
     {
-      this.http.post(URLConstant.GetViewSubjectInfoCompany, reqByTrxNo).subscribe(
+      this.http.post(this.UrlConstantNew.GetViewSubjectInfoCompany, reqByTrxNo).subscribe(
         (response: ResViewSubjectInfoCompanyObj) => {
           this.TempDetailContract.PefindoId = response.PefindoId;
           this.TempDetailContract.Name = response.CoyName;
@@ -178,7 +180,7 @@ export class PefindoViewContractsComponent implements OnInit {
   {
     let reqByTrxNo: GenericObj = new GenericObj();
     reqByTrxNo.TrxNo = this.TrxNo;
-    await this.http.post(URLConstant.GetPefindoContracts, reqByTrxNo).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetPefindoContracts, reqByTrxNo).toPromise().then(
       (response: {ReturnObject: Array<ResContractObj>}) => {
         this.ResListContractsObj = response.ReturnObject? response.ReturnObject : [];
         this.ResListContractsObj = this.ResListContractsObj.filter(x => x.ClientRole == 'MainDebtor');
@@ -222,7 +224,7 @@ export class PefindoViewContractsComponent implements OnInit {
       if (a["Month"] > b["Month"]) return 1;
     });
 
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsDefPefindoGraphCntrctYears }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GsDefPefindoGraphCntrctYears }).toPromise().then(
       (result: GeneralSettingObj) => {
         let def: Array<string> = result.GsValue != null? result.GsValue.split(";") : ["5","5"];
 

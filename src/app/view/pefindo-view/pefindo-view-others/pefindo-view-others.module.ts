@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PefindoViewOthersRoutingModule } from './pefindo-view-others-routing.module';
 import { PefindoViewOthersComponent } from './pefindo-view-others.component';
-import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
@@ -14,13 +13,15 @@ import { PefindoViewSecuritiesModule } from '../pefindo-view-securities/pefindo-
 import { PefindoViewOtherLiabilitiesModule } from '../pefindo-view-other-liabilities/pefindo-view-other-liabilities.module';
 import { PefindoViewInvolvementsModule } from '../pefindo-view-involvements/pefindo-view-involvements.module';
 import { PefindoViewRelationsModule } from '../pefindo-view-relations/pefindo-view-relations.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [PefindoViewOthersComponent],
   imports: [
     CommonModule,
     PefindoViewOthersRoutingModule,
-    HttpModule,
+    HttpClientModule,
     NgbModule,
     AdInsSharedModule,
     SharingModule,
@@ -32,6 +33,9 @@ import { PefindoViewRelationsModule } from '../pefindo-view-relations/pefindo-vi
     PefindoViewOtherLiabilitiesModule,
     PefindoViewInvolvementsModule,
     PefindoViewRelationsModule
+  ],
+  providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class PefindoViewOthersModule { }

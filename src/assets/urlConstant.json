@@ -964,5 +964,9 @@
     "GetOCRNPWPData" : "/v1/OCR/GetOCRNPWPData",
     "GetRefPaymentAllocAttrByRefPaymentAllocId" : "/v1/RefPaymentAlloc/GetRefPaymentAllocAttrByRefPaymentAllocId",
     "SubmitAddRefAttr" : "/v1/RefPaymentAlloc/SubmitAddRefAttr",
+    "GetPefindoContracts" : "/v1/Pefindo/GetPefindoContracts",
+    "GetViewSubjectInfoAllHistory" : "/v1/Pefindo/GetViewSubjectInfoAllHistory",
+    "GetPefindoMultiResultByGroupTrxNo" : "/v1/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo",
+    "AddTrxSrcDataForPefindoMultiResult" : "/v1/Digitalization/AddTrxSrcDataForPefindoMultiResult",
     "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
 }

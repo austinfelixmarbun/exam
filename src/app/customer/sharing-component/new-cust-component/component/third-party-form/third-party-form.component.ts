@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
@@ -27,12 +26,12 @@ import { ReqCustDocFileObj } from 'app/shared/model/cust-doc-file/req-cust-doc-f
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
-import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
-import { AsliRiReqComponent } from './asli-ri/request/asli-ri-req/asli-ri-req.component';
 import { AsliRiReqHeaderComponent } from './asli-ri/request/asli-ri-req-header.component';
 import { AsliRiViewComponent } from './asli-ri/view/asli-ri-view/asli-ri-view.component';
 import { CbasSlikViewComponent } from './cbas-slik/cbas-slik-view.component';
 import { CbasSlikReqHeaderComponent } from './cbas-slik/cbas-slik-req-header.component';
+import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
 
 @Component({
   selector: 'app-third-party-form',
@@ -201,7 +200,7 @@ export class ThirdPartyFormComponent implements OnInit {
 
   async checkIsPefindoMulti()
   {
-    await this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
       (response) => {
         this.pefindoMultiResMax = parseInt(response["GsValue"]);
       });
@@ -218,13 +217,6 @@ export class ThirdPartyFormComponent implements OnInit {
     }
 
     await this.checkIsPefindoMulti();
-
-    if (this.pefindoMultiResMax == 0)
-    {
-      await this.checkThirdPartyTrxNo();
-      await this.saveThirdPartyTrxNo();
-    }
-
 
     let tempForm = this.parentForm.getRawValue();
 
@@ -249,14 +241,17 @@ export class ThirdPartyFormComponent implements OnInit {
       var custDocFileObjs: ReqCustDocFileObj = new ReqCustDocFileObj();
       custDocFileObjs.CustId = this.custObj.CustId;
       custDocFileObjs.CustDocFileObjs = await this.thirdPartyUploadService.ConvertToCustDocFileObj(this.CustDocFileFormObjs);
-      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.SaveCustDocFile, custDocFileObjs).subscribe(
         (response) => {
           const modalRef = this.modalService.open(PefindoReqComponent);
           modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
           modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
           modalRef.componentInstance.CustId = this.custObj.CustId;
           modalRef.componentInstance.RowVersion = this.custObj.RowVersion;
+
           if (this.pefindoMultiResMax > 0)
+          {
+            modalRef.result.then((res) => {
               this.thirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
               this.custObj.ThirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
               this.custObj.RowVersion = res["RowVersion"];
@@ -270,6 +265,8 @@ export class ThirdPartyFormComponent implements OnInit {
               this.custObj.ThirdPartyTrxNo = res["Code"];
               this.custObj.RowVersion = res["RowVersion"];
               this.OutputCustObj.emit(this.custObj);
+            })
+          }
         }
       );
     }
@@ -277,14 +274,22 @@ export class ThirdPartyFormComponent implements OnInit {
       const modalRef = this.modalService.open(PefindoReqComponent);
       modalRef.componentInstance.ReqPefindoSmartSearchObj = reqPefindoSmartSearchObj;
       modalRef.componentInstance.ThirdPartyTrxNo = this.thirdPartyTrxNo;
-      modalRef.result.then((res) => {
+      if (this.pefindoMultiResMax > 0)
+      {
+        modalRef.result.then((res) => {
           this.thirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
           this.custObj.ThirdPartyGroupTrxNo = res["ThirdPartyRsltHGroupNo"];
           this.OutputCustObj.emit(this.custObj);
+        })
+      }
+      else
+      {
+        modalRef.result.then((res) => {
           this.thirdPartyTrxNo = res["Code"];
           this.custObj.ThirdPartyTrxNo = res["Code"];
           this.OutputCustObj.emit(this.custObj);
-      })
+        })
+      }
     }
 
   }
@@ -297,24 +302,29 @@ export class ThirdPartyFormComponent implements OnInit {
 
       if (this.custObj.CustId > 0)
       {
-        await this.http.post(URLConstant.GetCustByCustId, { Id: this.custObj.CustId }).toPromise().then(
+        await this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.custObj.CustId }).toPromise().then(
           (response: CustObj) => {
             TrxNo = response["ThirdPartyGroupTrxNo"];
           });
       }
 
-      if (TrxNo == null)
+      if (TrxNo == null || TrxNo == "")
       {
         this.toastr.warningMessage("Please request Pefindo first!");
         return;
       }
 
-      AdInsHelper.OpenPefindoMultiResultView(TrxNo, this.MrCustTypeCode);
+      this.adInsHelperService.OpenPefindoMultiResultView(TrxNo, this.MrCustTypeCode);
     }
     else
     {
       let TrxNo = this.thirdPartyTrxNo;
-      AdInsHelper.OpenPefindoView(TrxNo, this.MrCustTypeCode);
+      if (TrxNo == null || TrxNo == "")
+      {
+        this.toastr.warningMessage("Please request Pefindo first!");
+        return;
+      }
+      this.adInsHelperService.OpenPefindoView(TrxNo, this.MrCustTypeCode);
     }
   }
 

@@ -65,7 +65,48 @@
               </div>
             </div><br><br>
           </div>
+
+          <lib-ucSubsection [id]="'ContractSummaryDebtorId'" [title]="'Contract Summary, Debtor'" [panel]="'ContractSummaryDebtor'">
+          </lib-ucSubsection>
+          <div id="ContractSummaryDebtor">
+            <div class="card-body" style="overflow-x: auto">
+              <table class="table table-responsive-md text-center table-hover">
+                <thead>
+                  <tr class="table-header">
+                    <th class="text-left">
+                      <span name='Nama Kreditur' translate>Nama Kreditur</span>
+                    </th>
+                    <th class="text-right" width="120">
+                      <span name='Total' translate>Total</span>
+                    </th>
+                    <th class="text-right" width="120">
+                      <span name='Balance' translate>Balance</span>
+                    </th>
+                    <th class="text-right" width="120">
+                      <span name='Past Due' translate>Past Due</span>
+                    </th>
+                    <th class="text-right" width="220">
+                      <span name='Max Arreas' translate>Max Arreas</span>
+                    </th>
                     </tr>
+                </thead>
+                <tbody *ngIf = "ResSummaryContractsObj.length == 0">
+                  <tr>
+                    <td colspan="100%">No Data Available</td>
+                  </tr>
+                </tbody>
+                <tbody *ngIf="ResSummaryContractsObj.length > 0">
+                  <tr *ngFor="let item of ResSummaryContractsObj">
+                    <td class="text-left">{{ item.Creditor }}</td>
+                    <td class="text-right">{{ item.TtlAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.OsAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueAmt | number: '.2':'en-US' }}</td>
+                    <td class="text-right">{{ item.PastDueDays }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
           <lib-ucSubsection [id]="'ContractDebtorId'" [title]="'Contract List'" [panel]="'ContractDebtor'">
           </lib-ucSubsection>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -9,12 +9,17 @@ import { PefindoSmartSearchCoyObj } from 'app/shared/model/digitalization/pefind
 import { PefindoSmartSearchPersonalObj } from 'app/shared/model/digitalization/pefindo-smart-search-personal-obj.model';
 import { ReqAddTrxSrcDataForPefindoObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-obj.model';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { ReqAddTrxSrcDataForPefindoMultiResultObj } from 'app/shared/model/digitalization/req-add-trx-src-data-for-pefindo-multi-result-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { ReqGenerateTrxNoObj } from 'app/shared/model/master-sequence/req-generate-trx-no-obj.model';
+import { ResGenerateTrxNoObj } from 'app/shared/model/master-sequence/res-generate-trx-no-obj.model';
+import { CurrentUserContext } from 'app/shared/model/current-user-context.model';
+import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { CookieService } from 'ngx-cookie';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 
 @Component({
@@ -41,8 +46,10 @@ export class PefindoReqComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     public activeModal: NgbActiveModal,
-    private toastr: NGXToastrService, 
+    private toastr: NGXToastrService,
+    private cookieService: CookieService,
     private UrlConstantNew: UrlConstantNew
+  ) {
 
   }
 
@@ -52,7 +59,7 @@ export class PefindoReqComponent implements OnInit {
   }
 
   async initGrid(){
-    this.http.post(URLConstant.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.PefindoSmartSearch, this.ReqPefindoSmartSearchObj).toPromise().then(
       (response) => {
         if(this.ReqPefindoSmartSearchObj.CustType == this.CustTypePersonal){
           this.PefindoSmartSearchPersonalObjs = response["ReturnObject"];
@@ -71,7 +78,7 @@ export class PefindoReqComponent implements OnInit {
   @Output() thirdPartyGroupTrxNo: EventEmitter<string> = new EventEmitter();
   async getGenSet()
   {
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
       (result: GeneralSettingObj) => {
         this.pefindoMultiResMax = parseInt(result.GsValue);
       }
@@ -163,7 +170,7 @@ export class PefindoReqComponent implements OnInit {
       reqAddTrxSrcDataForPefindoMultiResultObj.ReqAddTrxSrcDataForPefindoObj.push(reqAddTrxSrcDataForPefindoObj);
     });
 
-    this.http.post(URLConstant.AddTrxSrcDataForPefindoMultiResult, reqAddTrxSrcDataForPefindoMultiResultObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoMultiResult, reqAddTrxSrcDataForPefindoMultiResultObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.thirdPartyGroupTrxNo.emit(response['ThirdPartyRsltHGroupNo'])
         this.toastr.successMessage(response["Message"]);
@@ -172,7 +179,9 @@ export class PefindoReqComponent implements OnInit {
     );
   }
 
-  RequestPersonal(pefindoSmartSearchPersonalObj: PefindoSmartSearchPersonalObj){
+  async RequestPersonal(pefindoSmartSearchPersonalObj: PefindoSmartSearchPersonalObj){
+    await this.checkThirdPartyTrxNo();
+
     var reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
 
     reqAddTrxSrcDataForPefindoObj.TrxNo = this.ThirdPartyTrxNo;
@@ -190,14 +199,16 @@ export class PefindoReqComponent implements OnInit {
     }
     
     if(environment.isCore){
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
+      await this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).toPromise().then(
+        async (response) => {
+          this.saveThirdPartyTrxNo();
           this.toastr.successMessage(response["Message"]);
         }
       );
     }else{
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
         (response) => {
+          this.saveThirdPartyTrxNo();
           this.toastr.successMessage(response["Message"]);
         }
       );
@@ -205,7 +216,9 @@ export class PefindoReqComponent implements OnInit {
 
   }
 
-  RequestCompany(pefindoSmartSearchCoyObj: PefindoSmartSearchCoyObj){
+  async RequestCompany(pefindoSmartSearchCoyObj: PefindoSmartSearchCoyObj){
+    await this.checkThirdPartyTrxNo();
+
     var reqAddTrxSrcDataForPefindoObj = new ReqAddTrxSrcDataForPefindoObj();
 
     reqAddTrxSrcDataForPefindoObj.TrxNo = this.ThirdPartyTrxNo;
@@ -222,26 +235,56 @@ export class PefindoReqComponent implements OnInit {
     }
 
     if(environment.isCore){
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
-        (response) => {
+      await this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindoV2, reqAddTrxSrcDataForPefindoObj).toPromise().then(
+        async (response) => {
+          this.saveThirdPartyTrxNo();
           this.toastr.successMessage(response["Message"]);
         }
       );
     }else{
-      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.AddTrxSrcDataForPefindo, reqAddTrxSrcDataForPefindoObj).subscribe(
         (response) => {
+          this.saveThirdPartyTrxNo();
           this.toastr.successMessage(response["Message"]);
         }
       );
     }
 
   }
+
+  async saveThirdPartyTrxNo() {
+    let reqByIdAndCode: GenericObj = new GenericObj();
     if (!this.CustId)
     {
       reqByIdAndCode.Code = this.ThirdPartyTrxNo;
       this.activeModal.close(reqByIdAndCode);
       return;
     }
+    reqByIdAndCode.Id = this.CustId;
+    reqByIdAndCode.Code = this.ThirdPartyTrxNo;
     reqByIdAndCode.RowVersion = this.RowVersion;
+
+    await this.http.post(this.UrlConstantNew.SaveCustThirdPartyTrxNo, reqByIdAndCode).toPromise().then(
+      response => {
         this.activeModal.close(response);
+      }
+    )
+  }
+
+  async checkThirdPartyTrxNo() {
+    if (this.ThirdPartyTrxNo == null || this.ThirdPartyTrxNo == "") {
+      let context: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+      let officeCode = context[CommonConstant.OFFICE_CODE];
+
+      var reqGenerateTrxNoObj = new ReqGenerateTrxNoObj();
+      reqGenerateTrxNoObj.MasterSeqCode = CommonConstant.MasterSequenceCodeCustomerThirdParty;
+      reqGenerateTrxNoObj.OfficeCode = officeCode;
+
+      await this.http.post(this.UrlConstantNew.GenerateTransactionNoFromRedis, reqGenerateTrxNoObj).toPromise().then(
+        (response: ResGenerateTrxNoObj) => {
+          this.ThirdPartyTrxNo = response.TrxNo;
+        }
+      );
+    }
+  }
 }

@@ -35,17 +35,12 @@ export class PefindoViewSubjectInfoPersonalComponent implements OnInit {
       }
     )
 
-    this.http.post(URLConstant.GetViewSubjectInfoAllHistory, reqByTrxNo).subscribe(
+    this.http.post(this.UrlConstantNew.GetViewSubjectInfoAllHistory, reqByTrxNo).subscribe(
       (response) => {
         this.ListRPefindoSubjInfoAddrHist = response["ListRPefindoSubjInfoAddrHist"]? response["ListRPefindoSubjInfoAddrHist"] : new Array<ResViewSubjectInfoHistoryObj>();
         this.ListRPefindoSubjInfoCntctHist = response["ListRPefindoSubjInfoCntctHist"]? response["ListRPefindoSubjInfoCntctHist"] : new Array<ResViewSubjectInfoHistoryObj>();
         this.ListRPefindoSubjInfoGnrlHist = response["ListRPefindoSubjInfoGnrlHist"]? response["ListRPefindoSubjInfoGnrlHist"] : new Array<ResViewSubjectInfoHistoryObj>();
         this.ListRPefindoSubjInfoIdntfctnHist = response["ListRPefindoSubjInfoIdntfctnHist"]? response["ListRPefindoSubjInfoIdntfctnHist"] : new Array<ResViewSubjectInfoHistoryObj>();
-
-        console.log(this.ListRPefindoSubjInfoAddrHist)
-        console.log(this.ListRPefindoSubjInfoCntctHist)
-        console.log(this.ListRPefindoSubjInfoGnrlHist)
-        console.log(this.ListRPefindoSubjInfoIdntfctnHist)
       }
     )
   }

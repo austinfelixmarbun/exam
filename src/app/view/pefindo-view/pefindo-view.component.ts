@@ -141,7 +141,7 @@ export class PefindoViewComponent implements OnInit {
   ListPefindoMulti: Array<ResGetPefindoMultiObj> = new Array<ResGetPefindoMultiObj>();
   async getGenSet()
   {
-    await this.http.post(URLConstant.GetGeneralSettingByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GsPefindoMultiResultMax }).toPromise().then(
       (result: GeneralSettingObj) => {
         this.pefindoMultiResMax = parseInt(result.GsValue);
       }
@@ -153,7 +153,7 @@ export class PefindoViewComponent implements OnInit {
     let reqByThirdPartyGroupTrxNo: GenericObj = new GenericObj();
     reqByThirdPartyGroupTrxNo.Code = this.GroupTrxNo;
 
-    await this.http.post(URLConstant.GetPefindoMultiResultByGroupTrxNo, reqByThirdPartyGroupTrxNo).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetPefindoMultiResultByGroupTrxNo, reqByThirdPartyGroupTrxNo).toPromise().then(
     (response) => {
       var temp: Array<ResGetPefindoMultiObj> = new Array<ResGetPefindoMultiObj>();
       temp = response["ReturnObject"];

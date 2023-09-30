@@ -60,7 +60,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VIEW_PEFINDO_OTHERS,
-        loadChildren: './pefindo-view-others/pefindo-view-others.module#PefindoViewOthersModule'
+        loadChildren: () => import('./pefindo-view-others/pefindo-view-others.module').then(m => m.PefindoViewOthersModule),
       }
     ]
   }

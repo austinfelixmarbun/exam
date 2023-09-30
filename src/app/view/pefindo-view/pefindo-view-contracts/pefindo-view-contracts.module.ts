@@ -10,6 +10,8 @@ import { UcSubsectionModule } from '@adins/uc-subsection';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts'
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [PefindoViewContractsComponent],
@@ -23,6 +25,9 @@ import { FormsModule } from '@angular/forms';
     UcSubsectionModule,
     NgxChartsModule,
     FormsModule
+  ],
+  providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class PefindoViewContractsModule { }
