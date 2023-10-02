@@ -19,7 +19,7 @@ import { ResBouwheerCompanyIndustryInfoObj } from 'app/shared/model/res-bouwheer
 import { CookieService } from 'ngx-cookie';
 import { environment } from 'environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { downloadDmsDocument } from 'app/shared/function/customer-function';
+import { downloadDmsDocument, sendXhr } from 'app/shared/function/customer-function';
 
 @Component({
   selector: 'app-self-custom-bouwheer-company-industry-info',
@@ -160,43 +160,60 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
               }
             ]
           };
-          try {
-            if (environment.SpinnerOnHttpPost) this.spinner.show();
+          // try {
 
-            const formData: any = new FormData();
-            formData.append('reqObj', JSON.stringify(reqObj));
-
-            const xhr = new XMLHttpRequest();
-
-            const xhrPromise = new Promise<void>((resolve, reject) => {
-              xhr.onreadystatechange = evnt => {
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200 || xhr.status === 201) {
-                    resolve();
-                  } else {
-                    reject(new Error('Upload Failed !'));
-                  }
-                }
-              };
-
-              xhr.onerror = evnt => {
-                reject(new Error('Upload Failed !'));
-              };
-
-              xhr.open('POST', this.UrlConstantNew.UploadBouwheerCompanyIndustryDoc, true);
-              const value = this.cookieService.get('XSRF-TOKEN');
-              const token = this.DecryptString(value, environment.ChipperKeyCookie);
-              xhr.setRequestHeader('AdInsKey', `${token}`);
-              xhr.send(formData);
+            sendXhr(
+              reqObj, 
+              response["Message"], 
+              this.toastr, 
+              this.cookieService, 
+              "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
+              environment.FoundationR3Url,
+              "reqObj"
+              )
+            .then(() => {
+              // Berhasil diunggah
+            })
+            .catch((error) => {
+              // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
             });
 
-            await xhrPromise;
+            // if (environment.SpinnerOnHttpPost) this.spinner.show();
 
-          } catch (error) {
-            this.toastr.errorMessage(error.message || 'An error occurred during upload.');
-          } finally {
-            if (environment.SpinnerOnHttpPost) this.spinner.hide();
-          }
+            // const formData: any = new FormData();
+            // formData.append('reqObj', JSON.stringify(reqObj));
+
+            // const xhr = new XMLHttpRequest();
+
+            // const xhrPromise = new Promise<void>((resolve, reject) => {
+            //   xhr.onreadystatechange = evnt => {
+            //     if (xhr.readyState === 4) {
+            //       if (xhr.status === 200 || xhr.status === 201) {
+            //         resolve();
+            //       } else {
+            //         reject(new Error('Upload Failed !'));
+            //       }
+            //     }
+            //   };
+
+            //   xhr.onerror = evnt => {
+            //     reject(new Error('Upload Failed !'));
+            //   };
+
+            //   xhr.open('POST', this.UrlConstantNew.UploadBouwheerCompanyIndustryDoc, true);
+            //   const value = this.cookieService.get('XSRF-TOKEN');
+            //   const token = this.DecryptString(value, environment.ChipperKeyCookie);
+            //   xhr.setRequestHeader('AdInsKey', `${token}`);
+            //   xhr.send(formData);
+            // });
+
+            // await xhrPromise;
+
+          // } catch (error) {
+          //   this.toastr.errorMessage(error.message || 'An error occurred during upload.');
+          // } finally {
+          //   // if (environment.SpinnerOnHttpPost) this.spinner.hide();
+          // }
         });
       this.currentModal.close("Success");
       this.toastr.successMessage("Success");

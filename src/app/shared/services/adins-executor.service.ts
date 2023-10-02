@@ -17,7 +17,9 @@ import { endStepperSrvyTaskDetail } from "../function/survey-function";
 import { addEditFundingCoy } from "../function/funding-function";
 import { addeditAttributeMaster } from "../function/attribute-master-function";
 import { submitCoa } from "../function/coa-scheme-function";
-import { addEditCustCompanyLegalDoc, uploadDocFileLegalMultipart } from "../function/customer-function";
+import { addEditCustCompanyLegalDoc,
+  //  uploadDocFileLegalMultipart 
+} from "../function/customer-function";
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +67,7 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addeditAttributeMaster", addeditAttributeMaster);
     this.setExecutor("submitCoa", submitCoa);
     this.setExecutor("addEditCustCompanyLegalDoc", addEditCustCompanyLegalDoc);
-    this.setExecutor("uploadDocFileLegalMultipart", uploadDocFileLegalMultipart);
+    // this.setExecutor("uploadDocFileLegalMultipart", uploadDocFileLegalMultipart);
     this.setExecutor("addBouwheerCompany", addBouwheerCompany);
     this.setExecutor("addBeneficiaryOwnerToDuplicate", addBeneficiaryOwnerToDuplicate);
   }
