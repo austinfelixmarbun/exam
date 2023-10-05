@@ -184,6 +184,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'paymenthistoryview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentHistoryModule'
+      })
+        .then(m => m.PaymentHistoryModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'lmsschemeview',
     loadChildren: () => {
       return loadRemoteModule({
