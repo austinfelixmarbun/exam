@@ -63,7 +63,7 @@
                             "placeholder": "",
                             "datatype": "text",
                             "isFromURL": false,
-                            "ddlType": "one",
+                            "ddlType": "all",
                             "isEvent": false,
                             "items": [
                                 {
