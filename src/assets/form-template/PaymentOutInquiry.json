@@ -15,7 +15,7 @@
                     "title": "",
                     "sectionTitle": "Search",
                     "querystring": {
-                        "name": "PayoutInquiry"
+                        "name": "searchPayoutInquiry"
                     },
                     "exportExcel": false,
                     "component": [
@@ -40,7 +40,7 @@
                         {
                             "id": "groupedbatchtrxNoSearchId",
                             "type": "textbox",
-                            "label": "PaymentBatchNo.",
+                            "label": "Payment Batch No",
                             "name": "GROUPEDBATCH.TRX_NO",
                             "value": "",
                             "placeholder": "",
@@ -50,7 +50,7 @@
                             "id": "groupedbatchpayoutTypeSearchId",
                             "type": "dropdown",
                             "label": "Payment Out Type",
-                            "name": "GROUPEDBATCH.PAYOUT_TYPE",
+                            "name": "RMT_PAY.DESCR",
                             "value": "",
                             "placeholder": "",
                             "datatype": "text",
@@ -59,11 +59,11 @@
                             "isEvent": false,
                             "items": [
                                 {
-                                    "key": "INST",
+                                    "key": "Installment",
                                     "value": "Installment"
                                 },
                                 {
-                                    "key": "LC",
+                                    "key": "Late Charge",
                                     "value": "Late Charge"
                                 }
                             ]
@@ -72,7 +72,7 @@
                             "id": "groupedbatchbatchTypeSearchId",
                             "type": "dropdown",
                             "label": "Batch Type",
-                            "name": "GROUPEDBATCH.BATCH_TYPE",
+                            "name": "RMT_BATCH.DESCR",
                             "value": "",
                             "placeholder": "",
                             "datatype": "text",
@@ -81,11 +81,11 @@
                             "isEvent": false,
                             "items": [
                                 {
-                                    "key": "RCV",
+                                    "key": "Receive",
                                     "value": "Payment"
                                 },
                                 {
-                                    "key": "RVS",
+                                    "key": "Reversal",
                                     "value": "Reversal"
                                 }
                             ]
@@ -99,7 +99,7 @@
                             "placeholder": "",
                             "datatype": "text",
                             "isFromURL": false,
-                            "ddlType": "one",
+                            "ddlType": "all",
                             "isEvent": false,
                             "items": [
                                 {
@@ -115,7 +115,7 @@
                         {
                             "id": "groupedbatchbatchDtSearchId",
                             "type": "datepicker",
-                            "label": "Batch Prepare Date Start Date",
+                            "label": "Batch Prepare Start Date",
                             "name": "GROUPEDBATCH.BATCH_DT",
                             "value": "",
                             "placeholder": "",
@@ -126,7 +126,7 @@
                         {
                             "id": "groupedbatchbatchDtSearchId",
                             "type": "datepicker",
-                            "label": "Batch Prepare Date End Date",
+                            "label": "Batch Prepare End Date",
                             "name": "GROUPEDBATCH.BATCH_DT",
                             "value": "",
                             "placeholder": "",
@@ -158,13 +158,13 @@
                             "type": "sort",
                             "label": "Payment Out Type",
                             "position": "center",
-                            "name": "GROUPEDBATCH.PAYOUT_TYPE"
+                            "name": "RMT_PAY.DESCR"
                         },
                         {
                             "type": "sort",
                             "label": "Batch Type",
                             "position": "center",
-                            "name": "GROUPEDBATCH.BATCH_TYPE"
+                            "name": "RMT_BATCH.DESCR"
                         },
                         {
                             "type": "sort",
@@ -182,7 +182,7 @@
                             "type": "sort",
                             "label": "Batch Status",
                             "position": "center",
-                            "name": "GROUPEDBATCH.TRX_STAT"
+                            "name": "GROUPEDBATCH.DESCR"
                         },
                         {
                             "type": "sort",
