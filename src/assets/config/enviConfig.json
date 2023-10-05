@@ -19,7 +19,7 @@
     "amendmentR3Web": "https://r3web-server.ad-ins.com/LMSAMENDMENT",
     "gvrmntrgltionR3Web": "https://r3web-server.ad-ins.com/LMSGOVREG",
     "paymentR3Web": "https://r3web-server.ad-ins.com/LMSPAYMENT",
-    "cashbankR3Web": "http://localhost:4203",
+    "cashbankR3Web": "https://r3web-server.ad-ins.com/LMSCASHBANK",
     "pdcR3Web": "https://r3web-server.ad-ins.com/LMSPDC",
     "apR3Web": "https://r3web-server.ad-ins.com/FMSAP",
     "integrationR3Web": "https://r3web-server.ad-ins.com/INTEGRATION",
