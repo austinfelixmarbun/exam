@@ -631,6 +631,18 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.AdvancePaymentModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
+  },
+  {
+    path: 'paymentrequestview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentRequestModule'
+      })
+        .then(m => m.PaymentRequestModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
   }
   //#endregion
 ];
