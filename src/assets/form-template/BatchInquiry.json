@@ -139,7 +139,7 @@
                         },
                         {
                             "type": "sort",
-                            "label": "Drawodn Plan Amount",
+                            "label": "Drawdown Plan Amount",
                             "position": "center",
                             "name": "JB.DRAWDOWN_PLAN_AMT"
                         },
