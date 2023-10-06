@@ -633,7 +633,7 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+
   //#endregion
 
   //#region PDC
@@ -995,7 +995,7 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CostAllocMasterModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
-    
+
   },
   {
     path: 'limitstaffclaim',
@@ -1033,7 +1033,19 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
   },
+  {
+    path: 'paymentrequest',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentRequestModule'
+      })
+        .then(m => m.PaymentRequestModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
   // #endregion
 
-  
+
 ];
