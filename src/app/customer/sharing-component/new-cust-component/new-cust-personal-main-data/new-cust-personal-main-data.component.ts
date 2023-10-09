@@ -166,11 +166,11 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.isReady = true;
   }
 
-  CustNameLabel: string = "Customer";
+  CustNameLabel: string = "Debtor";
   InitCustMainDataMode() {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        this.CustNameLabel = "Customer";
+        this.CustNameLabel = "Debtor";
         break;
       case this.CustDataModeFamily:
         this.CustNameLabel = "Family";

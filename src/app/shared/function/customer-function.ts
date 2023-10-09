@@ -603,7 +603,7 @@ function redirectSaveEditMainData(custId: number, custType: string, Mode: string
   if (Mode == CommonConstant.CustMainDataModeCust) {
     let param = { "IdCust": custId, Page: 'Edit', From: From };
     if (custType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE], param);
-    if (custType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(router, [NavigationConstant.CUST_COY_PAGE], param);
+    if (custType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(router, [NavigationConstant.CUSTOM_CUST_COY_PAGE], param);
     return;
   }
 }

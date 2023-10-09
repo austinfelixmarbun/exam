@@ -113,7 +113,7 @@
               </div>
             </div>
             <div class="form-group row" *ngIf="CustDataMode == CustDataModeMain">
-              <label class="col-md-4 adins-required-label" translate>Customer Model</label>
+              <label class="col-md-4 adins-required-label" translate>Debtor Model</label>
               <div class="col-md-8" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
                 <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
                   [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'"
@@ -275,7 +275,7 @@
       </lib-ucSubsection>
       <div class="form-body" id="LegalAddrSection">
         <div class="form-group row" *ngIf="!IsLockCopyAddrBtn && CustDataMode != CustDataModeMain">
-          <label class="col-md-12 adInsLabel label-field-2" translate>Copy Address From Legal Customer</label>
+          <label class="col-md-12 adInsLabel label-field-2" translate>Copy Address From Legal Debtor</label>
           <div class="col-md-12">
             <button type="button" class="btn btn-raised btn-primary-2" (click)="CopyLegalAddr()">
               <i class="far"></i>&nbsp;<span translate>Copy</span>
