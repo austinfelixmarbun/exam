@@ -158,6 +158,11 @@ export class AdInsHelper {
         return encrypted
     }
 
+    public static OpenPefindoMultiResultView(TrxNo: string, MrCustTypeCode: string) {
+        var url = environment.FoundationR3Web + "/View/Pefindo?GroupTrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+        window.open(url, "_blank");
+    }
+
     public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
         // Ngebuat bisa jalanin Constructor dan NgOnInit lagi
         const prev = router.routeReuseStrategy.shouldReuseRoute;

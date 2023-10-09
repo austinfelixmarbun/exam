@@ -137,10 +137,10 @@
           </lib-ucaddress>
         </div>
         <div *ngIf="pageFrom == CustFromEditMainData && CustDataMode == CustDataModeMain">
-          <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo"
-            [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypeCoy"
-            (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)"
-            (OutputUploadFile)="SetCustFileFormObjs($event)"></app-third-party-form>
+          <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo" [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypeCoy" 
+            (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputCustObj)="SetThirdPartyTrxNoAndRowVersion($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"
+          >
+          </app-third-party-form>
         </div>
         <div class="form-actions right">
           <button type="button" class="btn btn-raised mr-1 btn-outline-2" (click)="Cancel()">

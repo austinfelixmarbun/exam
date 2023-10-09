@@ -1162,6 +1162,13 @@ export class UrlConstantNew{
     public GetViewDisputes = this.env.FoundationR3Url + this.url.GetViewDisputes;
     public GetViewFinancialStatements = this.env.FoundationR3Url + this.url.GetViewFinancialStatements;
     public PefindoSmartSearch = this.env.FoundationR3Url + this.url.PefindoSmartSearch;
+    public GetPefindoContracts = this.env.FoundationR3Url + this.url.GetPefindoContracts;
+    public GetViewSubjectInfoAllHistory = this.env.FoundationR3Url + this.url.GetViewSubjectInfoAllHistory;
+    public GetPefindoMultiResultByGroupTrxNo = this.env.FoundationR3Url + this.url.GetPefindoMultiResultByGroupTrxNo;
+    public AddTrxSrcDataForPefindoMultiResult = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoMultiResult;
+    public GetPefindoTrxSrcData = this.env.FoundationR3Url + this.url.GetPefindoTrxSrcData;
+    public PefindoSmartSearchV2 = this.env.FoundationR3Url + this.url.PefindoSmartSearchV2;
+    public AddTrxSrcDataForPefindoMultiResultV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoMultiResultV2;
 
     // THINGS TO DO
     public GetThingsToDoByRole = this.env.FoundationR3Url + this.url.GetThingsToDoByRole;

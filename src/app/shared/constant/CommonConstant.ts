@@ -222,6 +222,8 @@ export class CommonConstant {
     public static RefMasterTypeCodeVendorCategoryGeneral = "VENDOR_CATEGORY_GENERAL";
     public static RefMasterTypeCodeCbasSlikPurposeCode = "CBAS_SLIK_PURPOSE_CODE";
 
+    public static RefMasterTypeCodePefindoInquiryReason = "PEFINDO_INQUIRY_REASON";
+    
     //MASTER CODE
     public static MasterCodeCustDocTypeSpouseId = "APGEN03";
 
@@ -247,6 +249,9 @@ export class CommonConstant {
     public static GSCodeCoyMandatoryLegalDocs = "COY_MANDATORY_LEGAL_DOCS";
     public static GSCodeCustAgeLimit = "CUST_AGE_LIMIT";
     public static GsCodeMaxAssetQtyValue = "MAX_ASSET_QUANTITY_VALUE";
+    public static GsPefindoMultiResultMax = "PEFINDO_MULTI_RESULT_MAX";
+    public static GsDefPefindoGraphCntrctYears = "DEF_PEFINDO_GRAPH_CNTRCT_YEARS";
+    public static GsInqPefindoCustReq = "INQ_PEFINDO_CUST_REQ";
     public static GsCodeIdTypeExpDtRequired = "ID_TYPE_EXP_DT_REQUIRED";
     public static GsCodeIdTypeExpDtReadonly = "ID_TYPE_EXP_DT_READONLY";
     public static GsCodeEmailAttachmentFormat = "EMAIL_ATTCHMNT_FORMAT";
@@ -522,4 +527,9 @@ export class CommonConstant {
 
     //Highlight Comment
     public static HIGHLIGHT_COMMENT = "HighlightComment";
+    
+    //Pefindo
+    public static PEFINDO_TRX_SRC_DATA_STAT_REQ = "REQ";
+    public static PEFINDO_TRX_SRC_DATA_STAT_INP = "INP";
+    
 }

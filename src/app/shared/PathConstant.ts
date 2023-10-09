@@ -345,6 +345,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
     public static BOUWHEER = "Bouwheer";
+    public static CUST_PEFINDO_REQ = "CustPefindoReq";
 
     public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
@@ -786,6 +787,7 @@ export class PathConstant {
     public static VIEW_INQUIRIES = "Inquiries";
     public static VIEW_DISPUTES = "Disputes";
     public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
+    public static VIEW_PEFINDO_OTHERS = "Others";
     //#endregion
 
     //#region Notif-Engine

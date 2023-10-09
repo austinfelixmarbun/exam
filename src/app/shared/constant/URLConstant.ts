@@ -4,6 +4,7 @@ import * as _environment from "../../../assets/config/enviConfig.json";
 
 // URL" API di concat dengan environment url + version + api path
 // KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
+// HARAP JANGAN PAKE INI LAGI, KARENA SEKARANG SUDAH ADA UrlConstantNew YANG PAKE JSON
 export const envi = _environment;
 const urlConstant = _urlConstant;
 export class URLConstant {
@@ -1141,6 +1142,9 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static AddTrxSrcDataForTrustingSocialV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForTrustingSocial";
     public static AddTrxSrcDataForPefindo = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindo";
     public static AddTrxSrcDataForPefindoV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindo";
+    public static AddTrxSrcDataForPefindoMultiResult = environment.FoundationR3Url + "/v1" + "/Digitalization/AddTrxSrcDataForPefindoMultiResult";
+    public static AddTrxSrcDataForPefindoMultiResultV2 = environment.FoundationR3Url + "/v2" + "/Digitalization/AddTrxSrcDataForPefindoMultiResult";
+    public static GetPefindoMultiResultByGroupTrxNo = environment.FoundationR3Url + "/v1" + "/Digitalization/GetPefindoMultiResultByThirdPartyRsltGroupNo";
     public static AddTrxScrDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/AddTrxSrcDataForAsliRi";
     public static GetTrxSrcDataForAsliRi = environment.FoundationR3Url + "/v1" + "/IntegratorAsliRi/GetTrxResultDataForAsliRi";
 
@@ -1149,6 +1153,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetViewPefindoScore = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoScore";
     public static GetViewSubjectInfoPersonal = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoPersonal";
     public static GetViewSubjectInfoCompany = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoCompany";
+    public static GetViewSubjectInfoAllHistory = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSubjectInfoAllHistory";
     public static GetViewContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewContracts";
     public static GetViewPefindoAlertQuest = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewPefindoAlertQuest";
     public static GetViewSecurities = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewSecurities";
@@ -1159,6 +1164,9 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetViewDisputes = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewDisputes";
     public static GetViewFinancialStatements = environment.FoundationR3Url + "/v1" + "/Pefindo/GetViewFinancialStatements";
     public static PefindoSmartSearch = environment.FoundationR3Url + "/v1" + "/Pefindo/PefindoSmartSearch";
+    public static PefindoSmartSearchV2 = environment.FoundationR3Url + "/v2" + "/Pefindo/PefindoSmartSearch";
+    public static GetPefindoContracts = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoContracts";
+    public static GetPefindoTrxSrcData = environment.FoundationR3Url + "/v1" + "/Pefindo/GetPefindoTrxSrcData";
 
     // THINGS TO DO
   public static GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo = "ServiceTask/GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo";

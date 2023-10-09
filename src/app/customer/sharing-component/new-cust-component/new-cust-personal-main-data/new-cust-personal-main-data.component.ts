@@ -79,6 +79,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   inputAddressObj: InputAddressObj = new InputAddressObj(this.UrlConstantNew);
   inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   thirdPartyTrxNo: string = null;
+  thirdPartyTrxGroupNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   isReady: boolean = false;
@@ -694,6 +695,7 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustomerPersonal;
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    reqSubmitObj.CustObj.ThirdPartyGroupTrxNo = this.thirdPartyTrxGroupNo;
     
     reqSubmitObj.CustPersonalObj = this.tempCustPersonalObj;
     reqSubmitObj.CustPersonalObj.CustFullName = tempForm["CustName"];
@@ -873,9 +875,15 @@ export class NewCustPersonalMainDataComponent implements OnInit {
   }
   
   //#endregion
-
+  
   SetThirdPartyTrxNo(e){
     this.thirdPartyTrxNo = e;
+  }
+
+  SetThirdPartyTrxNoAndRowVersion(e){
+    this.thirdPartyTrxGroupNo = e.ThirdPartyGroupTrxNo;
+    this.thirdPartyTrxNo = e.ThirdPartyTrxNo;
+    if (this.custObj.CustId > 0) this.custObj.RowVersion = e.RowVersion;
   }
 
   SetCustFileFormObjs(e){

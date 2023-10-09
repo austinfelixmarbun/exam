@@ -57,6 +57,10 @@ const routes: Routes = [
       {
         path: PathConstant.VIEW_FINANCIAL_STATEMENTS,
         loadChildren: () => import('./pefindo-view-financial-statements/pefindo-view-financial-statements.module').then(m => m.PefindoViewFinancialStatementsModule)
+      },
+      {
+        path: PathConstant.VIEW_PEFINDO_OTHERS,
+        loadChildren: () => import('./pefindo-view-others/pefindo-view-others.module').then(m => m.PefindoViewOthersModule),
       }
     ]
   }
