@@ -205,7 +205,8 @@
         <div class="form-group row px-3">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-md-12 label-field-2 adins-required-label" translate>Mobile Phone 1</label>
+              <label class="col-md-12 label-field-2" translate>Mobile Phone 1
+            </label>
               <div class="col-md-8">
                 <input type="text" class="form-control adInsInput input-field-2" formControlName="MobilePhnNo1"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo1.invalid}">
@@ -217,7 +218,9 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Mobile Phone 2</label>
+              <label class="col-md-12 label-field-2" translate>Mobile Phone 2
+                <span class="optional-text">(Optional)</span>
+              </label>
               <div class="col-md-8">
                 <input type="text" class="form-control adInsInput input-field-2" formControlName="MobilePhnNo2"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo2.invalid}">
@@ -227,7 +230,9 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Mobile Phone 3</label>
+              <label class="col-md-12 label-field-2" translate>Mobile Phone 3
+                <span class="optional-text">(Optional)</span>
+              </label>
               <div class="col-md-8">
                 <input type="text" class="form-control adInsInput input-field-2" formControlName="MobilePhnNo3"
                   [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.MobilePhnNo3.invalid}">
@@ -239,21 +244,27 @@
 
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 1</label>
+              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 1
+                <span class="optional-text">(Optional)</span>
+              </label>
               <div class="col-md-12">
                 <input class="input-field-2" type="checkbox" data-md-icheck formControlName="IsWaMobilePhnNo1" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 2</label>
+              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 2
+                <span class="optional-text">(Optional)</span>
+              </label>
               <div class="col-md-12">
                 <input class="input-field-2" type="checkbox" data-md-icheck formControlName="IsWaMobilePhnNo2" />
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 3</label>
+              <label class="col-md-12 label-field-2" translate>Is Wa Mobile Phone 3
+                <span class="optional-text">(Optional)</span>
+              </label>
               <div class="col-md-12">
                 <input class="input-field-2" type="checkbox" data-md-icheck formControlName="IsWaMobilePhnNo3" />
               </div>
