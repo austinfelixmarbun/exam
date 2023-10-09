@@ -141,6 +141,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       }
       await this.http.post(this.UrlConstantNew.AddEditBouwheerCompanyIndustryInfo, this.ReqBouwheerIndustryInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         async (response) => {
+          this.toastr.successMessage(response["Message"]);
           // this.toastr.successMessage(response["Message"]);
 
           if (this.IndustryInfoForm.controls['DocUploadName'].value == "") {
@@ -215,8 +216,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
           //   // if (environment.SpinnerOnHttpPost) this.spinner.hide();
           // }
         });
-      this.currentModal.close("Success");
-      this.toastr.successMessage("Success");
+      this.currentModal.close();
       this.getListBouwheerIndustryInfo();
     } else {
       if (this.mode == 'edit'){
