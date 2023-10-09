@@ -2,7 +2,7 @@
 <form class="form form-horizontal" [formGroup]="CustAttrListForm" #enjiForm="ngForm"
 (ngSubmit)="enjiForm.form.valid && saveCustAttrContentAndNext()">
 
-<app-cust-attr-list [title]="'Customer Financial Attribute'" [CustId]="this.CustId"[enjiForm]="enjiForm"
+<app-cust-attr-list [title]="'Debtor Financial Attribute'" [CustId]="this.CustId"[enjiForm]="enjiForm"
   [parentForm]="CustAttrListForm" [identifier]="'AttrList'" [attrGroups]="attrGroups">
 </app-cust-attr-list>
 
