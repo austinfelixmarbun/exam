@@ -73,6 +73,7 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { CustPefindoReqComponent } from './cust-pefindo-req/cust-pefindo-req.component';
 import { CustomerViewModule } from 'app/view/customer-view/customer-view.module';
 import { CustomerViewHeaderPersonalComponent } from './customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { CustomerViewHeaderCompanyComponent } from './customer-view/customer-view-header-company/customer-view-header-company.component';
@@ -219,6 +220,7 @@ export const customCurrencyMaskConfig = {
         UpdateCustomerCompanyLegalDocComponent,
         CustBankAccComponent,
         CustAssetComponent,
+        CustPefindoReqComponent,
         CustomerViewHeaderPersonalComponent,
         CustomerViewHeaderCompanyComponent,
         SelfCustomCustomerPagingComponent,

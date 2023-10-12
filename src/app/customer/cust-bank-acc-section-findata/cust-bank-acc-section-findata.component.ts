@@ -66,15 +66,15 @@ export class CustBankAccSectionFindataComponent implements OnInit {
     modalCustBank.componentInstance.isAddBankStatement = type == "editStmnt" ? true : false;
     switch (type) {
       case "add":
-        modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Account";
+        modalCustBank.componentInstance.modalTitle = "Add New Debtor Bank Account";
         break;
 
       case "editStmnt":
-        modalCustBank.componentInstance.modalTitle = "Add New Customer Bank Statement";
+        modalCustBank.componentInstance.modalTitle = "Add New Debtor Bank Statement";
         break;
 
       case "edit":
-        modalCustBank.componentInstance.modalTitle = "Edit Customer Bank Account";
+        modalCustBank.componentInstance.modalTitle = "Edit Debtor Bank Account";
         break;
 
       default:

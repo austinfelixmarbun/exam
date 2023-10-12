@@ -63,7 +63,7 @@
   <div class="col-md-6">
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adInsLabel" translate>Customer Model
+      <label class="col-md-12 adInsLabel" translate>Debtor Model
         <span class="optional-text">(Optional)</span>
       </label>
       <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
@@ -102,7 +102,8 @@
       </label>
       <div class="col-md-12">
         <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
-        [formControlName]="'IsOwner'"> 
+        [formControlName]="'IsOwner'"
+        (valueChange)="onChangeIsOwnerInput($event)"> 
         </ui-switch>
         <!-- <input class="border-primary input-field-2" type="checkbox" data-md-icheck formControlName="IsOwner" /> -->
       </div>

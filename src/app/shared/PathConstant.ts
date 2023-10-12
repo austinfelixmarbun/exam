@@ -171,7 +171,6 @@ export class PathConstant {
     public static CS_HOLIDAY_DETAIL = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL;
     public static CS_HOLIDAY_DETAIL_ADD = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL + "/" + PathConstant.ADD;
     public static CS_HOLIDAY_DETAIL_EDIT = PathConstant.CS_HOLIDAY + "/" + PathConstant.DETAIL  + "/" + PathConstant.EDIT;
-    public static CS_BENEFICIARY_OWNER = "BeneficiaryOwner";
     public static CS_PROJECT = "Project";
     public static CS_OFFICE_ZIPCODE_MBR = "OfficeZipcodeMember";
     public static CS_OFFICE_ZIPCODE_MBR_PAGING = PathConstant.CS_OFFICE_ZIPCODE_MBR + "/" + PathConstant.PAGING;
@@ -253,8 +252,6 @@ export class PathConstant {
     public static CS_SELF_CUSTOM_WORKING_HOUR = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR;
     public static CS_SELF_CUSTOM_WORKING_HOUR_ADD = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR + "/" + PathConstant.ADD;
     public static CS_SELF_CUSTOM_WORKING_HOUR_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_WORKING_HOUR + "/" + PathConstant.DETAIL;
-    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BENEFICIARY_OWNER;
-    public static CS_SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BENEFICIARY_OWNER + "/" + PathConstant.ADD_EDIT;
     public static CS_SELF_CUSTOM_PROJECT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROJECT;
     public static CS_SELF_CUSTOM_PROJECT_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_PROJECT + "/" + PathConstant.ADD_EDIT;
 
@@ -313,6 +310,7 @@ export class PathConstant {
     public static CUST_FORM = "Form";
     public static CUST_JOB_DATA = "JobData";
     public static CUST_NON_PRO = "NonPro";
+    public static BENEFICIARY_OWNER = "BeneficiaryOwner";
     public static CUST_PERSONAL_MAIN_INFO = PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_MAIN_INFO;
     public static CUST_PERSONAL_DUP_CHECK = PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_DUP_CHECK;
     public static CUST_PERSONAL_PAGE = PathConstant.CUST_PERSONAL + "/" + PathConstant.CUST_PAGE;
@@ -347,6 +345,7 @@ export class PathConstant {
     public static CUST_NEG_RVW_UPLOAD_DETAIL = PathConstant.CUST_NEG + "/" + PathConstant.RVW_UPLOAD_DETAIL;
     public static NEW_CUST = "NewCustomer";
     public static BOUWHEER = "Bouwheer";
+    public static CUST_PEFINDO_REQ = "CustPefindoReq";
 
     public static SELF_CUSTOM_CUST_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CUST_EDIT_MAIN_DATA + "/" + PathConstant.PAGING;
@@ -371,7 +370,10 @@ export class PathConstant {
     public static SELF_CUSTOM_NEW_CUST_SHAREHOLDER = PathConstant.SELF_CUSTOM_NEW_CUST + "Shareholder"
     public static SELF_CUSTOM_BOUWHEER_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.PAGING;
     public static SELF_CUSTOM_BOUWHEER_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.BOUWHEER + "/" + PathConstant.DETAIL;
-    
+    public static SELF_CUSTOM_BENEFICIARY_OWNER = PathConstant.SELF_CUSTOM + "/" + PathConstant.BENEFICIARY_OWNER;
+    public static SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.BENEFICIARY_OWNER + "/" + PathConstant.ADD_EDIT;
+    public static SELF_CUSTOM_BENEFICIARY_OWNER_PERSONAL_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "BeneficiaryOwnerPersonalDuplicateChecking";
+    public static SELF_CUSTOM_BENEFICIARY_OWNER_COMPANY_DUPLICATE_CHECK = PathConstant.SELF_CUSTOM + "/" + "BeneficiaryOwnerCompanyDuplicateChecking";
     //#endregion
     
     //#region Dashboard-Module
@@ -785,6 +787,7 @@ export class PathConstant {
     public static VIEW_INQUIRIES = "Inquiries";
     public static VIEW_DISPUTES = "Disputes";
     public static VIEW_FINANCIAL_STATEMENTS = "FinancialStatements";
+    public static VIEW_PEFINDO_OTHERS = "Others";
     //#endregion
 
     //#region Notif-Engine

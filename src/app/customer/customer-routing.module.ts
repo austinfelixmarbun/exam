@@ -23,6 +23,7 @@ import { CustomerUpdateMasterComponent } from './customer-update-master/customer
 import { CustomerUpdateMasterDetailComponent } from './customer-update-master/customer-update-master-detail/customer-update-master-detail.component';
 import { PathConstant } from 'app/shared/PathConstant';
 import { NewCustHeaderComponent } from './sharing-component/new-cust-header/new-cust-header.component';
+import { CustPefindoReqComponent } from './cust-pefindo-req/cust-pefindo-req.component';
 import { SelfCustomCustomerPagingComponent } from './self-custom-customer-paging/self-custom-customer-paging.component';
 import { SelfCustomEditMainDataPagingComponent } from './edit-main-data/self-custom-edit-main-data-paging/self-custom-edit-main-data-paging.component';
 import { SelfCustomCustomerFamilyMenuComponent } from './self-custom-customer-family-menu/self-custom-customer-family-menu.component';
@@ -189,6 +190,13 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.CUST_PEFINDO_REQ,
+        component: CustPefindoReqComponent,
+        data: {
+          title: 'Cust Pefindo Req'
+        }
+      },
+      {
         path: PathConstant.SELF_CUSTOM_CUST_PAGING,
         component: SelfCustomCustomerPagingComponent,
         data: {
@@ -290,6 +298,22 @@ const routes: Routes = [
         }
       },
       {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner',
+          page: 'Hsbpagingbeneficiaryowner'
+        },
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_ADD_EDIT,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Beneficiary Owner Add Edit',
+          page: 'Addeditbeneficiaryowner'
+        },
+      }, 
+      {
         path: PathConstant.SELF_CUSTOM_CUSTOM_CUST_PERSONAL_DUPLICATE_CHECK,
         component: UcTemplateComponent,
         data: {
@@ -303,6 +327,22 @@ const routes: Routes = [
         data: {
           title: 'Customer Duplicate Checking',
           page: 'CustomerDuplicateCheckingMatchCompanyV2'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_PERSONAL_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchPersonalForBO'
+        }
+      },
+      {
+        path: PathConstant.SELF_CUSTOM_BENEFICIARY_OWNER_COMPANY_DUPLICATE_CHECK,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Customer Duplicate Checking',
+          page: 'CustomerDuplicateCheckingMatchCompanyV2ForBO'
         }
       },
       {

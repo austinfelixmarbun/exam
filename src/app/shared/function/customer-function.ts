@@ -35,6 +35,8 @@ import { BouwheerCompanyObj } from "../model/bouwheer-company-obj.model";
 import { base64StringToBlob } from "blob-util";
 import { saveAs } from 'file-saver';
 import { CustCompanyObjV2 } from "../model/cust-company-obj-v2.model";
+import { ReqAddBeneficiaryOwnerPersonalObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-personal-obj.model";
+import { ReqAddBeneficiaryOwnerCompanyObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-company-obj.model";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -514,7 +516,8 @@ function SaveCustCompanyV2(parentForm: any, dicts: Record<string, any>, Mode: st
 
   reqSubmitObj.CustObj.CustName = parentForm.CoyCustName;
   reqSubmitObj.CustObj.TaxIdNo = parentForm.CoyTaxIdNo;
-  reqSubmitObj.CustObj.IdNo = parentForm.CoyTaxIdNo;
+  reqSubmitObj.CustObj.IdNo = parentForm.CoyIdNo;
+  reqSubmitObj.CustObj.MrIdTypeCode = parentForm.CoyMrIdTypeCode;
   reqSubmitObj.CustObj.MrCustModelCode = parentForm.CoyMrCustModelCode;
   reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
   reqSubmitObj.CustObj.ThirdPartyTrxNo = dicts.ThirdPartyTrxNo;
@@ -600,7 +603,7 @@ function redirectSaveEditMainData(custId: number, custType: string, Mode: string
   if (Mode == CommonConstant.CustMainDataModeCust) {
     let param = { "IdCust": custId, Page: 'Edit', From: From };
     if (custType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(router, [NavigationConstant.SELF_CUSTOM_CUST_PERSONAL_PAGE], param);
-    if (custType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(router, [NavigationConstant.CUST_COY_PAGE], param);
+    if (custType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(router, [NavigationConstant.CUSTOM_CUST_COY_PAGE], param);
     return;
   }
 }
@@ -714,6 +717,70 @@ export function addCustToDuplicate(parentForm: any, dicts: Record<string, any>, 
 
   dicts["AddCustForm"] = parentForm;
   dicts["CustDuplicate"] = dicts.ReturnObject.CustDuplicate;
+  dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
+  dicts["mode"] = "edit";
+
+  localStorage.setItem('dicts', JSON.stringify(dicts)); // notes: set dicts ke localStorage dulu untuk kirim dicts ke page yang berbeda
+  AdInsHelper.RedirectUrl(router, [next], {}, true);
+}
+
+export function addBeneficiaryOwnerToDuplicate(parentForm: any, dicts: Record<string, any>, next: string, router: Router)
+{
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
+  {
+    let reqSubmitObj: ReqAddBeneficiaryOwnerPersonalObj = new ReqAddBeneficiaryOwnerPersonalObj();
+    reqSubmitObj.rAddBeneficiaryOwnerObj.BeneficiaryOwnerName = parentForm.BeneficiaryOwnerNamePersonal;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrIdTypeCode = parentForm.MrIdTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdNo = parentForm.IdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdExpiredDt = parentForm.IdExpiredDt;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.TaxIdNo = parentForm.TaxIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.BirthDt = parentForm.BirthDt;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.BirthPlace = parentForm.BirthPlace;
+    reqSubmitObj.rAddBeneficiaryOwnerPersonalObj.MrGenderCode = parentForm.MrGenderCode;
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    let customObj = {
+      BeneficiaryOwnerName: parentForm.BeneficiaryOwnerNamePersonal,
+      MrCustTypeCode: parentForm.MrCustTypeCode,
+      MrIdTypeCode: parentForm.MrIdTypeCode,
+      IdNo: parentForm.IdNo,
+      IdExpiredDt: parentForm.IdExpiredDt,
+      TaxIdNo: parentForm.TaxIdNo,
+      BirthDt: parentForm.BirthDt,
+      BirthPlace: parentForm.BirthPlace,
+      MrGenderCode: parentForm.MrGenderCode,
+    };
+
+  dicts["AddCustForm"] = customObj;
+  }
+
+  if (parentForm.MrCustTypeCode == CommonConstant.CustTypeCompany)
+  {
+    let reqSubmitObj: ReqAddBeneficiaryOwnerCompanyObj = new ReqAddBeneficiaryOwnerCompanyObj();
+    reqSubmitObj.rAddBeneficiaryOwnerObj.BeneficiaryOwnerName = parentForm.BeneficiaryOwnerNameCompany;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrCustTypeCode = parentForm.MrCustTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.MrIdTypeCode = parentForm.CoyMrIdTypeCode;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdNo = parentForm.CoyIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.IdExpiredDt = parentForm.CoyIdExpiredDt;
+    reqSubmitObj.rAddBeneficiaryOwnerObj.TaxIdNo = parentForm.CoyTaxIdNo;
+    reqSubmitObj.rAddBeneficiaryOwnerCompanyObj.MrCompanyTypeCode = parentForm.MrCompanyTypeCode;
+    dicts["ReqSubmitObj"] = reqSubmitObj;
+
+    
+    let customObj = {
+      BeneficiaryOwnerName: parentForm.BeneficiaryOwnerNameCompany,
+      MrCustTypeCode: parentForm.MrCustTypeCode,
+      MrIdTypeCode: parentForm.CoyMrIdTypeCode,
+      IdNo: parentForm.CoyIdNo,
+      IdExpiredDt: parentForm.CoyIdExpiredDt,
+      TaxIdNo: parentForm.CoyTaxIdNo,
+      MrCompanyTypeCode: parentForm.MrCompanyTypeCode,
+    };
+    dicts["AddCustForm"] = customObj;
+  }
+
+  // dicts["AddCustForm"] = parentForm;
   dicts["NegativeCustDuplicate"] = dicts.ReturnObject.NegativeCustDuplicate;
   dicts["mode"] = "edit";
 
@@ -1310,7 +1377,7 @@ async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, htt
   custCompanyObj.RefIndustryTypeId = dicts.RefIndustryTypeId
   custCompanyObj.RegistrationNo = dicts.RegistrationNo;
   custCompanyObj.VipNotes = dicts.formRaw.VipNotes;
-  custCompanyObj.RowVersion = dicts.form.RowVersion;
+  custCompanyObj.RowVersion = dicts.form.RowVersionCoy;
   custCompanyObj.Website = dicts.Website;
   custCompanyObj.CustApuPptObj.IsEdd = dicts.formRaw.IsEdd;
   custCompanyObj.CustApuPptObj.MrCategory1TypeCode = dicts.formRaw.MrCategory1TypeCode;
@@ -1741,51 +1808,120 @@ export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string
       reqFileUpl.DocUploadName = dicts.UploadFile.DocUploadName;
       reqFileUpl.CustCompanyLegalDocId = resSave["Id"];
 
-      uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
+      // uploadDocFileLegalMultipart(reqFileUpl, resSave["Message"], toastr, cookieService, DialogRef)
+      sendXhr(
+        reqFileUpl, 
+        resSave["Message"], 
+        toastr, 
+        cookieService, 
+        "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc",
+        environment.FoundationR3Url,
+        "reqUploadCustCompanyLegalDocObj"
+        )
+      .then(() => {
+        // Berhasil diunggah
+      })
+      .catch((error) => {
+        // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
+      });
+      DialogRef.close()
     }
   );
 }
 
-export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
-  let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
+export function sendXhr(
+  fileUpload: any, 
+  successMsg: string, 
+  toastr: NGXToastrService, 
+  cookieService: CookieService, 
+  apiUrl: string,
+  baseUrl: string = environment.FoundationR3Url,
+  reqDtoName: string,
+  ): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const urlUpload = baseUrl + apiUrl;
+    const formData: FormData = new FormData();
+    formData.append(reqDtoName, JSON.stringify(fileUpload));
+    const xhr = new XMLHttpRequest();
 
-  var formData: any = new FormData();
-  formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
-  const xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = evnt => {
-    if (xhr.readyState !== 4) return;
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4) return;
 
-    if (xhr.status !== 200 && xhr.status !== 201) {
-      toastr.errorMessage('Upload Failed !');
-      return;
-    }
-    else {
-      var response = JSON.parse(xhr.response);
-      if (response.HeaderObj.StatusCode != '200') {
-        toastr.errorMessage('Upload Failed ! ' + + response.HeaderObj.Message);
-        return
+      if (xhr.status !== 200 && xhr.status !== 201) {
+        toastr.errorMessage('Upload Failed !');
+        reject(new Error('Upload Failed !'));
+        return;
+      } else {
+        const response = JSON.parse(xhr.response);
+        if (response.HeaderObj.StatusCode !== '200') {
+          const errorMessage = `Upload Failed ! ${response.HeaderObj.Message}`;
+          toastr.errorMessage(errorMessage);
+          reject(new Error(errorMessage));
+          return;
+        }
       }
-    }
 
-    if (xhr.status === 200) {
-      toastr.successMessage(successMsg);
-      // DialogRef.close()
+      if (xhr.status === 200) {
+        toastr.successMessage(successMsg);
+        resolve();
+        return;
+      }
+    };
+
+    xhr.onerror = () => {
+      toastr.errorMessage('Upload Failed !');
+      reject(new Error('Upload Failed !'));
       return;
-    }
-  };
+    };
 
-  xhr.onerror = evnt => {
-    toastr.errorMessage('Upload Failed !');
-    return;
-  };
-  xhr.open('POST', urlUpload, true);
-  let value = cookieService.get('XSRF-TOKEN');
-  let token = DecryptString(value, environment.ChipperKeyCookie);
-  xhr.setRequestHeader('AdInsKey', `${token}`);
-  xhr.send(formData);
+    xhr.open('POST', urlUpload, true);
+    const value = cookieService.get('XSRF-TOKEN');
+    const token = DecryptString(value, environment.ChipperKeyCookie);
+    xhr.setRequestHeader('AdInsKey', token);
+    xhr.send(formData);
+  });
 }
 
-export async function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
+// export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
+//   let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
+
+//   var formData: any = new FormData();
+//   formData.append('reqUploadCustCompanyLegalDocObj', JSON.stringify(fileUpload));
+//   const xhr = new XMLHttpRequest();
+//   xhr.onreadystatechange = evnt => {
+//     if (xhr.readyState !== 4) return;
+
+//     if (xhr.status !== 200 && xhr.status !== 201) {
+//       toastr.errorMessage('Upload Failed !');
+//       return;
+//     }
+//     else {
+//       var response = JSON.parse(xhr.response);
+//       if (response.HeaderObj.StatusCode != '200') {
+//         toastr.errorMessage('Upload Failed ! ' + + response.HeaderObj.Message);
+//         return
+//       }
+//     }
+
+//     if (xhr.status === 200) {
+//       toastr.successMessage(successMsg);
+//       // DialogRef.close()
+//       return;
+//     }
+//   };
+
+//   xhr.onerror = evnt => {
+//     toastr.errorMessage('Upload Failed !');
+//     return;
+//   };
+//   xhr.open('POST', urlUpload, true);
+//   let value = cookieService.get('XSRF-TOKEN');
+//   let token = DecryptString(value, environment.ChipperKeyCookie);
+//   xhr.setRequestHeader('AdInsKey', `${token}`);
+//   xhr.send(formData);
+// }
+
+export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
   let url = environment.FoundationR3Url + api;
   let reqSubmitObj: ReqBouwheerCompanyObj = new ReqBouwheerCompanyObj();
@@ -1832,54 +1968,78 @@ export async function addBouwheerCompany(parentForm: any, dicts: Record<string, 
       resSave = response;
 
       if (Array.isArray(forUpload) && forUpload.length > 0) {
-        let reqObj = {
+
+        let reqFileUpl = {
           BouwheerId: resSave["Id"] ,
           uploadIndustryDocs: forUpload
         };
+
+        sendXhr(
+          reqFileUpl, 
+          resSave["Message"], 
+          toastr, 
+          cookieService, 
+          "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
+          environment.FoundationR3Url,
+          "reqObj"
+          )
+        .then(() => {
+          // Berhasil diunggah
+        })
+        .catch((error) => {
+          // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
+        });
+        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+
+        // let reqObj = {
+        //   BouwheerId: resSave["Id"] ,
+        //   uploadIndustryDocs: forUpload
+        // };
   
-        let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
-        // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
+        // let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
+        // // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
         
-        try {
-          if (environment.SpinnerOnHttpPost) this.spinner.show();
+        // try {
+        //   if (environment.SpinnerOnHttpPost) this.spinner.show();
       
-          const formData: any = new FormData();
-          formData.append('reqObj', JSON.stringify(reqObj));
+        //   const formData: any = new FormData();
+        //   formData.append('reqObj', JSON.stringify(reqObj));
       
-          const xhr = new XMLHttpRequest();
+        //   const xhr = new XMLHttpRequest();
       
-          const xhrPromise = new Promise<void>((resolve, reject) => {
-            xhr.onreadystatechange = evnt => {
-              if (xhr.readyState === 4) {
-                if (xhr.status === 200 || xhr.status === 201) {
-                  resolve();
-                } else {
-                  reject(new Error('Upload Failed !'));
-                }
-              }
-            };
+        //   const xhrPromise = new Promise<void>((resolve, reject) => {
+        //     xhr.onreadystatechange = evnt => {
+        //       if (xhr.readyState === 4) {
+        //         if (xhr.status === 200 || xhr.status === 201) {
+        //           resolve();
+        //         } else {
+        //           reject(new Error('Upload Failed !'));
+        //         }
+        //       }
+        //     };
       
-            xhr.onerror = evnt => {
-              reject(new Error('Upload Failed !'));
-            };
+        //     xhr.onerror = evnt => {
+        //       reject(new Error('Upload Failed !'));
+        //     };
       
-            xhr.open('POST', urlUpload, true);
-            const value = cookieService.get('XSRF-TOKEN');
-            const token = DecryptString(value, environment.ChipperKeyCookie);
-            xhr.setRequestHeader('AdInsKey', `${token}`);
-            xhr.send(formData);
-          });
+        //     xhr.open('POST', urlUpload, true);
+        //     const value = cookieService.get('XSRF-TOKEN');
+        //     const token = DecryptString(value, environment.ChipperKeyCookie);
+        //     xhr.setRequestHeader('AdInsKey', `${token}`);
+        //     xhr.send(formData);
+        //   });
       
-          await xhrPromise; // Tunggu sampai permintaan XHR selesai
+        //   await xhrPromise; // Tunggu sampai permintaan XHR selesai
       
-        } catch (error) {
-          toastr.errorMessage(error.message || 'An error occurred during upload.');
-        } finally {
-          if (environment.SpinnerOnHttpPost) this.spinner.hide();
-          toastr.successMessage(resSave["Message"])
-          await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
-        }
-      }else{
+        // } catch (error) {
+        //   toastr.errorMessage(error.message || 'An error occurred during upload.');
+        // } finally {
+        //   if (environment.SpinnerOnHttpPost) this.spinner.hide();
+        //   toastr.successMessage(resSave["Message"])
+        //   await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+        // }
+      }
+      else{
         toastr.successMessage(resSave["Message"])
         await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
       }
@@ -1890,28 +2050,40 @@ export async function addBouwheerCompany(parentForm: any, dicts: Record<string, 
 export async function downloadDmsDocument(
   http: HttpClient, 
   toastr: NGXToastrService, 
-  RowObj: any) 
-  {
-  let DocumentId = RowObj.DocDmsId;
-  http.post(this.UrlConstantNew.DownloadDmsDocument, { DocumentId: DocumentId }).subscribe(
-    response => {
-      if (response && Array.isArray(response['data']) && response['data'].length > 0) {
-        const content = response['data'][0]['content'];
-        const contentType = 'application/pdf';
-        const blob = base64StringToBlob(content, contentType);
+  RowObj: any) {
+  const url = `${environment.FoundationR3Url}/v1/DMS/DownloadDmsDocument`;
+  const documentId = RowObj.DocDmsId;
 
-        const metadata = response['data'][0]['metadata'];
-        const fileName = metadata.find(item => item.label === 'Document Name').value;
+  if(documentId == null)
+  {
+    toastr.errorMessage('There are no documents uploaded for this record.');
+    return;
+  }
+
+  try {
+    const response = await http.post(url, { DocumentId: documentId }).toPromise();
+
+    if (response && Array.isArray(response['Data']) && response['Data'].length > 0) {
+      const content = response['Data'][0]['Content'];
+      const contentType = 'application/pdf';
+      const blob = base64StringToBlob(content, contentType);
+
+      const metadata = response['Data'][0]['Metadata'];
+      const fileName = metadata.find((item: { label: string; value: string }) => item.label === 'Document Name')?.value;
+
+      if (fileName) {
         saveAs(blob, fileName);
       } else {
-        // Handle invalid response from the server.
-        // this.toastr.errorMessage('Invalid response from the server.');
+        toastr.errorMessage('File name not found in metadata.');
+        return;
       }
-    },
-    error => {
-      // Handle error occurred while downloading the document.
-      // this.toastr.errorMessage('An error occurred while downloading the document.');
+    } else {
+      toastr.errorMessage('Invalid response from the server.');
+      return;
     }
-  );
+  } catch (error) {
+    toastr.errorMessage('An error occurred while downloading the document.');
+    return;
+  }
 }
 

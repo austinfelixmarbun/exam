@@ -1,11 +1,12 @@
 <!-- <lib-ucSubsection [id]="'documentId'" [title]="'Document'" [panel]="'document'">
 </lib-ucSubsection> -->
-<div id="document">
-  <div class="form-group row">
-    <label class="col-md-2" translate>DOCUMENT UPLOAD</label>
-    <div class="col-md-4">
-      <label [for]="'doc'" class="btn btn-primary btn-sm afu-select-btn">Choose File</label>
-      <input type="file" [id]="'doc'" style="display: none" (change)="HandleFileInput($event.target.files)"
+  <div class="form-group row px-3">
+    <label class="col-md-12 label-field-2" translate>DOCUMENT UPLOAD
+      <span class="optional-text">(Optional)</span>
+    </label>
+    <div class="col-md-12">
+      <label [for]="'doc'" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2" >Choose File</label>
+      <input class="input-field-2" type="file" [id]="'doc'" style="display: none" (change)="HandleFileInput($event.target.files)"
         [accept]="ExtStr" />
         <div [hidden]="!reqFileUpl.File" style="padding-left: 15px" class="row afu-valid-file">
           <p class="col-xs-3 textOverflow"><span class="text-primary">{{reqFileUpl?.File?.name}}</span></p>
@@ -15,4 +16,3 @@
         </div>
     </div>
   </div>
-</div>

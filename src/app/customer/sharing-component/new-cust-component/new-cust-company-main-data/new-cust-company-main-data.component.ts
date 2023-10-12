@@ -54,6 +54,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   inputFieldObj: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
   inputLookupObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
   thirdPartyTrxNo: string = null;
+  thirdPartyTrxGroupNo: string = null;
   CustDocFileFormObjs: Array<CustDocFileFormObj> = new Array<CustDocFileFormObj>();
   pageFrom: string = CommonConstant.CustFromEditMainData;
   houseOwnershipObj: any;
@@ -121,11 +122,11 @@ export class NewCustCompanyMainDataComponent implements OnInit {
   }
   //#endregion
 
-  CustNameLabel: string = "Customer";
+  CustNameLabel: string = "Debtor";
   InitCustMainDataMode() {
     switch (this.CustDataMode) {
       case this.CustDataModeMain:
-        this.CustNameLabel = "Customer";
+        this.CustNameLabel = "Debtor";
         break;
       case this.CustDataModeShareholder:
         this.CustNameLabel = "Share Legal";
@@ -379,6 +380,7 @@ export class NewCustCompanyMainDataComponent implements OnInit {
     reqSubmitObj.CustObj.MrCustModelCode = tempForm["MrCustModelCode"];
     reqSubmitObj.CustObj.MrCustTypeCode = CommonConstant.CustTypeCompany;
     reqSubmitObj.CustObj.ThirdPartyTrxNo = this.thirdPartyTrxNo;
+    reqSubmitObj.CustObj.ThirdPartyGroupTrxNo = this.thirdPartyTrxGroupNo;
 
     reqSubmitObj.CustCompanyObj = this.tempCustCompanyObj;
     reqSubmitObj.CustCompanyObj.MrCompanyTypeCode = tempForm["MrCompanyTypeCode"];
@@ -450,6 +452,12 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   SetThirdPartyTrxNo(e){
     this.thirdPartyTrxNo = e;
+  }
+
+  SetThirdPartyTrxNoAndRowVersion(e){
+    this.thirdPartyTrxGroupNo = e.ThirdPartyGroupTrxNo;
+    this.thirdPartyTrxNo = e.ThirdPartyTrxNo;
+    if (this.custObj.CustId > 0) this.custObj.RowVersion = e.RowVersion;
   }
 
   SetCustFileFormObjs(e){

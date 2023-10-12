@@ -633,7 +633,7 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
-  
+
   //#endregion
 
   //#region PDC
@@ -745,6 +745,18 @@ export const Full_ROUTES: Routes = [
         exposedModule: './IntegrationMappingModule'
       })
         .then(m => m.IntegrationMappingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'upload',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './UploadModule'
+      })
+        .then(m => m.IntegrationModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
@@ -995,7 +1007,7 @@ export const Full_ROUTES: Routes = [
         .then(m => m.CostAllocMasterModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
-    
+
   },
   {
     path: 'limitstaffclaim',
@@ -1033,7 +1045,19 @@ export const Full_ROUTES: Routes = [
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
   },
+  {
+    path: 'paymentrequest',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentRequestModule'
+      })
+        .then(m => m.PaymentRequestModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
   // #endregion
 
-  
+
 ];

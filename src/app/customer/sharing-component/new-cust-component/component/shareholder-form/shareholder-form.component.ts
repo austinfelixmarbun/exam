@@ -57,6 +57,15 @@ export class ShareholderFormComponent implements OnInit {
     });
   }
 
+  onChangeIsOwnerInput(isOwner: boolean) {
+    if (isOwner) {
+      this.parentForm.get('SharePrcnt').setValidators([Validators.required, Validators.min(1.00), Validators.max(100)]);
+    } else {
+      this.parentForm.get('SharePrcnt').setValidators([Validators.min(0), Validators.max(100)]);
+    }
+    this.parentForm.get('SharePrcnt').updateValueAndValidity();
+  }
+
   UserAccess: CurrentUserContext;
   MaxDate: Date;
   businessDtMin: Date;
@@ -72,6 +81,7 @@ export class ShareholderFormComponent implements OnInit {
     await this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
+    this.onChangeIsOwnerInput(this.parentForm.get("IsOwner").value);
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
     this.professionLookUpObj.isReady = true;

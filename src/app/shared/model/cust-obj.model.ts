@@ -22,6 +22,7 @@ export class CustObj {
     IsShareholder: boolean;
     ThirdPartyTrxNo: string;
     IsCustGrp: boolean;
+    ThirdPartyGroupTrxNo: string;
 
     constructor() {
         this.CustId = 0;
@@ -32,6 +33,7 @@ export class CustObj {
         this.IsShareholder = false;
         this.CustNo = "";
         this.ThirdPartyTrxNo = "";
+        this.ThirdPartyGroupTrxNo = "";
         this.RowVersion = "";
     }
 }

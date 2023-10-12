@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { PefindoViewPefindoAlertQuestRoutingModule } from './pefindo-view-pefindo-alert-quest-routing.module';
 import { PefindoViewPefindoAlertQuestComponent } from './pefindo-view-pefindo-alert-quest.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -8,6 +7,8 @@ import { SharingModule } from 'app/shared/sharing.module';
 import { ArchwizardModule } from 'angular-archwizard';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
 
 @NgModule({
   declarations: [PefindoViewPefindoAlertQuestComponent],
@@ -19,6 +20,12 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
     SharingModule,
     ArchwizardModule,
     UcSubsectionModule
+  ],
+  exports: [
+    PefindoViewPefindoAlertQuestComponent
+  ],
+  providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
   ]
 })
 export class PefindoViewPefindoAlertQuestModule { }

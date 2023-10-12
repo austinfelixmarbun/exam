@@ -184,6 +184,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'paymenthistoryview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.arR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentHistoryModule'
+      })
+        .then(m => m.PaymentHistoryModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'lmsschemeview',
     loadChildren: () => {
       return loadRemoteModule({
@@ -617,6 +629,18 @@ export const CONTENT_ROUTES: Routes = [
         exposedModule: './advancepayment'
       })
         .then(m => m.AdvancePaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'paymentrequestview',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentRequestModule'
+      })
+        .then(m => m.PaymentRequestModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   }

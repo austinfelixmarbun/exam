@@ -738,6 +738,7 @@ export class UrlConstantNew{
     public SaveCustCompanyShareholderMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustCompanyShareholderMainDataV3;
     public SaveCustPersonalFamilyMainData = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainData;
     public SaveCustPersonalFamilyMainDataV2 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV2;
+    public SaveCustPersonalFamilyMainDataV3 = this.env.FoundationR3Url  + this.url.SaveCustPersonalFamilyMainDataV3;
 
     public NewEditDuplicateCust = this.env.FoundationR3Url  + this.url.NewEditDuplicateCust;
     public NewEditDuplicateCustV2 = this.env.FoundationR3Url  + this.url.NewEditDuplicateCustV2;
@@ -1161,6 +1162,13 @@ export class UrlConstantNew{
     public GetViewDisputes = this.env.FoundationR3Url + this.url.GetViewDisputes;
     public GetViewFinancialStatements = this.env.FoundationR3Url + this.url.GetViewFinancialStatements;
     public PefindoSmartSearch = this.env.FoundationR3Url + this.url.PefindoSmartSearch;
+    public GetPefindoContracts = this.env.FoundationR3Url + this.url.GetPefindoContracts;
+    public GetViewSubjectInfoAllHistory = this.env.FoundationR3Url + this.url.GetViewSubjectInfoAllHistory;
+    public GetPefindoMultiResultByGroupTrxNo = this.env.FoundationR3Url + this.url.GetPefindoMultiResultByGroupTrxNo;
+    public AddTrxSrcDataForPefindoMultiResult = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoMultiResult;
+    public GetPefindoTrxSrcData = this.env.FoundationR3Url + this.url.GetPefindoTrxSrcData;
+    public PefindoSmartSearchV2 = this.env.FoundationR3Url + this.url.PefindoSmartSearchV2;
+    public AddTrxSrcDataForPefindoMultiResultV2 = this.env.FoundationR3Url + this.url.AddTrxSrcDataForPefindoMultiResultV2;
 
     // THINGS TO DO
     public GetThingsToDoByRole = this.env.FoundationR3Url + this.url.GetThingsToDoByRole;

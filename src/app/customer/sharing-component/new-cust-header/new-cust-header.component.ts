@@ -42,7 +42,7 @@ export class NewCustHeaderComponent implements OnInit {
   @Input() CustType: string = CommonConstant.CustomerPersonal;
   PageType: string = CommonConstant.CustPageTypeHeader;
   @Input() CustDataMode: string;
-  subjectTitle: string = "Customer";
+  subjectTitle: string = "Debtor";
   From: string = "";
   @Input() CustId: number = 0;
   @Input() CustCompanyMgmntShrholderId: number = 0;
@@ -344,7 +344,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.AddCustPersonalMainDataV2;
         break;
       case this.CustDataModeFamily:
-        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV3;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV3;
@@ -360,7 +360,7 @@ export class NewCustHeaderComponent implements OnInit {
         urlAdd = this.UrlConstantNew.EditCustPersonalMainDataV2;
         break;
       case this.CustDataModeFamily:
-        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV2;
+        urlAdd = this.UrlConstantNew.SaveCustPersonalFamilyMainDataV3;
         break;
       case CommonConstant.CustMainDataModeMgmntShrholder:
         urlAdd = this.UrlConstantNew.SaveCustPersonalShareholderMainDataV3;

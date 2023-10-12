@@ -18,6 +18,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { CookieService } from 'ngx-cookie';
 import { environment } from 'environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { sendXhr } from 'app/shared/function/customer-function';
 
 @Component({
   selector: 'app-self-custom-cust-company-industry-info',
@@ -157,43 +158,65 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
             DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
           };
 
-          try {
-            if (environment.SpinnerOnHttpPost) this.spinner.show();
+          sendXhr(
+            reqObj, 
+            response["Message"], 
+            this.toastr, 
+            this.cookieService, 
+            this.UrlConstantNew.UploadCustCompanyIndustryDoc,
+            "",
+            "reqObj"
+            )
+          .then(() => {
+            // Berhasil diunggah
+          })
+          .catch((error) => {
+            // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
+          });
 
-            const formData: any = new FormData();
-            formData.append('reqObj', JSON.stringify(reqObj));
+          // let reqObj = {
+          //   CustCompanyIndustryInfoId: response["Id"] ,
+          //   ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
+          //   DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
+          // };
 
-            const xhr = new XMLHttpRequest();
+          // try {
+          //   if (environment.SpinnerOnHttpPost) this.spinner.show();
 
-            const xhrPromise = new Promise<void>((resolve, reject) => {
-              xhr.onreadystatechange = evnt => {
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200 || xhr.status === 201) {
-                    resolve();
-                  } else {
-                    reject(new Error('Upload Failed !'));
-                  }
-                }
-              };
+          //   const formData: any = new FormData();
+          //   formData.append('reqObj', JSON.stringify(reqObj));
 
-              xhr.onerror = evnt => {
-                reject(new Error('Upload Failed !'));
-              };
+          //   const xhr = new XMLHttpRequest();
 
-              xhr.open('POST', this.UrlConstantNew.UploadCustCompanyIndustryDoc, true);
-              const value = this.cookieService.get('XSRF-TOKEN');
-              const token = this.DecryptString(value, environment.ChipperKeyCookie);
-              xhr.setRequestHeader('AdInsKey', `${token}`);
-              xhr.send(formData);
-            });
+          //   const xhrPromise = new Promise<void>((resolve, reject) => {
+          //     xhr.onreadystatechange = evnt => {
+          //       if (xhr.readyState === 4) {
+          //         if (xhr.status === 200 || xhr.status === 201) {
+          //           resolve();
+          //         } else {
+          //           reject(new Error('Upload Failed !'));
+          //         }
+          //       }
+          //     };
 
-            await xhrPromise; // Tunggu sampai permintaan XHR selesai
+          //     xhr.onerror = evnt => {
+          //       reject(new Error('Upload Failed !'));
+          //     };
 
-          } catch (error) {
-            this.toastr.errorMessage(error.message || 'An error occurred during upload.');
-          } finally {
-            if (environment.SpinnerOnHttpPost) this.spinner.hide();
-          }
+          //     xhr.open('POST', this.UrlConstantNew.UploadCustCompanyIndustryDoc, true);
+          //     const value = this.cookieService.get('XSRF-TOKEN');
+          //     const token = this.DecryptString(value, environment.ChipperKeyCookie);
+          //     xhr.setRequestHeader('AdInsKey', `${token}`);
+          //     xhr.send(formData);
+          //   });
+
+          //   await xhrPromise; // Tunggu sampai permintaan XHR selesai
+
+          // } catch (error) {
+          //   this.toastr.errorMessage(error.message || 'An error occurred during upload.');
+          // } finally {
+          //   if (environment.SpinnerOnHttpPost) this.spinner.hide();
+          // }
         });
         this.currentModal.close("Success");
         this.toastr.successMessage("Success");

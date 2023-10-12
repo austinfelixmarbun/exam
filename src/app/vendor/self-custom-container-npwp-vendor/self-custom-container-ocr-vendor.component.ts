@@ -119,10 +119,10 @@ export class SelfCustomContainerOcrVendorComponent implements OnInit {
           }
         };
         
-        xhr.onerror = evnt => {
-          this.isDisableButton = false;
-          this.toastr.errorMessage('Upload Failed !');
-        };
+        // xhr.onerror = evnt => {
+        //   this.isDisableButton = false;
+        //   this.toastr.errorMessage('Upload Failed !');
+        // };
 // ...
   }
   

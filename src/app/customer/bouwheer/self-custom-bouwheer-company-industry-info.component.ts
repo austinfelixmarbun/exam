@@ -19,6 +19,7 @@ import { ResBouwheerCompanyIndustryInfoObj } from 'app/shared/model/res-bouwheer
 import { CookieService } from 'ngx-cookie';
 import { environment } from 'environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { downloadDmsDocument, sendXhr } from 'app/shared/function/customer-function';
 
 @Component({
   selector: 'app-self-custom-bouwheer-company-industry-info',
@@ -36,6 +37,8 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   currentModal: any;
   lookUpObj: InputLookupObj;
   mode: string;
+  showDownload : boolean = false;
+  Id : number = 0;
 
   @Input() BwrNo: string;
   @Input() BwrId: number;
@@ -53,6 +56,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
     ByteBase64: [''],
     DocUploadName: [''],
     RowVersion: [''],
+    index : [0]
   });
   constructor(
     private http: HttpClient,
@@ -71,6 +75,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
     this.lookUpObj.pagingJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.genericJson = "./assets/lookup/lookupIndustryType.json";
     this.lookUpObj.isReady = true
+    if (this.BwrId > 0){
+      this.showDownload = true;
+    }
     await this.getListBouwheerIndustryInfo();
   }
 
@@ -105,7 +112,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       Notes: this.industryInfo.Notes,
       IsMain: this.industryInfo.IsMain,
       RefIndustryTypeCode: this.industryInfo.RefIndustryTypeCode,
-      BouwheerCompanyIndustryInfoId: this.industryInfo.BouwheerCompanyIndustryInfoId
+      RefIndustryTypeName: this.industryInfo.RefIndustryTypeName,
+      BouwheerCompanyIndustryInfoId: this.industryInfo.BouwheerCompanyIndustryInfoId,
+      index : i
     });
   }
 
@@ -117,24 +126,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   }
 
   async SaveIndustryInfo() {
-    if (this.ListBouwheerIndustryInfo.length == 0) {
-      if (this.IndustryInfoForm.controls['IsMain'].value == false) {
-        this.toastr.warningMessage("The first input must be the main industry!")
-        return;
-      }
-    } else {
-      let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain === true && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value
-      && this.IndustryInfoForm.controls['IsMain'].value === true);
-      if (duplicateMainIndustry) {
-        this.toastr.warningMessage("There can only be one main industry!")
-        return;
-      }
-      let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode === this.IndustryInfoForm.controls['RefIndustryTypeCode'].value && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
-      if (duplicateIndustryTypeCode) {
-        this.toastr.warningMessage("Industry type already exists!")
-        return;
-      }
-    }
+    
     if (this.BwrId > 0) {
       this.ReqBouwheerIndustryInfoObj = new ReqAddEditBouwheerCompanyIndustryInfoObj
       this.ReqBouwheerIndustryInfoObj.BouwheerId = this.BwrId,
@@ -149,6 +141,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       }
       await this.http.post(this.UrlConstantNew.AddEditBouwheerCompanyIndustryInfo, this.ReqBouwheerIndustryInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         async (response) => {
+          this.toastr.successMessage(response["Message"]);
           // this.toastr.successMessage(response["Message"]);
 
           if (this.IndustryInfoForm.controls['DocUploadName'].value == "") {
@@ -168,60 +161,122 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
               }
             ]
           };
-          try {
-            if (environment.SpinnerOnHttpPost) this.spinner.show();
+          // try {
 
-            const formData: any = new FormData();
-            formData.append('reqObj', JSON.stringify(reqObj));
-
-            const xhr = new XMLHttpRequest();
-
-            const xhrPromise = new Promise<void>((resolve, reject) => {
-              xhr.onreadystatechange = evnt => {
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200 || xhr.status === 201) {
-                    resolve();
-                  } else {
-                    reject(new Error('Upload Failed !'));
-                  }
-                }
-              };
-
-              xhr.onerror = evnt => {
-                reject(new Error('Upload Failed !'));
-              };
-
-              xhr.open('POST', this.UrlConstantNew.UploadBouwheerCompanyIndustryDoc, true);
-              const value = this.cookieService.get('XSRF-TOKEN');
-              const token = this.DecryptString(value, environment.ChipperKeyCookie);
-              xhr.setRequestHeader('AdInsKey', `${token}`);
-              xhr.send(formData);
+            sendXhr(
+              reqObj, 
+              response["Message"], 
+              this.toastr, 
+              this.cookieService, 
+              "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
+              environment.FoundationR3Url,
+              "reqObj"
+              )
+            .then(() => {
+              // Berhasil diunggah
+            })
+            .catch((error) => {
+              // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
             });
 
-            await xhrPromise;
+            // if (environment.SpinnerOnHttpPost) this.spinner.show();
 
-          } catch (error) {
-            this.toastr.errorMessage(error.message || 'An error occurred during upload.');
-          } finally {
-            if (environment.SpinnerOnHttpPost) this.spinner.hide();
-          }
+            // const formData: any = new FormData();
+            // formData.append('reqObj', JSON.stringify(reqObj));
+
+            // const xhr = new XMLHttpRequest();
+
+            // const xhrPromise = new Promise<void>((resolve, reject) => {
+            //   xhr.onreadystatechange = evnt => {
+            //     if (xhr.readyState === 4) {
+            //       if (xhr.status === 200 || xhr.status === 201) {
+            //         resolve();
+            //       } else {
+            //         reject(new Error('Upload Failed !'));
+            //       }
+            //     }
+            //   };
+
+            //   xhr.onerror = evnt => {
+            //     reject(new Error('Upload Failed !'));
+            //   };
+
+            //   xhr.open('POST', this.UrlConstantNew.UploadBouwheerCompanyIndustryDoc, true);
+            //   const value = this.cookieService.get('XSRF-TOKEN');
+            //   const token = this.DecryptString(value, environment.ChipperKeyCookie);
+            //   xhr.setRequestHeader('AdInsKey', `${token}`);
+            //   xhr.send(formData);
+            // });
+
+            // await xhrPromise;
+
+          // } catch (error) {
+          //   this.toastr.errorMessage(error.message || 'An error occurred during upload.');
+          // } finally {
+          //   // if (environment.SpinnerOnHttpPost) this.spinner.hide();
+          // }
         });
-      this.currentModal.close("Success");
-      this.toastr.successMessage("Success");
+      this.currentModal.close();
       this.getListBouwheerIndustryInfo();
     } else {
-      this.ListBouwheerIndustryInfo.push({
-        RefIndustryTypeCode: this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
-        BusinessStartDate: this.IndustryInfoForm.controls['BusinessStartDate'].value,
-        IsMain: this.IndustryInfoForm.controls['IsMain'].value,
-        Notes: this.IndustryInfoForm.controls['Notes'].value,
-        BouwheerCompanyIndustryInfoId: 0,
-        BouwheerCompanyId: 0,
-        RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
-        ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
-        DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
-        RowVersion: undefined
-      });
+      if (this.mode == 'edit'){
+        if (this.ListBouwheerIndustryInfo.length == 0) {
+          if (this.IndustryInfoForm.controls['IsMain'].value == false) {
+            this.toastr.warningMessage("The first input must be the main industry!")
+            return;
+          }
+        } else {      
+          let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode === this.IndustryInfoForm.controls['RefIndustryTypeCode'].value && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
+          if (duplicateIndustryTypeCode) {
+            this.toastr.warningMessage("Industry type already exists!")
+            return;
+          }
+          let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain === true && x.BouwheerCompanyIndustryInfoId != this.IndustryInfoForm.controls['BouwheerCompanyIndustryInfoId'].value);
+          if (duplicateMainIndustry && this.IndustryInfoForm.controls['IsMain'].value == true) {
+            this.toastr.warningMessage("There can only be one main industry!")
+            return;
+          }
+        }
+        let index =  this.IndustryInfoForm.controls['index'].value
+        this.ListBouwheerIndustryInfo[index].RefIndustryTypeCode = this.IndustryInfoForm.controls['RefIndustryTypeCode'].value
+        this.ListBouwheerIndustryInfo[index].BusinessStartDate = this.IndustryInfoForm.controls['BusinessStartDate'].value
+        this.ListBouwheerIndustryInfo[index].IsMain = this.IndustryInfoForm.controls['IsMain'].value
+        this.ListBouwheerIndustryInfo[index].Notes = this.IndustryInfoForm.controls['Notes'].value
+        this.ListBouwheerIndustryInfo[index].RefIndustryTypeName = this.IndustryInfoForm.controls['RefIndustryTypeName'].value
+      }
+      else{
+        if (this.ListBouwheerIndustryInfo.length == 0) {
+          if (this.IndustryInfoForm.controls['IsMain'].value == false) {
+            this.toastr.warningMessage("The first input must be the main industry!")
+            return;
+          }
+        } else {      
+          let duplicateIndustryTypeCode = this.ListBouwheerIndustryInfo.find(x => x.RefIndustryTypeCode == this.IndustryInfoForm.controls['RefIndustryTypeCode'].value);
+          if (duplicateIndustryTypeCode) {
+            this.toastr.warningMessage("Industry type already exists!")
+            return;
+          }
+          let duplicateMainIndustry = this.ListBouwheerIndustryInfo.find(x => x.IsMain == true);
+          if (duplicateMainIndustry && this.IndustryInfoForm.controls['IsMain'].value == true) {
+            this.toastr.warningMessage("There can only be one main industry!")
+            return;
+          }
+        }
+        this.Id = this.Id + 1;        
+        this.ListBouwheerIndustryInfo.push({
+          RefIndustryTypeCode: this.IndustryInfoForm.controls['RefIndustryTypeCode'].value,
+          BusinessStartDate: this.IndustryInfoForm.controls['BusinessStartDate'].value,
+          IsMain: this.IndustryInfoForm.controls['IsMain'].value,
+          Notes: this.IndustryInfoForm.controls['Notes'].value,
+          BouwheerCompanyIndustryInfoId: this.Id,
+          BouwheerCompanyId: 0,
+          RefIndustryTypeName: this.IndustryInfoForm.controls['RefIndustryTypeName'].value,
+          ByteBase64: this.IndustryInfoForm.controls['ByteBase64'].value,
+          DocUploadName: this.IndustryInfoForm.controls['DocUploadName'].value,
+          DocDmsId: 0,
+          RowVersion: undefined
+        });
+      }
       this.dicts['ListBouwheerIndustryInfo'] = this.ListBouwheerIndustryInfo;
       this.currentModal.close("");
     }
@@ -278,5 +333,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
       ByteBase64: ByteBase64.substring(ByteBase64.lastIndexOf(',') + 1),
       DocUploadName: file.name
     });
+  }
+
+  DownloadFileIndustryInfo(i:number){
+    downloadDmsDocument(this.http, this.toastr, this.ListBouwheerIndustryInfo[i]);
   }
 }
