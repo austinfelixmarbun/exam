@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie';
 import { NewCustSetData } from '../../NewCustSetData.Service';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ActivatedRoute } from '@angular/router';
+import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 
 @Component({
   selector: 'app-shareholder-form',
@@ -71,7 +72,9 @@ export class ShareholderFormComponent implements OnInit {
   businessDtMin: Date;
   tempExisting: CustFormExistingObj = new CustFormExistingObj();
   DictUcDDLObj: { [id: string]: UcDropdownListObj } = {};
+  isShareholderReady : boolean = false;
   async ngOnInit() {
+    await this.getGsJobPostIsOwner();
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.MaxDate = new Date(context[CommonConstant.BUSINESS_DT]);
     this.businessDtMin = new Date(context[CommonConstant.BUSINESS_DT]);
@@ -81,11 +84,12 @@ export class ShareholderFormComponent implements OnInit {
     await this.GetExistingShareholder();
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, this.CustType, true);
     await this.GetExistingJobData();
-    this.onChangeIsOwnerInput(this.parentForm.get("IsOwner").value);
     this.jobPositionLookupObj.isReady = true;
     this.positionSlikLookUpObj.isReady = true;
     this.professionLookUpObj.isReady = true;
     this.outputExisting.emit(this.tempExisting);
+    this.CheckJobPostionIsOwner();
+    this.isShareholderReady = true;
   }
 
   positionSlikLookUpObj: InputLookupObj = new InputLookupObj(this.UrlConstantNew);
@@ -218,6 +222,7 @@ export class ShareholderFormComponent implements OnInit {
   getLookUpSlik(ev) {
     let tempMrPositionSlikCode = this.parentForm.get("MrPositionSlikCode");
     tempMrPositionSlikCode.patchValue(ev.Code);
+    this.CheckJobPostionIsOwner();
   }
 
   getLookUpProfession(event: RefProfessionObj) {
@@ -260,5 +265,34 @@ export class ShareholderFormComponent implements OnInit {
 
     this.professionLookUpObj.addCritInput = listCriteriaObj;
     this.ucLookupProfession.setAddCritInput();
+  }
+
+  ListJobPostIsOwner : Array<string> = new Array<string>();
+  async getGsJobPostIsOwner(){
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GS_SHAREHOLDER_JOB_POSITION_IS_OWNER }).toPromise().then(
+      (response: GeneralSettingObj) => {
+        let x = response.GsValue;
+        this.ListJobPostIsOwner = x.split(';');
+      }
+    )
+  }
+
+  CheckJobPostionIsOwner(){
+    let x = this.ListJobPostIsOwner.find(f=>f == this.parentForm.controls.MrPositionSlikCode.value);
+    console.log(x);
+    if(x!= null){
+      this.parentForm.patchValue({
+        IsOwner: true,
+      });
+      this.parentForm.get("IsOwner").disable();
+      this.onChangeIsOwnerInput(true);
+    }
+    else{
+      this.parentForm.patchValue({
+        IsOwner: false,
+      });
+      this.parentForm.get("IsOwner").disable();
+      this.onChangeIsOwnerInput(false);
+    }
   }
 }
