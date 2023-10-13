@@ -1079,7 +1079,7 @@ export const Full_ROUTES: Routes = [
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
-        exposedModule: './ReportModule'
+        exposedModule: './Report'
       })
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
