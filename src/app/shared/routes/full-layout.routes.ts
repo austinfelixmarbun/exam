@@ -749,6 +749,18 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
+    path: 'upload',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
+        exposedModule: './UploadModule'
+      })
+        .then(m => m.IntegrationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'pdc',
     loadChildren: () => {
       return loadRemoteModule({
