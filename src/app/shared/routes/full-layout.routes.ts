@@ -1071,8 +1071,20 @@ export const Full_ROUTES: Routes = [
       })
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
-    }
+    },
   },
+  {
+    path: 'report',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  }
   // #endregion
 
 
