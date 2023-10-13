@@ -57,7 +57,9 @@ import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-s
 import { AdInsExecutorService } from "app/shared/services/adins-executor.service";
 import { CustomAssetMasterDetailParentComponent } from "./custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-detail-parent/custom-asset-master-detail-parent.component";
 import { CustomAssetMasterAddEditParentComponent } from "./custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component";
-import { AssetDocumentAddEditXComponent } from "app/impl/asset-document-add-edit-x/asset-document-add-edit-x.component";
+import { AssetDocumentAddEditXComponent } from "app/impl/asset-document-x/asset-document-add-edit-x/asset-document-add-edit-x.component";
+import { AssetDocumentPagingXComponent } from "app/impl/asset-document-x/asset-document-paging-x/asset-document-paging-x.component";
+import { AssetConfigurationPagingXComponent } from "app/impl/asset-configuration-x/asset-configuration-paging-x/asset-configuration-paging-x.component";
 
 export const customCurrencyMaskConfig = {     
   align: "left",     
@@ -132,7 +134,9 @@ export const customCurrencyMaskConfig = {
     CustomAddAssetSchemeComponent,
     CustomAssetMasterDetailParentComponent,
     CustomAssetMasterAddEditParentComponent,
-    AssetDocumentAddEditXComponent
+    AssetDocumentAddEditXComponent,
+    AssetDocumentPagingXComponent,
+    AssetConfigurationPagingXComponent
   ],
   
   providers: [
