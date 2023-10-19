@@ -186,6 +186,7 @@
     "GetListActiveRefMasterType": "/v1/RefMasterType/GetListKeyValueActiveByCode",
     "GetRefMasterByRefMasterId": "/v1/RefMaster/GetRefMasterByRefMasterId",
     "GetListActiveRefMaster": "/v1/RefMaster/GetListKeyValueActiveByCode",
+    "GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode": "/v1/RefMaster/GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode",
     "GetRefMasterByMasterCode": "/v1/RefMaster/GetRefMasterByMasterCode",
     "GetListActiveRefMasterByRefMasterTypeCode": "/v1/RefMaster/GetListActiveRefMasterByRefMasterTypeCode",
     "GetRefMasterByRefMasterTypeCodeAndMasterCode": "/v1/RefMaster/GetRefMasterByRefMasterTypeCodeAndMasterCode",

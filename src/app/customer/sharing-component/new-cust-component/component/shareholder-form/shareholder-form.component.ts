@@ -60,7 +60,7 @@ export class ShareholderFormComponent implements OnInit {
 
   onChangeIsOwnerInput(isOwner: boolean) {
     if (isOwner) {
-      this.parentForm.get('SharePrcnt').setValidators([Validators.required, Validators.min(1.00), Validators.max(100)]);
+      this.parentForm.get('SharePrcnt').setValidators([Validators.required, Validators.min(0.01), Validators.max(100)]);
     } else {
       this.parentForm.get('SharePrcnt').setValidators([Validators.min(0), Validators.max(100)]);
     }
@@ -264,7 +264,7 @@ export class ShareholderFormComponent implements OnInit {
     listCriteriaObj.push(criteriaCustObj);
 
     this.professionLookUpObj.addCritInput = listCriteriaObj;
-    this.ucLookupProfession.setAddCritInput();
+    setTimeout(() => { this.ucLookupProfession.setAddCritInput(); }, 100);
   }
 
   ListJobPostIsOwner : Array<string> = new Array<string>();
