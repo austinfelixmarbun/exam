@@ -252,6 +252,7 @@ export class UrlConstantNew{
     public GetListActiveRefMasterTypeForDdl = this.url.GetListActiveRefMasterTypeForDdl;
     public GetRefMasterByRefMasterId = this.env.FoundationR3Url + this.url.GetRefMasterByRefMasterId;
     public GetListActiveRefMaster = this.env.FoundationR3Url + this.url.GetListActiveRefMaster;
+    public GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode = this.env.FoundationR3Url + this.url.GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode;
     public GetRefMasterByMasterCode = this.env.FoundationR3Url + this.url.GetRefMasterByMasterCode;
     public GetListActiveRefMasterWithMappingCodeAll = this.env.FoundationR3Url + this.url.GetListActiveRefMasterWithMappingCodeAll;
     public GetListActiveRefMasterByRefMasterTypeCode = this.env.FoundationR3Url + this.url.GetListActiveRefMasterByRefMasterTypeCode;
