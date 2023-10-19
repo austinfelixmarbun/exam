@@ -106,7 +106,7 @@ export class NewCustSetData {
     return criteriaListCust;
   }
 
-  public initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = this.UrlConstantNew.GetListActiveRefMaster): UcDropdownListObj {
+  public initDdlRefMaster(refMasterTypeCode: string, mappingCode: string = null, isSelectOutput: boolean = false, apiUrl: string = this.UrlConstantNew.GetListActiveRefMaster, masterCode: string = ""): UcDropdownListObj {
     let tempDdlObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
     let ReqRefMasterObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
       RefMasterTypeCode: refMasterTypeCode,
@@ -119,6 +119,12 @@ export class NewCustSetData {
       tempDdlObj.customKey = "MasterCode";
       tempDdlObj.customValue = "Descr";
     }
+    if (apiUrl == this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode) {
+      tempDdlObj.customKey = "MasterCode";
+      tempDdlObj.customValue = "Descr";
+      tempDdlObj.requestObj = {RefMasterTypeCode : refMasterTypeCode, MasterCode : masterCode};
+    }
+    
     tempDdlObj.isReady = true;
     return tempDdlObj;
   }

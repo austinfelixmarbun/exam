@@ -18,7 +18,7 @@ import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
+import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
 import { CustCompanyMgmntShrholderObj, ResCustCompanyMgmntShrholderObj } from 'app/shared/model/new-cust/cust-company-mgmnt-shrholder-obj.model';
@@ -139,7 +139,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
     this.DictUcDDLObj[this.RefMasterTypeCodeGender] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    if(this.IsAddSpouse)
+    {
+      this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true, this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode, CommonConstant.MaritalStatusMarried);
+    }else{
+      this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    }
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
