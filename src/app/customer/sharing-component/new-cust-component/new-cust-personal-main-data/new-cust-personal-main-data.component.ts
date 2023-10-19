@@ -139,7 +139,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     this.DictUcDDLObj[this.RefMasterTypeCodeIdType] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeIdType, null, true);
     this.onOptionsSelected();
     this.DictUcDDLObj[this.RefMasterTypeCodeGender] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeGender);
-    this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    if(this.IsAddSpouse)
+    {
+      this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true, this.UrlConstantNew.GetListActiveRefMasterByRefMasterTypeCodeAndMasterCode);
+    }else{
+      this.DictUcDDLObj[this.RefMasterTypeCodeMaritalStat] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeMaritalStat, null, true);
+    }
     this.DictUcDDLObj[this.RefMasterTypeCodeCustModel] = this.newCustService.initDdlRefMaster(this.RefMasterTypeCodeCustModel, CommonConstant.CustTypePersonal, true);
     await this.GetExistingData();
     this.GetCustAddrToCopy();
