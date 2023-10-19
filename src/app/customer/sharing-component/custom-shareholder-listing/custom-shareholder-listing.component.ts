@@ -47,6 +47,7 @@ export class CustomShareholderListingComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.IsAddSpouse = false;
     this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
         this.CustNo = response.CustNo;
