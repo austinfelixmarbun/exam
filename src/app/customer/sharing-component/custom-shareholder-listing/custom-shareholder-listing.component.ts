@@ -47,6 +47,7 @@ export class CustomShareholderListingComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.IsAddSpouse = false;
     this.http.post(this.UrlConstantNew.GetCustByCustId, { Id: this.IdCust }).subscribe(
       (response: CustObj) => {
         this.CustNo = response.CustNo;
@@ -104,8 +105,10 @@ export class CustomShareholderListingComponent implements OnInit {
 
   IsAddSpouse: boolean = false;
   SelectedCustSpouseId: number = 0;
-  addCustShareHolder(isAdd: boolean = true) {
+  addCustShareHolder(isAdd: boolean = true, isAddSpouse: boolean = false) {
     this.PageType = this.CustPageTypeHeader;
+    if(isAddSpouse) this.IsAddSpouse = true;
+    else this.IsAddSpouse = false;
     if (isAdd) {
       this.CustType = CommonConstant.CustomerPersonal;
       this.selectedCustId = 0;
@@ -123,9 +126,9 @@ export class CustomShareholderListingComponent implements OnInit {
     {
       this.IsAddSpouse = true;
       this.SelectedCustSpouseId = ev.RowObj.ShareholderId;
-      this.addCustShareHolder();
+      this.addCustShareHolder(true, true);
     }else{
-      this.addCustShareHolder(false);
+      this.addCustShareHolder(false, false);
     }
   }
 
