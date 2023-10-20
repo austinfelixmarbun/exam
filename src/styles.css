@@ -43,7 +43,7 @@
 /*css for link button*/
 .btn-link-2{
     border: none!important;
-    background: var(--white, #FDFEFF)!important;
+    background: transparent !important;
     color :var(--blue-primary, #246CFE)!important;
     border-radius: 7px !important;
     padding: 0.5rem 1rem 0.5rem 1rem;
@@ -52,6 +52,20 @@
     background: var(--light-grey, #F4F8FB)!important;
     color: var(--blue-primary-darker, #0010F7)!important;
 }
+
+/*css for danger button*/
+.btn-danger-2{
+    border: 1px solid var(--red-danger, #FF455E);
+    background: var(--red-danger, #FF455E);
+    color :var(--white, #FDFEFF)!important;
+    border-radius: 7px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+}
+.btn-danger-2:hover{
+    background: var(--red-danger-darker, #F02)!important;
+    border: 1px solid var(--red-danger-darker, #F02)!important;
+}
+/*css for danger button*/
 
 /*warna background card*/
 .bg-light-blue-card {
@@ -172,6 +186,17 @@ form .textarea-field-2{
 
 .custom-switches .switch.checked {
   background: #246CFE;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #246CFE;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle, 
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), 
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, 
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple{
+    background: #246CFE;
 }
 
 /* END CSS FOR NEW UI */

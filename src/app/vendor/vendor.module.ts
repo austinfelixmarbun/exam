@@ -99,6 +99,7 @@ import { SelfCustomContainerVendorBranchInfoComponent } from './vendor-branch/se
 import { SelfCustomContainerOcrVendorComponent } from './self-custom-container-npwp-vendor/self-custom-container-ocr-vendor.component';
 import { CustomFundingCompanyAddEditComponent } from './funding-company/custom-funding-company-add-edit/custom-funding-company-add-edit.component';
 import { SelfCustomVendorAtpmSelectComponent } from './vendor-ATPM/self-custom-vendor-atpm-select/self-custom-vendor-atpm-select.component';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -142,7 +143,8 @@ export const customCurrencyMaskConfig = {
         UcapprovalR3Module,
         UcapprovalHistoryModule,
         UcapprovalgeneralinfoModule,
-        UcTemplateModule
+        UcTemplateModule,
+        UiSwitchModule,
     ],
     declarations: [
         VendorHoldingPagingComponent,
