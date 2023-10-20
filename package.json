@@ -46,7 +46,7 @@
     "@adins/ucdropdownsearch": "3.0.1",
     "@adins/ucdropdownsearch2": "3.1.2",
     "@adins/ucform": "3.6.28-canary.0",
-    "@adins/ucformarray": "3.2.4-canary.0",
+    "@adins/ucformarray": "^3.2.6-canary.0",
     "@adins/ucgridfooter": "3.1.2-canary.0",
     "@adins/ucgridview": "^3.7.1-canary.0",
     "@adins/uclookupgeneric": "3.1.2-canary.0",
