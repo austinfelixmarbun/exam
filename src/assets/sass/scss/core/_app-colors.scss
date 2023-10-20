@@ -20,6 +20,23 @@ $black-color: (
   "accent-3":   #3BF7FF,
   "accent-4":   #22F6FF
 );
+$primary-2: (
+  "lighten-6":  #f8fcff,
+  "lighten-5":  #E7EFF8,
+  "lighten-4":  #CFDFF9,
+  "lighten-3":  #b7cffa,
+  "lighten-2":  #86AEFB,
+  "lighten-1":  #558DFD,
+  "base":       #246CFE,
+  "darken-1":   #0010F7,
+  "darken-2":   #000ED6,
+  "darken-3":   #000CB6,
+  "darken-4":   #000A90,
+  "accent-1":   #246CFE,
+  "accent-2":   #4482fe,
+  "accent-3":   #6194fa,
+  "accent-4":   #9bbdff
+);
 $success: (
   "lighten-5":  #E2F8F0,
   "lighten-4":  #B6EDD8,
@@ -399,6 +416,7 @@ $colors: (
   "white": $white-color,
   "black": $black-color,
   "primary": $primary,
+  "primary-2": $primary-2,
   "success": $success,
   "info": $info,
   "warning": $warning,
