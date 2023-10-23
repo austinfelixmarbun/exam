@@ -24,6 +24,18 @@ export const CONTENT_ROUTES: Routes = [
     loadChildren: () => import('app/journal/journal.module').then(m => m.JournalModule)
   },
   {
+    path: PathConstant.STAFF_CLAIM_VIEW,
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './StaffClaim'
+      })
+        .then(m => m.StaffClaimModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'agrmntview',
     loadChildren: () => {
       return loadRemoteModule({
