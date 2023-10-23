@@ -156,6 +156,18 @@ export const CONTENT_ROUTES: Routes = [
     },
   },
   {
+    path: 'cashbankvoucher-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.cashbankR3Web + '/remoteEntry.js',
+        exposedModule: './CashbankModule'
+      })
+        .then(m => m.CashbankModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'nonaccrualview',
     loadChildren: () => {
       return loadRemoteModule({

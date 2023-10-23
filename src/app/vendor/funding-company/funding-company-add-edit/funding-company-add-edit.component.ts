@@ -543,4 +543,10 @@ export class FundingCompanyAddEditComponent implements OnInit {
   }
 }   
 }
+
+  ChangeCallbackSwitch(formName, $event:boolean){
+    this.FormUtama.get(formName).setValue($event);
+    console.log(formName ,this.FormUtama.get(formName).value);
+  }
+
 }
