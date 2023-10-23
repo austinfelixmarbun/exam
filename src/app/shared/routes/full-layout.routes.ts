@@ -760,7 +760,7 @@ export const Full_ROUTES: Routes = [
         remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
         exposedModule: './UploadModule'
       })
-        .then(m => m.IntegrationModule)
+        .then(m => m.UploadModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
