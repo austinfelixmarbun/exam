@@ -1458,7 +1458,7 @@ async function saveAddEditCustJobData(dicts: Record<string, any>, api: any, http
   }
   else
   {
-    custPersonalJobDataObj.JobAddrId = dicts.JobAddrId;
+    custPersonalJobDataObj.JobAddrId = dicts.JobAddrId; 
     custPersonalJobDataObj.PrevJobAddrId = dicts.CustAddrIdPrevAddr;
     custPersonalJobDataObj.OthBizAddrId = dicts.OthBizAddrId;
 
