@@ -802,4 +802,8 @@ export class PathConstant {
     //#region Notary
     public static NOTARY_COMPANY = "NotaryCompany";
     public static NOTARY_PERSONAL = "NotaryPersonal";
+
+    // staff claim
+    public static STAFF_CLAIM = "staff-claim";
+    public static STAFF_CLAIM_VIEW = PathConstant.STAFF_CLAIM + "/" + PathConstant.VIEW;
 }
