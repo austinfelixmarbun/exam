@@ -753,7 +753,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'upload',
+    path: 'uploadintegration',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
