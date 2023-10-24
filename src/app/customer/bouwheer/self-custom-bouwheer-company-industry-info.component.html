@@ -54,7 +54,7 @@
           <h4 class="modal-title" id="modal-basic-title">
             Industry Info
           </h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"><span
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()"><span
               aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
@@ -101,7 +101,7 @@
           <div class="form-group row">
             <label class="col-md-12 label-field-2" for="IsMain" translate>Is Main Industry</label>
             <div class="col-md-12">
-              <ui-switch uncheckedlabel="No" checkedlabel="Yes" size="small" formControlName="IsMain"
+              <ui-switch uncheckedLabel="no" checkedLabel="yes" size="small" formControlName="IsMain"
                 class="custom-switches">
               </ui-switch>
               <!-- <input type="checkbox" class="border-primary" formControlName="IsMain"
