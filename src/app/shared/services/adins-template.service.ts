@@ -16,7 +16,7 @@ const listEnvironments = [
   { environment: 'LMSR3WEB', url: envi.lmsR3Web },
   { environment: 'LOS', url: envi.LosURL },
   { environment: 'CashBankUrl', url: envi.CashBankUrl },
-  { environment: 'TAX', url: environment.TaxUrl},
+  { environment: 'TAX', url: envi.TaxUrl},
 ];
 
 @Injectable({
