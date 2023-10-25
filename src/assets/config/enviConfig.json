@@ -23,7 +23,7 @@
     "pdcR3Web": "https://r3web-server.ad-ins.com/LMSPDC",
     "apR3Web": "https://r3web-server.ad-ins.com/FMSAP",
     "integrationR3Web": "https://r3web-server.ad-ins.com/INTEGRATION",
-    "finopsR3Web": "http://localhost:4204",
+    "finopsR3Web": "https://r3web-server.ad-ins.com/FMSFINOPS",
     "WorkflowR3Url": "https://R3App-Server.ad-ins.com/WORKFLOW_R3",
     "WebSocketURL": "https://r3app-server.ad-ins.com/FOUNDATION_CORE_DEV",
     "DashboardURL": "https://r3app-server.ad-ins.com/Dashboard",
