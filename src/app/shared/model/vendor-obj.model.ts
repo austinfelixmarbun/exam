@@ -25,7 +25,8 @@ export class VendorObj{
     IsNpwpExist: boolean;
     VendorAtpmCode: string;
     TaxIdNo: string;
-    IsOneAffiliate: boolean
+    IsOneAffiliate: boolean;
+    TaxSchmCode: boolean;
     
     constructor() { this.VendorId = 0; }
 }
