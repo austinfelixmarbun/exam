@@ -27,6 +27,8 @@ import { SelfCustomContainerCustViewFinDataBankStmntComponent } from './self-cus
 import { SelfCustomContainerViewExposureBucketComponent } from './self-custom-container-view-exposure-bucket/self-custom-container-view-exposure-bucket.component';
 import { SelfCustomCustomerViewCoyFinancialComponent} from './self-custom-customer-view-coy-financial/self-custom-customer-view-coy-financial.component';
 import { AdinsTemplateService } from 'app/shared/services/adins-template.service';
+import { RouterModule } from '@angular/router';
+import { SelfCustomCustViewComponent } from './self-custom-cust-view/self-custom-cust-view.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AdinsTemplateService } from 'app/shared/services/adins-template.service
     SelfCustomCustomerViewIframeGenericComponent,
     SelfCustomContainerCustViewFinDataBankStmntComponent,
     SelfCustomContainerViewExposureBucketComponent,
-    SelfCustomCustomerViewCoyFinancialComponent
+    SelfCustomCustomerViewCoyFinancialComponent,
+    SelfCustomCustViewComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +60,7 @@ import { AdinsTemplateService } from 'app/shared/services/adins-template.service
     UcShowErrorsModule,
     SharedModule,
     AdInsSharedModule,
+    RouterModule,
     SelfCustomCustViewRoutingModule
   ],
   providers: [
