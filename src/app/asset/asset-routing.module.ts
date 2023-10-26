@@ -49,8 +49,6 @@ import { CustomAssetSchemeMemberComponent } from './custom/asset-scheme/asset-sc
 import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-scheme/custom-add-asset-scheme.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
 import { CustomAssetMasterAddEditParentComponent } from './custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component';
-import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { AssetDocumentAddEditXComponent } from 'app/impl/asset-document-add-edit-x/asset-document-add-edit-x.component';
 
 const routes: Routes = [
   {
@@ -218,8 +216,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.ASSET_DOC_DETAIL_X,
-        component: AssetDocumentAddEditXComponent,
+        path: PathConstant.ASSET_DOC_DETAIL,
+        component: AssetDocumentAddEditComponent,
         data: {
           title: 'Asset Document Detail'
         },
