@@ -2038,3 +2038,9 @@ export async function downloadDmsDocument(
   }
 }
 
+export function redirectSubmitProject(toastr: NGXToastrService, router: Router) {
+  toastr.successMessage("Success");
+  router.navigate([NavigationConstant.CS_SELF_CUSTOM_PROJECT])
+  return;
+}
+
