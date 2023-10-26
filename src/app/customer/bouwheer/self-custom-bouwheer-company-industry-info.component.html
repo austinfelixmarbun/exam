@@ -92,9 +92,15 @@
             <label class="col-md-12 adInsLabel label-field-2" for="myfile" translate>Industry File Upload <span
                 class="optional-text">(Optional)</span></label>
             <div class="col-md-12">
-              <label [for]="'doc'" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2">Choose File</label>
-              <input [id]="'doc'" type="file" id="myfile" style="display: none" (change)="onFileChange($event)"
-                name="myfile"><br><br>
+              <label [for]="'doc'" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2" >Choose File</label>
+              <input class="input-field-2" type="file" [id]="'doc'" style="display: none" (change)="onFileChange($event.target.files)"
+                [accept]="ExtStr" />
+                <div [hidden]="!file" style="padding-left: 15px" class="row afu-valid-file">
+                  <p class="col-xs-3 textOverflow"><span class="text-primary">{{file?.name}}</span></p>
+                  <p class="col-xs-3 padMarg sizeC">
+                    <strong>({{ConvertSize(file?.size)}})</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </p>
+                </div>
             </div>
           </div>
 

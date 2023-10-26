@@ -175,7 +175,7 @@ export class SelfCustomCustCompanyIndustryInfo implements OnInit {
         )
           .then(() => {
             this.closeModal();
-            this.toastr.successMessage("Success");
+            // this.toastr.successMessage("Success");
             this.getListCustIndustryInfo();
           })
           .catch((error) => {
