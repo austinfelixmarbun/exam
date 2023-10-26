@@ -13,7 +13,8 @@ const listEnvironments = [
   { environment: 'FOU', url: environment.FoundationR3Url},
   { environment: 'FOUR3WEB', url: environment.FoundationR3Web },
   { environment: 'LOSR3WEB', url: environment.losR3Web },
-  { environment: 'LOS', url: environment.LosURL }
+  { environment: 'LOS', url: environment.LosURL },
+  { environment: 'TAX', url: environment.TaxUrl},
   ];
 
 @Injectable({

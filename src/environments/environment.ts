@@ -33,6 +33,7 @@ export const environment = {
   DashboardURL: 'https://r3app-server.ad-ins.com/Dashboard',
   dmsURL: 'https://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx',
   WFThingsToDoUrl: 'https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/',
-  NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE"
+  NotificationPublicKey: "BBbkWeKUsFaOoDQxdc3XJ9pJhfSvAypmRhDmRORWaCxTjs6odY0VK58sBcl-0ZLwFHkCs2IcS7GTvpGEPEcZaAE",
+  TaxUrl:"https://r3app-server.ad-ins.com/TAX"
 
 };
