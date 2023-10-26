@@ -269,11 +269,13 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
       vendorBranchObj.VendorObj.IdNo = dicts.formRaw.IdNo;
       vendorBranchObj.VendorObj.RegistrationNo = "";
       vendorBranchObj.VendorObj.LicenseNo = "";
+      vendorBranchObj.VendorObj.TaxSchmCode = dicts.formRaw.TaxSchmCodePersonal1;
     }
     else {
       vendorBranchObj.VendorObj.IdNo = "";
       vendorBranchObj.VendorObj.RegistrationNo = dicts.formRaw.RegistrationNo;
       vendorBranchObj.VendorObj.LicenseNo = dicts.formRaw.LicenseNo;
+      vendorBranchObj.VendorObj.TaxSchmCode = dicts.formRaw.TaxSchmCodeCompany1;
     }
 
     vendorBranchObj.VendorObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
