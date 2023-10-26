@@ -41,5 +41,6 @@
     "storageR3Web": "https://r3web-server.ad-ins.com/AMS_STORAGE",
     "facilityMntR3Web": "https://r3web-server.ad-ins.com/TMSFACILITY_MNT",
     "facilityExecR3Web": "https://r3web-server.ad-ins.com/TMSFACILITY_EXEC",
-    "PayOutR3Web": "https://r3web-server.ad-ins.com/TMSPAYOUT"
+    "PayOutR3Web": "https://r3web-server.ad-ins.com/TMSPAYOUT",
+    "TaxUrl": "https://r3app-server.ad-ins.com/TAX"
 }

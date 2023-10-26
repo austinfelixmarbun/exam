@@ -318,7 +318,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Customer Duplicate Checking',
-          page: 'CustomerDuplicateCheckingMatchPersonal'
+          page: 'CustomerDuplicateCheckingMatchPersonalV2'
         }
       },
       {
