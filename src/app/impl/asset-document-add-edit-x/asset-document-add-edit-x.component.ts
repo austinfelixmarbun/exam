@@ -11,9 +11,8 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericListByCodeObj } from 'app/shared/model/generic/generic-list-by-code-obj.model';
 import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/response/general-setting/res-general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
-import { AssetDocListXObj } from '../../shared/model/asset-doc-list-x-obj.model';
+import { AssetDocListXObj } from '../shared/model/asset-doc-list-x-obj.model';
 import { RefAssetDocObj } from 'app/shared/model/ref-asset-doc-obj.model';
-import { NavigationConstantX } from 'app/impl/shared/NavigationConstantX';
 
 @Component({
   selector: 'app-asset-document-add-edit-x',
@@ -46,7 +45,7 @@ export class AssetDocumentAddEditXComponent implements OnInit {
   isShowCbxBorrow: boolean;
   isShowCbxPledge: boolean;
   
-  readonly CancelLink: string = NavigationConstantX.BACK_TO_PAGING_X;
+  readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       if (params["AssetTypeId"] != null) {
@@ -163,7 +162,7 @@ export class AssetDocumentAddEditXComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetDocList, this.assetDocListObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING_X],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }

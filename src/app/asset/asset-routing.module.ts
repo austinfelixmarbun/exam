@@ -50,9 +50,7 @@ import { CustomAddAssetSchemeComponent } from './custom/asset-scheme/add-asset-s
 import { UcTemplateComponent } from '@adins/uctemplate';
 import { CustomAssetMasterAddEditParentComponent } from './custom-asset-master/custom-asset-master-add-edit-parent/custom-asset-master-add-edit-parent.component';
 import { PathConstantX } from 'app/impl/shared/PathConstantX';
-import { AssetDocumentAddEditXComponent } from "app/impl/asset-document-x/asset-document-add-edit-x/asset-document-add-edit-x.component";
-import { AssetDocumentPagingXComponent } from "app/impl/asset-document-x/asset-document-paging-x/asset-document-paging-x.component";
-import { AssetConfigurationPagingXComponent } from 'app/impl/asset-configuration-x/asset-configuration-paging-x/asset-configuration-paging-x.component';
+import { AssetDocumentAddEditXComponent } from 'app/impl/asset-document-add-edit-x/asset-document-add-edit-x.component';
 
 const routes: Routes = [
   {
@@ -144,7 +142,7 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_CONFIG_PAGING,
-        component: AssetConfigurationPagingXComponent,
+        component: AssetConfigurationPagingComponent,
         data: {
           title: 'Asset Configuration Paging'
         },
@@ -157,8 +155,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.ASSET_DOC_PAGING_X,
-        component: AssetDocumentPagingXComponent,
+        path: PathConstant.ASSET_DOC_PAGING,
+        component: AssetDocumentPagingComponent,
         data: {
           title: 'Asset Document Paging'
         },
@@ -213,8 +211,8 @@ const routes: Routes = [
         },
       },
       {
-        path: PathConstantX.ASSET_DOC_PAGING_X,
-        component: AssetDocumentPagingXComponent,
+        path: PathConstant.ASSET_DOC_PAGING,
+        component: AssetDocumentPagingComponent,
         data: {
           title: 'Asset Document Paging'
         },
