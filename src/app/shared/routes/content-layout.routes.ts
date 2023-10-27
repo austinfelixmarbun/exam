@@ -633,7 +633,7 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
-    path: 'reimburse/view',
+    path: 'reimbursement/view',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
