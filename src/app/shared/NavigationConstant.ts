@@ -1,4 +1,3 @@
-import { PathConstantX } from "app/impl/shared/PathConstantX";
 import { environment } from "environments/environment";
 import { PathConstant } from "./PathConstant";
 
@@ -46,7 +45,6 @@ export class NavigationConstant {
     public static ASSET_CATEGORY_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_CATEGORY_PAGING; //'/Asset/Category/Paging'
     public static ASSET_CATEGORY_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_CATEGORY_DETAIL; //'/Asset/Category/Detail'
     public static ASSET_DOC_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_PAGING; //'/Asset/Document/Paging'
-    public static ASSET_DOC_PAGING_X = "/" + PathConstant.LR_ASSET + "/" + PathConstantX.ASSET_DOC_PAGING_X; //'/Asset/Document/PagingX'
     public static ASSET_DOC_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_DETAIL; //'/Asset/Document/Detail'
     public static ASSET_DOC_MASTER_PAGING = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_PAGING; //'/Asset/DocumentMaster/Paging'
     public static ASSET_DOC_MASTER_DETAIL = "/" + PathConstant.LR_ASSET + "/" + PathConstant.ASSET_DOC_MASTER_DETAIL; //'/Asset/DocumentMaster/Detail'
