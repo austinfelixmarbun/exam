@@ -66,8 +66,6 @@
     "@adins/ucapproval-r3": "3.0.5-canary.0",
     "@adins/ucform": "^3.6.33-canary.0",
     "@adins/ucviewfileupload": "^1.0.0",
-
-
     "@angular-architects/module-federation": "^14.2.0",
     "@angular/animations": "^13.2.2",
     "@angular/cdk": "^13.2.2",
