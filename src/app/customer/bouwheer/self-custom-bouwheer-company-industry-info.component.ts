@@ -14,11 +14,12 @@ import { ResBouwheerCompanyIndustryInfoObj } from 'app/shared/model/res-bouwheer
 import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { downloadDmsDocument, sendXhr } from 'app/shared/function/customer-function';
-
+import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { String } from 'typescript-string-operations';
 @Component({
   selector: 'app-self-custom-bouwheer-company-industry-info',
   templateUrl: './self-custom-bouwheer-company-industry-info.component.html',
-  styleUrls: []
+  styleUrls: ['./self-custom-bouwheer-company-industry-info.component.css']
 })
 export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   ListBouwheerIndustryInfo: Array<ResBouwheerCompanyIndustryInfoObj> = [];
@@ -33,6 +34,9 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
   mode: string;
   showDownload: boolean = false;
   Id: number = 0;
+
+  readonly FileExtAllowed: Array<string> = [CommonConstant.FileExtensionPdf, CommonConstant.FileExtensionJpg, CommonConstant.FileExtensionJpeg, CommonConstant.FileExtensionGif, CommonConstant.FileExtensionPng]
+  readonly ExtStr: string = String.Join(", ", this.FileExtAllowed);
 
   @Input() BwrNo: string;
   @Input() BwrId: number;
@@ -178,7 +182,7 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
           )
             .then(() => {
               this.closeModal();
-              this.toastr.successMessage("Success");
+              // this.toastr.successMessage("Success");
               this.getListBouwheerIndustryInfo();
             })
             .catch((error) => {
@@ -305,16 +309,24 @@ export class SelfCustomBouwheerCompanyIndustryInfo implements OnInit {
     }
   }
 
-  async onFileChange(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    let ByteBase64: any = await this.readFileAsDataURL(file);
+  file : File
+  async onFileChange(files: FileList) {
+    this.file = files.item(0);
+    files.item(0)
+    let ByteBase64: any = await this.readFileAsDataURL(this.file);
     this.IndustryInfoForm.patchValue({
       ByteBase64: ByteBase64.substring(ByteBase64.lastIndexOf(',') + 1),
-      DocUploadName: file.name
+      DocUploadName: this.file.name
     });
   }
-
+  
   DownloadFileIndustryInfo(i: number) {
     downloadDmsDocument(this.http, this.toastr, this.ListBouwheerIndustryInfo[i]);
+  }
+
+  ConvertSize(fileSize: number) {
+    return fileSize < 1024000
+      ? (fileSize / 1024).toFixed(2) + ' KB'
+      : (fileSize / 1024000).toFixed(2) + ' MB';
   }
 }

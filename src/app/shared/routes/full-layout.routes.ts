@@ -95,10 +95,6 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
   },
-  {
-    path: 'Impl',
-    loadChildren: () => import('app/impl/impl.module').then(m => m.ImplModule)
-  },
   // dynamic import remote module
   //#region AR Module
   {

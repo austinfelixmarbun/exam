@@ -1820,11 +1820,11 @@ export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string
         )
       .then(() => {
         // Berhasil diunggah
+        DialogRef.close()
       })
       .catch((error) => {
         // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
       });
-      DialogRef.close()
     }
   );
 }
@@ -1983,11 +1983,12 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
           environment.FoundationR3Url,
           "reqObj"
           )
-        .then(() => {
+        .then(async () => {
+          await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
         })
         .catch((error) => {
         });
-        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
+
       }
       else{
         // toastr.successMessage(resSave["Message"])
@@ -2035,5 +2036,11 @@ export async function downloadDmsDocument(
     toastr.errorMessage('An error occurred while downloading the document.');
     return;
   }
+}
+
+export function redirectSubmitProject(toastr: NGXToastrService, router: Router) {
+  toastr.successMessage("Success");
+  router.navigate([NavigationConstant.CS_SELF_CUSTOM_PROJECT])
+  return;
 }
 

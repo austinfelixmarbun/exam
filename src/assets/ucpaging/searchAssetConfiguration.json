@@ -125,7 +125,7 @@
         "action": [
           {
             "type": "edit",
-            "path": "ASSET_DOC_PAGING_X",
+            "path": "ASSET_DOC_PAGING",
             "param": [
               {
                 "type": "AssetTypeId",

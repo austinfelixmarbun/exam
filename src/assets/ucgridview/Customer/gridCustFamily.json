@@ -4,7 +4,7 @@
         {
             "type": "sort",
             "position": "left",
-            "label": "Customer No",
+            "label": "Debtor No",
             "name": "CustNo"
         },
         {
