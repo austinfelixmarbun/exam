@@ -657,6 +657,18 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'advance-payment-alloc-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './AdvPayAllocModule'
+      })
+        .then(m => m.AdvPayAllocModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'paymentrequestview',
     loadChildren: () => {
       return loadRemoteModule({
