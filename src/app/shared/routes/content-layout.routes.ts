@@ -633,7 +633,7 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
-    path: 'reimburse/view',
+    path: 'reimbursement/view',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -653,6 +653,18 @@ export const CONTENT_ROUTES: Routes = [
         exposedModule: './advancepayment'
       })
         .then(m => m.AdvancePaymentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'advance-payment-alloc-view',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.finopsR3Web + '/remoteEntry.js',
+        exposedModule: './AdvPayAllocModule'
+      })
+        .then(m => m.AdvPayAllocModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
