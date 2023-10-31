@@ -61,7 +61,7 @@
     "@adins/ucreport": "3.0.2",
     "@adins/ucsearch": "3.4.0-canary.0",
     "@adins/uctable": "^1.1.6-canary.0",
-    "@adins/uctemplate": "^1.10.8-canary.0",
+    "@adins/uctemplate": "^1.10.10-canary.0",
     "@adins/ucthingstodo": "3.0.1",
     "@adins/ucupload": "3.0.4-canary.0",
     "@adins/ucviewfileupload": "^1.0.0",
