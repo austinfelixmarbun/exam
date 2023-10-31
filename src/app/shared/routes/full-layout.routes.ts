@@ -1084,8 +1084,18 @@ export const Full_ROUTES: Routes = [
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
+  },
+  {
+    path: 'contractdocument',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.contractDocR3Web + '/remoteEntry.js',
+        exposedModule: './ContractDocumentModule'
+      })
+        .then(m => m.ContractDocumentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
   }
   // #endregion
-
-
 ];
