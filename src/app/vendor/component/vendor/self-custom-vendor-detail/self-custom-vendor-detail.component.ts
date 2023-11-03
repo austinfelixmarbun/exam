@@ -16,7 +16,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.subscribeParam();
 
-    this.pageName = 'SupplierDetail'
+    this.pageName = 'SupplierDetailDummy'
     this.selectPage();
   }
 
@@ -59,7 +59,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-        this.pageName = "SupplierDetail"
+        this.pageName = "SupplierDetailDummy"
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
                this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
