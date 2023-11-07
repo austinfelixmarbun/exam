@@ -1820,11 +1820,11 @@ export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string
         )
       .then(() => {
         // Berhasil diunggah
+        DialogRef.close()
       })
       .catch((error) => {
         // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
       });
-      DialogRef.close()
     }
   );
 }
@@ -1967,8 +1967,8 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
     async (response) => {
       resSave = response;
 
-      if (Array.isArray(forUpload) && forUpload.length > 0) {
-
+      if (Array.isArray(forUpload) && forUpload.length > 0 && forUpload.every(obj => obj.ByteBase64?.trim() && obj.DocUploadName?.trim())) 
+      {
         let reqFileUpl = {
           BouwheerId: resSave["Id"] ,
           uploadIndustryDocs: forUpload
@@ -1983,64 +1983,15 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
           environment.FoundationR3Url,
           "reqObj"
           )
-        .then(() => {
-          // Berhasil diunggah
+        .then(async () => {
+          await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
         })
         .catch((error) => {
-          // Gagal unggah, error dapat digunakan untuk menampilkan pesan kesalahan
         });
-        await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
 
-        // let reqObj = {
-        //   BouwheerId: resSave["Id"] ,
-        //   uploadIndustryDocs: forUpload
-        // };
-  
-        // let urlUpload = environment.FoundationR3Url + "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc";
-        // // await this.uploadDocFileMultipartForGeneralPurpose(reqObj, resSave["Message"], toastr, cookieService, urlUpload, router)
-        
-        // try {
-        //   if (environment.SpinnerOnHttpPost) this.spinner.show();
-      
-        //   const formData: any = new FormData();
-        //   formData.append('reqObj', JSON.stringify(reqObj));
-      
-        //   const xhr = new XMLHttpRequest();
-      
-        //   const xhrPromise = new Promise<void>((resolve, reject) => {
-        //     xhr.onreadystatechange = evnt => {
-        //       if (xhr.readyState === 4) {
-        //         if (xhr.status === 200 || xhr.status === 201) {
-        //           resolve();
-        //         } else {
-        //           reject(new Error('Upload Failed !'));
-        //         }
-        //       }
-        //     };
-      
-        //     xhr.onerror = evnt => {
-        //       reject(new Error('Upload Failed !'));
-        //     };
-      
-        //     xhr.open('POST', urlUpload, true);
-        //     const value = cookieService.get('XSRF-TOKEN');
-        //     const token = DecryptString(value, environment.ChipperKeyCookie);
-        //     xhr.setRequestHeader('AdInsKey', `${token}`);
-        //     xhr.send(formData);
-        //   });
-      
-        //   await xhrPromise; // Tunggu sampai permintaan XHR selesai
-      
-        // } catch (error) {
-        //   toastr.errorMessage(error.message || 'An error occurred during upload.');
-        // } finally {
-        //   if (environment.SpinnerOnHttpPost) this.spinner.hide();
-        //   toastr.successMessage(resSave["Message"])
-        //   await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
-        // }
       }
       else{
-        toastr.successMessage(resSave["Message"])
+        // toastr.successMessage(resSave["Message"])
         await router.navigate(['/Customer/SelfCustom/Bouwheer/Paging']);
       }
     });
@@ -2085,5 +2036,11 @@ export async function downloadDmsDocument(
     toastr.errorMessage('An error occurred while downloading the document.');
     return;
   }
+}
+
+export function redirectSubmitProject(toastr: NGXToastrService, router: Router) {
+  toastr.successMessage("Success");
+  router.navigate([NavigationConstant.CS_SELF_CUSTOM_PROJECT])
+  return;
 }
 

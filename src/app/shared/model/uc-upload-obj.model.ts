@@ -27,6 +27,7 @@ export class UcUploadObj {
     isDownloadTmplt: boolean;
     ddlEnvironments: Array<EnviObj>;
     listEnvironments: Array<EnvisObj>;
+    additionalPayload: Record<string,string>;
 
     constructor(private UrlConstantNew: UrlConstantNew) {
         this.title = "";
@@ -54,6 +55,7 @@ export class UcUploadObj {
         this.listEnvironments = new Array<EnvisObj>();
         this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
         this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
+        this.additionalPayload = {};
     }
 }
 

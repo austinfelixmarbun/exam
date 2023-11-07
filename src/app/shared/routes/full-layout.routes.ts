@@ -95,10 +95,6 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_SYS_USER,
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
   },
-  {
-    path: 'Impl',
-    loadChildren: () => import('app/impl/impl.module').then(m => m.ImplModule)
-  },
   // dynamic import remote module
   //#region AR Module
   {
@@ -753,14 +749,14 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'upload',
+    path: 'uploadintegration',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.integrationR3Web + '/remoteEntry.js',
         exposedModule: './UploadModule'
       })
-        .then(m => m.IntegrationModule)
+        .then(m => m.UploadModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
@@ -1084,8 +1080,18 @@ export const Full_ROUTES: Routes = [
         .then(m => m.ReportModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
+  },
+  {
+    path: 'contractdocument',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.contractDocR3Web + '/remoteEntry.js',
+        exposedModule: './ContractDocumentModule'
+      })
+        .then(m => m.ContractDocumentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
   }
   // #endregion
-
-
 ];
