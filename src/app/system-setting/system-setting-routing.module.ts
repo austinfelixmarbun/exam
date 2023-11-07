@@ -112,10 +112,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.REF_FORM_PAGING,
-        component: RefFormPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Ref Form Paging'
+          title: 'Form Paging',
+          page: 'FormPaging'
         },
+        // component: RefFormPagingComponent,
+        // data: {
+        //   title: 'Ref Form Paging'
+        // },
       },
       {
         path: PathConstant.REF_FORM_DETAIL,

@@ -104,10 +104,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_MASTER,
-        component: MasterPagingComponent,
+        component: CustomMasterComponent,
         data: {
-          title: 'Master Maintenance Paging'
+          title: 'Economic Sector Detail'
         },
+        // component: MasterPagingComponent,
+        // data: {
+        //   title: 'Master Maintenance Paging'
+        // },
       },
       {
         path: PathConstant.CS_MASTER_DETAIL,
@@ -118,10 +122,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_GEN_SETTING,
-        component: GeneralSettingPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'General Setting Maintenance Paging'
+          title: 'General Setting Maintenance Paging',
+          page: 'Generalsetting'
         },
+        // component: GeneralSettingPagingComponent,
+        // data: {
+        //   title: 'General Setting Maintenance Paging'
+        // },
       },
       {
         path: PathConstant.CS_GEN_SETTING_DETAIL,
@@ -146,10 +155,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_CURRENCY_PAGING,
-        component: CurrencyComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Currency'
+          title: 'Currency',
+          page: 'Currency'
         },
+        // component: CurrencyComponent,
+        // data: {
+        //   title: 'Currency'
+        // },
       },
       {
         path: PathConstant.CS_CURRENCY_ADD,
@@ -258,10 +272,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_ECONOMIC_SECTOR_PAGING,
-        component: EconomicSectorComponent,
+        component: CustomEconomicSectorComponent,
         data: {
-          title: 'Economic Sector Paging'
+          title: 'Economic Sector Detail'
         },
+        // component: EconomicSectorComponent,
+        // data: {
+        //   title: 'Economic Sector Paging'
+        // },
       },
       {
         path: PathConstant.CS_ECONOMIC_SECTOR_DETAIL,
@@ -272,10 +290,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_REF_PROVINCE_PAGING,
-        component: ProvinceComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Province Paging'
+          page: "ProvincePaging"
         },
+        // component: ProvinceComponent,
+        // data: {
+        //   title: 'Province Paging'
+        // },
       },
       {
         path: PathConstant.CS_REF_PROVINCE_DETAIL,
@@ -335,10 +357,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_PROFESSION_PAGING,
-        component: ProfessionComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Profession Paging'
-        },
+          title: 'Profession Paging',
+          page: 'Professionpaging'
+        }
+        // component: ProfessionComponent,
+        // data: {
+        //   title: 'Profession Paging'
+        // },
       },
       {
         path: PathConstant.CS_PROFESSION_DETAIL,
@@ -349,10 +376,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_INDUSTRY_TYPE_PAGING,
-        component: RefIndustryTypeComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Industry Type Paging'
-        },
+          title: 'Industry Type Paging',
+          page: 'IndustryTypePaging'
+        }
+        // component: RefIndustryTypeComponent,
+        // data: {
+        //   title: 'Industry Type Paging'
+        // },
       },
       {
         path: PathConstant.CS_INDUSTRY_TYPE_DETAIL,
@@ -363,10 +395,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_BANK_PAGING,
-        component: BankComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Bank Paging'
+          title: 'Bank Paging',
+          page: 'Fou-sysset-bank'
         },
+        // component: BankComponent,
+        // data: {
+        //   title: 'Bank Paging'
+        // },
       },
       {
         path: PathConstant.CS_BANK_DETAIL,
@@ -377,10 +414,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_ZIPCODE_PAGING,
-        component: ZipcodeComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Zipcode Paging'
+          title: 'Zipcode Paging',
+          page: 'ZipcodePaging'
         },
+        // component: ZipcodeComponent,
+        // data: {
+        //   title: 'Zipcode Paging'
+        // },
       },
       {
         path: PathConstant.CS_ZIPCODE_DETAIL,
@@ -412,10 +454,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_REASON_PAGING,
-        component: ReasonComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Reason Paging'
-        },
+          title: 'Custom Reason  ',
+          page: 'Reason'
+        }
+        // component: ReasonComponent,
+        // data: {
+        //   title: 'Reason Paging'
+        // },
       },
       {
         path: PathConstant.CS_REASON_DETAIL,
@@ -461,10 +508,15 @@ const routes: Routes = [
       // PAYMENT ALLOCATION
       {
         path: PathConstant.CS_PAYMENT_ALLOC_PAGING,
-        component: PaymentAllocPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Payment Allocation'
+          title: 'Payment Allocation Paging',
+          page: 'PaymentAllocationPaging'
         },
+        // component: PaymentAllocPagingComponent,
+        // data: {
+        //   title: 'Payment Allocation'
+        // },
       },
       {
         path: PathConstant.CS_PAYMENT_ALLOC_DETAIL,
@@ -493,10 +545,15 @@ const routes: Routes = [
       // COA
       {
         path: PathConstant.CS_COA_PAGING,
-        component: CoaPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'COA'
+          title: 'COA',
+          page: 'Coa'
         },
+        // component: CoaPagingComponent,
+        // data: {
+        //   title: 'COA'
+        // },
       },
       {
         path: PathConstant.CS_COA_DETAIL,
@@ -538,10 +595,15 @@ const routes: Routes = [
 
       {
         path: PathConstant.CS_INDUSTRY_TYPE_CAT_PAGING,
-        component: IndustryTypeCategoryPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Industry Type Category'
-        },
+          title: 'Industry Type Category Paging',
+          page: 'IndustryTypeCategoryPaging'
+        }
+        // component: IndustryTypeCategoryPagingComponent,
+        // data: {
+        //   title: 'Industry Type Category'
+        // },
       },
       {
         path: PathConstant.CS_INDUSTRY_TYPE_CAT_DETAIL,
@@ -554,10 +616,15 @@ const routes: Routes = [
       //REF TC
       {
         path: PathConstant.CS_REF_TC_PAGING,
-        component: RefTcComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Ref TC'
+          title: 'Ref TC',
+          page: 'Reftc'
         },
+        // component: RefTcComponent,
+        // data: {
+        //   title: 'Ref TC'
+        // },
       },
       {
         path: PathConstant.CS_REF_TC_DETAIL,
@@ -577,10 +644,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_REF_TAX_OFFICE_PAGING,
-        component: TaxOfficePagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Tax Office Paging'
+          title: 'Tax Office Paging',
+          page: 'TaxOffice'
         },
+        // component: TaxOfficePagingComponent,
+        // data: {
+        //   title: 'Tax Office Paging'
+        // },
       },
 
       //REF INS CLAIM DOC
@@ -593,10 +665,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.CS_REF_INS_CLAIM_DOC_PAGING,
-        component: RefInsClaimDocPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Insurance Claim Document Paging'
+          title: 'Insurance Claim Document Paging',
+          page: 'InsuranceClaimDoc'
         },
+        // component: RefInsClaimDocPagingComponent,
+        // data: {
+        //   title: 'Insurance Claim Document Paging'
+        // },
       },
 
       //CUSTOM UC TEMPLATE

@@ -56,10 +56,14 @@ const routes: Routes = [
     children: [
       {
         path: PathConstant.ASSET_TYPE_PAGING,
-        component: AssetTypePagingComponent,
+        component: CustomAssetTypePagingComponent,
         data: {
           title: 'Asset Type Paging'
         }
+        // component: AssetTypePagingComponent,
+        // data: {
+        //   title: 'Asset Type Paging'
+        // }
       },
       {
         path: PathConstant.SELF_CUSTOM_ASSET_TYPE_PAGING,
@@ -84,10 +88,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_SCHM_PAGING,
-        component: AssetSchemePagingComponent,
+        component: CustomAssetSchemePagingComponent,
         data: {
           title: 'Asset Scheme Paging'
         }
+        // component: AssetSchemePagingComponent,
+        // data: {
+        //   title: 'Asset Scheme Paging'
+        // }
       },
       {
         path: PathConstant.SELF_CUSTOM_ASSET_SCHM_PAGING,
@@ -140,10 +148,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_CONFIG_PAGING,
-        component: AssetConfigurationPagingComponent,
+        component: CustomAssetConfigurationPagingComponent,
         data: {
-          title: 'Asset Configuration Paging'
+          title: 'Asset Doc Master Paging'
         },
+        // component: AssetConfigurationPagingComponent,
+        // data: {
+        //   title: 'Asset Configuration Paging'
+        // },
       },
       {
         path: PathConstant.ASSET_CATEGORY_PAGING,
@@ -159,13 +171,13 @@ const routes: Routes = [
           title: 'Asset Document Paging'
         },
       },
-      {
-        path: PathConstant.ASSET_DOC_MASTER_PAGING,
-        component: AssetDocumentMasterPagingComponent,
-        data: {
-          title: 'Asset Document Paging'
-        },
-      },
+      // {
+      //   path: PathConstant.ASSET_DOC_MASTER_PAGING,
+      //   component: AssetDocumentMasterPagingComponent,
+      //   data: {
+      //     title: 'Asset Document Paging'
+      //   },
+      // },
       {
         path: PathConstant.ASSET_CATEGORY_DETAIL,
         component: AssetCategoryAddEditComponent,
@@ -224,9 +236,9 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_DOC_MASTER_PAGING,
-        component: AssetDocumentMasterPagingComponent,
+        component: CustomAssetDocumentMasterPagingComponent,
         data: {
-          title: 'Asset Document Master Paging'
+          title: 'Asset Doc Master Paging'
         },
       },
       {
@@ -238,10 +250,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_NEG_PAGING,
-        component: NegativeAssetComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Negative Asset'
+          title: 'Negative Asset',
+          page: 'AssetNegative'
         },
+        // component: NegativeAssetComponent,
+        // data: {
+        //   title: 'Negative Asset'
+        // },
       },
       {
         path: PathConstant.ASSET_NEG_DETAIL,
@@ -252,17 +269,27 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_NEG_UPLOAD,
-        component: NegativeAssetUploadComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Upload Negative Asset'
+          title: 'Upload Negative Asset',
+          page: 'UploadAssetNegative'
         },
+        // component: NegativeAssetUploadComponent,
+        // data: {
+        //   title: 'Upload Negative Asset'
+        // },
       },
       {
         path: PathConstant.ASSET_NEG_RVW_UPLOAD_PAGING,
-        component: ReviewUploadNegativeAssetPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Review Upload Negative Asset Paging'
+          title: 'Review Upload Negative Asset Paging',
+          page: 'ReviewUploadNegativeAsset'
         },
+        // component: ReviewUploadNegativeAssetPagingComponent,
+        // data: {
+        //   title: 'Review Upload Negative Asset Paging'
+        // },
       },
       {
         path: PathConstant.ASSET_NEG_RVW_UPLOAD_DETAIL,
@@ -273,10 +300,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_MASTER_PAGING,
-        component: AssetMasterComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Asset Master'
+          title: 'Asset Master',
+          page: 'AssetMaster'
         },
+        // component: AssetMasterComponent,
+        // data: {
+        //   title: 'Asset Master'
+        // },
       },
       {
         path: PathConstant.ASSET_MASTER_DETAIL,
@@ -294,17 +326,27 @@ const routes: Routes = [
       },
       {
         path: PathConstant.ASSET_MASTER_UPLOAD,
-        component: UploadAssetMasterComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Upload Asset Master'
+          title: 'Upload Asset Master',
+          page: 'UploadAssetMaster'
         },
+        // component: UploadAssetMasterComponent,
+        // data: {
+        //   title: 'Upload Asset Master'
+        // },
       },
       {
         path: PathConstant.ASSET_MASTER_RVW_UPLOAD_PAGING,
-        component: ReviewUploadAssetMasterPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Review Upload Asset Master Paging'
+          title: 'Review Upload Asset Master Paging',
+          page: 'ReviewUploadAssetMaster'
         },
+        // component: ReviewUploadAssetMasterPagingComponent,
+        // data: {
+        //   title: 'Review Upload Asset Master Paging'
+        // },
       },
       {
         path: PathConstant.ASSET_MASTER_RVW_UPLOAD_DETAIL,

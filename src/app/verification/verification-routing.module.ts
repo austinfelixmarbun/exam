@@ -21,10 +21,14 @@ const routes: Routes = [
     children: [
       {
         path: PathConstant.QA_PAGING,
-        component: VerificationQuestionAnswerPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Verification Question Answer Paging'
+          page: "VerificationQuestionAnswer"
         },
+        // component: VerificationQuestionAnswerPagingComponent,
+        // data: {
+        //   title: 'Verification Question Answer Paging'
+        // },
       },
       {
         path: PathConstant.QA_ADD,
@@ -42,10 +46,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.QA_GRP_PAGING,
-        component: VerificationQuestionGroupPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Verification Question Group Paging'
+          page: "VerificationQuestionGroup"
         },
+        // component: VerificationQuestionGroupPagingComponent,
+        // data: {
+        //   title: 'Verification Question Group Paging'
+        // },
       },
       {
         path: PathConstant.QA_GRP_ADD,
@@ -84,10 +92,14 @@ const routes: Routes = [
       },
       {
         path: PathConstant.QA_SCHM_PAGING,
-        component: VerificationQuestionSchemePagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Verification Question Scheme Paging'
+          page: "VerificationQuestionScheme"
         },
+        // component: VerificationQuestionSchemePagingComponent,
+        // data: {
+        //   title: 'Verification Question Scheme Paging'
+        // },
       },
       {
         path: PathConstant.QA_SCHM_ADD,

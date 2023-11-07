@@ -32,10 +32,15 @@ const routes: Routes = [
       },
       {
         path: PathConstant.SRVY_ORDER_PAGING,
-        component: SurveyOrderComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Survey Order Inquiry'
+          title: 'Survey Order Inquiry',
+          page: 'SurveyOrderInquiry'
         },
+        // component: SurveyOrderComponent,
+        // data: {
+        //   title: 'Survey Order Inquiry'
+        // },
       },
       {
         path: PathConstant.SRVY_TASK,
@@ -60,10 +65,15 @@ const routes: Routes = [
       },      
       {
         path: PathConstant.SURVEYOR_PAGING,
-        component: SurveyorPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Surveyor Paging'
+          title: 'Surveyor Paging',
+          page: 'SurveyorPaging'
         }
+        // component: SurveyorPagingComponent,
+        // data: {
+        //   title: 'Surveyor Paging'
+        // }
       },   
       {
         path: PathConstant.SURVEYOR_ADD,
@@ -88,17 +98,27 @@ const routes: Routes = [
       },
       {
         path: PathConstant.SRVY_TASK_PAGING,
-        component: SurveyTaskComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Survey Task Inquiry'
-        }
+          title: 'Survey Task Inquiry',
+          page: 'SurveyTaskInquiry'
+        },
+        // component: SurveyTaskComponent,
+        // data: {
+        //   title: 'Survey Task Inquiry'
+        // }
       },
       {
         path: PathConstant.SRVY_RESULT_REVIEW_PAGING,
-        component: SurveyResultReviewPagingComponent,
+        component: UcTemplateComponent,
         data:{
-          title: 'Survey Result Review'
+          title: 'Survey Result Review',
+          page: 'SurveyResultReview'
         }
+        // component: SurveyResultReviewPagingComponent,
+        // data:{
+        //   title: 'Survey Result Review'
+        // }
       },
       {
         path: PathConstant.SRVY_RESULT_REVIEW_DETAIL,

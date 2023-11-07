@@ -17,16 +17,16 @@ import { SelfCustomUploadJournalPagingComponent} from './self-custom-upload-jour
 import { SelfCustomUploadJournalDetailComponent } from './self-custom-upload-journal/self-custom-upload-journal-detail.component';
 
 const routes: Routes = [
-    { path: PathConstant.JOURNAL_MEDIA_PAGING, component: JournalMediaPagingComponent },
+    { path: PathConstant.JOURNAL_MEDIA_PAGING, component: UcTemplateComponent, data: { page: "JournalMediaSetting" } /*component: JournalMediaPagingComponent*/ },
     { path: PathConstant.JOURNAL_MEDIA_DETAIL, component: JournalMediaDetailComponent },
     { path: PathConstant.JOURNAL_MEDIA_HEADER_FACT, component: JournalHeaderFactComponent },
     { path: PathConstant.JOURNAL_MEDIA_GROUP, component: JournalGroupComponent },
     { path: PathConstant.JOURNAL_MEDIA_GROUP_FACT, component: JournalGroupFactComponent },
     { path: PathConstant.JOURNAL_MEDIA_GROUP_ITEM_VALUE, component: JournalItemValueComponent },
-    { path: PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING, component: FailedJournalListPagingComponent },
+    { path: PathConstant.FAILED_JOURNAL_RESULT_LIST_PAGING, component: UcTemplateComponent, data: { page: "FailedJournalResultList" } /*component: FailedJournalListPagingComponent*/ },
     { path: PathConstant.JOURNAL_RESULT, component: JournalResultComponent },
-    { path: PathConstant.JOURNAL_RECONCILE_PAGING, component: JournalReconcilePagingComponent },
-    { path: PathConstant.UPLOAD_JOURNAL_FILE_PAGING, component: UploadJournalPagingComponent },
+    { path: PathConstant.JOURNAL_RECONCILE_PAGING, component: UcTemplateComponent, data: { page: "JournalReconcile" } /*component: JournalReconcilePagingComponent*/ },
+    { path: PathConstant.UPLOAD_JOURNAL_FILE_PAGING, component: SelfCustomUploadJournalPagingComponent, data: { page: "JournalExcelFiles" } /*component: UploadJournalPagingComponent*/ },
     { path: PathConstant.UPLOAD_JOURNAL_FILE_DETAIL, component: UploadJournalDetailComponent },
 
     { path: PathConstant.SELF_CUSTOM_JOURNAL_MEDIA_PAGING, component: UcTemplateComponent, data: { page: "JournalMediaSetting" } },
