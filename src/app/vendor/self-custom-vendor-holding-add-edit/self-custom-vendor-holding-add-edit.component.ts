@@ -20,6 +20,7 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
   MrIdTypeCode: string;
   itemIdType: Array<KeyValueObj>;
   MrVendorTypeCode: string;
+  RefMasterTypeCode : string;
   VendorId: number = 0;
 
   VatForPersonal: boolean = false;
@@ -49,6 +50,8 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
       await this.http.post(this.UrlConstantNew.GetVendorAndVendorAddr, ReqGetVendorAndVendorAddr).toPromise().then(
         (response: any) => {
         this.MrIdTypeCode = response.VendorObj.MrIdTypeCode;
+        this.MrVendorTypeCode = response.VendorObj.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
+  
       });
     }
     else
@@ -62,6 +65,7 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
           this.VatForPersonal = true;
         }
       });
+    this.getDdlIdType();
   }
 
   onFormCreate(fg: FormGroup)
@@ -90,40 +94,9 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
     {
       await this.waitFor(_ => this.Form.controls.MrVendorTypeCode != undefined);
       this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
-  
-      let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-        MappingCode: this.MrVendorTypeCode
-      }
-      this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
-        (response) => {
-          this.itemIdType = new Array<KeyValueObj>();
-          this.itemIdType = response[CommonConstant.ReturnObj];
-  
-          this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
-  
-          let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
-          
-          this.Form.patchValue({
-            MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
-          })
 
-          this.setValidatorIdNo();
-      });
-
-      if (!this.VatForPersonal){
-        if(this.MrVendorTypeCode == "PERSONAL")
-        {
-          this.Form.get("IsVat").disable();
-          this.Form.patchValue({
-            IsVat : false
-          })
-        }
-        else
-        {
-          this.Form.get("IsVat").enable();
-        }
-      }
+      this.getDdlIdType();
+      
     }
 
     if (ev == "MrIdTypeCode")
@@ -149,6 +122,44 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
     }
   
     this.Form.controls.IdNo.updateValueAndValidity();
+  }
+
+  getDdlIdType(){
+    if (this.MrVendorTypeCode == CommonConstant.CustTypePersonal){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+    }
+    else if (this.MrVendorTypeCode == CommonConstant.CustTypeCompany){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany
+    }
+    this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
+      (response) => {
+        this.itemIdType = new Array<KeyValueObj>();
+        this.itemIdType = response[CommonConstant.ReturnObj];
+
+        this.ddlSvc.SetDictDDL('MrIdTypeCode', this.itemIdType)
+
+        let res = this.itemIdType.filter((x) => {return x.Key == this.MrIdTypeCode})
+        
+        this.Form.patchValue({
+          MrIdTypeCode: this.VendorId == 0 || res.length == 0? this.itemIdType[0].Key : this.MrIdTypeCode
+        })
+
+        this.setValidatorIdNo();
+      });
+
+    if (!this.VatForPersonal){
+      if(this.MrVendorTypeCode == "PERSONAL")
+      {
+        this.Form.get("IsVat").disable();
+        this.Form.patchValue({
+          IsVat : false
+        })
+      }
+      else
+      {
+        this.Form.get("IsVat").enable();
+      }
+    }
   }
 
 }

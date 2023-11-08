@@ -23,6 +23,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   VatForPersonal: boolean = false;
   isReady = false;
   MrVendorTypeCode: string = "COMPANY";
+  RefMasterTypeCode: string;
   Form: FormGroup = this.fb.group({});
   itemIdType: Array<KeyValueObj>;
   VendorId: number = 0;
@@ -39,7 +40,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       }
     });
 
-    this.pageName = "SupplierRegistrationV2";
+    this.pageName = "SupplierregistrationV2Dummy";
 
     this.selectPage();
   }
@@ -71,7 +72,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
     this.isReady = false;
     if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-        this.pageName = 'SupplierRegistrationV2'
+        this.pageName = 'SupplierregistrationV2Dummy'
       }
       else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH ||
         this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY || this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY)
@@ -113,12 +114,13 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
     {
       await this.waitFor(_ => this.Form.controls.MrVendorTypeCode != undefined);
       this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
-  
-      let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-        RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-        MappingCode: this.MrVendorTypeCode
+
+      if (this.MrVendorTypeCode == CommonConstant.CustTypePersonal){
+        this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+      }else if(this.MrVendorTypeCode == CommonConstant.CustTypeCompany){
+        this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
       }
-      this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
         (response) => {
           this.itemIdType = new Array<KeyValueObj>();
           this.itemIdType = response[CommonConstant.ReturnObj];
@@ -132,7 +134,8 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
           })
 
           this.setValidatorIdNo();
-      });
+        }
+      );
 
       if (!this.VatForPersonal){
         if(this.MrVendorTypeCode == "PERSONAL")

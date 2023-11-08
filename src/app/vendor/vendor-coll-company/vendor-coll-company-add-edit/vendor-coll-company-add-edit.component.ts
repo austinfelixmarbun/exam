@@ -51,6 +51,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
 
   isHidden: boolean = true;
   RsvField: string;
+  RefMasterTypeCode: string;
   VendorAttrList: any;
   ListInputLookUpObj = new Array<any>();
   vendorAttrRequest = new Array<VendorAttrContentObj>();
@@ -473,11 +474,12 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
             });
           }
 
-          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            MappingCode: this.RsvField,
+          if (this.RsvField == CommonConstant.CustTypePersonal){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+          }else if(this.RsvField == CommonConstant.CustTypeCompany){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
           }
-          await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -487,9 +489,8 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
                   });
                 }
               }
-
             }
-          );
+          );          
         }
         this.VendorForm.controls.MrVendorTypeCode.disable();
         await this.checkType();
@@ -561,11 +562,12 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
 
     }
 
-    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      MappingCode: this.RsvField,
+    if (this.RsvField == CommonConstant.CustTypePersonal){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+    }else if(this.RsvField == CommonConstant.CustTypeCompany){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
     }
-    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -580,7 +582,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
           }
         }
       }
-    );
+    );  
     this.setValidatorPattern();
   }
 
