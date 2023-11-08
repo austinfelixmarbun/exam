@@ -60,6 +60,7 @@ export class VendorBranchAddEditComponent implements OnInit {
 
   isHidden: boolean = true;
   RsvField: string;
+  RefMasterTypeCode: string;
   Registration: string;
   Code: string;
   Name: string;
@@ -568,11 +569,12 @@ export class VendorBranchAddEditComponent implements OnInit {
             });
           }
 
-          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            MappingCode: this.RsvField,
+          if (this.RsvField == CommonConstant.CustTypePersonal){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+          }else if(this.RsvField == CommonConstant.CustTypeCompany){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
           }
-          await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -582,7 +584,6 @@ export class VendorBranchAddEditComponent implements OnInit {
                   });
                 }
               }
-
             }
           );
         }
@@ -683,11 +684,12 @@ export class VendorBranchAddEditComponent implements OnInit {
 
     }
 
-    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      MappingCode: this.RsvField,
+    if (this.RsvField == CommonConstant.CustTypePersonal){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+    }else if(this.RsvField == CommonConstant.CustTypeCompany){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
     }
-    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {

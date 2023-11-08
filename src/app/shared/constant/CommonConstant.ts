@@ -188,6 +188,7 @@ export class CommonConstant {
     public static RefMasterTypeCodeSupplierUpCalcMethod = "SUPPLIER_UP_CALC_METHOD";
     public static RefMasterTypeCodeVendorType = "VENDOR_TYPE";
     public static RefMasterTypeCodeIdTypeVendor = "ID_TYPE_VENDOR";
+    public static RefMasterTypeCodeIdTypeVendorCompany = "ID_TYPE_VENDOR_COMPANY";
     public static RefMasterTypeCodeTaskAssignmentType = "TASK_ASSIGNMENT_TYPE";
     public static RefMasterTypeCodeScoreTrxType = "SCORE_TRX_TYPE";
     public static RefMasterTypeCodeAttrInputType = "ATTR_INPUT_TYPE";

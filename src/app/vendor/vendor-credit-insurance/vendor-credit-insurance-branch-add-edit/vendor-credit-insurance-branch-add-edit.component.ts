@@ -53,6 +53,7 @@ export class VendorCreditInsuranceBranchAddEditComponent implements OnInit {
 
   isHidden: boolean = true;
   RsvField: string;
+  RefMasterTypeCode: string;
   Registration: string;
   Code: string;
   Name: string;
@@ -240,11 +241,12 @@ export class VendorCreditInsuranceBranchAddEditComponent implements OnInit {
             });
           }
 
-          let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-            RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-            MappingCode: this.RsvField,
+          if (this.RsvField == CommonConstant.CustTypePersonal){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+          }else if(this.RsvField == CommonConstant.CustTypeCompany){
+            this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
           }
-          await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+          this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
             (response) => {
               this.itemIdType = response[CommonConstant.ReturnObj];
               if (this.mode != "edit") {
@@ -254,9 +256,8 @@ export class VendorCreditInsuranceBranchAddEditComponent implements OnInit {
                   });
                 }
               }
-
             }
-          );
+          ); 
         }
         await this.checkType();
       }
@@ -330,11 +331,12 @@ export class VendorCreditInsuranceBranchAddEditComponent implements OnInit {
 
     }
 
-    let refMasterIdObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
-      RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdTypeVendor,
-      MappingCode: this.RsvField,
+    if (this.RsvField == CommonConstant.CustTypePersonal){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
+    }else if(this.RsvField == CommonConstant.CustTypeCompany){
+      this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendorCompany            
     }
-    await this.http.post(this.UrlConstantNew.GetListActiveRefMasterWithMappingCodeAll, refMasterIdObj).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListKeyValueActiveByCodeOrderBySeqNo, { RefMasterTypeCode: this.RefMasterTypeCode }).subscribe(
       (response) => {
         this.itemIdType = response[CommonConstant.ReturnObj];
         if (this.itemIdType.length > 0) {
@@ -349,7 +351,7 @@ export class VendorCreditInsuranceBranchAddEditComponent implements OnInit {
           }
         }
       }
-    );
+    ); 
     this.setValidatorPattern();
     // this.setVAT();
   }
