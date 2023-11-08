@@ -58,7 +58,7 @@ export class SelfCustomVendorATPMAddEditComponent implements OnInit {
           this.VatForPersonal = true;
         }
       });
-    this.getDdlType();
+    this.getDdlIdType();
   }
 
   onFormCreate(ev) {
@@ -85,7 +85,7 @@ export class SelfCustomVendorATPMAddEditComponent implements OnInit {
       await this.waitFor(_ => this.Form.controls.MrVendorTypeCode != undefined);
       this.MrVendorTypeCode = this.Form.controls.MrVendorTypeCode.value == CommonConstant.VENDOR_TYPE_PERSONAL? "PERSONAL" : "COMPANY"
 
-      this.getDdlType();
+      this.getDdlIdType();
       
     }
 
@@ -114,7 +114,7 @@ export class SelfCustomVendorATPMAddEditComponent implements OnInit {
     this.Form.controls.IdNo.updateValueAndValidity();
   }
 
-  getDdlType(){
+  getDdlIdType(){
     if (this.MrVendorTypeCode == CommonConstant.CustTypePersonal){
       this.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeIdTypeVendor
     }else if(this.MrVendorTypeCode == CommonConstant.CustTypeCompany){
