@@ -10,11 +10,11 @@ import * as env from "assets/config/enviConfig.json";
 import * as Module from '././form-template';
 
 const listEnvironments = [
-  { environment: 'FOU', url: environment.FoundationR3Url},
-  { environment: 'FOUR3WEB', url: environment.FoundationR3Web },
-  { environment: 'LOSR3WEB', url: environment.losR3Web },
-  { environment: 'LOS', url: environment.LosURL },
-  { environment: 'TAX', url: environment.TaxUrl},
+  { environment: 'FOU', url: env.FoundationR3Url},
+  { environment: 'FOUR3WEB', url: env.FoundationR3Web },
+  { environment: 'LOSR3WEB', url: env.losR3Web },
+  { environment: 'LOS', url: env.LosURL },
+  { environment: 'TAX', url: env.TaxUrl},
   ];
 
 @Injectable({
@@ -33,7 +33,7 @@ export class AdinsTemplateService extends UcTemplateService{
   }
 
   private configure() {
-    this.environment  = environment;
+    this.environment  = env;
     this.envConfig    = env;
     this.urlConstant  = this.UrlConstant;
     this.navConstant  = NavigationConstant;
