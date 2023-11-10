@@ -210,7 +210,7 @@
                   <span class="optional-text">(optional)</span>
                 </label>
                 <div class="col-md-12">
-                  <input type="number" class="form-control adInsInput input-field-2" style="width: 100%;"
+                  <input type="number" min="0" oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" class="form-control adInsInput input-field-2" style="width: 100%;"
                     formControlName="VendorAttrValue"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls['VendorAttrList']['controls'][attr['AttrCode']].controls.VendorAttrValue.invalid }">
                   <div class="message-box">
@@ -275,7 +275,7 @@
                   <input type="" currencyMask class="form-control adInsInput input-field-2" style="width: 100%;"
                     formControlName="VendorAttrValue"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls['VendorAttrList']['controls'][attr['AttrCode']].controls.VendorAttrValue.invalid }"
-                    [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: true, allowZero:true, precision: 6, nullable: false }" >
+                    [options]="{ thousands: ',', decimal: '.', align: 'right', allowNegative: false, allowZero:true, precision: 6, nullable: false }" >
                   <div class="message-box">
                     <lib-uc-show-errors
                     [control]="parentForm.controls['VendorAttrList']['controls'][attr['AttrCode']].controls.VendorAttrValue"
