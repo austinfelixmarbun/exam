@@ -40,7 +40,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       }
     });
 
-    this.pageName = "SupplierregistrationV2Dummy";
+    this.pageName = "SupplierregistrationV2";
 
     this.selectPage();
   }
@@ -74,10 +74,11 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
     this.isReady = false;
     if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-        this.pageName = 'SupplierregistrationV2Dummy'
+        this.pageName = 'SupplierregistrationV2'
       }
       else if (this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.LIFE_INSCO_BRANCH || this.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH ||
         this.MrVendorCategoryCode == CommonConstant.AUCTION_COMPANY || this.MrVendorCategoryCode == CommonConstant.COLL_COMPANY || this.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY || this.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY
+        || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL
         || this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_BRANCH)
       {
         this.pageName = "VendorbranchregistrationV2"

@@ -377,8 +377,20 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
         }
         vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
         vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
-        vendorBranchObj.VendorObj.RowVersion = dicts.formRaw.RowVersionVendor;
-        vendorBranchObj.VendorAddrObj.RowVersion = dicts.formRaw.RowVersionAddr;
+        
+        if(dicts.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_BRANCH 
+          || dicts.MrVendorCategoryCode == CommonConstant.SURVEYOR_BRANCH
+          || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
+          || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY
+          || dicts.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY
+          || dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER)
+        {
+          vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
+          vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
+        }else{
+          vendorBranchObj.VendorObj.RowVersion = dicts.formRaw.RowVersionVendor;
+          vendorBranchObj.VendorAddrObj.RowVersion = dicts.formRaw.RowVersionAddr;
+        }
 
         http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
