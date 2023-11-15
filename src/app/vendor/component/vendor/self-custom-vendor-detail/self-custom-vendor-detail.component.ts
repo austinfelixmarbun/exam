@@ -16,7 +16,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router) {
     this.subscribeParam();
 
-    this.pageName = 'SupplierDetailDummy'
+    this.pageName = 'SupplierDetail'
     this.selectPage();
   }
 
@@ -59,7 +59,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-        this.pageName = "SupplierDetailDummy"
+        this.pageName = "SupplierDetail"
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
                this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
@@ -81,6 +81,9 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
             break;
           case CommonConstant.SURVEYOR_HO:
             this.pageName = 'SupplierHoDetail'
+            break;
+          case CommonConstant.CRD_INSCO_HO:
+              this.pageName = 'SupplierHoDetail'
             break;
         }
       }
