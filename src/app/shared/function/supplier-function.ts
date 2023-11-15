@@ -383,7 +383,8 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
           || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL
           || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY
           || dicts.MrVendorCategoryCode == CommonConstant.NOTARY_COMPANY
-          || dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER)
+          || dicts.MrVendorCategoryCode == CommonConstant.SUPPLIER
+          || dicts.MrVendorCategoryCode == CommonConstant.CRD_INSCO_BRANCH)
         {
           vendorBranchObj.VendorObj.RowVersion = dicts.RowVersionVendor;
           vendorBranchObj.VendorAddrObj.RowVersion = dicts.RowVersionAddr;
