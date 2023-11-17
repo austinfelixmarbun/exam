@@ -373,6 +373,20 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
         vendorBranchObj.VendorAttrContentObjs = vendorAttrRequest;
       }
     }
+
+    let MrVendorCategoryCodeParam = dicts.formRaw.MrVendorCategoryCode;
+
+    if (dicts.formRaw.MrVendorCategoryCode == CommonConstant.NOTARY)
+    {
+      if (dicts.formRaw.MrVendorTypeCode == CommonConstant.VENDOR_TYPE_PERSONAL)
+      {
+        MrVendorCategoryCodeParam = CommonConstant.NOTARY_PERSONAL;
+      }
+      else
+      {
+        MrVendorCategoryCodeParam = CommonConstant.NOTARY_COMPANY;
+      }
+    }
   
     if (dicts.mode == "edit") {
         if (dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
@@ -399,14 +413,14 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
         http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode, "mode": "edit" });
+            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": MrVendorCategoryCodeParam, "mode": "edit" });
           });
     }
     else {
         http.post<GenericObj>(url, vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
             toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": dicts.formRaw.MrVendorCategoryCode });
+            AdInsHelper.RedirectUrl(router, [next], { "VendorId": response.Id, "MrVendorCategoryCode": MrVendorCategoryCodeParam });
         });
     }
 }
