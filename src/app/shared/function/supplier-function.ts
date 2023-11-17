@@ -1,5 +1,6 @@
 import { AdInsHelper } from "../AdInsHelper";
 import {environment} from '../../../environments/environment';
+import * as env from "../../../assets/config/enviConfig.json";
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { Router } from "@angular/router";
@@ -14,6 +15,8 @@ import { AdInsConstant } from "../AdInstConstant";
 import { NavigationConstant } from "../NavigationConstant";
 import { formatDate } from "@angular/common";
 import { VendorBranchObj } from "../model/vendor-branch-obj.model";
+
+const envi = env;
 
 function getVendorId(listTemp: any)
 {
@@ -41,7 +44,7 @@ export function addRangeVendorMbr(listTemp: any, VendorId: number, api: any, nex
   let listId = getVendorId(listTemp);
   let obj = {};
   let param = {};
-  let url = environment.FoundationR3Url + api;
+  let url = envi.FoundationR3Url + api;
 
   if (from == "SUPPLIER_SCHM")
   {
@@ -92,7 +95,7 @@ export function addRangeVendorGrpMbr(listTemp: any, VendorId: number, api: any, 
     let listId = getVendorId(listTemp);
     let obj = {};
     let param = {};
-    let url = environment.FoundationR3Url + api;
+    let url = envi.FoundationR3Url + api;
   
     obj = {
         "VendorId": listId,
@@ -115,7 +118,7 @@ export function addRangeOfficeMbr(listTemp: any, VendorId: number, api: any, nex
     let listId = getRefOfficeId(listTemp);
     let obj = {};
     let param = {};
-    let url = environment.FoundationR3Url + api;
+    let url = envi.FoundationR3Url + api;
   
     obj = {
         "RefOfficeId": listId,
@@ -147,7 +150,7 @@ export function cancelHORegistration(dicts: Record<string, any>, router: Router)
 
 export function addEditvendorHO(dicts: Record<string, any>, api: string, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = envi.FoundationR3Url + api;
 
     let vendorHoObj = new VendorHoObj();
 
@@ -253,7 +256,7 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
 
 export function addEditvendorBranch(dicts: Record<string, any>, api: string, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = envi.FoundationR3Url + api;
 
     let vendorBranchObj: any;
     vendorBranchObj = new VendorBranchObj();
