@@ -1,1 +1,206 @@
-{"title":"RefTC","hideTitle":false,"id":"Reftc","addButton":true,"addLink":"/CommonSetting/SelfCustom/RefTc/Detail","pathOption":"selfCustom","backButton":false,"component":[{"paging":{"environment":"FoundationR3Url","apiVersion":"v1","pagingInput":{"title":"Term & Conditions","sectionTitle":"","querystring":{"name":"searchRefTc"},"exportExcel":false,"component":[{"id":"atcCodeSearchId","type":"textbox","label":"TC Code","name":"A.TC_CODE","value":"","placeholder":"","datatype":"text"},{"id":"atcNameSearchId","type":"textbox","label":"TC Name","name":"A.TC_NAME","value":"","placeholder":"","datatype":"text"},{"id":"atcTypeSearchId","type":"dropdown","label":"TC Type","name":"A.TC_TYPE","value":"","placeholder":"","datatype":"text","isFromURL":false,"ddlType":"all","isEvent":false,"items":[{"key":"ALL","value":"Type All"},{"key":"P","value":"Personal"},{"key":"C","value":"Company"}]},{"id":"aisActiveSearchId","type":"dropdown","label":"Active Status","name":"A.IS_ACTIVE","value":"","placeholder":"","datatype":"text","isFromURL":false,"ddlType":"all","isEvent":false,"items":[{"key":"0","value":"No"},{"key":"1","value":"Yes"}]}],"headerList":[{"type":"sort","label":"TC Code","position":"left","name":"A.TC_CODE"},{"type":"sort","label":"TC Name","position":"left","name":"A.TC_NAME"},{"type":"sort","label":"TC Type","position":"left","name":"A.TC_TYPE"},{"type":"sort","label":"Active Status","position":"center","name":"A.IS_ACTIVE"},{"type":"label","label":"action","position":"center"}],"bodyList":[{"type":"text","position":"left","property":"TcCode"},{"type":"text","position":"left","property":"TcName"},{"type":"text","position":"left","property":"TcType"},{"type":"boolean","position":"center","property":"IsActive"},{"type":"action","position":"center","action":[{"type":"edit","param":[{"type":"refTcId","property":"refTcId"},{"type":"mode","property":"edit"}],"path":"/CommonSetting/SelfCustom/RefTc/Detail","icon":""}]}]},"criteria":[],"whereValue":[],"fromValue":[],"useIntegration":false,"isHideSearch":false,"isSearched":false,"delay":1},"id":"fd99130a-c986-4ab9-88d2-7d6fc2982630"}],"serviceUrl":{"add":{"environment":"FoundationR3Url","apiPath":"/v1/RefBank/AddRefBankAsync","apiUrl":""},"edit":{"environment":"FoundationR3Url","apiPath":"/v1/RefBank/EditRefBank","apiUrl":""},"createRfa":{"environment":"","apiPath":"","apiUrl":""}},"isRedirect":false,"redirectOption":"","redirectLink":"","hideSubmitButton":false,"hideCancelButton":false,"listBtn":[],"onInit":[],"isOverrideSubmit":false,"onSubmit":[],"isOverrideCancel":false,"onCancel":{},"customToastrMsg":""}
+{
+  "title": "Term & Conditions",
+  "hideTitle": false,
+  "id": "Reftc",
+  "addButton": true,
+  "addLink": "/CommonSetting/SelfCustom/RefTc/Detail",
+  "pathOption": "selfCustom",
+  "backButton": false,
+  "component": [
+    {
+      "paging": {
+        "environment": "FoundationR3Url",
+        "apiVersion": "v1",
+        "pagingInput": {
+          "title": "Term & Conditions",
+          "sectionTitle": "",
+          "querystring": {
+            "name": "searchRefTc"
+          },
+          "exportExcel": false,
+          "component": [
+            {
+              "id": "atcCodeSearchId",
+              "type": "textbox",
+              "label": "TC Code",
+              "name": "A.TC_CODE",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text"
+            },
+            {
+              "id": "atcNameSearchId",
+              "type": "textbox",
+              "label": "TC Name",
+              "name": "A.TC_NAME",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text"
+            },
+            {
+              "id": "atcTypeSearchId",
+              "type": "dropdown",
+              "label": "TC Type",
+              "name": "A.TC_TYPE",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text",
+              "isFromURL": false,
+              "ddlType": "all",
+              "isEvent": false,
+              "items": [
+                {
+                  "key": "ALL",
+                  "value": "Type All"
+                },
+                {
+                  "key": "P",
+                  "value": "Personal"
+                },
+                {
+                  "key": "C",
+                  "value": "Company"
+                }
+              ]
+            },
+            {
+              "id": "aisActiveSearchId",
+              "type": "dropdown",
+              "label": "Active Status",
+              "name": "A.IS_ACTIVE",
+              "value": "",
+              "placeholder": "",
+              "datatype": "text",
+              "isFromURL": false,
+              "ddlType": "all",
+              "isEvent": false,
+              "items": [
+                {
+                  "key": "0",
+                  "value": "No"
+                },
+                {
+                  "key": "1",
+                  "value": "Yes"
+                }
+              ]
+            }
+          ],
+          "headerList": [
+            {
+              "type": "sort",
+              "label": "TC Code",
+              "position": "left",
+              "name": "A.TC_CODE"
+            },
+            {
+              "type": "sort",
+              "label": "TC Name",
+              "position": "left",
+              "name": "A.TC_NAME"
+            },
+            {
+              "type": "sort",
+              "label": "TC Type",
+              "position": "left",
+              "name": "A.TC_TYPE"
+            },
+            {
+              "type": "sort",
+              "label": "Active Status",
+              "position": "center",
+              "name": "A.IS_ACTIVE"
+            },
+            {
+              "type": "label",
+              "label": "action",
+              "position": "center"
+            }
+          ],
+          "bodyList": [
+            {
+              "type": "text",
+              "position": "left",
+              "property": "TcCode"
+            },
+            {
+              "type": "text",
+              "position": "left",
+              "property": "TcName"
+            },
+            {
+              "type": "text",
+              "position": "left",
+              "property": "TcType"
+            },
+            {
+              "type": "boolean",
+              "position": "center",
+              "property": "IsActive"
+            },
+            {
+              "type": "action",
+              "position": "center",
+              "action": [
+                {
+                  "type": "edit",
+                  "param": [
+                    {
+                      "type": "refTcId",
+                      "property": "refTcId"
+                    },
+                    {
+                      "type": "mode",
+                      "property": "edit"
+                    }
+                  ],
+                  "path": "/CommonSetting/SelfCustom/RefTc/Detail",
+                  "icon": ""
+                }
+              ]
+            }
+          ]
+        },
+        "criteria": [],
+        "whereValue": [],
+        "fromValue": [],
+        "useIntegration": false,
+        "isHideSearch": false,
+        "isSearched": false,
+        "delay": 1
+      },
+      "id": "fd99130a-c986-4ab9-88d2-7d6fc2982630"
+    }
+  ],
+  "serviceUrl": {
+    "add": {
+      "environment": "FoundationR3Url",
+      "apiPath": "/v1/RefBank/AddRefBankAsync",
+      "apiUrl": ""
+    },
+    "edit": {
+      "environment": "FoundationR3Url",
+      "apiPath": "/v1/RefBank/EditRefBank",
+      "apiUrl": ""
+    },
+    "createRfa": {
+      "environment": "",
+      "apiPath": "",
+      "apiUrl": ""
+    }
+  },
+  "isRedirect": false,
+  "redirectOption": "",
+  "redirectLink": "",
+  "hideSubmitButton": false,
+  "hideCancelButton": false,
+  "listBtn": [],
+  "onInit": [],
+  "isOverrideSubmit": false,
+  "onSubmit": [],
+  "isOverrideCancel": false,
+  "onCancel": {},
+  "customToastrMsg": "",
+  "persistData": false,
+  "persistPropName": ""
+}
