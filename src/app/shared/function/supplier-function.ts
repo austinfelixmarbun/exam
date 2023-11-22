@@ -390,7 +390,7 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
   
     if (dicts.mode == "edit") {
         if (dicts.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || dicts.MrVendorCategoryCode == CommonConstant.AGENCY_COMPANY) {
-          vendorBranchObj.VendorObj.MrVendorTypeCode = dicts.MrVendorCategoryCode;
+          vendorBranchObj.VendorObj.MrVendorTypeCode = dicts.formRaw.MrVendorTypeCode;
         }
         vendorBranchObj.VendorObj.VendorId = dicts.VendorId;
         vendorBranchObj.VendorAddrObj.VendorAddrId = dicts.VendorAddrObj.VendorAddrId;
