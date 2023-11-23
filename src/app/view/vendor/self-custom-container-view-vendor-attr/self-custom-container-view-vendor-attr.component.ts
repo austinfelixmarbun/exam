@@ -19,6 +19,8 @@ export class SelfCustomContainerViewVendorAttrComponent implements OnInit {
   constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit(): void {
+    let mrVendorCategoryCodes = ['SUPPLIER', 'ASSET_INSCO_BRANCH'];
+    if (!mrVendorCategoryCodes.includes(this.MrVendorCategoryCode)) return;
     this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorId, { Id: this.VendorId }).subscribe(
       (response) => {
         this.ListVendorAttrContent = response[CommonConstant.ReturnObj];
@@ -28,6 +30,7 @@ export class SelfCustomContainerViewVendorAttrComponent implements OnInit {
           this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe( 
             (res) => {
               this.VendorAttrList = res[CommonConstant.ReturnObj];
+              if (this.VendorAttrList == null) return;
               this.VendorAttrList.forEach((x, index) => {
                 if(!this.ListVendorAttrContent.find(({AttrCode}) => AttrCode == x.AttrCode)){
                   this.ListVendorAttrContent.splice(index,0,{'AttrContent':''});
