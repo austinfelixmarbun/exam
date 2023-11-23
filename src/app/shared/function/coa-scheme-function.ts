@@ -50,11 +50,11 @@ export function submitCoa(formData: any, coaSchmId: any, listPayment: any[], lis
 
     if(listSelectedCurr.length === 0 )
     {
-      this.toastr.errorMessage("Can not Submit Coa Scheme, Please select Currency First!");
+      toastr.errorMessage("Can not Submit Coa Scheme, Please select Currency First!");
     }
     else if(CountCoaNull == listPayment.length * listSelectedCurr.length)
     {
-      this.toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
+      toastr.errorMessage("Can not Submit Coa Scheme, Please input at least one Coa!");
     }
     else
     {
