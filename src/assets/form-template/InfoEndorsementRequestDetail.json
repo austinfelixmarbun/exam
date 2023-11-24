@@ -274,7 +274,7 @@
         "key": "save",
         "position": "bottom",
         "icon": "ft-edit",
-        "cssClass": "btn btn-raised btn-primary"
+        "cssClass": "btn btn-raised btn-primary-2"
       },
       {
         "displayName": "Submit",
@@ -282,7 +282,7 @@
         "key": "submit",
         "position": "bottom",
         "icon": "far fa-check-square",
-        "cssClass": "btn btn-raised btn-primary"
+        "cssClass": "btn btn-raised btn-primary-2"
       }
     ]
   }
