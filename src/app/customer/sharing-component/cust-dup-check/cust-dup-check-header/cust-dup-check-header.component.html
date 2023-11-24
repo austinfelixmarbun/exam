@@ -5,7 +5,7 @@
         <div class="card-header header-title">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title" id="horz-layout-colored-controls" translate>Customer Duplicate Checking Match
+              <h4 class="card-title" id="horz-layout-colored-controls" translate>Debtor Duplicate Checking Match
                 {{CustType}} </h4>
             </div>
             <div class="col-md-4" style="text-align-last: right">
@@ -13,7 +13,7 @@
                 <i class="fa fa-arrow-left"></i>&nbsp;<span translate>Back</span>
               </button>
               <button [hidden]="IsLock" type="button" class="btn btn-raised btn-primary-2" (click)="SaveForm()">
-                <i class="far fa-check-square"></i>&nbsp;<span translate>New Customer</span>
+                <i class="far fa-check-square"></i>&nbsp;<span translate>New Debtor</span>
               </button>
             </div>
           </div>
@@ -36,10 +36,10 @@
                       <th><span class="thead-header" name='No' translate>NO.</span>
                       </th>
                       <th><span style="float: left; text-align: left; width: 120px;" class="thead-header" name='CustNo'
-                          translate>CUSTOMER NO.</span>
+                          translate>DEBTOR NO.</span>
                       </th>
                       <th><span style="float: left; text-align: left; width: 200px;" class="thead-header"
-                          name='CustName' translate>CUSTOMER NAME</span>
+                          name='CustName' translate>DEBTOR NAME</span>
                       </th>
                       <th *ngIf="CustType == CustTypePersonal"><span
                           style="float: left; text-align: left; width: 100px;" class="thead-header" name='MrIdType'
@@ -104,7 +104,7 @@
                 </table>
               </div>
 
-              <lib-ucSubsection [id]="'NegMatchSimilarDataId'" [title]="'Negative Customer Match / Similar Data'"
+              <lib-ucSubsection [id]="'NegMatchSimilarDataId'" [title]="'Negative Debtor Match / Similar Data'"
                 [panel]="'NegMatchSimilarData'">
               </lib-ucSubsection>
               <div class="table-responsive" id="NegMatchSimilarData">
@@ -114,10 +114,10 @@
                       <th><span class="thead-header" name='No' translate>NO.</span>
                       </th>
                       <th><span style="float: left; text-align: left; width: 120px;" class="thead-header" name='CustNo'
-                          translate>CUSTOMER NO.</span>
+                          translate>DEBTOR NO.</span>
                       </th>
                       <th><span style="float: left; text-align: left; width: 200px;" class="thead-header"
-                          name='CustName' translate>CUSTOMER NAME</span>
+                          name='CustName' translate>DEBTOR NAME</span>
                       </th>
                       <th *ngIf="CustType == CustTypePersonal"><span
                           style="float: left; text-align: left; width: 100px;" class="thead-header" name='MrIdType'
