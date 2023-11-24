@@ -16,12 +16,10 @@
               </div>
               <div class="form-group row" [formGroupName]="j"
                 *ngFor="let QRList of QuestionGrpList.controls.VerfQuestionAnswerList.controls; let j = index">
-                <label class="col-md-3 label-field-2" *ngIf="isStatScs"
+                <label class="col-md-3 label-field-2 adins-required-label" *ngIf="isStatScs"
                   translate>{{QRList.value.QuestionGrp.VerfQuestionText}} </label>
                 <label class="col-md-3 adInsLabel label-field-2" *ngIf="!isStatScs"
-                  translate>{{QRList.value.QuestionGrp.VerfQuestionText}}
-                  <span class="optional-text">(Optional)</span>
-                </label>
+                  translate>{{QRList.value.QuestionGrp.VerfQuestionText}}</label>
                 <div class="col-md-4" formGroupName="ResultGrp">
                   <span *ngIf="QRList.value.QuestionGrp.VerfAnswerTypeCode == 'DDL' || QRList.value.QuestionGrp.VerfAnswerTypeCode == 'RBL'">
                     <select class="form-control input-field-2" formControlName="Answer"

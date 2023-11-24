@@ -4,9 +4,7 @@
     </lib-ucSubsection>
     <div id="document" class="px-3">
       <div *ngFor="let item of CustDocFileFormObjs; let i=index" class="form-group row">
-        <label class="col-md-2 label-field-2" translate>{{item.DocTypeName}}
-          <span *ngIf="CustDocFileFormObjs[i].IsRequired == false" class="optional-text">(Optional)</span>
-        </label>
+        <label [ngClass]="{'adins-required-label': CustDocFileFormObjs[i]?.IsRequired}" class="col-md-2 label-field-2" translate>{{item.DocTypeName}}</label>
         <div class="col-md-4">
           <label [for]="'doc' + i" class="btn btn-primary-2 btn-sm afu-select-btn label-field-2">Choose File</label>
           <input type="file" [id]="'doc' + i" style="display: none" (change)="HandleFileInput($event.target.files, i)"
@@ -27,9 +25,7 @@
     </lib-ucSubsection>
     <div id="thirdPartyChecking" class="px-3">
       <div *ngIf="IsUsePefindo" class="form-group row">
-        <label class="col-md-2 label-field-2" translate>Pefindo
-          <span class="optional-text">(Optional)</span>
-        </label>
+        <label class="col-md-2 label-field-2" translate>Pefindo</label>
         <div class="col-md-4">
           <button type="button" (click)="ReqPefindo()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
@@ -40,9 +36,7 @@
         </div>
       </div>
       <div *ngIf="IsUseTs" class="form-group row">
-        <label class="col-md-2 label-field-2" translate>Trusting Social
-          <span class="optional-text">(Optional)</span>
-        </label>
+        <label class="col-md-2 label-field-2" translate>Trusting Social</label>
         <div class="col-md-4">
           <button type="button" (click)="ReqTrustingSocial()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
@@ -53,9 +47,7 @@
         </div>
       </div>
       <div *ngIf="IsUseAsliRI" class="form-group row">
-        <label class="col-md-2 label-field-2" translate>Asli RI
-          <span class="optional-text">(Optional)</span>
-        </label>
+        <label class="col-md-2 label-field-2" translate>Asli RI</label>
         <div class="col-md-4">
           <button type="button" (click)="ReqASLIRI()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
@@ -67,9 +59,7 @@
       </div>
   
       <div *ngIf="IsUseCbasSlik" class="form-group row">
-        <label class="col-md-2 label-field-2" translate>CBAS SLIK
-          <span class="optional-text">(Optional)</span>
-        </label>
+        <label class="col-md-2 label-field-2" translate>CBAS SLIK</label>
         <div class="col-md-4">
           <button type="button" (click)="ReqCbasSlik()" class="btn btn-raised btn-primary-2 mr-1" translate>
             Request
