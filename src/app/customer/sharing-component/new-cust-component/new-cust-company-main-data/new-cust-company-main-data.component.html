@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12">label
   <div class="card bg-light-blue-card">
     <div class="card-body">
       <form class="form form-horizontal" [formGroup]="CustomerForm" (ngSubmit)="CustomerForm.valid && SaveForm() "
@@ -10,7 +10,7 @@
             <div class="col-md-6">
               <div class="form-group row">
                 <label class="col-md-12 adInsLabel label-field-2" translate>Is Supplier
-                  <span class="optional-text">(Optional)</span>
+
                 </label>
                 <div class="col-md-12">
                   <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row" [hidden]="!CustomerForm.controls.IsSupplier.value">
-                <label class="c label-field-2" for="LinkSupplier" translate>Link Supplier </label>
+                <label class="c label-field-2 adins-required-label" for="LinkSupplier" translate>Link Supplier </label>
                 <div class="col-md-12">
                   <lib-uclookupgeneric *ngIf="inputLookupObj?.isReady" [lookupInput]="inputLookupObj"
                     [parentForm]='CustomerForm' [enjiForm]='enjiForm' [identifier]="'lookupSupp'" #LookupSupplier
@@ -37,7 +37,7 @@
             <div class="col-md-6">
 
               <div class="form-group row">
-                <label class="col-md-12 label-field-2" translate>{{CustNameLabel}} Name </label>
+                <label class="col-md-12 label-field-2 adins-required-label" translate>{{CustNameLabel}} Name </label>
                 <div class="col-md-12" *ngIf="CustDataMode != CustDataModeMain && existingCustomerLookUpObj.isReady">
                   <lib-uclookupgeneric [lookupInput]="existingCustomerLookUpObj" [parentForm]="CustomerForm"
                     [enjiForm]="enjiForm" [identifier]="'ExistingCustName'" (lookup)=getLookUpCustomer($event)>
@@ -55,7 +55,7 @@
 
               <div class="form-group row">
                 <label class="col-md-12 label-field-2" translate>Tax Id No
-                  <span class="optional-text">(Optional)</span>
+
                 </label>
                 <div class="col-md-12">
                   <input type="text" class="form-control input-field-2" formControlName="TaxIdNo"
@@ -71,7 +71,8 @@
                 <label class="col-md-12 adins-required-label" translate>ID Type </label>
                 <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeIdTypeCompany]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeIdTypeCompany]"
-                    [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrIdTypeCode'"></lib-ucdropdownlist>
+                    [parentForm]="CustomerForm" [enjiForm]="enjiForm"
+                    [identifier]="'MrIdTypeCode'"></lib-ucdropdownlist>
                 </div>
               </div>
 
@@ -80,19 +81,17 @@
             <div class="col-md-6">
 
               <div class="form-group row">
-                <label class="col-md-12 label-field-2" translate>Company Type</label>
+                <label class="col-md-12 label-field-2 adins-required-label" translate>Company Type</label>
                 <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeCompanyType]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCompanyType]"
                     [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrCompanyTypeCode'">
                   </lib-ucdropdownlist>
                 </div>
               </div>
-
               <div class="form-group row">
                 <label class="col-md-12 label-field-2"
                   [ngClass]="{ 'adins-required-label' : CustDataMode != CustDataModeShareholder}" translate>Debtor
                   Model
-                  <span class="optional-text">(Optional)</span>
                 </label>
                 <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
                   <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]"
@@ -100,18 +99,18 @@
                     [identifier]="'MrCustModelCode'"></lib-ucdropdownlist>
                 </div>
               </div>
-
               <div class="form-group row">
                 <label class="col-md-12 label-field-2 adins-required-label" translate>ID Number </label>
                 <div class="col-md-12">
                   <input type="text" class="form-control input-field-2" formControlName="IdNo"
                     [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.IdNo.invalid}">
-                  <lib-uc-show-errors [customPattern]="customPattern" [control]="CustomerForm.controls.IdNo"
+                  <div class="message-box">
+                    <lib-uc-show-errors [customPattern]="customPattern" [control]="CustomerForm.controls.IdNo"
                     [submit]="enjiForm.submitted">
                   </lib-uc-show-errors>
+                  </div>
                 </div>
               </div>
-
             </div>
           </div>
           <app-shareholder-form *ngIf="CustDataMode == CustDataModeShareholder" [parentForm]="CustomerForm"
@@ -124,7 +123,6 @@
         <div class="form-body" id="LegalAddrSection">
           <div class="form-group row" *ngIf="!IsLockCopyAddrBtn && CustDataMode != CustDataModeMain">
             <label class="col-md-2 adInsLabel label-field-2" translate>Copy Address From Legal Debtor
-              <span class="optional-text">(Optional)</span>
             </label>
             <div class="col-md-4">
               <button type="button" class="btn btn-raised btn-primary-2" (click)="CopyLegalAddr()">
@@ -137,9 +135,10 @@
           </lib-ucaddress>
         </div>
         <div *ngIf="pageFrom == CustFromEditMainData && CustDataMode == CustDataModeMain">
-          <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo" [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypeCoy" 
-            (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)" (OutputCustObj)="SetThirdPartyTrxNoAndRowVersion($event)" (OutputUploadFile)="SetCustFileFormObjs($event)"
-          >
+          <app-third-party-form *ngIf="IsCustLoaded" [parentForm]="CustomerForm" [thirdPartyTrxNo]="thirdPartyTrxNo"
+            [custObj]="custObj" [CustDataMode]="CustDataMode" [MrCustTypeCode]="CustTypeCoy"
+            (OutputThirdPartyTrxNo)="SetThirdPartyTrxNo($event)"
+            (OutputCustObj)="SetThirdPartyTrxNoAndRowVersion($event)" (OutputUploadFile)="SetCustFileFormObjs($event)">
           </app-third-party-form>
         </div>
         <div class="form-actions right">

@@ -12,7 +12,7 @@
                 <div class="col-md-6">
 
                   <div class="form-group row">
-                    <label class="col-md-12 label-field-2" translate>Public Type </label>
+                    <label class="col-md-12 label-field-2 adins-required-label" translate>Public Type </label>
                     <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodePublicType]?.isReady">
                       <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodePublicType]"
                         [parentForm]="CustomerForm" [enjiForm]="enjiForm" [identifier]="'MrPublicTypeCode'"
@@ -21,7 +21,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-12 label-field-2" translate>Identity No </label>
+                    <label class="col-md-12 label-field-2 adins-required-label" translate>Identity No </label>
                     <div class="col-md-12">
                       <input type="text" class="form-control input-field-2" formControlName="PublicIdentityNo"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.PublicIdentityNo.invalid}">
@@ -35,10 +35,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-12 adInsLabel label-field-2" translate> Share(%)
-                      <span class="optional-text">(Optional)</span>
-
-                    </label>
+                    <label class="col-md-12 adInsLabel label-field-2" translate> Share(%)</label>
                     <div class="col-md-12">
                       <input type="" currencyMask min="0" max="100" class="form-control" formControlName="SharePrcnt"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.SharePrcnt.invalid}"
@@ -55,7 +52,7 @@
                 <div class="col-md-6">
 
                   <div class="form-group row">
-                    <label class="col-md-12 label-field-2" translate>Name</label>
+                    <label class="col-md-12 label-field-2 adins-required-label" translate>Name</label>
                     <div class="col-md-12">
                       <input type="text" class="form-control input-field-2" formControlName="PublicName"
                         [ngClass]="{ 'is-invalid': enjiForm.submitted && CustomerForm.controls.PublicName.invalid}">
@@ -67,7 +64,7 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-12 label-field-2" translate> Position SLIK </label>
+                    <label class="col-md-12 label-field-2 adins-required-label" translate> Position SLIK </label>
                     <div class="col-md-12">
                       <lib-uclookupgeneric [lookupInput]="positionSlikLookUpObj" [parentForm]="CustomerForm"
                         [enjiForm]="enjiForm" [identifier]="'PositionSlikCode'" (lookup)=getLookUpSlik($event)>
@@ -76,14 +73,11 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-md-12 adInsLabel label-field-2" translate>Is Active
-                      <span class="optional-text">(Optional)</span>
-
-                    </label>
+                    <label class="col-md-12 adInsLabel label-field-2" translate>Is Active</label>
                     <div class="col-md-12">
                       <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
-                    [formControlName]="'IsActive'">
-                  </ui-switch>
+                        [formControlName]="'IsActive'">
+                      </ui-switch>
                       <!-- <input class="border-primary input-field-2" type="checkbox" data-md-icheck
                         formControlName="IsActive" /> -->
                     </div>
@@ -97,9 +91,7 @@
             </lib-ucSubsection>
             <div *ngIf="!isHideAddress" class="form-body" id="LegalAddrSection">
               <div class="form-group row" *ngIf="!IsLockCopyAddrBtn">
-                <label class="col-md-2 adInsLabel label-field-2" translate>Copy Address From Legal Customer
-                  <span class="optional-text">(Optional)</span>
-                </label>
+                <label class="col-md-2 adInsLabel label-field-2" translate>Copy Address From Legal Customer</label>
                 <div class="col-md-4">
                   <button type="button" class="btn btn-raised btn-primary-2" (click)="CopyLegalAddr()">
                     <i class="far"></i>&nbsp;<span translate>Copy</span>
