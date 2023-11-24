@@ -34,7 +34,7 @@
     "@adins/uc-file-upload": "^1.0.0",
     "@adins/uc-show-errors": "3.0.2-canary.0",
     "@adins/uc-subsection": "3.0.2-canary.1",
-    "@adins/ucaddress": "3.1.5-canary.0",
+    "@adins/ucaddress": "3.1.6-canary.0",
     "@adins/ucaddtotemp": "3.0.14-canary.0",
     "@adins/ucapproval": "1.0.12",
     "@adins/ucapproval-history": "3.0.2-canary.0",

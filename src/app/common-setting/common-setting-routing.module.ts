@@ -709,16 +709,18 @@ const routes: Routes = [
       //REF AMRTZ ITEM
       {
         path: PathConstant.CS_REF_AMRTZ_ITEM_DETAIL,
-        component: RefAmrtzAddEditComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Ref Amortize Detail'
+          page: 'RefAmortizeItemDetail',
+          title: 'Amortize Item Detail'
         },
       },
       {
         path: PathConstant.CS_REF_AMRTZ_ITEM_PAGING,
-        component: RefAmrtzItemPagingComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Ref Amortize Paging'
+          page: 'RefAmrtzItem',
+          title: 'Amortize Item Paging'
         },
       },
       

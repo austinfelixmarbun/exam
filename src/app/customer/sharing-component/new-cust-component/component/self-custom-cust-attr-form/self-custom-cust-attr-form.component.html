@@ -6,9 +6,11 @@
         <div *ngFor="let item of parentForm.controls[identifier]['controls']; let idx = index" [ngClass]="{'col-md-6': !IsVertical}">
           <div [formGroupName]="idx">
             <div class="form-group row">
-              <label class="label-field-2 col-md-12" translate>
+              <label class="label-field-2 col-md-12 adins-required-label" translate *ngIf="item.controls.IsMandatory.value">
                 {{item.controls.AttrName.value}}
-                <span *ngIf="!item.controls.IsMandatory.value" class="optional-text">(Optional)</span>
+              </label>
+              <label class="label-field-2 col-md-12" translate *ngIf="!item.controls.IsMandatory.value">
+                {{item.controls.AttrName.value}}
               </label>
               <div [ngSwitch]="item.controls.AttrInputType.value" class="col-md-12">
                 <input type="text" *ngSwitchCase="AttrInputTypeText" class="form-control adInsInput input-field-2"
