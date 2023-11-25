@@ -864,6 +864,7 @@
     "GetRefCoaByRefCoaId": "/v1/Coa/GetRefCoaByRefCoaId",
     "GetListKvpPayAllocVendorByCategoryCode": "/v1/Coa/GetListKvpPayAllocVendorByCategoryCode",
     "GetRefCoaWithoutCoaSchemeByReqCoaObj": "/v1/Coa/GetRefCoaWithoutCoaSchemeByReqCoaObj",
+    "GetRefCoaWithoutCoaSchemeByReqListCoaObj": "/v1/Coa/GetRefCoaWithoutCoaSchemeByReqListCoaObj",
     "SubmitCoa": "/v1/Coa/SubmitCoa",
     "SubmitListCoa": "/v1/Coa/SubmitListCoa",
     "GetListRefCoaByCoaSchmId": "/v1/Coa/GetListRefCoaByCoaSchmId",
