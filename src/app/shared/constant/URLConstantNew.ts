@@ -1021,6 +1021,7 @@ export class UrlConstantNew{
     public SubmitListCoa = this.env.FoundationR3Url + this.url.SubmitListCoa;
     public GetListRefCoaByCoaSchmId = this.env.FoundationR3Url + this.url.GetListRefCoaByCoaSchmId;
     public GetRefCoaWithoutCoaSchemeByReqCoaObj = this.env.FoundationR3Url + this.url.GetRefCoaWithoutCoaSchemeByReqCoaObj;
+    public GetRefCoaWithoutCoaSchemeByReqListCoaObj = this.env.FoundationR3Url + this.url.GetRefCoaWithoutCoaSchemeByReqListCoaObj;
 
     // COA Scheme
     public GetCoaSchmByCoaSchmId = this.env.FoundationR3Url + this.url.GetCoaSchmByCoaSchmId;

@@ -82,31 +82,41 @@ export class CoaDetailComponent implements OnInit {
       var ListCurrBeforeAdd = [...this.ListCurr];
       if ((ListCurrBeforeAdd.findIndex(x => x.newCurr === ev.value)) === -1) {
         this.colHeadTable.push({ newHead: 'COA ' + ev.value });
+        var reqListCoaObj: Array<RefCoaObj> = [];
         for (let i = 0; i < this.ListCOA.length; i++) {
-          var ListDataCOA = this.GetListCoaFormArray().get(i.toString()).get("DataCOA") as FormArray;
           var CoaObjForSubmit = new RefCoaObj();
-
           CoaObjForSubmit.MrEntityCode = this.ListCOA[i].coa[0].EntityCode;
           CoaObjForSubmit.MrEntityType = this.ListCOA[i].coa[0].EntityTypeCode;
-          CoaObjForSubmit.PaymentAllocCode = this.ListCOA[i].coa[0].PaymentAllocCode,
-            CoaObjForSubmit.CurrCode = ev.value;
-
-          await this.http.post<RefCoaObj>(this.UrlConstantNew.GetRefCoaWithoutCoaSchemeByReqCoaObj, CoaObjForSubmit).toPromise().then(
-            (response) => {
-              var refCoaInitValue = new RefCoaObj();
-              refCoaInitValue = response;
-
-              ListDataCOA.push(this.AddListCoaDetailItemFormGroup(refCoaInitValue.Coa, refCoaInitValue.RefCoaId));
-
-              if (i === this.ListCOA.length - 1) {
-                this.ListCurr.push({ newCurr: ev.value });
-              }
-            },
-            (error) => {
-              console.log(error)
-            }
-          );
+          CoaObjForSubmit.PaymentAllocCode = this.ListCOA[i].coa[0].PaymentAllocCode;
+          CoaObjForSubmit.CurrCode = ev.value;
+          reqListCoaObj.push(CoaObjForSubmit);         
         }
+        
+        var reqPayload = {"ListRequestRefCoaObjs" : reqListCoaObj};
+        var result : Array<RefCoaObj> = [];
+        await this.http.post(this.UrlConstantNew.GetRefCoaWithoutCoaSchemeByReqListCoaObj, reqPayload).toPromise().then(
+          (response) => {
+            if (!response['ListResponseRefCoaObj']) return;
+            result = response['ListResponseRefCoaObj'];
+          },
+          (error) => {
+            console.log(error)
+          }
+        );
+
+        if (!result) return;
+        for(let j=0; j<reqListCoaObj.length; j++)
+        {
+          var ListDataCOA = this.GetListCoaFormArray().get(j.toString()).get("DataCOA") as FormArray;
+          let currReqItem = reqListCoaObj[j];
+          let resItem = result.find(x => x.MrEntityCode == currReqItem.MrEntityCode && x.MrEntityType == currReqItem.MrEntityType && x.PaymentAllocCode==currReqItem.PaymentAllocCode && x.CurrCode == x.CurrCode);
+          if (!resItem) resItem = new RefCoaObj();
+          ListDataCOA.push(this.AddListCoaDetailItemFormGroup(resItem.Coa, resItem.RefCoaId));
+          if (j === this.ListCOA.length - 1) 
+          {
+            this.ListCurr.push({ newCurr: ev.value });
+          }
+        }           
 
       }
       else {
