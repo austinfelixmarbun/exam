@@ -20,6 +20,7 @@ import { submitCoa } from "../function/coa-scheme-function";
 import { addEditCustCompanyLegalDoc,
   //  uploadDocFileLegalMultipart 
 } from "../function/customer-function";
+import { rejectUpload } from "../function/review-upload-function";
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +72,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("addBouwheerCompany", addBouwheerCompany);
     this.setExecutor("addBeneficiaryOwnerToDuplicate", addBeneficiaryOwnerToDuplicate);
     this.setExecutor("redirectSubmitProject", redirectSubmitProject);
+    this.setExecutor("rejectUpload", rejectUpload);
   }
 }
