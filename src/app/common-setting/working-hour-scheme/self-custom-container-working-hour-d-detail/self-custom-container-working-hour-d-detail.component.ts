@@ -150,6 +150,16 @@ export class SelfCustomContainerWorkingHourDDetailComponent implements OnInit {
 
   SaveForm() {
     for (var i = 0; i < 7; i++) {
+      if (this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value != "" && this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value == "")
+      {
+        this.toastr.errorMessage(String.Format(ExceptionConstant.WORKING_HOUR_FROM_CAN_NOT_BE_EMPTY_WHEN_THERE_IS_WORKING_HOUR_TO, CommonConstant.FROM, 1, CommonConstant.TO, 1))
+        return false;
+      }
+      if (this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo2"].value != "" && this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom2"].value == "")
+      {
+        this.toastr.errorMessage(String.Format(ExceptionConstant.WORKING_HOUR_FROM_CAN_NOT_BE_EMPTY_WHEN_THERE_IS_WORKING_HOUR_TO, CommonConstant.FROM, 2, CommonConstant.TO, 2))
+        return false;
+      }
       if (this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value > this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value) {
         this.toastr.errorMessage(String.Format(ExceptionConstant.WORKING_HOUR_CHECKING, CommonConstant.FROM, 1, CommonConstant.GTE, CommonConstant.TO, 2))
         return false;
