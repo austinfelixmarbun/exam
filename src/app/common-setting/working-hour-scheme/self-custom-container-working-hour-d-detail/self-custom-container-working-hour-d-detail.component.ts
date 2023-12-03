@@ -148,7 +148,22 @@ export class SelfCustomContainerWorkingHourDDetailComponent implements OnInit {
     );
   }
 
+  invalidInput = [];
+  onTimeChange(event, day)
+  {
+    if (event.target.validity == undefined || event.target.validity.valid == undefined) return;
+    
+    if (!event.target.validity.valid && !this.invalidInput.includes(day)) this.invalidInput.push(day);
+    else if (event.target.validity.valid) this.invalidInput = this.invalidInput.filter(function(e) { return e !== day })
+  }
+
   SaveForm() {
+    if (this.invalidInput.length)
+    {
+      this.toastr.errorMessage(String.Format(ExceptionConstant.WORKING_HOUR_AT_DAY_MUST_COMPLETE, this.invalidInput[0]))
+      return;
+    }
+
     for (var i = 0; i < 7; i++) {
       if (this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourTo1"].value != "" && this.WorkingHourSchmDForm.controls["items"]["controls"][i]["controls"]["WorkingHourFrom1"].value == "")
       {

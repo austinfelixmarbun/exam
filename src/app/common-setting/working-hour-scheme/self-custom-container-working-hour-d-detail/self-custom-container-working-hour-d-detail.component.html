@@ -15,16 +15,16 @@
               <div class="form-group row" [formGroupName]="i">
                 <label class="col-md-2 text-center label-field-2" translate>{{item.controls.Label.value}}</label>
                 <div class="col-md-2" style="border-right: 1px solid grey">
-                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourFrom1">
+                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourFrom1" (keyup)="onTimeChange($event, item.controls.Label.value + ' From Before Break')">
                 </div>
                 <div class="col-md-2">
-                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourTo1">
+                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourTo1" (keyup)="onTimeChange($event, item.controls.Label.value + ' To Before Break')">
                 </div>
                 <div class="col-md-2" style="border-right: 1px solid grey">
-                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourFrom2">
+                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourFrom2" (keyup)="onTimeChange($event, item.controls.Label.value + ' From After Break')">
                 </div>
                 <div class="col-md-2">
-                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourTo2">
+                  <input type="time" class="form-control input-field-2" formControlName="WorkingHourTo2" (keyup)="onTimeChange($event, item.controls.Label.value + ' To After Break')">
                 </div>
               </div>
             </div>
