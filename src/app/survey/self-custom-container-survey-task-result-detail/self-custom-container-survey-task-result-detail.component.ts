@@ -149,8 +149,6 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
             this.dictNotes[element.VerfQuestionText] = element.Notes;
           }
 
-          console.log(this.dictAnswer)
-
           for (let i = 0; i < this.QuestionObj.VerfQuestionAnswerListObj.length; i++)
           {
             for (let j = 0; j < this.QuestionObj.VerfQuestionAnswerListObj[i].verfQuestionAnswerList.length; j++)
@@ -160,8 +158,6 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
                 Answer: this.dictAnswer[checkName],
                 Notes: this.dictNotes[checkName]
               })
-
-              console.log(this.dictAnswer[checkName])
             }
           }
 
@@ -173,9 +169,7 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
 
   GenerateFormVerfQuestion() {
     var parentFormGroup = new Object();
-
-    console.log("Y")
-    console.log(this.QuestionObj)
+    
     var grpListObj = this.QuestionObj.VerfQuestionAnswerListObj;
 
     for (let i = 0; i < grpListObj.length; i++) {
