@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
@@ -25,10 +25,12 @@ import { UcTemplateService } from '@adins/uctemplate';
 })
 export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnInit, OnDestroy {
 
+  @Input() parentForm: FormGroup;
   @Input() dicts: Record<string, any>;
-  @Output() next: EventEmitter<any> = new EventEmitter<any>();
 
   subscriber: Subscription;
+  enjiForm: NgForm;
+  isReady: boolean = false;
 
   ReqGetVerfResultHObj: ReqGetVerfResultHObj = new ReqGetVerfResultHObj();
   ResVerfResultHObj: ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj = new ResVerfResultHByTrxRefNoAndMrAddrTypeCodeObj();
@@ -40,12 +42,7 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
   VerfSchemeHId: number = 0;
   isQuestionLoaded: boolean = true;
   isStatScs: boolean = false;
-  PageType: string = "Add";
   ListVerfAnswer = [];
-
-  SrvyTaskForm = this.fb.group({
-    QuestionObjs: new FormArray([])
-  });
 
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
@@ -57,29 +54,31 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
     private ucTemplateSvc: UcTemplateService) { }
 
   async ngOnInit() {
-    console.log(this.dicts)
+    this.enjiForm = this.ucTemplateSvc.container.getEnjiForm();
+
     await this.getQuestion();
     await this.getData();
 
+    await this.waitFor(_ => this.dicts.formRaw != undefined);
+    await this.waitFor(_ => this.dicts.formRaw.MrVerfResultHStatCode != undefined);
     if (this.dicts.formRaw != undefined && this.dicts.formRaw.MrVerfResultHStatCode != undefined)
     {
       this.isStatScs = this.dicts.formRaw.MrVerfResultHStatCode == "SCS"? true : false;
     }
-    console.log("===========isStatScs", this.isStatScs)
 
-    this.subscriber = this.ucTemplateSvc.callback.subscribe((ev) => {
-      // this.callbackSubscribe(ev)
-      console.log("===========MrVerfResultHStatCode")
+    this.subscriber = await this.ucTemplateSvc.callback.subscribe((ev) => {
       if (ev != undefined && !ev.hasOwnProperty("pageId")) {
         if (ev === "MrVerfResultHStatCode") {
           const _MrVerfResultHStatCode = this.dicts.formRaw.MrVerfResultHStatCode;
           if (_MrVerfResultHStatCode) {
+            this.ChangeResult();
             this.isStatScs = _MrVerfResultHStatCode == "SCS"? true : false;
-            console.log("===========isStatScs", this.isStatScs)
           }
         }
       }
     });
+
+    this.isReady = true;
   }
 
   waitFor(conditions) {
@@ -91,23 +90,6 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
     return new Promise(vote);
   }
 
-  async callbackSubscribe(ev)
-  {
-    console.log("===========MrVerfResultHStatCode")
-    if (ev != undefined && !ev.hasOwnProperty("pageId")) {
-      if (ev === "MrVerfResultHStatCode") {
-        await this.waitFor(_ => this.dicts.formRaw != undefined);
-        await this.waitFor(_ => this.dicts.formRaw.MrVerfResultHStatCode != undefined);
-        const _MrVerfResultHStatCode = this.dicts.formRaw.MrVerfResultHStatCode;
-        if (_MrVerfResultHStatCode) {
-          this.isStatScs = _MrVerfResultHStatCode == "SCS"? true : false;
-          console.log("===========isStatScs", this.isStatScs)
-        }
-      }
-    }
-  }
-  
-
   ngOnDestroy(): void {
     if(this.subscriber) {
       this.subscriber.unsubscribe();
@@ -115,6 +97,9 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
   }
 
   async getQuestion(){
+    this.dicts["VerfSchemeHId"] = 0;
+    this.dicts["IsQuestionLoaded"] = true;
+
     let ReqGenericObj = new GenericObj();
     ReqGenericObj.Id = this.dicts.SrvyFormSchmId;
 
@@ -122,6 +107,8 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
       (response) => {
         if(response["VerfSchemeHId"] != null){
         this.VerfSchemeHId = response["VerfSchemeHId"];
+        this.dicts["VerfSchemeHId"] = response["VerfSchemeHId"];
+        this.dicts["QuestionObj"] = null;
       
 
       ReqGenericObj = new GenericObj();
@@ -130,9 +117,11 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
       (response) => {
         if(response["ReturnObject"]!=null){
           this.QuestionObj = response[CommonConstant.ReturnObj];
+          this.dicts["QuestionObj"] = this.QuestionObj;
           this.GenerateFormVerfQuestion();
         }else{
           this.isQuestionLoaded = false;
+          this.dicts["IsQuestionLoaded"] = false;
         }
       });
       }
@@ -142,6 +131,8 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
   dictAnswer: { [id: string]: string } = {};
   dictNotes: { [id: string]: string } = {};
   async getData(){
+    this.dicts["PageType"] = "Add";
+    this.dicts["VerfResultHId"] = 0;
     this.ReqGetVerfResultHObj.TrxRefNo = this.dicts.SrvyTaskNo;
     this.ReqGetVerfResultHObj.MrAddrTypeCode = this.dicts.MrSrvyObjTypeCode;
     await this.http.post(this.UrlConstantNew.GetVerfResultHDsByTrxRefNoAndMrAddrTypeCode, this.ReqGetVerfResultHObj).toPromise().then(
@@ -150,43 +141,54 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
           this.ResVerfResultHObj = response["VerfResultH"];
           this.ResVerfResultDObj = response["VerfResultD"];
 
+          this.dicts["VerfResultHId"] = this.ResVerfResultHObj.VerfResultHId;
+
           for(let a=0;a<this.ResVerfResultDObj.length;a++){
             const element = this.ResVerfResultDObj[a];
             this.dictAnswer[element.VerfQuestionText] = element.Answer;
             this.dictNotes[element.VerfQuestionText] = element.Notes;
           }
 
-          for (let i = 0; i < this.SrvyTaskForm.controls["QuestionObjs"]["controls"].length; i++) {
-            for (let j = 0; j < this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"].length; j++) {
-              var checkName = this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["VerfQuestionText"].value;
-              
-              this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"].patchValue({
+          console.log(this.dictAnswer)
+
+          for (let i = 0; i < this.QuestionObj.VerfQuestionAnswerListObj.length; i++)
+          {
+            for (let j = 0; j < this.QuestionObj.VerfQuestionAnswerListObj[i].verfQuestionAnswerList.length; j++)
+            {
+              var checkName = (this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["VerfQuestionText"].value).toUpperCase();
+              this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"].patchValue({
                 Answer: this.dictAnswer[checkName],
                 Notes: this.dictNotes[checkName]
               })
+
+              console.log(this.dictAnswer[checkName])
             }
           }
 
-          this.PageType = "Edit";
+          this.dicts["PageType"] = "Edit"
         }
       }
     );
   }
 
   GenerateFormVerfQuestion() {
+    var parentFormGroup = new Object();
+
+    console.log("Y")
+    console.log(this.QuestionObj)
     var grpListObj = this.QuestionObj.VerfQuestionAnswerListObj;
 
     for (let i = 0; i < grpListObj.length; i++) {
-      var QuestionGrp = this.fb.group({
-        VerfQuestionGrpCode: grpListObj[i].VerfQuestionGrpCode,
-        VerfQuestionGrpName: grpListObj[i].VerfQuestionGrpName,
-        VerfQuestionAnswerList: this.fb.array([])
-      }) as FormGroup;
-      (this.SrvyTaskForm.controls["QuestionObjs"] as FormArray).push(QuestionGrp);
-      var ResultGrp = this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"] as FormArray;
+      var QuestionFormGrp = new Object();
+
+      QuestionFormGrp["VerfQuestionGrpCode"] = [grpListObj[i].VerfQuestionGrpCode];
+      QuestionFormGrp["VerfQuestionGrpName"] = [grpListObj[i].VerfQuestionGrpName];
+      QuestionFormGrp["VerfQuestionAnswerList"] = this.fb.group({});
+
       var QuestionList = grpListObj[i].verfQuestionAnswerList;
 
       this.ListVerfAnswer.push([]);
+      var QuestionAnswerListFormGrp = new Object();
       if (QuestionList.length != 0) {
         for (let j = 0; j < QuestionList.length; j++) {
           var QuestionResultGrp = this.fb.group({
@@ -233,139 +235,48 @@ export class SelfCustomContainerSurveyTaskResultDetailComponent implements OnIni
             QuestionResultGrp.controls.ResultGrp["controls"].Answer.setValidators([Validators.required])
             this.ListVerfAnswer[i].push("");
           }
-          ResultGrp.push(QuestionResultGrp);
+          
+          QuestionAnswerListFormGrp[j] = QuestionResultGrp;
         }
-        this.ChangeResult();
+        QuestionFormGrp["VerfQuestionAnswerList"] = this.fb.group(QuestionAnswerListFormGrp);
       }
+
+      parentFormGroup[i] = this.fb.group(QuestionFormGrp);
     }
+
+    this.parentForm.addControl("QuestionObjs", this.fb.group(parentFormGroup));
+
+    this.ChangeResult();
   }
 
   ChangeResult() {
+    this.isReady = false;
+
     if (this.dicts.formRaw == undefined || this.dicts.formRaw.MrVerfResultHStatCode == undefined) return;
-    if (this.dicts.formRaw.MrVerfResultHStatCode == CommonConstant.VerfResultStatSuccess) {
-      for (let i = 0; i < this.SrvyTaskForm.controls["QuestionObjs"]["controls"].length; i++) {
-        for (let j = 0; j < this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"].length; j++) {
-          this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].setValidators([Validators.required]);
-          this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].updateValueAndValidity();
+
+    if (this.parentForm.controls.MrVerfResultHStatCode.value == CommonConstant.VerfResultStatSuccess)
+    {
+      for (let i = 0; i < this.QuestionObj.VerfQuestionAnswerListObj.length; i++)
+      {
+        for (let j = 0; j < this.QuestionObj.VerfQuestionAnswerListObj[i].verfQuestionAnswerList.length; j++)
+        {
+          this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].setValidators([Validators.required]);
+          this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].updateValueAndValidity();
         }
       }
     }
-    else {
-      for (let i = 0; i < this.SrvyTaskForm.controls["QuestionObjs"]["controls"].length; i++) {
-        for (let j = 0; j < this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"].length; j++) {
-          this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].clearValidators();
-          this.SrvyTaskForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].updateValueAndValidity();
+    else
+    {
+      for (let i = 0; i < this.QuestionObj.VerfQuestionAnswerListObj.length; i++)
+      {
+        for (let j = 0; j < this.QuestionObj.VerfQuestionAnswerListObj[i].verfQuestionAnswerList.length; j++)
+        {
+          this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].clearValidators();
+          this.parentForm.controls["QuestionObjs"]["controls"][i]["controls"]["VerfQuestionAnswerList"]["controls"][j]["controls"]["ResultGrp"]["controls"]["Answer"].updateValueAndValidity();
         }
       }
     }
+
+    setTimeout(() => { this.isReady = true; }, 100);
   }
-
-  setSurveyVerifData() {
-
-    var businessDt = new Date(AdInsHelper.GetCookie(this.cookieService, CommonConstant.BUSINESS_DATE_RAW));
-    var todaydate = new Date();
-    businessDt.setHours(todaydate.getHours(), todaydate.getMinutes(), todaydate.getSeconds());
-    var usertimezone = businessDt.getTimezoneOffset() * 60000;
-    businessDt = new Date(businessDt.getTime() - usertimezone);
-
-    this.VerfResultHD = new VerifResulHDetailObj();
-    this.VerfResultHD.VerfResultDListObj = new Array<VerfResultDObj>();
-    this.VerfResultHD.VerfResultHObj.VerfResultId = this.dicts.VerfResultId;
-    this.VerfResultHD.VerfResultHObj.VerfSchemeHId = this.VerfSchemeHId;
-    this.VerfResultHD.VerfResultHObj.MrVerfObjectCode = this.dicts.Type;
-    this.VerfResultHD.VerfResultHObj.MrVerfSubjectRelationCode = this.dicts.Type;
-    this.VerfResultHD.VerfResultHObj.MrVerfSubjectRelationName = this.dicts.CustName;
-    this.VerfResultHD.VerfResultHObj.VerfDt = businessDt;
-    this.VerfResultHD.VerfResultHObj.MrVerfResultHStatCode = this.dicts.formRaw.MrVerfResultHStatCode;
-    this.VerfResultHD.VerfResultHObj.Phn = this.dicts.CustPhone;
-    this.VerfResultHD.VerfResultHObj.PhnType = CommonConstant.VerfResultPhnTypeMobile;
-    this.VerfResultHD.VerfResultHObj.Notes = this.dicts.formRaw.Notes;
-    this.VerfResultHD.VerfResultHObj.Addr = this.dicts.Addr;
-    this.VerfResultHD.VerfResultHObj.MrAddrTypeCode = this.dicts.MrSrvyObjTypeCode;
-    this.VerfResultHD.VerfResultHObj.TrxRefNo = this.dicts.SrvyTaskNo;
-    this.VerfResultHD.VerfResultHObj.RowVersion = this.dicts.RowVersionSrvyTask;
-
-    if (this.dicts.formRaw.MrVerfResultHStatCode == CommonConstant.VerfResultStatSuccess) {
-      for (let i = 0; i < this.SrvyTaskForm.controls["QuestionObjs"].value.length; i++) {
-        var currGrp = this.SrvyTaskForm.controls["QuestionObjs"].value[i].VerfQuestionAnswerList;
-        for (let j = 0; j < currGrp.length; j++) {
-          var currAnswer = currGrp[j].ResultGrp;
-          var question = new VerfResultDObj();
-          question.VerfQuestionAnswerId = currAnswer.VerfQuestionAnswerId;
-          question.VerfQuestionText = currAnswer.VerfQuestionText;
-          question.Answer = currAnswer.Answer;
-          question.Notes = currAnswer.Notes;
-          question.SeqNo = currAnswer.SeqNo;
-          question.VerfQuestionGroupCode = currAnswer.VerfQuestionGroupCode;
-          this.VerfResultHD.VerfResultDListObj.push(question);
-        }
-      }
-    }
-  }
-
-  Save(){
-    if (this.isQuestionLoaded == false) {
-      this.toastr.warningMessage("Can't process further because questions are not loaded");
-    }
-    else {
-      if(this.PageType == "Add"){
-        this.setSurveyVerifData();
-        this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.dicts.SrvyTaskId;
-        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
-        this.http.post(this.UrlConstantNew.UpdateSrvyTaskAndAddVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["message"]);
-
-            if(response["StatusCode"] == '200'){
-              const actions = [
-                {
-                  'result': {
-                    'type': 'function',
-                    'target': 'self',
-                    'alias': '',
-                    'methodName': 'NextStep',
-                    'params': []
-                  },
-                  'conditions': []
-                }
-              ];
-          
-              this.next.emit({Actions: actions});
-            }
-          });
-
-      }else if(this.PageType == "Edit"){
-        this.setSurveyVerifData();
-        this.ReqSrvyTaskAndAddVerfResultHDObj.SrvyTaskId = this.dicts.SrvyTaskId;
-        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD = this.VerfResultHD;
-        this.ReqSrvyTaskAndAddVerfResultHDObj.VerfResultHD.VerfResultHId = this.ResVerfResultHObj.VerfResultHId;
-        this.http.post(this.UrlConstantNew.UpdateSrvyTaskAndEditVerfResultH, this.ReqSrvyTaskAndAddVerfResultHDObj, AdInsConstant.SpinnerOptions).subscribe(
-          (response) => {
-            this.toastr.successMessage(response["message"]);
-
-            if(response["StatusCode"] == '200'){
-              const actions = [
-                {
-                  'result': {
-                    'type': 'function',
-                    'target': 'self',
-                    'alias': '',
-                    'methodName': 'NextStep',
-                    'params': []
-                  },
-                  'conditions': []
-                }
-              ];
-          
-              this.next.emit({Actions: actions});
-            }
-          });
-      }
-    }
-  }
-
-  Cancel() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SELF_CUSTOM_SURVEY_TASK_RESULT_PAGING],{});
-  }
-
 }

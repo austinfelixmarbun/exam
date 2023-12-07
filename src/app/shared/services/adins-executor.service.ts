@@ -13,7 +13,7 @@ import { saveListAuthForm_Form } from "../function/form-function";
 import { addHolidaySchmDUntilYear } from "../function/holiday-function";
 import { ApprovalTaskService } from "./ApprovalTask.service";
 import { callBackVendorPagingApproval } from "../function/approval-function";
-import { endStepperSrvyTaskDetail } from "../function/survey-function";
+import { addEditSurveyTaskResultDetail, endStepperSrvyTaskDetail } from "../function/survey-function";
 import { addEditFundingCoy } from "../function/funding-function";
 import { addeditAttributeMaster } from "../function/attribute-master-function";
 import { submitCoa } from "../function/coa-scheme-function";
@@ -63,6 +63,7 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("callBackVendorPagingApproval", callBackVendorPagingApproval);
     this.setExecutor("saveJrMHeaderFact", saveJrMHeaderFact);
     this.setExecutor("endStepperSrvyTaskDetail", endStepperSrvyTaskDetail);
+    this.setExecutor("addEditSurveyTaskResultDetail", addEditSurveyTaskResultDetail);
     this.setExecutor("saveJrMGroupDFact", saveJrMGroupDFact);
     this.setExecutor("addEditFundingCoy", addEditFundingCoy);
     this.setExecutor("addeditAttributeMaster", addeditAttributeMaster);
