@@ -3,7 +3,7 @@
     <div formGroupName="QuestionObjs" *ngIf="isStatScs">
         <div class="form-body" [formGroupName]="i"
           *ngFor="let QuestionGrpList of QuestionObj.VerfQuestionAnswerListObj; let i = index">
-          <lib-ucSubsection [id]="'grpName'+i+'id'" [title]="QuestionGrpList.VerfQuestionGrpName"
+          <lib-ucSubsection [id]="'grp'+i+'id'" [title]="QuestionGrpList.VerfQuestionGrpName"
             [panel]="'grpName'+i">
           </lib-ucSubsection>
           <div id="grpName{{i}}" class="p-3">
