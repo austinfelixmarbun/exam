@@ -96,6 +96,34 @@ export const Full_ROUTES: Routes = [
     loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
   },
   // dynamic import remote module
+
+  // #region LOS
+  {
+    path: 'SettingLos',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './SettingModule'
+      })
+        .then(m => m.SettingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Ltkm',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './LtkmModule'
+      })
+        .then(m => m.LtkmModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion
+
   //#region AR Module
   {
     path: 'agrmnt',
