@@ -70,36 +70,6 @@ export class DashBoardComponent implements OnInit {
     }
 
     this.Item.RequestObj.IntegrationObj.push(integrationObj);
-
-    await this.http.post<any>(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).toPromise().then(
-      async (response) => {
-        var tempExpiredDt = new Date(response.ExpiredDt);
-        tempExpiredDt.setHours(0, 0, 0, 0);
-        var expiredDt = formatDate(tempExpiredDt, 'yyyy-MM-dd', 'en-US');
-        
-        let generalSettingCode = {
-          Code: CommonConstant.GsCodeNDayWarningExpiredUser
-        }
-        
-        await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingCode).toPromise().then(
-          (response) => {
-            this.gsValueExpiredUser = parseInt(response['GsValue']);
-        });
-
-        var businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
-
-        var differenceInTime = tempExpiredDt.getTime()- businessDt.getTime();
-        var differenceInDays = differenceInTime / (1000 * 3600 * 24);
-        var daysUntilExpiration = Math.ceil(differenceInDays);
-
-        var tempDayWarningExpiredUser = businessDt.setDate(businessDt.getDate() + this.gsValueExpiredUser);
-        var dayWarningExpiredUser = formatDate(new Date(tempDayWarningExpiredUser), 'yyyy-MM-dd', 'en-US');
-        
-        if (expiredDt <= dayWarningExpiredUser) {
-            this.toastr.warningMessage(ExceptionConstant.PASSWORD_WILL_BE_EXPIRED + daysUntilExpiration + " days. " + ExceptionConstant.CHANGE_PASSWORD);
-        }
-      }
-    )
   }
   
   showMessage(message: any) {

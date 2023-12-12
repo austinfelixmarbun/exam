@@ -13,6 +13,7 @@ import { StorageService } from '../services/StorageService';
 import { UcDropdownSearchConstant, UcDropdownSearchObj } from '../model/library/uc-dropdown-search-obj.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UrlConstantNew } from '../constant/URLConstantNew';
+import { ExceptionConstant } from '../constant/ExceptionConstant';
 
 @Component({
   selector: 'app-rolepick',
@@ -28,6 +29,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
   selectedOffice: number = -1;
   selectedRole: number= -1;
   tempList: Array<any> = new Array<any>();
+  gsValueExpiredUser: number;
+  warningMessage: string = "";
 
   RolepickForm = this.fb.group({
     Office: ['', [Validators.required]],
@@ -56,6 +59,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
     this.rolesDropdownSearchObj.customKey = "JobTitleAndRoleName";
     this.rolesDropdownSearchObj.customValue = "JobTitleAndRoleName";
     this.rolesDropdownSearchObj.isCustomList = true;
+
+    this.warningMessageUserExpired();
   }
 
   ngAfterViewInit(): void {
@@ -165,5 +170,37 @@ export class RolepickComponent implements OnInit, AfterViewInit {
         }
       );
     }
+  }
+  
+  async warningMessageUserExpired() {
+    await this.http.post<any>(this.UrlConstantNew.GetUserEmpByUsername, {Username: this.refUser.Username}).toPromise().then(
+        async (response) => {
+          var tempExpiredDt = new Date(response.ExpiredDt);
+          tempExpiredDt.setHours(0, 0, 0, 0);
+          var expiredDt = formatDate(tempExpiredDt, 'yyyy-MM-dd', 'en-US');
+          
+          let generalSettingCode = {
+            Code: CommonConstant.GsCodeNDayWarningExpiredUser
+          }
+          
+          await this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, generalSettingCode).toPromise().then(
+          (response) => {
+            this.gsValueExpiredUser = parseInt(response['GsValue']);
+          });
+  
+          var businessDt = new Date(this.refUser.BusinessDt);
+  
+          var differenceInTime = tempExpiredDt.getTime()- businessDt.getTime();
+          var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+          var daysUntilExpiration = Math.ceil(differenceInDays);
+  
+          var tempDayWarningExpiredUser = businessDt.setDate(businessDt.getDate() + this.gsValueExpiredUser);
+          var dayWarningExpiredUser = formatDate(new Date(tempDayWarningExpiredUser), 'yyyy-MM-dd', 'en-US');
+          
+          if (expiredDt <= dayWarningExpiredUser) {
+            this.warningMessage = ExceptionConstant.PASSWORD_WILL_BE_EXPIRED + daysUntilExpiration + " days. " + ExceptionConstant.CHANGE_PASSWORD;
+          }
+        }
+      )
   }
 }
