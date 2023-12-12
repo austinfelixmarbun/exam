@@ -99,14 +99,38 @@ export const Full_ROUTES: Routes = [
 
   // #region LOS
   {
-    path: 'SettingLos',
+    path: 'Product',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
         remoteEntry: envi.losR3Web + '/remoteEntry.js',
-        exposedModule: './SettingModule'
+        exposedModule: './ProductModule'
       })
-        .then(m => m.SettingModule)
+        .then(m => m.ProductModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Inquiry',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './InquiryModule'
+      })
+        .then(m => m.InquiryModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Lead',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './LeadModule'
+      })
+        .then(m => m.LeadModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
@@ -119,6 +143,78 @@ export const Full_ROUTES: Routes = [
         exposedModule: './LtkmModule'
       })
         .then(m => m.LtkmModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Mou',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './MouModule'
+      })
+        .then(m => m.MouModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Report',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './ReportModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'TaskReassignment',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './TaskReassignmentModule'
+      })
+        .then(m => m.TaskReassignmentModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'TrialCalculation',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './TrialCalculationModule'
+      })
+        .then(m => m.TrialCalculationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'Nap',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './NapModule'
+      })
+        .then(m => m.NapModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'SettingLos',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './SettingModule'
+      })
+        .then(m => m.SettingModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
   },
