@@ -59,17 +59,31 @@ export class CustomAssetMasterDetailParentComponent implements OnInit, AfterView
     console.log('View Init Custom Asset Master Add Edit');
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     console.log('dictionary', this.dicts);
 
+    await this.waitFor(_ => this.dicts.formRaw != undefined);
+    await this.waitFor(_ => this.dicts.formRaw.AssetTypeId != undefined);
+
     this.valueSub = this.templateService.callback.subscribe(key => {
-      if (!event.hasOwnProperty('pageId')) {
-        console.log('event', key);
-        const value = this.parentForm.get(key).value;
-        this.checkFinal(value);
-        this.getListAssetScheme(value);
+      if (key != undefined && !key.hasOwnProperty('pageId')) {
+        if (key === "AssetTypeId")
+        {
+          const value = this.dicts.formRaw.AssetTypeId;
+          this.checkFinal(value);
+          this.getListAssetScheme(value);
+        }
       }
     });
+  }
+
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
+
+    return new Promise(vote);
   }
 
   Checked(AssetSchmHIdFromH: number, isChecked: boolean): void {
@@ -107,6 +121,8 @@ export class CustomAssetMasterDetailParentComponent implements OnInit, AfterView
     if (this.AssetTypeId === key && key === '') {
       return;
     }
+
+    if (key == "") return;
     
     this.AssetTypeId = key;
     const request = {
@@ -129,6 +145,8 @@ export class CustomAssetMasterDetailParentComponent implements OnInit, AfterView
     if (this.AssetTypeId === key && key !== '') {
       return;
     }
+
+    if (key == "") return;
     
     this.AssetTypeId = key;
     const request = {
@@ -141,8 +159,6 @@ export class CustomAssetMasterDetailParentComponent implements OnInit, AfterView
 
         if ( res['MaxHierarchyLevel'] == 1) {
           this.isFinal = true;
-          // this.AssetMasterParentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
-          // this.AssetMasterParentForm.controls['AssetCategoryId'].updateValueAndValidity();
         }
         else {
           this.isFinal = false;

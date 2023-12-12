@@ -28,11 +28,6 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
   AssetTypeId: string;
   mode: string;
   pageName: string = "AssetMasterDetail";
-
-  AssetMasterParentForm = this.fb.group({
-    IsFinal: [false],
-    AssetCategoryId: ['']
-  });
   
   handler = {
     callback: ($event) => this.callback($event)
@@ -51,16 +46,32 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     console.log("masook");    
   }
 
-  callback(ev: any) {
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
+
+    return new Promise(vote);
+  }
+
+  async callback(ev: any) {
     if(ev === 'AssetTypeId') {
-      console.log(this.parentForm.get(ev).value);
-      console.log("Parent Form",this.parentForm);
+
+      await this.waitFor(_ => this.parentForm.controls.AssetTypeId != undefined);
+
       const _ddl = this.ddlSvc.GetDictDDL(ev);
-      console.log("ddl: ",_ddl);
       const y = this.parentForm.get(ev).value;
       const x = _ddl.find(x=>x.Key == y);
-      console.log("AssetTypeCode", x.Value);
-      this. getListAssetCategory(x.Value)
+
+      let assetTypeCode = ""
+      await this.http.post(this.UrlConstantNew.GetAssetTypeById, {Id: x.Key }).toPromise().then(
+        (response) => {
+          assetTypeCode = response['AssetTypeCode'];
+        }
+      );
+
+      this. getListAssetCategory(assetTypeCode)
     }
   }
 
