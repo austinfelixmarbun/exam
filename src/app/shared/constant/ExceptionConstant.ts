@@ -76,6 +76,7 @@ export class ExceptionConstant {
     public static ROUNDED_AMT_INVALID = "Rounded Amount must be between 0-2";
     public static EXP_PASSWORD = "Password has expired. Please change your password.";
     public static PWD_EXCEPTION = "Minimum 8 characters, at least 1 letter, 1 number and 1 special character.";
+    public static PASSWORD_DEFAULT = "The password is still in default, please change it immediately.";
 
     public static MANDATORY_LEGAL_DOC = "Legal Documents with following type are mandatory: {0}";
 
