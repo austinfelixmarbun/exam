@@ -1,7 +1,7 @@
 import { UcTemplateService } from '@adins/uctemplate';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { Subscription } from 'rxjs';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -42,8 +42,7 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.parentForm = ev;
   }
 
-  ngOnInit(): void {
-    console.log("masook");    
+  ngOnInit(): void {  
   }
 
   waitFor(conditions) {
@@ -68,6 +67,15 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
       await this.http.post(this.UrlConstantNew.GetAssetTypeById, {Id: x.Key }).toPromise().then(
         (response) => {
           assetTypeCode = response['AssetTypeCode'];
+          if (response['MaxHierarchyLevel'] == 1)
+          {
+            this.parentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+          }
+          else
+          {
+            this.parentForm.controls['AssetCategoryId'].clearValidators();
+          }
+          this.parentForm.controls['AssetCategoryId'].updateValueAndValidity();
         }
       );
 
@@ -83,11 +91,10 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.AssetTypeCode = val;
     
     var critObj = new CriteriaObj();
-        critObj.DataType = 'text';
-        critObj.restriction = AdInsConstant.RestrictionEq;
-        critObj.propName = 'ASSET_TYPE_CODE';
-        critObj.value = this.AssetTypeCode;
-        console.log("crit val: ", critObj.value);
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'ASSET_TYPE_CODE';
+    critObj.value = this.AssetTypeCode;
     
     this.listRequest = new ListRequestCriteriaObj();
     this.listRequest.criteria = new Array();
@@ -96,7 +103,6 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.http.post<GenericKeyValueListObj>(this.UrlConstantNew.GetListAssetCategory, this.listRequest).subscribe(
       (response) => {
         this.resultAssetCategory = response[CommonConstant.ReturnObj];
-        console.log("resultAssetCategory", this.resultAssetCategory)
         this.ddlSvc.SetDictDDL("AssetCategoryId", this.resultAssetCategory);
       });
   }
