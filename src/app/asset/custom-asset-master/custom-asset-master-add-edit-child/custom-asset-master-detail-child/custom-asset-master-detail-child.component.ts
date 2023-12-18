@@ -125,12 +125,13 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
       this.assetMasterObj.AssetMasterId = this.dicts.AssetMasterId;
       await this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).toPromise().then(
         async (response: AssetMasterObj) => {
+          this.resultData = response;
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
           await this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).toPromise().then(
             async (response: AssetTypeObj) => {
-
+              this.resultAssetType = response;
               if (this.isFinal) {
                 let reqGetAssetMasterAttrContentObj = {
                   AssetMasterId: this.dicts.AssetMasterId,
@@ -176,16 +177,6 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
         }
       );
     }
-    await this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).toPromise().then(
-      async (response: AssetMasterObj) => {
-        this.resultData = response;
-        this.assetTypeObj = new AssetTypeObj();
-        this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-        await this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).toPromise().then(
-          (response: AssetTypeObj) => {
-            this.resultAssetType = response;
-          })
-        });
     await this.getListAssetCategory(this.resultAssetType.AssetTypeCode)
   }
 
@@ -293,6 +284,9 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
       (response) => {
         this.resultAssetCategory = response[CommonConstant.ReturnObj];
         this.ddlSvc.SetDictDDL("AssetCategoryId", this.resultAssetCategory);
+        this.parentForm.patchValue({
+          AssetCategoryId: this.dicts.mode == "edit" ? this.resultData.AssetCategoryId : ""
+        });
       });
   }
 }
