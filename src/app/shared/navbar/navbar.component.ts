@@ -160,6 +160,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
+        sessionStorage.clear();
     }
 
     ShowRole() {

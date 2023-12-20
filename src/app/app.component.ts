@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { AdInsHelper } from './shared/AdInsHelper';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie';
-import { Router } from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import { CommonConstant } from './shared/constant/CommonConstant';
 import { URLConstant } from './shared/constant/URLConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { AdInsConstant } from './shared/AdInstConstant';
 import { EnviConfigService } from './shared/services/enviConfig.service';
+import Swal from 'sweetalert2';
+import {filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -18,15 +21,18 @@ import { EnviConfigService } from './shared/services/enviConfig.service';
 })
 export class AppComponent implements OnInit {
 
-
     private _hubConnection: HubConnection;
+    private Identity: string;
     private env;
+
     //TEST PUSH MASTER 5
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService, private UrlConstantNew: UrlConstantNew) {
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService,
+                private UrlConstantNew: UrlConstantNew, private elementRef: ElementRef, private renderer: Renderer2) {
       this.env = this.configEnv.getConfig();
     }
  
     ngOnInit(): void {
+        this.setIdentity(this.cookieService.get(CommonConstant.USER_ACCESS));
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {
             // this.checkisEODforlogout();
@@ -34,6 +40,83 @@ export class AppComponent implements OnInit {
         }
         const appVersion = require('../../package.json').version;
         localStorage.setItem("Version", appVersion);
+
+        /**
+         * Nendi: 20 Des 2024 | Bugfix session override after change role
+         * Invalidate current session after change role event
+         * Prevent form submission due on invalid session
+         */
+        const invalidIdentityDialog = (formValue?: any) => {
+          const msgr = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-primary-2',
+              cancelButton: 'btn btn-link-2'
+            },
+            buttonsStyling: true
+          });
+
+          msgr.fire({
+            title: 'Identity invalid',
+            text: 'Your identity has been changed please refresh your current page!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Refresh',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true
+          }).then(result => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
+        };
+
+        const validateIdentity = () => {
+          // Validate Identity for the latest change
+          const latestIdentity = this.cookieService.get('UserAccess');
+          if (this.Identity !== latestIdentity) {
+            const containerElement   = this.elementRef.nativeElement.querySelector('.content-wrapper') as HTMLElement;
+
+            if (containerElement) {
+              const buttons = containerElement.querySelectorAll('button'); // formElement.querySelector('button');
+              console.log('buttons', buttons);
+              buttons.forEach((button: HTMLButtonElement) => {
+                if (button.type === 'button') {
+                  button.setAttribute('disabled', 'disabled');
+                } else {
+                  this.renderer.listen(button, 'click', (event: Event) => {
+                    // Stop form from default submission and run custom event handler
+                    event.preventDefault();
+                    invalidIdentityDialog();
+                  });
+                }
+              });
+            }
+
+            invalidIdentityDialog();
+          }
+        };
+
+        // Listen for user change role
+        window.addEventListener('change:user', event => {
+          this.setIdentity(event['detail']['Identity']);
+        });
+
+        // Listen for change browser tab
+        document.addEventListener('visibilitychange', () => {
+          // let routeChangeSub: Subscription;
+          if (document.hidden) {
+            console.log('Identity', this.Identity);
+          } else {
+            validateIdentity();
+            this.router.events.subscribe(next => {
+              if (next instanceof NavigationEnd) {
+                setTimeout(() => {
+                  validateIdentity();
+                }, 2 * 1000);
+              }
+            });
+          }
+        });
     }
 
     checkisEODforlogout(){
@@ -69,6 +152,12 @@ export class AppComponent implements OnInit {
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
+        sessionStorage.clear();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
+    }
+
+    setIdentity(identity: string) {
+      this.Identity = identity;
+      sessionStorage.setItem('Identity', this.Identity);
     }
 }

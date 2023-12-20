@@ -7,6 +7,42 @@
     font-family: 'Manrope', Arial, Helvetica, sans-serif;
 }
 
+.swal2-actions {
+  display: flex;
+  z-index: 1;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 1.25em auto 0;
+  padding: 0;
+}
+
+.swal2-modal .swal2-confirm {
+  background: var(--blue-primary, #246CFE)!important;
+}
+
+.swal2-modal .swal2-cancel {
+  background: var(--white, #FDFEFF)!important;
+}
+
+.swal2-html-container {
+  z-index: 1;
+  text-transform: none !important;
+  justify-content: center;
+  margin: 1em 1.6em .3em;
+  padding: 0;
+  overflow: auto;
+  color: inherit;
+  font-size: 1.125em;
+  font-weight: normal;
+  line-height: normal;
+  text-align: center;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
 /*css for button*/
 .button-text, .button-icon{
     font-size: 11px;
@@ -737,4 +773,10 @@ mat-dialog-container#role-modal {
     display: inline-block;
     user-select: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.subsection-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--Black_1, #3A4060);
 }
