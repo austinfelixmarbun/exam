@@ -56,8 +56,8 @@ export class AppComponent implements OnInit {
           });
 
           msgr.fire({
-            title: 'Identity invalid',
-            text: 'Your identity has been changed please refresh your current page!',
+            title: 'Session Identity Invalid',
+            text: 'Your session identity has been changed, please refresh your current page!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Refresh',
