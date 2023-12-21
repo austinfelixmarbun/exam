@@ -25,12 +25,12 @@ export class AppComponent implements OnInit {
     private Identity: string;
     private env;
 
-    //TEST PUSH MASTER 5
+    // TEST PUSH MASTER 5
     constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService,
                 private UrlConstantNew: UrlConstantNew, private elementRef: ElementRef, private renderer: Renderer2) {
       this.env = this.configEnv.getConfig();
     }
- 
+
     ngOnInit(): void {
         this.setIdentity(this.cookieService.get(CommonConstant.USER_ACCESS));
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
             // this.validateIp(); // force logout saat ada yg login di IP berbeda
         }
         const appVersion = require('../../package.json').version;
-        localStorage.setItem("Version", appVersion);
+        localStorage.setItem('Version', appVersion);
 
         /**
          * Nendi: 20 Des 2024 | Bugfix session override after change role
@@ -73,6 +73,19 @@ export class AppComponent implements OnInit {
         const validateIdentity = () => {
           // Validate Identity for the latest change
           const latestIdentity = this.cookieService.get('UserAccess');
+
+          // Nendi: 21 Des 2023 | Ignore when user has logout
+          if (!latestIdentity) {
+            return this.clearSession();
+          }
+
+          // User has already login
+          if (latestIdentity && !this.Identity) {
+            this.setIdentity(latestIdentity);
+            this.router.navigate([NavigationConstant.DASHBOARD]);
+            return;
+          }
+
           if (this.Identity !== latestIdentity) {
             const containerElement   = this.elementRef.nativeElement.querySelector('.content-wrapper') as HTMLElement;
 
@@ -97,6 +110,11 @@ export class AppComponent implements OnInit {
         };
 
         // Listen for user change role
+        window.addEventListener('user:logout', () => {
+          this.Identity = null;
+        });
+
+        // Listen for user logout
         window.addEventListener('change:user', event => {
           this.setIdentity(event['detail']['Identity']);
         });
@@ -119,27 +137,25 @@ export class AppComponent implements OnInit {
         });
     }
 
-    checkisEODforlogout(){
+    checkisEODforlogout() {
         this.http.post(this.UrlConstantNew.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
-              if(response["SysValue"] == '1')
-              {
-                localStorage.setItem("IsEod",response["SysValue"] );
+              if (response['SysValue'] == '1') {
+                localStorage.setItem('IsEod', response['SysValue'] );
                 this.logout();
               }
             }
           );
     }
 
-    validateIp(){
-        let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+    validateIp() {
+        const context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.http.post(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
-              if(response["LastIpAddress"] != localStorage.getItem("LocalIp"))
-              {        
-                let version = localStorage.getItem(CommonConstant.VERSION);
+              if (response['LastIpAddress'] != localStorage.getItem('LocalIp')) {
+                const version = localStorage.getItem(CommonConstant.VERSION);
                 localStorage.clear();
-                localStorage.setItem("Version", version);
+                localStorage.setItem('Version', version);
                 this.cookieService.removeAll();
                 window.location.reload();
               }
@@ -148,7 +164,7 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        var url = this.env.FoundationR3Url + "/v1" + "/Authenticate/Logout";
+        const url = this.env.FoundationR3Url + '/v1' + '/Authenticate/Logout';
         this.http.post(url, {}).subscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.cookieService.removeAll();
@@ -159,5 +175,15 @@ export class AppComponent implements OnInit {
     setIdentity(identity: string) {
       this.Identity = identity;
       sessionStorage.setItem('Identity', this.Identity);
+    }
+
+    clearSession() {
+      this.Identity = null;
+      sessionStorage.clear();
+
+      const url = location.href;
+      if (!url.includes('Login')) {
+        this.router.navigate([NavigationConstant.PAGES_LOGIN]);
+      }
     }
 }

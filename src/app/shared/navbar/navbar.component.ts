@@ -158,9 +158,9 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
         this.needUnsubscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
+        this.clearSession();
         this.cookieService.removeAll();
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
-        sessionStorage.clear();
     }
 
     ShowRole() {
@@ -235,5 +235,11 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
+    }
+
+    private clearSession() {
+      sessionStorage.clear();
+      const event: CustomEvent = new CustomEvent<any>('user:logout');
+      window.dispatchEvent(event);
     }
 }
