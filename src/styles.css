@@ -7,6 +7,49 @@
     font-family: 'Manrope', Arial, Helvetica, sans-serif;
 }
 
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* color of the scrollbar thumb */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* color of the scrollbar thumb on hover */
+}
+
+.app-sidebar .navigation li.active > a, .off-canvas-sidebar .navigation li.active > a {
+   border-left: none !important;
+  color: #246CFE !important;
+}
+
+.app-sidebar .logo .logo-text, .off-canvas-sidebar .logo .logo-text {
+   padding: 0 !important;
+  display: block;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.sidebar-header a.nav-toggle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  right: 14px;
+  top: 16px;
+}
+
 .swal2-actions {
   display: flex;
   z-index: 1;
@@ -51,16 +94,17 @@
 
 /*css for primary button*/
 .btn-primary-2{
-    border: 1px solid var(--blue-primary, #246CFE)!important;
-    background: var(--blue-primary, #246CFE)!important;
-    color :var(--white, #FDFEFF)!important;
-    border-radius: 7px !important;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1px solid var(--blue-primary, #246CFE);
+  background: var(--blue-primary, #246CFE);
+  color :var(--white, #FDFEFF)!important;
+  border-radius: 7px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 .btn-primary-2:hover{
-    background: var(--blue-primary-darker, #0010F7)!important;
-    border: 1px solid var(--blue-primary-darker, #0010F7)!important;
+  background: var(--blue-primary-darker, #0010F7)!important;
+  border: 1px solid var(--blue-primary-darker, #0010F7)!important;
 }
+/*css for primary button*/
 
 /*css for outline button*/
 .btn-outline-2{
@@ -296,27 +340,27 @@ form .textarea-field-2{
 }
 
 tbody tr td {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 select {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
 }
 
 div {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
 }
 
 a {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
 }
 
 span {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
 }
 
 button {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
 }
 
 .form-section {
@@ -410,12 +454,11 @@ form label {
 }
 
 thead tr th {
-    text-transform: uppercase;
     font-size: 12px;
 }
 
 .form-section {
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 .button-right {
@@ -489,6 +532,13 @@ label.custom-control-label {
 
 .custom-control-label {
     font-size: 1rem;
+}
+
+/*button add in formarray*/
+.add-formarray{
+  position: absolute;
+  margin-top: 7px;
+  right: 40px;
 }
 
 .addButton {
@@ -596,8 +646,14 @@ form .form-section {
     margin-right: 150px;
 }
 
+footer {
+  padding-left: 250px;
+  display: block;
+  margin-top: 0 !important;
+}
+
 label {
-    text-transform: uppercase !important;
+    /*text-transform: uppercase !important;*/
     letter-spacing: 0.5px !important;
     font-size: 1rem !important;
 }
@@ -630,7 +686,7 @@ form.form-horizontal .form-group .label-control {
     transform: translateX(-50%) translateY(-100%);
     opacity: 0;
     transition: opacity 0.3s;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Manrope', Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-size: 12px;
 }

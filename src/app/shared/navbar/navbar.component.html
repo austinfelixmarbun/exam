@@ -41,41 +41,35 @@
                             </a>
                         </div>
                     </li> -->
-                    <li class="nav-item mr-2">
-                        <a class="nav-link" id="dropdownModul" placement="bottom" triggers="mouseenter:mouseleave" ngbPopover="Change Module" (click)="changeModul('cm')">
-                            <i class="ft-folder font-medium-3 blue-grey darken-4"></i>
-                            <p class="d-none">Modul</p>
-                        </a>
-                    </li>
+<!--                    <li class="nav-item mr-2">-->
+<!--                        <a class="nav-link" id="dropdownModul" placement="bottom" triggers="mouseenter:mouseleave" ngbPopover="Change Module" (click)="changeModul('cm')">-->
+<!--                            <i class="ft-folder font-medium-3 blue-grey darken-4"></i>-->
+<!--                            <p class="d-none">Modul</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li class="nav-item mr-2  d-none d-lg-block">
                         <a href="javascript:;" class="nav-link" id="navbar-fullscreen" appToggleFullscreen
                             (click)="ToggleClass()">
-                            <i class="{{toggleClass}} font-medium-3 blue-grey darken-4"></i>
+                            <i class="{{toggleClass}} font-medium-3 primary-2"></i>
                             <p class="d-none">fullscreen</p>
                         </a>
                     </li>
-                    <li class="nav-item" ngbDropdown [placement]="placement">
-                        <a class="nav-link position-relative" id="dropdownLang" ngbDropdownToggle>
-                            <i class="ft-flag font-medium-3 blue-grey darken-4"></i>
-                            <p class="d-none">Language</p>
-                        </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownLang" class="dropdownLang text-left">
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('en')">
-                                <img src="./assets/img/flags/us.png" alt="English" class="langimg">
-                                <span>English</span>
-                            </a>
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('id')">
-                                <img src="./assets/img/flags/id.png" alt="Indonesia" class="langimg">
-                                <span>Indonesia</span>
-                            </a>
-                        </div>
+                    <li class="nav-item mr-2 mt-1 d-none d-lg-block">
+                      <div class="toggle-lang btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="currentLang" (ngModelChange)="ChangeLanguage($event)" style="align-items: center;">
+                        <label ngbButtonLabel [ngClass]="{'btn-lighten-5' : currentLang === 'en', 'bg-white btn-black' : currentLang !== 'en'}" style="border: 1px solid #246CFE; color: #246CFE; border-radius: 7px 0px 0px 7px; padding: 3px 15px;">
+                          <input ngbButton type="radio" [value]="'en'"> EN
+                        </label>
+                        <label ngbButtonLabel [ngClass]="{'btn-lighten-5' : currentLang === 'id', 'bg-white btn-black' : currentLang !== 'id'}" style="border: 1px solid #246CFE; color: #246CFE; border-radius: 0px 7px 7px 0px; padding: 3px 15px;" >
+                          <input ngbButton type="radio" [value]="'id'"> ID
+                        </label>
+                      </div>
                     </li>
-                    <li *ngIf="IsUseNotification == '1'">
-                        <lib-ucnotification #appnotif class="nav-item" ngbDropdown [InputObj]="NotificationObj" (NeedLogOut)="notifLogoutHandler($event)"></lib-ucnotification>
-                    </li>
+<!--                    <li *ngIf="IsUseNotification == '1'">-->
+<!--                        <lib-ucnotification #appnotif class="nav-item" ngbDropdown [InputObj]="NotificationObj" (NeedLogOut)="notifLogoutHandler($event)"></lib-ucnotification>-->
+<!--                    </li>-->
                     <li class="nav-item" ngbDropdown [placement]="placement">
                         <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
-                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+                            <i class="ft-user font-medium-3 primary-2"></i>
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3" class="text-left">

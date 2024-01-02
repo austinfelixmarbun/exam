@@ -8,7 +8,7 @@
 
  =========================================================
 */
- $(document).ready( function(){
+$(document).ready( function(){
 
 
     var $sidebar = $('.app-sidebar'),
@@ -20,7 +20,7 @@
     $sidebar_content.perfectScrollbar();
 
     if( $sidebar_img_container.length !== 0 && $sidebar_img !== undefined ){
-        $sidebar_img_container.css('background-image','url("' + $sidebar_img + '")');
+        // $sidebar_img_container.css('background-image','url("' + $sidebar_img + '")');
     }
 
     if(!$wrapper.hasClass('nav-collapsed')){
@@ -125,7 +125,7 @@
         if(toggle === 'expanded'){
             $wrapper.addClass('nav-collapsed');
 
-            $('.nav-toggle').find('.toggle-icon').removeClass('ft-toggle-right').addClass('ft-toggle-left');
+           // $('.nav-toggle').find('.toggle-icon').removeClass('ft-toggle-right').addClass('ft-toggle-left');
             toggle_icon.attr('data-toggle', 'collapsed');
             if(compact_menu_checkbox.length > 0){
                 compact_menu_checkbox.prop('checked',true);
@@ -133,8 +133,10 @@
         }
         else{
             $wrapper.removeClass('nav-collapsed menu-collapsed');
+            $('.sidebar-header').find('.logo-menu').removeClass('logo-open').addClass('d-none');
+            $('.sidebar-header').find('.sidebar-element-collapsed').removeClass('d-none');
 
-            $('.nav-toggle').find('.toggle-icon').removeClass('ft-toggle-left').addClass('ft-toggle-right');
+            //$('.nav-toggle').find('.toggle-icon').removeClass('ft-toggle-left').addClass('ft-toggle-right');
             toggle_icon.attr('data-toggle', 'expanded');
             if(compact_menu_checkbox.length > 0){
                 compact_menu_checkbox.prop('checked',false);
@@ -145,6 +147,9 @@
     $sidebar.on('mouseenter', function() {
         if($wrapper.hasClass('nav-collapsed')){
             $wrapper.removeClass('menu-collapsed');
+            $('.sidebar-header').find('.logo-menu').removeClass('logo-open').addClass('d-none');
+            $('.sidebar-header').find('.sidebar-element-collapsed').removeClass('d-none');
+
             var $listItem = $('.navigation li.nav-collapsed-open'),
             $subList = $listItem.children('ul');
 
@@ -158,6 +163,10 @@
     }).on('mouseleave', function(event) {
         if($wrapper.hasClass('nav-collapsed')){
             $wrapper.addClass('menu-collapsed');
+
+            $('.sidebar-header').find('.logo-menu').removeClass('d-none').addClass('logo-open');
+            $('.sidebar-header').find('.sidebar-element-collapsed').addClass('d-none');
+
             var $listItem = $('.navigation li.open'),
             $subList = $listItem.children('ul');
             $listItem.addClass('nav-collapsed-open');
@@ -173,16 +182,20 @@
     if ($(window).width() < 992) {
         $sidebar.addClass('hide-sidebar');
         $wrapper.removeClass('nav-collapsed menu-collapsed');
+        $('.sidebar-header').find('.logo-menu').removeClass('logo-open').addClass('d-none');
     }
     $( window ).resize(function() {
         if ($(window).width() < 992) {
             $sidebar.addClass('hide-sidebar');
             $wrapper.removeClass('nav-collapsed menu-collapsed');
+            $('.sidebar-header').find('.logo-menu').removeClass('logo-open').addClass('d-none');
         }
         if ($(window).width() > 992) {
             $sidebar.removeClass('hide-sidebar');
             if( $('.toggle-icon').attr('data-toggle') === 'collapsed' &&  $wrapper.not('.nav-collapsed menu-collapsed')){
                 $wrapper.addClass('nav-collapsed menu-collapsed');
+                $('.sidebar-header').find('.logo-menu').removeClass('d-none').addClass('logo-open');
+                $('.sidebar-header').find('.sidebar-element-collapsed').addClass('d-none');
             }
         }
     });
@@ -203,6 +216,7 @@
     $('.navbar-toggle').on('click',function(e){
         e.stopPropagation();
         $sidebar.toggleClass('hide-sidebar');
+        $('.sidebar-header').find('.sidebar-element-collapsed').removeClass('d-none');
     });
 
     $('html').on('click', function (e) {
