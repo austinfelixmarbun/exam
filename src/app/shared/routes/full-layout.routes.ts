@@ -333,7 +333,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'report',
+    path: 'reportarmnt',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -345,7 +345,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'report',
+    path: 'reportcashbank',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -469,7 +469,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'report',
+    path: 'reportpayment',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -579,7 +579,7 @@ export const Full_ROUTES: Routes = [
     }
   },
   {
-    path: 'report',
+    path: 'reportamendment',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -1182,7 +1182,7 @@ export const Full_ROUTES: Routes = [
     },
   },
   {
-    path: 'report',
+    path: 'reportap',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
@@ -1194,7 +1194,7 @@ export const Full_ROUTES: Routes = [
     },
   },
   {
-    path: 'report',
+    path: 'reportfinops',
     loadChildren: () => {
       return loadRemoteModule({
         type: 'module',
