@@ -95,8 +95,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
       if (params['mode'] != null) {
         this.mode = params['mode'];
       }
-
-      console.log("ini vendor category code:", this.MrVendorCategoryCode)
     });
 
   }
@@ -111,7 +109,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
 
     this.http.post(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
-        console.log("GetListVendorAttrContentByVendorCode: ", response);
         this.ListVendorAttrContent = response;
         if (this.ListVendorAttrContent != null) {
           if (this.ListVendorAttrContent.length < 1) {
@@ -119,8 +116,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
             this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
-                console.log("ini response ref attr", response);
-                console.log("GetListVendorAttrContentByVendorCode[2]: ", response);
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
                 let tempLookup = {};
@@ -258,7 +253,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                                   this.jurisdictionValue = "OFFSHORE"
                                 }
                               });
-                            console.log("this is ref bank response", response)
                           });
 
                       }
@@ -270,7 +264,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                        console.log("ini attr value bank_code", vendorAttr["AttrCode"])
 
                       }
 
@@ -281,7 +274,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                        console.log("ini attr value zipcode", vendorAttr["AttrCode"])
                       }
                     }
                     else {
@@ -321,10 +313,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                                   this.jurisdictionValue = "OFFSHORE"
                                 }
                               });
-
-
-                            console.log("this is ref bank response", response)
-                            console.log(this.jurisdictionValue)
                           });
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
@@ -343,7 +331,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                           (response) => {
                             this.responseApi = response;
                             tempLookup[vendorAttr["AttrCode"]].jsonSelect = { Descr: this.responseApi.Descr }
-                            console.log("this is mr counterpart response", response)
                           });
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
@@ -402,10 +389,8 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                             AttrContent: formValue[key].VendorAttrValue,
                             VendorId: this.VendorId
                           }));
-                          console.log('vendorAttrContent:', vendorAttrContent);
                   this.parentForm.addControl("VendorAttrList2", this.fb.group(vendorAttrContent));
                         }
-                        console.log("vendorAttrContent:", this.parentForm);
                   this.isFormReady = true;
                 }
               });
@@ -442,8 +427,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
     this.vendorContactPerson = contactPerson;
     this.data.emit({contactPerson: this.vendorContactPerson});
     // this.parentForm.addControl("contactPerson", this.fb.group(this.vendorContactPerson));
-    console.log("ini isi this.vendorCP di parent", this.vendorContactPerson);
-    console.log("asascascas");
   }
 
   getLookUpAttrBank(e, VendorAttrCode) {
@@ -467,7 +450,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
     this.parentForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
       VendorAttrValue: e.LbppmsCntrprtCode
     });
-    console.log("ini hasil event attr category", e.LbppmsCntrprtCode);
   }
 
   getLookUpZipcode(e, VendorAttrCode) {
@@ -514,7 +496,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             VendorAttrContent: vendorAttrContent,
             VendorContactPerson: this.vendorContactPerson
           }
-          console.log("ini isi form data edit", formDataEdit)
           this.http.post(URLConstant.EditVendorFundingCoy, formDataEdit).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
@@ -529,7 +510,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             vendorAttrContent: vendorAttrContent,
             vendorContactPerson: this.vendorContactPerson
           }
-          console.log(this.vendorFundingCoyObj.value);
           this.http.post<any>(URLConstant.AddVendorFundingCoy, formDataAdd, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
