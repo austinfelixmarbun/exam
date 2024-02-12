@@ -21,6 +21,7 @@ import { addEditCustCompanyLegalDoc,
   //  uploadDocFileLegalMultipart 
 } from "../function/customer-function";
 import { rejectUpload } from "../function/review-upload-function";
+import { saveListMaskingItemForm } from "../function/masking-data-function";
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,6 @@ export class AdInsExecutorService extends ExecutorService {
     this.setExecutor("rejectUpload", rejectUpload);
     this.setExecutor("saveFormAssetMasterParent", saveFormAssetMasterParent);
     this.setExecutor("saveFormAssetMasterChild", saveFormAssetMasterChild);
+    this.setExecutor("saveListMaskingItemForm", saveListMaskingItemForm);
   }
 }

@@ -275,6 +275,13 @@ export class PathConstant {
     public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
     public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
 
+    public static CS_MASKING = "MaskingData";
+    public static CS_MASKING_PAGING = PathConstant.CS_MASKING + "/" + PathConstant.PAGING;
+    public static CS_MASKING_DETAIL = PathConstant.CS_MASKING + "/" + PathConstant.DETAIL;    
+    public static CS_MASKING_WHITELIST = PathConstant.CS_MASKING + "/WhitelistRole";
+    public static CS_MASKING_WHITELIST_DETAIL = PathConstant.CS_MASKING + "/WhitelistRoleDetail";
+    public static CS_MASKING_WHITELIST_EDIT = PathConstant.CS_MASKING + "/WhitelistRoleEdit";
+
     public static CUSTOM_CS_GEN_SETTING = PathConstant.SELF_CUSTOM + "/" + "GeneralSetting";
     public static CUSTOM_CS_GEN_SETTING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_BANK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.PAGING;
