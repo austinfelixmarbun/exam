@@ -513,6 +513,7 @@ export class PathConstant {
     public static CHANGE_PASSWORD = "ChangePassword";
     public static REF_FORM = "RefForm";
     public static ROLE_MAP = "RoleMapping";
+    public static FEATURE = "Feature";
     public static REF_FORM_PAGING = PathConstant.REF_FORM + "/" + PathConstant.PAGING;
     public static REF_FORM_DETAIL = PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static REF_FORM_ROLE_MAP = PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP;
@@ -527,6 +528,7 @@ export class PathConstant {
     public static CUSTOM_ROLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE + "/" + PathConstant.DETAIL;
     public static CUSTOM_ROLE_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + "RoleForm" + "/" + PathConstant.PAGING;
     public static CUSTOM_ROLE_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ROLE_FORM_FEATURE = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.FEATURE;
     public static CUSTOM_REF_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.PAGING;
     public static CUSTOM_REF_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static CUSTOM_REF_FORM_ROLE_MAP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.PAGING;

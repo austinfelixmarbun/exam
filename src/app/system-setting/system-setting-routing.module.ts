@@ -205,6 +205,14 @@ const routes: Routes = [
         },
       },
       {
+        path: PathConstant.CUSTOM_ROLE_FORM_FEATURE,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Role Form Feature',
+          page: 'RoleFormFeature'
+        },
+      },
+      {
         path: PathConstant.CUSTOM_REF_FORM_PAGING,
         component: UcTemplateComponent,
         data: {
