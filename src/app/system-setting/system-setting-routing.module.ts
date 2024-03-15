@@ -244,6 +244,30 @@ const routes: Routes = [
           page: 'FormRoleDetail'
         },
       },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_API_PAGING,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Form API Paging',
+          page: 'FormApiPaging'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_API_DETAIL,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Form API Detail',
+          page: 'FormApiDetail'
+        },
+      },
+      {
+        path: PathConstant.CUSTOM_REF_FORM_API_FEATURE,
+        component: UcTemplateComponent,
+        data: {
+          title: 'Form API Feature',
+          page: 'FormApiFeatureDetail'
+        },
+      },
     ]
   }
 ];

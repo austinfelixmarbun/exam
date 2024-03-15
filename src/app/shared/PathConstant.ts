@@ -514,6 +514,7 @@ export class PathConstant {
     public static REF_FORM = "RefForm";
     public static ROLE_MAP = "RoleMapping";
     public static FEATURE = "Feature";
+    public static API = "Api";
     public static REF_FORM_PAGING = PathConstant.REF_FORM + "/" + PathConstant.PAGING;
     public static REF_FORM_DETAIL = PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static REF_FORM_ROLE_MAP = PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP;
@@ -533,6 +534,9 @@ export class PathConstant {
     public static CUSTOM_REF_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static CUSTOM_REF_FORM_ROLE_MAP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.PAGING;
     public static CUSTOM_REF_FORM_ROLE_MAP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_API_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.PAGING;
+    public static CUSTOM_REF_FORM_API_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_API_FEATURE = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.FEATURE;
     //#endregion
 
     //#region Upload-Module
