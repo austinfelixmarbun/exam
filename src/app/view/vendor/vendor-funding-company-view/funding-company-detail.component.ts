@@ -5,8 +5,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { URLConstant } from 'app/shared/constant/URLConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
@@ -14,6 +12,7 @@ import { ResGetListVendorContactPersonObj, ResListVendorContactPersonObj } from 
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { VendorAttrContentObj } from 'app/shared/model/vendor-attr-content-obj.model';
 import { FundingCompanyService } from 'app/vendor/funding-company.service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-funding-company-detail',
@@ -75,7 +74,7 @@ export class FundingCompanyDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log("ini id",this.VendorCode);
 
-    this.http.post(URLConstant.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
       async (response) => {
         this.result = response;
         this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
@@ -86,7 +85,7 @@ export class FundingCompanyDetailComponent implements OnInit {
         })
         this.vendor = vendorData;
       })
-      this.http.post(URLConstant.GetVendorAddrByVendorCode, { Code: this.VendorCode }).toPromise().then(
+      this.http.post(this.UrlConstantNew.GetVendorAddrByVendorCode, { Code: this.VendorCode }).toPromise().then(
         async (response) => {
           this.resultAddr = response;
           const vendorAddrData = ({
@@ -96,13 +95,13 @@ export class FundingCompanyDetailComponent implements OnInit {
         }
       )
   
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
+    this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
         this.ListVendorAttrContent = response;
         if (this.ListVendorAttrContent != null) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
-            this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
+            this.http.post(this.UrlConstantNew.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
                 var parentFormGroup = new Object();
                 let tempLookup = {};
@@ -119,7 +118,7 @@ export class FundingCompanyDetailComponent implements OnInit {
                         rowVersion: "",
                         code: attribute.AttrContent
                       }
-                      await this.http.post(URLConstant.GetRefBankByRefBankCodeAsync, reqObjBank).toPromise().then(
+                      await this.http.post(this.UrlConstantNew.GetRefBankByBankCodeAsync, reqObjBank).toPromise().then(
                         (response) => {
                           this.responseBank = response;
                           attribute.AttrName = "BANK NAME"
@@ -139,7 +138,7 @@ export class FundingCompanyDetailComponent implements OnInit {
                         rowVersion: "",
                         code: attribute.AttrContent
                       }
-                      await this.http.post(URLConstant.GetLbppmsCntrprtByLbppmsCntrprtCode, reqObjCntrprt).toPromise().then(
+                      await this.http.post(this.UrlConstantNew.GetLbppmsCntrprtByLbppmsCntrprtCode, reqObjCntrprt).toPromise().then(
                         (response) => {
                           this.responseApi = response;
                           attribute.AttrContent = this.responseApi.Descr
@@ -160,7 +159,7 @@ export class FundingCompanyDetailComponent implements OnInit {
       }
     );
     this.vendorCPObj.Code = this.VendorCode;
-    this.http.post(URLConstant.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
+    this.http.post(this.UrlConstantNew.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
       (response: ResGetListVendorContactPersonObj) => {
         this.listVendorCP = response[CommonConstant.ReturnObj];
         this.listVendorCP = this.listVendorCP.concat(this.childFormService.getChildFormValues());
