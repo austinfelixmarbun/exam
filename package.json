@@ -27,6 +27,7 @@
   },
   "private": true,
   "dependencies": {
+    "@adins/fe-core": "1.0.0",
     "@adins/form-engine": "1.0.2",
     "@adins/uc-attribute": "3.1.3-canary.0",
     "@adins/uc-directive-upper-case": "3.0.1",
@@ -61,7 +62,7 @@
     "@adins/ucreport": "3.0.2",
     "@adins/ucsearch": "^3.4.6-canary.0",
     "@adins/uctable": "^1.1.11-canary.0",
-    "@adins/uctemplate": "1.12.1-canary.0",
+    "@adins/uctemplate": "1.12.32-canary.0",
     "@adins/ucthingstodo": "^3.0.3-canary.0",
     "@adins/ucupload": "^3.0.7-canary.0",
     "@adins/ucviewfileupload": "1.0.1",
