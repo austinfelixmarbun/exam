@@ -8,6 +8,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-journal-media-detail',
@@ -41,17 +42,19 @@ export class JournalMediaDetailComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastr: NGXToastrService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       params => {
-        if (params['mode'] != null) {
-          this.mode = params['mode'];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams['mode'] != null) {
+          this.mode = queryParams['mode'];
         }
 
-        if (params['JrMHeaderId'] != null) {
-          this.JrMHeaderId = +params['JrMHeaderId'];
+        if (queryParams['JrMHeaderId'] != null) {
+          this.JrMHeaderId = +queryParams['JrMHeaderId'];
         }
       }
     );
@@ -78,7 +81,7 @@ export class JournalMediaDetailComponent implements OnInit {
       this.http.post<any>(this.UrlConstantNew.SaveJrMEntity, { ...request, JrMHeaderId: this.JrMHeaderId }, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
         },
         error => {
           console.log(error);
@@ -88,7 +91,7 @@ export class JournalMediaDetailComponent implements OnInit {
       this.http.post<any>(this.UrlConstantNew.AddJrMHeader, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.JOURNAL_MEDIA_PAGING], {})
         },
         error => {
           console.log(error);

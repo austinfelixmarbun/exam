@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -21,11 +22,13 @@ export class CustomerViewCoyFinancialSectionComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) 
   {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
   }

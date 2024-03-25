@@ -20,6 +20,7 @@ import { RegexService } from 'app/customer/regex.service';
 import { HttpClient } from '@angular/common/http';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-atpm-add-edit',
@@ -49,11 +50,13 @@ export class VendorATPMAddEditComponent implements OnInit {
 
   constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, 
               private route: ActivatedRoute, private toastr: NGXToastrService, private vendorService: VendorService, 
-              private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+              private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+              private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      this.VendorId = params['VendorId'];
-      this.mode = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
+      this.VendorId = queryParams['VendorId'];
+      this.mode = queryParams['mode'];
     });
   }
 
@@ -341,7 +344,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.EditVendorATPM(this.vendorATPMObj).subscribe(
           (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id, "mode": 'edit' });
           });
       } else {
         this.vendorATPMObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -349,7 +352,7 @@ export class VendorATPMAddEditComponent implements OnInit {
         this.vendorService.AddVendorATPM(this.vendorATPMObj).subscribe(
           (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id });
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": response.Id });
           });
       }
     }
@@ -357,9 +360,9 @@ export class VendorATPMAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": this.VendorId, "mode": 'edit' });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_ATPM_REG], { "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }

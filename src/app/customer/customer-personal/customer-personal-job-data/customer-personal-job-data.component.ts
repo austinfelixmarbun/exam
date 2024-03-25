@@ -13,6 +13,7 @@ import { JobDataProfessionalComponent } from './job-data-professional/job-data-p
 import { JobDataSmeComponent } from './job-data-small-medium-enterprise/job-data-small-medium-enterprise.component';
 import { JobDataNonProfessionalComponent } from './job-data-non-professional/job-data-non-professional.component';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-personal-job-data',
@@ -30,12 +31,14 @@ export class CustomerPersonalJobDataComponent implements OnInit {
   IsReset: boolean = false;
   custModelReqObj: ReqRefMasterByTypeCodeAndMappingCodeObj;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.tempCustModel = new Array<KeyValueObj>();
 
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }

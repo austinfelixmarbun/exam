@@ -14,6 +14,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { String } from 'typescript-string-operations';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-answer-add-edit',
@@ -31,10 +32,13 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
   dropdownListObj: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private regexService: RegexService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private regexService: RegexService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfQuestionAnswerId = params["VerfQuestionAnswerId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfQuestionAnswerId = queryParams["VerfQuestionAnswerId"];
+      this.mode = queryParams["mode"];
       if (this.mode == "edit")
         this.mode = "edit";
     })
@@ -176,7 +180,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_PAGING],{});
         });
     }
     else {
@@ -184,7 +188,7 @@ export class VerificationQuestionAnswerAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddVerfQuestionAnswer, this.verfQuestionAnswerObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_PAGING],{});
         });
     }
   }

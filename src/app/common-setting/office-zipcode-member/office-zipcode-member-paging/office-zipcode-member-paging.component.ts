@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-zipcode-member-paging',
@@ -39,10 +40,12 @@ export class OfficeZipcodeMemberPagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR;
   readonly AddLink: string = NavigationConstant.CS_OFFICE_ZIPCODE_MBR_ADD;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params['refOfficeId'] != null) {
-        this.refOfficeId = params['refOfficeId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['refOfficeId'] != null) {
+        this.refOfficeId = queryParams['refOfficeId'];
       }
     });
   }

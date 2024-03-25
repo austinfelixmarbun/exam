@@ -8,6 +8,7 @@ import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/resp
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-company-address-check',
@@ -21,13 +22,16 @@ export class CustomerCompanyAddressCheckComponent implements OnInit {
   custAddrObj: GenericObj = new GenericObj();
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
   From: string;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["From"] != null) {
-        this.From = params["From"];
+      if (queryParams["From"] != null) {
+        this.From = queryParams["From"];
       }
     });
   }

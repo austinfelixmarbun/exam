@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -28,10 +29,12 @@ export class CustomDocumentSurveyTaskViewComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
   ReqGenericObj: GenericObj = new GenericObj();
   
-  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["SrvyTaskId"] != null) {
-        this.SrvyTaskId = params["SrvyTaskId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["SrvyTaskId"] != null) {
+        this.SrvyTaskId = queryParams["SrvyTaskId"];
       }
     });
   }

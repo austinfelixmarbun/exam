@@ -33,7 +33,7 @@ export class AdinsTemplateService extends UcTemplateService{
   }
 
   private configure() {
-    this.environment  = env;
+    this.environment  = environment;
     this.envConfig    = env;
     this.urlConstant  = this.UrlConstant;
     this.navConstant  = NavigationConstant;

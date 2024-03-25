@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,13 +17,15 @@ export class CustomerViewHighligtCommentComponent implements OnInit {
   InputBy : any;
 
 
-  constructor(private http: HttpClient ,private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient ,private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { }
 
   ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
-      if (params["CustId"] != null) {
-        this.CustId = params["CustId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustId"] != null) {
+        this.CustId = queryParams["CustId"];
         this.GetListCustHighlightComment(this.CustId);
       }
     });

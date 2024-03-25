@@ -14,6 +14,7 @@ import { RequestTaskModelObj } from 'app/shared/model/v2/request-task-model-obj.
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-review-upload-asset-master-paging',
@@ -25,7 +26,7 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
   requestTaskModel : RequestTaskModelObj = new RequestTaskModelObj();
   arrCrit = new Array<CriteriaObj>();
 
-  constructor(private router: Router, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private router: NgxRouterService, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     let UserAccess = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
@@ -64,9 +65,7 @@ export class ReviewUploadAssetMasterPagingComponent implements OnInit {
     this.http.post(this.UrlConstantNew.CancelUploadV2, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING],{});
-        });
+        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_RVW_UPLOAD_PAGING],{});
     });
   }
 }

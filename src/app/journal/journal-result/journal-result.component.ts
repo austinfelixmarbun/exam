@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,15 +19,17 @@ export class JournalResultComponent implements OnInit {
   JournalLogFailedD = [];
   ErrMsg = [];
   JrResult = [];
-  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['JrMsgHId'] != null) {
-        this.JrMsgHId = params['JrMsgHId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['JrMsgHId'] != null) {
+        this.JrMsgHId = queryParams['JrMsgHId'];
       }
-      if (params['JournalLogFailedHId'] != null) {
-        this.JournalLogFailedHId = params['JournalLogFailedHId'];
+      if (queryParams['JournalLogFailedHId'] != null) {
+        this.JournalLogFailedHId = queryParams['JournalLogFailedHId'];
       }
 
     })

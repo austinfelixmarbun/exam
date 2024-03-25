@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-scheme-member-edit',
@@ -31,13 +32,15 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
   VerfQuestionGrpName: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfSchemeHId = params["VerfSchemeHId"];
-      this.VerfSchemeDId = params["VerfSchemeDId"];
-      this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
-      this.SeqNo = params["SeqNo"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfSchemeHId = queryParams["VerfSchemeHId"];
+      this.VerfSchemeDId = queryParams["VerfSchemeDId"];
+      this.VerfQuestionGrpHId = queryParams["VerfQuestionGrpHId"];
+      this.SeqNo = queryParams["SeqNo"];
+      this.mode = queryParams["mode"];
       if (this.mode != "edit")
         this.mode = "Add";
     })
@@ -77,7 +80,7 @@ export class VerificationQuestionSchemeMemberEditComponent implements OnInit {
     this.http.post(this.UrlConstantNew.EditVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });
       });
   }
 }

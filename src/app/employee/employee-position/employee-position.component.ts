@@ -15,6 +15,7 @@ import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
@@ -46,19 +47,21 @@ export class EmployeePositionComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.EMP_PAGING;
   readonly AddLink: string = NavigationConstant.EMP_POS_DETAIL;
   readonly EditLink: string = NavigationConstant.EMP_POS_DETAIL;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
     this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
-      if (params['refEmpId'] != null) {
-        this.refEmpId = params['refEmpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['refEmpId'] != null) {
+        this.refEmpId = queryParams['refEmpId'];
       }
-      if (params['empNo'] != null) {
-        this.empNo = params['empNo'];
+      if (queryParams['empNo'] != null) {
+        this.empNo = queryParams['empNo'];
       }
-      if (params['empName'] != null) {
-        this.empName = params['empName'];
+      if (queryParams['empName'] != null) {
+        this.empName = queryParams['empName'];
       }
     });
   }

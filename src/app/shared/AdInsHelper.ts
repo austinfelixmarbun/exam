@@ -5,11 +5,19 @@ import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie";
 import * as CryptoJS from 'crypto-js';
-import { NavigationConstant } from "./NavigationConstant";
-import { HttpClient } from "@angular/common/http";
-import { URLConstant } from "./constant/URLConstant";
+import { NgxRouterService } from "@adins/fe-core";
 
 export class AdInsHelper {
+
+    private static ucxRouter: NgxRouterService;
+
+    public static get ngxRouter() {
+        return this.ucxRouter;
+    }
+
+    public static set ngxRouter(service: NgxRouterService) {
+        this.ucxRouter = service;
+    }
 
     //Function
     public static InsertLog(cookieService: CookieService, url, type, param = "") {
@@ -169,24 +177,30 @@ export class AdInsHelper {
         window.open(url, "_blank");
     }
 
-    public static RedirectUrl(router: Router, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
+    public static RedirectUrl(router: Router | NgxRouterService, url: Array<string>, queryParams: {} = {}, isSkipLocation: boolean = false) {
         // Ngebuat bisa jalanin Constructor dan NgOnInit lagi
-        const prev = router.routeReuseStrategy.shouldReuseRoute;
-        if (Object.entries(queryParams).length === 0) {
-            router.routeReuseStrategy.shouldReuseRoute = () => {
-                return false;
-            }
-        }
+        // const prev = router.routeReuseStrategy.shouldReuseRoute;
+        // if (Object.entries(queryParams).length === 0) {
+        //     router.routeReuseStrategy.shouldReuseRoute = () => {
+        //         return false;
+        //     }
+        // }
         // router.navigateByUrl(
         //   router.createUrlTree(
         //     [url.toString()], { queryParams: queryParams }
         //   ), { skipLocationChange: isSkipLocation }
         // );
         // router.routeReuseStrategy.shouldReuseRoute = function() { return false; }
-        router.navigate(url, { queryParams: queryParams, skipLocationChange: isSkipLocation });
-        setTimeout(() => {
-            router.routeReuseStrategy.shouldReuseRoute = prev;
-        }, 1);
+        if (router instanceof Router) {
+            const params = this.ucxRouter.createQueryParams(queryParams);
+            router.navigate(url, { queryParams: params, skipLocationChange: isSkipLocation });
+        } else {
+            router.navigate(url, queryParams);
+        }
+        
+        // setTimeout(() => {
+        //     router.routeReuseStrategy.shouldReuseRoute = prev;
+        // }, 1);
     }
 
     public static RedirectUrlView(router: Router, url: Array<string>, queryParams: {}, isSkipLocation: boolean = false) {

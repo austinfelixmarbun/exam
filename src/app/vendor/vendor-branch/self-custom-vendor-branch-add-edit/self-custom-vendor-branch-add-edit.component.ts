@@ -9,6 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 import e from 'express';
 
 @Component({
@@ -30,14 +31,15 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
   VendorId: number = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
-    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
       }
 
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
 

@@ -5,6 +5,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-atpm-registration',
@@ -22,9 +23,10 @@ export class VendorATPMRegistrationComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly EditLink: string = NavigationConstant.VENDOR_ATPM_DETAIL;
-  constructor(private route: ActivatedRoute, private router: Router, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private router: Router, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
     });
    }
 
@@ -56,6 +58,6 @@ export class VendorATPMRegistrationComponent implements OnInit {
   }
 
   Finish() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": CommonConstant.SUPPLIER_ATPM });
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VENDOR_PAGING],{ "MrVendorCategoryCode": CommonConstant.SUPPLIER_ATPM });
   }
 }

@@ -8,6 +8,7 @@ import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { environment } from 'environments/environment';
 import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -28,11 +29,13 @@ export class UserRoleComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private location: Location, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['refUserId'] != null) {
-        this.refUserId = params['refUserId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['refUserId'] != null) {
+        this.refUserId = queryParams['refUserId'];
       }
     });
   }

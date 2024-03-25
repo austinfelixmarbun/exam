@@ -8,6 +8,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-branch-employee-paging',
@@ -22,10 +23,12 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_EMP_DETAIL;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,private router:Router) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,
+    private router:Router, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
   }
@@ -53,6 +56,6 @@ export class VendorBranchEmployeePagingComponent implements OnInit {
   }
 
   back(){
-    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
+    AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
   }
 }

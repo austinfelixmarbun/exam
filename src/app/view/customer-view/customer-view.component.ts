@@ -9,6 +9,7 @@ import { ResSysConfigResultObj } from 'app/shared/model/response/res-sys-config-
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResCustListIframeViewObj } from 'app/shared/model/response/cust-list-iframe-View/res-cust-list-iframe-view-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view',
@@ -45,13 +46,14 @@ export class CustomerViewComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
   digitalizationSysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj();
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private UrlConstantNew: UrlConstantNew) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.getCustByCustIdUrl = this.UrlConstantNew.GetCustByCustId;
   }
 
   changeRoute(url) {
     this.router.navigateByUrl('', { skipLocationChange: true });
-    setTimeout(() => AdInsHelper.RedirectUrl(this.router, [url], {}));
+    setTimeout(() => AdInsHelper.RedirectUrl(this.ngxRouter, [url], {}));
   }
 
   dictIdxAt: { [Id: string]: number } = {};
@@ -60,11 +62,12 @@ export class CustomerViewComponent implements OnInit {
 
     this.viewCustCoyMainInfoHeader.viewInput = "./assets/ucviewgeneric/viewCustCoyMainInfoHeader.json";
     this.route.queryParams.subscribe(params => {
-      if (params["CustId"] != null) {
-        this.CustId = params["CustId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustId"] != null) {
+        this.CustId = queryParams["CustId"];
       }
-      if (params["Tab"] != null) {
-        this.Tab = params["Tab"];
+      if (queryParams["Tab"] != null) {
+        this.Tab = queryParams["Tab"];
       }
     });
     

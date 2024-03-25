@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ref-industry-type-detail',
@@ -39,14 +40,16 @@ export class RefIndustryTypeDetailComponent implements OnInit {
     private service: NGXToastrService,
     private fb: FormBuilder,
     private http: HttpClient,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.type = queryParams['mode'];
       }
-      if (params['RefIndustryTypeId'] != null) {
-        this.RefIndustryTypeId = params['RefIndustryTypeId'];
+      if (queryParams['RefIndustryTypeId'] != null) {
+        this.RefIndustryTypeId = queryParams['RefIndustryTypeId'];
       }
     });
   }
@@ -112,7 +115,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
         //SAVE
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);
@@ -125,7 +128,7 @@ export class RefIndustryTypeDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefIndustryType, refIndustryTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_INDUSTRY_TYPE_PAGING],{});
         },
         (error) => {
           this.service.typeErrorCustom(error);

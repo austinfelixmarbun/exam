@@ -17,6 +17,7 @@ import { CustAttrListComponent } from '../cust-attr-list/cust-attr-list.componen
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-cust-attr-section',
@@ -42,12 +43,14 @@ export class CustAttrSectionComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.pageType = "add";
     this.isLookupReady = false;
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.From = params["From"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.From = queryParams["From"];
       }
     });
   }
@@ -175,15 +178,15 @@ export class CustAttrSectionComponent implements OnInit {
           if(isRedirectAfterSuccess)
           {
             if (this.From === "EditMainData") {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
             }
             else if (this.From === "CustFamily") {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_FAMILY_PAGING], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_FAMILY_PAGING], {});
             }
             else if (this.From === "CustShareholder") {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
             } else {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
             }
           }
         });

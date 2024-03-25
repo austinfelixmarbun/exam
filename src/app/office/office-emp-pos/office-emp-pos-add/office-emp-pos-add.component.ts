@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-emp-pos-add',
@@ -55,34 +56,37 @@ export class OfficeEmpPosAddComponent implements OnInit {
   arrCrit: any;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_EMP_POS;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.pageType = params['param'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['param'] != null) {
+        this.pageType = queryParams['param'];
       }
-      if (params['refEmpId'] != null) {
-        this.refEmpId = params['refEmpId'];
+      if (queryParams['refEmpId'] != null) {
+        this.refEmpId = queryParams['refEmpId'];
       }
-      if (params['empNo'] != null) {
-        this.empNo = params['empNo'];
+      if (queryParams['empNo'] != null) {
+        this.empNo = queryParams['empNo'];
       }
-      if (params['empName'] != null) {
-        this.empName = params['empName'];
+      if (queryParams['empName'] != null) {
+        this.empName = queryParams['empName'];
       }
-      if (params['refOfficeId'] != null) {
-        this.refOfficeId = params['refOfficeId'];
+      if (queryParams['refOfficeId'] != null) {
+        this.refOfficeId = queryParams['refOfficeId'];
       }
-      if (params['officeCode'] != null) {
-        this.officeCode = params['officeCode'];
+      if (queryParams['officeCode'] != null) {
+        this.officeCode = queryParams['officeCode'];
       }
-      if (params['officeName'] != null) {
-        this.officeName = params['officeName'];
+      if (queryParams['officeName'] != null) {
+        this.officeName = queryParams['officeName'];
       }
-      if (params['empPositionId'] != null) {
-        this.empPositionId = params['empPositionId'];
+      if (queryParams['empPositionId'] != null) {
+        this.empPositionId = queryParams['empPositionId'];
       }
-      if (params['refBizUnitId'] != null) {
-        this.refBizUnitId = params['refBizUnitId'];
+      if (queryParams['refBizUnitId'] != null) {
+        this.refBizUnitId = queryParams['refBizUnitId'];
       }
     });
   }
@@ -155,7 +159,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
         (response) => {
           if (response['isError'] != true) {
             this.toastr.successMessage(response['message']);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.EMP], {});
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.EMP], {});
           }
         }
       );
@@ -173,7 +177,7 @@ export class OfficeEmpPosAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditEmpPosition, this.empPositionObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.OFFICE], {});
         }
       );
 

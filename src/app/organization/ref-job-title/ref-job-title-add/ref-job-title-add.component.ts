@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ref-job-title-add',
@@ -31,17 +32,20 @@ export class RefJobTitleAddComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.ORG_JOB_TITLE;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.apiUrl = this.UrlConstantNew.GetRefJobTitleById;
     this.addUrl = this.UrlConstantNew.AddRefJobTitle;
     this.editUrl = this.UrlConstantNew.EditRefJobTitle;
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["refJobTitleId"] != null) {
-        this.refJobTitleId = params["refJobTitleId"];
+      if (queryParams["refJobTitleId"] != null) {
+        this.refJobTitleId = queryParams["refJobTitleId"];
       }
     });
   }
@@ -74,7 +78,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.addUrl, this.rjtObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ORG_JOB_TITLE],{});
         }
       );
     } else {
@@ -83,7 +87,7 @@ export class RefJobTitleAddComponent implements OnInit {
       this.http.post(this.editUrl, this.rjtObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ORG_JOB_TITLE],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ORG_JOB_TITLE],{});
         }
       );
     }

@@ -27,6 +27,7 @@ import { UcDropdownListCallbackObj, UcDropdownListConstant, UcDropdownListObj } 
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NewCustSetData } from 'app/customer/sharing-component/new-cust-component/NewCustSetData.Service';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-emergency-contact',
@@ -96,11 +97,14 @@ export class CustomerEmergencyContactComponent implements OnInit {
   criteriaCurrentCust: CriteriaObj;
   inputAddressObj: InputAddressObj;
 
-  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private regexService: RegexService, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.KTP = RefMasterConstant.EKtp;
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
     this.custId = 0;

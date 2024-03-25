@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-personal-financial-data',
@@ -19,13 +20,15 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) { }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     
@@ -34,7 +37,7 @@ export class CustomerViewPersonalFinancialDataComponent implements OnInit {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
   }

@@ -13,6 +13,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-login-page',
@@ -46,13 +47,15 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private cookieService: CookieService,
-    private toastr: NGXToastrService, private url: UrlConstantNew) {
+    private toastr: NGXToastrService, private url: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
     this.version = localStorage.getItem(CommonConstant.VERSION);
     this.route.queryParams.subscribe(params => {
-      if (params['token'] != null) {
-        this.token = params['token'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['token'] != null) {
+        this.token = queryParams['token'];
         AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, this.token);
       }
     });
@@ -81,7 +84,7 @@ export class LoginPageComponent implements OnInit {
           await this.http.post(this.url.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).toPromise().then(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.DASHBOARD], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.DASHBOARD], {});
             });
         }
       );

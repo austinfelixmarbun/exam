@@ -10,6 +10,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-coa-scheme-detail',
@@ -52,13 +53,15 @@ export class CoaSchemeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
     private http: HttpClient,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params['CoaSchmId'] != null) {
-        this.coaSchmId = params['CoaSchmId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CoaSchmId'] != null) {
+        this.coaSchmId = queryParams['CoaSchmId'];
       }
-      if (params['mode'] != null) {
-        this.mode = params['mode'];
+      if (queryParams['mode'] != null) {
+        this.mode = queryParams['mode'];
       }
     });
   }

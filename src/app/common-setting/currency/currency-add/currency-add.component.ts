@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-currency-add',
@@ -37,13 +38,15 @@ export class CurrencyAddComponent implements OnInit {
   isInvalid: boolean = false;
 
   readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["RefCurrId"] != null) {
-        this.refCurrId = params["RefCurrId"];
+      if (queryParams["RefCurrId"] != null) {
+        this.refCurrId = queryParams["RefCurrId"];
       }
     });
   }
@@ -104,7 +107,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CS_CURRENCY_PAGING], {});
         }
       );
     } else {
@@ -117,7 +120,7 @@ export class CurrencyAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefCurr, this.currObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_CURRENCY_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CS_CURRENCY_PAGING], {});
         }
       );
     }

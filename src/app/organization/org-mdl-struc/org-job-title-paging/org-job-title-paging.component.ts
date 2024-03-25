@@ -13,6 +13,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -47,17 +48,19 @@ export class OrgJobTitlePagingComponent implements OnInit {
     private service: NGXToastrService,
     private http: HttpClient,
     private location: Location, 
-    private UrlConstantNew: UrlConstantNew
+    private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["orgMdlStrucId"] != null) {
-        this.orgMdlStrucId = params["orgMdlStrucId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["orgMdlStrucId"] != null) {
+        this.orgMdlStrucId = queryParams["orgMdlStrucId"];
       }
-      if (params["bizUnitName"] != null) {
-        this.bizUnitName = params["bizUnitName"];
+      if (queryParams["bizUnitName"] != null) {
+        this.bizUnitName = queryParams["bizUnitName"];
       }
-      if (params["refOrgId"] != null) {
-        this.refOrgId = params["refOrgId"];
+      if (queryParams["refOrgId"] != null) {
+        this.refOrgId = queryParams["refOrgId"];
       }
     });
   }

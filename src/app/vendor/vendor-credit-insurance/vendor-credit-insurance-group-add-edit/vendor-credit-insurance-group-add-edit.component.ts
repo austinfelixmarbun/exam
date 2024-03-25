@@ -10,6 +10,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-credit-insurance-group-add-edit',
@@ -36,13 +37,16 @@ export class VendorCreditInsuranceGroupAddEditComponent implements OnInit {
   MrVendorCategoryCode: string;
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.pageType = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.pageType = queryParams['mode'];
       }
-      if (params['VendorGrpId'] != null) {
-        this.VendorGrpId = params['VendorGrpId'];
+      if (queryParams['VendorGrpId'] != null) {
+        this.VendorGrpId = queryParams['VendorGrpId'];
       }
       
     });
@@ -106,7 +110,7 @@ export class VendorCreditInsuranceGroupAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CREDIT_INS_GROUP_PAGING]);
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CREDIT_INS_GROUP_PAGING]);
         }
       );
     }
@@ -117,7 +121,7 @@ export class VendorCreditInsuranceGroupAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVendorGrp, this.vendorGrpObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CREDIT_INS_GROUP_PAGING]);
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CREDIT_INS_GROUP_PAGING]);
         }
       );
     }

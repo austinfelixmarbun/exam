@@ -8,6 +8,7 @@ import { RefAssetDocObj } from 'app/shared/model/ref-asset-doc-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-document-master-add-edit',
@@ -27,13 +28,15 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["RefAssetDocId"] != null) {
-        this.RefAssetDocId = params["RefAssetDocId"];
+      if (queryParams["RefAssetDocId"] != null) {
+        this.RefAssetDocId = queryParams["RefAssetDocId"];
       }
     });
   }
@@ -65,7 +68,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddNewRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
         }
       );
     }
@@ -78,7 +81,7 @@ export class AssetDocumentMasterAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefAssetDocData, this.refAssetObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_DOC_MASTER_PAGING],{});
         });
     }
   }

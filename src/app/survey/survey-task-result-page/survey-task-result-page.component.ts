@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,19 +34,22 @@ export class SurveyTaskResultPageComponent implements OnInit {
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private toastr: NGXToastrService,private router: Router, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private toastr: NGXToastrService,private router: Router, 
+    private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if(params["SrvyTaskId"] != null){
-        this.SrvyTaskId = params["SrvyTaskId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if(queryParams["SrvyTaskId"] != null){
+        this.SrvyTaskId = queryParams["SrvyTaskId"];
       }
-      if(params["SrvyOrderId"] != null){
-        this.SrvyOrderId = params["SrvyOrderId"];
+      if(queryParams["SrvyOrderId"] != null){
+        this.SrvyOrderId = queryParams["SrvyOrderId"];
       }
-      if(params["SurveyorName"] != null){
-        this.SurveyorName = params["SurveyorName"];
+      if(queryParams["SurveyorName"] != null){
+        this.SurveyorName = queryParams["SurveyorName"];
       }
-      if(params["Type"] != null){
-        this.Type = params["Type"];
+      if(queryParams["Type"] != null){
+        this.Type = queryParams["Type"];
       }
     });
   }
@@ -57,7 +61,7 @@ export class SurveyTaskResultPageComponent implements OnInit {
   }
 
   back() {
-      AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
+      AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
   }
  
   async ngOnInit() {
@@ -147,7 +151,7 @@ export class SurveyTaskResultPageComponent implements OnInit {
     this.http.post(this.UrlConstantNew.UpdateMrSurveyTaskStatCode, this.ReqGenericObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SURVEY_TASK_RESULT_PAGING],{});
       });
   }
 

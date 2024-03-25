@@ -6,6 +6,7 @@ import { UcPagingObj } from "app/shared/model/uc-paging-obj.model";
 import { UcViewGenericObj } from "app/shared/model/uc-view-generic-obj.model";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 
 @Component({
   selector: 'app-office-group-member',
@@ -20,10 +21,11 @@ export class OfficeGroupMemberComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   readonly AddLink: string = NavigationConstant.OFFICE_GROUP_MEMBER_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefOfficeId = params["RefOfficeId"];
-      this.CenterGrpId = params["CenterGrpId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefOfficeId = queryParams["RefOfficeId"];
+      this.CenterGrpId = queryParams["CenterGrpId"];
     })
   }
 

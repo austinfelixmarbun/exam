@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
@@ -12,10 +13,11 @@ export class CoaSchemeViewComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   ListProd: Array<any> = new Array<any>();
 
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['CoaSchmId'] != null) {
-        this.coaSchmId = params['CoaSchmId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CoaSchmId'] != null) {
+        this.coaSchmId = queryParams['CoaSchmId'];
       }
     });
   }

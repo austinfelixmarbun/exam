@@ -26,6 +26,7 @@ import { CurrentUserContext } from 'app/shared/model/current-user-context.model'
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-job-data-employee',
@@ -139,14 +140,16 @@ export class JobDataEmployeeComponent implements OnInit {
     private fb: FormBuilder,
     private cookieService: CookieService,
     private addressService: AddressService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
+      if (queryParams["IdCustPersonal"] != null) {
+        this.IdCustPersonal = queryParams["IdCustPersonal"];
       }
     });
   }

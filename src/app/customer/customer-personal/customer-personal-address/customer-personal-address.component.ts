@@ -7,6 +7,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -23,10 +24,12 @@ export class CustomerPersonalAddressComponent implements OnInit {
   legalAddr: CustAddrObj;
   residenceAddr: CustAddrObj;
   custAddrObj: CustAddrObj;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }

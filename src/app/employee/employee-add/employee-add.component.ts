@@ -24,6 +24,7 @@ import { RefEmployeeObj } from "app/shared/model/ref-employee-obj";
 import { ReqRefEmployeeObj } from "app/shared/model/request/user-organization/ref-emp/req-ref-employee.model";
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 
 @Component({
   selector: "app-employee-add",
@@ -84,14 +85,16 @@ export class EmployeeAddComponent implements OnInit {
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private cookieService: CookieService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["RefEmpId"] != null) {
-        this.RefEmpId = params["RefEmpId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["RefEmpId"] != null) {
+        this.RefEmpId = queryParams["RefEmpId"];
       }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
     });
 
@@ -358,7 +361,7 @@ export class EmployeeAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_PAGING],{});
         }
       );
     }
@@ -368,7 +371,7 @@ export class EmployeeAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_PAGING],{});
         }
       );
     }

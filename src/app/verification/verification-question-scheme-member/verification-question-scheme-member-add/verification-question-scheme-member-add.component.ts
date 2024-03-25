@@ -13,6 +13,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-scheme-member-add',
@@ -27,9 +28,11 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfSchemeHId = params["VerfSchemeHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfSchemeHId = queryParams["VerfSchemeHId"];
     })
   }
 
@@ -83,7 +86,7 @@ export class VerificationQuestionSchemeMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddListVerfSchemeD, this.verfSchemeDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_SCHM_MBR_PAGING],{ "VerfSchemeHId": this.VerfSchemeHId });
       }
     );
   }

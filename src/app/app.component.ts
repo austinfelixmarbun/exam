@@ -13,6 +13,7 @@ import { EnviConfigService } from './shared/services/enviConfig.service';
 import Swal from 'sweetalert2';
 import {filter} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import { NgxRouterService } from '@adins/fe-core';
 // import * as signalR from '@aspnet/signalr';
 
 @Component({
@@ -27,8 +28,10 @@ export class AppComponent implements OnInit {
 
     // TEST PUSH MASTER 5
     constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService,
-                private UrlConstantNew: UrlConstantNew, private elementRef: ElementRef, private renderer: Renderer2) {
+                private UrlConstantNew: UrlConstantNew, private elementRef: ElementRef, private renderer: Renderer2,
+                private ngxRouter: NgxRouterService) {
       this.env = this.configEnv.getConfig();
+      AdInsHelper.ngxRouter = this.ngxRouter;
     }
 
     ngOnInit(): void {

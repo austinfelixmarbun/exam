@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj, WhereValueObj } from 'app/shared/model/uc-paging-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -15,9 +16,10 @@ export class AppSourceOfficeMemberPagingComponent implements OnInit {
   RefAppSrcId: string;
   inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefAppSrcId = params["RefAppSrcId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefAppSrcId = queryParams["RefAppSrcId"];
     })
   }
 

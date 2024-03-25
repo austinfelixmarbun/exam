@@ -4,6 +4,7 @@ import { UcPagingObj, WhereValueObj } from 'app/shared/model/uc-paging-obj.model
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-area-member-paging',
@@ -18,9 +19,10 @@ export class OfficeAreaMemberPagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
   readonly AddLink: string = NavigationConstant.OFFICE_AREA_MEMBER_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService){
     this.route.queryParams.subscribe(params => {
-      this.RefOfficeAreaId = params["RefOfficeAreaId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefOfficeAreaId = queryParams["RefOfficeAreaId"];
   })
   }
 

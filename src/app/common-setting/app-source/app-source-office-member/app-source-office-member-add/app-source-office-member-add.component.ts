@@ -9,6 +9,7 @@ import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-t
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-app-source-office-member-add',
@@ -20,10 +21,12 @@ export class AppSourceOfficeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,
+    private location: Location, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['RefAppSrcId'] != null) {
-        this.RefAppSrcId = params['RefAppSrcId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['RefAppSrcId'] != null) {
+        this.RefAppSrcId = queryParams['RefAppSrcId'];
       }
     });
   }
@@ -58,7 +61,7 @@ export class AppSourceOfficeMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddRefAppSrcOfficeMbr, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/OfficeMember/Paging"],{ "RefAppSrcId": this.RefAppSrcId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,["/CommonSetting/AppSource/OfficeMember/Paging"],{ "RefAppSrcId": this.RefAppSrcId });
       });
     
   }

@@ -10,6 +10,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-holiday-detail-edit',
@@ -28,10 +29,13 @@ export class HolidayDetailEditComponent implements OnInit {
   result: any;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.HolidaySchmDId = params["HolidaySchmDId"];
-      this.HolidaySchmHId = params["HolidaySchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.HolidaySchmDId = queryParams["HolidaySchmDId"];
+      this.HolidaySchmHId = queryParams["HolidaySchmHId"];
     })
   }
 
@@ -64,12 +68,12 @@ export class HolidayDetailEditComponent implements OnInit {
 
     this.http.post(this.UrlConstantNew.EditHolidaySchmD, HolidayObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
   }
 
   BackNavigate() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 }

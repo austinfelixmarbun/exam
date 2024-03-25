@@ -7,6 +7,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-employee-businessunit-paging',
@@ -21,10 +22,11 @@ export class EmployeeBusinessunitPagingComponent implements OnInit {
 
   CancelLink: string = NavigationConstant.EMP_PAGING;
   readonly AddLink: string = NavigationConstant.EMP_BZ_UNIT_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.RefUserId = params["RefUserId"];
-      this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefUserId = queryParams["RefUserId"];
+      this.pageType = queryParams["mode"];
     })
   }
 

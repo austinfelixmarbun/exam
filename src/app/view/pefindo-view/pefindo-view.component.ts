@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,26 +25,28 @@ export class PefindoViewComponent implements OnInit {
   CustObj: CustObj = new CustObj();
   MrCustTypeCode: string;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["CustNo"] != null) {
-        this.CustNo = params["CustNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustNo"] != null) {
+        this.CustNo = queryParams["CustNo"];
       }
 
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
 
-      if (params["GroupTrxNo"] != null) {
-        this.GroupTrxNo = params["GroupTrxNo"];
+      if (queryParams["GroupTrxNo"] != null) {
+        this.GroupTrxNo = queryParams["GroupTrxNo"];
       }
 
-      if (params["MrCustTypeCode"] != null) {
-        this.MrCustTypeCode = params["MrCustTypeCode"];
+      if (queryParams["MrCustTypeCode"] != null) {
+        this.MrCustTypeCode = queryParams["MrCustTypeCode"];
       }
 
-      if (params["IsLos"] != null) {
-        this.IsLos = JSON.parse(params["IsLos"]);
+      if (queryParams["IsLos"] != null) {
+        this.IsLos = JSON.parse(queryParams["IsLos"]);
       }
     });
   }

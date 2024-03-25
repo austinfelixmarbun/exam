@@ -9,6 +9,7 @@ import { VendorOfficeMbrObj } from 'app/shared/model/vendor-office-mbr-obj.model
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-coll-company-view',
@@ -55,11 +56,13 @@ export class VendorCollCompanyViewComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private ngxRouter: NgxRouterService, private UrlConstantNew: UrlConstantNew) {
 
     this.route.queryParams.subscribe(params => {
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
 
     });

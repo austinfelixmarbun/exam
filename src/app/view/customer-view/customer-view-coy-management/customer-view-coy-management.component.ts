@@ -8,6 +8,7 @@ import { ShareholderListingObj } from 'app/shared/model/new-cust/shareholder/sha
 import { GenericListObj } from 'app/shared/model/generic/generic-list-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AdInsHelperService } from 'app/shared/services/AdInsHelper.service';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-coy-management',
@@ -28,6 +29,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew,
     private adInsHelperService: AdInsHelperService) { 
   }
@@ -36,8 +38,9 @@ export class CustomerViewCoyManagementComponent implements OnInit {
     this.dictNegCustType[this.NegCustTypeBad]="red";
     this.dictNegCustType[this.NegCustTypeWarning]="yellow";
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     this.http.post(this.UrlConstantNew.GetListManagementShareholderForListPagingByCustId, {Id : this.CustId}).subscribe(
@@ -45,7 +48,7 @@ export class CustomerViewCoyManagementComponent implements OnInit {
         this.responseObj = response.ReturnObject;
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
   }

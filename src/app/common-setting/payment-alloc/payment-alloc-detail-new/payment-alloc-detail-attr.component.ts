@@ -13,6 +13,7 @@ import { value } from 'app/shared/data/dropdowns';
 import { PaymentAllocAttr, RefPaymentAllocWithAttrObj } from 'app/shared/model/common-setting/ref-payment-alloc-with-attr-obj.model';
 import { forEach } from 'core-js/core/array';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-payment-alloc-detail-new',
   templateUrl: './payment-alloc-detail-new.component.html',
@@ -35,13 +36,15 @@ export class PaymentAllocDetailNewComponent implements OnInit {
     private http: HttpClient,
     private modalService: NgbModal,
     private toastr: NGXToastrService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["RefPaymentAllocId"] != null) {
-        this.RefPaymentAllocId = params["RefPaymentAllocId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["RefPaymentAllocId"] != null) {
+        this.RefPaymentAllocId = queryParams["RefPaymentAllocId"];
       }
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
     });
   }

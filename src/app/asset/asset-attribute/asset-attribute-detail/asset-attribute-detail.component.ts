@@ -13,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-attribute-detail',
@@ -39,16 +40,18 @@ export class AssetAttributeDetailComponent implements OnInit {
   @ViewChild('LookupAssetAttr') ucLookupAssetAttr: UclookupgenericComponent;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetTypeId"] != null) {
+        this.AssetTypeId = queryParams["AssetTypeId"];
       }
-      if (params["AssetAttrId"] != null) {
-        this.AssetAttrId = params["AssetAttrId"];
+      if (queryParams["AssetAttrId"] != null) {
+        this.AssetAttrId = queryParams["AssetAttrId"];
       }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
     });
   }
@@ -135,7 +138,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
         });
     }
     else if (this.pageType == "edit") {
@@ -144,7 +147,7 @@ export class AssetAttributeDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetAttr, this.assetAttrObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_ATTR_PAGING],{ "AssetTypeId": this.AssetTypeId });
         });
     }
   }

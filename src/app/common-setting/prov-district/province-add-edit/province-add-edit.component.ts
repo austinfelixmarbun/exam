@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-province-add-edit',
@@ -28,15 +29,18 @@ export class ProvinceAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { 
     
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["refProvDistrictId"] != null) {
-        this.refProvDistrictId = params["refProvDistrictId"];
+      if (queryParams["refProvDistrictId"] != null) {
+        this.refProvDistrictId = queryParams["refProvDistrictId"];
       }
     });
   }
@@ -70,7 +74,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});     
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});     
         }
       );
     } else {
@@ -81,7 +85,7 @@ export class ProvinceAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});   
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REF_PROVINCE_PAGING],{});   
         }
       );
     }

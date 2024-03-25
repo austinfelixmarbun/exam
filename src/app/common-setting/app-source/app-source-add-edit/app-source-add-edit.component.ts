@@ -9,6 +9,7 @@ import { formatDate } from '@angular/common';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-app-source-add-edit',
@@ -34,13 +35,15 @@ export class AppSourceAddEditComponent implements OnInit {
   });
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
-      if (params["RefAppSrcId"] != null) {
-        this.RefAppSrcId = params["RefAppSrcId"];
+      if (queryParams["RefAppSrcId"] != null) {
+        this.RefAppSrcId = queryParams["RefAppSrcId"];
       }
     });
   }
@@ -99,7 +102,7 @@ export class AppSourceAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           //this.router.navigate(["/CommonSetting/AppSource/Paging"], { queryParams: { "RefAppSrcId": this.rasObj.RefAppSrcId } });
-          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/Paging"],{ "RefAppSrcId": this.rasObj.RefAppSrcId});
+          AdInsHelper.RedirectUrl(this.ngxRouter,["/CommonSetting/AppSource/Paging"],{ "RefAppSrcId": this.rasObj.RefAppSrcId});
         }
       );
     } else {
@@ -115,7 +118,7 @@ export class AppSourceAddEditComponent implements OnInit {
         response => {
           this.toastr.successMessage(response["Message"]);
           //this.router.navigate(["/CommonSetting/AppSource/Paging"], { queryParams: { "RefAppSrcId": this.rasObj.RefAppSrcId } });
-          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/AppSource/Paging"],{ "RefAppSrcId": this.rasObj.RefAppSrcId});
+          AdInsHelper.RedirectUrl(this.ngxRouter,["/CommonSetting/AppSource/Paging"],{ "RefAppSrcId": this.rasObj.RefAppSrcId});
         }
       );
     }

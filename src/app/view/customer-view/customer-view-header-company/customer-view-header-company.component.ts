@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -15,14 +16,16 @@ export class CustomerViewHeaderCompanyComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
     private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService,
     private adInsHelperService: AdInsHelperService) { 
     this.route.queryParams.subscribe(params => {
+      const queryParams = this.ngxRouter.getQueryParams(params);
 
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      else if (params["CustId"] != null) {
-        this.IdCust = params["CustId"];
+      else if (queryParams["CustId"] != null) {
+        this.IdCust = queryParams["CustId"];
       }
     });
   }

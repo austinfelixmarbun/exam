@@ -30,6 +30,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { RegexService } from 'app/customer/regex.service';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-new-cust-company-main-data',
@@ -64,11 +65,12 @@ export class NewCustCompanyMainDataComponent implements OnInit {
 
   constructor(private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService,
     private cookieService: CookieService, private thirdPartyUploadService: ThirdPartyUploadService,
-    private route: ActivatedRoute, private newCustService: NewCustSetData, 
+    private route: ActivatedRoute, private newCustService: NewCustSetData, private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew, private regexService: RegexService) { 
       this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {        
-          this.pageFrom = params["From"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["From"] != null) {        
+          this.pageFrom = queryParams["From"];
         }
       });
     }

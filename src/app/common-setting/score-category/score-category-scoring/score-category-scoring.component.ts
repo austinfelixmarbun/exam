@@ -10,6 +10,7 @@ import { ListScoreCategorySchmDObj } from 'app/shared/model/score-category/list-
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-score-category-scoring',
@@ -36,11 +37,13 @@ export class ScoreCategoryScoringComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['ScoreCategorySchmHId'] != null) {
-        this.scoreCategorySchmHId = params['ScoreCategorySchmHId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['ScoreCategorySchmHId'] != null) {
+        this.scoreCategorySchmHId = queryParams['ScoreCategorySchmHId'];
       }
     });
   }
@@ -154,7 +157,7 @@ export class ScoreCategoryScoringComponent implements OnInit {
       //SAVE
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_SCORE_CATEGORY_PAGING],{});
       },
       (error) => {
         this.toastr.typeErrorCustom(error);

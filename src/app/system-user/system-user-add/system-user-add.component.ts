@@ -29,6 +29,7 @@ import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-system-user-add',
@@ -100,14 +101,16 @@ export class SystemUserAddComponent implements OnInit {
     private fb: FormBuilder,
     private spinner: NgxSpinnerService,
     private http: HttpClient, 
+    private ngxRouter: NgxRouterService,
     private cookieService: CookieService
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["RefEmpId"] != null) {
-        this.RefEmpId = params["RefEmpId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["RefEmpId"] != null) {
+        this.RefEmpId = queryParams["RefEmpId"];
       }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
     });
 
@@ -433,7 +436,7 @@ export class SystemUserAddComponent implements OnInit {
       this.httpClient.post(this.UrlConstantNew.AddRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYS_USER_PAGING],{});
         }
       );
     }
@@ -443,7 +446,7 @@ export class SystemUserAddComponent implements OnInit {
       this.httpClient.post(this.UrlConstantNew.EditRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYS_USER_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYS_USER_PAGING],{});
         }
       );
     }

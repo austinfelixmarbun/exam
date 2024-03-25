@@ -6,6 +6,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-role-form-paging',
@@ -18,9 +19,10 @@ export class RoleFormPagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService){
     this.route.queryParams.subscribe(params => {
-      this.RefRoleId = params["RefRoleId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefRoleId = queryParams["RefRoleId"];
   })
   }
 

@@ -8,6 +8,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-branch-office-member',
@@ -21,11 +22,13 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
 
   CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_BRANCH_MBR_ADD;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,private router : Router) {
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew,
+    private router : Router, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
-      this.objPassing["VendorEmpId"] = params['VendorEmpId'];
-      this.VendorId = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
+      this.objPassing["VendorEmpId"] = queryParams['VendorEmpId'];
+      this.VendorId = queryParams['VendorId'];
     });
   }
 
@@ -57,10 +60,10 @@ export class VendorBranchOfficeMemberComponent implements OnInit {
 
   back(){
     if(this.MrVendorCategoryCode == "CRD_INSCO_BRANCH"){
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CREDIT_INS_BRANCH_PAGING])
     }
     else{
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING])
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING])
 
     }
   }

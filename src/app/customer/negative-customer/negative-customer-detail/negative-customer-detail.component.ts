@@ -22,6 +22,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-negative-customer-detail',
@@ -99,14 +100,16 @@ export class NegativeCustomerDetailComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.pageType = params['param'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['param'] != null) {
+        this.pageType = queryParams['param'];
       }
-      if (params['negativeCustId'] != null) {
-        this.negativeCustId = params['negativeCustId'];
+      if (queryParams['negativeCustId'] != null) {
+        this.negativeCustId = queryParams['negativeCustId'];
       }
     });
 
@@ -429,7 +432,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
 
   Back(): void {
     // this.location.back();
-    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
+    AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_NEG_PAGING], {});
   }
 
   custTypeHandler(e) {
@@ -645,7 +648,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }
@@ -676,7 +679,7 @@ export class NegativeCustomerDetailComponent implements OnInit {
         (response) => {
           var responseNegativeCust = response[0];
           this.toastr.successMessage(responseNegativeCust["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_NEG_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_NEG_PAGING], {});
         }
       );
     }

@@ -13,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-holiday-detail',
@@ -32,14 +33,17 @@ export class HolidayDetailComponent implements OnInit {
   });
 
   readonly BackLink: string = NavigationConstant.CS_HOLIDAY;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.HolidaySchmHId = params["HolidaySchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.HolidaySchmHId = queryParams["HolidaySchmHId"];
     })
   }
 
   AddNavigate() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL_ADD],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL_ADD],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 
   ngOnInit() {
@@ -81,7 +85,7 @@ export class HolidayDetailComponent implements OnInit {
 
       this.http.post(this.UrlConstantNew.CopyHolidaySchmH, this.copyHoliday, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CS_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
           this.toastr.successMessage(response['message']);
         },
         (error) => {

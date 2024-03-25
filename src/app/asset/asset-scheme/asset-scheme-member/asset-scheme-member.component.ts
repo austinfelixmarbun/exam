@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { AssetSchemeHObj } from 'app/shared/model/asset-scheme-h-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-scheme-member',
@@ -24,10 +25,12 @@ export class AssetSchemeMemberComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.ASSET_SCHM_PAGING;
   readonly AddLink: string = NavigationConstant.ASSET_SCHM_ADD_MBR;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetSchmHId"] != null) {
-        this.AssetSchmHId = params["AssetSchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetSchmHId"] != null) {
+        this.AssetSchmHId = queryParams["AssetSchmHId"];
       }
     });
   }

@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-scheme-add-edit',
@@ -25,11 +26,13 @@ export class VendorSchemeAddEditComponent implements OnInit {
   itemCategoryType: any;
   MrVendorCategoryCode: string;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorSchmId = params["VendorSchmId"];
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorSchmId = queryParams["VendorSchmId"];
+      this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
+      this.mode = queryParams["mode"];
     })
   }
 
@@ -95,7 +98,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         });
     }
     else {
@@ -103,7 +106,7 @@ export class VendorSchemeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddVendorSchm, this.vendorSchemeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "Type": "Scheme", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         });
     }
   }

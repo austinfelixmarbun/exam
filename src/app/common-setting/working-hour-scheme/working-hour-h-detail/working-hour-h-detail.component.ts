@@ -8,6 +8,7 @@ import { WorkingHourSchmHObj } from 'app/shared/model/working-hour-schm-h-obj.mo
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-working-hour-h-detail',
@@ -88,16 +89,19 @@ export class WorkingHourHDetailComponent implements OnInit {
   ]
 
   readonly CancelLink: string = NavigationConstant.CS_WORKING_HOUR;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { 
     
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }else{
         this.pageType = "add";
       }
-      if (params["workingHourSchmHId"] != null) {
-        this.workingHourSchmHId = params["workingHourSchmHId"];
+      if (queryParams["workingHourSchmHId"] != null) {
+        this.workingHourSchmHId = queryParams["workingHourSchmHId"];
       }
     });
   }
@@ -161,7 +165,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddWorkingHourSchmH, this.workingHourSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_WORKING_HOUR],{});
         }
       );
     } else {
@@ -171,7 +175,7 @@ export class WorkingHourHDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditWorkingHourSchmH, this.workingHourSchmHObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_WORKING_HOUR],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_WORKING_HOUR],{});
         }
       );
     }

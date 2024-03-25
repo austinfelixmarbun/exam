@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { ThirdPartyTsObj } from 'app/shared/model/third-party-rslt/third-party-ts-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-trusting-social',
@@ -21,14 +22,16 @@ export class CustomerViewTrustingSocialComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
+    private ngxRouter: NgxRouterService,
     private fb: FormBuilder, private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
-      if (params['CustNo'] != null) {
-        this.CustNo = params['CustNo'];
+      if (queryParams['CustNo'] != null) {
+        this.CustNo = queryParams['CustNo'];
       }
     });
   }

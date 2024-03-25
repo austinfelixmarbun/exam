@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-economic-sector-add-edit',
@@ -27,13 +28,15 @@ export class EconomicSectorAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_ECONOMIC_SECTOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["RefEconomicSectorId"] != null) {
-        this.RefEconomicSectorId = params["RefEconomicSectorId"];
+      if (queryParams["RefEconomicSectorId"] != null) {
+        this.RefEconomicSectorId = queryParams["RefEconomicSectorId"];
       }
     });
   }
@@ -71,7 +74,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});         
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});         
         }
       );
     } else {
@@ -83,7 +86,7 @@ export class EconomicSectorAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefEconomicSector, this.refEconomicSectorObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});  
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ECONOMIC_SECTOR_PAGING],{});  
         }
       );
     }

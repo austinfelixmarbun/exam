@@ -6,6 +6,7 @@ import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-scheme-member-paging',
@@ -20,10 +21,11 @@ export class VendorSchemeMemberPagingComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.VENDOR_SCHM_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorSchmId = params["VendorSchmId"];
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorSchmId = queryParams["VendorSchmId"];
+      this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
   })
   }
 

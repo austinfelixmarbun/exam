@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-detail-license',
@@ -18,12 +19,14 @@ export class DetailLicenseComponent implements OnInit {
   modules : any;
   LicenseData : any;
   readonly CancelLink: string = NavigationConstant.LICENSE_PAGING;
-  constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private toastr: NGXToastrService, private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.systemName = params["systemName"];
-      this.licenseType = params["licenseType"];
-      this.status = params["status"];   
-      this.modules = params["modules"]   
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.systemName = queryParams["systemName"];
+      this.licenseType = queryParams["licenseType"];
+      this.status = queryParams["status"];   
+      this.modules = queryParams["modules"]   
     })
    }
 

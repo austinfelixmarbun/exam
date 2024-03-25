@@ -7,6 +7,7 @@ import { map, mergeMap } from 'rxjs/operators';
 import { NegativeCustChangeTrxObj } from 'app/shared/model/negative-cust-change-trx-obj.model';
 import { forkJoin } from 'rxjs';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-negative-customer-view',
@@ -25,11 +26,13 @@ export class NegativeCustomerViewComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private http: HttpClient, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['negativeCustId'] != null) {
-        this.negativeCustId = params['negativeCustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['negativeCustId'] != null) {
+        this.negativeCustId = queryParams['negativeCustId'];
       }
     });
   }

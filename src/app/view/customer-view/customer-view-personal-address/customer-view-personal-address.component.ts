@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -35,14 +36,16 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     this.viewCustFinData.viewInput =   "./assets/ucviewgeneric/viewCustFinData.json";
@@ -53,7 +56,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
     this.http.post(this.UrlConstantNew.GetListCustAddrHistByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
@@ -63,7 +66,7 @@ export class CustomerViewPersonalAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
 

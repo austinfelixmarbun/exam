@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder } from '@angular/forms';
@@ -32,10 +33,13 @@ export class CustomSurveyResultReviewDetailComponent implements OnInit {
     ListSurveyTask: this.fb.array([])
   });
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService, private toastr: NGXToastrService, private router: Router, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, 
+    private cookieService: CookieService, private toastr: NGXToastrService, private router: Router, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["SrvyOrderId"] != null) {
-        this.SrvyOrderId = params["SrvyOrderId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["SrvyOrderId"] != null) {
+        this.SrvyOrderId = queryParams["SrvyOrderId"];
       }
     });
   }
@@ -158,7 +162,7 @@ export class CustomSurveyResultReviewDetailComponent implements OnInit {
       (response) => {
         /* istanbul ignore next */
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_RESULT_REVIEW_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SURVEY_RESULT_REVIEW_PAGING], {});
       }
     );
   }

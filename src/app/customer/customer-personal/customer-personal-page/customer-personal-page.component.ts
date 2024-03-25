@@ -21,6 +21,7 @@ import { CustomerPersonalJobDataComponent } from '../customer-personal-job-data/
 import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 import { CustomerViewHeaderPersonalComponent } from 'app/customer/customer-view/customer-view-header-personal/customer-view-header-personal.component';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-customer-personal-page',
   templateUrl: './customer-personal-page.component.html',
@@ -48,16 +49,19 @@ export class CustomerPersonalPageComponent implements OnInit {
   dmsObj: DMSObj;
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, 
+    private cookieService: CookieService, private CustSetData: NewCustSetData, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
-      if (params["From"] != null) {
-        this.From = params["From"];
+      if (queryParams["From"] != null) {
+        this.From = queryParams["From"];
       }
     });
   }
@@ -82,7 +86,7 @@ export class CustomerPersonalPageComponent implements OnInit {
   }
 
   back() {
-    AdInsHelper.RedirectUrl(this.router, [this.SetUrlBack()], {});
+    AdInsHelper.RedirectUrl(this.ngxRouter, [this.SetUrlBack()], {});
   }
 
   async ngOnInit(): Promise<void> {
@@ -191,9 +195,9 @@ export class CustomerPersonalPageComponent implements OnInit {
 
   endStepper(ev: any) {
     if (this.From) {
-      AdInsHelper.RedirectUrl(this.router, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, ["/" + PathConstant.LR_CUST + "/" + this.From + "/" + PathConstant.PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
     }
   }
 

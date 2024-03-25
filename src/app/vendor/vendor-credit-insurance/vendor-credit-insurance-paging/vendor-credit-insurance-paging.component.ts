@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -21,7 +22,8 @@ export class VendorCreditInsurancePagingComponent implements OnInit {
   MrVendorCategoryCode : string = 'CRD_INSCO_HO';
   isReady : boolean = false;
   navigationSubscription : any;
-  constructor(private route : ActivatedRoute, private UrlConstantNew: UrlConstantNew, private router : Router) { 
+  constructor(private route : ActivatedRoute, private UrlConstantNew: UrlConstantNew, private router : Router,
+    private ngxRouter: NgxRouterService) { 
 
     this.subscribeParam();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -56,7 +58,7 @@ export class VendorCreditInsurancePagingComponent implements OnInit {
   }
 
   navigate(){
-    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_CRD_INSCO_HO_DETAIL]);
+    AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_CRD_INSCO_HO_DETAIL]);
 
   }
 

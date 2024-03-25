@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -28,13 +29,15 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
     RegRptCode: ['',[Validators.required, Validators.maxLength(100)]],
     IsActive: [true]
   });
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["IndustryTypeCategoryId"] != null) {
-        this.RefIndustryTypeCategoryId = params["IndustryTypeCategoryId"];
+      if (queryParams["IndustryTypeCategoryId"] != null) {
+        this.RefIndustryTypeCategoryId = queryParams["IndustryTypeCategoryId"];
       }
     });
   }
@@ -92,7 +95,7 @@ export class IndustryTypeCategoryDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddEditIndustryTypeCategory, this.industryTypeCategoryObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,["/CommonSetting/IndustryTypeCategory/Paging"],{});         
+          AdInsHelper.RedirectUrl(this.ngxRouter,["/CommonSetting/IndustryTypeCategory/Paging"],{});         
       }
     );
   }

@@ -5,6 +5,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-view-cabinet',
@@ -21,14 +22,16 @@ export class ViewCabinetComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/document-management/view-cabinet-detail.json";
 
     this.route.queryParams.subscribe(params => {
-      if (params['CabinetCode'] != null) {
-        this.CabinetCode = params['CabinetCode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CabinetCode'] != null) {
+        this.CabinetCode = queryParams['CabinetCode'];
       }
     });
 

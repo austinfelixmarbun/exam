@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -30,13 +31,16 @@ export class RefTcAddEditComponent implements OnInit {
   })
 
   readonly CancelLink: string = NavigationConstant.CS_REF_TC_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["refTcId"] != null) {
-        this.refTcId = params["refTcId"];
+      if (queryParams["refTcId"] != null) {
+        this.refTcId = queryParams["refTcId"];
       }
     });
   }
@@ -74,7 +78,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REF_TC_PAGING],{});
         }
       );
     }
@@ -88,7 +92,7 @@ export class RefTcAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefTc, this.refTcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TC_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REF_TC_PAGING],{});
         }
       );
     }

@@ -12,6 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { GenericListByCodeObj } from 'app/shared/model/generic/generic-list-by-code-obj.model';
 import { ResGeneralSettingObj, ResListGeneralSettingObj } from 'app/shared/model/response/general-setting/res-general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-document-add-edit',
@@ -44,16 +45,19 @@ export class AssetDocumentAddEditComponent implements OnInit {
   isShowCbxPledge: boolean;
   
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetTypeId"] != null) {
+        this.AssetTypeId = queryParams["AssetTypeId"];
       }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["AssetDocListId"] != null) {
-        this.AssetDocListId = params["AssetDocListId"];
+      if (queryParams["AssetDocListId"] != null) {
+        this.AssetDocListId = queryParams["AssetDocListId"];
       }
     });
   }
@@ -130,7 +134,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddNewAssetDocList, this.assetDocListObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }
@@ -148,7 +152,7 @@ export class AssetDocumentAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetDocList, this.assetDocListObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_DOC_PAGING],{ "AssetTypeId": this.assetDocListObj.AssetTypeId });
         }
       );
     }

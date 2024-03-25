@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -22,9 +23,10 @@ export class ExchangeRatePagingComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.CS_CURRENCY_PAGING;
   readonly AddLink: string = NavigationConstant.CS_EXCHANGE_RATE_DETAIL;
 
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefCurrId = params["RefCurrId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefCurrId = queryParams["RefCurrId"];
     })
   }
 

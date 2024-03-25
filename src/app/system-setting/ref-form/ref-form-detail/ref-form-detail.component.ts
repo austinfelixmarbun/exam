@@ -15,6 +15,7 @@ import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/libr
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ref-form-detail',
@@ -41,10 +42,13 @@ export class RefFormDetailComponent implements OnInit {
     }
   }
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['RefFormId'] != null) this.RefFormId = params['RefFormId'];
-      if (params['mode'] != null) this.mode = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['RefFormId'] != null) this.RefFormId = queryParams['RefFormId'];
+      if (queryParams['mode'] != null) this.mode = queryParams['mode'];
     });
   }
 
@@ -289,14 +293,14 @@ export class RefFormDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
 
         });
     } else {
       this.http.post(this.UrlConstantNew.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
         });
     }
   }

@@ -19,6 +19,7 @@ import { AddressService } from 'app/shared/services/custAddr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcaddressService } from '@adins/ucaddress';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-personal-address-add',
@@ -82,10 +83,14 @@ export class CustomerPersonalAddressAddComponent implements OnInit {
   });
   inputAddressObj: InputAddressObj;
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, private toastr: NGXToastrService, private CustSetData: NewCustSetData, private addressService: AddressService, private UrlConstantNew: UrlConstantNew, private ucaddrSvc: UcaddressService) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private fb: FormBuilder, 
+    private toastr: NGXToastrService, private CustSetData: NewCustSetData, private addressService: AddressService, 
+    private UrlConstantNew: UrlConstantNew, private ucaddrSvc: UcaddressService,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }

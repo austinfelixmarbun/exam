@@ -13,6 +13,7 @@ import { String } from 'typescript-string-operations';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-self-custom-container-working-hour-d-detail',
@@ -101,12 +102,15 @@ export class SelfCustomContainerWorkingHourDDetailComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_SELF_CUSTOM_WORKING_HOUR;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.postUrl = this.UrlConstantNew.AddListWorkingHourSchmD;
 
     this.route.queryParams.subscribe(params => {
-      if (params["WorkingHourSchmHId"] != null) {
-        this.workingHourSchmHId = params["WorkingHourSchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["WorkingHourSchmHId"] != null) {
+        this.workingHourSchmHId = queryParams["WorkingHourSchmHId"];
       }
     });
   }
@@ -220,7 +224,7 @@ export class SelfCustomContainerWorkingHourDDetailComponent implements OnInit {
     this.http.post(this.postUrl, this.listWorkingHourSchmDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SELF_CUSTOM_WORKING_HOUR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_SELF_CUSTOM_WORKING_HOUR],{});
       }
     );
   }

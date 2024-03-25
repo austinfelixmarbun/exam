@@ -14,6 +14,7 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-org-mdl-struc-paging',
@@ -51,11 +52,13 @@ export class OrgMdlStrucPagingComponent implements OnInit {
     private service: NGXToastrService,
     private https: HttpClient,
     private location: Location, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['orgMdlId'] != null) {
-        this.orgMdlId = +params['orgMdlId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['orgMdlId'] != null) {
+        this.orgMdlId = +queryParams['orgMdlId'];
       }
     });
   }

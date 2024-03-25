@@ -13,6 +13,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -38,14 +39,16 @@ export class CustLegalDocComponent implements OnInit {
     private toastr: NGXToastrService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
     });
   }

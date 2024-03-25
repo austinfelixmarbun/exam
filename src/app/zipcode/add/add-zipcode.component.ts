@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'add-zipcode',
@@ -36,14 +37,17 @@ export class ZipcodeAddComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_ZIPCODE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["refZipcodeId"] != null) {
-        this.refZipcodeId = params["refZipcodeId"];
+      if (queryParams["refZipcodeId"] != null) {
+        this.refZipcodeId = queryParams["refZipcodeId"];
       }
     });
   }
@@ -95,7 +99,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ZIPCODE_PAGING],{});
         }
       );
     } else {
@@ -104,7 +108,7 @@ export class ZipcodeAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_ZIPCODE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ZIPCODE_PAGING],{});
         }
       );
     }

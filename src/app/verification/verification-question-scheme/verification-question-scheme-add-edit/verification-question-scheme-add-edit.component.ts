@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-scheme-add-edit',
@@ -24,10 +25,12 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
   verfQuestionScheme: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfSchemeHId = params["VerfSchemeHId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfSchemeHId = queryParams["VerfSchemeHId"];
+      this.mode = queryParams["mode"];
       if (this.mode != "edit")
         this.mode = "Add";
     })
@@ -66,7 +69,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
         });
     }
     else {
@@ -74,7 +77,7 @@ export class VerificationQuestionSchemeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddVerfSchemeH, this.verfSchemeHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_SCHM_PAGING],{ });
         });
     }
   }

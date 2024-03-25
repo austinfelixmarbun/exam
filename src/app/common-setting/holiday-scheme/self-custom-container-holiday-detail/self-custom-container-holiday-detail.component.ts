@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -28,9 +29,12 @@ export class SelfCustomContainerHolidayDetailComponent implements OnInit {
 
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.HolidaySchmHId = params["HolidaySchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.HolidaySchmHId = queryParams["HolidaySchmHId"];
     })
   }
 
@@ -62,7 +66,7 @@ export class SelfCustomContainerHolidayDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.CopyHolidaySchmH, this.copyHoliday, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_SELF_CUSTOM_HOLIDAY_DETAIL],{ HolidaySchmHId: this.HolidaySchmHId })
         }
       );
     }

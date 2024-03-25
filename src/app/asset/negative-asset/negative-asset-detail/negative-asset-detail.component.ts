@@ -14,6 +14,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-negative-asset-detail',
@@ -60,14 +61,16 @@ export class NegativeAssetDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.pageType = params['param'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['param'] != null) {
+        this.pageType = queryParams['param'];
       }
-      if (params['assetNegativeId'] != null) {
-        this.assetNegativeId = params['assetNegativeId'];
+      if (queryParams['assetNegativeId'] != null) {
+        this.assetNegativeId = queryParams['assetNegativeId'];
       }
     });
   }
@@ -251,7 +254,7 @@ export class NegativeAssetDetailComponent implements OnInit {
   }
 
   Back() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_NEG_PAGING],{});
   }
 
   Save() {
@@ -260,7 +263,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_NEG_PAGING],{});
         }
       );
     }
@@ -268,7 +271,7 @@ export class NegativeAssetDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetNegative, assetNegativeObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_NEG_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_NEG_PAGING],{});
         }
       );
     }

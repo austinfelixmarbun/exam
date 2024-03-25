@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-reason-add-edit',
@@ -31,13 +32,15 @@ export class ReasonAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_REASON_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["refReasonId"] != null) {
-        this.refReasonId = params["refReasonId"];
+      if (queryParams["refReasonId"] != null) {
+        this.refReasonId = queryParams["refReasonId"];
       }
     });
   }
@@ -81,7 +84,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REASON_PAGING],{});
         }
       );
     } else {
@@ -92,7 +95,7 @@ export class ReasonAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefReason, refReasonObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REASON_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REASON_PAGING],{});
         }
       );
     }

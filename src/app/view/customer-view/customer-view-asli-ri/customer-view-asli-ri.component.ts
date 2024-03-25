@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -19,15 +20,17 @@ export class CustomerViewAsliRiComponent implements OnInit {
     private http: HttpClient, 
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) 
   {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
-      if (params['CustNo'] != null) {
-        this.CustNo = params['CustNo'];
+      if (queryParams['CustNo'] != null) {
+        this.CustNo = queryParams['CustNo'];
       }
     });
   }

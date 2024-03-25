@@ -9,6 +9,7 @@ import { HolidayObj } from 'app/shared/model/holiday-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
     selector: 'app-holiday-add',
@@ -33,10 +34,13 @@ export class HolidayAddComponent implements OnInit {
     criteria: CriteriaObj[] = [];
 
     readonly CancelLink: string = NavigationConstant.CS_HOLIDAY;
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, 
+        private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+        private ngxRouter: NgxRouterService) {
         this.route.queryParams.subscribe(params => {
-            this.HolidaySchmId = params["HolidaySchmHId"];
-            this.mode = params["mode"];
+            const queryParams = this.ngxRouter.getQueryParams(params);
+            this.HolidaySchmId = queryParams["HolidaySchmHId"];
+            this.mode = queryParams["mode"];
             if (this.mode == "edit") {
                 var tempCrit = new CriteriaObj();
                 tempCrit.restriction = "Eq";
@@ -74,7 +78,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = this.result.RowVersion;
             this.http.post(this.UrlConstantNew.EditHolidaySchmH, this.holidayObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
+                    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY],{})
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -85,7 +89,7 @@ export class HolidayAddComponent implements OnInit {
             this.holidayObj.RowVersion = "";
 
             this.http.post(this.UrlConstantNew.AddHolidaySchmH, this.holidayObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
-                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY],{})
+                AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY],{})
                 this.toastr.successMessage(response['message']);
             });
         }

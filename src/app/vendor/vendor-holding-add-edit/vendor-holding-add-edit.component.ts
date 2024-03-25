@@ -17,6 +17,7 @@ import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-holding-add-edit',
@@ -47,11 +48,13 @@ export class VendorHoldingAddEditComponent implements OnInit {
   isIDTypeReady: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService, 
-              private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+              private vendorService: VendorService, private cookieService: CookieService, private http: HttpClient, 
+              private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
-      this.VendorId = params['VendorId'];
-      this.mode = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
+      this.VendorId = queryParams['VendorId'];
+      this.mode = queryParams['mode'];
     });
   }
 
@@ -365,7 +368,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.EditVendorHolding(this.vendorHoldingObj).subscribe(
           (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id, "mode": 'edit' });
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id, "mode": 'edit' });
           });
       } else {
         this.vendorHoldingObj.MrVendorCategoryCode = this.MrVendorCategoryCode;
@@ -373,7 +376,7 @@ export class VendorHoldingAddEditComponent implements OnInit {
         this.vendorService.AddVendorHolding(this.vendorHoldingObj).subscribe(
           (response: GenericObj) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id });
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": response.Id });
           });
       }
     }
@@ -381,9 +384,9 @@ export class VendorHoldingAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": this.VendorId, "mode": 'edit' });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HOLDING_REG], { "VendorId": this.VendorId, "mode": 'edit' });
     } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
 
   }

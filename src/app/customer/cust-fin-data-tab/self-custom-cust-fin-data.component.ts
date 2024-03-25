@@ -19,6 +19,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-self-custom-cust-fin-data',
@@ -117,6 +118,7 @@ export class SelfCustomCustFinDataComponent implements OnInit {
       private route: ActivatedRoute,
       private modalService: NgbModal, 
       private UrlConstantNew: UrlConstantNew,
+      private ngxRouter: NgxRouterService,
       private CustSetData: NewCustSetData
     ) {
       if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
@@ -126,11 +128,12 @@ export class SelfCustomCustFinDataComponent implements OnInit {
         this.isCalculated = true;
       }
       this.route.queryParams.subscribe(params => {
-        if (params["Page"] != null) {
-          this.Page = params["Page"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["Page"] != null) {
+          this.Page = queryParams["Page"];
         }
-        if (params["From"] != null) {
-            this.From = params["From"];
+        if (queryParams["From"] != null) {
+            this.From = queryParams["From"];
         }
       });
     }

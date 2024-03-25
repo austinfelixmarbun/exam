@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
@@ -18,18 +19,20 @@ export class CustomerViewCbasSlikComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   )
   {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) this.CustId = params['CustId'];
-      if (params['TrxNo'] != null) this.TrxNo = params['TrxNo'];
-      if (params['KtpNo'] != null) this.KtpNo = params['KtpNo'];
-      if (params['Npwp'] != null) this.Npwp = params['Npwp'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) this.CustId = queryParams['CustId'];
+      if (queryParams['TrxNo'] != null) this.TrxNo = queryParams['TrxNo'];
+      if (queryParams['KtpNo'] != null) this.KtpNo = queryParams['KtpNo'];
+      if (queryParams['Npwp'] != null) this.Npwp = queryParams['Npwp'];
 
-      if (params["IsEmbedded"] != null && params["Token"] != null) {
+      if (queryParams["IsEmbedded"] != null && queryParams["Token"] != null) {
         const embeddHeaders = new HttpHeaders({
-          'AdInsKey': params["Token"]
+          'AdInsKey': queryParams["Token"]
         });
         this.embeddOptions = { headers: embeddHeaders, withCredentials: true };
       }

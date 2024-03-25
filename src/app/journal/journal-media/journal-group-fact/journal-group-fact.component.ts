@@ -10,6 +10,7 @@ import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-journal-group-fact',
@@ -47,13 +48,15 @@ export class JournalGroupFactComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastr: NGXToastrService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       params => {
-        if (params['JrMGroupId'] != null) {
-          this.JrMGroupId = +params['JrMGroupId'];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams['JrMGroupId'] != null) {
+          this.JrMGroupId = +queryParams['JrMGroupId'];
         }
       }
     );
@@ -172,7 +175,7 @@ export class JournalGroupFactComponent implements OnInit {
       this.http.post<any>(this.UrlConstantNew.SaveJrMGroupDFact, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })
         },
         error => {
           console.log(error);

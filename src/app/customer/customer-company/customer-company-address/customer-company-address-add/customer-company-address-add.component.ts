@@ -16,6 +16,7 @@ import { NewCustSetData } from 'app/customer/sharing-component/new-cust-componen
 import { AddressService } from 'app/shared/services/custAddr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-company-address-add',
@@ -59,10 +60,12 @@ export class CustomerCompanyAddressAddComponent implements OnInit {
     private http: HttpClient,
     private fb: FormBuilder, private CustSetData: NewCustSetData,
     private toastr: NGXToastrService, private addressService: AddressService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }

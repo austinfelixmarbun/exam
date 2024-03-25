@@ -10,6 +10,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-profession-add-edit',
@@ -33,15 +34,18 @@ export class ProfessionAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_PROFESSION_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
    
 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["refProfessionId"] != null) {
-        this.refProfessionId = params["refProfessionId"];
+      if (queryParams["refProfessionId"] != null) {
+        this.refProfessionId = queryParams["refProfessionId"];
       }
     });
   }
@@ -84,7 +88,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_PROFESSION_PAGING],{});
         }
       );
     } else {
@@ -96,7 +100,7 @@ export class ProfessionAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefProfession, this.refProfessionObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_PROFESSION_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_PROFESSION_PAGING],{});
         }
       );
     }

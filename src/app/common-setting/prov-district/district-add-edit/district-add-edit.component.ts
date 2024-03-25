@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-district-add-edit',
@@ -32,17 +33,19 @@ export class DistrictAddEditComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.CS_DISTRICT_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["refProvDistrictId"] != null) {
-        this.refProvDistrictId = params["refProvDistrictId"];
+      if (queryParams["refProvDistrictId"] != null) {
+        this.refProvDistrictId = queryParams["refProvDistrictId"];
       }
-      if (params["parentId"] != null) {
-        this.parentId = params["parentId"];
+      if (queryParams["parentId"] != null) {
+        this.parentId = queryParams["parentId"];
       }
     });
   }
@@ -90,7 +93,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.toastr.successMessage(response["Message"]);  
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});     
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});     
         }
       );
     } else {
@@ -104,7 +107,7 @@ export class DistrictAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefProvDistrict, this.refProvDistrictObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);  
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});       
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_DISTRICT_PAGING],{"refProvDistrictId": this.parentId});       
         }
       );
     }

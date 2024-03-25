@@ -16,6 +16,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-employee-businessunit-add',
@@ -48,11 +49,13 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router, private http: HttpClient,
     private fb: FormBuilder, private toastr: NGXToastrService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      this.RefUserId = params["RefUserId"];
-      this.RefUserRoleId = params["RefUserRoleId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefUserId = queryParams["RefUserId"];
+      this.RefUserRoleId = queryParams["RefUserRoleId"];
+      this.mode = queryParams["mode"];
     })
   }
 
@@ -190,7 +193,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
         }
       );
     }
@@ -200,7 +203,7 @@ export class EmployeeBusinessunitAddComponent implements OnInit {
       this.userRole.RefUserId = this.RefUserId;
       this.http.post(this.UrlConstantNew.AddRefUserRole, this.userRole, AdInsConstant.SpinnerOptions).subscribe((response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_BZ_UNIT_PAGING],{ "RefUserId": this.RefUserId });
       });
     }
   }

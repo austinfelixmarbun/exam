@@ -1,4 +1,5 @@
 
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
@@ -37,13 +38,15 @@ export class TaxOfficeDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastr: NGXToastrService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { 
       this.route.queryParams.subscribe(params => {
-        if (params["mode"] != null) {
-        this.type = params["mode"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["mode"] != null) {
+        this.type = queryParams["mode"];
         }
-        if (params["RefTaxOfficeId"] != null) {
-        this.refTaxOfficeId = params["RefTaxOfficeId"];
+        if (queryParams["RefTaxOfficeId"] != null) {
+        this.refTaxOfficeId = queryParams["RefTaxOfficeId"];
         }
       });
     }
@@ -103,6 +106,6 @@ export class TaxOfficeDetailComponent implements OnInit {
   }
 
   RedirectPaging(){
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_REF_TAX_OFFICE_PAGING],{});
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_REF_TAX_OFFICE_PAGING],{});
   }
 }
