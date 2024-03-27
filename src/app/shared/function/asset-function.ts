@@ -4,7 +4,6 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
 import { Router } from "@angular/router";
 import { AssetMasterObj } from '../model/asset-master-obj.model';
 import { ListAssetSchmDObj } from '../model/list-asset-schm-d-obj.model';
@@ -29,7 +28,7 @@ export function addRangeAssetSchmD(AssetSchmHId: any, listTemp: any[], api: any,
     AssetSchmDObjs: arrAssetSchmDObj
   }
 
-  let url = environment.FoundationR3Url + api;
+  let url = envi.FoundationR3Url + api;
   http.post(url, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
     response => {
       toastr.successMessage(response['message']);

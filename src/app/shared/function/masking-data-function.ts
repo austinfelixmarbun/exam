@@ -4,9 +4,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from "@angular/router";
-import * as env from "../../../assets/config/enviConfig.json";
-
-const envi = env;
+import enviConfig from "assets/config/enviConfig.json";
 
 export function saveListMaskingItemForm(RoleCode: string, ListTemp: any[], ApiUrl: any, http: HttpClient, toastr: NGXToastrService, router: Router) 
 {
@@ -21,7 +19,7 @@ export function saveListMaskingItemForm(RoleCode: string, ListTemp: any[], ApiUr
     "RoleCode": RoleCode,
     "ListMaskingDataItemCode": listMaskedItem,
   }
-  http.post(envi.FoundationR3Url + ApiUrl, reqObj, AdInsConstant.SpinnerOptions).subscribe(
+  http.post(enviConfig.FoundationR3Url + ApiUrl, reqObj, AdInsConstant.SpinnerOptions).subscribe(
     response => {
       toastr.successMessage(response['message']);
       AdInsHelper.RedirectUrl(router,[NavigationConstant.CS_MASKING_WHITELIST_DETAIL],{ "RoleCode": RoleCode });

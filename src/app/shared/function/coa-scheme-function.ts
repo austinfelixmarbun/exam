@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { CommonConstant } from "../constant/CommonConstant";
 import { RefCoaObj } from "../model/common-setting/ref-coa-obj.model";
@@ -11,7 +11,7 @@ import { FormArray, FormGroup } from "@angular/forms";
 
 export function submitCoa(formData: any, coaSchmId: any, listPayment: any[], listSelectedCurr: any[], Form: FormGroup, api:any, http: HttpClient, toastr: NGXToastrService, router: Router) {
 
-  const url = environment.FoundationR3Url + api;
+  const url = enviConfig.FoundationR3Url + api;
 
   const coaSchmObj: Record<string, any> = {};
   const GetListCoaInfoDataCoaInfoCoaValue = (idxListCoa, idxDtCoa) => {

@@ -1,10 +1,9 @@
-import { AssetSchmDObj } from '../model/asset-schm-d-obj.model';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 
 export function addRefOfficeAreaMember(RefOfficeAreaId: any, listTemp: any[], api: any, http: HttpClient, toastr: NGXToastrService, router: Router) {
@@ -22,7 +21,7 @@ export function addRefOfficeAreaMember(RefOfficeAreaId: any, listTemp: any[], ap
     RefOfficeId: listSelectedId
   }
 
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
   http.post(url, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
     response => {
       toastr.successMessage(response['message']);

@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { environment } from "environments/environment";
 import * as env from "../../../assets/config/enviConfig.json";
 import { GenericObj } from "../model/generic/generic-obj.model";
 import { AdInsConstant } from "../AdInstConstant";

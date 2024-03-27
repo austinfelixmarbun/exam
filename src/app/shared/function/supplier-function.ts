@@ -1,5 +1,4 @@
 import { AdInsHelper } from "../AdInsHelper";
-import {environment} from '../../../environments/environment';
 import * as env from "../../../assets/config/enviConfig.json";
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
@@ -13,7 +12,6 @@ import { VendorAtpmMappingObj } from "../model/vendor-atpm-mapping-obj.model";
 import { GenericObj } from "../model/generic/generic-obj.model";
 import { AdInsConstant } from "../AdInstConstant";
 import { NavigationConstant } from "../NavigationConstant";
-import { formatDate } from "@angular/common";
 import { VendorBranchObj } from "../model/vendor-branch-obj.model";
 
 const envi = env;
