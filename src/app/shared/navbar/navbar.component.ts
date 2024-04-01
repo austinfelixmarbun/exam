@@ -156,7 +156,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     logout() {
         this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
-        this.needUnsubscribe();
+        // this.needUnsubscribe();
         AdInsHelper.ClearAllLog(this.cookieService);
         this.clearSession();
         this.cookieService.removeAll();

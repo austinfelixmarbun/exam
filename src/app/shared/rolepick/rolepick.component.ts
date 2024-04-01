@@ -130,6 +130,14 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+          if(typeof response["Identity_JWT"] === 'string')
+          {
+              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+          }
+          else
+          {
+              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
+          }
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
           //Set Cookie jika Office nya Syariah
@@ -163,6 +171,14 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
           AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+          if(typeof response["Identity_JWT"] === 'string')
+          {
+              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+          }
+          else
+          {
+              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
+          }
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
           //Set Cookie jika Office nya Syariah

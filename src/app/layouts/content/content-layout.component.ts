@@ -76,6 +76,15 @@ export class ContentLayoutComponent implements OnInit {
                 AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                 AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                 AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
+                if(typeof response["Identity_JWT"] === 'string')
+                {
+                    AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+                }
+                else
+                {
+                    AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");                    
+                }
+                
                 AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
                 await this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
