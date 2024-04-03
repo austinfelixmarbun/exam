@@ -691,6 +691,22 @@ export const CONTENT_ROUTES: Routes = [
         .then(m => m.PaymentRequestModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     }
-  }
+  },
   //#endregion
+
+  //#region LOS
+  {
+    path: 'ViewLos',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.losR3Web + '/remoteEntry.js',
+        exposedModule: './ViewModule'
+      })
+        .then(m => m.ViewModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  //#endregion LOS
+
 ];
