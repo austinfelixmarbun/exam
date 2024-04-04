@@ -7,7 +7,7 @@
         "mainInfoPath": "/Generic/GetDataViewBySQL",
         "mainInfo": [
           {
-            "type": "text",
+            "type": "text", 
             "label": "Tax Payer Calculation Method:",
             "property": "TaxCalculationMethod"
           },
