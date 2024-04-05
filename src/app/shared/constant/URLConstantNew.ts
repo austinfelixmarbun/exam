@@ -1213,8 +1213,8 @@ export class UrlConstantNew{
     public Logout = this.env.FoundationR3Url + this.url.Logout;
     public GetAllActiveRefFormByRoleCodeAndModuleCode = this.env.FoundationR3Url + this.url.GetAllActiveRefFormByRoleCodeAndModuleCode;
     public GetDashboardAccessToken = this.env.FoundationR3Url + this.url.GetDashboardAccessToken;
-    public GetThingsToDoCamunda = this.env.FoundationR3Url + this.url.GetThingsToDoCamunda;
-    public GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = this.env.ApprovalR3Url + this.url.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
+    public GetThingsToDoCamunda = this.env.FoundationR3Url_svc + this.url.GetThingsToDoCamunda;
+    public GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = this.env.ApprovalR3Url_svc + this.url.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
     public GetListJobTitleByUsernameAndModule = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModule;
     public GetListJobTitleByUsernameAndModuleV2 = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModuleV2;
     public CheckUserSessionLog = this.env.FoundationR3Url + this.url.CheckUserSessionLog;
