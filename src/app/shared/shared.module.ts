@@ -17,6 +17,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcnotificationModule } from '@adins/ucnotification';
 import { SelfCustomContainerDmsIframeComponent } from './self-custom-container-dms-iframe/self-custom-container-dms-iframe.component';
+import {FormsModule} from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,7 +43,8 @@ export function createTranslateLoader(http: HttpClient) {
         AdInsSharedModule,
         UcnotificationModule,
         ContextMenuModule.forRoot(),
-        NgMultiSelectDropDownModule
+        NgMultiSelectDropDownModule,
+        FormsModule,
     ],
     declarations: [
         FooterComponent,

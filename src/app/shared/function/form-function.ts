@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { AuthFormObj } from "app/shared/model/auth-form-obj.model";
 import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
@@ -21,7 +21,7 @@ export function saveListAuthForm_Form(RefFormId: Number, listTemp: any[], api: a
         reqObj.ListAuthFormObj.push(AuthObj);
     }
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response['message']);

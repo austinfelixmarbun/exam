@@ -109,11 +109,15 @@ export class UrlConstantNew{
     public GetBankPaging = this.env.FoundationR3Url + this.url.GetBankPaging;
     public GetBank = this.env.FoundationR3Url + this.url.GetBank;
     public GetRefBankByRefBankIdAsync = this.env.FoundationR3Url + this.url.GetRefBankByRefBankIdAsync;
+    public GetRefBankByBankCodeAsync = this.env.FoundationR3Url + this.url.GetRefBankByBankCodeAsync;
     public EditRefBank = this.env.FoundationR3Url + this.url.EditRefBank;
     public AddRefBank = this.env.FoundationR3Url + this.url.AddRefBank;
     public AddRefBankAsync = this.env.FoundationR3Url + this.url.AddRefBankAsync;
     public DeleteRefBank = this.env.FoundationR3Url + this.url.DeleteRefBank;
     public GetBankByBankCode = this.env.FoundationR3Url + this.url.GetBankByBankCode;
+
+    //LBPPMS-CNTRPRT
+    public GetLbppmsCntrprtByLbppmsCntrprtCode = this.env.FoundationR3Url + this.url.GetLbppmsCntrprtByLbppmsCntrprtCode;
 
     //REF-EMP
     public GetEmpNameByRefUserId = this.env.FoundationR3Url + this.url.GetEmpNameByRefUserId;
@@ -533,6 +537,7 @@ export class UrlConstantNew{
     public EditVendorBankAcc = this.env.FoundationR3Url + this.url.EditVendorBankAcc;
     public GetVendorBankAccByVendorBankAccId = this.env.FoundationR3Url + this.url.GetVendorBankAccByVendorBankAccId;
     public DeleteVendorBankAcc = this.env.FoundationR3Url + this.url.DeleteVendorBankAcc;
+    public GetListVendorContactPersonByVendorCode = this.env.FoundationR3Url + this.url.GetListVendorContactPersonByVendorCode;
     public GetVendorContactPersonById = this.env.FoundationR3Url + this.url.GetVendorContactPersonById;
     public AddVendorContactPerson = this.env.FoundationR3Url + this.url.AddVendorContactPerson;
     public EditVendorContactPerson = this.env.FoundationR3Url + this.url.EditVendorContactPerson;
@@ -547,6 +552,7 @@ export class UrlConstantNew{
 
     // VENDOR ADDR
     public GetVendorAddrByVendorCodeAndMrAddrTypeCode = this.env.FoundationR3Url + this.url.GetVendorAddrByVendorCodeAndMrAddrTypeCode;
+    public GetVendorAddrByVendorCode = this.env.FoundationR3Url + this.url.GetVendorAddrByVendorCode;
 
     // VENDOR BANK ACC
     public GetVendorBankAccDefaultByVendorId = this.env.FoundationR3Url + this.url.GetVendorBankAccDefaultByVendorId;
@@ -612,6 +618,7 @@ export class UrlConstantNew{
     public DeleteRangeVendorAttrContentByIds = this.url.DeleteRangeVendorAttrContentByIds;
     public GetListVendorAttrContentByVendorAttrId = this.env.FoundationR3Url + this.url.GetListVendorAttrContentByVendorAttrId;
     public GetListVendorAttrContentByVendorId = this.env.FoundationR3Url + this.url.GetListVendorAttrContentByVendorId;
+    public GetListVendorAttrContentByVendorCode = this.env.FoundationR3Url + this.url.GetListVendorAttrContentByVendorCode;
 
     // VENDOR ATPM MAPPING
     public GetListVendorAtpmMappingByVendorId = this.env.FoundationR3Url + this.url.GetListVendorAtpmMappingByVendorId;
@@ -1206,8 +1213,8 @@ export class UrlConstantNew{
     public Logout = this.env.FoundationR3Url + this.url.Logout;
     public GetAllActiveRefFormByRoleCodeAndModuleCode = this.env.FoundationR3Url + this.url.GetAllActiveRefFormByRoleCodeAndModuleCode;
     public GetDashboardAccessToken = this.env.FoundationR3Url + this.url.GetDashboardAccessToken;
-    public GetThingsToDoCamunda = this.env.FoundationR3Url + this.url.GetThingsToDoCamunda;
-    public GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = this.env.ApprovalR3Url + this.url.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
+    public GetThingsToDoCamunda = this.env.FoundationR3Url_svc + this.url.GetThingsToDoCamunda;
+    public GetListApvTaskListByUsernameAndRoleCodeForThingsToDo = this.env.ApprovalR3Url_svc + this.url.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
     public GetListJobTitleByUsernameAndModule = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModule;
     public GetListJobTitleByUsernameAndModuleV2 = this.env.FoundationR3Url + this.url.GetListJobTitleByUsernameAndModuleV2;
     public CheckUserSessionLog = this.env.FoundationR3Url + this.url.CheckUserSessionLog;

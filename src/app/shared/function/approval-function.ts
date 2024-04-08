@@ -1,24 +1,19 @@
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
-import { AuthFormObj } from "app/shared/model/auth-form-obj.model";
-import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
 import { CommonConstant } from "../constant/CommonConstant";
 import { String } from 'typescript-string-operations';
 import { ExceptionConstant } from "../constant/ExceptionConstant";
-import { ApprovalTaskService } from "../services/ApprovalTask.service";
-import { CookieService } from "ngx-cookie";
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ApvClaimTaskObj } from "../model/approval/approval-req-obj.model";
 import { ApprovalObj } from "../model/approval/approval-obj.model";
 
 export async function callBackVendorPagingApproval(Key: string, RowObj: any, http: HttpClient, toastr: NGXToastrService, router: Router, userContext: any, api: any) {
   const isRoleAssignment = RowObj.IsRoleAssignment.toString();
-  const url = environment.FoundationR3Url + api;
+  const url = enviConfig.FoundationR3Url + api;
   if (Key == "Process") {
     if (isRoleAssignment != CommonConstant.TRUE) {
       if (String.Format("{0:L}", RowObj.CurrentUser) != String.Format("{0:L}", userContext.UserName)) {

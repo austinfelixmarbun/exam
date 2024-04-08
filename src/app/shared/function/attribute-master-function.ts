@@ -1,15 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
-import { environment } from "environments/environment";
 import { CommonConstant } from "../constant/CommonConstant";
 import { ExceptionConstant } from "../constant/ExceptionConstant";
 import { AdInsConstant } from "../AdInstConstant";
 import { AdInsHelper } from "../AdInsHelper";
+import enviConfig from "assets/config/enviConfig.json";
 
 export function addeditAttributeMaster(dicts: Record<string, any>, api: any, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
 
     if (dicts.formRaw.AttrInputType == CommonConstant.AttrInputTypeList) {
         if (dicts.formRaw.AttrValueList.length < 1) {

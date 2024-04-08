@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from "@angular/router";
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { Params, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,7 @@ declare var $: any;
 
 @Component({
     selector: 'app-sidebar',
-    templateUrl: './sidebar.component.html',
+    templateUrl: './sidebar.component.html'
 })
 
 export class SidebarComponent implements OnInit {
@@ -27,6 +27,7 @@ export class SidebarComponent implements OnInit {
     private url: string;
     version: string;
     jsFunc: any = import('../../../assets/js/auto-scroll.js');
+    readonly URLHome: string = NavigationConstant.DASHBOARD;
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
@@ -39,7 +40,7 @@ export class SidebarComponent implements OnInit {
         return this.http.get(url);
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         // this.url = "./assets/menu.json";
         // this.getJSON(this.url).subscribe
         //     (data => {
@@ -50,9 +51,11 @@ export class SidebarComponent implements OnInit {
         //     this.menuItems = ROUTES.filter(menuItem => menuItem);
         //     return;
         // }
-        var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        const currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         if (currentUserContext) {
-            this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
+            await this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {
+              RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module
+            }, { withCredentials: true }).toPromise().then(
                 (response) => {
                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
@@ -62,8 +65,24 @@ export class SidebarComponent implements OnInit {
                     }, 10);
                 });
         }
-        else
+        else {
             this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+        }
+
+        this.menuItems = this.queryParamGenerator(this.menuItems);
+    }
+
+    queryParamGenerator(menuItems)
+    {
+        menuItems.forEach(x => {
+            if(x.Submenu.length > 0)
+            {
+                this.queryParamGenerator(x.Submenu);
+            }
+            x.GeneratedParam = this.genParam(x.Params);
+        })
+
+        return menuItems
     }
 
     setMenu() {
@@ -72,14 +91,15 @@ export class SidebarComponent implements OnInit {
     }
 
     genParam(params: [{ 'Attr': string, 'Value': string }]) {
-        var arrList = {};
+        const arrList: Params = {};
         if (params != undefined) {
-            for (var i = 0; i < params.length; i++) {
+            for (let i = 0; i < params.length; i++) {
                 arrList[params[i].Attr] = params[i].Value;
             }
         }
         return arrList;
     }
+
     //NGX Wizard - skip url change
     ngxWizardFunction(path: string) {
         if (path.indexOf('forms/ngx') != -1)
@@ -87,8 +107,8 @@ export class SidebarComponent implements OnInit {
     }
 
     navigateSkipLocationChange(ev) {
-        //sementara Sementara begini dulu, belum ketemu solusi lain
-        //problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-empty terlebih dahulu
+        // sementara Sementara begini dulu, belum ketemu solusi lain
+        // problem : ketika di 'click' halaman memasuki halaman /dashboard/dash-empty terlebih dahulu
         AdInsHelper.RedirectUrl(this.router, [ev.Path], this.genParam(ev.Params), false);
         // this.router.navigateByUrl(NavigationConstant.DASHEMPTY, { skipLocationChange: true }).then(() => {
         // });

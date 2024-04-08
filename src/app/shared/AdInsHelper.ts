@@ -77,6 +77,12 @@ export class AdInsHelper {
     //     cookieService.removeAll();
     // }
 
+    public static GetUserAccess(cookieService: CookieService) {
+      var userAccess = AdInsHelper.GetCookie(cookieService, CommonConstant.USER_ACCESS);
+      if (!userAccess) return null;
+      return JSON.parse(userAccess);
+    }
+
     public static ClearPageAccessLog(cookieService: CookieService) {
         localStorage.removeItem("PageAccess");
         cookieService.remove("PageAccess");
