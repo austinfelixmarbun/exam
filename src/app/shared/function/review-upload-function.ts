@@ -1,9 +1,8 @@
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsHelper } from 'app/shared/AdInsHelper';
-import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { WorkflowApiObj } from "../model/workflow-api-obj.model";
 
@@ -14,7 +13,7 @@ export function rejectUpload(http: HttpClient, toastr: NGXToastrService, RowObj:
     wfObj.TransactionNo = RowObj.UploadNo;
     wfObj.ListValue = { "Status": "RJC" };
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response["Message"]);

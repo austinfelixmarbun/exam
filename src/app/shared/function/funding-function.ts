@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { VendorFundingObj } from '../model/response/vendor-funding-obj.model';
 import { VendorObj } from '../model/vendor-obj.model';
@@ -58,7 +58,7 @@ export function addEditFundingCoy(dicts: Record<string, any>,  api: any, http: H
         } 
         console.log("ini isi form data edit", formDataEdit)
         console.log(vendorFundingCoyObj);
-        let url = environment.FoundationR3Url + api;
+        let url = enviConfig.FoundationR3Url + api;
         http.post(url, formDataEdit, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
             toastr.successMessage(response["message"]);
@@ -73,7 +73,7 @@ export function addEditFundingCoy(dicts: Record<string, any>,  api: any, http: H
           vendorAttrContent: vendorAttrContent,
           vendorContactPerson : dicts.contactPerson
         } 
-        let url = environment.FoundationR3Url + api;
+        let url = enviConfig.FoundationR3Url + api;
         http.post(url, formDataAdd, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
             toastr.successMessage(response["message"]);

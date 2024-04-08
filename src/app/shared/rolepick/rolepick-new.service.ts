@@ -36,6 +36,7 @@ export class RolePickNewService {
                         const dialogRef = this.dialog.open(RolepickComponent, dialogConfig);
     
                         dialogRef.afterClosed().subscribe(() => {
+                          this.dispatchEventRole();
                         });
                     }
                 );
@@ -95,6 +96,7 @@ export class RolePickNewService {
                             this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
                                 (response) => {
                                     AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
+                                    this.dispatchEventRole();
                                     this.router.navigate([NavigationConstant.DASHBOARD]);
                                 });
                         }
@@ -112,9 +114,20 @@ export class RolePickNewService {
     
     
                     dialogRef.afterClosed().subscribe(() => {
+                      this.dispatchEventRole();
                     });
                 }
             }
+        }
+
+        private dispatchEventRole() {
+          const event: CustomEvent = new CustomEvent<any>('change:user', {
+            detail: {
+              Identity: this.cookieService.get('UserAccess')
+            }
+          });
+          console.log('dispatch change:user');
+          window.dispatchEvent(event);
         }
     
         closeDialog() {

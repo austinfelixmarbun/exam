@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { VerfSchemeDObj } from 'app/shared/model/verf-scheme-d-obj.model';
 import { VerfQuestionGrpDObj } from 'app/shared/model/verf-question-grp-d-obj.model';
@@ -19,7 +19,7 @@ export function addListVerfSchemeD(VerfSchemeHId: any, listTemp: any[], api: any
     verfSchemeDObj.VerfSchemeDId = "0";
     verfSchemeDObj.ListVerfQuestionGrpHId = listSelectedId;
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, verfSchemeDObj, AdInsConstant.SpinnerOptions)
     .subscribe(response => {
             toastr.successMessage(response['message']);
@@ -39,7 +39,7 @@ export function addListVerfQuestionGrpD(VerfQuestionGrpHId: any, listTemp: any[]
     verfQuestionGrpDObj.VerfQuestionGrpDId = 0;
     verfQuestionGrpDObj.ListVerfQuestionAnswerId = listSelectedId;
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, verfQuestionGrpDObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response['message']);

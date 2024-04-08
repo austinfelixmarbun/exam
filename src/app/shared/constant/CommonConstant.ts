@@ -259,6 +259,7 @@ export class CommonConstant {
     public static GsCodeEmailAttachmentMaxSize = "EMAIL_ATTCHMNT_MAX_SIZE";
 
     public static GsDefaultPass = "DEFAULT_PASS";
+    public static GsCodeNDayWarningExpiredUser = "N_DAY_WARNING_EXPIRED_USER";
 
     // WNA COUNTRY CODE
     public static WnaCountryCodeIdn = "IDN";

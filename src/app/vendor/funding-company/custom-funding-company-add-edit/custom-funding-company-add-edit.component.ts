@@ -64,6 +64,7 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
   radioForm: any;
   responseApi: any;
   responseBank: any;
+  responseZipcode: any;
   isOnshore: any;
   jurisdictionValue: any;
   bankCountryCodeValue: any;
@@ -94,8 +95,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
       if (params['mode'] != null) {
         this.mode = params['mode'];
       }
-
-      console.log("ini vendor category code:", this.MrVendorCategoryCode)
     });
 
   }
@@ -117,7 +116,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
             this.http.post(URLConstant.GetListActiveRefAttrByAttrGroup, reqByAttrGroup).subscribe(
               async (response: any) => {
-                console.log("ini response ref attr", response)
                 var parentFormGroup = new Object();
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
                 let tempLookup = {};
@@ -173,6 +171,15 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/lookup/lookupCounterpartCategory.json";
                       tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/lookup/lookupCounterpartCategory.json";
                       tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/lookup/lookupCounterpartCategory.json";
+                      tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
+                      tempLookup[vendorAttr["AttrCode"]].isRequired = true;
+                    }
+
+                    if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'ZIPCODE') {
+                      tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
+                      tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+                      tempLookup[vendorAttr["AttrCode"]].pagingJson = "./assets/uclookup/zipcode/lookupZipcode.json";
+                      tempLookup[vendorAttr["AttrCode"]].genericJson = "./assets/uclookup/zipcode/lookupZipcode.json";
                       tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                       tempLookup[vendorAttr["AttrCode"]].isRequired = true;
                     }
@@ -246,7 +253,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                                   this.jurisdictionValue = "OFFSHORE"
                                 }
                               });
-                            console.log("this is ref bank response", response)
                           });
 
                       }
@@ -258,8 +264,16 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                         tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
                         tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
                         tempLookup[vendorAttr["AttrCode"]].isRequired = false;
-                        console.log("ini attr value bank_code", vendorAttr["AttrCode"])
 
+                      }
+
+                      if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'ZIPCODE') {
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
+                        tempLookup[vendorAttr["AttrCode"]].urlJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].pagingJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
+                        tempLookup[vendorAttr["AttrCode"]].isRequired = false;
                       }
                     }
                     else {
@@ -299,10 +313,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                                   this.jurisdictionValue = "OFFSHORE"
                                 }
                               });
-
-
-                            console.log("this is ref bank response", response)
-                            console.log(this.jurisdictionValue)
                           });
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
@@ -321,8 +331,28 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                           (response) => {
                             this.responseApi = response;
                             tempLookup[vendorAttr["AttrCode"]].jsonSelect = { Descr: this.responseApi.Descr }
-                            console.log("this is mr counterpart response", response)
                           });
+                        formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
+                      }
+                      else if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'ZIPCODE') {
+                        tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
+                        tempLookup[vendorAttr["AttrCode"]].urlJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].pagingJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].genericJson = vendorAttr["AttrValue"];
+                        tempLookup[vendorAttr["AttrCode"]].title = vendorAttr.AttrName;
+                        tempLookup[vendorAttr["AttrCode"]].isRequired = false;
+
+                        await this.http.post(URLConstant.GetZipcodeDataByZipCode, { Zipcode: item["AttrContent"] }).toPromise().then(
+                          (response) => {
+                            this.responseZipcode = response;
+                            tempLookup[vendorAttr["AttrCode"]].jsonSelect = {
+                              Zipcode: this.responseZipcode.Zipcode,
+                              City: this.responseZipcode.City,
+                              AreaCode1: this.responseZipcode.AreaCode1,
+                              AreaCode2: this.responseZipcode.AreaCode2
+                            }
+                          });
+
                         formGroupObject["VendorAttrValue"] = [item["AttrContent"]];
                       }
                       else if (vendorAttr["AttrInputType"] == 'L') {
@@ -397,8 +427,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
     this.vendorContactPerson = contactPerson;
     this.data.emit({contactPerson: this.vendorContactPerson});
     // this.parentForm.addControl("contactPerson", this.fb.group(this.vendorContactPerson));
-    console.log("ini isi this.vendorCP di parent", this.vendorContactPerson);
-    console.log("asascascas");
   }
 
   getLookUpAttrBank(e, VendorAttrCode) {
@@ -422,7 +450,12 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
     this.parentForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
       VendorAttrValue: e.LbppmsCntrprtCode
     });
-    console.log("ini hasil event attr category", e.LbppmsCntrprtCode);
+  }
+
+  getLookUpZipcode(e, VendorAttrCode) {
+    this.parentForm['controls']["VendorAttrList"]["controls"][VendorAttrCode].patchValue({
+      VendorAttrValue: e.Zipcode
+    });
   }
 
   addVendor() {
@@ -463,7 +496,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             VendorAttrContent: vendorAttrContent,
             VendorContactPerson: this.vendorContactPerson
           }
-          console.log("ini isi form data edit", formDataEdit)
           this.http.post(URLConstant.EditVendorFundingCoy, formDataEdit).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);
@@ -478,7 +510,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
             vendorAttrContent: vendorAttrContent,
             vendorContactPerson: this.vendorContactPerson
           }
-          console.log(this.vendorFundingCoyObj.value);
           this.http.post<any>(URLConstant.AddVendorFundingCoy, formDataAdd, AdInsConstant.SpinnerOptions).subscribe(
             (response) => {
               this.toastr.successMessage(response["message"]);

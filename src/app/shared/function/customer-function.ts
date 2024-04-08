@@ -37,6 +37,7 @@ import { saveAs } from 'file-saver';
 import { CustCompanyObjV2 } from "../model/cust-company-obj-v2.model";
 import { ReqAddBeneficiaryOwnerPersonalObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-personal-obj.model";
 import { ReqAddBeneficiaryOwnerCompanyObj } from "../model/beneficiary-owner/req-add-beneficiary-owner-company-obj.model";
+import enviConfig from "assets/config/enviConfig.json";
 
 function setJobAddress(parentForm: any, dicts: Record<string, any>, addrType: string, Notes: string)
 {
@@ -610,7 +611,7 @@ function redirectSaveEditMainData(custId: number, custType: string, Mode: string
 
 function SaveCustomerData(dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let reqPayload = separateFileUpload(dicts.ReqSubmitObj);
   let resSave: GenericObj;
@@ -623,7 +624,7 @@ function SaveCustomerData(dicts: Record<string, any>, Mode: string, From: string
 
 function uploadDocFileMultipart(objDoc: {CustId: number, CustDocFileObjs: Array<CustDocFileObj>}, successMsg:string, custId:number, custType: string, Mode:string, From: string, toastr: NGXToastrService,  router: Router, cookieService: CookieService)
 {
-    let urlUpload = environment.FoundationR3Url + "/v2.1/Cust/SaveCustDocFile";
+    let urlUpload = enviConfig.FoundationR3Url + "/v2.1/Cust/SaveCustDocFile";
 
     if(!objDoc.CustDocFileObjs || !objDoc.CustDocFileObjs.length || !custId) 
     {
@@ -686,7 +687,7 @@ function DecryptString(chipperText: string, chipperKey: string) {
 
 export function editCustomerFamily(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, next: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
 
     let reqSubmitObj: ReqPersonalObj = new ReqPersonalObj();
 
@@ -799,7 +800,7 @@ export function backFromCustDuplicate(dicts: Record<string, any>, next: string, 
 
 export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
   
   if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
   {
@@ -849,7 +850,7 @@ export function addEditCustomer(parentForm: any, dicts: Record<string, any>, Mod
 
 export function addEditCustomerV2(parentForm: any, dicts: Record<string, any>, Mode: string, From: string, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
   
   if (parentForm.MrCustTypeCode == CommonConstant.CustTypePersonal)
   {
@@ -901,7 +902,7 @@ export function addCustomerPersonalAfterDuplicate(dicts: Record<string, any>, Ro
 {
   console.log(RowObj)
 
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   if (key == "SAVE")
   {
@@ -965,7 +966,7 @@ export function addCustomerCompanyAfterDuplicate(dicts: Record<string, any>, Row
 {
   console.log(RowObj)
 
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   if (key == "SAVE")
   {
@@ -1032,7 +1033,7 @@ export function backCust(dicts: Record<string, any>, router: Router)
 
 export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService, DialogRef: MatDialogRef<any>)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
     let AssetTotalValue = parentForm.AssetValue * parentForm.AssetQty;
 
     let obj = {
@@ -1055,7 +1056,7 @@ export function addEditCustAsset(parentForm: any, CustId: number, CustAssetId: n
 
 export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: number, api: any, RowVersion: any, http: HttpClient, toastr: NGXToastrService, DialogRef: MatDialogRef<any>)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
     let FullAddr = parentForm.UcAddress.Addr + " RT: " + parentForm.UcAddress.AreaCode4 + " RW: " + parentForm.UcAddress.AreaCode3 + " " + parentForm.UcAddress.AreaCode2 + ", " + parentForm.UcAddress.AreaCode1 + " " + parentForm.UcAddress.Zipcode;
 
     let obj = {
@@ -1095,7 +1096,7 @@ export function addEditCustAddr(parentForm: any, CustId: number, CustAddrId: num
 
 export function addEditCustJobData(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, templateService: UcTemplateService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
   let custPersonalJobDataObj = new CustPersonalJobDataObj();
@@ -1205,7 +1206,7 @@ export function addEditCustJobData(dicts: Record<string, any>, api: any, http: H
 
 async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let custPersonalObj = new CustPersonalObj();
   custPersonalObj.BirthDt = dicts.BirthDt;
@@ -1256,7 +1257,7 @@ async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http
 
 async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let custPersonalObj = new CustPersonalObjV2();
   custPersonalObj.BirthDt = dicts.BirthDt;
@@ -1311,7 +1312,7 @@ async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, ht
 
 async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let custCompanyObj = new CustCompanyObj();
   custCompanyObj.CustCompanyId = dicts.CustCompanyId;
@@ -1350,7 +1351,7 @@ async function saveCustCompanyDetail(dicts: Record<string, any>, api: any, http:
 
 async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let custCompanyObj = new CustCompanyObjV2();
   custCompanyObj.CustCompanyId = dicts.CustCompanyId;
@@ -1395,7 +1396,7 @@ async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, htt
 
 async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let custPersonalContactPersonObj = new CustPersonalContactPersonObj();
   custPersonalContactPersonObj.BirthPlace = dicts.formRaw.BirthPlace;
@@ -1444,7 +1445,7 @@ async function saveAddEditEmergencyCntcPerson(dicts: Record<string, any>, api: a
 
 async function saveAddEditCustJobData(dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
 
   let reqCustPersonalJobDataObj = new RequestCustPersonalJobDataObj();
   let custPersonalJobDataObj = new CustPersonalJobDataObj();
@@ -1579,7 +1580,7 @@ export async function saveDataOrSaveAndSync(dicts: Record<string, any>, from: an
     let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
     if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
 
-    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    let url = enviConfig.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
     http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
@@ -1628,7 +1629,7 @@ export async function saveDataOrSaveAndSyncCompany(dicts: Record<string, any>, f
     let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
     if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
 
-    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    let url = enviConfig.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
     http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
@@ -1676,7 +1677,7 @@ export async function saveDataOrSaveAndSyncCompanyV2(dicts: Record<string, any>,
     let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
     if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
 
-    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    let url = enviConfig.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
     http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
@@ -1747,7 +1748,7 @@ export async function saveDataOrSaveAndSyncV2(dicts: Record<string, any>, from: 
     let UrlBack = NavigationConstant.SELF_CUSTOM_CUST_PAGING;
     if (from == CommonConstant.CustFromEditMainData) UrlBack = NavigationConstant.SELF_CUSTOM_CUST_EDIT_MAIN_DATA_PAGING;
 
-    let url = environment.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
+    let url = enviConfig.FoundationR3Url + "/v1/Cust/SendCustomerDataToRabbitMq"
     http.post(url, { CustNo: dicts.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
@@ -1777,7 +1778,7 @@ export async function saveDataOrSaveAndSyncV2(dicts: Record<string, any>, from: 
 }
 
 export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string, any>, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService, DialogRef: MatDialogRef<any>) {
-  let url = environment.FoundationR3Url;
+  let url = enviConfig.FoundationR3Url;
 
   let reqObj = { ...parentForm };
   reqObj.CustCompanyId = dicts.CustCompanyId;
@@ -1815,7 +1816,7 @@ export function addEditCustCompanyLegalDoc(parentForm: any, dicts: Record<string
         toastr, 
         cookieService, 
         "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc",
-        environment.FoundationR3Url,
+        enviConfig.FoundationR3Url,
         "reqUploadCustCompanyLegalDocObj"
         )
       .then(() => {
@@ -1835,7 +1836,7 @@ export function sendXhr(
   toastr: NGXToastrService, 
   cookieService: CookieService, 
   apiUrl: string,
-  baseUrl: string = environment.FoundationR3Url,
+  baseUrl: string = enviConfig.FoundationR3Url,
   reqDtoName: string,
   ): Promise<void> {
   return new Promise<void>((resolve, reject) => {
@@ -1882,7 +1883,7 @@ export function sendXhr(
   });
 }
 
-// export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = environment.FoundationR3Url) {
+// export function uploadDocFileLegalMultipart(fileUpload: CustCompanylegalDocFile, successMsg: string, toastr: NGXToastrService, cookieService: CookieService, DialogRef: MatDialogRef<any>, baseUrl: string = enviConfig.FoundationR3Url) {
 //   let urlUpload = baseUrl + "/v1/CustCompanyLegalDoc/UploadCustCompanyLegalDoc";
 
 //   var formData: any = new FormData();
@@ -1923,7 +1924,7 @@ export function sendXhr(
 
 export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, api: any, http: HttpClient, toastr: NGXToastrService, router: Router, cookieService: CookieService)
 {
-  let url = environment.FoundationR3Url + api;
+  let url = enviConfig.FoundationR3Url + api;
   let reqSubmitObj: ReqBouwheerCompanyObj = new ReqBouwheerCompanyObj();
   reqSubmitObj.rAddBouwheerObj = new BouwheerObj();
   reqSubmitObj.rAddBouwheerObj.BouwheerName = parentForm.BouwheerNameCompany;
@@ -1980,7 +1981,7 @@ export function addBouwheerCompany(parentForm: any, dicts: Record<string, any>, 
           toastr, 
           cookieService, 
           "/v1/BouwheerCompanyIndustryInfo/UploadBouwheerCompanyIndustryDoc",
-          environment.FoundationR3Url,
+          enviConfig.FoundationR3Url,
           "reqObj"
           )
         .then(async () => {
@@ -2002,7 +2003,7 @@ export async function downloadDmsDocument(
   http: HttpClient, 
   toastr: NGXToastrService, 
   RowObj: any) {
-  const url = `${environment.FoundationR3Url}/v1/DMS/DownloadDmsDocument`;
+  const url = `${enviConfig.FoundationR3Url}/v1/DMS/DownloadDmsDocument`;
   const documentId = RowObj.DocDmsId;
 
   if(documentId == null)

@@ -1097,6 +1097,21 @@ const routes: Routes = [
           title: 'Project Add Edit',
           page: 'Addeditproject'
         },
+      },
+      {
+        path: PathConstant.CS_MASKING_PAGING, component: UcTemplateComponent, data: { page: "MaskingDataItemPaging" },
+      },
+      {
+        path: PathConstant.CS_MASKING_DETAIL, component: UcTemplateComponent, data: { page: "MaskingDataItemDetail" },
+      },
+      {
+        path: PathConstant.CS_MASKING_WHITELIST, component: UcTemplateComponent, data: { page: "MaskingDataWhitelistRolePaging" },
+      },
+      {
+        path: PathConstant.CS_MASKING_WHITELIST_DETAIL, component: UcTemplateComponent, data: { page: "MaskingDataWhitelistRoleDetail" },
+      },
+      {
+        path: PathConstant.CS_MASKING_WHITELIST_EDIT, component: UcTemplateComponent, data: { page: "MaskingDataWhitelistRoleEdit" },
       }
     ]
   }

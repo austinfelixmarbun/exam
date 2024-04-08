@@ -1,7 +1,7 @@
 import { UcTemplateService } from '@adins/uctemplate';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { Subscription } from 'rxjs';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -28,11 +28,6 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
   AssetTypeId: string;
   mode: string;
   pageName: string = "AssetMasterDetail";
-
-  AssetMasterParentForm = this.fb.group({
-    IsFinal: [false],
-    AssetCategoryId: ['']
-  });
   
   handler = {
     callback: ($event) => this.callback($event)
@@ -47,20 +42,44 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.parentForm = ev;
   }
 
-  ngOnInit(): void {
-    console.log("masook");    
+  ngOnInit(): void {  
   }
 
-  callback(ev: any) {
+  waitFor(conditions) {
+    const vote = resolve => {
+      if (conditions()) resolve();
+      else setTimeout(_ => vote(resolve), 250);
+    }
+
+    return new Promise(vote);
+  }
+
+  async callback(ev: any) {
     if(ev === 'AssetTypeId') {
-      console.log(this.parentForm.get(ev).value);
-      console.log("Parent Form",this.parentForm);
+
+      await this.waitFor(_ => this.parentForm.controls.AssetTypeId != undefined);
+
       const _ddl = this.ddlSvc.GetDictDDL(ev);
-      console.log("ddl: ",_ddl);
       const y = this.parentForm.get(ev).value;
       const x = _ddl.find(x=>x.Key == y);
-      console.log("AssetTypeCode", x.Value);
-      this. getListAssetCategory(x.Value)
+
+      let assetTypeCode = ""
+      await this.http.post(this.UrlConstantNew.GetAssetTypeById, {Id: x.Key }).toPromise().then(
+        (response) => {
+          assetTypeCode = response['AssetTypeCode'];
+          if (response['MaxHierarchyLevel'] == 1)
+          {
+            this.parentForm.controls["AssetCategoryId"].setValidators([Validators.required]);
+          }
+          else
+          {
+            this.parentForm.controls['AssetCategoryId'].clearValidators();
+          }
+          this.parentForm.controls['AssetCategoryId'].updateValueAndValidity();
+        }
+      );
+
+      this. getListAssetCategory(assetTypeCode)
     }
   }
 
@@ -72,11 +91,10 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.AssetTypeCode = val;
     
     var critObj = new CriteriaObj();
-        critObj.DataType = 'text';
-        critObj.restriction = AdInsConstant.RestrictionEq;
-        critObj.propName = 'ASSET_TYPE_CODE';
-        critObj.value = this.AssetTypeCode;
-        console.log("crit val: ", critObj.value);
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'ASSET_TYPE_CODE';
+    critObj.value = this.AssetTypeCode;
     
     this.listRequest = new ListRequestCriteriaObj();
     this.listRequest.criteria = new Array();
@@ -85,7 +103,6 @@ export class CustomAssetMasterAddEditParentComponent implements OnInit, AfterVie
     this.http.post<GenericKeyValueListObj>(this.UrlConstantNew.GetListAssetCategory, this.listRequest).subscribe(
       (response) => {
         this.resultAssetCategory = response[CommonConstant.ReturnObj];
-        console.log("resultAssetCategory", this.resultAssetCategory)
         this.ddlSvc.SetDictDDL("AssetCategoryId", this.resultAssetCategory);
       });
   }

@@ -275,6 +275,13 @@ export class PathConstant {
     public static CS_REF_TRX_TYPE_PAGING = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.PAGING;
     public static CS_REF_TRX_TYPE_DETAIL = PathConstant.CS_REF_TRX_TYPE + "/" + PathConstant.DETAIL;
 
+    public static CS_MASKING = "MaskingData";
+    public static CS_MASKING_PAGING = PathConstant.CS_MASKING + "/" + PathConstant.PAGING;
+    public static CS_MASKING_DETAIL = PathConstant.CS_MASKING + "/" + PathConstant.DETAIL;    
+    public static CS_MASKING_WHITELIST = PathConstant.CS_MASKING + "/WhitelistRole";
+    public static CS_MASKING_WHITELIST_DETAIL = PathConstant.CS_MASKING + "/WhitelistRoleDetail";
+    public static CS_MASKING_WHITELIST_EDIT = PathConstant.CS_MASKING + "/WhitelistRoleEdit";
+
     public static CUSTOM_CS_GEN_SETTING = PathConstant.SELF_CUSTOM + "/" + "GeneralSetting";
     public static CUSTOM_CS_GEN_SETTING_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_GEN_SETTING + "/" + PathConstant.DETAIL;
     public static CUSTOM_CS_BANK_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.CS_BANK + "/" + PathConstant.PAGING;
@@ -506,6 +513,8 @@ export class PathConstant {
     public static CHANGE_PASSWORD = "ChangePassword";
     public static REF_FORM = "RefForm";
     public static ROLE_MAP = "RoleMapping";
+    public static FEATURE = "Feature";
+    public static API = "Api";
     public static REF_FORM_PAGING = PathConstant.REF_FORM + "/" + PathConstant.PAGING;
     public static REF_FORM_DETAIL = PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static REF_FORM_ROLE_MAP = PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP;
@@ -520,10 +529,14 @@ export class PathConstant {
     public static CUSTOM_ROLE_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE + "/" + PathConstant.DETAIL;
     public static CUSTOM_ROLE_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + "RoleForm" + "/" + PathConstant.PAGING;
     public static CUSTOM_ROLE_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.DETAIL;
+    public static CUSTOM_ROLE_FORM_FEATURE = PathConstant.SELF_CUSTOM + "/" + PathConstant.ROLE_FORM + "/" + PathConstant.FEATURE;
     public static CUSTOM_REF_FORM_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.PAGING;
     public static CUSTOM_REF_FORM_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.DETAIL;
     public static CUSTOM_REF_FORM_ROLE_MAP_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.PAGING;
     public static CUSTOM_REF_FORM_ROLE_MAP_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.ROLE_MAP + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_API_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.PAGING;
+    public static CUSTOM_REF_FORM_API_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.DETAIL;
+    public static CUSTOM_REF_FORM_API_FEATURE = PathConstant.SELF_CUSTOM + "/" + PathConstant.REF_FORM + "/" + PathConstant.API + "/" + PathConstant.FEATURE;
     //#endregion
 
     //#region Upload-Module

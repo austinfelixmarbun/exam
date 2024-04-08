@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { ExceptionConstant } from '../constant/ExceptionConstant';
 
@@ -19,7 +19,7 @@ export function rerunJournal(listTemp: any[], api: any, http: HttpClient, toastr
       }
     }
 
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
     http.post(url, {
       ListTransactionNo: req
     }, AdInsConstant.SpinnerOptions).subscribe(
@@ -72,7 +72,7 @@ export function saveJrMHeaderFact(JrMHeaderId: Number, form: any, api: any, http
     ListJrMHeaderFact: form.ListJrMHeaderFact
   }
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, request, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response['message']);
@@ -118,7 +118,7 @@ export function saveJrMGroupDFact(JrMGroupId: Number, form: any, api: any, http:
     ListJrMGroupDFact: form.ListJrMGroupDFact
   }
 
-    const url = environment.FoundationR3Url + api;
+    const url = enviConfig.FoundationR3Url + api;
     http.post(url, request, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response['message']);

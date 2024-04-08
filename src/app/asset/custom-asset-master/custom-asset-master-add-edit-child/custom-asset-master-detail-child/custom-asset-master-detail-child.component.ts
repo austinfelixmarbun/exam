@@ -15,7 +15,10 @@ import { ListAssetSchmDObj } from 'app/shared/model/list-asset-schm-d-obj.model'
 import { map, mergeMap, first } from 'rxjs/operators';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AssetMasterAttrContentObj, AssetMasterAttrObj } from 'app/shared/model/asset-master-attr/asset-master-attr-obj.model';
-
+import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { GenericKeyValueListObj } from 'app/shared/model/generic/generic-key-value-list-obj.model';
+import { FormDropDownListService } from '@adins/ucform';
 
 @Component({
   selector: 'app-custom-asset-master-detail-child',
@@ -53,23 +56,22 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
   listItem: any[];
 
   constructor(private http: HttpClient, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
-    private templateService: UcTemplateService, private cdr: ChangeDetectorRef) { }
+    private templateService: UcTemplateService, private cdr: ChangeDetectorRef, private ddlSvc: FormDropDownListService) { }
 
-  ngOnInit(): void {
-    console.log("dicts: ", this.dicts);
+  async ngOnInit() {
     // this.getListAssetScheme(this.dicts.AssetTypeId);
     this.checkFinal();
     if (this.dicts.mode == "edit") {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.dicts.AssetMasterId;
-      this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).subscribe(
-        (response: AssetMasterObj) => {
+      await this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).toPromise().then(
+        async (response: AssetMasterObj) => {
           this.resultData = response;
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).subscribe(
-            (response: AssetTypeObj) => {
+          await this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).toPromise().then(
+            async (response: AssetTypeObj) => {
               this.resultAssetType = response;
 
               if (this.isFinal) {
@@ -77,7 +79,7 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
                   AssetMasterId: this.dicts.AssetMasterId,
                   AttrTypeCode: CommonConstant.AttrTypeCodeMaster
                 };
-                this.http.post(this.UrlConstantNew.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
+                await this.http.post(this.UrlConstantNew.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).toPromise().then(
                   async (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var parentFormGroup = new Object();
@@ -85,13 +87,14 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
 
                       var formGroupObject = new Object();
                       formGroupObject["AssetAttrId"] = [masterAttr["AssetAttrId"]];
-                      // formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
+                      formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
                       formGroupObject["AttrLength"] = [masterAttr["AttrLength"]];
 
                       await this.setFormGroupValue(masterAttr, formGroupObject, parentFormGroup);
                     }
                     this.parentForm.addControl("AssetMasterAttrContent", this.fb.group(parentFormGroup));
                     this.isReadyAssetMasterAttr = true;
+                    this.data.emit({ListAssetMasterAttrContent: this.listAssetMasterAttrContent});
                   },
                   (error) => {
                     console.log(error);
@@ -102,14 +105,16 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
           this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
           this.reqGetListAssetSchmHObj.AssetMasterId = this.dicts.AssetMasterId;
           this.reqGetListAssetSchmHObj.AssetTypeId = this.dicts.AssetTypeId;
-          this.http.post<ResGetListAssetSchemeHObj>(this.UrlConstantNew.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
-            response => {
+          await this.http.post<ResGetListAssetSchemeHObj>(this.UrlConstantNew.GetListAssetSchmH, this.reqGetListAssetSchmHObj).toPromise().then(
+            async response => {
               this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
                 }
               }
+              this.data.emit({ listSelectedSchm: this.listSelectedId });
+              this.data.emit({ListAssetScheme: this.listAssetScheme});
             });
         }
       );
@@ -118,20 +123,21 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
     if (this.dicts.mode == "add") {
       this.assetMasterObj = new AssetMasterObj();
       this.assetMasterObj.AssetMasterId = this.dicts.AssetMasterId;
-      this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).subscribe(
-        (response: AssetMasterObj) => {
+      await this.http.post(this.UrlConstantNew.GetAssetMasterById, { Id: this.dicts.AssetMasterId }).toPromise().then(
+        async (response: AssetMasterObj) => {
+          this.resultData = response;
 
           this.assetTypeObj = new AssetTypeObj();
           this.assetTypeObj.AssetTypeId = this.resultData.AssetTypeId;
-          this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).subscribe(
-            (response: AssetTypeObj) => {
-
+          await this.http.post(this.UrlConstantNew.GetAssetTypeById, { Id: this.resultData.AssetTypeId }).toPromise().then(
+            async (response: AssetTypeObj) => {
+              this.resultAssetType = response;
               if (this.isFinal) {
                 let reqGetAssetMasterAttrContentObj = {
                   AssetMasterId: this.dicts.AssetMasterId,
                   AttrTypeCode: CommonConstant.AttrTypeCodeMaster
                 };
-                this.http.post<ResGetAssetMasterAttrContentByIdObj>(this.UrlConstantNew.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).subscribe(
+                await this.http.post<ResGetAssetMasterAttrContentByIdObj>(this.UrlConstantNew.GetAssetMasterAttrContentForAssetMasterByAttrTypeCode, reqGetAssetMasterAttrContentObj).pipe(first()).toPromise().then(
                   async (response) => {
                     this.listAssetMasterAttrContent = response["AssetMasterAttrContentObjs"];
                     var parentFormGroup = new Object();
@@ -139,13 +145,14 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
 
                       var formGroupObject = new Object();
                       formGroupObject["AssetAttrId"] = [masterAttr["AssetAttrId"]];
-                      // formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
+                      formGroupObject["IsMandatory"] = [masterAttr["IsMandatory"]];
                       formGroupObject["AttrLength"] = [masterAttr["AttrLength"]];
 
                       await this.setFormGroupValue(masterAttr, formGroupObject, parentFormGroup);
                     }
                     this.parentForm.addControl("AssetMasterAttrContent", this.fb.group(parentFormGroup));
                     this.isReadyAssetMasterAttr = true;
+                    this.data.emit({ListAssetMasterAttrContent: this.listAssetMasterAttrContent});
                   },
                   (error) => {
                     console.log(error);
@@ -156,18 +163,21 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
           this.reqGetListAssetSchmHObj = new ReqGetListAssetSchmHObj();
           this.reqGetListAssetSchmHObj.AssetMasterId = this.dicts.AssetMasterId;
           this.reqGetListAssetSchmHObj.AssetTypeId = this.dicts.AssetTypeId;
-          this.http.post<ResGetListAssetSchemeHObj>(this.UrlConstantNew.GetListAssetSchmH, this.reqGetListAssetSchmHObj).subscribe(
-            response => {
+          await this.http.post<ResGetListAssetSchemeHObj>(this.UrlConstantNew.GetListAssetSchmH, this.reqGetListAssetSchmHObj).toPromise().then(
+            async response => {
               this.listAssetScheme = response[CommonConstant.ReturnObj];
               for (let i = 0; i < this.listAssetScheme.length; i++) {
                 if (this.listAssetScheme[i].AssetSchmHIdFromD != null) {
                   this.listSelectedId.push(this.listAssetScheme[i].AssetSchmHIdFromD);
                 }
               }
+              this.data.emit({ listSelectedSchm: this.listSelectedId });
+              this.data.emit({ ListAssetScheme: this.listAssetScheme });
             });
         }
       );
     }
+    await this.getListAssetCategory(this.resultAssetType.AssetTypeCode)
   }
 
 
@@ -180,7 +190,6 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
     }
 
     this.data.emit({ listSelectedSchm: this.listSelectedId });
-    console.log('dicts', this.dicts);
   }
 
   SelectAll(condition) {
@@ -218,7 +227,6 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
       } else {
         this.listAssetScheme[i].AssetMasterId = null;
       }
-      console.log('last asset Assets', this.listAssetScheme);
       this.data.emit({ ListAssetScheme: this.listAssetScheme });
     }
   }
@@ -239,7 +247,6 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
   }
 
   checkFinal() {
-    console.log("checkFinal");
     const MaxHierarchyLvl = this.dicts.MaxHierarchyLevel;
     let mode = this.dicts.mode;
     if (mode == "edit" && MaxHierarchyLvl == this.dicts.HierarchyLvl) {
@@ -254,5 +261,32 @@ export class CustomAssetMasterDetailChildComponent implements OnInit {
       this.isFinal = false;
     }
     this.parentForm.get('IsFinal').setValue(this.isFinal);
+  }
+
+  getListAssetCategory(val: string){
+    if (this.AssetTypeCode === val && val !== '') {
+      return;
+    }
+    
+    this.AssetTypeCode = val;
+    
+    var critObj = new CriteriaObj();
+    critObj.DataType = 'text';
+    critObj.restriction = AdInsConstant.RestrictionEq;
+    critObj.propName = 'ASSET_TYPE_CODE';
+    critObj.value = this.AssetTypeCode;
+    
+    this.listRequest = new ListRequestCriteriaObj();
+    this.listRequest.criteria = new Array();
+    this.listRequest.criteria.push(critObj);
+
+    this.http.post<GenericKeyValueListObj>(this.UrlConstantNew.GetListAssetCategory, this.listRequest).subscribe(
+      (response) => {
+        this.resultAssetCategory = response[CommonConstant.ReturnObj];
+        this.ddlSvc.SetDictDDL("AssetCategoryId", this.resultAssetCategory);
+        this.parentForm.patchValue({
+          AssetCategoryId: this.dicts.mode == "edit" ? this.resultData.AssetCategoryId : ""
+        });
+      });
   }
 }

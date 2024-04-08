@@ -2,14 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { HolidayDByYearObj } from "../model/holiday-d-by-year-obj.model";
-import {environment} from '../../../environments/environment';
 import { AdInsHelper } from "../AdInsHelper";
 import { AdInsConstant } from "../AdInstConstant";
-import { NavigationConstant } from "../NavigationConstant";
+import enviConfig from "assets/config/enviConfig.json";
 
 export function addHolidaySchmDUntilYear(dicts: Record<string, any>, api: any, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
 {
-    let url = environment.FoundationR3Url + api;
+    let url = enviConfig.FoundationR3Url + api;
 
     let holidayDetailByYearObj = new HolidayDByYearObj();
     holidayDetailByYearObj.IsPublicHoliday = dicts.formRaw.IsPublicHoliday;

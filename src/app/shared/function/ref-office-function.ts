@@ -3,7 +3,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { environment } from '../../../environments/environment';
+import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 
 export function saveOfficeGroupMember(CenterGrpId: Number, RefOfficeId: Number, listTemp: any[], api: any, http: HttpClient, toastr: NGXToastrService, router: Router) {
@@ -18,7 +18,7 @@ export function saveOfficeGroupMember(CenterGrpId: Number, RefOfficeId: Number, 
     RefOfficeId: listRefOfficeIds
   }
 
-  const url = environment.FoundationR3Url + api;
+  const url = enviConfig.FoundationR3Url + api;
   http.post(url, reqObj, AdInsConstant.SpinnerOptions).subscribe(
     response => {
       toastr.successMessage(response['message']);
