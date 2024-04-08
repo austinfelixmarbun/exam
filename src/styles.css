@@ -152,6 +152,12 @@
     background: var(--light-blue-bg, #f8fcff);
 }
 
+.card-shadow{
+    border-radius: 8px; 
+    padding: 0 !important;
+    box-shadow: 0px 0px 10px 0px #0000001A;
+}
+
 /*label input form*/
 .label-field-2{
     margin-bottom: 8px;
@@ -208,8 +214,20 @@ form .textarea-field-2{
 }
 
 /* table */
+.table {
+    background-color: #e4eefb;
+    border-radius: 8px !important;
+    border: 1px solid #e4eefb!important;
+    overflow: hidden;
+}
+
 .table-header-2{
     background: #EEF8FF;
+}
+.table thead th{
+    border-bottom: 0px !important;
+    border-top: 0;
+    color: var(--new-bgb-100, #2D3436);
 }
 
 .table-new thead th{
@@ -217,11 +235,20 @@ form .textarea-field-2{
     border-top: 1px solid #bfd4ff !important;
 }
 
-.table-new>tbody>tr:nth-child(odd)>td,
-.table-new>tbody>tr:nth-child(odd)>th {
-    background-color: #F4F8FB !important;
+.table-new>tbody>tr:nth-child(even)>td,
+.table-new>tbody>tr:nth-child(even)>th {
+    background-color: #F4F8FB;
     border-top: 1px solid #e4eefb;
     border-bottom: 1px solid #e4eefb;
+    color: var(--new-bgb-100, #2D3436);
+}
+
+.table-new>tbody>tr:nth-child(odd)>td,
+.table-new>tbody>tr:nth-child(odd)>th {
+    background-color: #FFFF;
+    border-top: 1px solid #e4eefb;
+    border-bottom: 1px solid #e4eefb;
+    color: var(--new-bgb-100, #2D3436);
 }
 
 .table-responsive{
