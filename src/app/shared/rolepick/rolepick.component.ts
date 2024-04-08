@@ -198,6 +198,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           var dayWarningExpiredUser = formatDate(new Date(tempDayWarningExpiredUser), 'yyyy-MM-dd', 'en-US');
           
           if (expiredDt <= dayWarningExpiredUser) {
+            daysUntilExpiration = daysUntilExpiration < 0 ? 0 : daysUntilExpiration;
             this.warningMessage = ExceptionConstant.PASSWORD_WILL_BE_EXPIRED + daysUntilExpiration + " days. " + ExceptionConstant.CHANGE_PASSWORD;
           }
         }

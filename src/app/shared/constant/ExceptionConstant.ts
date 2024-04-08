@@ -86,6 +86,6 @@ export class ExceptionConstant {
     // No Whitespace
     public static NO_WHITE_SPACE = "Cannot contain space";
 
-    public static PASSWORD_WILL_BE_EXPIRED = "The password will be expired in ";
+    public static PASSWORD_WILL_BE_EXPIRED = "Your password will be expired in ";
     public static CHANGE_PASSWORD = "Please change your password immediately.";
 }
