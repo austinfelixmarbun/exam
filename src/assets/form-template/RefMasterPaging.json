@@ -1,5 +1,5 @@
 {
-    "title": "Ref Master Paging",
+    "title": "Master Paging",
     "hideTitle": false,
     "id": "Refmasterpaging",
     "addButton": false,
@@ -228,7 +228,7 @@
             "id": "addId",
             "key": "",
             "position": "top",
-            "icon": "",
+            "icon": "ft-plus-circle",
             "cssClass": "",
             "conditions": [],
             "btnType": "button",
