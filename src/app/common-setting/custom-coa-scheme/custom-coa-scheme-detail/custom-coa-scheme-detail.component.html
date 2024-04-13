@@ -1,11 +1,9 @@
-<!-- <div class="col-md-12"> -->
-  <div class="card bg-light-blue-card">
+<!-- <div class="col-md-12"> --> 
     <!-- <div class="card-header">
       <h4 class="card-title" id="horz-layout-colored-controls" translate>COA Scheme</h4>
     </div> -->
 
-    <div class="card-body">
-      <div class="px-3">
+    <div class="card-body"> 
         <form class="form form-horizontal" [formGroup]="parentForm" #enjiForm="ngForm">
           <div class="form-body">
 
@@ -45,8 +43,9 @@
             </lib-ucSubsection>
             <div id='CoaSchemeDetailInfo'>
 
-              <div class="form-group row" *ngIf="mode != 'edit'">
-                <label class="col-md-3" translate>Copy</label>
+              <div class="p-3">
+                <div class="form-group row" *ngIf="mode != 'edit'">
+                <label class="col-md-3 label-field-2" translate>Copy</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
                     <select class="form-control input-field-2" #coaSchmSelect>
@@ -56,7 +55,7 @@
                       </option>
                     </select>
 
-                    <div class="input-group-append">
+                    <div class="input-group-append ml-3">
                       <span class="input-group-btn">
                         <button class="btn btn-raised btn-primary-2" type="button" (click)="copy(coaSchmSelect)">
                           <i class="fa fa-check-square-o button-icon"></i>&nbsp;<span class="button-text" translate>Copy</span>
@@ -67,16 +66,16 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3" translate>Currency Code</label>
+                <label class="col-md-3 label-field-2" translate>Currency Code</label>
                 <div class="col-md-3">
                   <div class="input-group mb-0">
                     <select class="form-control input-field-2"  #currselect>
-                      <option disabled [value]="null">-Select One-</option>
+                      <option [value]="null">-Select One-</option>
                       <option *ngFor="let item of ListCurr" [value]="item.Key">
                         {{item.Value}}
                       </option>
                     </select>
-                    <div class="input-group-append">
+                    <div class="input-group-append ml-3">
                       <span class="input-group-btn">
                         <button class="btn btn-raised btn-primary-2" type="button" (click)="Add(currselect)">
                           <i class="fa fa-check-square-o button-icon"></i>&nbsp;<span class="button-text" translate>Add</span>
@@ -86,6 +85,7 @@
                   </div>
                 </div>
               </div>
+            </div>
 
               <div class="table-responsive" style="overflow-x: auto;">
                 <table class="table table-responsive-md text-center table-hover table-new">
@@ -131,10 +131,8 @@
             </button>
           </div> -->
         </form>
-      </div>
-    </div>
-
-  </div>
+      </div> 
+ 
 <!-- </div> -->
 
 

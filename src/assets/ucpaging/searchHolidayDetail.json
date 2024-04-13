@@ -36,7 +36,7 @@
             "id": "DescrId",
             "value": "",
             "label": "Description",
-            "placeholder": "Placeholder"
+            "placeholder": "Input Description"
         },
         {
             "type": "datepicker",
@@ -54,7 +54,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "DATE",
             "name": "HoliD.HOLIDAY_DT"
         },
@@ -79,7 +79,7 @@
     "bodyList": [
         {
             "type": "date",
-            "position": "left",
+            "position": "center",
             "property": "HolidayDt"
         },
         {
