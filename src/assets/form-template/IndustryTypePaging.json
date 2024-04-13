@@ -118,7 +118,7 @@
                             "property": "RefIndustryTypeCategoryName"
                         },
                         {
-                            "type": "text",
+                            "type": "boolean",
                             "position": "center",
                             "property": "IsActive"
                         },
