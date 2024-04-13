@@ -182,7 +182,7 @@ export class AppComponent implements OnInit {
       sessionStorage.clear();
 
       const url = location.href;
-      if (!url.includes('Login')) {
+      if (!url.includes('Login') && !url.includes('RequestPassword') && !url.includes('ChangePassword')) {
         this.router.navigate([NavigationConstant.PAGES_LOGIN]);
       }
     }
