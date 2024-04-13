@@ -158,13 +158,13 @@
                             "property": "PayAllocGrpPurpose"
                         },
                         {
-                            "type": "text",
+                            "type": "boolean",
                             "position": "center",
                             "property": "IsActive"
                         },
                         {
                             "type": "boolean",
-                            "position": "",
+                            "position": "center",
                             "property": "IsSystem"
                         },
                         {
