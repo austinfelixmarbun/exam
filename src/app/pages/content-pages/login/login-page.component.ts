@@ -42,6 +42,7 @@ export class LoginPageComponent implements OnInit {
   };
   isInvalidOtp: boolean = false;
   showPass: boolean = false;
+  gsValueDefaultPass: string = "";
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private cookieService: CookieService,
@@ -94,7 +95,7 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  onSubmit(event) {
+  async onSubmit(event) {
     event.preventDefault();
     const username = this.userInputRef.nativeElement.value;
     const password = this.userPassRef.nativeElement.value;
@@ -117,7 +118,7 @@ export class LoginPageComponent implements OnInit {
           this.loginObj.pwd = password;
           
           await this.http.post<any>(this.url.GetUserEmpByUsername, requestObj).toPromise().then(
-            (response) => {
+            async (response) => {
               this.result = response;
               if (this.result.IsNeedUpdatePassword) {
                 this.toastr.warningMessage(ExceptionConstant.EXP_PASSWORD);
