@@ -137,7 +137,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data: {
           title: 'Employee Business Unit Detail',
-          page: 'Empbusinessunitdetailv2'
+          page: 'Empbusinessunitdetailv2.1'
         },
       },
     ]
