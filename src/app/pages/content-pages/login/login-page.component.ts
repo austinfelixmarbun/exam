@@ -129,21 +129,6 @@ export class LoginPageComponent implements OnInit {
                   this.sendOtp();
                 }
                 else {
-                  let generalSettingCode = {
-                    Code: CommonConstant.GsDefaultPass
-                  }
-                  
-                  await this.http.post(this.url.GetGeneralSettingValueByCode, generalSettingCode).toPromise().then(
-                  (response) => {
-                    this.gsValueDefaultPass = response['GsValue'];
-                  });
-              
-                  if (password == this.gsValueDefaultPass) {
-                    this.toastr.warningMessage(ExceptionConstant.PASSWORD_DEFAULT);
-                    this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
-                    return;
-                  }
-
                   this.selectRole();
                 }
               }
