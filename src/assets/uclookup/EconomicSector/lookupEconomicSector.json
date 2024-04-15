@@ -34,7 +34,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Economic Sector Code",
             "name": "REF_ECONOMIC_SECTOR_ID"
         },
@@ -46,7 +46,7 @@
         },
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "BI Code",
             "name": "REG_RPT_CODE"
         },
@@ -59,7 +59,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "EconomicSectorCode"
         },
         {
@@ -69,7 +69,7 @@
         },
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "RegRptCode"
         },
         {
