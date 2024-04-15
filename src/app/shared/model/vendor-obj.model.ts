@@ -1,6 +1,7 @@
 export class VendorObj{
     VendorId: number;
     MrVendorCategoryCode: string;
+    MrKonvenSyariahCode: string;
     VendorCode: string;
     VendorName: string;
     MrVendorTypeCode: string;
