@@ -21,7 +21,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
     //     // this.RefetchData();
     //   }
     // });
-    this.pageName = 'SupplierHoComponent'
+    this.pageName = 'Supplierhocomponent'
   }
 
   ngOnInit(): void {
@@ -102,7 +102,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
                this.MrVendorCategoryCode == CommonConstant.SURVEYOR_HO) {
         switch (this.MrVendorCategoryCode) {
           case CommonConstant.SUPPLIER_HO:
-            this.pageName = 'SupplierHoComponent'
+            this.pageName = 'Supplierhocomponent'
             break;
           case CommonConstant.ASSET_INSCO_HO:
             this.pageName = 'AssetInsuranceHoPaging'
