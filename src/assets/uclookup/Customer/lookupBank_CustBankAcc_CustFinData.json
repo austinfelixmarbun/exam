@@ -25,7 +25,7 @@
     "headerList": [
         {
             "type": "sort",
-            "position": "left",
+            "position": "center",
             "label": "Bank Code",
             "name": "BANK_CODE"
         },
@@ -44,7 +44,7 @@
     "bodyList": [
         {
             "type": "text",
-            "position": "left",
+            "position": "center",
             "property": "BankCode"
         },
         {
