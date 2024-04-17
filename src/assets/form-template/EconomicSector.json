@@ -116,7 +116,7 @@
                         },
                         {
                             "type": "text",
-                            "position": "left",
+                            "position": "center",
                             "property": "RegRptCode",
                             "isFlagColor": false
                         },
