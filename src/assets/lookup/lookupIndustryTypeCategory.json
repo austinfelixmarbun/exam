@@ -34,7 +34,7 @@
   "headerList": [
       {
           "type": "sort",
-          "position": "left",
+          "position": "center",
           "label": "Industry Type Category Code",
           "name": "REF_INDUSTRY_TYPE_CATEGORY_CODE"
       },
@@ -46,7 +46,7 @@
       },
       {
           "type": "sort",
-          "position": "left",
+          "position": "center",
           "label": "BI Code",
           "name": "REG_RPT_CODE"
       },
@@ -59,7 +59,7 @@
   "bodyList": [
       {
           "type": "text",
-          "position": "left",
+          "position": "center",
           "property": "RefIndustryTypeCategoryCode"
       },
       {
@@ -69,7 +69,7 @@
       },
       {
           "type": "text",
-          "position": "left",
+          "position": "center",
           "property": "RegRptCode"
       },
       {
