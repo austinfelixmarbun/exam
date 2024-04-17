@@ -1,1 +1,73 @@
-{"lookupId":"Lookupempleave","title":"LookupEmpLeave","component":[{"id":"aempNoSearchId","type":"textbox","label":"Employee No","name":"A.EMP_NO","value":"","placeholder":"","datatype":"text"},{"id":"aempNameSearchId","type":"textbox","label":"Employee Name","name":"A.EMP_NAME","value":"","placeholder":"","datatype":"text"}],"querystring":{"name":"lookupEmpLeave"},"orderby":null,"headerList":[{"type":"sort","label":"Employee No","position":"left","name":"A.EMP_NO"},{"type":"sort","label":"Employee Name","position":"left","name":"A.EMP_NAME"},{"type":"label","position":"center","label":"Select"}],"bodyList":[{"type":"text","position":"left","property":"empNo"},{"type":"text","position":"left","property":"empName"},{"type":"action","position":"center","action":[{"type":"select","property":"refEmpId"}]}],"propertyId":"refEmpId","propertyName":"empName","environment":"FoundationR3Url","apiVersion":"v1"}
+{
+    "lookupId": "Lookupempleave",
+    "title": "LookupEmpLeave",
+    "component": [
+        {
+            "id": "aempNoSearchId",
+            "type": "textbox",
+            "label": "Employee No",
+            "name": "A.EMP_NO",
+            "value": "",
+            "placeholder": "",
+            "datatype": "text"
+        },
+        {
+            "id": "aempNameSearchId",
+            "type": "textbox",
+            "label": "Employee Name",
+            "name": "A.EMP_NAME",
+            "value": "",
+            "placeholder": "",
+            "datatype": "text"
+        }
+    ],
+    "querystring": {
+        "name": "lookupEmpLeave"
+    },
+    "orderby": null,
+    "headerList": [
+        {
+            "type": "sort",
+            "label": "Employee No",
+            "position": "center",
+            "name": "A.EMP_NO"
+        },
+        {
+            "type": "sort",
+            "label": "Employee Name",
+            "position": "left",
+            "name": "A.EMP_NAME"
+        },
+        {
+            "type": "label",
+            "position": "center",
+            "label": "Select"
+        }
+    ],
+    "bodyList": [
+        {
+            "type": "text",
+            "position": "center",
+            "property": "empNo"
+        },
+        {
+            "type": "text",
+            "position": "left",
+            "property": "empName"
+        },
+        {
+            "type": "action",
+            "position": "center",
+            "action": [
+                {
+                    "type": "select",
+                    "property": "refEmpId"
+                }
+            ]
+        }
+    ],
+    "propertyId": "refEmpId",
+    "propertyName": "empName",
+    "environment": "FoundationR3Url",
+    "apiVersion": "v1"
+}
