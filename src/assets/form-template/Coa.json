@@ -54,8 +54,8 @@
                             "isEvent": false,
                             "environment": "FOU",
                             "path": "/v1/Coa/GetListKVEntityCodeByEntityType",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
+                            "criteriaPropName": "RefMasterTypeCode",
+                            "criteriaPropValue": "SUPPL",
                             "isQueryIn": false
                         },
                         {
@@ -71,8 +71,8 @@
                             "isEvent": false,
                             "environment": "FOU",
                             "path": "/v1/Coa/GetListKVPayAllocCodeByEntityType",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
+                            "criteriaPropName": "RefMasterTypeCode",
+                            "criteriaPropValue": "SUPPL",
                             "isQueryIn": false
                         },
                         {
