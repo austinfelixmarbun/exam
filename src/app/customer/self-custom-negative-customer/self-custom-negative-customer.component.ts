@@ -37,12 +37,12 @@ export class SelfCustomNegativeCustomerComponent implements OnInit {
 
     if(ev.Key == "view"){
       if(ev.RowObj.mrCustTypeCode == "Personal"){
-        let url = NavigationConstant.VIEW_CUSTOM_CUST_NEG_PERSONAL + "?negativeCustId=" + raw;
+        let url = this.urlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_CUSTOM_CUST_NEG_PERSONAL + "?negativeCustId=" + raw;
         window.open(url,"_blank");
 
       }
       else{
-        let url = NavigationConstant.VIEW_CUSTOM_CUST_NEG_COMPANY + "?negativeCustId=" + raw;
+        let url = this.urlConstantNew.env.FoundationR3Web + NavigationConstant.VIEW_CUSTOM_CUST_NEG_COMPANY + "?negativeCustId=" + raw;
         window.open(url,"_blank");
       }
 
