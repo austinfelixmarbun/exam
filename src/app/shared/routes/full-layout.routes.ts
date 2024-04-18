@@ -1216,6 +1216,42 @@ export const Full_ROUTES: Routes = [
         .then(m => m.ContractDocumentModule)
         .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
     },
-  }
+  },
+  {
+    path: 'ReportTms',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './ReportPayoutModule'
+      })
+        .then(m => m.ReportPayoutModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
+  {
+    path: 'ReportTms',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityExecR3Web + '/remoteEntry.js',
+        exposedModule: './ReportExecModule'
+      })
+        .then(m => m.ReportExecModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
+  {
+    path: 'ReportTms',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.facilityMntR3Web + '/remoteEntry.js',
+        exposedModule: './ReportTmsModule'
+      })
+        .then(m => m.ReportModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    },
+  },
   // #endregion
 ];

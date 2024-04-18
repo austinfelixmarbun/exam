@@ -59,7 +59,7 @@
     "@adins/ucmoduleselection": "3.0.3",
     "@adins/ucnotification": "3.0.0",
     "@adins/ucpaging": "^3.2.3-canary.0",
-    "@adins/ucreport": "3.0.2",
+    "@adins/ucreport": "3.0.3",
     "@adins/ucsearch": "^3.4.6-canary.0",
     "@adins/uctable": "^1.1.11-canary.0",
     "@adins/uctemplate": "1.12.32-canary.0",
@@ -84,6 +84,7 @@
     "@aspnet/signalr": "1.1.0",
     "@microsoft/signalr": "^3.1.22",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
+    "@ng-select/ng-select": "^8.3.0",
     "@ngx-translate/core": "^10.0.2",
     "@ngx-translate/http-loader": "^3.0.1",
     "@swimlane/ngx-charts": "^17.0.0",
@@ -145,7 +146,6 @@
     "ucpaging": "2.0.10",
     "videogular2": "6.3.0",
     "xlsx": "0.14.5",
-    "@ng-select/ng-select": "^8.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
