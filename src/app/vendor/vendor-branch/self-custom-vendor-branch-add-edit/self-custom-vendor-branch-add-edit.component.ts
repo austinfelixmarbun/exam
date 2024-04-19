@@ -9,6 +9,7 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
+import e from 'express';
 
 @Component({
   selector: 'app-self-custom-vendor-branch-add-edit',
@@ -61,13 +62,13 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       await this.callback("MrVendorTypeCode")
     }
 
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
+    await this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, { Code: CommonConstant.GSCodeVATForPersonal }).toPromise().then(
       (result: GeneralSettingObj) => {
         if (result.GeneralSettingId == 0 || result.GsValue == '1') {
           this.VatForPersonal = true;
         }
       });
-    this.getDdlIdType();
+    await this.getDdlIdType();
   }
 
   selectPage() {
@@ -184,6 +185,8 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
       {
         this.Form.get("IsVat").enable();
       }
+    }else{
+      this.Form.get("IsVat").enable();
     }
   }
 }
