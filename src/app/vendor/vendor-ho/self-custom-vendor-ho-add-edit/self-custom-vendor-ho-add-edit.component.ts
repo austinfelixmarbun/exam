@@ -40,13 +40,9 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
     });
 
     this.pageName = 'VendorHoRegistrationV2Syariah'
-    if (this.MrVendorCategoryCode != CommonConstant.SUPPLIER_HO)
+    if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO || this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO)
     {
-      this.pageName = 'VendorHoRegistrationV2Syariah'
-    }
-    else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO)
-    {
-      this.pageName = 'SupplierhoregistrationV2'
+      this.pageName = 'VendorHoRegistrationWithAttrSyariah'
     }
   }
 
