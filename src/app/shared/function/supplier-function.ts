@@ -167,7 +167,6 @@ export function addEditvendorHO(dicts: Record<string, any>, api: string, next: s
     vendorHoObj.VendorObj.MrIdTypeCode = dicts.formRaw.MrIdTypeCode;
     vendorHoObj.VendorObj.MrTaxCalcMethodCode = dicts.formRaw.MrTaxCalcMethodCode;
     vendorHoObj.VendorObj.MrVendorCategoryCode = dicts.formRaw.MrVendorCategoryCode;
-    vendorHoObj.VendorObj.MrKonvenSyariahCode = dicts.formRaw.MrKonvenSyariahCode;
     vendorHoObj.VendorObj.MrVendorClass = CommonConstant.HeadOffice;
     vendorHoObj.VendorObj.MrVendorTypeCode = dicts.formRaw.MrVendorTypeCode;
     vendorHoObj.VendorObj.PartnershipDt = dicts.formRaw.PartnershipDt;
