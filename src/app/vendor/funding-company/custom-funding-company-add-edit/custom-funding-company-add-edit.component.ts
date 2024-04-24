@@ -1,3 +1,4 @@
+import { UcTemplateService } from '@adins/uctemplate';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
@@ -82,7 +83,8 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
-    private UrlConstantNew: UrlConstantNew) {
+    private UrlConstantNew: UrlConstantNew,
+    private ucTemplateSvc: UcTemplateService) {
     this.route.queryParams.subscribe(params => {
       if (params["MrVendorCategoryCode"] != null) {
         this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
@@ -104,12 +106,9 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
   RadioButtonVendorAttr: { [id: string]: Array<any> } = {};
   async ngOnInit() {
-
-console.log(this.parentForm)
-
-
+    this.enjiForm = this.ucTemplateSvc.container.getEnjiForm();
+    
     if (this.mode == "edit") {
-      // this.parentForm.controls.InputCode.disable();
       await this.getData();
     }
 
