@@ -30,13 +30,14 @@
               *ngIf="attr.AttrInputType == 'N' && attr.AttrCode == 'DAYS_PER_YEAR'"
               [formGroupName]="attr.AttrCode"
             >
-              <label class="col-md-3 col-form-label adins-required-label">{{
+              <label class="col-md-3 col-form-label adins-required-label" style="margin-bottom: 1%;"
+              >{{
                 attr.AttrName
               }}</label>
               <div class="col-md-9">
                 <input
                   type="number"
-                  class="form-control adInsInput width-50-per"
+                  class="form-control adInsInput width-100-per"
                   formControlName="VendorAttrValue"
                   [ngClass]="{
                     'is-invalid':
@@ -65,7 +66,7 @@
               <label class="col-md-3 col-form-label adins-required-label">{{
                 attr.AttrName
               }}</label>
-              <div class="col-md-4">
+              <div class="col-md-9">
                 <lib-uclookupgeneric
                   [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
                   [parentForm]="parentForm"
@@ -88,14 +89,21 @@
               class="form-group row"
               *ngIf="attr.AttrInputType == 'C'"
               [formGroupName]="attr.AttrCode"
+              style="margin-top: -1%;"
             >
-              <label class="col-md-3 col-form-label">{{ attr.AttrName }}</label>
+              <label class="col-md-3 col-form-label" style="margin-bottom: 1%;">{{ attr.AttrName }}</label>
               <div class="col-md-3 col-form-label">
-                <input
-                  type="checkbox"
-                  formControlName="VendorAttrValue"
-                  id="flexCheckDefault"
-                />
+                <ui-switch
+                          class="custom-switches"
+                          uncheckedLabel="No"
+                          checkedLabel="Yes"
+                          size="small"
+                          (change)="
+                            ChangeCallbackSwitch('VendorAttrValue', $event)
+                          "
+                          [formControlName]="'VendorAttrValue'"
+                        >
+                        </ui-switch>
               </div>
             </div>
             <!-- COUNTERPART CATEGORY -->
@@ -110,7 +118,7 @@
               <label class="col-md-3 col-form-label adins-required-label">{{
                 attr.AttrName
               }}</label>
-              <div class="col-md-4">
+              <div class="col-md-9">
                 <lib-uclookupgeneric
                   [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
                   [parentForm]="parentForm"
@@ -133,6 +141,7 @@
               class="form-group row"
               *ngIf="attr.AttrInputType == 'R'"
               [formGroupName]="attr.AttrCode"
+              style="margin-bottom: 1%;"
             >
               <label class="col-md-3 col-form-label">{{ attr.AttrName }}</label>
               <div class="col-md-9">
@@ -154,13 +163,14 @@
               class="form-group row"
               *ngIf="attr.AttrInputType == 'P'"
               [formGroupName]="attr.AttrCode"
+              style="margin-top: 1%;"
             >
-              <label class="col-md-3 col-form-label">{{ attr.AttrName }}</label>
+              <label class="col-md-3 col-form-label" style="margin-bottom: 1%;">{{ attr.AttrName }}</label>
               <div class="col-md-9">
                 <input
                   type="text"
                   currencyMask
-                  class="form-control adInsInput width-50-per"
+                  class="form-control adInsInput width-100-per"
                   formControlName="VendorAttrValue"
                   [options]="{
                     thousands: ',',
@@ -199,7 +209,7 @@
               <label class="col-md-3 col-form-label adins-required-label">{{
                 attr.AttrName
               }}</label>
-              <div class="col-md-4">
+              <div class="col-md-9">
                 <lib-uclookupgeneric
                   [lookupInput]="ListInputLookUpObj[0][attr['AttrCode']]"
                   [parentForm]="parentForm"
@@ -223,13 +233,13 @@
               *ngIf="attr.AttrInputType == 'N' && attr.AttrCode == 'BANK_ACCOUNT_NO'"
               [formGroupName]="attr.AttrCode"
             >
-              <label class="col-md-3 col-form-label adins-required-label">{{
+              <label class="col-md-3 col-form-label adins-required-label" style="margin-bottom: 1%;">{{
                 attr.AttrName
               }}</label>
               <div class="col-md-9">
                 <input
                   type="number"
-                  class="form-control adInsInput width-50-per"
+                  class="form-control adInsInput width-100-per"
                   formControlName="VendorAttrValue"
                   [ngClass]="{
                     'is-invalid':
@@ -261,9 +271,10 @@
     </div>
   </form>
   <!-- <app-funding-company-contact-person (outputValue)="addCPValues($event)" ></app-funding-company-contact-person> -->
-  <app-funding-company-contact-person
-    [VendorId]="VendorId"
-    (addContactPerson)="addVendorContactPerson($event)"
-    [mode]="mode"
-  ></app-funding-company-contact-person>
+
 </div>
+<app-funding-company-contact-person
+[VendorId]="VendorId"
+(addContactPerson)="addVendorContactPerson($event)"
+[mode]="mode"
+></app-funding-company-contact-person>

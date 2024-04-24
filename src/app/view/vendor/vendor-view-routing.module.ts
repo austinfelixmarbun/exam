@@ -41,10 +41,10 @@ const routes: Routes = [
       },
       {
         path: PathConstant.VIEW_FUNDING_COMPANY,
-        component: FundingCompanyDetailComponent,
+        component: UcTemplateComponent,
         data: {
-          title: 'Vendor Funding Company Company View'
-        }
+          page: 'VendorFundingCoyView'
+        },
       },
       {
         path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_HOLDING,

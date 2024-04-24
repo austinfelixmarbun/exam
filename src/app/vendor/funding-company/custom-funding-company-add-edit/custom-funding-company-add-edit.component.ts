@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -22,6 +22,7 @@ import { VendorBranchMainObj } from 'app/shared/model/vendor-branch-main-obj.mod
 import { VendorBranchObj } from 'app/shared/model/vendor-branch-obj.model';
 import { VendorContactPersonObj } from 'app/shared/model/vendor-contact-person-obj.model';
 import { VendorObj } from 'app/shared/model/vendor-obj.model';
+import { resGetListVendorAttr } from 'app/shared/model/vendor/res-get-list-vendor-attr.model';
 
 @Component({
   selector: 'app-custom-funding-company-add-edit',
@@ -36,6 +37,8 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
 
   @Output() data: EventEmitter<any> = new EventEmitter<any>();
   @Output() ParentMode: EventEmitter<object> = new EventEmitter();
+  enjiForm: NgForm;
+
   MrVendorCategoryCode: string = "JF_FUNDING_COMPANY";
   MrVendorTypeCode: string;
   arrCrit: any;
@@ -96,21 +99,25 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
         this.mode = params['mode'];
       }
     });
-
   }
 
   DictDDLVendorAttr: { [id: string]: Array<any> } = {};
   RadioButtonVendorAttr: { [id: string]: Array<any> } = {};
   async ngOnInit() {
+
+console.log(this.parentForm)
+
+
     if (this.mode == "edit") {
       // this.parentForm.controls.InputCode.disable();
       await this.getData();
     }
 
-    this.http.post(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
+    this.http.post<resGetListVendorAttr>(URLConstant.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
-        this.ListVendorAttrContent = response;
+        this.ListVendorAttrContent = response.ListVendorAttrContent;
         if (this.ListVendorAttrContent != null) {
+          console.log(this.ListVendorAttrContent.length)
           if (this.ListVendorAttrContent.length < 1) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;
@@ -121,6 +128,7 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                 let tempLookup = {};
                 if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
+
                     var item = this.ListVendorAttrContent.find(x => x.AttrCode == vendorAttr.AttrCode);
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
@@ -156,7 +164,6 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                     }
 
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);
-
                     if (vendorAttr["AttrInputType"] == 'LU' && vendorAttr["AttrCode"] == 'BANK_CODE') {
                       tempLookup[vendorAttr["AttrCode"]] = new InputLookupObj(this.UrlConstantNew);
                       tempLookup[vendorAttr["AttrCode"]].urlJson = "./assets/uclookup/Customer/lookupBank_CustBankAcc_CustFinData.json";
@@ -187,6 +194,8 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                   this.ListInputLookUpObj.push(tempLookup);
                   this.parentForm.addControl("VendorAttrList", this.fb.group(parentFormGroup));
                   this.isFormReady = true;
+                  console.log(this.parentForm, "test")
+
                 }
               }
             );
@@ -201,8 +210,10 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                 this.VendorAttrList = response[CommonConstant.ReturnObj];
                 if (this.VendorAttrList != null) {
                   for (const vendorAttr of this.VendorAttrList) {
-                    var item = this.ListVendorAttrContent.find(x => x.AttrCode == vendorAttr.AttrCode);
-                    if (item == undefined) {
+                    var item = this.ListVendorAttrContent.find(
+                      (x) => x.AttrCode == vendorAttr.AttrCode
+                    );
+                      if (item == undefined) {
                       var formGroupObject = new Object();
                       formGroupObject["VendorAttrContentId"] = [0];
                       formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];

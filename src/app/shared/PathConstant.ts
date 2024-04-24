@@ -695,11 +695,11 @@ export class PathConstant {
     public static VIEW_VENDOR_HO = "VendorHO";
     public static VIEW_VENDOR_COLL_COMPANY = "VendorCollCompany";
     public static VIEW_FUNDING_COMPANY = "FundingCompany";
-
     public static SELF_CUSTOM_VIEW_VENDOR_COLL_COMPANY = PathConstant.SELF_CUSTOM + PathConstant.VIEW_VENDOR_COLL_COMPANY;
     public static SELF_CUSTOM_VIEW_VENDOR_HOLDING = PathConstant.SELF_CUSTOM + "/" + "VendorHolding";
     public static SELF_CUSTOM_VIEW_VENDOR_HO = PathConstant.SELF_CUSTOM + "/" + "VendorHO";
     public static SELF_CUSTOM_VIEW_VENDOR_BRANCH = PathConstant.SELF_CUSTOM + "/" + "VendorBranch";
+
     //#endregion
 
     //#region View-Survey-Module
