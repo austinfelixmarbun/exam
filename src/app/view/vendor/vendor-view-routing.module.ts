@@ -74,13 +74,6 @@ const routes: Routes = [
           title: 'View Vendor Collection Company',
           page: 'ViewvendorCollectionCompany'
         },
-      },
-      {
-        path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_FUNDCOY,
-        component: UcTemplateComponent,
-        data: {
-          page: 'VendorFundingCoyView'
-        },
       }
     ]
   }
