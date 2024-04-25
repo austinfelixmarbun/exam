@@ -14,7 +14,7 @@ export class CustomAssetDocumentMasterPagingComponent implements OnInit {
   pageName: string;
 
   constructor(private adInsHelperService: AdInsHelperService, private router: Router) {
-    this.pageName = "AssetDocMasterPaging"
+    this.pageName = "Assetdocmasterpaging"
   }
 
   ngOnInit(): void {
