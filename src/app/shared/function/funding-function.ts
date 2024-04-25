@@ -38,7 +38,7 @@ export function addEditFundingCoy(dicts: Record<string, any>,  api: any, http: H
         // vendorFundingCoyObj.VendorFundCoyAddrObj.VendorAddrId = dicts.VendorAddrId;
         // vendorFundingCoyObj.VendorFundCoyAddrObj.VendorId = dicts.VendorId;
         vendorFundingCoyObj.VendorAttrContent = vendorAttrContent;
-        vendorFundingCoyObj.VendorContactPerson = dicts.contactPerson;
+        vendorFundingCoyObj.VendorContactPerson = dicts.contactPerson ? dicts.contactPerson : new Array<VendorContactPersonObj>();
         
     
     if(dicts.mode == 'edit'){
@@ -54,7 +54,7 @@ export function addEditFundingCoy(dicts: Record<string, any>,  api: any, http: H
           VendorFundCoyObj: vendorFundingCoyObj.VendorFundCoyObj,
           VendorFundCoyAddrObj: vendorFundingCoyObj.VendorFundCoyAddrObj,
           VendorAttrContent: vendorAttrContent,
-          VendorContactPerson : dicts.contactPerson
+          VendorContactPerson : dicts.contactPerson ? dicts.contactPerson : new Array<VendorContactPersonObj>()
         } 
         console.log("ini isi form data edit", formDataEdit)
         console.log(vendorFundingCoyObj);
@@ -71,7 +71,7 @@ export function addEditFundingCoy(dicts: Record<string, any>,  api: any, http: H
           vendorFundCoyObj: vendorFundingCoyObj.VendorFundCoyObj,
           vendorFundCoyAddrObj: vendorFundingCoyObj.VendorFundCoyAddrObj,
           vendorAttrContent: vendorAttrContent,
-          vendorContactPerson : dicts.contactPerson
+          vendorContactPerson : dicts.contactPerson ? dicts.contactPerson : new Array<VendorContactPersonObj>()
         } 
         let url = enviConfig.FoundationR3Url + api;
         http.post(url, formDataAdd, AdInsConstant.SpinnerOptions).subscribe(
