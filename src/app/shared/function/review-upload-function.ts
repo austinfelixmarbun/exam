@@ -8,6 +8,11 @@ import { WorkflowApiObj } from "../model/workflow-api-obj.model";
 
 
 export function rejectUpload(http: HttpClient, toastr: NGXToastrService, RowObj: any, api: any, router: Router, redirectUrl: any) {
+  // Menyiapkan pesan konfirmasi
+  const confirmationMessage = 'Are You Sure?';
+
+  // Menampilkan pesan konfirmasi dan menjalankan fungsi untuk menghapus data jika pengguna menekan "OK"
+  if (confirm(confirmationMessage)) {
     var wfObj = new WorkflowApiObj();
     wfObj.TaskListId = RowObj.ProcessInstanceId;
     wfObj.TransactionNo = RowObj.UploadNo;
@@ -17,9 +22,10 @@ export function rejectUpload(http: HttpClient, toastr: NGXToastrService, RowObj:
     http.post(url, wfObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         toastr.successMessage(response["Message"]);
-          router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            AdInsHelper.RedirectUrl(router,[redirectUrl]);
+        router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          AdInsHelper.RedirectUrl(router,[redirectUrl]);
         });
       }
     );
+  }
 }
