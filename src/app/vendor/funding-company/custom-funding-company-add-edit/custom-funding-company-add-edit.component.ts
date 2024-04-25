@@ -132,34 +132,59 @@ export class CustomFundingCompanyAddEditComponent implements OnInit {
                     var formGroupObject = new Object();
                     formGroupObject["VendorAttrContentId"] = [0];
                     formGroupObject["AttrCode"] = [vendorAttr["AttrCode"]];
-                    if (vendorAttr["AttrInputType"] == 'T' && vendorAttr["IsMandatory"] == true) {
-                      formGroupObject["VendorAttrValue"] = ['', Validators.required];
+                    if (
+                      vendorAttr["AttrInputType"] == "T" &&
+                      vendorAttr["IsMandatory"] == true
+                    ) {
+                      formGroupObject["VendorAttrValue"] = [
+                        "",
+                        Validators.required,
+                      ];
                     }
-                    if (vendorAttr["AttrInputType"] == 'N' && vendorAttr["IsMandatory"] == true) {
-                      formGroupObject["VendorAttrValue"] = [0, Validators.required];
+                    if (vendorAttr["AttrInputType"] == "P") {
+                      formGroupObject["VendorAttrValue"] = [0,Validators.min(0)];
                     }
-                    if (vendorAttr["AttrInputType"] == 'P') {
-                      formGroupObject["VendorAttrValue"] = [0];
-                    }
-                    if (vendorAttr["AttrInputType"] == 'C') {
+                    if (vendorAttr["AttrInputType"] == "C") {
                       var temp = vendorAttr["AttrValue"].split(";");
                       this.DictDDLVendorAttr[vendorAttr["AttrCode"]] = temp;
                       formGroupObject["VendorAttrValue"] = [temp[0]];
                     }
 
-                    if (vendorAttr["AttrInputType"] == 'R') {
+                    if (vendorAttr["AttrInputType"] == "R") {
                       var temp = vendorAttr["AttrValue"].split(";");
                       this.RadioButtonVendorAttr[vendorAttr["AttrCode"]] = temp;
                       formGroupObject["VendorAttrValue"] = [temp[1]];
                       this.radioForm = new FormGroup({
-                        selectedOption: new FormControl(temp[0])
+                        selectedOption: new FormControl(temp[0]),
                       });
+                    }
+                    if(vendorAttr["AttrInputType"] == "N"){
+                      if(vendorAttr['AttrCode'] == 'DAYS_PER_YEAR'){
+                        formGroupObject["VendorAttrValue"] = [
+                          0,
+                          Validators.compose([Validators.required,Validators.max(366),Validators.min(0)])
+                        ];
+                      }else if(vendorAttr['AttrCode'] == "BANK_ACCOUNT_NO"){
+                        formGroupObject['VendorAttrValue']=[
+                          0,
+                          Validators.compose([Validators.required,Validators.pattern("^[0-9]+$")])
+                        ]
+                      }else{
+
+                        formGroupObject["VendorAttrValue"] = [
+                          "",
+                        Validators.compose([Validators.required,Validators.min(0)])
+
+                        ];
+                      }
                     }
                     else {
                       if (vendorAttr["IsMandatory"] == true) {
-                        formGroupObject["VendorAttrValue"] = ['', Validators.required];
+                        formGroupObject["VendorAttrValue"] = [
+                          "",
+                          Validators.required
+                        ];
                       }
-
                     }
 
                     parentFormGroup[vendorAttr["AttrCode"]] = this.fb.group(formGroupObject);

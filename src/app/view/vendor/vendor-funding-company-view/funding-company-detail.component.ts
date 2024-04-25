@@ -97,7 +97,7 @@ export class FundingCompanyDetailComponent implements OnInit {
   
     this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {
-        this.ListVendorAttrContent = response;
+        this.ListVendorAttrContent = response['ListVendorAttrContent'];
         if (this.ListVendorAttrContent != null) {
             let reqByAttrGroup: ReqRefAttrByAttrGroupObj = new ReqRefAttrByAttrGroupObj();
             reqByAttrGroup.AttrGroup = this.MrVendorCategoryCode;

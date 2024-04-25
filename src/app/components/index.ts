@@ -63,3 +63,4 @@ export { CustomUpdateCustomerCompanyDetailComponent } from 'app/customer/self-cu
 export { ContainerCustLegalDocUploadComponent } from "app/customer/cust-legal-doc/container-cust-legal-doc-upload/container-cust-legal-doc-upload.component";
 export { SelfCustomContainerDmsIframeProjectComponent } from 'app/common-setting/Project/self-custom-container-dms-iframe-project/self-custom-container-dms-iframe-project.component';
 export { SelfCustomCustViewComponent } from 'app/view/self-custom-cust-view/self-custom-cust-view/self-custom-cust-view.component';
+export { FundingCompanyDetailComponent} from 'app/view/vendor/vendor-funding-company-view/funding-company-detail.component'
