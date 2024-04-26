@@ -550,7 +550,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static GetVendorByVendorCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetVendorByVendorCode";
     public static GetListKeyValueActiveByCategoryCodeAndOfficeCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetListKeyValueActiveByCategoryCodeAndOfficeCode";
     public static GetListKvpVendorObjByCategoryCode = environment.FoundationR3Url + "/v1" + "/Vendor/GetListKvpVendorObjByCategoryCode";
-    
+    public static GetListVendorContactPersonWithoutJobPositionByVendorId = environment.FoundationR3Url + "/v1/VendorContactPerson/GetListVendorContactPersonWithoutJobPositionByVendorId";
     //VENDOR FUNDING COY
     public static AddVendorFundingCoy = environment.FoundationR3Url + "/v1" + "/Vendor/AddFundingCompany";
     public static EditVendorFundingCoy = environment.FoundationR3Url + "/v1" + "/Vendor/EditFundingCompany";

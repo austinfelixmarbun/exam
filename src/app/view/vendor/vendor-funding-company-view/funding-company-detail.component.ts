@@ -17,6 +17,15 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 @Component({
   selector: 'app-funding-company-detail',
   templateUrl: './funding-company-detail.component.html',
+  styles: [
+    `
+   .label-field {
+    color: var(--gray-font-2, #A1A3A5);
+    font-size: 12px !important;
+    font-weight: 500;
+}
+    `
+  ]
 })
 export class FundingCompanyDetailComponent implements OnInit {
   VendorCode : string = "";
@@ -74,26 +83,7 @@ export class FundingCompanyDetailComponent implements OnInit {
   ngOnInit(): void {
     console.log("ini id",this.VendorCode);
 
-    this.http.post(this.UrlConstantNew.GetVendorByVendorCode, { Code: this.VendorCode }).toPromise().then(
-      async (response) => {
-        this.result = response;
-        this.MrVendorCategoryCode = this.result.MrVendorCategoryCode;
-        const vendorData = ({
-          InputCode: this.result.VendorCode,
-          InputName: this.result.VendorName,
-          IsActive: this.result.IsActive,
-        })
-        this.vendor = vendorData;
-      })
-      this.http.post(this.UrlConstantNew.GetVendorAddrByVendorCode, { Code: this.VendorCode }).toPromise().then(
-        async (response) => {
-          this.resultAddr = response;
-          const vendorAddrData = ({
-           Address: this.resultAddr.Addr
-          })
-          this.address = vendorAddrData;
-        }
-      )
+    
   
     this.http.post(this.UrlConstantNew.GetListVendorAttrContentByVendorCode, { Code: this.VendorCode }).toPromise().then(
       (response) => {

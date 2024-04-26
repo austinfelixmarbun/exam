@@ -77,7 +77,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
     this.vendorCPObj.Code = this.VendorCode;
 
     if(this.mode === 'edit'){
-      this.http.post(URLConstant.GetListVendorContactPersonByVendorCode, this.vendorCPObj).subscribe(
+      this.http.post(URLConstant.GetListVendorContactPersonWithoutJobPositionByVendorId, this.vendorCPObj).subscribe(
         (response: ResGetListVendorContactPersonObj) => {
           if(response[CommonConstant.ReturnObj] != null){
           this.listVendorCP = response[CommonConstant.ReturnObj];
