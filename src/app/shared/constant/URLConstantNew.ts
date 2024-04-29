@@ -2,14 +2,19 @@ import { Injectable } from "@angular/core";
 import { EnviConfigService } from "../services/enviConfig.service";
 import { UrlConstantService } from "../services/urlConstant.service";
 
+import * as _urlConstant from "../../../assets/urlConstant.json";
+import { URLConstant } from "./URLConstant";
 @Injectable()
 
 export class UrlConstantNew{
 
     constructor( private configEnv: EnviConfigService, private urlConfig: UrlConstantService) {
     }
-    public env = this.configEnv.getConfig();
-    private url = this.urlConfig.getConfig();
+    
+    public env = URLConstant.env;
+    private url =  _urlConstant;
+    // public env = this.configEnv.getConfig();
+    // private url = this.urlConfig.getConfig();
 
     // SYS CONFIG RESULT
     public GetSysConfigResultByCode = this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;

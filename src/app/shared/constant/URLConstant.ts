@@ -5,9 +5,14 @@ import * as _environment from "../../../assets/config/enviConfig.json";
 // URL" API di concat dengan environment url + version + api path
 // KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
 // HARAP JANGAN PAKE INI LAGI, KARENA SEKARANG SUDAH ADA UrlConstantNew YANG PAKE JSON
-export const envi = _environment;
+// export const envi = _environment;
 const urlConstant = _urlConstant;
 export class URLConstant {
+    public static get env() {
+        const _env = JSON.parse(localStorage.getItem('envi'));
+        return _env || _environment;
+    }
+
     // FRAMEWORK
     public static GetPagingObjectBySQL = "/Generic/GetPagingObjectBySQL" // UCPaging
     public static GetJournalResultPagingObjectBySQL = "/Generic/GetJournalResultPagingObjectBySQL";
@@ -1203,3 +1208,4 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
    public static GetRefInsClaimDocByRefInsClaimDocCode = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
 }
 
+export const envi: any = URLConstant.env;

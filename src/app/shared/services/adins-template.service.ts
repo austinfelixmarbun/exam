@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {UcTemplateService} from '@adins/uctemplate';
-import {AdInsHelper} from '../AdInsHelper';
-import {CookieService} from 'ngx-cookie';
 import {environment} from '../../../environments/environment';
 import * as _moment from 'moment';
-import {URLConstant, envi} from '../constant/URLConstant';
-import * as Module from 'app/components';
-import { NavigationConstant } from '../NavigationConstant';
+import { CookieService } from "ngx-cookie";
+import { AdInsHelper } from "../AdInsHelper";
+import * as Module from '../../form-template';
+import { envi } from '../constant/URLConstant';
 import { UrlConstantNew } from '../constant/URLConstantNew';
+import { NavigationConstant } from '../NavigationConstant';
 
 const listEnvironments = [
   { environment: 'FOU', url: envi.FoundationR3Url},

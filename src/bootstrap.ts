@@ -8,5 +8,12 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+fetch('assets/config/enviConfig.json').then(response => {
+  response.json().then(config => {
+    // Cache list env to storage
+    localStorage.setItem('envi', JSON.stringify(config));
+    platformBrowserDynamic().bootstrapModule(AppModule);
+  })
+}).catch(err => {
+  console.log('err', err);
+});
