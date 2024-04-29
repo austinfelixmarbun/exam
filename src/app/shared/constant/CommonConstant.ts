@@ -35,6 +35,7 @@ export class CommonConstant {
     public static ENVIRONMENT_MODULE = 'EnvironmentModule';
     public static OFFICE_CODE = 'OfficeCode';
     public static ROLE_CODE = 'RoleCode';
+    public static MR_KONVEN_SYARIAH_CODE_SYARIAH = "SYA";
 
     //SYS CTRL COY KEY
     public static IsEodRun = "IsEodRun";

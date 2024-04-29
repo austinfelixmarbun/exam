@@ -4,6 +4,7 @@ export class RefOfficeObj {
     ListAddOffice: string;
     ListDelOffice: string;
     OfficeName : string;
+    MrKonvenSyariahCode : string;
 
     constructor() { this.RefOfficeId = 0 }
 }
