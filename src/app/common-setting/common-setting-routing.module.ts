@@ -984,7 +984,7 @@ const routes: Routes = [
          component: UcTemplateComponent,
           data: { 
             title: 'OFFICE BANK ACCOUNT' ,
-            page: 'OfficeBankAcc'
+            page: 'OfficeBankAccV1.2'
         } 
       },
       { 
@@ -992,7 +992,7 @@ const routes: Routes = [
         component: UcTemplateComponent, 
         data: { 
           title: 'OFFICE BANK ACCOUNT' ,
-          page: 'Officebankaccdetail'
+          page: 'OfficebankaccdetailV1.2'
         } 
       },
       { 

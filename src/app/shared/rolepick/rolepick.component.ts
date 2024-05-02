@@ -14,6 +14,7 @@ import { UcDropdownSearchConstant, UcDropdownSearchObj } from '../model/library/
 import { FormBuilder, Validators } from '@angular/forms';
 import { UrlConstantNew } from '../constant/URLConstantNew';
 import { ExceptionConstant } from '../constant/ExceptionConstant';
+import { RefOfficeObj } from '../model/ref-office-obj.model';
 
 @Component({
   selector: 'app-rolepick',
@@ -131,6 +132,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
+          //Set Cookie jika Office nya Syariah
+          this.getOfficeSyariahInformation(this.listRole[this.selectedOffice].OfficeCode);
+
           this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
@@ -161,6 +165,9 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
           AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
+          //Set Cookie jika Office nya Syariah
+          this.getOfficeSyariahInformation(this.listRole[this.selectedOffice].OfficeCode);
+
           this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
@@ -170,6 +177,15 @@ export class RolepickComponent implements OnInit, AfterViewInit {
         }
       );
     }
+  }
+
+  getOfficeSyariahInformation(officeCode: string)
+  {
+    this.http.post(this.UrlConstantNew.GetRefOfficeByOfficeCode, { Code: officeCode }).subscribe(
+      (response: RefOfficeObj) => {
+        AdInsHelper.SetLocalStorage("IS_OFFICE_SYARIAH", response.MrKonvenSyariahCode == CommonConstant.MR_KONVEN_SYARIAH_CODE_SYARIAH ? "1" : "0");
+      }
+    );
   }
   
   async warningMessageUserExpired() {

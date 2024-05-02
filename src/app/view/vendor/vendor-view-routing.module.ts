@@ -57,14 +57,14 @@ const routes: Routes = [
         path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_HO,
         component: UcTemplateComponent,
         data: {
-          page: 'ViewSupplierHo'
+          page: 'ViewSupplierHoSyariah'
         }
       },
       {
         path: PathConstant.SELF_CUSTOM_VIEW_VENDOR_BRANCH,
         component: UcTemplateComponent,
         data: {
-          page: 'ViewVendorBranch'
+          page: 'ViewVendorBranchSyariah'
         }
       },
       {
