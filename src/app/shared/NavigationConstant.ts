@@ -337,6 +337,10 @@ export class NavigationConstant {
     public static OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER; //'/Office/Group/Member'
     public static OFFICE_GROUP_MEMBER_ADD = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.OFFICE_GROUP_MEMBER_ADD; //'/Office/Group/Member/Add'
     public static CUSTOM_OFFICE_GROUP_MEMBER = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.CUSTOM_OFFICE_GROUP_MEMBER;
+
+    public static CS_OFFICE_PAGING = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.CUSTOM_PAGING; //'/Office/Paging'
+    public static CS_OFFICE_DETAIL = "/" + PathConstant.LR_OFFICE + "/" + PathConstant.CUSTOM_DETAIL; //'/Office/Detail'
+
     //#endregion
 
     //#region
