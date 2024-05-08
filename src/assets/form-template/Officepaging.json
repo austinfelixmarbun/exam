@@ -2,9 +2,9 @@
     "title": "Office Paging",
     "hideTitle": false,
     "id": "OfficePaging",
-    "addButton": true,
-    "addLink": "CS_OFFICE_DETAIL",
-    "pathOption": "selfCustom",
+    "addButton": false,
+    "addLink": "",
+    "pathOption": "",
     "backButton": false,
     "component": [
         {
@@ -355,8 +355,29 @@
     "redirectLink": "",
     "hideSubmitButton": false,
     "hideCancelButton": false,
-    "listBtn": [],
-    "customToastrMsg": "",
+    "listBtn": [
+        {
+            "displayName": "Add",
+            "id": "addId",
+            "key": "",
+            "position": "top",
+            "icon": "ft-plus-circle",
+            "cssClass": "",
+            "conditions": [],
+            "btnType": "button",
+            "action": {
+                "type": "link",
+                "path": "CS_OFFICE_DETAIL",
+                "target": "_self",
+                "params": [
+                    {
+                        "propName": "mode",
+                        "propValue": "add"
+                    }
+                ]
+            }
+        }
+    ],
     "onInit": [],
     "isOverrideSubmit": false,
     "onSubmit": [],
