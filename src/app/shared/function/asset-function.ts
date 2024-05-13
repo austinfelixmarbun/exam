@@ -49,19 +49,17 @@ export function saveFormAssetMasterParent(dicts: Record<string, any>, apiSaveFor
   assetMasterObj.FullAssetCode = dicts.formRaw["AssetCode"];
   assetMasterObj.FullAssetName = dicts.formRaw["AssetName"];
   assetMasterObj.IsFinal = dicts.formRaw["IsFinal"];
-  assetMasterObj.IsActive = dicts.formRaw["IsActive"];
+  assetMasterObj.IsActive = dicts.formRaw["IsActiveAssetMaster"];
 
   if (dicts.mode == "add") {
     assetMasterObj.HierarchyLvl = 1;
     assetMasterObj.ParentId = null;
- 
     if (assetMasterObj.IsFinal == true) {
       assetMasterObj.AssetCategoryId = dicts.formRaw["AssetCategoryId"];
     }
     else {
       assetMasterObj.AssetCategoryId = '';
     }
- 
     if (assetMasterObj.IsFinal == true) {
       let listAssetSchmDObj = new ListAssetSchmDObj();
       listAssetSchmDObj.AssetMasterId = dicts.AssetMasterId;
@@ -96,30 +94,25 @@ export function saveFormAssetMasterParent(dicts: Record<string, any>, apiSaveFor
           toastr.successMessage(response[response.length - 1]["Message"]);
           AdInsHelper.RedirectUrl(router,[NavigationConstant.CUSTOM_ASSET_MASTER_PAGING],{});
         });
- 
     }else{
       http.post(url, assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           toastr.successMessage(response["Message"]);
           AdInsHelper.RedirectUrl(router,[NavigationConstant.CUSTOM_ASSET_MASTER_PAGING],{});
- 
         }
       );
     }
- 
   } else {
     assetMasterObj.AssetMasterId = dicts.AssetMasterId;
     assetMasterObj.HierarchyLvl = dicts["HierarchyLvl"];
     assetMasterObj.ParentId = dicts["ParentId"];
     assetMasterObj.RowVersion = dicts.formRaw.rowVersion;
- 
     if (assetMasterObj.IsFinal == true) {
       assetMasterObj.AssetCategoryId = dicts.formRaw["AssetCategoryId"];
     }
     else {
       assetMasterObj.AssetCategoryId = '';
     }
- 
     if (assetMasterObj.IsFinal == true) {
       let listAssetSchmDObj = new ListAssetSchmDObj();
       listAssetSchmDObj.AssetMasterId = dicts.AssetMasterId;
@@ -138,12 +131,9 @@ export function saveFormAssetMasterParent(dicts: Record<string, any>, apiSaveFor
           dicts.ListAssetScheme[i].AssetMasterId = null;
         }
       }
- 
       let editAssetMaster = http.post(url, assetMasterObj, AdInsConstant.SpinnerOptions);
       let editAssetSchm = http.post(urlSchm, listAssetSchmDObj, AdInsConstant.SpinnerOptions);
       let observableBatch = [editAssetMaster, editAssetSchm];
- 
- 
       forkJoin(observableBatch).subscribe(
         (response) => {
           toastr.successMessage(response[response.length - 1]["Message"]);
@@ -160,9 +150,7 @@ export function saveFormAssetMasterParent(dicts: Record<string, any>, apiSaveFor
           AdInsHelper.RedirectUrl(router,[NavigationConstant.CUSTOM_ASSET_MASTER_PAGING],{});
         }
       );
- 
     }
- 
   }
 }
 
