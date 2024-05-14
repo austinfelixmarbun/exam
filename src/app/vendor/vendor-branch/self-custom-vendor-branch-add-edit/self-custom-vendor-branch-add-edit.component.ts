@@ -83,7 +83,7 @@ export class SelfCustomVendorBranchAddEditComponent implements OnInit {
         || this.MrVendorCategoryCode == CommonConstant.CRD_INSCO_BRANCH
         || this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL)
       {
-        this.pageName = "VendorbranchregistrationV2"
+        this.pageName = "VendorbranchregistrationV2.1"
       }
       // else if (this.MrVendorCategoryCode == CommonConstant.AGENCY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.NOTARY_PERSONAL || this.MrVendorCategoryCode == CommonConstant.CUSTODY) {
       else{  
