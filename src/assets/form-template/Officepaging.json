@@ -16,7 +16,7 @@
                     "title": "",
                     "sectionTitle": "Paging",
                     "querystring": {
-                        "name": "searchOffice"
+                        "name": "searchOfficeV1.1"
                     },
                     "exportExcel": false,
                     "component": [
