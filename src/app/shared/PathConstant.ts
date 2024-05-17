@@ -634,6 +634,9 @@ export class PathConstant {
     public static SELF_CUSTOM_VENDOR_BRANCH_DETAIL = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_BRANCH + "/" + PathConstant.DETAIL;
     public static CUSTOM_VENDOR_FUNDING_COY_PAGING = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.PAGING;
     public static CUSTOM_VENDOR_FUNDING_COY_ADD_EDIT = PathConstant.SELF_CUSTOM + "/" + PathConstant.VENDOR_FUNDING_COY + "/" + PathConstant.ADD_EDIT;
+    public static LAW_FIRM = "LawFirm";
+    public static MASTER_LAW_FIRM_PAGING = PathConstant.LAW_FIRM + "/" + PathConstant.PAGING;
+    public static MASTER_LAW_FIRM_ADD = PathConstant.LAW_FIRM + "/" + PathConstant.ADD;
     //#endregion
 
     //#region Verif-Module

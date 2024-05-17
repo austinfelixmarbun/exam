@@ -61,6 +61,8 @@ import { VendorCreditInsuranceGroupPagingComponent } from './vendor-credit-insur
 import { VendorCreditInsuranceGroupAddEditComponent } from './vendor-credit-insurance/vendor-credit-insurance-group-add-edit/vendor-credit-insurance-group-add-edit.component';
 import { UcTemplateComponent } from '@adins/uctemplate';
 import { SelfCustomVendorDetailComponent } from './component/vendor/self-custom-vendor-detail/self-custom-vendor-detail.component';
+import { MasterLawFirmPagingComponent } from './master-law-firm/master-law-firm-paging/master-law-firm-paging.component';
+import { MasterLawFirmAddComponent } from './master-law-firm/master-law-firm-add/master-law-firm-add.component';
 
 const routes: Routes = [
   {
@@ -575,6 +577,14 @@ const routes: Routes = [
           title: 'Funding Company Addedit',
           page: 'Vendorfundingcoydetail'
         },
+      },
+      {
+        path: PathConstant.MASTER_LAW_FIRM_PAGING,
+        component: MasterLawFirmPagingComponent
+      },
+      {
+        path: PathConstant.MASTER_LAW_FIRM_ADD,
+        component: MasterLawFirmAddComponent
       }
     ]
 

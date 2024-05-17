@@ -100,6 +100,8 @@ import { SelfCustomContainerOcrVendorComponent } from './self-custom-container-n
 import { CustomFundingCompanyAddEditComponent } from './funding-company/custom-funding-company-add-edit/custom-funding-company-add-edit.component';
 import { SelfCustomVendorAtpmSelectComponent } from './vendor-ATPM/self-custom-vendor-atpm-select/self-custom-vendor-atpm-select.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { MasterLawFirmPagingComponent } from './master-law-firm/master-law-firm-paging/master-law-firm-paging.component';
+import { MasterLawFirmAddComponent } from './master-law-firm/master-law-firm-add/master-law-firm-add.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -215,7 +217,9 @@ export const customCurrencyMaskConfig = {
         SelfCustomContainerVendorBranchInfoComponent,
         SelfCustomContainerOcrVendorComponent,
         CustomFundingCompanyAddEditComponent,
-        SelfCustomVendorAtpmSelectComponent
+        SelfCustomVendorAtpmSelectComponent,
+        MasterLawFirmPagingComponent,
+        MasterLawFirmAddComponent
     ],
     providers: [
         VendorService,
