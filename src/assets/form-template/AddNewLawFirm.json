@@ -28,7 +28,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Law Firm Code"
                         },
                         {
@@ -43,7 +43,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Law Firm Name"
                         },
                         {
@@ -60,14 +60,14 @@
                             "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Options": [
                                 {
-                                    "Key": "Personal",
+                                    "Key": "PERSONAL",
                                     "Value": "Personal"
                                 },
                                 {
-                                    "Key": "Corporate",
+                                    "Key": "CORPORATE",
                                     "Value": "Corporate"
                                 }
                             ]
@@ -84,7 +84,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Description"
                         },
                         {
@@ -99,7 +99,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input MOU No"
                         },
                         {
@@ -111,7 +111,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Max": null,
                             "MinDtCode": null,
                             "MinOperator": null,
@@ -132,7 +132,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Max": null,
                             "MinDtCode": null,
                             "MinOperator": null,
@@ -153,7 +153,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Max": null,
                             "MinDtCode": null,
                             "MinOperator": null,
@@ -205,7 +205,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "IsClear": false,
                             "LookupName": "${Lookupbank}",
                             "Criteria": [],
@@ -223,7 +223,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Account Name"
                         },
                         {
@@ -238,7 +238,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Account No"
                         },
                         {
@@ -251,7 +251,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false
+                            "IsEditable": true
                         }
                     ],
                     "onLoad": [
@@ -266,7 +266,21 @@
                                 }
                             ],
                             "environment": "localbe",
-                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
+                            "mapRes": [
+                                {
+                                    "accessorName": "StartDate",
+                                    "variableName": "MouStartDate"
+                                },
+                                {
+                                    "accessorName": "EndDate",
+                                    "variableName": "MouEndDate"
+                                },
+                                {
+                                    "accessorName": "Address",
+                                    "variableName": "Address"
+                                }
+                            ]
                         }
                     ],
                     "criteria": [],
@@ -294,7 +308,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "UseDefaultValue": false,
                             "isUseAPI": false,
                             "DdlItemsObj": [],
@@ -309,16 +323,16 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "UseDefaultValue": false,
                             "isUseAPI": false,
                             "DdlItemsObj": [
                                 {
-                                    "Key": "Nett",
+                                    "Key": "NETT",
                                     "Value": "Nett"
                                 },
                                 {
-                                    "Key": "Gross",
+                                    "Key": "GROSS",
                                     "Value": "Gross"
                                 }
                             ],
@@ -333,7 +347,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "UseDefaultValue": false,
                             "isUseAPI": false,
                             "DdlItemsObj": [
@@ -392,7 +406,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Contact person"
                         },
                         {
@@ -407,7 +421,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Contact Person Job Title"
                         },
                         {
@@ -422,14 +436,14 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Contact Person Phone"
                         },
                         {
                             "Action": [],
                             "Type": "TEXT",
                             "Label": "Contact Person Mobile Phone",
-                            "Variable": "ContractPersonMobilePhone",
+                            "Variable": "ContactPersonMobilePhone",
                             "Value": "",
                             "Pattern": "",
                             "IsRequired": true,
@@ -437,7 +451,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Contact Person Mobile Phone"
                         },
                         {
@@ -452,7 +466,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input Contact Person Email"
                         }
                     ],
@@ -468,7 +482,8 @@
                                 }
                             ],
                             "environment": "localbe",
-                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
+                            "mapRes": []
                         }
                     ],
                     "criteria": [],
@@ -499,7 +514,7 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input NPWP Name"
                         },
                         {
@@ -514,14 +529,14 @@
                             "IsCallback": false,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Placeholder": "Input NPWP No"
                         },
                         {
                             "Action": [],
                             "Type": "ADDRESS",
                             "Variable": "AddressNpwp",
-                            "IsRequired": true,
+                            "IsRequired": false,
                             "IsReadonly": false,
                             "IsHide": false,
                             "IsEditable": true,
@@ -529,7 +544,7 @@
                             "ShowPhn1": true,
                             "ShowPhn2": false,
                             "ShowPhn3": false,
-                            "RequiredPhn1": true,
+                            "RequiredPhn1": false,
                             "RequiredPhn2": false,
                             "RequiredPhn3": false,
                             "RequiredPhnExt1": false,
@@ -561,7 +576,13 @@
                                 }
                             ],
                             "environment": "localbe",
-                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
+                            "mapRes": [
+                                {
+                                    "accessorName": "AddressNpwp",
+                                    "variableName": "AddressNpwp"
+                                }
+                            ]
                         }
                     ],
                     "criteria": [],
@@ -579,8 +600,8 @@
             "apiUrl": ""
         },
         "edit": {
-            "environment": "",
-            "apiPath": "",
+            "environment": "localbe",
+            "apiPath": "/v1/Vendor/EditVendorLawFirm",
             "apiUrl": ""
         },
         "createRfa": {
