@@ -47,12 +47,17 @@
                             "Placeholder": "Input Law Firm Name"
                         },
                         {
-                            "Action": [],
+                            "Action": [
+                                {
+                                    "type": "cbCallback",
+                                    "key": "LawFirmType"
+                                }
+                            ],
                             "Type": "RADIO",
                             "Label": "Law Firm Type",
                             "Variable": "LawFirmType",
                             "IsRequired": true,
-                            "IsCallback": false,
+                            "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
                             "IsEditable": false,
@@ -247,42 +252,124 @@
                             "IsReadonly": false,
                             "IsHide": false,
                             "IsEditable": false
-                        },
-                        {
-                            "Action": [],
-                            "Type": "TEXT",
-                            "Label": "Workload",
-                            "Variable": "Workload",
-                            "Value": "",
-                            "Pattern": "",
-                            "IsRequired": true,
-                            "IsUppercase": false,
-                            "IsCallback": false,
-                            "IsReadonly": false,
-                            "IsHide": false,
-                            "IsEditable": false,
-                            "Placeholder": "Input Workload"
-                        },
-                        {
-                            "Action": [],
-                            "Type": "BOOL",
-                            "Label": "Is External",
-                            "Variable": "IsExternal",
-                            "Value": false,
-                            "IsRequired": false,
-                            "IsCallback": false,
-                            "IsReadonly": false,
-                            "IsHide": false,
-                            "IsEditable": false
                         }
                     ],
-                    "onLoad": [],
+                    "onLoad": [
+                        {
+                            "conditions": [],
+                            "isUseApi": true,
+                            "reqObj": [
+                                {
+                                    "isFromDict": false,
+                                    "propName": "Code",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ],
+                            "environment": "localbe",
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                        }
+                    ],
                     "criteria": [],
                     "mapCookie": [],
                     "initAction": []
                 }
             },
             "id": "ecfed9c5-7638-459a-bdbc-8948b49426f0"
+        },
+        {
+            "form": {
+                "subsection": {
+                    "title": "Tax Information",
+                    "isVertical": false,
+                    "isSubsection": true,
+                    "isCollapsed": false,
+                    "isModeAdd": true,
+                    "formInput": [
+                        {
+                            "Action": [],
+                            "Type": "DDL",
+                            "Label": "Tax Scheme",
+                            "Variable": "TaxScheme",
+                            "IsRequired": false,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": false,
+                            "UseDefaultValue": false,
+                            "isUseAPI": false,
+                            "DdlItemsObj": [],
+                            "DdlReqObj": null
+                        },
+                        {
+                            "Action": [],
+                            "Type": "DDL",
+                            "Label": "Tax Calculation Method",
+                            "Variable": "TaxCalculationMethod",
+                            "IsRequired": true,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": false,
+                            "UseDefaultValue": false,
+                            "isUseAPI": false,
+                            "DdlItemsObj": [
+                                {
+                                    "Key": "Nett",
+                                    "Value": "Nett"
+                                },
+                                {
+                                    "Key": "Gross",
+                                    "Value": "Gross"
+                                }
+                            ],
+                            "DdlReqObj": null
+                        },
+                        {
+                            "Action": [],
+                            "Type": "DDL",
+                            "Label": "VAT",
+                            "Variable": "Vat",
+                            "IsRequired": true,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": false,
+                            "UseDefaultValue": false,
+                            "isUseAPI": false,
+                            "DdlItemsObj": [
+                                {
+                                    "Key": "true",
+                                    "Value": "Yes"
+                                },
+                                {
+                                    "Key": "false",
+                                    "Value": "No"
+                                }
+                            ],
+                            "DdlReqObj": null
+                        }
+                    ],
+                    "onLoad": [
+                        {
+                            "conditions": [],
+                            "isUseApi": true,
+                            "reqObj": [
+                                {
+                                    "isFromDict": false,
+                                    "propName": "Code",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ],
+                            "environment": "localbe",
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                        }
+                    ],
+                    "criteria": [],
+                    "mapCookie": [],
+                    "initAction": []
+                }
+            },
+            "id": "280b0f7b-4131-4c6d-9bf0-b2d3b412b756"
         },
         {
             "form": {
@@ -369,7 +456,21 @@
                             "Placeholder": "Input Contact Person Email"
                         }
                     ],
-                    "onLoad": [],
+                    "onLoad": [
+                        {
+                            "conditions": [],
+                            "isUseApi": true,
+                            "reqObj": [
+                                {
+                                    "isFromDict": false,
+                                    "propName": "Code",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ],
+                            "environment": "localbe",
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                        }
+                    ],
                     "criteria": [],
                     "mapCookie": [],
                     "initAction": []
@@ -448,7 +549,21 @@
                             "ReadonlyFax": false
                         }
                     ],
-                    "onLoad": [],
+                    "onLoad": [
+                        {
+                            "conditions": [],
+                            "isUseApi": true,
+                            "reqObj": [
+                                {
+                                    "isFromDict": false,
+                                    "propName": "Code",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ],
+                            "environment": "localbe",
+                            "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
+                        }
+                    ],
                     "criteria": [],
                     "mapCookie": [],
                     "initAction": []

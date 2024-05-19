@@ -637,6 +637,9 @@ export class PathConstant {
     public static LAW_FIRM = "LawFirm";
     public static MASTER_LAW_FIRM_PAGING = PathConstant.LAW_FIRM + "/" + PathConstant.PAGING;
     public static MASTER_LAW_FIRM_ADD = PathConstant.LAW_FIRM + "/" + PathConstant.ADD;
+    public static LAWYER = "Lawyer";
+    public static MASTER_LAWYER_PAGING = PathConstant.LAWYER + "/" + PathConstant.PAGING;
+    public static MASTER_LAWYER_ADD = PathConstant.LAWYER + "/" + PathConstant.ADD;
     //#endregion
 
     //#region Verif-Module

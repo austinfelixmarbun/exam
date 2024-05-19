@@ -102,6 +102,8 @@ import { SelfCustomVendorAtpmSelectComponent } from './vendor-ATPM/self-custom-v
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { MasterLawFirmPagingComponent } from './master-law-firm/master-law-firm-paging/master-law-firm-paging.component';
 import { MasterLawFirmAddComponent } from './master-law-firm/master-law-firm-add/master-law-firm-add.component';
+import { LawyerMaintenancePagingComponent } from './master-law-firm/lawyer-maintenance-paging/lawyer-maintenance-paging.component';
+import { LawyerMaintenanceAddComponent } from './master-law-firm/lawyer-maintenance-add/lawyer-maintenance-add.component';
 
 export const customCurrencyMaskConfig = {     
   align: "right",     
@@ -219,7 +221,9 @@ export const customCurrencyMaskConfig = {
         CustomFundingCompanyAddEditComponent,
         SelfCustomVendorAtpmSelectComponent,
         MasterLawFirmPagingComponent,
-        MasterLawFirmAddComponent
+        MasterLawFirmAddComponent,
+        LawyerMaintenancePagingComponent,
+        LawyerMaintenanceAddComponent
     ],
     providers: [
         VendorService,

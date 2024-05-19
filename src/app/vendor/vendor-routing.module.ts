@@ -63,6 +63,8 @@ import { UcTemplateComponent } from '@adins/uctemplate';
 import { SelfCustomVendorDetailComponent } from './component/vendor/self-custom-vendor-detail/self-custom-vendor-detail.component';
 import { MasterLawFirmPagingComponent } from './master-law-firm/master-law-firm-paging/master-law-firm-paging.component';
 import { MasterLawFirmAddComponent } from './master-law-firm/master-law-firm-add/master-law-firm-add.component';
+import { LawyerMaintenancePagingComponent } from './master-law-firm/lawyer-maintenance-paging/lawyer-maintenance-paging.component';
+import { LawyerMaintenanceAddComponent } from './master-law-firm/lawyer-maintenance-add/lawyer-maintenance-add.component';
 
 const routes: Routes = [
   {
@@ -585,6 +587,14 @@ const routes: Routes = [
       {
         path: PathConstant.MASTER_LAW_FIRM_ADD,
         component: MasterLawFirmAddComponent
+      },
+      {
+        path: PathConstant.MASTER_LAWYER_PAGING,
+        component: LawyerMaintenancePagingComponent
+      },
+      {
+        path: PathConstant.MASTER_LAWYER_ADD,
+        component: LawyerMaintenanceAddComponent
       }
     ]
 

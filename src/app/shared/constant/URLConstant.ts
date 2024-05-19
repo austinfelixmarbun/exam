@@ -1195,6 +1195,7 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
   public static DeleteRefTaxOffice = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/DeleteRefTaxOffice";
   public static GetRefTaxOfficeDetailById = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetRefTaxOfficeDetailById";
   public static GetListRefTaxOfficeActive = environment.FoundationR3Url + "/v1" + "/RefTaxOffice/GetListRefTaxOfficeActive";
+  public static GetTaxScheme = environment.TaxUrl + "/v1" + "/TaxCalculation/GetTaxSchemeHByTaxKindAndNationality"
 
    // ASSET INS CLAIM DOC
    public static AddRefInsClaimDoc = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/AddRefInsClaimDoc"

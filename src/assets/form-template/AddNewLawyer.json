@@ -1,0 +1,269 @@
+{
+    "title": "Add New Lawyer",
+    "hideTitle": false,
+    "id": "AddNewLawyer",
+    "addButton": false,
+    "addLink": "",
+    "pathOption": "",
+    "backButton": false,
+    "component": [
+        {
+            "form": {
+                "subsection": {
+                    "title": "Add New Lawyer",
+                    "isVertical": false,
+                    "isSubsection": true,
+                    "isCollapsed": false,
+                    "isModeAdd": true,
+                    "formInput": [
+                        {
+                            "Action": [],
+                            "Type": "TEXT",
+                            "Label": "Lawyer Name",
+                            "Variable": "LawyerName",
+                            "Value": "",
+                            "Pattern": "",
+                            "IsRequired": true,
+                            "IsUppercase": false,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "Placeholder": "Input Lawyer Name"
+                        },
+                        {
+                            "Action": [],
+                            "Type": "TEXT",
+                            "Label": "Advocate Licence No",
+                            "Variable": "AdvocateLicenceNo",
+                            "Value": "",
+                            "Pattern": "",
+                            "IsRequired": true,
+                            "IsUppercase": false,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "Placeholder": "Input Advocate Licence No"
+                        },
+                        {
+                            "Action": [],
+                            "Type": "TEXT",
+                            "Label": "Birth Place",
+                            "Variable": "BirthPlace",
+                            "Value": "",
+                            "Pattern": "",
+                            "IsRequired": true,
+                            "IsUppercase": false,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "Placeholder": "Input Birth Place"
+                        },
+                        {
+                            "Action": [],
+                            "Type": "DATE",
+                            "Label": "Birth Date",
+                            "Variable": "BirthDate",
+                            "IsRequired": true,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "Max": null,
+                            "MinDtCode": null,
+                            "MinOperator": null,
+                            "MinValue": null,
+                            "MaxDtCode": null,
+                            "MaxOperator": null,
+                            "MaxValue": null,
+                            "DtRestrictOptMin": "",
+                            "DtRestrictOptMax": "",
+                            "Value": ""
+                        },
+                        {
+                            "Action": [],
+                            "Type": "TEXT",
+                            "Label": "Email 1",
+                            "Variable": "Email1Lawyer",
+                            "Value": "",
+                            "Pattern": "",
+                            "IsRequired": true,
+                            "IsUppercase": false,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "Placeholder": "Input Email 1"
+                        },
+                        {
+                            "Action": [],
+                            "Type": "BOOL",
+                            "Label": "Is Active",
+                            "Variable": "IsActive",
+                            "Value": true,
+                            "IsRequired": true,
+                            "IsCallback": false,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true
+                        },
+                        {
+                            "Action": [],
+                            "Type": "ADDRESS",
+                            "Variable": "AddressLawyer",
+                            "IsRequired": true,
+                            "IsReadonly": false,
+                            "IsHide": false,
+                            "IsEditable": true,
+                            "UseFourColl": false,
+                            "ShowPhn1": true,
+                            "ShowPhn2": true,
+                            "ShowPhn3": false,
+                            "RequiredPhn1": true,
+                            "RequiredPhn2": false,
+                            "RequiredPhn3": false,
+                            "RequiredPhnExt1": false,
+                            "RequiredPhnExt2": false,
+                            "RequiredPhnExt3": false,
+                            "ShowFax": false,
+                            "ShowOwnership": false,
+                            "RequiredOwnership": false,
+                            "ShowStayLength": false,
+                            "UseStaySince": false,
+                            "ReadonlyPhn1": false,
+                            "ReadonlyPhn2": false,
+                            "ReadonlyPhn3": false,
+                            "ReadonlyPhnExt1": false,
+                            "ReadonlyPhnExt2": false,
+                            "ReadonlyPhnExt3": false,
+                            "ReadonlyFax": false
+                        }
+                    ],
+                    "onLoad": [
+                        {
+                            "conditions": [],
+                            "isUseApi": true,
+                            "reqObj": [
+                                {
+                                    "isFromDict": false,
+                                    "propName": "EmpNo",
+                                    "propValue": "LawyerNo"
+                                }
+                            ],
+                            "environment": "localbe",
+                            "apiPath": "/v1/VendorEmp/GetVendorEmpLawFirmByVendorEmpCode"
+                        }
+                    ],
+                    "criteria": [],
+                    "mapCookie": [],
+                    "initAction": []
+                }
+            },
+            "id": "074c5b62-4590-49f9-b35e-cd292dbda166"
+        }
+    ],
+    "serviceUrl": {
+        "add": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "edit": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        },
+        "createRfa": {
+            "environment": "",
+            "apiPath": "",
+            "apiUrl": ""
+        }
+    },
+    "isRedirect": false,
+    "redirectOption": "",
+    "redirectLink": "",
+    "hideSubmitButton": false,
+    "hideCancelButton": false,
+    "listBtn": [],
+    "onInit": [],
+    "isOverrideSubmit": true,
+    "onSubmit": [
+        {
+            "conditions": [
+                {
+                    "property": "mode",
+                    "restriction": "NEQ",
+                    "value": "edit"
+                }
+            ],
+            "result": {
+                "environment": "localbe",
+                "path": "/v1/VendorEmp/AddVendorEmp",
+                "onError": {
+                    "type": "toaster",
+                    "message": ""
+                },
+                "type": "http",
+                "reqObj": [
+                    {
+                        "propName": "VendorId",
+                        "propValue": "LawFirmId"
+                    },
+                    {
+                        "propName": "VendorEmpName",
+                        "propValue": "form.LawyerName"
+                    },
+                    {
+                        "propName": "VendorEmpNo",
+                        "propValue": "form.AdvocateLicenseNo"
+                    },
+                    {
+                        "propName": "MobilePhnNo1",
+                        "propValue": "AddressLawyer.phn1"
+                    },
+                    {
+                        "propName": "MobilePhnNo2",
+                        "propValue": "AddressLawyer.phn2"
+                    },
+                    {
+                        "propName": "Email",
+                        "propValue": "form.Email1"
+                    },
+                    {
+                        "propName": "BirthPlace",
+                        "propValue": "form.BirthPlace"
+                    },
+                    {
+                        "propName": "BirthDate",
+                        "propValue": "form.BirthDate"
+                    },
+                    {
+                        "propName": "IsActive",
+                        "propValue": "form.IsActive"
+                    }
+                ],
+                "excObj": [],
+                "onSuccess": [
+                    {
+                        "conditions": [],
+                        "result": {
+                            "type": "toaster",
+                            "mode": "success",
+                            "message": "Add Successfully"
+                        }
+                    }
+                ],
+                "mapResToDict": []
+            }
+        }
+    ],
+    "isOverrideCancel": false,
+    "onCancel": {},
+    "conditionalTitle": [],
+    "persistData": false,
+    "overrideSubmitBtnText": "",
+    "customToastrMsg": "",
+    "persistPropName": ""
+}

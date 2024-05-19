@@ -1,32 +1,78 @@
 {
-    "title": "Master Law Firm",
+    "title": "Lawyer Maintenance",
     "hideTitle": false,
-    "id": "MasterLawFirm",
+    "id": "LawyerMaintenance",
     "addButton": false,
     "addLink": "",
     "pathOption": "",
     "backButton": false,
     "component": [
         {
+            "view": {
+                "subsection": {
+                    "subSectionId": "LawFirmInformationId",
+                    "subSectionTitle": "Law Firm Information",
+                    "concatDate": false,
+                    "setDate": "",
+                    "formatDate": "",
+                    "environment": "localbe",
+                    "apiVersion": "v1",
+                    "uri": "",
+                    "mainInfoPath": "/Generic/GetDataViewBySQL",
+                    "service": "",
+                    "querystring": {
+                        "name": "viewVendorLawFirm"
+                    },
+                    "reqObj": {},
+                    "mainInfo": [
+                        {
+                            "type": "text",
+                            "label": "Law Firm Code",
+                            "property": "VendorCode",
+                            "position": "left",
+                            "isHide": false,
+                            "customClassLabel": "",
+                            "customClassProperty": ""
+                        },
+                        {
+                            "type": "text",
+                            "label": "Law Firm Name",
+                            "property": "VendorName",
+                            "position": "left",
+                            "isHide": false,
+                            "customClassLabel": "",
+                            "customClassProperty": ""
+                        }
+                    ],
+                    "whereValue": [
+                        "LawFirmCode"
+                    ],
+                    "fromValue": [],
+                    "resObjName": ""
+                }
+            },
+            "id": "80ad6aac-4933-4a29-bbd2-f0a57c196e24"
+        },
+        {
             "paging": {
                 "environment": "localbe",
-                "apiVersion": "v2",
+                "apiVersion": "v1",
                 "service": "",
                 "pagingInput": {
                     "title": "",
-                    "sectionTitle": "",
+                    "sectionTitle": "Search",
                     "querystring": {
-                        "name": "SearchLawFirmPaging"
+                        "name": "searchLawyerPaging"
                     },
                     "exportExcel": false,
                     "component": [
                         {
-                            "id": "vvendorCodeSearchId",
+                            "id": "empvendorEmpNoSearchId",
                             "type": "textbox",
-                            "label": "Law Firm Code",
-                            "name": "v.vendor_code",
+                            "label": "Lawyer No",
+                            "name": "emp.vendor_emp_no",
                             "value": "",
-                            "placeholder": "",
+                            "placeholder": "Input Lawyer No",
                             "datatype": "text",
                             "isRequired": false,
                             "isReadonly": false,
@@ -35,44 +81,24 @@
                             "isCriteriaDataTable": false
                         },
                         {
-                            "id": "vvendorNameSearchId",
+                            "id": "empvendorEmpNameSearchId",
                             "type": "textbox",
-                            "label": "Law Firm Name",
-                            "name": "v.vendor_name",
+                            "label": "Lawyer Name",
+                            "name": "emp.vendor_emp_name",
                             "value": "",
-                            "placeholder": "",
+                            "placeholder": "Input Lawyer Name",
                             "datatype": "text",
                             "isRequired": false,
                             "isReadonly": false,
                             "useAutofill": false,
-                            "isUppercase": false,
+                            "isUppercase": true,
                             "isCriteriaDataTable": false
                         },
                         {
-                            "id": "case when vmrVendorTypeCode = 'p' then 'personal' else 'corporate' endSearchId",
-                            "type": "dropdown",
-                            "label": "Law Firm Type",
-                            "name": "CASE WHEN v.mr_vendor_type_code = 'P' THEN 'Personal' ELSE 'Corporate' END",
-                            "value": "",
-                            "placeholder": "",
-                            "datatype": "text",
-                            "isRequired": false,
-                            "isFromURL": true,
-                            "ddlType": "all",
-                            "isEvent": false,
-                            "isCriteriaDataTable": false,
-                            "environment": "",
-                            "path": "",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
-                            "isQueryIn": false,
-                            "useAutofill": false
-                        },
-                        {
-                            "id": "visActiveSearchId",
+                            "id": "empisActiveSearchId",
                             "type": "dropdown",
                             "label": "Is Active",
-                            "name": "v.is_active",
+                            "name": "emp.is_active",
                             "value": "",
                             "placeholder": "",
                             "datatype": "text",
@@ -97,47 +123,40 @@
                     "headerList": [
                         {
                             "type": "sort",
-                            "label": "Law Firm Code",
+                            "label": "Lawyer No",
                             "position": "center",
-                            "name": "v.vendor_code",
+                            "name": "emp.vendor_emp_no",
                             "isSelectAll": false
                         },
                         {
                             "type": "sort",
-                            "label": "Law Firm Name",
+                            "label": "Lawyer Name",
                             "position": "left",
-                            "name": "v.vendor_name",
-                            "isSelectAll": false
-                        },
-                        {
-                            "type": "sort",
-                            "label": "Law Firm Type",
-                            "position": "center",
-                            "name": "CASE WHEN v.mr_vendor_type_code = 'P' THEN 'Personal' ELSE 'Corporate' END",
-                            "isSelectAll": false
-                        },
-                        {
-                            "type": "sort",
-                            "label": "Address",
-                            "position": "left",
-                            "name": "addr.addr",
+                            "name": "emp.vendor_emp_name",
                             "isSelectAll": false
                         },
                         {
                             "type": "sort",
                             "label": "Is Active",
                             "position": "center",
-                            "name": "v.is_active",
+                            "name": "emp.is_active",
+                            "isSelectAll": false
+                        },
+                        {
+                            "type": "sort",
+                            "label": "Mobile Phone",
+                            "position": "center",
+                            "name": "emp.mobile_phn_no_1",
                             "isSelectAll": false
                         },
                         {
                             "type": "label",
-                            "label": "Lawyer",
+                            "label": "Edit",
                             "position": "center"
                         },
                         {
                             "type": "label",
-                            "label": "Edit",
+                            "label": "Delete",
                             "position": "center"
                         }
                     ],
@@ -145,28 +164,16 @@
                         {
                             "type": "callback",
                             "position": "center",
-                            "property": "LawFirmCode",
+                            "property": "VendorEmployeeNo",
                             "isFlagColor": false,
-                            "key": "ViewLawFirm"
+                            "key": "ViewLawyer"
                         },
                         {
                             "type": "callback",
                             "position": "left",
-                            "property": "LawFirmName",
+                            "property": "VendorEmployeeName",
                             "isFlagColor": false,
-                            "key": "ViewLawFirm"
-                        },
-                        {
-                            "type": "text",
-                            "position": "center",
-                            "property": "LawFirmType",
-                            "isFlagColor": false
-                        },
-                        {
-                            "type": "text",
-                            "position": "left",
-                            "property": "Address",
-                            "isFlagColor": false
+                            "key": "ViewLawyer"
                         },
                         {
                             "type": "boolean",
@@ -175,23 +182,10 @@
                             "isFlagColor": false
                         },
                         {
-                            "type": "action",
+                            "type": "text",
                             "position": "center",
-                            "action": [
-                                {
-                                    "type": "link",
-                                    "path": "/Vendor/Lawyer/Paging",
-                                    "target": "_self",
-                                    "param": [
-                                        {
-                                            "type": "LawFirmCode",
-                                            "property": "LawFirmCode"
-                                        }
-                                    ],
-                                    "property": "",
-                                    "icon": "fa-user"
-                                }
-                            ]
+                            "property": "MobilePhone1",
+                            "isFlagColor": false
                         },
                         {
                             "type": "action",
@@ -201,16 +195,34 @@
                                     "type": "edit",
                                     "param": [
                                         {
+                                            "type": "LawFirmId",
+                                            "property": "LawFirmId"
+                                        },
+                                        {
                                             "type": "LawFirmCode",
                                             "property": "LawFirmCode"
+                                        },
+                                        {
+                                            "type": "LawyerNo",
+                                            "property": "VendorEmployeeNo"
                                         },
                                         {
                                             "type": "mode",
                                             "property": "edit"
                                         }
                                     ],
-                                    "path": "/Vendor/LawFirm/Add",
+                                    "path": "/Vendor/Lawyer/Add",
                                     "icon": "fa-edit"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "action",
+                            "position": "center",
+                            "action": [
+                                {
+                                    "type": "delete",
+                                    "property": "LawyerNo"
                                 }
                             ]
                         }
@@ -218,7 +230,9 @@
                     "exportAsFileList": []
                 },
                 "criteria": [],
-                "whereValue": [],
+                "whereValue": [
+                    "LawFirmCode"
+                ],
                 "fromValue": [],
                 "useIntegration": false,
                 "isHideSearch": false,
@@ -227,7 +241,7 @@
                 "isUseCustomApi": false,
                 "customApiQryPaging": ""
             },
-            "id": "12206e27-74e0-4065-970d-2b6141e71767"
+            "id": "38ca2f0a-55c7-473b-a457-a3271070e1bf"
         }
     ],
     "serviceUrl": {
@@ -254,8 +268,8 @@
     "hideCancelButton": false,
     "listBtn": [
         {
-            "displayName": "Add New Law Firm",
-            "id": "add new law firmId",
+            "displayName": "Add New Lawyer",
+            "id": "add new lawyerId",
             "key": "",
             "position": "top",
             "icon": "",
@@ -263,14 +277,38 @@
             "conditions": [],
             "btnType": "button",
             "action": {
-                "path": "/Vendor/LawFirm/Add",
+                "path": "/Vendor/Lawyer/Add",
                 "type": "link",
                 "target": "_self",
-                "params": []
+                "params": [
+                    {
+                        "propName": "LawFirmId",
+                        "propValue": "LawFirmId"
+                    }
+                ]
             }
         }
     ],
-    "onInit": [],
+    "onInit": [
+        {
+            "environment": "localbe",
+            "apiPath": "/v1/Vendor/GetVendorByVendorCode",
+            "reqObj": [
+                {
+                    "isFromDict": false,
+                    "propName": "Code",
+                    "propValue": "LawFirmCode"
+                }
+            ],
+            "return": [
+                {
+                    "propName": "LawFirmId",
+                    "propValue": "VendorId"
+                }
+            ],
+            "conditions": []
+        }
+    ],
     "isOverrideSubmit": false,
     "onSubmit": [],
     "isOverrideCancel": false,
