@@ -285,7 +285,22 @@
                     ],
                     "criteria": [],
                     "mapCookie": [],
-                    "initAction": []
+                    "initAction": [
+                        {
+                            "type": "hideField",
+                            "condition": [
+                                {
+                                    "variable": "mode",
+                                    "restriction": "Eq",
+                                    "value": "edit"
+                                }
+                            ],
+                            "listField": [
+                                "LawFirmCode"
+                            ],
+                            "isRevertable": true
+                        }
+                    ]
                 }
             },
             "id": "ecfed9c5-7638-459a-bdbc-8948b49426f0"
