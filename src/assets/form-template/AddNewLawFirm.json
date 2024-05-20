@@ -60,7 +60,7 @@
                             "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": true,
+                            "IsEditable": false,
                             "Options": [
                                 {
                                     "Key": "PERSONAL",

@@ -18,7 +18,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class MasterLawFirmAddComponent implements OnInit {
 
-  @Input() parentForm: FormGroup;
+  parentForm: FormGroup;
 
   pageName: string;
   ContractNo :string;
@@ -40,6 +40,32 @@ export class MasterLawFirmAddComponent implements OnInit {
     callback: ($event) => this.callback($event)
   };
 
+  async onFormCreated(ev)
+  {
+    this.parentForm = ev;
+    let TaxKindCode = "";
+    const lawFirmTypeControl = this.parentForm.controls["LawFirmType"];
+
+    if(lawFirmTypeControl && lawFirmTypeControl.value === 'PERSONAL') {
+      TaxKindCode = "P";
+    } else {
+      TaxKindCode = "C";
+    }
+
+    this.http.post(URLConstant.GetTaxScheme, { MrNationalityCode: 'WNI', MrTaxKindCode: TaxKindCode }).subscribe(
+      (response) => {
+        const keyValueArray = response[CommonConstant.ReturnObj].map(element => ({
+          Key: element.TaxSchmCode,
+          Value: element.TaxSchmName
+        }));
+
+        this.ddlservice.SetDictDDL("TaxScheme",keyValueArray);
+        // Assuming you need to do something with keyValueArray
+        console.log("inidata",keyValueArray);
+      }
+    );
+  }
+
   callback(ev) {
     let row = ev.RowObj;
     let View = ev.ViewObj;
@@ -53,9 +79,9 @@ export class MasterLawFirmAddComponent implements OnInit {
 
       let TaxKindCode = "";
       console.log('Parent Form', this.parentForm.getRawValue());
-      const lawFirmTypeControl = this.parentForm.controls["BatchFees"];
+      const lawFirmTypeControl = this.parentForm.controls["LawFirmType"];
 
-      if(lawFirmTypeControl && lawFirmTypeControl.value === 'Personal') {
+      if(lawFirmTypeControl && lawFirmTypeControl.value === 'PERSONAL') {
         TaxKindCode = "P";
       } else {
         TaxKindCode = "C";
@@ -68,6 +94,7 @@ export class MasterLawFirmAddComponent implements OnInit {
             Value: element.TaxSchmName
           }));
 
+          this.ddlservice.SetDictDDL("TaxScheme",keyValueArray);
           // Assuming you need to do something with keyValueArray
           console.log("inidata",keyValueArray);
         }

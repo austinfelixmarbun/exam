@@ -284,6 +284,10 @@
                     {
                         "propName": "LawFirmId",
                         "propValue": "LawFirmId"
+                    },
+                    {
+                        "propName": "LawFirmCode",
+                        "propValue": "LawFirmCode"
                     }
                 ]
             }

@@ -153,11 +153,33 @@
                                 }
                             ],
                             "environment": "localbe",
-                            "apiPath": "/v1/VendorEmp/GetVendorEmpLawFirmByVendorEmpCode"
+                            "apiPath": "/v1/VendorEmp/GetVendorEmpLawFirmByVendorEmpCode",
+                            "mapRes": [
+                                {
+                                    "accessorName": "AddressLawyer",
+                                    "variableName": "AddressLawyer"
+                                }
+                            ]
                         }
                     ],
                     "criteria": [],
-                    "mapCookie": [],
+                    "mapCookie": [
+                        {
+                            "variableName": "LawyerName",
+                            "cookieName": "VendorEmpName",
+                            "isEmptyNotFound": false
+                        },
+                        {
+                            "variableName": "AdvocateLicenceNo",
+                            "cookieName": "VendorEmpNo",
+                            "isEmptyNotFound": false
+                        },
+                        {
+                            "variableName": "Email1Lawyer",
+                            "cookieName": "Email",
+                            "isEmptyNotFound": false
+                        }
+                    ],
                     "initAction": []
                 }
             },
@@ -193,14 +215,14 @@
         {
             "conditions": [
                 {
-                    "property": "mode",
                     "restriction": "NEQ",
-                    "value": "edit"
+                    "value": "edit",
+                    "property": "mode"
                 }
             ],
             "result": {
                 "environment": "localbe",
-                "path": "/v1/VendorEmp/AddVendorEmp",
+                "path": "/v1/VendorEmp/AddVendorEmpLawyer",
                 "onError": {
                     "type": "toaster",
                     "message": ""
@@ -208,28 +230,24 @@
                 "type": "http",
                 "reqObj": [
                     {
-                        "propName": "VendorId",
+                        "propName": "LawFirmId",
                         "propValue": "LawFirmId"
                     },
                     {
-                        "propName": "VendorEmpName",
+                        "propName": "LawyerName",
                         "propValue": "form.LawyerName"
                     },
                     {
-                        "propName": "VendorEmpNo",
-                        "propValue": "form.AdvocateLicenseNo"
+                        "propName": "AdvocateLicenceNo",
+                        "propValue": "form.AdvocateLicenceNo"
                     },
                     {
-                        "propName": "MobilePhnNo1",
-                        "propValue": "AddressLawyer.phn1"
+                        "propName": "AddressLawyer",
+                        "propValue": "form.AddressLawyer"
                     },
                     {
-                        "propName": "MobilePhnNo2",
-                        "propValue": "AddressLawyer.phn2"
-                    },
-                    {
-                        "propName": "Email",
-                        "propValue": "form.Email1"
+                        "propName": "Email1Lawyer",
+                        "propValue": "form.Email1Lawyer"
                     },
                     {
                         "propName": "BirthPlace",
@@ -252,6 +270,20 @@
                             "type": "toaster",
                             "mode": "success",
                             "message": "Add Successfully"
+                        }
+                    },
+                    {
+                        "conditions": [],
+                        "result": {
+                            "type": "link",
+                            "target": "_self",
+                            "params": [
+                                {
+                                    "propName": "LawFirmCode",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ],
+                            "path": "/Vendor/Lawyer/Paging"
                         }
                     }
                 ],
