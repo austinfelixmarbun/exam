@@ -215,9 +215,9 @@
         {
             "conditions": [
                 {
+                    "property": "mode",
                     "restriction": "NEQ",
-                    "value": "edit",
-                    "property": "mode"
+                    "value": "edit"
                 }
             ],
             "result": {
@@ -288,6 +288,84 @@
                     }
                 ],
                 "mapResToDict": []
+            }
+        },
+        {
+            "conditions": [
+                {
+                    "value": "edit",
+                    "property": "mode",
+                    "restriction": "EQ"
+                }
+            ],
+            "result": {
+                "type": "http",
+                "environment": "localbe",
+                "path": "/v1/VendorEmp/EditVendorEmpLawyer",
+                "onError": {
+                    "type": "toaster",
+                    "message": ""
+                },
+                "reqObj": [
+                    {
+                        "propName": "LawFirmId",
+                        "propValue": "LawFirmId"
+                    },
+                    {
+                        "propName": "LawyerName",
+                        "propValue": "form.LawyerName"
+                    },
+                    {
+                        "propName": "AdvocateLicenceNo",
+                        "propValue": "form.AdvocateLicenceNo"
+                    },
+                    {
+                        "propName": "AddressLawyer",
+                        "propValue": "form.AddressLawyer"
+                    },
+                    {
+                        "propName": "Email1Lawyer",
+                        "propValue": "form.Email1Lawyer"
+                    },
+                    {
+                        "propName": "BirthPlace",
+                        "propValue": "form.BirthPlace"
+                    },
+                    {
+                        "propName": "BirthDate",
+                        "propValue": "form.BirthDate"
+                    },
+                    {
+                        "propName": "IsActive",
+                        "propValue": "form.IsActive"
+                    }
+                ],
+                "excObj": [],
+                "mapResToDict": [],
+                "onSuccess": [
+                    {
+                        "conditions": [],
+                        "result": {
+                            "type": "toaster",
+                            "message": "Edit Succesfully",
+                            "mode": "success"
+                        }
+                    },
+                    {
+                        "conditions": [],
+                        "result": {
+                            "type": "link",
+                            "path": "/Vendor/Lawyer/Paging",
+                            "target": "_self",
+                            "params": [
+                                {
+                                    "propName": "LawFirmCode",
+                                    "propValue": "LawFirmCode"
+                                }
+                            ]
+                        }
+                    }
+                ]
             }
         }
     ],
