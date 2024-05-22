@@ -60,7 +60,7 @@
                             "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
-                            "IsEditable": false,
+                            "IsEditable": true,
                             "Options": [
                                 {
                                     "Key": "PERSONAL",
@@ -265,7 +265,7 @@
                                     "propValue": "LawFirmCode"
                                 }
                             ],
-                            "environment": "localbe",
+                            "environment": "FoundationR3Url_svc",
                             "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
                             "mapRes": [
                                 {
@@ -296,7 +296,8 @@
                                 }
                             ],
                             "listField": [
-                                "LawFirmCode"
+                                "LawFirmCode",
+                                "LawFirmType"
                             ],
                             "isRevertable": true
                         }
@@ -389,7 +390,7 @@
                                     "propValue": "LawFirmCode"
                                 }
                             ],
-                            "environment": "localbe",
+                            "environment": "FoundationR3Url_svc",
                             "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode"
                         }
                     ],
@@ -496,7 +497,7 @@
                                     "propValue": "LawFirmCode"
                                 }
                             ],
-                            "environment": "localbe",
+                            "environment": "FoundationR3Url_svc",
                             "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
                             "mapRes": []
                         }
@@ -590,7 +591,7 @@
                                     "propValue": "LawFirmCode"
                                 }
                             ],
-                            "environment": "localbe",
+                            "environment": "FoundationR3Url_svc",
                             "apiPath": "/v1/Vendor/GetVendorLawFirmByVendorCode",
                             "mapRes": [
                                 {
@@ -610,12 +611,12 @@
     ],
     "serviceUrl": {
         "add": {
-            "environment": "localbe",
+            "environment": "FoundationR3Url_svc",
             "apiPath": "/v1/Vendor/AddVendorLawFirm",
             "apiUrl": ""
         },
         "edit": {
-            "environment": "localbe",
+            "environment": "FoundationR3Url_svc",
             "apiPath": "/v1/Vendor/EditVendorLawFirm",
             "apiUrl": ""
         },

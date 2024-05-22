@@ -152,7 +152,7 @@
                                     "propValue": "LawyerNo"
                                 }
                             ],
-                            "environment": "localbe",
+                            "environment": "FoundationR3Url_svc",
                             "apiPath": "/v1/VendorEmp/GetVendorEmpLawFirmByVendorEmpCode",
                             "mapRes": [
                                 {
@@ -221,7 +221,7 @@
                 }
             ],
             "result": {
-                "environment": "localbe",
+                "environment": "FoundationR3Url_svc",
                 "path": "/v1/VendorEmp/AddVendorEmpLawyer",
                 "onError": {
                     "type": "toaster",
@@ -293,19 +293,19 @@
         {
             "conditions": [
                 {
-                    "value": "edit",
                     "property": "mode",
-                    "restriction": "EQ"
+                    "restriction": "EQ",
+                    "value": "edit"
                 }
             ],
             "result": {
-                "type": "http",
-                "environment": "localbe",
+                "environment": "FoundationR3Url_svc",
                 "path": "/v1/VendorEmp/EditVendorEmpLawyer",
                 "onError": {
                     "type": "toaster",
                     "message": ""
                 },
+                "type": "http",
                 "reqObj": [
                     {
                         "propName": "LawFirmId",
@@ -341,31 +341,31 @@
                     }
                 ],
                 "excObj": [],
-                "mapResToDict": [],
                 "onSuccess": [
                     {
                         "conditions": [],
                         "result": {
                             "type": "toaster",
-                            "message": "Edit Succesfully",
-                            "mode": "success"
+                            "mode": "success",
+                            "message": "Edit Succesfully"
                         }
                     },
                     {
                         "conditions": [],
                         "result": {
                             "type": "link",
-                            "path": "/Vendor/Lawyer/Paging",
                             "target": "_self",
                             "params": [
                                 {
                                     "propName": "LawFirmCode",
                                     "propValue": "LawFirmCode"
                                 }
-                            ]
+                            ],
+                            "path": "/Vendor/Lawyer/Paging"
                         }
                     }
-                ]
+                ],
+                "mapResToDict": []
             }
         }
     ],

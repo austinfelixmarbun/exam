@@ -15,7 +15,7 @@
                     "concatDate": false,
                     "setDate": "",
                     "formatDate": "",
-                    "environment": "localbe",
+                    "environment": "FoundationR3Url_svc",
                     "apiVersion": "v1",
                     "uri": "",
                     "mainInfoPath": "/Generic/GetDataViewBySQL",
@@ -55,7 +55,7 @@
         },
         {
             "paging": {
-                "environment": "localbe",
+                "environment": "FoundationR3Url_svc",
                 "apiVersion": "v1",
                 "service": "",
                 "pagingInput": {
@@ -295,7 +295,7 @@
     ],
     "onInit": [
         {
-            "environment": "localbe",
+            "environment": "FoundationR3Url_svc",
             "apiPath": "/v1/Vendor/GetVendorByVendorCode",
             "reqObj": [
                 {
