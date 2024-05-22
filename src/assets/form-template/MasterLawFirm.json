@@ -57,15 +57,20 @@
                             "placeholder": "",
                             "datatype": "text",
                             "isRequired": false,
-                            "isFromURL": true,
+                            "isFromURL": false,
                             "ddlType": "all",
                             "isEvent": false,
                             "isCriteriaDataTable": false,
-                            "environment": "",
-                            "path": "",
-                            "criteriaPropName": "",
-                            "criteriaPropValue": "",
-                            "isQueryIn": false,
+                            "items": [
+                                {
+                                    "key": "PERSONAL",
+                                    "value": "Personal"
+                                },
+                                {
+                                    "key": "CORPOPRATE",
+                                    "value": "Corporate"
+                                }
+                            ],
                             "useAutofill": false
                         },
                         {
@@ -78,7 +83,7 @@
                             "datatype": "text",
                             "isRequired": false,
                             "isFromURL": false,
-                            "ddlType": "one",
+                            "ddlType": "all",
                             "isEvent": false,
                             "isCriteriaDataTable": false,
                             "items": [
@@ -143,18 +148,32 @@
                     ],
                     "bodyList": [
                         {
-                            "type": "callback",
-                            "position": "center",
+                            "type": "link",
+                            "position": "left",
                             "property": "LawFirmCode",
                             "isFlagColor": false,
-                            "key": "ViewLawFirm"
+                            "target": "_blank",
+                            "path": "VIEW_VENDOR_BRANCH",
+                            "param": [
+                                {
+                                    "type": "VendorId",
+                                    "property": "VendorId"
+                                }
+                            ]
                         },
                         {
-                            "type": "callback",
+                            "type": "link",
                             "position": "left",
                             "property": "LawFirmName",
                             "isFlagColor": false,
-                            "key": "ViewLawFirm"
+                            "target": "_blank",
+                            "path": "VIEW_VENDOR_BRANCH",
+                            "param": [
+                                {
+                                    "type": "VendorId",
+                                    "property": "VendorId"
+                                }
+                            ]
                         },
                         {
                             "type": "text",

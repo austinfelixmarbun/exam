@@ -104,7 +104,7 @@
                             "datatype": "text",
                             "isRequired": false,
                             "isFromURL": false,
-                            "ddlType": "one",
+                            "ddlType": "all",
                             "isEvent": false,
                             "isCriteriaDataTable": false,
                             "items": [
@@ -290,6 +290,22 @@
                         "propValue": "LawFirmCode"
                     }
                 ]
+            }
+        },
+        {
+            "displayName": "Cancel",
+            "id": "cancelId",
+            "key": "",
+            "position": "bottom",
+            "icon": "",
+            "cssClass": "",
+            "conditions": [],
+            "btnType": "button",
+            "action": {
+                "path": "/Vendor/LawFirm/Paging",
+                "type": "link",
+                "target": "_self",
+                "params": []
             }
         }
     ],
