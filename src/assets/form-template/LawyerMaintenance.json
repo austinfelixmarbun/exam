@@ -222,7 +222,7 @@
                             "action": [
                                 {
                                     "type": "delete",
-                                    "property": "LawyerNo"
+                                    "property": "VendorEmployeeId"
                                 }
                             ]
                         }

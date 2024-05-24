@@ -63,11 +63,11 @@
                             "isCriteriaDataTable": false,
                             "items": [
                                 {
-                                    "key": "PERSONAL",
+                                    "key": "Personal",
                                     "value": "Personal"
                                 },
                                 {
-                                    "key": "CORPOPRATE",
+                                    "key": "Corporate",
                                     "value": "Corporate"
                                 }
                             ],
@@ -157,7 +157,7 @@
                             "param": [
                                 {
                                     "type": "VendorId",
-                                    "property": "VendorId"
+                                    "property": "LawFirmId"
                                 }
                             ]
                         },
@@ -171,7 +171,7 @@
                             "param": [
                                 {
                                     "type": "VendorId",
-                                    "property": "VendorId"
+                                    "property": "LawFirmId"
                                 }
                             ]
                         },
