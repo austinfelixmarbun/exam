@@ -15,11 +15,11 @@ import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { CookieService } from 'ngx-cookie';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
-import { ResViewContractsObj } from 'app/shared/model/Response/pefindo/res-view-contracts-obj.model';
-import { ResContractObj } from 'app/shared/model/Response/pefindo/res-contract-obj.model';
-import { ResViewPefindoContractsObj } from 'app/shared/model/Response/pefindo/res-view-pefindo-contracts-obj.model';
+import { ResViewContractsObj } from 'app/shared/model/response/pefindo/res-view-contracts-obj.model';
+import { ResContractObj } from 'app/shared/model/response/pefindo/res-contract-obj.model';
+import { ResViewPefindoContractsObj } from 'app/shared/model/response/pefindo/res-view-pefindo-contracts-obj.model';
 import { ChartsObj } from 'app/shared/model/charts/charts-obj.model';
-import { ResPefindoContractForExportObj } from 'app/shared/model/Response/pefindo/res-pefindo-contract-for-export-obj.model';
+import { ResPefindoContractForExportObj } from 'app/shared/model/response/pefindo/res-pefindo-contract-for-export-obj.model';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
