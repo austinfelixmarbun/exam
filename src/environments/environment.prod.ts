@@ -4,11 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-    production: false,
+    production: true,
     navbarColor: 'transparent',
     isPageFromService: false,
     isCore: true,
     SpinnerOnHttpPost: true,
+    useSafeUrl: true,
     Module:"FOU",
     ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
     ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
