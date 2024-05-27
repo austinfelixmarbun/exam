@@ -228,11 +228,18 @@ form .textarea-field-2{
     border-bottom: 0px !important;
     border-top: 0;
     color: var(--new-bgb-100, #2D3436);
+    text-align: center !important;
 }
+
+.table thead th span{
+    text-align: center !important;
+}
+
 
 .table-new thead th{
     border-bottom: 0px !important;
     border-top: 1px solid #bfd4ff !important;
+    text-align: center !important;
 }
 
 .table-new>tbody>tr:nth-child(even)>td,

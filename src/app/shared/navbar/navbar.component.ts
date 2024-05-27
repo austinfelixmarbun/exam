@@ -59,7 +59,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     needUnsubscribe(){
-        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1'){
+        if(AdInsHelper.GetLocalStorage(CommonConstant.GSCodeIsUseNotification) == '1' && this.appnotif){
             this.appnotif.UnsubNotification();
         }
     }
