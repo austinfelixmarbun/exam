@@ -637,7 +637,18 @@
     "onSubmit": [],
     "isOverrideCancel": false,
     "onCancel": {},
-    "conditionalTitle": [],
+    "conditionalTitle": [
+        {
+            "title": "Edit Law Firm",
+            "conditions": [
+                {
+                    "property": "mode",
+                    "restriction": "EQ",
+                    "value": "edit"
+                }
+            ]
+        }
+    ],
     "persistData": false,
     "overrideSubmitBtnText": ""
 }

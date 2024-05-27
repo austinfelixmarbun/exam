@@ -239,7 +239,11 @@
                 "isSearched": false,
                 "delay": 1,
                 "isUseCustomApi": false,
-                "customApiQryPaging": ""
+                "customApiQryPaging": "",
+                "deleteObj": {
+                    "deleteEnvi": "FoundationR3Url_svc",
+                    "deleteApiPath": "/v1/VendorEmp/DeleteVendorEmployeeLawFirm"
+                }
             },
             "id": "38ca2f0a-55c7-473b-a457-a3271070e1bf"
         }
