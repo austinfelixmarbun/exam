@@ -1244,7 +1244,7 @@ async function saveCustPersonalDetail(dicts: Record<string, any>, api: any, http
   custPersonalObj.VipNotes = dicts.formRaw.VipNotes;
   custPersonalObj.WnaCountryCode = dicts.formRaw.WnaCountryCode;
   custPersonalObj.RowVersion = dicts.RowVersionPersonal;
-  custPersonalObj.ParentCustId = dicts.formRaw.ParentCustId;
+  custPersonalObj.ParentCustId = dicts.formRaw.ParentCustId == "" ? 0 : dicts.formRaw.ParentCustId;
 
   await http.post(url, custPersonalObj, AdInsConstant.SpinnerOptions).toPromise().then(
     response => {
@@ -1263,6 +1263,7 @@ async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, ht
   custPersonalObj.BirthDt = dicts.BirthDt;
   custPersonalObj.BirthPlace = dicts.BirthPlace;
   custPersonalObj.CustFullName = dicts.CustName;
+  custPersonalObj.CustId = dicts.IdCust;
   custPersonalObj.CustPersonalId = dicts.CustPersonalId;
   custPersonalObj.Email1 = dicts.Email1;
   custPersonalObj.Email2 = dicts.Email2;
@@ -1294,7 +1295,8 @@ async function saveCustPersonalDetailV2(dicts: Record<string, any>, api: any, ht
   custPersonalObj.VipNotes = dicts.formRaw.VipNotes;
   custPersonalObj.WnaCountryCode = dicts.formRaw.WnaCountryCode;
   custPersonalObj.RowVersion = dicts.RowVersionPersonal;
-  custPersonalObj.ParentCustId = dicts.formRaw.ParentCustId;
+  custPersonalObj.ParentCustId = dicts.formRaw.ParentCustId == "" ? 0 : dicts.formRaw.ParentCustId;
+  custPersonalObj.CustApuPptObj.CustId = dicts.formRaw.IdCust;
   custPersonalObj.CustApuPptObj.IsEdd = dicts.formRaw.IsEdd;
   custPersonalObj.CustApuPptObj.MrCategory1TypeCode = dicts.formRaw.MrCategory1TypeCode;
   custPersonalObj.CustApuPptObj.MrCategory2TypeCode = dicts.formRaw.MrCategory2TypeCode;
