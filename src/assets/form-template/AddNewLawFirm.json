@@ -124,12 +124,23 @@
                             "Value": ""
                         },
                         {
-                            "Action": [],
+                            "Action": [
+                                {
+                                    "type": "setMinMaxDt",
+                                    "condition": [],
+                                    "listField": [
+                                        "MouEndDate"
+                                    ],
+                                    "minDt": "MouStartDate",
+                                    "maxDt": "",
+                                    "isRevertable": true
+                                }
+                            ],
                             "Type": "DATE",
                             "Label": "MOU Start Date",
                             "Variable": "MouStartDate",
                             "IsRequired": true,
-                            "IsCallback": false,
+                            "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
                             "IsEditable": true,
@@ -145,12 +156,23 @@
                             "Value": ""
                         },
                         {
-                            "Action": [],
+                            "Action": [
+                                {
+                                    "type": "setMinMaxDt",
+                                    "condition": [],
+                                    "listField": [
+                                        "MouStartDate"
+                                    ],
+                                    "minDt": "",
+                                    "maxDt": "MouEndDate",
+                                    "isRevertable": true
+                                }
+                            ],
                             "Type": "DATE",
                             "Label": "MOU End Date",
                             "Variable": "MouEndDate",
                             "IsRequired": true,
-                            "IsCallback": false,
+                            "IsCallback": true,
                             "IsReadonly": false,
                             "IsHide": false,
                             "IsEditable": true,
