@@ -68,9 +68,9 @@ export class RolePickNewService {
                     let roleObject = {
                         UserName: data.user,
                         Password: data.pwd,
-                        OfficeCode: item.OfficeCode,
-                        RoleCode: item.RoleCode,
-                        JobTitleCode: item.JobTitleCode,
+                        OfficeCode: item.RefUserRoles[0].OfficeCode,
+                        RoleCode: item.RefUserRoles[0].Roles[0].RoleCode,
+                        JobTitleCode: item.RefUserRoles[0].Roles[0].JobTitleCode,
                         RequestDateTime: item.BusinessDt,
                         RowVersion: "",
                         Ip: "",
@@ -81,7 +81,7 @@ export class RolePickNewService {
                         'IsLoading': "true"
                     });
                     let SpinnerOptions = { headers: SpinnerHeaders, withCredentials: true };
-                    this.http.post(this.UrlConstantNew.LoginByRoleV2, roleObject, SpinnerOptions).subscribe(
+                    this.http.post(this.UrlConstantNew.LoginByRole, roleObject, SpinnerOptions).subscribe(
                         (response) => {
                             //Cookie sudah diambil dari BE (Di set manual dulu)
     
