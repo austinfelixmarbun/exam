@@ -8,6 +8,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-category-add-edit',
@@ -27,16 +28,19 @@ export class AssetCategoryAddEditComponent implements OnInit {
   assetTypeName: string;
 
   readonly CancelLink: string = NavigationConstant.BACK_TO_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetTypeId"] != null) {
+        this.AssetTypeId = queryParams["AssetTypeId"];
       }
-      if (params["mode"] != null) {
-        this.pageType = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.pageType = queryParams["mode"];
       }
-      if (params["AssetCategoryId"] != null) {
-        this.AssetCategoryId = params["AssetCategoryId"];
+      if (queryParams["AssetCategoryId"] != null) {
+        this.AssetCategoryId = queryParams["AssetCategoryId"];
       }
     });
   }
@@ -76,7 +80,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddNewAssetCategory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     } else {
       this.acObj = this.result;
@@ -87,7 +91,7 @@ export class AssetCategoryAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetCategory, this.acObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_CATEGORY_PAGING],{ "AssetTypeId": this.acObj.AssetTypeId });
         });
     }
   }

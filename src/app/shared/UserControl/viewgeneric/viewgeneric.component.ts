@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Object } from 'core-js';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-viewgeneric',
@@ -16,9 +17,10 @@ export class ViewgenericComponent implements OnInit {
   getList: any;
   viewInfoObjList: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { 
+  constructor(private route: ActivatedRoute, private http: HttpClient, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.getList = params;
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.getList = queryParams;
     });
   }
 

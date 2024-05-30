@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in  `.angular-cli.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   navbarColor: '#E7EFF8',
   ChipperKeyLocalStorage: "AdInsFOU2020OKOK", // 256 bit atau 16 karakter
   ChipperKeyCookie: "AdInsFOU12345678", // 256 bit atau 16 karakter & harus sama dengan BE
@@ -12,6 +12,7 @@ export const environment = {
   isCore: true,
   SpinnerOnHttpPost: false,
   isPageFromService: true,
+  useSafeUrl: true,
 
   LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_CORE_DEV',

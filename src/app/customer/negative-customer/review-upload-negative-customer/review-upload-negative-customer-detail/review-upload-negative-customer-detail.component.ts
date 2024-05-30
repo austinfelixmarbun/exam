@@ -16,6 +16,7 @@ import { ClaimTaskService } from 'app/shared/claimTask.service';
 import { WorkflowApiObj } from 'app/shared/model/workflow-api-obj.model';
 import { UploadReviewCustomObj } from 'app/shared/model/upload-review-custom-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-review-upload-negative-customer-detail',
@@ -30,13 +31,16 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
   currentUserContext: CurrentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
   
   readonly CancelLink: string = NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private cookieService: CookieService, private claimTaskService: ClaimTaskService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["UploadNo"] != null) {
-        this.uploadNo = params["UploadNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["UploadNo"] != null) {
+        this.uploadNo = queryParams["UploadNo"];
       }
-      if (params["TaskListId"] != null) {
-        this.taskListId = params["TaskListId"];
+      if (queryParams["TaskListId"] != null) {
+        this.taskListId = queryParams["TaskListId"];
       }
     });
   }
@@ -67,7 +71,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
       response => {
         this.toastr.successMessage(response["Message"]);
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
       }); 
       }
     );
@@ -81,7 +85,7 @@ export class ReviewUploadNegativeCustomerDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.UploadReviewV2, uploadObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CUST_NEG_RVW_UPLOAD_PAGING],{});
         }
       );
   }

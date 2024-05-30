@@ -7,6 +7,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-journal-item-value',
@@ -38,13 +39,15 @@ export class JournalItemValueComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private toastr: NGXToastrService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(
       params => {
-        if (params['JrMGroupId'] != null) {
-          this.JrMGroupId = +params['JrMGroupId'];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams['JrMGroupId'] != null) {
+          this.JrMGroupId = +queryParams['JrMGroupId'];
         }
       }
     );
@@ -115,7 +118,7 @@ export class JournalItemValueComponent implements OnInit {
       this.http.post<any>(this.UrlConstantNew.SaveJrMItemValue, request, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage('Success !');
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.JOURNAL_MEDIA_GROUP], { JrMHeaderId: this.JrMHeaderId })
         },
         error => {
           console.log(error);

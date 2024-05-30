@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'member-app-business-unit',
@@ -18,9 +19,10 @@ export class MemberBusinessUnitComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
   readonly CancelLink: string = NavigationConstant.ORG_BZ_UNIT;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew){
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService){
     this.route.queryParams.subscribe(params => {
-      this.RefBizUnitId = params["RefBizUnitId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefBizUnitId = queryParams["RefBizUnitId"];
   })
   }
 

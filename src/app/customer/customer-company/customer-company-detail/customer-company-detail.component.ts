@@ -22,6 +22,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-company-detail',
@@ -67,13 +68,15 @@ export class CustomerCompanyDetailComponent implements OnInit {
     private fb: FormBuilder,
     private cookieService: CookieService,
     private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService,
     private newCustService: NewCustSetData) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
     });
   }
@@ -233,10 +236,10 @@ export class CustomerCompanyDetailComponent implements OnInit {
 
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
     }
     else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
     }
   }
 }

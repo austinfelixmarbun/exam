@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ho-info',
@@ -14,9 +15,11 @@ export class HoInfoComponent implements OnInit {
   viewSupplierObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   viewSurveyorObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams['VendorId'];
     });
   }
 

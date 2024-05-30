@@ -6,6 +6,7 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ref-form-role-paging',
@@ -19,9 +20,10 @@ export class RefFormRolePagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefFormId = params["RefFormId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefFormId = queryParams["RefFormId"];
     })
   }
 

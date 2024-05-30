@@ -25,6 +25,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { String } from 'typescript-string-operations';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-job-data-professional',
@@ -118,13 +119,17 @@ export class JobDataProfessionalComponent implements OnInit {
   copyCustomerAddrFrom: any;
   listCustAddr: Array<ResListCustAddrObj> = new Array<ResListCustAddrObj>();
 
-  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private addressService: AddressService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private addressService: AddressService, private UrlConstantNew: UrlConstantNew, 
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
+      if (queryParams["IdCustPersonal"] != null) {
+        this.IdCustPersonal = queryParams["IdCustPersonal"];
       }
     });
   }

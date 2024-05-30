@@ -16,6 +16,7 @@ import { CustPersonalObj } from 'app/shared/model/cust-personal-obj.model';
 import { CustObj } from 'app/shared/model/cust-obj.model';
 import { UcLookupObj } from 'app/shared/model/uc-lookup-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
     selector: 'add-bank',
@@ -61,10 +62,13 @@ export class BankAddComponent implements OnInit {
     responseCountry: any;
 
     readonly CancelLink: string = NavigationConstant.CS_BANK_PAGING;
-    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private http: HttpClient, private fb: FormBuilder) {
+    constructor(private toastr: NGXToastrService, private router: Router, private route: ActivatedRoute, 
+      private UrlConstantNew: UrlConstantNew, private http: HttpClient, private fb: FormBuilder,
+      private ngxRouter: NgxRouterService) {
         this.route.queryParams.subscribe((params) => {
-            this.refBankId = params["RefBankId"];
-            this.mode = params["mode"];
+            const queryParams = this.ngxRouter.getQueryParams(params);
+            this.refBankId = queryParams["RefBankId"];
+            this.mode = queryParams["mode"];
 
             if (this.mode == "edit") {
                 var tempCrit = new CriteriaObj();
@@ -178,7 +182,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.EditRefBank, this.bankObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
-                    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
+                    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_BANK_PAGING],{});
                     this.toastr.successMessage(response['message']);
                 });
         }
@@ -190,7 +194,7 @@ export class BankAddComponent implements OnInit {
 
             this.http.post(URLConstant.AddRefBankAsync, this.bankObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
                 this.toastr.successMessage(response['message']);
-                AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_BANK_PAGING],{});
+                AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_BANK_PAGING],{});
             });
         }
     }

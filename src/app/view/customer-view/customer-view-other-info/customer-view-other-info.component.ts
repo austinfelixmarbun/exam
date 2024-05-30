@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-other-info',
@@ -16,10 +17,11 @@ export class CustomerViewOtherInfoComponent implements OnInit {
   IsReady: boolean = false;
 
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+    private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
   }

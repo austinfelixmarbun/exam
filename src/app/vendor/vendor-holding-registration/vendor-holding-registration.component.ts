@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { VendorService } from '../vendor.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-holding-registration',
@@ -24,9 +25,11 @@ export class VendorHoldingRegistrationComponent implements OnInit {
   
   readonly EditLink: string = NavigationConstant.VENDOR_HOLDING_DETAIL;
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private route: ActivatedRoute, private vendorService: VendorService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private vendorService: VendorService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
     });
    }
 

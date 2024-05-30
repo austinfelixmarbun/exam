@@ -17,6 +17,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { CustGrpObj } from 'app/shared/model/cust-grp-obj.model';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-personal-detail',
@@ -69,13 +70,16 @@ export class CustomerPersonalDetailComponent implements OnInit {
     IsAffiliateWithMf: [false],
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, 
+    private newCustService: NewCustSetData, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
     });
 
@@ -291,9 +295,9 @@ export class CustomerPersonalDetailComponent implements OnInit {
   }
   back() {
     if (this.Page != null) {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
     } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
     }
   }
 }

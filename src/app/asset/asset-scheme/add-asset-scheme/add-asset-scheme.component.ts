@@ -11,6 +11,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-add-asset-scheme',
@@ -37,18 +38,20 @@ export class AddAssetSchemeComponent implements OnInit {
     private toastr: NGXToastrService,
     private route: ActivatedRoute,
     private router: Router,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.pageType = params['param'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['param'] != null) {
+        this.pageType = queryParams['param'];
       } else {
         this.pageType = 'add';
       }
-      if (params['AssetSchmHId'] != null) {
-        this.AssetSchmHId = params['AssetSchmHId'];
+      if (queryParams['AssetSchmHId'] != null) {
+        this.AssetSchmHId = queryParams['AssetSchmHId'];
       }
-      if (params['AssetTypeId'] != null) {
-        this.AssetTypeId = params['AssetTypeId'];
+      if (queryParams['AssetTypeId'] != null) {
+        this.AssetTypeId = queryParams['AssetTypeId'];
       }
     });
   }
@@ -104,7 +107,7 @@ export class AddAssetSchemeComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddRangeAssetSchmD, AssetSchmObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": this.AssetSchmHId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_SCHM_MBR_DETAIL],{ "AssetSchmHId": this.AssetSchmHId });
       }
     );
   }

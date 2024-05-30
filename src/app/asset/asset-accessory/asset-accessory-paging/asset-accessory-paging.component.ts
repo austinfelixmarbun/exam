@@ -7,6 +7,7 @@ import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-accessory-paging',
@@ -19,10 +20,11 @@ export class AssetAccessoryPagingComponent implements OnInit {
   critObj: CriteriaObj = new CriteriaObj();
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetTypeId"] != null) {
+        this.AssetTypeId = queryParams["AssetTypeId"];
       }
     });
   }

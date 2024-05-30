@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-scheme-member-paging',
@@ -26,9 +27,10 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.VERIF_QA_SCHM_MBR_ADD;
   readonly CancelLink: string = NavigationConstant.VERIF_QA_SCHM_PAGING;
   constructor(private router: Router, private route: ActivatedRoute,
-    private http: HttpClient, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew) {
+    private http: HttpClient, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfSchemeHId = params["VerfSchemeHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfSchemeHId = queryParams["VerfSchemeHId"];
     })
   }
 
@@ -52,7 +54,7 @@ export class VerificationQuestionSchemeMemberPagingComponent implements OnInit {
   }
 
   Edit(item) {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_SCHM_MBR_EDIT],{ "VerfSchemeHId": this.VerfSchemeHId, "VerfSchemeDId": item.VerfSchemeDId, "VerfQuestionGrpHId": item.VerfQuestionGrpHId });
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_SCHM_MBR_EDIT],{ "VerfSchemeHId": this.VerfSchemeHId, "VerfSchemeDId": item.VerfSchemeDId, "VerfQuestionGrpHId": item.VerfQuestionGrpHId });
   }
 
   DeleteData(VerfSchemeDId) {

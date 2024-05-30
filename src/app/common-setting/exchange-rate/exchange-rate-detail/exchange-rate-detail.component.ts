@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -40,10 +41,12 @@ export class ExchangeRateDetailComponent implements OnInit {
     private toastr: NGXToastrService,
     private fb: FormBuilder,
     private cookieService: CookieService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["RefCurrId"] != null) {
-        this.RefCurrId = params["RefCurrId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["RefCurrId"] != null) {
+        this.RefCurrId = queryParams["RefCurrId"];
       }
     });
   }
@@ -89,7 +92,7 @@ export class ExchangeRateDetailComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddExchangeRate, this.reqExchangeRateObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_EXCHANGE_RATE_PAGING],{"RefCurrId":this.RefCurrId});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_EXCHANGE_RATE_PAGING],{"RefCurrId":this.RefCurrId});
         }
       );
     }

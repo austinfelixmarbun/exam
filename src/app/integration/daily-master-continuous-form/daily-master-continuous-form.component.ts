@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -26,9 +27,10 @@ export class DailyMasterContinuousFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private http: HttpClient, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew) {
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.Type = params["Type"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.Type = queryParams["Type"];
       if (this.Type == this.TypeSingle) {
         this.DateForm.get("RequestDt").setValidators(Validators.required);
         this.DateForm.get("RequestDt").updateValueAndValidity();

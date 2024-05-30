@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -19,10 +20,12 @@ export class VendorHoRegistrationComponent implements OnInit {
   MrVendorCategoryCodeParam: string = "";
 
   readonly EditLink: string = NavigationConstant.VENDOR_HO_DETAIL;
-  constructor(private route: ActivatedRoute, private router: Router, private vendorService: VendorService) { 
+  constructor(private route: ActivatedRoute, private router: Router, private vendorService: VendorService,
+    private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
-      this.MrVendorCategoryCodeParam = params['MrVendorCategoryCode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
+      this.MrVendorCategoryCodeParam = queryParams['MrVendorCategoryCode'];
     });
   }
 
@@ -49,10 +52,10 @@ export class VendorHoRegistrationComponent implements OnInit {
 
   Back() {
     if(this.MrVendorCategoryCode == "CRD_INSCO_HO"){
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_PAGING]);
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CREDIT_INS_PAGING]);
     }
     else{
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCodeParam });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCodeParam });
     }
   }
 }

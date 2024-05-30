@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ho-bank-info',
@@ -12,9 +13,11 @@ export class HoBankInfoComponent implements OnInit {
 VendorId: any;
 ListData : any = new Array();
 
-  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams['VendorId'];
     });
   }
 

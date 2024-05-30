@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -62,20 +63,22 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     private cookieService: CookieService,
     private claimTaskService: ClaimTaskService, 
     private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService,
     private adInsHelperService: AdInsHelperService
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["CustDataTrxId"] != null) {
-        this.CustDataTrxId = params["CustDataTrxId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustDataTrxId"] != null) {
+        this.CustDataTrxId = queryParams["CustDataTrxId"];
       }
-      if (params["CustNo"] != null) {
-        this.CustNo = params["CustNo"];
+      if (queryParams["CustNo"] != null) {
+        this.CustNo = queryParams["CustNo"];
       }
-      if (params["WfTaskListId"] != null) {
-        this.WfTaskListId = params["WfTaskListId"];
+      if (queryParams["WfTaskListId"] != null) {
+        this.WfTaskListId = queryParams["WfTaskListId"];
       }
-      if (params["SubjectTypeDescr"] != null) {
-        this.SubjectType = params["SubjectTypeDescr"];
+      if (queryParams["SubjectTypeDescr"] != null) {
+        this.SubjectType = queryParams["SubjectTypeDescr"];
       }
     });
     this.StepIdx = 1;
@@ -183,7 +186,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
       if (this.StepIdx == this.CustPersonalStep["FIN"]) {
         // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
       }
       else {
         this.StepIdx++;
@@ -193,7 +196,7 @@ export class CustomerUpdateMasterDetailComponent implements OnInit {
     else {
       if (this.StepIdx == this.CustCompanyStep["LEGAL"]) {
         // this.router.navigate(["/Customer/UpdateDataCustomer/Paging"]);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_UPDATE_DATA_PAGING], {});
       }
       else {
         this.StepIdx++;

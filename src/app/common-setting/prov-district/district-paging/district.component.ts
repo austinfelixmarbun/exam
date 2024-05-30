@@ -8,6 +8,7 @@ import { RefProvDistrictObj } from 'app/shared/model/ref-prov-district-obj.model
 import { HttpClient } from '@angular/common/http';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 
@@ -29,11 +30,13 @@ export class DistrictComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.CS_REF_PROVINCE_PAGING;
   readonly AddLink: string = NavigationConstant.CS_DISTRICT_DETAIL;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.getUrl = this.UrlConstantNew.GetRefProvDistrictById;
     this.route.queryParams.subscribe(params => {
-      if (params['refProvDistrictId'] != null) {
-        this.parentId = params['refProvDistrictId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['refProvDistrictId'] != null) {
+        this.parentId = queryParams['refProvDistrictId'];
       }
     });
   }

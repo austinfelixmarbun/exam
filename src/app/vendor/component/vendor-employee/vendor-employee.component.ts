@@ -17,6 +17,7 @@ import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-employee',
@@ -73,20 +74,24 @@ export class VendorEmployeeComponent implements OnInit {
     IsNpwpExist: [false]
   });
 
-  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private http: HttpClient, 
+    private route: ActivatedRoute, private toastr: NGXToastrService, private wizard: WizardComponent, 
+    private cookieService: CookieService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
-      if (params["VendorEmpId"] != null) {
-        this.VendorEmpId = params["VendorEmpId"];
+      if (queryParams["VendorEmpId"] != null) {
+        this.VendorEmpId = queryParams["VendorEmpId"];
         this.mode = "edit";
       }
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
-      if (params["MrVendorCategoryCode"] != null) {
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      if (queryParams["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
       }
     });
   }

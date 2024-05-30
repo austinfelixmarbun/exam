@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -81,21 +82,23 @@ export class FundingCompanyAddEditComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
       this.route.queryParams.subscribe(params => {
-        if (params["MrVendorCategoryCode"] != null) {
-          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
         }
-        if(params["VendorId"] != null){
-          this.VendorId = params['VendorId'];
-        }
-
-        if(params["FundCoyCode"] != null){
-          this.VendorCode = params['FundCoyCode'];
+        if(queryParams["VendorId"] != null){
+          this.VendorId = queryParams['VendorId'];
         }
 
-        if (params['mode'] != null) {
-          this.mode = params['mode'];
+        if(queryParams["FundCoyCode"] != null){
+          this.VendorCode = queryParams['FundCoyCode'];
+        }
+
+        if (queryParams['mode'] != null) {
+          this.mode = queryParams['mode'];
         }
 
         console.log("ini vendor category code:", this.MrVendorCategoryCode)
@@ -452,14 +455,14 @@ export class FundingCompanyAddEditComponent implements OnInit {
         this.http.post<any>(URLConstant.EditVendorFundingCoy, formDataEdit).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
           });
       }
       else{
         this.http.post<any>(URLConstant.AddVendorFundingCoy, formDataAdd).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
           });
       }
 
@@ -469,7 +472,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
 }
 
   back(){
-    AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
+    AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
   }
   addVendor(){
     if (this.FormUtama.valid) {
@@ -520,7 +523,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
         this.http.post(URLConstant.EditVendorFundingCoy, formDataEdit).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
           });
       }
       else{
@@ -535,7 +538,7 @@ export class FundingCompanyAddEditComponent implements OnInit {
         this.http.post<any>(URLConstant.AddVendorFundingCoy, formDataAdd,  AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_FUNDING_COY_PAGING]);
           });
       }
 

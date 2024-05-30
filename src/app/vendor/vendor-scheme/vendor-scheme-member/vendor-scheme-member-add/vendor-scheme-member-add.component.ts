@@ -9,6 +9,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-scheme-member-add',
@@ -22,10 +23,12 @@ export class VendorSchemeMemberAddComponent implements OnInit {
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.VENDOR_SCHM_MBR;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router, public toastr: ToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorSchmId = params['VendorSchmId'];
-      this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorSchmId = queryParams['VendorSchmId'];
+      this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
     });
   }
 
@@ -65,7 +68,7 @@ export class VendorSchemeMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddVendorSchmMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.success(response["message"], 'Success!');
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_SCHM_MBR],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VENDOR_SCHM_MBR],{ "VendorSchmId" : this.VendorSchmId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

@@ -549,6 +549,66 @@ export const CONTENT_ROUTES: Routes = [
     }
   },
   {
+    path: 'ViewAssetSelling',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './AssetSellingModule'
+      })
+        .then(m => m.AssetSellingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'ViewPaymentWo',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './PaymentWoModule'
+      })
+        .then(m => m.PaymentWoModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'ViewTermination',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './TerminationModule'
+      })
+        .then(m => m.TerminationModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'View',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './ViewSettingModule'
+      })
+        .then(m => m.ViewSettingModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
+    path: 'ViewPaymentOut',
+    loadChildren: () => {
+      return loadRemoteModule({
+        type: 'module',
+        remoteEntry: envi.PayOutR3Web + '/remoteEntry.js',
+        exposedModule: './PayoutModule'
+      })
+        .then(m => m.PayoutModule)
+        .catch(e => import('app/error-page/error-page.module').then(m => m.ErrorPageModule))
+    }
+  },
+  {
     path: 'Termination',
     loadChildren: () => {
       return loadRemoteModule({

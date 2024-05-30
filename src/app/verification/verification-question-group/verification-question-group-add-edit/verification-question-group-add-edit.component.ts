@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-group-add-edit',
@@ -20,10 +21,12 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
   isActive: boolean = true;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfQuestionGrpHId = queryParams["VerfQuestionGrpHId"];
+      this.mode = queryParams["mode"];
       if (this.mode != "edit")
         this.mode = "Add";
     })
@@ -61,7 +64,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
         });
     }
     else {
@@ -69,7 +72,7 @@ export class VerificationQuestionGroupAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddVerfQuestionGrpH, this.verfQuestionGrpHObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_GRP_PAGING],{});
         });
     }
   }

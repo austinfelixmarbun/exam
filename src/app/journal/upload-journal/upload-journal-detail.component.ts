@@ -11,6 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-upload-journal-detail',
   templateUrl: './upload-journal-detail.component.html'
@@ -73,17 +74,19 @@ export class UploadJournalDetailComponent implements OnInit {
     private cookieService: CookieService,
     private route: ActivatedRoute,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
 
     this.route.queryParams.subscribe(
       params => {
-        if (params['JrSourceFileId'] != null) {
-          this.JrSourceFileId = +params['JrSourceFileId'];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams['JrSourceFileId'] != null) {
+          this.JrSourceFileId = +queryParams['JrSourceFileId'];
         }
-        if (params['FileCode'] != null) {
-          this.FileCode = params['FileCode'];
+        if (queryParams['FileCode'] != null) {
+          this.FileCode = queryParams['FileCode'];
         }
       }
     );
@@ -394,11 +397,11 @@ export class UploadJournalDetailComponent implements OnInit {
       if (xhr.responseText.indexOf("Error:") >= 0) {
         var errMessage = JSON.parse(xhr.responseText)
         this.toastr.errorMessage(errMessage)
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
       }
       else if (xhr.responseText.indexOf("Success") >= 0) {
         this.toastr.successMessage('File was uploaded successfully');
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.UPLOAD_JOURNAL_FILE_PAGING], {})
       }
     };
     xhr.send(formData);

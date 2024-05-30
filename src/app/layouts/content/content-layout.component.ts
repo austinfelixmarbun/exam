@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -21,11 +22,14 @@ export class ContentLayoutComponent implements OnInit {
 
     unsubscribe: any;
     token: string = null;
-    constructor(public translate: TranslateService, private strService: StorageService, private route: ActivatedRoute, private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+    constructor(public translate: TranslateService, private strService: StorageService, private route: ActivatedRoute, 
+        private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+        private ngxRouter: NgxRouterService) {
         const browserLang: string = translate.getBrowserLang();
         this.route.queryParams.subscribe(params => {
-            if (params['Token'] != null && params['Token'] != "null") {
-                this.token = params['Token'];
+            const queryParams = this.ngxRouter.getQueryParams(params);
+            if (queryParams['Token'] != null && queryParams['Token'] != "null") {
+                this.token = queryParams['Token'];
                 AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, this.token);
             }
         });
@@ -72,6 +76,15 @@ export class ContentLayoutComponent implements OnInit {
                 AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                 AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
                 AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
+                if(typeof response["Identity_JWT"] === 'string')
+                {
+                    AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+                }
+                else
+                {
+                    AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");                    
+                }
+                
                 AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
                 await this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(

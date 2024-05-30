@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-ho-contact-person-info',
@@ -14,9 +15,11 @@ export class HoContactPersonInfoComponent implements OnInit {
   VendorId: any;
   resultData: any;
   
-  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute,  private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams['VendorId'];
     });
   }
 

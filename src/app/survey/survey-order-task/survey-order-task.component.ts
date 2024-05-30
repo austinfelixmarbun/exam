@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-survey-order-task',
@@ -42,10 +43,12 @@ export class SurveyOrderTaskComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   constructor(private fb: FormBuilder, private modalService: NgbModal,
-    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["SrvyOrderId"] != null) {
-        this.SrvyOrderId = params["SrvyOrderId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["SrvyOrderId"] != null) {
+        this.SrvyOrderId = queryParams["SrvyOrderId"];
       }
     });
   }
@@ -89,7 +92,7 @@ export class SurveyOrderTaskComponent implements OnInit {
     this.http.post(this.UrlConstantNew.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SRVY_PAGING],{ });
       }
     );
   }

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, FormArray, FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -57,10 +58,12 @@ export class CustAttrListComponent implements OnInit {
   constructor(private http: HttpClient,
     private fb: FormBuilder,
     private route: ActivatedRoute, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.CustId = params["Page"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.CustId = queryParams["Page"];
       }
     });
   }

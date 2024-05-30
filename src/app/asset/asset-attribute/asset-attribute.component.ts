@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-asset-attribute',
   templateUrl: './asset-attribute.component.html',
@@ -24,10 +25,12 @@ export class AssetAttributeComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.BACK_TO_DETAIL;
   readonly CancelLink: string = NavigationConstant.ASSET_CONFIG_PAGING;
-  constructor(private route: ActivatedRoute, private http:HttpClient, private toastr : NGXToastrService, private router: Router, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http:HttpClient, private toastr : NGXToastrService, private router: Router, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["AssetTypeId"] != null) {
-        this.AssetTypeId = params["AssetTypeId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["AssetTypeId"] != null) {
+        this.AssetTypeId = queryParams["AssetTypeId"];
       }
     });
   }
@@ -46,7 +49,7 @@ export class AssetAttributeComponent implements OnInit {
   }
 
   edit(ev) {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_ATTR_DETAIL],{ "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit" });
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_ATTR_DETAIL],{ "AssetTypeId": this.AssetTypeId,"AssetAttrId": ev.RowObj.AssetAttrId, mode:"edit" });
   }
 
 }

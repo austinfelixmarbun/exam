@@ -5,6 +5,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-coy-other',
@@ -19,13 +20,15 @@ export class CustomerViewCoyOtherComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     var custObj = { "CustId": this.CustId };
@@ -34,7 +37,7 @@ export class CustomerViewCoyOtherComponent implements OnInit {
         this.responseCustAttr = response[CommonConstant.ReturnObj];
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
   }

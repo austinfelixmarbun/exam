@@ -12,6 +12,7 @@ import { FormBuilder } from '@angular/forms';
 import { UploadService } from 'app/shared/upload/upload.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-upload-setting-edit',
@@ -58,18 +59,20 @@ export class UploadSettingEditComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private uploadService: UploadService, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.tempRefRole = new Array();
     this.route.queryParams.subscribe(params => {
-      if (params['param'] != null) {
-        this.pageType = params['param'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['param'] != null) {
+        this.pageType = queryParams['param'];
       } else {
         this.pageType = 'add';
       }
-      if (params['uploadTypeId'] != null) {
-        this.uploadTypeId = params['uploadTypeId'];
+      if (queryParams['uploadTypeId'] != null) {
+        this.uploadTypeId = queryParams['uploadTypeId'];
       }
 
       if (this.pageType === 'edit') {

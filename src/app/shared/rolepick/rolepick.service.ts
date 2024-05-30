@@ -89,6 +89,14 @@ export class RolePickService {
                         AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
                         AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
                         AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+                        if(typeof response["Identity_JWT"] === 'string')
+                        {
+                            AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+                        }
+                        else
+                        {
+                            AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
+                        }
                         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
                         this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(

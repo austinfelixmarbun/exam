@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
@@ -11,13 +12,14 @@ export class NotifEngineTemplateViewComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   TemplateCode: string = "";
   TemplateVersion: number;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TemplateCode"] != null) {
-        this.TemplateCode = params["TemplateCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TemplateCode"] != null) {
+        this.TemplateCode = queryParams["TemplateCode"];
       }
-      if (params["TemplateVersion"] != null) {
-        this.TemplateVersion = params["TemplateVersion"];
+      if (queryParams["TemplateVersion"] != null) {
+        this.TemplateVersion = queryParams["TemplateVersion"];
       }
     });
    }

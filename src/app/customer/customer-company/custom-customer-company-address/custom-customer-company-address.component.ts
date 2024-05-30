@@ -11,6 +11,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-custom-customer-company-address',
@@ -27,10 +28,13 @@ export class CustomCustomerCompanyAddressComponent implements OnInit {
   IdCust: number = 0;
   CustNo: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService,private UrlConstantNew: UrlConstantNew) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, 
+    private toastr: NGXToastrService,private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }
@@ -55,7 +59,7 @@ export class CustomCustomerCompanyAddressComponent implements OnInit {
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
         }
       }
     )

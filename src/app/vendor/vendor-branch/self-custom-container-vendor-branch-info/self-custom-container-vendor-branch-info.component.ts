@@ -14,6 +14,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqRefMasterByTypeCodeAndMasterCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-master-cod-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-self-custom-container-vendor-branch-info',
@@ -41,10 +42,13 @@ export class SelfCustomContainerVendorBranchInfoComponent implements OnInit {
 
   isFormReady: boolean = false; 
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
       this.route.queryParams.subscribe(params => {
-        if (params["VendorId"] != null) {
-          this.VendorId = params["VendorId"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["VendorId"] != null) {
+          this.VendorId = queryParams["VendorId"];
         }
       });
     }

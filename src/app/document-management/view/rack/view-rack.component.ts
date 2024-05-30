@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-view-rack',
@@ -19,15 +20,17 @@ export class ViewRackComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['RackCode'] != null) {
-        this.RackCode = params['RackCode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['RackCode'] != null) {
+        this.RackCode = queryParams['RackCode'];
       }
-      if (params['CabinetCode'] != null) {
-        this.CabinetCode = params['CabinetCode'];
+      if (queryParams['CabinetCode'] != null) {
+        this.CabinetCode = queryParams['CabinetCode'];
       }
     });
 

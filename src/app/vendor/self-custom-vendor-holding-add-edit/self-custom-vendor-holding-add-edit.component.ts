@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { FormDropDownListService } from '@adins/ucform';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -28,14 +29,15 @@ export class SelfCustomVendorHoldingAddEditComponent implements OnInit {
   Form: FormGroup = this.fb.group({});
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
-    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
       }
 
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
     

@@ -9,6 +9,7 @@ import { FormDropDownListService } from '@adins/ucform';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-self-custom-vendor-ho-add-edit',
@@ -28,14 +29,15 @@ export class SelfCustomVendorHoAddEditComponent implements OnInit {
   Form: FormGroup = this.fb.group({});
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
-    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
       }
 
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
 

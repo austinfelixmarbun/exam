@@ -23,6 +23,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { ReqRefAttrByAttrGroupObj } from 'app/shared/model/request/ref-attr/req-ref-attr-by-attr-group-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-coll-company-add-edit',
@@ -61,14 +62,17 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
   BpbkAgingDefaultVal: number;
   DaysAPDuePaymentAfterGoLiveDefaultVal: number;
 
-  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private regexService: RegexService, private fb: FormBuilder, private router: Router, 
+    private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private cookieService: CookieService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-        this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["MrVendorCategoryCode"] != null) {
+        this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
       }
-      this.VendorId = params['VendorId'];
-      if (params['mode'] != null) {
-        this.mode = params['mode'];
+      this.VendorId = queryParams['VendorId'];
+      if (queryParams['mode'] != null) {
+        this.mode = queryParams['mode'];
       }
     });
   }
@@ -715,7 +719,7 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       this.http.post<GenericObj>(this.UrlConstantNew.EditVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "mode": "edit", "MrVendorCategoryCode": this.MrVendorCategoryCode });
         });
     }
     else {
@@ -723,16 +727,16 @@ export class VendorCollCompanyAddEditComponent implements OnInit {
       this.http.post<GenericObj>(this.UrlConstantNew.AddVendorBranch, this.vendorBranchObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_COLL_COMPANY_REG], { "VendorId": response.Id, "MrVendorCategoryCode": this.MrVendorCategoryCode });
         });
     }
   }
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": this.VendorId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_BRANCH_REG], { "VendorId": this.VendorId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
     } else {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING], { "MrVendorCategoryCode": this.MrVendorCategoryCode });
     }
   }
 

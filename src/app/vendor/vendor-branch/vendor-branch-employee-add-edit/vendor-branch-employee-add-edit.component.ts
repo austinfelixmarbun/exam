@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
@@ -13,11 +14,12 @@ export class VendorBranchEmployeeAddEditComponent implements OnInit {
   IsReload: boolean;
 
   readonly CancelLink: string = NavigationConstant.VENDOR_BRANCH_EMP_PAGING;
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
-      if(params['VendorEmpId'] != null){
-        this.objPassing["VendorEmpId"] = params['VendorEmpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
+      if(queryParams['VendorEmpId'] != null){
+        this.objPassing["VendorEmpId"] = queryParams['VendorEmpId'];
       }
     });
   }

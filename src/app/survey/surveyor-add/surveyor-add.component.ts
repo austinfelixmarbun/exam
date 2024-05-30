@@ -13,6 +13,7 @@ import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-surveyor-add',
@@ -61,12 +62,14 @@ export class SurveyorAddComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params['SurveyorId'] != null) {
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['SurveyorId'] != null) {
         this.isEdit = true;
         this.pageType = "edit";
-        this.surveyorId = params['SurveyorId'];
+        this.surveyorId = queryParams['SurveyorId'];
       }
       else {
         this.isEdit = false;
@@ -215,7 +218,7 @@ export class SurveyorAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SURVEYOR_PAGING], {});
         }
       )
     }
@@ -225,7 +228,7 @@ export class SurveyorAddComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditSurveyor, this.surveyorObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response['message']);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEYOR_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SURVEYOR_PAGING], {});
         }
       )
     }

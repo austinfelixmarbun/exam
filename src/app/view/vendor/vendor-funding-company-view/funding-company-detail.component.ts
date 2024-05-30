@@ -1,4 +1,5 @@
 
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -69,12 +70,14 @@ export class FundingCompanyDetailComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
+    private ngxRouter: NgxRouterService,
     private childFormService: FundingCompanyService,
     private UrlConstantNew: UrlConstantNew
   ) {
-    this.route.queryParams.subscribe((params) =>{
-        this.VendorId = params["VendorId"];
-        this.VendorCode = params["FundCoyCode"];
+    this.route.queryParams.subscribe((params) => {
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        this.VendorId = queryParams["VendorId"];
+        this.VendorCode = queryParams["FundCoyCode"];
     })
    }
 

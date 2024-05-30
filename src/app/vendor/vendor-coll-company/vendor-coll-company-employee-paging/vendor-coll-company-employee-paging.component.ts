@@ -6,6 +6,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-coll-company-employee-paging',
@@ -19,10 +20,12 @@ export class VendorCollCompanyEmployeePagingComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_PAGING;
   readonly AddLink: string = NavigationConstant.VENDOR_COLL_COMPANY_EMP_DETAIL;
-  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private http : HttpClient, private UrlConstantNew: UrlConstantNew, 
+    private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
   }

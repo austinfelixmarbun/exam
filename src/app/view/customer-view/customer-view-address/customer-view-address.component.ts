@@ -8,6 +8,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-address',
@@ -31,6 +32,7 @@ export class CustomerViewAddressComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
+    private ngxRouter: NgxRouterService,
     private fb: FormBuilder, 
     private UrlConstantNew: UrlConstantNew
   ) {
@@ -38,8 +40,9 @@ export class CustomerViewAddressComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     this.http.post(this.UrlConstantNew.GetListCustAddrByCustIdForCustomerPersonalView, { Id: this.CustId }).subscribe(
@@ -49,7 +52,7 @@ export class CustomerViewAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.ERROR], {});
       }
     );
     var custObj = new CustObj();
@@ -78,7 +81,7 @@ export class CustomerViewAddressComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.ERROR], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.ERROR], {});
       }
     );
   }

@@ -9,6 +9,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-master-type-add-edit',
@@ -31,13 +32,16 @@ export class MasterTypeAddEditComponent implements OnInit {
   sandiBiModel: any;
   
 
-  constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, private http: HttpClient, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private location: Location, private spinner: NgxSpinnerService, 
+    private http: HttpClient, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.type = queryParams['mode'];
       }
-      if (params['efRoleId'] != null) {
-        this.refRoleId = params['refRoleId'];
+      if (queryParams['efRoleId'] != null) {
+        this.refRoleId = queryParams['refRoleId'];
       }
     });
   }

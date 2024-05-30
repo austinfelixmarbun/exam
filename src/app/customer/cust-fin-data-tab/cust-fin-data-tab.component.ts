@@ -17,6 +17,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-cust-fin-data-tab',
@@ -113,6 +114,7 @@ export class CustFinDataTabComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     if (this.MrCustTypeCode == CommonConstant.CustTypePersonal) {
@@ -122,8 +124,9 @@ export class CustFinDataTabComponent implements OnInit {
       this.isCalculated = true;
     }
     this.route.queryParams.subscribe(params => {
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
     });
   }

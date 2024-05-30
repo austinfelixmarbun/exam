@@ -14,6 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-notification-add-edit',
@@ -53,16 +54,19 @@ export class NotificationAddEditComponent implements OnInit {
   })
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.getHUrl = this.UrlConstantNew.GetNotificationHByNotificationHId;
     this.addUrl = this.UrlConstantNew.AddNotificationHAndD;
 
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
-      if (params["NotificationHId"] != null) {
-        this.notificationHId = params["NotificationHId"];
+      if (queryParams["NotificationHId"] != null) {
+        this.notificationHId = queryParams["NotificationHId"];
       }
     });
   }
@@ -181,7 +185,7 @@ export class NotificationAddEditComponent implements OnInit {
         this.http.post(this.addUrl, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_NOTIF],{ });
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_NOTIF],{ });
 
           }
         );

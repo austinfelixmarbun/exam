@@ -20,6 +20,7 @@ import { ResContractObj } from 'app/shared/model/response/pefindo/res-contract-o
 import { ResViewPefindoContractsObj } from 'app/shared/model/response/pefindo/res-view-pefindo-contracts-obj.model';
 import { ChartsObj } from 'app/shared/model/charts/charts-obj.model';
 import { ResPefindoContractForExportObj } from 'app/shared/model/response/pefindo/res-pefindo-contract-for-export-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-pefindo-view-contracts',
@@ -40,18 +41,20 @@ export class PefindoViewContractsComponent implements OnInit {
   MrCustTypeCode: string;
   CustObj: CustObj = new CustObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
 
-      if (params["MrCustTypeCode"] != null) {
-        this.MrCustTypeCode = params["MrCustTypeCode"];
+      if (queryParams["MrCustTypeCode"] != null) {
+        this.MrCustTypeCode = queryParams["MrCustTypeCode"];
       }
 
-      if (params["CustNo"] != null) {
-        this.CustNo = params["CustNo"];
+      if (queryParams["CustNo"] != null) {
+        this.CustNo = queryParams["CustNo"];
       }
     });
   }

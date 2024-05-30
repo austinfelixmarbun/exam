@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -9,10 +10,11 @@ import { ActivatedRoute } from '@angular/router';
 export class PefindoViewOthersComponent implements OnInit {
   TrxNo: string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
     });
   }

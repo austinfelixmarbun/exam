@@ -14,6 +14,7 @@ import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 
 @Component({
   selector: "app-org-mdl-struc-detail",
@@ -51,20 +52,22 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private http: HttpClient,
     private service: NGXToastrService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["mode"] != null) {
-        this.type = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["mode"] != null) {
+        this.type = queryParams["mode"];
       }
-      if (params["orgMdlId"] != null) {
-        this.orgMdlId = params["orgMdlId"];
+      if (queryParams["orgMdlId"] != null) {
+        this.orgMdlId = queryParams["orgMdlId"];
       }
-      if (params["orgMdlStrucId"] != null) {
-        this.orgMdlStrucId = params["orgMdlStrucId"];
+      if (queryParams["orgMdlStrucId"] != null) {
+        this.orgMdlStrucId = queryParams["orgMdlStrucId"];
       }
-      if (params["refBizUnitId"] != null) {
-        this.refBizUnitId = params["refBizUnitId"];
+      if (queryParams["refBizUnitId"] != null) {
+        this.refBizUnitId = queryParams["refBizUnitId"];
       }
     });
   }

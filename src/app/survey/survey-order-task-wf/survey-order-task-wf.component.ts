@@ -11,6 +11,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-survey-order-task-wf',
@@ -47,13 +48,15 @@ export class SurveyOrderTaskWfComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.SRVY_PAGING;
   readonly ViewLink: string = NavigationConstant.VIEW_SRVY_TASK;
   constructor(private fb: FormBuilder, private modalService: NgbModal,
-    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
-      if (params["TrxType"] != null) {
-        this.TrxType = params["TrxType"];
+      if (queryParams["TrxType"] != null) {
+        this.TrxType = queryParams["TrxType"];
       }
     });
   }
@@ -111,7 +114,7 @@ export class SurveyOrderTaskWfComponent implements OnInit {
     this.http.post(this.UrlConstantNew.SendSrvyOrder, this.SrvyOrderObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SRVY_PAGING],{ });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SRVY_PAGING],{ });
       }
     );
   }

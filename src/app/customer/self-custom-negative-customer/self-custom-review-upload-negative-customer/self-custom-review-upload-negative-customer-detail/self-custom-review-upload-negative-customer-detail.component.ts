@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClaimTaskService } from 'app/shared/claimTask.service';
@@ -16,11 +17,13 @@ export class SelfCustomReviewUploadNegativeCustomerDetailComponent implements On
 
   constructor(
     private claimTaskService: ClaimTaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ngxRouter: NgxRouterService
   ){
     this.route.queryParams.subscribe(params => {
-      if (params["TaskListId"] != null) {
-        this.taskListId = params["TaskListId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TaskListId"] != null) {
+        this.taskListId = queryParams["TaskListId"];
       }
 
     });

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -28,10 +29,12 @@ export class CoaEditDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: NGXToastrService,
     private http: HttpClient,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params['RefCoaId'] != null) {
-        this.refCoaId = params['RefCoaId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['RefCoaId'] != null) {
+        this.refCoaId = queryParams['RefCoaId'];
       }
     });
   }
@@ -60,7 +63,7 @@ export class CoaEditDetailComponent implements OnInit {
 
     this.http.post(this.UrlConstantNew.SubmitCoa, this.refCoaObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
-        this.router.navigate([NavigationConstant.CS_COA_PAGING]);
+        this.ngxRouter.navigate([NavigationConstant.CS_COA_PAGING], {});
         this.toastr.successMessage(response["Message"]);
       },
       (error) => {

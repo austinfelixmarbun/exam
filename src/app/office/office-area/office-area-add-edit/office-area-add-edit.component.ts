@@ -10,6 +10,7 @@ import { RefOfficeAreaObj } from 'app/shared/model/ref-office-area-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-area-add-edit',
@@ -25,10 +26,12 @@ export class OfficeAreaAddEditComponent implements OnInit {
   mode: string = "add";
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefOfficeAreaId = params["RefOfficeAreaId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefOfficeAreaId = queryParams["RefOfficeAreaId"];
+      this.mode = queryParams["mode"];
     })
   }
 
@@ -69,7 +72,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.OFFICE_AREA],{});
         });
     }
     else {
@@ -77,7 +80,7 @@ export class OfficeAreaAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefOfficeArea, this.refOfficeAreaObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.OFFICE_AREA],{});
         });
     }
   }

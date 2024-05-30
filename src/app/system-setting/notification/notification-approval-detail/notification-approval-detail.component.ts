@@ -13,6 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-notification-approval-detail',
@@ -31,10 +32,13 @@ export class NotificationApprovalDetailComponent implements OnInit {
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["NotificationHId"] != null) {
-        this.NotificationHId = params["NotificationHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["NotificationHId"] != null) {
+        this.NotificationHId = queryParams["NotificationHId"];
       }
 
     });
@@ -91,7 +95,7 @@ export class NotificationApprovalDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.EditNotificationH, this.notificationHObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.toastr.successMessage(resultForMsg + " " + response["Message"]);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SYSTEM_SETTING_NOTIF_APPRV], {});
       }
     );
   }

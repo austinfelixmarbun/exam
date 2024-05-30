@@ -12,6 +12,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -53,13 +54,15 @@ export class MasterAddEditComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.type = queryParams['mode'];
       }
-      if (params['RefMasterId'] != null) {
-        this.RefMasterId = params['RefMasterId'];
+      if (queryParams['RefMasterId'] != null) {
+        this.RefMasterId = queryParams['RefMasterId'];
       }
     });
   }
@@ -111,7 +114,7 @@ export class MasterAddEditComponent implements OnInit {
         //SAVE
         (response) => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_MASTER], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CS_MASTER], {});
         },
         (error) => {
           this.toastr.typeErrorCustom(error);
@@ -126,7 +129,7 @@ export class MasterAddEditComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response["Message"]);
           //this.location.back();
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CS_MASTER], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CS_MASTER], {});
           this.spinner.hide();
         },
         (error) => {

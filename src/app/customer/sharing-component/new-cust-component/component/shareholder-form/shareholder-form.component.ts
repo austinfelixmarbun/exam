@@ -21,6 +21,7 @@ import { NewCustSetData } from '../../NewCustSetData.Service';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { ActivatedRoute } from '@angular/router';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-shareholder-form',
@@ -50,10 +51,13 @@ export class ShareholderFormComponent implements OnInit {
     }
   }
   readonly CurrencyMaskPrct = CommonConstant.CurrencyMaskPrct;
-  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private cookieService: CookieService,  
+    private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private newCustService: NewCustSetData,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.ParentCustId = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.ParentCustId = queryParams["IdCust"];
       }
     });
   }

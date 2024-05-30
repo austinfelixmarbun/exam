@@ -41,6 +41,7 @@ import { ThirdPartyFormComponent } from '../component/third-party-form/third-par
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { String } from 'typescript-string-operations';
 import { ValidatorPattern } from '@adins/uc-show-errors/lib/model/validator-pattern.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-new-cust-personal-main-data',
@@ -91,10 +92,12 @@ export class NewCustPersonalMainDataComponent implements OnInit {
     private cookieService: CookieService,
     private thirdPartyUploadService: ThirdPartyUploadService,
     private route: ActivatedRoute, private newCustService: NewCustSetData, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
       this.route.queryParams.subscribe(params => {
-        if (params["From"] != null) {        
-          this.pageFrom = params["From"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["From"] != null) {        
+          this.pageFrom = queryParams["From"];
         }
       });
   }

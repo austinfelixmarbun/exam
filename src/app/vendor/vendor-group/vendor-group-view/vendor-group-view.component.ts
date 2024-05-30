@@ -7,6 +7,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -22,13 +23,15 @@ export class VendorGroupViewComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.VENDOR_GRP_MBR_ADD;
   CancelLink: string = NavigationConstant.VENDOR_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['VendorGrpId'] != null) {
-        this.VendorGrpId = params['VendorGrpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['VendorGrpId'] != null) {
+        this.VendorGrpId = queryParams['VendorGrpId'];
       }
-      if (params['MrVendorCategoryCode'] != null) {
-        this.MrVendorCategoryCode = params['MrVendorCategoryCode'];
+      if (queryParams['MrVendorCategoryCode'] != null) {
+        this.MrVendorCategoryCode = queryParams['MrVendorCategoryCode'];
       }
     });
 

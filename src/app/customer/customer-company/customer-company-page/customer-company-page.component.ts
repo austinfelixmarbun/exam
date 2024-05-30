@@ -18,6 +18,7 @@ import { CustFinDataTabComponent } from 'app/customer/cust-fin-data-tab/cust-fin
 import { CustAttrSectionComponent } from 'app/customer/cust-attr-section/cust-attr-section.component';
 import { CustomerViewHeaderCompanyComponent } from 'app/customer/customer-view/customer-view-header-company/customer-view-header-company.component';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-company-page',
@@ -48,17 +49,20 @@ export class CustomerCompanyPageComponent implements OnInit {
   SysConfigResultObj: ResSysConfigResultObj = new ResSysConfigResultObj()
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService, private CustSetData: NewCustSetData, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private cookieService: CookieService, private CustSetData: NewCustSetData, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["Page"] != null) {
-        this.Page = params["Page"];
+      if (queryParams["Page"] != null) {
+        this.Page = queryParams["Page"];
       }
-      if (params["From"] != null) {
-        this.From = params["From"];
+      if (queryParams["From"] != null) {
+        this.From = queryParams["From"];
       }
     });
   }
@@ -70,12 +74,12 @@ export class CustomerCompanyPageComponent implements OnInit {
   }
 
   back() {
-    AdInsHelper.RedirectUrl(this.router, [this.SetUrlBack()], {});
+    AdInsHelper.RedirectUrl(this.ngxRouter, [this.SetUrlBack()], {});
   }
 
   async ngOnInit(): Promise<void> {
     if (this.IdCust == null) {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
     }
     else {
       var custObj = { CustId: this.IdCust };

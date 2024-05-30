@@ -22,6 +22,7 @@ import { environment } from 'environments/environment';
 import { CustDocFileObj } from 'app/shared/model/cust-doc-file/cust-doc-file-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-new-cust-header',
@@ -60,22 +61,24 @@ export class NewCustHeaderComponent implements OnInit {
   constructor(
     private UrlConstantNew: UrlConstantNew,
     private cookieService: CookieService, private spinner: NgxSpinnerService,
-    private http: HttpClient, private router: Router, private route: ActivatedRoute, private toastr: NGXToastrService) {
+    private http: HttpClient, private router: Router, private route: ActivatedRoute, 
+    private ngxRouter: NgxRouterService, private toastr: NGXToastrService) {
     this.route.queryParams.subscribe(params => {
-      if (params["CustId"] != null) {
-        this.CustId = params["CustId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustId"] != null) {
+        this.CustId = queryParams["CustId"];
       }
-      if (params["CustType"] != null) {
-        this.CustType = params["CustType"];
+      if (queryParams["CustType"] != null) {
+        this.CustType = queryParams["CustType"];
       }
-      if (params["From"] != null) {
-        this.From = params["From"];
+      if (queryParams["From"] != null) {
+        this.From = queryParams["From"];
       }
-      if (params["CustPersonalFamilyId"] != null) {
-        this.CustPersonalFamilyId = params["CustPersonalFamilyId"];
+      if (queryParams["CustPersonalFamilyId"] != null) {
+        this.CustPersonalFamilyId = queryParams["CustPersonalFamilyId"];
       }
-      if (params["CustCompanyMgmntShrholderId"] != null) {
-        this.CustCompanyMgmntShrholderId = params["CustCompanyMgmntShrholderId"];
+      if (queryParams["CustCompanyMgmntShrholderId"] != null) {
+        this.CustCompanyMgmntShrholderId = queryParams["CustCompanyMgmntShrholderId"];
       }
     });
   }
@@ -155,19 +158,19 @@ export class NewCustHeaderComponent implements OnInit {
     }
     switch (this.From) {
       case CommonConstant.CustFromEditMainData:
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_EDIT_MAIN_DATA_PAGING], {});
         break;
       case CommonConstant.CustFromCustFamily:
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_FAMILY_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_FAMILY_PAGING], {});
         break;
       case CommonConstant.CustFromCustShareholder:
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_SHRHLDR_PAGING], {});
         break;
       case "CustGuarantor":
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_GUARANTOR_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_GUARANTOR_PAGING], {});
         break;
       default:
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PAGING], {});
         break;
     }
   }
@@ -228,8 +231,8 @@ export class NewCustHeaderComponent implements OnInit {
   redirectSaveEditMainData(custId: number) {
     if (this.CustDataMode == CommonConstant.CustMainDataModeCust) {
       let param = { "IdCust": custId, Page: 'Edit', From: this.From };
-      if (this.CustType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_PERSONAL_PAGE], param);
-      if (this.CustType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CUST_COY_PAGE], param);
+      if (this.CustType == CommonConstant.CustTypePersonal) AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_PERSONAL_PAGE], param);
+      if (this.CustType == CommonConstant.CustTypeCompany) AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CUST_COY_PAGE], param);
       return;
     }
     this.Cancel();

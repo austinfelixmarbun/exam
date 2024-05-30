@@ -17,6 +17,7 @@ import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -103,13 +104,16 @@ export class OfficeAddComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.OFFICE_PAGING;
   responseRefOfficeX: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.pageType = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.pageType = queryParams['mode'];
       }
-      if (params['RefOfficeId'] != null) {
-        this.RefOfficeId = params['RefOfficeId'];
+      if (queryParams['RefOfficeId'] != null) {
+        this.RefOfficeId = queryParams['RefOfficeId'];
       }
     });
   }
@@ -479,7 +483,7 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
 
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.OFFICE_PAGING], {});
         }
       );
     }
@@ -492,7 +496,7 @@ export class OfficeAddComponent implements OnInit {
         (response) => {
           this.toastr.successMessage(response['message']);
 
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.OFFICE_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.OFFICE_PAGING], {});
         }
       );
 

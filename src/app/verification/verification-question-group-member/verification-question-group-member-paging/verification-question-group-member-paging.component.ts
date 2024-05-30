@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-group-member-paging',
@@ -25,9 +26,11 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
   
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_PAGING;
   readonly AddLink: string = NavigationConstant.VERIF_QA_GRP_MBR_ADD;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfQuestionGrpHId = queryParams["VerfQuestionGrpHId"];
    })
   }
 
@@ -51,7 +54,7 @@ export class VerificationQuestionGroupMemberPagingComponent implements OnInit {
 
   Edit(item)
   {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_EDIT],{ "VerfQuestionGrpDId": item.VerfQuestionGrpDId, "VerfQuestionGrpHId" : this.VerfQuestionGrpHId});
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_GRP_MBR_EDIT],{ "VerfQuestionGrpDId": item.VerfQuestionGrpDId, "VerfQuestionGrpHId" : this.VerfQuestionGrpHId});
   }
 
   Delete(verfQuestionGrpDId){

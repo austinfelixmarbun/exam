@@ -9,6 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-verification-question-group-member-edit',
@@ -33,11 +34,13 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
   VerfAnswer: any;
 
   readonly CancelLink: string = NavigationConstant.VERIF_QA_GRP_MBR_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VerfQuestionGrpDId = params["VerfQuestionGrpDId"];
-      this.VerfQuestionGrpHId = params["VerfQuestionGrpHId"];
-      this.mode = params["mode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VerfQuestionGrpDId = queryParams["VerfQuestionGrpDId"];
+      this.VerfQuestionGrpHId = queryParams["VerfQuestionGrpHId"];
+      this.mode = queryParams["mode"];
       if (this.mode != "edit")
         this.mode = "Add";
     })
@@ -82,7 +85,7 @@ export class VerificationQuestionGroupMemberEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditVerfQuestionGrpD, this.verfQuestionGrpDObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VERIF_QA_GRP_MBR_PAGING],{ "VerfQuestionGrpHId": this.VerfQuestionGrpHId });
         });
     
   }

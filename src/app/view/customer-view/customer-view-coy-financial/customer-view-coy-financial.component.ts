@@ -5,6 +5,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-coy-financial',
@@ -24,13 +25,15 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     var custAddrObj = { "CustId": this.CustId };
@@ -39,7 +42,7 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
         this.responseCBAObj = response['ListCBAForCustFinData'];
       },
       (error) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
 
@@ -49,7 +52,7 @@ export class CustomerViewCoyFinancialComponent implements OnInit {
         this.IsAttrExist = true;
       },
       (error) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
   }

@@ -5,6 +5,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-branch-registration',
@@ -15,11 +16,13 @@ export class VendorBranchRegistrationComponent implements OnInit {
   objPassing: any = {};
   MrVendorCategoryCode: string = "";
   Registration : string;
-  constructor(private router : Router,private route: ActivatedRoute,private http: HttpClient, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private router : Router,private route: ActivatedRoute,private http: HttpClient, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      this.objPassing["VendorId"] = params['VendorId'];
-      if(!params['VendorEmpId']){
-      this.objPassing["VendorEmpId"] = params['VendorEmpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.objPassing["VendorId"] = queryParams['VendorId'];
+      if(!queryParams['VendorEmpId']){
+      this.objPassing["VendorEmpId"] = queryParams['VendorEmpId'];
       }
     });
   }
@@ -52,16 +55,16 @@ export class VendorBranchRegistrationComponent implements OnInit {
 
   back(){
     if(this.MrVendorCategoryCode == "CRD_INSCO_BRANCH"){
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_BRANCH_PAGING]);
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CREDIT_INS_BRANCH_PAGING]);
     }
     else{
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING]);
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING]);
     }
   }
 
   backTo(){
    
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_PAGING],{ MrVendorCategoryCode: this.MrVendorCategoryCode  });
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_PAGING],{ MrVendorCategoryCode: this.MrVendorCategoryCode  });
     
   }
 

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { FormDropDownListService } from '@adins/ucform';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -20,11 +21,12 @@ export class SelfCustomAttributeDetailComponent implements OnInit {
   Form: FormGroup = this.fb.group({});
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
-    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
+      const queryParams = this.ngxRouter.getQueryParams(params);
 
-      if (params["refAttrId"] != null) {
-        this.RefAttrId = params["refAttrId"];
+      if (queryParams["refAttrId"] != null) {
+        this.RefAttrId = queryParams["refAttrId"];
       }
     });
 

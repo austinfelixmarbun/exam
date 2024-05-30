@@ -7,6 +7,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { DatePipe } from '@angular/common';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-personal-financial-section',
@@ -27,13 +28,15 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.CustId = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.CustId = queryParams["IdCust"];
       }
-      else if (params["CustId"] != null) {
-        this.CustId = params["CustId"];
+      else if (queryParams["CustId"] != null) {
+        this.CustId = queryParams["CustId"];
       }
     });
   }
@@ -57,7 +60,7 @@ export class CustomerViewPersonalFinancialSectionComponent implements OnInit {
         }
       },
       (error) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
 

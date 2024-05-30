@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-holiday-detail-add',
@@ -39,10 +40,12 @@ export class HolidayDetailAddComponent implements OnInit {
     UntilYear: ['', [Validators.required, Validators.pattern("^[0-9]+$")]]
   })
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
-      this.HolidaySchmHId = params["HolidaySchmHId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.HolidaySchmHId = queryParams["HolidaySchmHId"];
     })
   }
 
@@ -60,7 +63,7 @@ export class HolidayDetailAddComponent implements OnInit {
       this.holidayDetailObj.Descr = this.HolidayListForm.controls.Descr.value;
 
       this.http.post(this.UrlConstantNew.AddHolidaySchmD, this.holidayDetailObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId });
         this.toastr.successMessage(response['message']);
       });
     }
@@ -93,7 +96,7 @@ export class HolidayDetailAddComponent implements OnInit {
         this.holidayDetailByYearObj.DictOfDays.push("Saturday");
       }
       this.http.post(this.UrlConstantNew.AddHolidaySchmDUntilYear, this.holidayDetailByYearObj, AdInsConstant.SpinnerOptions).subscribe((response) => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
         this.toastr.successMessage(response['message']);
       });
     }
@@ -123,6 +126,6 @@ export class HolidayDetailAddComponent implements OnInit {
 
   }
   BackNavigate() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_HOLIDAY_DETAIL],{ "HolidaySchmHId": this.HolidaySchmHId })
   }
 }

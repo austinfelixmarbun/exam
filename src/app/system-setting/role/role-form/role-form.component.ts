@@ -12,6 +12,7 @@ import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 
 @Component({
   selector: 'app-role-form',
@@ -29,9 +30,11 @@ export class RoleFormComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefRoleId = params['RefRoleId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefRoleId = queryParams['RefRoleId'];
     });
   }
 
@@ -71,7 +74,7 @@ export class RoleFormComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE_FORM],{ "RefRoleId": this.RefRoleId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ROLE_FORM],{ "RefRoleId": this.RefRoleId });
       });
   }
 }

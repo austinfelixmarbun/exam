@@ -14,6 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-attribute-detail',
@@ -51,18 +52,20 @@ export class AttributeDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.pageType = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.pageType = queryParams['mode'];
       }
       else {
         this.pageType = "add";
       }
 
-      if (params['refAttrId'] != null) {
-        this.refAttrId = params['refAttrId'];
+      if (queryParams['refAttrId'] != null) {
+        this.refAttrId = queryParams['refAttrId'];
       }
     });
 
@@ -205,7 +208,7 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   Back() {
-    AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_MSTR_PAGING],{});
+    AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ATTR_MSTR_PAGING],{});
   }
 
   Save() {
@@ -233,7 +236,7 @@ export class AttributeDetailComponent implements OnInit {
     this.http.post(url, formValue, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ATTR_PAGING],{ });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ATTR_PAGING],{ });
       },
       (error) => {
         console.log(error);

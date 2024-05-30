@@ -18,6 +18,7 @@ import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-custom-cust-attr-section',
@@ -53,10 +54,12 @@ export class CustomCustAttrSectionComponent implements OnInit {
     private toastr: NGXToastrService,
     private http: HttpClient,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
       this.route.queryParams.subscribe(params => {
-        if (params["IdCust"] != null) {
-          this.IdCust = params["IdCust"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["IdCust"] != null) {
+          this.IdCust = queryParams["IdCust"];
         }
       });
     }
@@ -129,7 +132,7 @@ export class CustomCustAttrSectionComponent implements OnInit {
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
         }
       }
     )
@@ -156,7 +159,7 @@ export class CustomCustAttrSectionComponent implements OnInit {
 
           if(isRedirectAfterSuccess)
           {
-              AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+              AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
           }
         });
       return true;

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,10 +16,12 @@ export class PefindoViewMoSummaryComponent implements OnInit {
   ListMOSummaryObj: Array<ResLabelValueMOSummaryObj> = new Array<ResLabelValueMOSummaryObj>();
   IsReady: boolean = false;
   
-  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
     });
   }

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
@@ -12,10 +13,11 @@ export class SurveyTaskViewComponent implements OnInit {
   SrvyTaskId: string;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
   
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) { 
+  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) { 
     this.route.queryParams.subscribe(params => {
-      if (params["SrvyTaskId"] != null) {
-        this.SrvyTaskId = params["SrvyTaskId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["SrvyTaskId"] != null) {
+        this.SrvyTaskId = queryParams["SrvyTaskId"];
       }
     });
   }

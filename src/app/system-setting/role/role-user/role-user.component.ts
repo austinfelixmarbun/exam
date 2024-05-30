@@ -14,6 +14,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { NgxRouterService } from "@adins/fe-core";
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
@@ -54,11 +55,13 @@ export class RoleUserComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params["refRoleId"] != null) {
-        this.refRoleId = params["refRoleId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["refRoleId"] != null) {
+        this.refRoleId = queryParams["refRoleId"];
       }
     });
 

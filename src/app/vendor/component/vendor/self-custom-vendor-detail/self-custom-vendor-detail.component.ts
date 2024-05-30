@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
@@ -13,7 +14,7 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
   navigationSubscription;
   isReady = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService) {
     this.subscribeParam();
 
     this.pageName = 'SupplierDetail'
@@ -39,12 +40,13 @@ export class SelfCustomVendorDetailComponent implements OnInit, OnDestroy {
 
   subscribeParam() {
     this.route.queryParams.subscribe(params => {
-      if (params["MrVendorCategoryCode"] != null) {
-          this.MrVendorCategoryCode = params["MrVendorCategoryCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["MrVendorCategoryCode"] != null) {
+          this.MrVendorCategoryCode = queryParams["MrVendorCategoryCode"];
 
       }
-      if (params["Type"] != null) {
-        this.Type = params["Type"];
+      if (queryParams["Type"] != null) {
+        this.Type = queryParams["Type"];
       }
     });
   }

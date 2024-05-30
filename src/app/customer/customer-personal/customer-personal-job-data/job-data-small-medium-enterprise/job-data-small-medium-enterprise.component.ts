@@ -27,6 +27,7 @@ import { String } from 'typescript-string-operations';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResGetListCustAddrObj, ResListCustAddrObj } from 'app/shared/model/response/res-get-list-cust-addr-obj.model';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-job-data-sme',
@@ -134,13 +135,15 @@ export class JobDataSmeComponent implements OnInit {
     private fb: FormBuilder,
     private cookieService: CookieService,
     private addressService: AddressService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
-      if (params["IdCustPersonal"] != null) {
-        this.IdCustPersonal = params["IdCustPersonal"];
+      if (queryParams["IdCustPersonal"] != null) {
+        this.IdCustPersonal = queryParams["IdCustPersonal"];
       }
     });
   }

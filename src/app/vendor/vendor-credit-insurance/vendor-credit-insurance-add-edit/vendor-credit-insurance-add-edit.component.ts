@@ -21,6 +21,7 @@ import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-ma
 import { GenericObj} from 'app/shared/model/generic/generic-obj.model';
 import { GeneralSettingObj } from 'app/shared/model/general-setting-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-credit-insurance-add-edit',
@@ -51,11 +52,14 @@ export class VendorCreditInsuranceAddEditComponent implements OnInit {
   VatForPersonal: boolean = false;
   isIdTypeReady: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private cookieService: CookieService, private modalService: NgbModal,
+    private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
-      if (params['mode'] != null) {
-        this.mode = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams['VendorId'];
+      if (queryParams['mode'] != null) {
+        this.mode = queryParams['mode'];
       }
     });
   }
@@ -360,9 +364,9 @@ export class VendorCreditInsuranceAddEditComponent implements OnInit {
 
   Back() {
     if (this.mode == "edit") {
-      AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": this.VendorId, "mode": "edit"});
+      AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HO_REG], { "VendorId": this.VendorId, "mode": "edit"});
     } else {
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.CREDIT_INS_PAGING]);
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.CREDIT_INS_PAGING]);
       
     }
   }
@@ -504,7 +508,7 @@ export class VendorCreditInsuranceAddEditComponent implements OnInit {
         this.http.post<GenericObj>(this.UrlConstantNew.EditVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "mode": "edit"});
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id, "mode": "edit"});
           });
       }
       else {
@@ -513,7 +517,7 @@ export class VendorCreditInsuranceAddEditComponent implements OnInit {
         this.http.post<GenericObj>(this.UrlConstantNew.AddVendorHO, this.vendorHoObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id});
+            AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.VENDOR_HO_REG], { "VendorId": response.Id});
           });
       }
     }

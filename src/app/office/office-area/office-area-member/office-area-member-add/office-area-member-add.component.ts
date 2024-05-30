@@ -9,6 +9,7 @@ import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-area-member-add',
@@ -21,10 +22,13 @@ export class OfficeAreaMemberAddComponent implements OnInit {
   tempDataExists = false;
 
   readonly CancelLink: string = NavigationConstant.OFFICE_AREA_MEMBER;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService,private location: Location, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService,private location: Location, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['RefOfficeAreaId'] != null) {
-        this.RefOfficeAreaId = params['RefOfficeAreaId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['RefOfficeAreaId'] != null) {
+        this.RefOfficeAreaId = queryParams['RefOfficeAreaId'];
       }
     });
   }
@@ -53,7 +57,7 @@ export class OfficeAreaMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddRefOfficeAreaMember, RequestItem, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_AREA_MEMBER],{ "RefOfficeAreaId": this.RefOfficeAreaId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.OFFICE_AREA_MEMBER],{ "RefOfficeAreaId": this.RefOfficeAreaId });
       });
     
   }

@@ -27,6 +27,7 @@ export class CommonConstant {
     public static CURRENT_USER_CONTEXT = "currentUserContext"
     public static PAGE_ACCESS = "PageAccess";
     public static TOKEN = "XSRF-TOKEN";
+    public static JWT_TOKEN = "jtoken";
     public static VERSION = "Version";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"

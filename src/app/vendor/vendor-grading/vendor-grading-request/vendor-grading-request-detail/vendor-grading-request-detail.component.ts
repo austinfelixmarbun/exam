@@ -17,6 +17,7 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { EnviConfigService } from "app/shared/services/enviConfig.service";
 import { ReqGetVendorGradeByVendorRatingAndVendorCategoryCodeObj } from "app/shared/model/request/req-get-vendor-grading.model";
+import { NgxRouterService } from "@adins/fe-core";
 @Component({
   selector: "app-vendor-grading-request-detail",
   templateUrl: "./vendor-grading-request-detail.component.html",
@@ -63,14 +64,16 @@ export class VendorGradingRequestDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private cookieService: CookieService, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe((params) => {
-      if (params["VendorId"] != 0) {
-        this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["VendorId"] != 0) {
+        this.VendorId = queryParams["VendorId"];
       }
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
     });
   }

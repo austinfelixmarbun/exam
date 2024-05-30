@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -35,11 +36,13 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
     private http: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) { 
     this.route.queryParams.subscribe(params => {
-      if (params['generalSettingId'] != null) {
-        this.generalSettingId = params['generalSettingId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['generalSettingId'] != null) {
+        this.generalSettingId = queryParams['generalSettingId'];
       }
     });
   }
@@ -69,7 +72,7 @@ export class GeneralSettingAdminDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING_ADMIN],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_GEN_SETTING_ADMIN],{});
       }
     );
   }

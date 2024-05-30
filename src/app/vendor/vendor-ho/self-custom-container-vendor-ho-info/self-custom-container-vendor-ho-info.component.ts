@@ -20,6 +20,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { Subscription } from 'rxjs';
 import { UcTemplateService } from '@adins/uctemplate';
 import { SelfCustomVendorAtpmSelectComponent } from 'app/vendor/vendor-ATPM/self-custom-vendor-atpm-select/self-custom-vendor-atpm-select.component';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-self-custom-container-vendor-ho-info',
@@ -51,11 +52,14 @@ export class SelfCustomContainerVendorHoInfoComponent implements OnInit, OnDestr
 
   subscriber: Subscription;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService, private UrlConstantNew: UrlConstantNew,
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService,
     private ucTemplateSvc: UcTemplateService) {
       this.route.queryParams.subscribe(params => {
-        if (params["VendorId"] != null) {
-          this.VendorId = params["VendorId"];
+        const queryParams = this.ngxRouter.getQueryParams(params);
+        if (queryParams["VendorId"] != null) {
+          this.VendorId = queryParams["VendorId"];
         }
       });
     }

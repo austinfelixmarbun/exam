@@ -7,6 +7,7 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-customer-view-coy-legal',
@@ -35,6 +36,7 @@ export class CustomerViewCoyLegalComponent implements OnInit {
     private router: Router,
     private adInsService: AdInsService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.GetCustCompanyLegalDocForCustViewByCustIdUrl = this.UrlConstantNew.GetCustCompanyLegalDocForCustViewByCustId
@@ -42,8 +44,9 @@ export class CustomerViewCoyLegalComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
     var custObj = { "CustId": this.CustId };
@@ -54,7 +57,7 @@ export class CustomerViewCoyLegalComponent implements OnInit {
         }
       },
       error => {
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ERROR],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ERROR],{});
       }
     );
   }

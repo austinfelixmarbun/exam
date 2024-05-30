@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-leave-maintenance-add-edit',
@@ -37,14 +38,17 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   businessDt: Date;
 
   readonly CancelLink: string = NavigationConstant.EMP_LEAVE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["refEmpLeaveMngmntId"] != null) {
-        this.refEmpLeaveMngmntId = params["refEmpLeaveMngmntId"];
+      if (queryParams["refEmpLeaveMngmntId"] != null) {
+        this.refEmpLeaveMngmntId = queryParams["refEmpLeaveMngmntId"];
       }
     });
   }
@@ -115,7 +119,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.UrlConstantNew.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_LEAVE_PAGING],{});
           }
         );
       } else {
@@ -125,7 +129,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.http.post(this.UrlConstantNew.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.EMP_LEAVE_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_LEAVE_PAGING],{});
           }
         );
       }

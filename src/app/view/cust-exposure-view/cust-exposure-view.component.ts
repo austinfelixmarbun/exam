@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -35,10 +36,12 @@ export class CustExposureViewComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService, 
     private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService,
     private adInsHelperService: AdInsHelperService) {
     this.route.queryParams.subscribe(params => {
-      if (params["CustId"] != null) {
-        this.CustId = params["CustId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["CustId"] != null) {
+        this.CustId = queryParams["CustId"];
       }
     });
   }

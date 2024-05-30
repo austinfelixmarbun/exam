@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -54,10 +55,13 @@ export class FundingCompanyContactPersonComponent implements OnInit {
   isChange: boolean = false;
   newVendorContactPerson: any;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private fb: FormBuilder, private toastr: NGXToastrService, private childFormService: FundingCompanyService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private fb: FormBuilder, 
+    private toastr: NGXToastrService, private childFormService: FundingCompanyService,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["FundCoyCode"] != null) {
-        this.VendorCode = params["FundCoyCode"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["FundCoyCode"] != null) {
+        this.VendorCode = queryParams["FundCoyCode"];
       }
     });
 

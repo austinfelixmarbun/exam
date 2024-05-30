@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-change-password',
@@ -30,9 +31,12 @@ export class ChangePasswordComponent implements OnInit {
   customPattern = new Array<CustomPatternObj>();
   showPass: Array<boolean> = Array<boolean>(3);
 
-  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.username = params['Username'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.username = queryParams['Username'];
     });
   }
 

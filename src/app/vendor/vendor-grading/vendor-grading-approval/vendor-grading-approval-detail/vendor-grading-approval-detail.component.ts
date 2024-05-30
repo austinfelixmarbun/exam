@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,26 +35,28 @@ export class VendorGradingApprovalDetailComponent implements OnInit {
     private route: ActivatedRoute,
      private toastr: NGXToastrService,
      private http: HttpClient, 
+     private ngxRouter: NgxRouterService,
      private UrlConstantNew: UrlConstantNew
      ) {
 
     this.route.queryParams.subscribe(params => {
+      const queryParams = this.ngxRouter.getQueryParams(params);
  
-      if(params["VendorGradingHistId"] != null) {
-        this.VendorGradingHistId = params["VendorGradingHistId"];
-        this.VendorGradingHistNo = params["VendorGradingHistNo"];
+      if(queryParams["VendorGradingHistId"] != null) {
+        this.VendorGradingHistId = queryParams["VendorGradingHistId"];
+        this.VendorGradingHistNo = queryParams["VendorGradingHistNo"];
       }
 
-      if(params["TaskId"] != null){
-        this.taskId = params["TaskId"];
+      if(queryParams["TaskId"] != null){
+        this.taskId = queryParams["TaskId"];
       }
 
-      if(params["InstanceId"] != null){
-        this.instanceId = params["InstanceId"];
+      if(queryParams["InstanceId"] != null){
+        this.instanceId = queryParams["InstanceId"];
       }
 
-      if(params["ApvReqId"] != null){
-        this.ApvReqId = params["ApvReqId"];
+      if(queryParams["ApvReqId"] != null){
+        this.ApvReqId = queryParams["ApvReqId"];
       }
     });
   }

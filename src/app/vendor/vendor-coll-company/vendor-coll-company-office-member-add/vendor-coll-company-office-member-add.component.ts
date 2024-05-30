@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-coll-company-office-member-add',
@@ -24,11 +25,13 @@ export class VendorCollCompanyOfficeMemberAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_COLL_COMPANY_MBR_PAGING;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params['VendorId'];
-      if (params["Type"] != null) {
-        this.Type = params["Type"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams['VendorId'];
+      if (queryParams["Type"] != null) {
+        this.Type = queryParams["Type"];
       }
     });
   }
@@ -75,7 +78,7 @@ export class VendorCollCompanyOfficeMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddListVendorOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_COLL_COMPANY_MBR_PAGING],{ "VendorId": this.VendorId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VENDOR_COLL_COMPANY_MBR_PAGING],{ "VendorId": this.VendorId });
       });
   }
 }

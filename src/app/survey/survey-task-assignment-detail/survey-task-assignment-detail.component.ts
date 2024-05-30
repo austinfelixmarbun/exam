@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
@@ -57,10 +58,13 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
   surveyorNumber: { [key: string]: any; } = {};
   surveyorNumberNationNo: { [key: string]: any; } = {};
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['SurveyOrderId'] != null) {
-        this.surveyOrderId = params['SurveyOrderId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['SurveyOrderId'] != null) {
+        this.surveyOrderId = queryParams['SurveyOrderId'];
       }
     });
   }
@@ -291,7 +295,7 @@ export class SurveyTaskAssignmentDetailComponent implements OnInit {
     this.http.post(this.UrlConstantNew.EditSrvyTaskAndSendToMobile, this.reqSrvyTaskAndSendToMobile, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING], {});
+        AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SURVEY_TASK_ASSIGNMENT_PAGING], {});
       }
     )
   }

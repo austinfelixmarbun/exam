@@ -10,6 +10,7 @@ import { RefBankObj } from 'app/shared/model/ref-bank-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-bank-account-detail',
@@ -78,10 +79,12 @@ export class OfficeBankAccountDetailComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["OfficeBankAccId"] != null) {
-        this.OfficeBankAccId = params["OfficeBankAccId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["OfficeBankAccId"] != null) {
+        this.OfficeBankAccId = queryParams["OfficeBankAccId"];
       }
     });
   }

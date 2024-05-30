@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-main-info-view',
@@ -14,9 +15,11 @@ export class MainInfoViewComponent implements OnInit {
   MrVendorClass: string;
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.VendorId = queryParams["VendorId"];
     })
   }
 

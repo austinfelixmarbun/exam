@@ -24,6 +24,7 @@ import { AssetMasterAttrContentObj, AssetMasterAttrObj } from 'app/shared/model/
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-master-add-edit-child',
@@ -76,13 +77,15 @@ export class AssetMasterAddEditChildComponent implements OnInit {
   });
 
   readonly CancelLink: string = NavigationConstant.ASSET_MASTER_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private fb: FormBuilder, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["AssetMasterId"] != null) {
-        this.AssetMasterId = params["AssetMasterId"];
+      if (queryParams["AssetMasterId"] != null) {
+        this.AssetMasterId = queryParams["AssetMasterId"];
       }
     });
   }
@@ -430,14 +433,14 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         ).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_MASTER_PAGING],{});
           });
       }
       else {
         this.http.post(this.UrlConstantNew.AddAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           (response) => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_MASTER_PAGING],{});
           });
       }
 
@@ -493,7 +496,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         forkJoin(observableBatch).subscribe(
           (response) => {
             this.toastr.successMessage(response[response.length - 1]["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_MASTER_PAGING],{});
           },
           (error) => {
             console.log(error);
@@ -504,7 +507,7 @@ export class AssetMasterAddEditChildComponent implements OnInit {
         this.http.post(this.UrlConstantNew.EditAssetMaster, this.assetMasterObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_MASTER_PAGING],{});
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_MASTER_PAGING],{});
           },
           error => {
             console.log(error);

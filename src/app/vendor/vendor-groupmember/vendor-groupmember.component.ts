@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-vendor-groupmember',
@@ -24,13 +25,15 @@ export class VendorGroupmemberComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.VENDOR_GRP_VIEW;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params['VendorGrpId'] != null) {
-        this.VendorGrpId = params['VendorGrpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['VendorGrpId'] != null) {
+        this.VendorGrpId = queryParams['VendorGrpId'];
       }
-      if (params['MrVendorCategoryCode'] != null) {
-        this.MrVendorCategoryCode = params['MrVendorCategoryCode'];
+      if (queryParams['MrVendorCategoryCode'] != null) {
+        this.MrVendorCategoryCode = queryParams['MrVendorCategoryCode'];
       }
     });
   }
@@ -90,7 +93,7 @@ export class VendorGroupmemberComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddRangeVendorGrpMbr, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.VENDOR_GRP_VIEW],{ "VendorGrpId": this.VendorGrpId, "MrVendorCategoryCode": this.MrVendorCategoryCode });
       });
   }
 }

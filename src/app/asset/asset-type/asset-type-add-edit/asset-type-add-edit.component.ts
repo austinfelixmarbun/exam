@@ -8,6 +8,7 @@ import { AssetTypeObj } from 'app/shared/model/asset-type-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-asset-type-add-edit',
@@ -50,13 +51,16 @@ export class AssetTypeAddEditComponent implements OnInit {
   serialNoShown: Array<boolean> = [false, false, false, false, false];
 
   readonly CancelLink: string = NavigationConstant.ASSET_TYPE_PAGING;
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
+    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["param"] != null) {
-        this.pageType = params["param"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["param"] != null) {
+        this.pageType = queryParams["param"];
       }
-      if (params["AssetTypeId"] != null) {
-        this.assetTypeId = params["AssetTypeId"];
+      if (queryParams["AssetTypeId"] != null) {
+        this.assetTypeId = queryParams["AssetTypeId"];
       }
     });
   }
@@ -257,7 +261,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_TYPE_PAGING],{});
         });
     } else {
       this.assetTypeObj.AssetTypeCode = this.assetTypeCode;
@@ -266,7 +270,7 @@ export class AssetTypeAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditAssetType, this.assetTypeObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.ASSET_TYPE_PAGING],{});
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ASSET_TYPE_PAGING],{});
         });
     }
   }

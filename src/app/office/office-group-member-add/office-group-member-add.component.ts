@@ -10,6 +10,7 @@ import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-group-member-add',
@@ -24,10 +25,12 @@ export class OfficeGroupMemberAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.OFFICE_GROUP_MEMBER;
   constructor(private http: HttpClient,
-    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+    private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      this.RefOfficeId = params['RefOfficeId'];
-      this.CenterGrpId = params['CenterGrpId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      this.RefOfficeId = queryParams['RefOfficeId'];
+      this.CenterGrpId = queryParams['CenterGrpId'];
     });
   }
 
@@ -78,7 +81,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
     this.http.post(this.UrlConstantNew.AddCenterGrpOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.OFFICE_GROUP_MEMBER],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.OFFICE_GROUP_MEMBER],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });
       });
   }
 }

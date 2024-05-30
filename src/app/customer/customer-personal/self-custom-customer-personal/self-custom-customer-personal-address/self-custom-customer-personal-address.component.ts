@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,11 +24,13 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
   mode: string;
   AddrId: number;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService,
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, 
+    private toastr: NGXToastrService, private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["IdCust"] != null) {
-        this.IdCust = params["IdCust"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["IdCust"] != null) {
+        this.IdCust = queryParams["IdCust"];
       }
     });
   }
@@ -53,7 +56,7 @@ export class SelfCustomCustomerPersonalAddressComponent implements OnInit {
       (response) => {
         if (response["StatusCode"] == 200) {
           this.toastr.successMessage("Sync Customer Succses");
-          AdInsHelper.RedirectUrl(this.router, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
+          AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SELF_CUSTOM_CUST_PAGING], {});
         }
       }
     )

@@ -15,6 +15,7 @@ import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-office-emp-pos',
@@ -48,19 +49,21 @@ export class OfficeEmpPosComponent implements OnInit {
 
   readonly AddLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   readonly EditLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
+    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
     this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
 
     this.route.queryParams.subscribe(params => {
-      if (params['refOfficeId'] != null) {
-        this.refOfficeId = params['refOfficeId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['refOfficeId'] != null) {
+        this.refOfficeId = queryParams['refOfficeId'];
       }
-      if (params['officeCode'] != null) {
-        this.officeCode = params['officeCode'];
+      if (queryParams['officeCode'] != null) {
+        this.officeCode = queryParams['officeCode'];
       }
-      if (params['officeName'] != null) {
-        this.officeName = params['officeName'];
+      if (queryParams['officeName'] != null) {
+        this.officeName = queryParams['officeName'];
       }
     });
   }

@@ -7,6 +7,7 @@ import { DMSObj } from 'app/shared/model/dms/dms-obj.model';
 import { DMSLabelValueObj } from 'app/shared/model/dms/dms-label-value-obj.model';
 import { CookieService } from 'ngx-cookie';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-customer-view-document',
   templateUrl: './customer-view-document.component.html'
@@ -23,12 +24,14 @@ export class CustomerViewDocumentComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
+    private ngxRouter: NgxRouterService,
     private cookieService: CookieService, 
     private UrlConstantNew: UrlConstantNew
   ) { 
     this.route.queryParams.subscribe(params => {
-      if (params['CustId'] != null) {
-        this.CustId = params['CustId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['CustId'] != null) {
+        this.CustId = queryParams['CustId'];
       }
     });
   }

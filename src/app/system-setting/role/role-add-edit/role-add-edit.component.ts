@@ -10,6 +10,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 
 @Component({
@@ -34,14 +35,16 @@ export class RoleAddEditComponent implements OnInit {
     private http: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder, 
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['mode'] != null) {
-        this.type = params['mode'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['mode'] != null) {
+        this.type = queryParams['mode'];
       }
-      if (params['RefRoleId'] != null) {
-        this.RefRoleId = params['RefRoleId'];
+      if (queryParams['RefRoleId'] != null) {
+        this.RefRoleId = queryParams['RefRoleId'];
       }
     });
   }
@@ -75,7 +78,7 @@ export class RoleAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.AddRefRoleV2, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
             this.service.successMessage(response["Message"]);
-            AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
+            AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
         }
       );
     } else {
@@ -87,7 +90,7 @@ export class RoleAddEditComponent implements OnInit {
       this.http.post(this.UrlConstantNew.EditRefRole, this.refRoleObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.successMessage(response["Message"]);
-          AdInsHelper.RedirectUrl(this.router,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
+          AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ROLE],{ });
         }
       );
     }

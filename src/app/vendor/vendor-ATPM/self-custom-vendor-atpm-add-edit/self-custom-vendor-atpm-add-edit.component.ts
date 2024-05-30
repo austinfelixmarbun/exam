@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { FormDropDownListService } from '@adins/ucform';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -26,10 +27,11 @@ export class SelfCustomVendorATPMAddEditComponent implements OnInit {
   VendorId: number = 0;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
-    private ddlSvc: FormDropDownListService, private fb: FormBuilder) {
+    private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["VendorId"] != null) {
-        this.VendorId = params["VendorId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["VendorId"] != null) {
+        this.VendorId = queryParams["VendorId"];
       }
     });
       

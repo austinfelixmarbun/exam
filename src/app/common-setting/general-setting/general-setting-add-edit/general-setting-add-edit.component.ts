@@ -8,6 +8,7 @@ import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
   selector: 'app-general-setting-add-edit',
@@ -35,11 +36,13 @@ export class GeneralSettingAddEditComponent implements OnInit {
     private http: HttpClient,
     private service: NGXToastrService,
     private fb: FormBuilder,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
-      if (params['generalSettingId'] != null) {
-        this.generalSettingId = params['generalSettingId'];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams['generalSettingId'] != null) {
+        this.generalSettingId = queryParams['generalSettingId'];
       }
     });
   }
@@ -70,7 +73,7 @@ export class GeneralSettingAddEditComponent implements OnInit {
     this.http.post(this.UrlConstantNew.EditGeneralSetting, this.gsObj, AdInsConstant.SpinnerOptions).subscribe(
       response => {
         this.service.successMessage(response["Message"]);
-        AdInsHelper.RedirectUrl(this.router,[NavigationConstant.CS_GEN_SETTING],{});
+        AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_GEN_SETTING],{});
       }
     );
   }

@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,10 +14,11 @@ export class PefindoViewPefindoAlertQuestComponent implements OnInit {
   TrxNo: string;
   ResViewPefindoAlertQuestObj: ResViewPefindoAlertQuestObj = new ResViewPefindoAlertQuestObj();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
-      if (params["TrxNo"] != null) {
-        this.TrxNo = params["TrxNo"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["TrxNo"] != null) {
+        this.TrxNo = queryParams["TrxNo"];
       }
     });
   }

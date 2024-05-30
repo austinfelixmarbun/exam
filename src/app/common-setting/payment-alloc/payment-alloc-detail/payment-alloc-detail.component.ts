@@ -1,3 +1,4 @@
+import { NgxRouterService } from '@adins/fe-core';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -25,13 +26,15 @@ export class PaymentAllocDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private toastr: NGXToastrService,
+    private ngxRouter: NgxRouterService,
     private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
-      if (params["RefPaymentAllocId"] != null) {
-        this.RefPaymentAllocId = params["RefPaymentAllocId"];
+      const queryParams = this.ngxRouter.getQueryParams(params);
+      if (queryParams["RefPaymentAllocId"] != null) {
+        this.RefPaymentAllocId = queryParams["RefPaymentAllocId"];
       }
-      if (params["mode"] != null) {
-        this.mode = params["mode"];
+      if (queryParams["mode"] != null) {
+        this.mode = queryParams["mode"];
       }
     });
   }
