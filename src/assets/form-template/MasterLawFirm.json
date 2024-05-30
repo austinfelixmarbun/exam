@@ -149,7 +149,7 @@
                     "bodyList": [
                         {
                             "type": "link",
-                            "position": "left",
+                            "position": "center",
                             "property": "LawFirmCode",
                             "isFlagColor": false,
                             "target": "_blank",

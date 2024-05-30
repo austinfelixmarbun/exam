@@ -371,7 +371,18 @@
     ],
     "isOverrideCancel": false,
     "onCancel": {},
-    "conditionalTitle": [],
+    "conditionalTitle": [
+        {
+            "title": "Edit Lawyer",
+            "conditions": [
+                {
+                    "property": "mode",
+                    "restriction": "EQ",
+                    "value": "edit"
+                }
+            ]
+        }
+    ],
     "persistData": false,
     "overrideSubmitBtnText": "",
     "customToastrMsg": "",
