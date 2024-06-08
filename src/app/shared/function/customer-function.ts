@@ -1367,7 +1367,7 @@ async function saveCustCompanyDetailV2(dicts: Record<string, any>, api: any, htt
   custCompanyObj.IsVip = dicts.form.IsVip;
   custCompanyObj.LicenseNo = dicts.LicenseNo;
   custCompanyObj.MrCompanyTypeCode = dicts.MrCompanyTypeCode;
-  custCompanyObj.MrCustModelCode = dicts.MrCustModelCode;
+  custCompanyObj.MrCustModelCode = dicts.form.MrCustModelCode;
   custCompanyObj.MrInvestmentTypeCode = dicts.MrInvestmentTypeCode;
   custCompanyObj.NumOfEmp = dicts.form.NumOfEmp;
   custCompanyObj.ParentCustId = dicts.form.ParentCustId;
