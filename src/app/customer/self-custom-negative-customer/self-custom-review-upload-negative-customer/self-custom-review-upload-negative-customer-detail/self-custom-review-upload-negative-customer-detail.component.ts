@@ -27,7 +27,7 @@ export class SelfCustomReviewUploadNegativeCustomerDetailComponent implements On
       }
 
     });
-    this.pageName = "NegativeCustomer"
+    this.pageName = "NegativeCustomerV2"
     console.log("taskListId",this.taskListId);
   }
 
