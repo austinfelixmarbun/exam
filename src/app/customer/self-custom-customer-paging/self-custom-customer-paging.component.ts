@@ -42,7 +42,7 @@ export class SelfCustomCustomerPagingComponent implements OnInit {
 
     if (ev.Action.key == "EditCustomerDetail")
     {
-      let param = { "IdCust": row.CustId };
+      let param = { "IdCust": row.CustId, "mode": "edit" };
 
       if (row.MrCustTypeCode == CommonConstant.CustTypePersonal)
       {
