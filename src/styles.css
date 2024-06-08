@@ -181,6 +181,26 @@ form .input-field-2{
     height: 31px !important;
     border-radius: 8px !important;
     background: var(--white-1, #FDFEFF);
+    width: 100%;
+}
+
+.input-field-3{
+    text-align: left;
+    border: 1px solid var(--gray-line, #DFE6E9);
+    height: 31px !important;
+    border-radius: 8px !important;
+    background: var(--white-1, #FDFEFF);
+    width: 100%;
+}
+select.input-field-3 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23246CFE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1rem center !important;
+    background-size: 1.4em !important;
 }
 
 /*field input box*/
@@ -190,6 +210,7 @@ form .textarea-field-2{
     height: 50px !important;
     border-radius: 8px !important;
     background: var(--white-1, #FDFEFF);
+    width: 100%;
 }
 
 /*kotak message form invalid*/
@@ -543,7 +564,7 @@ thead tr th {
 }
 
 select.form-control {
-    width: unset;
+    /* width: unset; */
     max-width: 100%;
 }
 
@@ -869,4 +890,11 @@ mat-dialog-container#role-modal {
     font-weight: 600;
     font-size: 14px;
     color: var(--Black_1, #3A4060);
+}
+
+.multiselect-dropdown{
+    height: 31px !important;
+    border-radius: 8px !important;
+    background: var(--white-1, #FDFEFF);
+    width: 100%;
 }

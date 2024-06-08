@@ -122,6 +122,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
         console.log(request.body);
         // console.log(JSON.stringify(request.body));
 
+        // Fix incorrected url
+        const serviceUrl = request.url.replace(/([^:]\/)\/+/g, '$1');
+        request = request.clone({url: serviceUrl});
+
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
