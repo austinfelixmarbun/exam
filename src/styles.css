@@ -898,3 +898,8 @@ mat-dialog-container#role-modal {
     background: var(--white-1, #FDFEFF);
     width: 100%;
 }
+.over-subsection{
+    position: absolute;
+    right: 10px;
+    margin-top: 6px;
+}

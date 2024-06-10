@@ -1,27 +1,29 @@
-<span class="mr-1 pull-right">
-  <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;"
+<div class="over-subsection">
+  <span class="mr-1 pull-right">  
+    <button type="button" class="btn btn-raised btn-primary-2" (click)="custBankHandler('add', '0')" style="margin-right: 0!important;"
     translate>
-    <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
-  </button>
-</span>
+      <i class="ft-plus-circle"></i>&nbsp;<span translate>Add</span>
+   </button>
+  </span>
+</div>
 <lib-ucSubsection [id]="'CustBankAccId'" [title]="'Debtor Bank Account'" [panel]="'CustBankAccSection'">
 </lib-ucSubsection>
 <div id="CustBankAccSection">
   <div class="col-md-12" *ngFor="let item of cbaFinDataList" style="padding: 0; margin-top: 20px;">
     <div class="col-md-12">
-      <h5 class="col-md-7" style="display: inline-block;">
+      <h5 class="col-md-12" style="display: inline-block;">
         <i class="fas fa-circle" style="color: green" *ngIf="item.IsActive == true"></i>
         <i class="fas fa-circle" style="color: red" *ngIf="item.IsActive == false"></i>
         - {{item.BankName}} - {{item.BankBranch}} - {{item.BankAccNo}} - {{item.BankAccName}}
       </h5>
-      <div class="col-md-5" style="display: inline-block; text-align: right;">
-        <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('editStmnt', item.CustBankAccId)" translate>
+      <div class="col-md-12" style="display: inline-block; text-align: right;">
+        <button type="button" class="btn btn-raised btn-primary-2 mr-1" (click)="custBankHandler('editStmnt', item.CustBankAccId)" translate>
           Add Bank Statement
         </button>
-        <button type="button" class="addButton btn-primary-2" (click)="custBankHandler('edit', item.CustBankAccId)" translate>
+        <button type="button" class="btn btn-raised btn-primary-2 mr-1" (click)="custBankHandler('edit', item.CustBankAccId)" translate>
           Edit Bank Account
         </button>
-        <button type="button" class="backButton btn-outline-2" (click)="custBankHandler('delete', item.CustBankAccId)" translate>
+        <button type="button" class="btn btn-raised btn-outline-2" (click)="custBankHandler('delete', item.CustBankAccId)" translate>
           Delete Bank Account
         </button>
       </div>
