@@ -11,7 +11,7 @@
     <br>
     <div class="col-md-12">
       <div class="px-1 form-group row" *ngIf="CustDataMode != CustDataModeFamily && !IsAddSpouse ">
-        <label class="col-md-2" translate>{{subjectTitle}} Type</label>
+        <label class="col-md-2 label-field-2" translate>{{subjectTitle}} Type</label>
         <div class="col-md-10">
           <mat-radio-group [(ngModel)]="CustType" (change)="ChangeType()" [disabled]="CustId!=0">
             <mat-radio-button class="custom-control custom-radio display-inline-block"

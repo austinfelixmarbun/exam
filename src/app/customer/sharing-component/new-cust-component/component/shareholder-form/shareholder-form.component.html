@@ -1,9 +1,9 @@
-<div class="form-group row" *ngIf="isShareholderReady">
+<div class="form-group row px-3" *ngIf="isShareholderReady">
 
   <div class="col-md-6">
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adins-required-label" translate>Job Position </label>
+      <label class="col-md-12 label-field-2 adins-required-label" translate>Job Position </label>
       <div class="col-md-12" *ngIf="jobPositionLookupObj?.isReady">
         <lib-uclookupgeneric [lookupInput]="jobPositionLookupObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
           [identifier]="'JobPosition'" (lookup)=getLookUpJobPosition($event)>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-md-12 adins-required-label" translate> Position SLIK </label>
+      <label class="col-md-12 label-field-2 adins-required-label" translate> Position SLIK </label>
       <div class="col-md-12">
         <lib-uclookupgeneric [lookupInput]="positionSlikLookUpObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
           [identifier]="'PositionSlikCode'" (lookup)=getLookUpSlik($event)>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adInsLabel" translate>Establishment Date</label>
+      <label class="col-md-12 label-field-2" translate>Establishment Date</label>
       <div class="col-md-12">
         <input type="date" class="form-control input-field-2" formControlName="EstablishmentDt"
           max="{{MaxDate | date: 'yyyy-MM-dd'}}"
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-md-12 adInsLabel" translate>Is Active</label>
+      <label class="col-md-12 label-field-2" translate>Is Active</label>
       <div class="col-md-12">
         <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
           [formControlName]="'IsActive'">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adInsLabel" translate>Is Signer
+      <label class="col-md-12 label-field-2" translate>Is Signer
       </label>
       <div class="col-md-12">
         <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
@@ -59,7 +59,7 @@
   <div class="col-md-6">
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adInsLabel" translate>Debtor Model</label>
+      <label class="col-md-12 label-field-2" translate>Debtor Model</label>
       <div class="col-md-12" *ngIf="DictUcDDLObj[RefMasterTypeCodeCustModel]?.isReady">
         <lib-ucdropdownlist [dropdownListObj]="DictUcDDLObj[RefMasterTypeCodeCustModel]" [parentForm]="parentForm"
           [enjiForm]="enjiForm" [identifier]="'MrCustModelCode'" (callback)="changeCustModel()"></lib-ucdropdownlist>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="form-group row" *ngIf="CustType == CustTypePersonal">
-      <label class="col-md-12 adInsLabel" translate> Profession Name </label>
+      <label class="col-md-12 label-field-2" translate> Profession Name </label>
       <div class="col-md-12">
         <lib-uclookupgeneric [lookupInput]="professionLookUpObj" [parentForm]="parentForm" [enjiForm]="enjiForm"
           [identifier]="'JobProfession'" (lookup)=getLookUpProfession($event) #LookupProfession>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-md-12 adInsLabel" translate> Share(%)</label>
+      <label class="col-md-12 label-field-2" translate> Share(%)</label>
       <div class="col-md-12">
         <input type="" currencyMask min="0" max="100" class="form-control input-field-2" formControlName="SharePrcnt"
           [ngClass]="{ 'is-invalid': enjiForm.submitted && parentForm.controls.SharePrcnt.invalid}"
@@ -89,7 +89,7 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-md-12 adInsLabel" translate>Is Owner</label>
+      <label class="col-md-12 label-field-2" translate>Is Owner</label>
       <div class="col-md-12">
         <ui-switch class="custom-switches" uncheckedLabel="no" checkedLabel="yes" size="small"
           [formControlName]="'IsOwner'" (valueChange)="onChangeIsOwnerInput($event)">
