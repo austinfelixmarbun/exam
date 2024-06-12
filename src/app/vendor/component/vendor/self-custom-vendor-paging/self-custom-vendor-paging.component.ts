@@ -95,7 +95,7 @@ export class SelfCustomVendorPagingComponent implements OnInit, OnDestroy {
     }
     else if (this.Type == "Default") {
       if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER) {
-        this.pageName = 'Suppliercomponent'
+        this.pageName = 'SupplierComponent'
       }
       else if (this.MrVendorCategoryCode == CommonConstant.SUPPLIER_HO ||
                this.MrVendorCategoryCode == CommonConstant.ASSET_INSCO_HO ||
