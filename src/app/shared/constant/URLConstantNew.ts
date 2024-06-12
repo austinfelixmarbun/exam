@@ -549,6 +549,7 @@ export class UrlConstantNew{
     public GetVendorByVendorCode = this.env.FoundationR3Url + this.url.GetVendorByVendorCode;
     public GetListKeyValueActiveByCategoryCodeAndOfficeCode = this.env.FoundationR3Url + this.url.GetListKeyValueActiveByCategoryCodeAndOfficeCode;
     public GetListKvpVendorObjByCategoryCode = this.env.FoundationR3Url + this.url.GetListKvpVendorObjByCategoryCode;
+    public GetListVendorContactPersonWithoutJobPositionByVendorId = this.env.FoundationR3Url + this.url.GetListVendorContactPersonWithoutJobPositionByVendorId;
 
     // VENDOR ADDR
     public GetVendorAddrByVendorCodeAndMrAddrTypeCode = this.env.FoundationR3Url + this.url.GetVendorAddrByVendorCodeAndMrAddrTypeCode;

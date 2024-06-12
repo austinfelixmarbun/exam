@@ -10,6 +10,7 @@ import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { ResGetListVendorContactPersonObj, ResListVendorContactPersonObj } from 'app/shared/model/response/res-get-list-vendor-contact-person-obj.model';
 import { VendorObj } from 'app/shared/model/vendor-obj.model';
 import { FundingCompanyService } from 'app/vendor/funding-company.service';
+import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({
   selector: 'app-funding-company-contact-person',
@@ -57,7 +58,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private fb: FormBuilder, 
     private toastr: NGXToastrService, private childFormService: FundingCompanyService,
-    private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService, private UrlConstantNew: UrlConstantNew) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       if (queryParams["FundCoyCode"] != null) {
@@ -81,7 +82,7 @@ export class FundingCompanyContactPersonComponent implements OnInit {
     this.vendorCPObj.Code = this.VendorCode;
 
     if(this.mode === 'edit'){
-      this.http.post(URLConstant.GetListVendorContactPersonWithoutJobPositionByVendorId, this.vendorCPObj).subscribe(
+      this.http.post(this.UrlConstantNew.GetListVendorContactPersonWithoutJobPositionByVendorId, this.vendorCPObj).subscribe(
         (response: ResGetListVendorContactPersonObj) => {
           if(response[CommonConstant.ReturnObj] != null){
           this.listVendorCP = response[CommonConstant.ReturnObj];

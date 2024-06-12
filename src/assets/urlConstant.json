@@ -978,5 +978,6 @@
     "AddTrxSrcDataForPefindoMultiResultV2" : "/v2/Digitalization/AddTrxSrcDataForPefindoMultiResult",
     "GetPefindoTrxSrcData" : "/v1/Pefindo/GetPefindoTrxSrcData",
     "PefindoSmartSearchV2" : "/v2/Pefindo/PefindoSmartSearch",
-    "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr"
+    "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr",
+    "GetListVendorContactPersonWithoutJobPositionByVendorId" : "/v1/VendorContactPerson/GetListVendorContactPersonWithoutJobPositionByVendorId"
 }
