@@ -12,7 +12,7 @@ export class CustomMasterAddEditComponent implements OnInit {
   dataEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private UrlConstantNew: UrlConstantNew, private http: HttpClient) {
-    this.pageName = "RefMasterDetail"
+    this.pageName = "Refmasterdetail"
   }
 
   async ngOnInit() {
