@@ -1198,7 +1198,7 @@ export function addEditCustJobData(dicts: Record<string, any>, api: any, http: H
         }
       ];
 
-      templateService.publish({Actions: actions});
+      //templateService.publish({Actions: actions});
       // NextStep();
     }
   );
