@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { GenericObj } from 'app/shared/model/generic/generic-obj.model';
 import { CustAttrContentObj } from 'app/shared/model/new-cust/cust-attr-content-obj.model';
@@ -18,7 +18,7 @@ import { RefProfessionObj } from 'app/shared/model/ref-profession-obj.model';
 import { NewCustSetData } from '../sharing-component/new-cust-component/NewCustSetData.Service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CustObj } from 'app/shared/model/cust-obj.model';
-import { NgxRouterService } from '@adins/fe-core';
+import { NgxRouterService } from '@adins/fe-core';  
 
 @Component({
   selector: 'app-custom-cust-attr-section',
@@ -30,9 +30,9 @@ export class CustomCustAttrSectionComponent implements OnInit {
   @ViewChild('CustAttrFormOld') custAttrFormOld: CustAttrListComponent;
   @Input() MrCustTypeCode: string;
   @Input() CustId: number = 0;
+  @Input() parentForm: FormGroup;
   @Output() outputTab: EventEmitter<Object> = new EventEmitter<Object>();
-  @Input()
-  dicts: Record<string, any> = {};
+  @Input() dicts: Record<string, any> = {};
 
   attrGroup: string;
   From: string;
@@ -42,12 +42,7 @@ export class CustomCustAttrSectionComponent implements OnInit {
   CustNo: string;
   IdCust: number = 0;
 
-  OtherInformationForm = this.fb.group({
-    LbppmsDebtGrpId: ['', [Validators.required]],
-    LbppmsCntrprtId: ['', [Validators.required]],
-    LbppmsBizSustainId: ['', [Validators.required]],
-    LbppmsBizSclId: ['', [Validators.required]]
-  });
+  OtherInformationForm = this.fb.group({});
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -126,8 +121,30 @@ export class CustomCustAttrSectionComponent implements OnInit {
     return this.UrlConstantNew.AddCustOtherInfo;
   }
 
+  private markFormGroupTouched(formGroup: FormGroup): void {
+    Object.keys(formGroup.controls).forEach(controlName => {
+      const control = formGroup.get(controlName);
+      control.markAsTouched(); 
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      }
+    });
+  }
+
+  isNumber(value: any): boolean {
+    return typeof value === 'number' && !isNaN(value);
+  }
+
   SaveAndSync()
   {
+    this.markFormGroupTouched(this.parentForm);
+    if(!this.parentForm.valid){ 
+      return 
+    }
+    if(!this.OtherInformationForm.valid){ 
+      return 
+    }
+    let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
     this.http.post(this.UrlConstantNew.SendCustomerDataToRabbitMq, { CustNo: this.CustNo }, AdInsConstant.SpinnerOptions).toPromise().then(
       (response) => {
         if (response["StatusCode"] == 200) {
@@ -137,15 +154,28 @@ export class CustomCustAttrSectionComponent implements OnInit {
       }
     )
   }
+ 
 
-  async SaveForm(isRedirectAfterSuccess:boolean = false): Promise<boolean> {
+  async SaveForm(isRedirectAfterSuccess:boolean = false): Promise<boolean> { 
+    console.log('what',this.dicts);
+    let frfrf = this.OtherInformationForm;
+    let par = this.parentForm;
+    
+    this.markFormGroupTouched(this.parentForm);
+    if(!this.parentForm.valid){ 
+      return 
+    }
+    if(!this.OtherInformationForm.valid){ 
+      return 
+    }
+    
     let formValue = this.OtherInformationForm.get(this.identifierCustAttr).value;
     if (Object.keys(formValue).length > 0) {
       let custOtherInfo = new CustOtherInfoObj();
-      custOtherInfo.LbppmsBizSclId = this.dicts.LbppmsBizSclId;
-      custOtherInfo.LbppmsBizSustainId = this.dicts.LbppmsBizSustainId;
-      custOtherInfo.LbppmsCntrprtId = this.dicts.LbppmsCntrprtId;
-      custOtherInfo.LbppmsDebtGrpId = this.dicts.LbppmsDebtGrpId;
+      custOtherInfo.LbppmsBizSclId = this.isNumber(this.dicts.formRaw.LbppmsBizSclDescr) ? this.dicts.formRaw.LbppmsBizSclDescr : this.dicts.LbppmsBizSclId;
+      custOtherInfo.LbppmsBizSustainId = this.isNumber(this.dicts.formRaw.LbppmsBizSustainDescr) ? this.dicts.formRaw.LbppmsBizSustainDescr : this.dicts.LbppmsBizSustainId;
+      custOtherInfo.LbppmsCntrprtId = this.isNumber(this.dicts.formRaw.LbppmsCntrprtDescr) ? this.dicts.formRaw.LbppmsCntrprtDescr : this.dicts.LbppmsCntrprtId;
+      custOtherInfo.LbppmsDebtGrpId = this.isNumber( this.dicts.formRaw.LbppmsDebtGrpDescr) ? this.dicts.formRaw.LbppmsDebtGrpDescr : this.dicts.LbppmsDebtGrpId;
       custOtherInfo.CustId = this.CustId;
 
       let RequestAppCustOtherInfoObj = {
