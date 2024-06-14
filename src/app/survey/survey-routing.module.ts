@@ -187,7 +187,7 @@ const routes: Routes = [
         component: UcTemplateComponent,
         data:{
           title: 'Survey Result Review Detail',
-          page: 'SurveyResultReviewDetail'
+          page: 'Surveyresultreviewdetail'
         }
       },
       {
