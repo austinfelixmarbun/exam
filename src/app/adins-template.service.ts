@@ -13,7 +13,7 @@ const listEnvironments = [
   { environment: 'FOU', url: env.FoundationR3Url},
   { environment: 'FOUR3WEB', url: env.FoundationR3Web },
   { environment: 'LOSR3WEB', url: env.losR3Web },
-  { environment: 'LOS', url: env.LosURL },
+  { environment: 'LOS', url: env.losUrl },
   { environment: 'TAX', url: env.TaxUrl},
   ];
 

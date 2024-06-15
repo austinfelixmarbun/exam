@@ -14,7 +14,7 @@ export const environment = {
   isPageFromService: true,
   useSafeUrl: true,
 
-  LosURL: 'https://r3app-server.ad-ins.com/LOS_DEV',
+  losUrl: 'https://r3app-server.ad-ins.com/LOS_DEV',
   FoundationR3Url: 'https://r3app-server.ad-ins.com/FOUNDATION_CORE_DEV',
   DMSUrl: "https://sky.ad-ins.com/LITEDMS_POC/Integration/ViewDoc.aspx",
   AMSUrl: "https://r3app-server.ad-ins.com/AMS_DEMO", //OPL dah ada

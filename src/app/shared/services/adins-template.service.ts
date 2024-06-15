@@ -14,7 +14,7 @@ const listEnvironments = [
   { environment: 'FOU_WEB', url: envi.FoundationR3Web },
   { environment: 'LOSR3WEB', url: envi.losR3Web },
   { environment: 'LMSR3WEB', url: envi.lmsR3Web },
-  { environment: 'LOS', url: envi.LosURL },
+  { environment: 'LOS', url: envi.losUrl },
   { environment: 'CashBankUrl', url: envi.CashBankUrl },
   { environment: 'TAX', url: envi.TaxUrl},
 ];
