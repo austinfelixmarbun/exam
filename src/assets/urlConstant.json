@@ -601,6 +601,7 @@
     "GetListNegativeCustChangeTrxByNegativeCustId": "/v1/NegativeCustChangeTrx/GetListNegativeCustChangeTrxByNegativeCustId",
     "GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType": "/v2/NegativeCust/GetUploadNegativeCustomerByUploadMonitoringNoAndTrxType",
     "GetNegativeCustByNegativeCustNameAndCustType": "/v1/NegativeCust/GetNegativeCustByNegativeCustNameAndCustType",
+    "AddEditCustOtherInfo": "/v1/CustOtherInfo/AddEditCustOtherInfo",
     "AddCustOtherInfo": "/v1/CustOtherInfo/AddCustOtherInfo",
     "EditCustOtherInfo": "/v1/CustOtherInfo/EditCustOtherInfo",
     "GetCustOtherInfoByCustId": "/v1/CustOtherInfo/GetCustOtherInfoByCustId",

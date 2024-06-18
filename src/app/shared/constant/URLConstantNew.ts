@@ -885,6 +885,7 @@ export class UrlConstantNew{
     public GetNegativeCustByNegativeCustNameAndCustType = this.env.FoundationR3Url + this.url.GetNegativeCustByNegativeCustNameAndCustType;
 
     // CUSTOMER OTHER INFO
+    public AddEditCustOtherInfo = this.env.FoundationR3Url + this.url.AddEditCustOtherInfo;
     public AddCustOtherInfo = this.env.FoundationR3Url + this.url.AddCustOtherInfo;
     public EditCustOtherInfo = this.env.FoundationR3Url + this.url.EditCustOtherInfo;
     public GetCustOtherInfoByCustId = this.env.FoundationR3Url + this.url.GetCustOtherInfoByCustId;

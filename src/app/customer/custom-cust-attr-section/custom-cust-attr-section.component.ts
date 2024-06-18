@@ -37,8 +37,7 @@ export class CustomCustAttrSectionComponent implements OnInit {
   attrGroup: string;
   From: string;
   CustOtherInfo: any;
-  identifierCustAttr: string = "CustAttrForm";
-  isExistData: boolean = false;
+  identifierCustAttr: string = "CustAttrForm"; 
   CustNo: string;
   IdCust: number = 0;
 
@@ -112,14 +111,7 @@ export class CustomCustAttrSectionComponent implements OnInit {
       tempAttr.push(tempAttrToPush);
     }
     return tempAttr;
-  }
-
-  getUrlSave(): string {
-    if (this.isExistData) {
-      return this.UrlConstantNew.EditCustOtherInfo;
-    }
-    return this.UrlConstantNew.AddCustOtherInfo;
-  }
+  } 
 
   private markFormGroupTouched(formGroup: FormGroup): void {
     Object.keys(formGroup.controls).forEach(controlName => {
@@ -180,10 +172,10 @@ export class CustomCustAttrSectionComponent implements OnInit {
 
       let RequestAppCustOtherInfoObj = {
         CustAttrContentObjs: this.custAttrFormOld != undefined ? this.SetCustAttrContentOld() : this.SetCustAttrContent(),
-        RCustOtherInfoObj: custOtherInfo
+        RequestCustOtherInfoObj: custOtherInfo
       };
 
-      await this.http.post(this.getUrlSave(), RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
+      await this.http.post(this.UrlConstantNew.AddEditCustOtherInfo, RequestAppCustOtherInfoObj, AdInsConstant.SpinnerOptions).toPromise().then(
         (response) => {
           this.toastr.successMessage(response["Message"]);
 
