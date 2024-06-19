@@ -314,6 +314,8 @@ export function addEditvendorBranch(dicts: Record<string, any>, api: string, nex
       vendorBranchObj.VendorObj.ReservedField4 = dicts.formRaw.ReservedField4;
       vendorBranchObj.VendorObj.ReservedField5 = dicts.formRaw.ReservedField5;
 
+      vendorBranchObj.VendorObj.CmoEmpNo = dicts.formRaw.CmoEmpNo;
+
       if (dicts.formRaw.VendorAttrList !== undefined && dicts.formRaw.VendorAttrList !== null) {
         if (dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV !== null) {
           vendorBranchObj.VendorObj.ReservedField6 = dicts.formRaw.VendorAttrList.AP_DUE_AFTER_GLV.VendorAttrValue;

@@ -28,6 +28,7 @@ export class VendorObj{
     TaxIdNo: string;
     IsOneAffiliate: boolean;
     TaxSchmCode: boolean;
+    CmoEmpNo: string;
     
     constructor() { this.VendorId = 0; }
 }
