@@ -45,14 +45,19 @@
               "Label": "Scheme Code",
               "Variable": "VendorSchmCode",
               "Value": "",
-              "Pattern": "",
               "IsRequired": true,
               "IsUppercase": true,
               "IsCallback": false,
               "IsReadonly": false,
               "IsHide": false,
               "IsEditable": true,
-              "Placeholder": ""
+              "Placeholder": "",
+              "CustomPattern": [
+                {
+                  "pattern": "^\\S*$",
+                  "invalidMsg": " Cannot have Whitespace"
+                }
+              ]
             },
             {
               "Action": [],
