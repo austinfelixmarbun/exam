@@ -14,7 +14,7 @@ export class CustomAssetDocumentMasterAddEditComponent implements OnInit {
   dataEvent: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private UrlConstantNew: UrlConstantNew, private http: HttpClient) {
-    this.pageName = "AssetDocMasterDetail"
+    this.pageName = "Assetdocmasterdetail"
   }
 
   async ngOnInit() {
