@@ -192,7 +192,7 @@ export class AdInsHelper {
         // );
         // router.routeReuseStrategy.shouldReuseRoute = function() { return false; }
         if (router instanceof Router) {
-            const params = this.ucxRouter.createQueryParams(queryParams);
+            const params = this.ucxRouter ? this.ucxRouter.createQueryParams(queryParams) : queryParams;
             router.navigate(url, { queryParams: params, skipLocationChange: isSkipLocation });
         } else {
             router.navigate(url, queryParams);
@@ -244,5 +244,28 @@ export class AdInsHelper {
         var decrypted = CryptoJS.AES.decrypt(chipperText, chipperKeyArr, { iv: iv });
         var plainText = decrypted.toString(CryptoJS.enc.Utf8);
         return plainText;
+    }
+
+    public static StoreSession(response: any, cookieService: CookieService) {
+        const DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
+        let Identity = response["Identity"];
+        Identity['Token'] = response['Token'];
+        
+        AdInsHelper.SetCookie(cookieService, CommonConstant.TOKEN, response['Token']);
+        AdInsHelper.SetCookie(cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
+        AdInsHelper.SetCookie(cookieService, "BusinessDate", DateParse);
+        AdInsHelper.SetCookie(cookieService, "UserAccess", JSON.stringify(Identity));
+        AdInsHelper.SetCookie(cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
+
+        if(typeof response["Identity_JWT"] === 'string')
+        {
+            AdInsHelper.SetCookie(cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
+        }
+        else
+        {
+            AdInsHelper.SetCookie(cookieService, CommonConstant.JWT_TOKEN, "");              
+        }
+
+        AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
     }
 }

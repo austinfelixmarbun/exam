@@ -123,22 +123,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
       this.http.post(this.UrlConstantNew.UpdateTokenV2_1, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
-          var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
-          AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
-          AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
-          AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
-          AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
-          AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
-          if(typeof response["Identity_JWT"] === 'string')
-          {
-              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
-          }
-          else
-          {
-              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
-          }
-          AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
+          AdInsHelper.StoreSession(response, this.cookieService);
 
           //Set Cookie jika Office nya Syariah
           this.getOfficeSyariahInformation(this.listRole[this.selectedOffice].OfficeCode);
@@ -163,23 +148,8 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
           this.http.post(this.UrlConstantNew.CheckUserSessionLog, roleObject, this.SpinnerOptions).subscribe(
             (response) => {});
-          
-          var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-          AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
-          AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
-          AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
-          AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
-          AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
-          AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
-          if(typeof response["Identity_JWT"] === 'string')
-          {
-              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
-          }
-          else
-          {
-              AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
-          }
-          AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
+            
+          AdInsHelper.StoreSession(response, this.cookieService);
 
           //Set Cookie jika Office nya Syariah
           this.getOfficeSyariahInformation(this.listRole[this.selectedOffice].OfficeCode);

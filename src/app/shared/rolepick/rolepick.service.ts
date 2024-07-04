@@ -81,23 +81,7 @@ export class RolePickService {
                 this.http.post(this.UrlConstantNew.LoginByRole, roleObject, SpinnerOptions).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)
-
-                        var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
-                        AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, response['Token']);
-                        AdInsHelper.SetCookie(this.cookieService, "XSRF-TOKEN", response['Token']);
-                        AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
-                        AdInsHelper.SetCookie(this.cookieService, "BusinessDate", DateParse);
-                        AdInsHelper.SetCookie(this.cookieService, "UserAccess", JSON.stringify(response["Identity"]));
-                        AdInsHelper.SetCookie(this.cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
-                        if(typeof response["Identity_JWT"] === 'string')
-                        {
-                            AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
-                        }
-                        else
-                        {
-                            AdInsHelper.SetCookie(this.cookieService, CommonConstant.JWT_TOKEN, "");              
-                        }
-                        AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
+                        AdInsHelper.StoreSession(response, this.cookieService);
 
                         this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {RoleCode: item.RefUserRoles[0].Roles[0].RoleCode, ModuleCode: environment.Module}, { withCredentials: true }).subscribe(
                             (response) => {
