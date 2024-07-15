@@ -10,13 +10,11 @@ import { NotificationSidebarComponent } from 'app/shared/notification-sidebar/no
 import { ToggleFullscreenDirective } from "app/shared/directives/toggle-fullscreen.directive";
 import { ContextMenuModule } from 'ngx-contextmenu';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { DmsIframeComponent } from './dms-iframe/dms-iframe.component';
 import { SafePipe } from './pipe/safepipe';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcnotificationModule } from '@adins/ucnotification';
-import { SelfCustomContainerDmsIframeComponent } from './self-custom-container-dms-iframe/self-custom-container-dms-iframe.component';
 import {FormsModule} from '@angular/forms';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -32,8 +30,6 @@ export function createTranslateLoader(http: HttpClient) {
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
         NgbModule,
-        DmsIframeComponent,
-        SelfCustomContainerDmsIframeComponent,
         SafePipe
     ],
     imports: [
@@ -53,8 +49,6 @@ export function createTranslateLoader(http: HttpClient) {
         CustomizerComponent,
         NotificationSidebarComponent,
         ToggleFullscreenDirective,
-        DmsIframeComponent,
-        SelfCustomContainerDmsIframeComponent,
         SafePipe
     ]
 })

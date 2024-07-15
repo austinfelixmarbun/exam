@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';

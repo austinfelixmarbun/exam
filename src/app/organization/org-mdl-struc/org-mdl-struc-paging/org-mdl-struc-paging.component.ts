@@ -1,10 +1,9 @@
 import { OrgMdlStrucObj } from 'app/shared/model/org-mdl-struc-obj';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ExcelService } from 'app/shared/excel-service/excel-service';
-import { environment } from 'environments/environment';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { OrgMdlObj } from 'app/shared/model/org-mdl-obj.model';
@@ -46,7 +45,6 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   refOrgId: number = 0;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private service: NGXToastrService,

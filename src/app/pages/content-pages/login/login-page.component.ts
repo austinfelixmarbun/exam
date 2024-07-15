@@ -9,7 +9,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';

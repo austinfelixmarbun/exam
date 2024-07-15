@@ -11,7 +11,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DashEmptyComponent } from './dash-empty/dash-empty.component';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
+import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interceptor';
 
 @NgModule({
     imports: [

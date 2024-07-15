@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RefEmpLeaveMngmntObj } from 'app/shared/model/ref-emp-leave-mngmnt-obj.model';
 import { formatDate, DatePipe } from '@angular/common';

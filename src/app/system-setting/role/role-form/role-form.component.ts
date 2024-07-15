@@ -1,11 +1,10 @@
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { HttpClient } from "@angular/common/http";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { AuthFormObj } from "app/shared/model/auth-form-obj.model";
-import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
 import { UcViewGenericObj } from "app/shared/model/uc-view-generic-obj.model";
 import { FromValueObj, UcTempPagingObj } from "app/shared/model/temp-paging/uc-temp-paging-obj.model";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
@@ -22,7 +21,7 @@ import { NgxRouterService } from "@adins/fe-core";
 export class RoleFormComponent implements OnInit {
   RefRoleId: number;
   AuthFormObj: AuthFormObj;
-  listAuthFormObj: ListAuthFormObj;
+  listAuthFormObj: {[key: string]: any};
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
@@ -60,7 +59,7 @@ export class RoleFormComponent implements OnInit {
       return;
     }
 
-    this.listAuthFormObj = new ListAuthFormObj();
+    this.listAuthFormObj = {};
     this.listAuthFormObj.ListAuthFormObj = new Array();
 
 

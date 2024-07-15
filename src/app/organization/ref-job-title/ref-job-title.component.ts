@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from '../../shared/model/uc-paging-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({

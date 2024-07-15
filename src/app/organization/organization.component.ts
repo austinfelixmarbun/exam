@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OrganizationObj } from 'app/shared/model/organization-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { DecimalPipe } from '@angular/common';
@@ -34,7 +33,7 @@ export class OrganizationComponent implements OnInit {
   orderByKey: any = null;
   orderByValue: boolean = true;
 
-  constructor(private http: HttpClient, private spinner: NgxSpinnerService, private service: NGXToastrService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
 
   ngOnInit() {
     this.inputObj = new InputSearchObj(this.UrlConstantNew);

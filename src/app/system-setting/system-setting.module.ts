@@ -29,7 +29,6 @@ import { RefFormRoleMappingComponent } from './ref-form/ref-form-role-mapping/re
 import { RefFormRolePagingComponent } from './ref-form/ref-form-role-paging/ref-form-role-paging.component';
 import { RoleFormPagingComponent } from './role/role-form-paging/role-form-paging.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcaddtotempModule } from '@adins/ucaddtotemp'; 
 import { AttributeComponent } from './attribute/attribute.component';
 import { AttributeDetailComponent } from './attribute/attribute-detail/attribute-detail.component';
@@ -39,6 +38,7 @@ import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
 import { SelfCustomAttributeDetailComponent } from './self-custom-attribute-detail/self-custom-attribute-detail.component';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 
 
 @NgModule({

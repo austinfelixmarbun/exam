@@ -1,10 +1,10 @@
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
+import { NGXToastrService } from '../services/toastr.service';
 
 export function addRefOfficeAreaMember(RefOfficeAreaId: any, listTemp: any[], api: any, http: HttpClient, toastr: NGXToastrService, router: Router) {
   var listSelectedId = [];

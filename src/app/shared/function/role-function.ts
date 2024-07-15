@@ -1,4 +1,3 @@
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
@@ -6,11 +5,12 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import enviConfig from "assets/config/enviConfig.json";
 import { Router } from "@angular/router";
 import { AuthFormObj } from "app/shared/model/auth-form-obj.model";
-import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
+import { NGXToastrService } from '../services/toastr.service';
+// import { ListAuthFormObj } from "app/shared/model/list-auth-form-obj.model";
 
 
 export function saveListAuthForm(RefRoleId: Number, listTemp: any[], api: any, http: HttpClient, toastr: NGXToastrService, router: Router) {
-    let reqObj = new ListAuthFormObj();
+    let reqObj: {[key: string]: any} = {};
     reqObj.ListAuthFormObj = new Array();
     let AuthObj = new AuthFormObj();
 

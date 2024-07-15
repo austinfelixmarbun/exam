@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';

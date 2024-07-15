@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';

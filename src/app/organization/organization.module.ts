@@ -20,10 +20,10 @@ import { MemberBusinessUnitComponent } from './business-unit/member-business-uni
 import { UcviewgenericModule } from '@adins/ucviewgeneric';
 import { UcSubsectionModule } from '@adins/uc-subsection';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { UcTemplateModule } from '@adins/uctemplate';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 
 @NgModule({
   imports: [

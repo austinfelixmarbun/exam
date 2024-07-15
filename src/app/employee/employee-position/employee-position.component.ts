@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { EmpPositionObj } from 'app/shared/model/emp-position-obj.model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/ref-office-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { DecimalPipe } from '@angular/common';

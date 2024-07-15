@@ -1,11 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SearchComponent } from 'app/shared/search/search.component';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
-import { environment } from 'environments/environment';
 import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { NgxRouterService } from '@adins/fe-core';
@@ -14,7 +12,6 @@ import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-user-role',
   templateUrl: './user-role.component.html',
- // providers: [NGXToastrService]
 })
 export class UserRoleComponent implements OnInit {
 

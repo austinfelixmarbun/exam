@@ -4,7 +4,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from '../constant/CommonConstant';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 
 @Injectable({
   providedIn: 'root'

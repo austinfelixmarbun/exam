@@ -9,9 +9,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { RegexService } from 'app/customer/regex.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CookieService } from 'ngx-cookie';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
@@ -22,7 +21,6 @@ import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { HttpClient } from '@angular/common/http';
-import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { RefUserRole } from 'app/shared/model/ref-user-role-obj.model';
 import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
 import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
@@ -30,6 +28,7 @@ import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from '@adins/fe-core';
+import { RegexService } from 'app/shared/services/regex.service';
 
 @Component({
   selector: 'app-system-user-add',

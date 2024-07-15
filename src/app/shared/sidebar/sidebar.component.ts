@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Params, Router } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -12,7 +12,6 @@ import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
 import { UrlConstantNew } from '../constant/URLConstantNew';
-import { ROUTES } from './sidebar-routes.config';
 
 declare var $: any;
 

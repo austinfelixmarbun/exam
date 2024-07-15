@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 @Component({

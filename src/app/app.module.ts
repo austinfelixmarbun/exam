@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from "app/shared/shared.module";
-import { IndividualConfig, ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -18,7 +18,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import * as $ from 'jquery';
-import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
+import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interceptor';
 import { ErrorDialogService } from 'app/error-dialog/error-dialog.service';
 import { ErrorDialogComponent } from 'app/error-dialog/error-dialog.component';
 import { RolepickComponent } from 'app/shared/rolepick/rolepick.component';
@@ -26,14 +26,11 @@ import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
-import { NGXToastrService } from './components/extra/toastr/toastr.service';
-import { ClaimTaskService } from './shared/claimTask.service';
 import { AdInsSharedModule } from './components/adins-module/adins-shared.module';
 import { EnviConfigService } from './shared/services/enviConfig.service';
 import { UrlConstantService } from './shared/services/urlConstant.service';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { ClipboardModule } from 'ngx-clipboard'
-import { ApprovalTaskService } from './shared/services/ApprovalTask.service';
 import { AddressService } from './shared/services/custAddr.service';
 import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
@@ -49,8 +46,7 @@ import { UcformModule } from '@adins/ucform';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsExecutorService } from './shared/services/adins-executor.service';
 import { UcformarrayModule } from '@adins/ucformarray';
-import { NewCustSetData } from './customer/sharing-component/new-cust-component/NewCustSetData.Service';
-import { ThirdPartyUploadService } from './customer/sharing-component/new-cust-component/component/third-party-form/services/ThirdPartyUpload.Service';
+import { NGXToastrService } from './shared/services/toastr.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -128,15 +124,11 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         RolePickNewService,
         StorageService,
         NGXToastrService,
-        ClaimTaskService,
-        ApprovalTaskService,
         AddressService,
         AdInsHelperService,
         UrlConstantNew,
         EnviConfigService,
-        NewCustSetData,
         FormGroupDirective,
-        ThirdPartyUploadService,
         { provide: UcTemplateService, useClass: AdinsTemplateService },
         { provide: ExecutorService, useClass: AdInsExecutorService },
         {
@@ -148,9 +140,6 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         },
         ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
-
-        { provide: UcTemplateService, useClass: AdinsTemplateService  },
-
         {provide: MAT_DIALOG_DATA, useValue: {}}
     ],
     bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { NgForm, FormBuilder } from '@angular/forms';
 import { EmpPositionObj } from 'app/shared/model/emp-position-obj.model';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { RefOfficeObj } from 'app/shared/model/ref-office-obj.model';
 import { OrgJobTitleObj } from 'app/shared/model/org-job-title-obj.model';
 import { formatDate } from '@angular/common';

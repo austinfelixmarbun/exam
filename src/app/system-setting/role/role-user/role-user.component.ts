@@ -1,7 +1,7 @@
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpClient } from "@angular/common/http";
 import { RefRoleObj } from "app/shared/model/ref-role-obj.model";

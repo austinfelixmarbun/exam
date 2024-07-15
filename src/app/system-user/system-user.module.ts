@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { SharingComponentModule } from 'app/shared/sharingcomponent.module';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { SystemUserComponent } from './system-user.component';
 import { SystemUserAddComponent } from './system-user-add/system-user-add.component';
 import { SelfCustomSystemUserComponent } from './self-custom-system-user/self-custom-system-user.component';

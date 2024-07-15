@@ -1,11 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { CommonConstant } from "../constant/CommonConstant";
 import { ExceptionConstant } from "../constant/ExceptionConstant";
 import { AdInsConstant } from "../AdInstConstant";
 import { AdInsHelper } from "../AdInsHelper";
 import enviConfig from "assets/config/enviConfig.json";
+import { NGXToastrService } from "../services/toastr.service";
 
 export function addeditAttributeMaster(dicts: Record<string, any>, api: any, next: string, http: HttpClient, toastr: NGXToastrService, router: Router)
 {

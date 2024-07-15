@@ -3,7 +3,7 @@ import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({

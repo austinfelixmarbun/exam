@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthFormObj } from 'app/shared/model/auth-form-obj.model';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { ListAuthFormObj } from 'app/shared/model/list-auth-form-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-temp-paging-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
@@ -21,7 +20,7 @@ import { NgxRouterService } from '@adins/fe-core';
 export class RefFormRoleMappingComponent implements OnInit {
   RefFormId: number;
   AuthFormObj: AuthFormObj;
-  listAuthFormObj: ListAuthFormObj;
+  listAuthFormObj: {[key: string]: any};
   listSelectedId: Array<number> = new Array<number>();
   tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
   viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
@@ -59,7 +58,7 @@ export class RefFormRoleMappingComponent implements OnInit {
       return;
     }
 
-    this.listAuthFormObj = new ListAuthFormObj();
+    this.listAuthFormObj = {};
     this.listAuthFormObj.ListAuthFormObj = new Array();
 
 

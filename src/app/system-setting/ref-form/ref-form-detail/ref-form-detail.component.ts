@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { RefFormObj } from 'app/shared/model/ref-form-obj.model';
@@ -42,7 +42,7 @@ export class RefFormDetailComponent implements OnInit {
     }
   }
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute, 
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, 
     private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew,
     private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {

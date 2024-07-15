@@ -1,10 +1,10 @@
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { Router } from "@angular/router";
 import enviConfig from "assets/config/enviConfig.json";
+import { NGXToastrService } from '../services/toastr.service';
 
 export function saveListMaskingItemForm(RoleCode: string, ListTemp: any[], ApiUrl: any, http: HttpClient, toastr: NGXToastrService, router: Router) 
 {

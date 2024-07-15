@@ -22,20 +22,6 @@ const routes: Routes = [
           title: 'Employee'
         },
       },
-      // {
-      //   path: 'add',
-      //   component: EmployeeAddComponent,
-      //   data: {
-      //     title: 'Add Employee'
-      //   }
-      // },
-      // {
-      //   path: 'edit',
-      //   component: EmployeeAddComponent,
-      //   data: {
-      //     title: 'Edit Employee'
-      //   }
-      // },
       {
         path: PathConstant.DETAIL,
         component: EmployeeAddComponent,

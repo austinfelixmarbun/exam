@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';

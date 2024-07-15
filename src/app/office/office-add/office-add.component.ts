@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { UcAddressObj } from 'app/shared/model/uc-address-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
 import { HttpClient } from '@angular/common/http';

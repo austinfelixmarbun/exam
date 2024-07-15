@@ -3,7 +3,7 @@ import { CriteriaObj } from "app/shared/model/criteria-obj.model";
 import { ExcelService } from "app/shared/excel-service/excel-service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import { OrgJobTitleObj } from "app/shared/model/org-job-title-obj.model";

@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { FullPagesRoutingModule } from "app/pages/full-pages/full-pages-routing.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { UserProfilePageComponent } from "app/pages/full-pages/user-profile/user-profile-page.component";
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 
 
@@ -17,8 +15,6 @@ import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.modu
         AdInsSharedModule,
         NgbModule,
     ],
-    declarations: [       
-        UserProfilePageComponent
-    ]
+    declarations: []
 })
 export class FullPagesModule { }

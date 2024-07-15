@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RefEmpObj } from "app/shared/model/ref-emp-obj.model";
 import { FormBuilder, Validators } from "@angular/forms";
-import { NGXToastrService } from "app/components/extra/toastr/toastr.service";
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { DatePipe } from "@angular/common";
 import { RefBankObj } from "app/shared/model/ref-bank-obj.model";
 import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
@@ -16,7 +16,6 @@ import { UcAddressObj } from "app/shared/model/uc-address-obj.model";
 import { InputAddressObj } from 'app/shared/model/input-address-obj.model';
 import { InputFieldObj } from 'app/shared/model/input-field-obj.model';
 import { AdInsHelper } from "app/shared/AdInsHelper";
-import { RegexService } from 'app/customer/regex.service';
 import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-obj.model';
 import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
@@ -25,6 +24,7 @@ import { ReqRefEmployeeObj } from "app/shared/model/request/user-organization/re
 import { AdInsConstant } from "app/shared/AdInstConstant";
 import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
+import { RegexService } from "app/shared/services/regex.service";
 
 @Component({
   selector: "app-employee-add",

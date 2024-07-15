@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
@@ -11,7 +11,6 @@ import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { ReqRefMasterByTypeCodeAndMappingCodeObj } from 'app/shared/model/ref-master/req-ref-master-by-type-code-and-mapping-code-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { NgxRouterService } from '@adins/fe-core';
@@ -72,7 +71,7 @@ export class NotificationAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var refMasterNotifTypeObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+    const refMasterNotifTypeObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationType,
       MappingCode: null
     };
@@ -87,7 +86,7 @@ export class NotificationAddEditComponent implements OnInit {
       }
     );
 
-    var refMasterNotifMethodObj: ReqRefMasterByTypeCodeAndMappingCodeObj = {
+    const refMasterNotifMethodObj = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeNotificationMethod,
       MappingCode: null
     };

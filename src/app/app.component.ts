@@ -1,20 +1,15 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { HubConnection } from '@microsoft/signalr';
 import { AdInsHelper } from './shared/AdInsHelper';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie';
 import {NavigationEnd, Router} from '@angular/router';
 import { CommonConstant } from './shared/constant/CommonConstant';
-import { URLConstant } from './shared/constant/URLConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
 import { UrlConstantNew } from './shared/constant/URLConstantNew';
-import { AdInsConstant } from './shared/AdInstConstant';
 import { EnviConfigService } from './shared/services/enviConfig.service';
 import Swal from 'sweetalert2';
-import {filter} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
 import { NgxRouterService } from '@adins/fe-core';
-// import * as signalR from '@aspnet/signalr';
 
 @Component({
     selector: 'app-root',

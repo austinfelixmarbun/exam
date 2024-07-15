@@ -23,7 +23,7 @@ import { OfficeAreaPagingComponent } from './office-area/office-area-paging/offi
 import { OfficeAreaMemberPagingComponent } from './office-area/office-area-member/office-area-member-paging/office-area-member-paging.component';
 import { UcShowErrorsModule } from '@adins/uc-show-errors';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsModule } from 'app/components/adins-module/adins.module';
 import { AdInsSharedModule } from 'app/components/adins-module/adins-shared.module';
 import { OfficeEmpViewComponent } from './office-emp-view/office-emp-view.component';

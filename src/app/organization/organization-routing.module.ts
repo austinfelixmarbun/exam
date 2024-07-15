@@ -12,7 +12,8 @@ import { UcTemplateComponent } from '@adins/uctemplate';
 
 const routes: Routes = [
   {
-    path: '',canActivate: [AuthGuard] ,
+    path: '',
+    canActivate: [AuthGuard],
     children: [
       {
         path: PathConstant.JOB_TITLE,

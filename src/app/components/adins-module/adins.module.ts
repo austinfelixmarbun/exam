@@ -21,7 +21,7 @@ import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
 import { UcDirectiveValidateDateModule } from '@adins/uc-directive-validate-date';
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpConfigInterceptor } from 'app/interceptor/httpconfig.interceptor';
+import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interceptor';
 
 @NgModule({
     exports: [
