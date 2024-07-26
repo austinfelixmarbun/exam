@@ -334,6 +334,34 @@ form .textarea-field-2{
     background: #246CFE;
 }
 
+/* Text Divider */
+.text-divider {
+    display: flex;
+    align-items: center;
+    --text-divider-gap: 1rem;
+}
+  
+.text-divider::before,
+.text-divider::after {
+    content: '';
+    height: 1px;
+    background-color: #dedede;
+    flex-grow: 1;
+}
+
+.text-divider::before {
+    margin-right: var(--text-divider-gap);
+}
+
+.text-divider::after {
+    margin-left: var(--text-divider-gap);
+}
+
+.text-muted {
+    color: #2D3436;
+    font-weight: 500;
+}
+
 /* END CSS FOR NEW UI */
 
 .number {

@@ -10,6 +10,7 @@ import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { EnviConfigService } from './shared/services/enviConfig.service';
 import Swal from 'sweetalert2';
 import { NgxRouterService } from '@adins/fe-core';
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -30,6 +31,9 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        const enableSafeUrl = JSON.stringify(environment.useSafeUrl);
+        localStorage.setItem('enableSafeUrl', enableSafeUrl);
+
         this.setIdentity(this.cookieService.get(CommonConstant.USER_ACCESS));
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         if (AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) != null) {

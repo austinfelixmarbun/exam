@@ -14,6 +14,8 @@ import { formatDate } from '@angular/common';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { NgxRouterService } from '@adins/fe-core';
+import { ConfinsAuthService } from 'app/shared/auth/confins-auth.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-login-page',
@@ -45,18 +47,46 @@ export class LoginPageComponent implements OnInit {
   showPass: boolean = false;
   gsValueDefaultPass: string = "";
 
+  SpinnerHeaders = new HttpHeaders({
+    'IsLoading': "true"
+  });
+  SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
+
+  // OIDC Integration
+  public providers: any[] = [];
+  public oidc: Record<string, any>;
+
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private cookieService: CookieService,
-    private toastr: NGXToastrService, private url: UrlConstantNew,
-    private ngxRouter: NgxRouterService) {
+    private toastr: NGXToastrService, private url: UrlConstantNew, 
+    private ngxRouter: NgxRouterService, private authService: ConfinsAuthService) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
+    this.oidc = environment.oidc;
     this.version = localStorage.getItem(CommonConstant.VERSION);
-    this.route.queryParams.subscribe(params => {
-      const queryParams = this.ngxRouter.getQueryParams(params);
-      if (queryParams['token'] != null) {
-        this.token = queryParams['token'];
+    this.route.queryParams.subscribe(async params => {
+      const query = this.ngxRouter.getQueryParams(params);
+      if (query['token'] != null) {
+        this.token = query['token'];
         AdInsHelper.SetCookie(this.cookieService, CommonConstant.TOKEN, this.token);
+      }
+
+      await this.fetchIdentityProvider();
+
+      if (query['code']) {
+        this.authService.exchangeCode(query['code'], '/Pages/Login').then(async res => {
+          if (res?.error) {
+            return this.toastr.errorMessage(res['error_description']);
+          }
+
+          const AuthObj = Boolean(localStorage.getItem('AuthObj')) ? JSON.parse(localStorage.getItem('AuthObj')) : {Username: 'user1', Password: 'P@ssw0rd123'};
+          this.authService.token = res;
+          await this.getUserDetail(AuthObj?.Username, AuthObj?.Password);
+          console.log('auth success', this.authService.token);
+        }, (err) => {
+          console.error('Error: ', err);
+          this.toastr.errorMessage('Authentication failed!');
+        })
       }
     });
 
@@ -65,10 +95,6 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  SpinnerHeaders = new HttpHeaders({
-    'IsLoading': "true"
-  });
-  SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
   async ngOnInit() {
     if (this.token != null) {
       await this.http.post(this.url.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
@@ -106,48 +132,72 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  private async fetchIdentityProvider() {
+    const listProvider = await this.authService.getIdentityProviders();
+    this.providers.push(...listProvider);
+    // console.table(providers);
+  }
+
+  loginWithProvider(alias: string) {
+    const redirectUri = window.location.origin + '/Pages/Login';
+    window.location.href = `${URLConstant.env[this.oidc.issuer]}/realms/${this.oidc.realm}/protocol/openid-connect/auth?client_id=${this.oidc.clientId}&redirect_uri=${redirectUri}&response_type=code&scope=openid&kc_idp_hint=${alias}`;
+  }
+
+  async getUserDetail(username: string, password: string = '') {
+    var requestObj = { "Username": username, "Password": password };
+    await this.http.post(this.url.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
+      (response) => {
+        this.loginObj.response = response;
+      });
+    
+    this.loginObj.user = username;
+    this.loginObj.pwd = password;
+    
+    await this.http.post<any>(this.url.GetUserEmpByUsername, requestObj).toPromise().then(
+      async (response) => {
+        this.result = response;
+        if (this.result.IsNeedUpdatePassword) {
+          this.toastr.warningMessage(ExceptionConstant.EXP_PASSWORD);
+          this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
+        }
+        else {
+          if (this.otpProperties['IsUseOtp']) {
+            this.sendOtp();
+          }
+          else {
+            this.selectRole();
+          }
+        }
+      }
+    );
+  }
+
   async onSubmit(event) {
     event.preventDefault();
     const username = this.userInputRef.nativeElement.value;
     const password = this.userPassRef.nativeElement.value;
     var requestObj = { "Username": username, "Password": password };
+    localStorage.setItem('AuthObj', JSON.stringify(requestObj));
     //this.rolePickService.openDialog(data.returnObject);
 
-    this.http.post(this.url.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
-      async (response) => {
-        if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
-          this.mode = "locked";
+    if (this.oidc?.enabled) {
+      await this.authService.login(username, password).then(async res => {
+        // store jwt token to secure storage
+        this.authService.token = res;
+        await this.getUserDetail(username, password);
+      });
+    } else {
+      this.http.post(this.url.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+        async (response) => {
+          if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
+            this.mode = "locked";
+          }
+          else {
+            await this.getUserDetail(username, password);
+          };
         }
-        else {
-          //this.cookieService.put("username", username);
-
-          await this.http.post(this.url.GetListJobTitleByUsernameAndModuleV2, {UserName : username, Module : environment.Module}, AdInsConstant.SpinnerOptions).toPromise().then(
-            (response) => {
-              this.loginObj.response = response;
-            });
-          this.loginObj.user = username;
-          this.loginObj.pwd = password;
-          
-          await this.http.post<any>(this.url.GetUserEmpByUsername, requestObj).toPromise().then(
-            async (response) => {
-              this.result = response;
-              if (this.result.IsNeedUpdatePassword) {
-                this.toastr.warningMessage(ExceptionConstant.EXP_PASSWORD);
-                this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
-              }
-              else {
-                if (this.otpProperties['IsUseOtp']) {
-                  this.sendOtp();
-                }
-                else {
-                  this.selectRole();
-                }
-              }
-            }
-          )
-        };
-      }
-    );
+      );
+    }
   }
 
   onSubmitOtp() {

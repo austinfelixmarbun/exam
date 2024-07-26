@@ -45,5 +45,6 @@
     "TaxUrl": "https://r3app-server.ad-ins.com/TAX",
     "contractDocR3Web": "https://r3web-server.ad-ins.com/CONTRACT_DOC",
     "FoundationR3Url_svc": "https://r3app-server.ad-ins.com/FOUNDATION_CORE_DEV",
-    "ApprovalR3Url_svc": "https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT"
+    "ApprovalR3Url_svc": "https://r3app-server.ad-ins.com/Approval_R3_BE_SPRINGBOOT",
+    "KeycloakUrl": "http://localhost:8080"
 }
