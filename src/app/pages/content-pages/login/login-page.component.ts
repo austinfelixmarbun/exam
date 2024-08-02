@@ -74,15 +74,15 @@ export class LoginPageComponent implements OnInit {
       await this.fetchIdentityProvider();
 
       if (query['code']) {
-        this.authService.exchangeCode(query['code'], '/Pages/Login').then(async res => {
+        this.authService.exchangeCode(query['code']).then(async res => {
           if (res?.error) {
             return this.toastr.errorMessage(res['error_description']);
           }
 
-          const AuthObj = Boolean(localStorage.getItem('AuthObj')) ? JSON.parse(localStorage.getItem('AuthObj')) : {Username: 'user1', Password: 'P@ssw0rd123'};
           this.authService.token = res;
+          const identity = this.authService.introspect(this.authService.token?.access_token);
+          const AuthObj  = {Username: identity['preferred_username'], Password: ''};
           await this.getUserDetail(AuthObj?.Username, AuthObj?.Password);
-          console.log('auth success', this.authService.token);
         }, (err) => {
           console.error('Error: ', err);
           this.toastr.errorMessage('Authentication failed!');

@@ -14,6 +14,7 @@ export const environment = {
   isPageFromService: true,
   useSafeUrl: true,
 
+  // Open ID Connect Integration
   oidc: {
     enabled: true,
     issuer: 'KeycloakUrl',
