@@ -78,7 +78,7 @@ export class RolePickService {
                   'IsLoading': "true"
                 });
                 let SpinnerOptions    = { headers: SpinnerHeaders, withCredentials: true };
-                const loginByRoleUrl  = environment.oidc.enabled ? this.UrlConstantNew.LoginByRoleV2 : this.UrlConstantNew.LoginByRole;
+                const loginByRoleUrl  = environment.identityProviders?.enabled ? this.UrlConstantNew.LoginByRoleV2 : this.UrlConstantNew.LoginByRole;
                 this.http.post(loginByRoleUrl, roleObject, SpinnerOptions).subscribe(
                     (response) => {
                         //Cookie sudah diambil dari BE (Di set manual dulu)

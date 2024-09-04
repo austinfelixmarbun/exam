@@ -3,7 +3,7 @@ import { AdInsConstant } from "app/shared/AdInstConstant";
 import { environment } from "environments/environment";
 import { CommonConstant } from "./constant/CommonConstant";
 import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie";
+import { CookieOptions, CookieService } from "ngx-cookie";
 import * as CryptoJS from 'crypto-js';
 import { NgxRouterService } from "@adins/fe-core";
 
@@ -215,8 +215,8 @@ export class AdInsHelper {
         return this.DecryptString(localStorage.getItem(key), environment.ChipperKeyLocalStorage);
     }
 
-    public static SetCookie(cookieService: CookieService, key: string, value: string) {
-        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie));
+    public static SetCookie(cookieService: CookieService, key: string, value: string, opt?: CookieOptions) {
+        cookieService.put(key, this.EncryptString(value, environment.ChipperKeyCookie), opt);
     }
 
     public static GetCookie(cookieService: CookieService, key: string) {
@@ -257,13 +257,10 @@ export class AdInsHelper {
         AdInsHelper.SetCookie(cookieService, "UserAccess", JSON.stringify(Identity));
         AdInsHelper.SetCookie(cookieService, "Username", JSON.stringify(response["Identity"]["UserName"]));
 
-        if(typeof response["Identity_JWT"] === 'string')
+        const isIamEnabled = environment.identityProviders.enabled;
+        if(typeof response["Identity_JWT"] === 'string' && isIamEnabled === false)
         {
             AdInsHelper.SetCookie(cookieService, CommonConstant.JWT_TOKEN, response["Identity_JWT"] ?? "");
-        }
-        else
-        {
-            AdInsHelper.SetCookie(cookieService, CommonConstant.JWT_TOKEN, "");              
         }
 
         AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);

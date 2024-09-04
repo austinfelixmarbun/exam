@@ -41,12 +41,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotFoundComponent } from './not-found-page/not-found.component';
 import { ExecutorService, UcTemplateService } from '@adins/uctemplate';
+import { UcloginhistModule } from '@adins/ucloginhist';
 import { AdinsTemplateService } from './shared/services/adins-template.service';
 import { UcformModule } from '@adins/ucform';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AdInsExecutorService } from './shared/services/adins-executor.service';
 import { UcformarrayModule } from '@adins/ucformarray';
 import { NGXToastrService } from './shared/services/toastr.service';
+import { AppContextService, LoggingService } from '@adins/fe-core';
+import { LogsInterceptor } from './shared/interceptor/logs.interceptor';
+import { ApplicationContextService } from './shared/services/application-context.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -104,6 +108,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         ReactiveFormsModule,
         UcdropdownsearchModule,
         UcformModule,
+        UcloginhistModule,
         NgMultiSelectDropDownModule.forRoot(),
         ServiceWorkerModule.register('ngsw-worker.js', {
           enabled: environment.production,
@@ -129,8 +134,10 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         UrlConstantNew,
         EnviConfigService,
         FormGroupDirective,
+        LoggingService,
         { provide: UcTemplateService, useClass: AdinsTemplateService },
         { provide: ExecutorService, useClass: AdInsExecutorService },
+        { provide: AppContextService, useClass: ApplicationContextService },
         {
             provide: APP_INITIALIZER, useFactory: enviConfig, multi: true, deps: [EnviConfigService]
         },
@@ -139,6 +146,7 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
             provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
         },
         ErrorDialogService,
+        { provide: HTTP_INTERCEPTORS, useClass: LogsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
         {provide: MAT_DIALOG_DATA, useValue: {}}
     ],

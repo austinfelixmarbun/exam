@@ -72,7 +72,7 @@ export class ResetPasswordComponent implements OnInit {
         NewPassword: this.ResetPassForm.controls["NewPassword"].value,
         Password: "-",
       };
-      this.http.post(this.UrlConstantNew.ResetPasswordByUsername, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(this.UrlConstantNew.ResetPasswordByUsernameV3_1, requestObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           this.isCompleted = true;

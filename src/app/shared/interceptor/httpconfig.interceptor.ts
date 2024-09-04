@@ -26,7 +26,7 @@ import { ConfinsAuthService } from '../auth/confins-auth.service';
 export class HttpConfigInterceptor implements HttpInterceptor {
     count = 0;
     constructor(public errorDialogService: ErrorDialogService, private spinner: NgxSpinnerService, private router: Router, private toastr: NGXToastrService, 
-        private cookieService: CookieService, private confinsAuthService: ConfinsAuthService) { }
+        private cookieService: CookieService, private authService: ConfinsAuthService) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log(request);
         if (environment.SpinnerOnHttpPost) {
@@ -68,7 +68,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         if (currentUserContext != null) {
             token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.confinsAuthService.token?.access_token;
+            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.authService.token?.AccessToken;
 
             myObj = new Object();
             if (request.body != null) {
@@ -83,7 +83,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
             myObj["RequestDateTime"] = businessDt;
             token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.confinsAuthService.token?.access_token;
+            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.authService.token?.AccessToken;
         }
 
         if (token == null) {

@@ -22,6 +22,8 @@ import { UcDirectiveValidateDateModule } from '@adins/uc-directive-validate-date
 import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interceptor';
+import { LogsInterceptor } from 'app/shared/interceptor/logs.interceptor';
+import { LoggingService } from '@adins/fe-core';
 
 @NgModule({
     exports: [
@@ -69,10 +71,10 @@ import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interce
         UcDirectiveValidateDateModule,
         UcdropdownsearchModule
     ],
-    declarations: [
-    ],
     providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+      LoggingService,
+      { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: LogsInterceptor, multi: true },
     ]
 })
 

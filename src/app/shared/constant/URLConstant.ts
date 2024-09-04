@@ -305,9 +305,13 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
     public static UpdateFormFeatureAuthForm = environment.FoundationR3Url + "/v1" + "/MenuManagement/UpdateFormFeatureAuthForm";
     public static GetAllActiveRefFormAndPathExist = environment.FoundationR3Url + "/v1" + "/MenuManagement/GetAllActiveRefFormAndPathExist";
     public static GetAllActiveRefForm = environment.FoundationR3Url + "/v1" + "/MenuManagement/GetAllActiveRefForm";
+    
+    //AUTHENTICATION
     public static LoginByRole = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByRole";
     public static LoginByToken = environment.FoundationR3Url + "/v1" + "/Authenticate/LoginByToken";
     public static UpdateToken = environment.FoundationR3Url + "/v1" + "/Authenticate/UpdateRole";
+    public static LoginByCode = `${this.env.FoundationR3Url}/v1/Authenticate/LoginByCode`;
+    public static Logout = `${this.env.FoundationR3Url}/v2/Authenticate/Logout`;
     public static LogoutAuth = environment.FoundationR3Url + "/v1" + "/Authenticate/Logout";
 
     //FORM FEATURE
@@ -1206,6 +1210,13 @@ public static GetLbppmsCntrprtByLbppmsCntrprtCode = environment.FoundationR3Url 
    public static AddRefInsClaimDoc = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/AddRefInsClaimDoc"
    public static EditRefInsClaimDoc = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/EditRefInsClaimDoc"
    public static GetRefInsClaimDocByRefInsClaimDocCode = environment.FoundationR3Url + "/v1" + "/RefInsClaimDoc/GetRefInsClaimDocByRefInsClaimDocCode"
+
+   //#region IDENTITY PROVIDER
+   public static GetIdentityProviders = `${this.env.FoundationR3Url}/v1/IdentityProvider/Instances`; 
+   //#endregion
+
+   public static GetRefUserPasswordExpirationDtById = environment.FoundationR3Url + "/v1" + "/RefUser/GetRefUserPasswordExpirationDtById";
+   
 }
 
 export const envi: any = URLConstant.env;

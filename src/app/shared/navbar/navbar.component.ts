@@ -4,7 +4,7 @@ import { RolePickService } from 'app/shared/rolepick/rolepick.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { formatDate } from '@angular/common';
 import { NotificationHObj } from '../model/notification-h/notification-h-obj.model';
@@ -19,6 +19,11 @@ import { AdInsHelperService } from '../services/AdInsHelper.service';
 import { RolePickNewService } from '../rolepick/rolepick-new.service';
 import { UcnotificationComponent } from '@adins/ucnotification';
 import { UcNotificationObj } from '../model/uc-notification-obj.model';
+import { ConfinsAuthService } from '../auth/confins-auth.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UcloginhistComponent } from '@adins/ucloginhist';
+import { URLConstant } from '../constant/URLConstant';
+import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
     selector: 'app-navbar',
@@ -45,17 +50,32 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     IsUseNotification: string = '';
     @ViewChild('appnotif') appnotif: UcnotificationComponent;
 
+    passwordExpirationObj: any = {
+        isNotify: false
+    };
+
     notifications: object[] = [];
 
     readonly ChangeLink: string = NavigationConstant.PAGES_CHANGE_PASSWORD;
-    constructor(public translate: TranslateService,
+    constructor(public translate: TranslateService, 
+        private route: ActivatedRoute,
+        private authService: ConfinsAuthService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
         private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService, 
         private UrlConstantNew: UrlConstantNew,
         private adInsHelperService: AdInsHelperService,
-        private rolePickNewService: RolePickNewService) {
+        private rolePickNewService: RolePickNewService,
+        public dialog: MatDialog,
+        private ngxRouter: NgxRouterService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
+        this.route.queryParams.subscribe(params => {
+            const queryParams = this.ngxRouter.getQueryParams(params);
+            if (queryParams.showLoginHistory == 1) {
+                this.showLoginHistory();
+                window.history.replaceState({}, "", window.location.href.split("?")[0])
+            }
+        })
     }
 
     needUnsubscribe(){
@@ -66,6 +86,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
     async ngOnInit() {
         this.checkUseNotification();
+        this.checkPasswordExpiration();
         this.setUser();
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
@@ -155,12 +176,19 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     logout() {
-        this.http.post(this.UrlConstantNew.Logout, "", AdInsConstant.SpinnerOptions);
-        // this.needUnsubscribe();
-        AdInsHelper.ClearAllLog(this.cookieService);
-        this.clearSession();
-        this.cookieService.removeAll();
-        this.router.navigate([NavigationConstant.PAGES_LOGIN]);
+        const logoutObj = {
+            RefreshToken: this.authService.token?.RefreshToken
+        };
+
+        this.http.post(this.UrlConstantNew.LogoutV2, logoutObj, AdInsConstant.SpinnerOptions).subscribe({
+            next: () => {
+                AdInsHelper.ClearAllLog(this.cookieService);
+                this.clearSession();
+                this.cookieService.removeAll();
+                this.router.navigate([NavigationConstant.PAGES_LOGIN]);
+                this.authService.revoke();
+            }
+        });
     }
 
     ShowRole() {
@@ -235,6 +263,45 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             }
             //this.notifications.push({ title: response, desc: "User " + response });
         });
+    }
+
+    showLoginHistory() {
+        const user = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        const dialogConfig = new MatDialogConfig();
+        const object = {
+            id: user.RefUserId
+        };  
+        dialogConfig.id = 'login-history-modal';
+        dialogConfig.width = '45%';
+        dialogConfig.data = object;
+        dialogConfig.backdropClass = "blur-bg";
+        dialogConfig.maxHeight = '80vh';
+        const dialogRef = this.dialog.open(UcloginhistComponent, dialogConfig);
+        dialogRef.componentInstance['envi']  = URLConstant.env;
+    }
+
+    checkPasswordExpiration() {
+        const useraccess: any = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        const data = AdInsHelper.GetCookie(this.cookieService, `PASSWORD_EXPIRATION_STATUS_${useraccess.RefUserId}`);
+        if (data !== null && data !== undefined) {
+            this.passwordExpirationObj = JSON.parse(data);
+            return;
+        }
+        this.http.post(this.UrlConstantNew.GetRefUserPasswordExpirationDtById, {id: useraccess.RefUserId}).subscribe(
+            (res: any) => {
+                this.passwordExpirationObj = {
+                    username: res.Username,
+                    isNotify: res.IsNotify,
+                    remainingPasswordExpirationDays: res.RemainingPasswordExpirationDays,
+                    passwordExpirationDt: res.PasswordExpirationDt
+                };
+                const expiredDt = new Date();
+                expiredDt.setMinutes(expiredDt.getMinutes() + 10);
+                AdInsHelper.SetCookie(this.cookieService, `PASSWORD_EXPIRATION_STATUS_${useraccess.RefUserId}`, JSON.stringify(this.passwordExpirationObj), {
+                    expires: expiredDt
+                });
+            }
+        )
     }
 
     private clearSession() {

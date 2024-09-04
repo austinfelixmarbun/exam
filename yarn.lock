@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adins/fe-core@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/@adins/fe-core/-/fe-core-1.2.3.tgz"
-  integrity sha512-lHymHEmCHjq1O3ykytbalQLUyp/OutzhDWy8BAdk4ewcOB5VtaygUHsrPV1W4wfyrd/w5K1GXt7fKO7aD0grpQ==
+"@adins/fe-core@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/@adins/fe-core/-/fe-core-1.4.2.tgz"
+  integrity sha512-GSXpIE17lhEeJH8tbjVpkgIYpEFTsDWPHHrkP2rLjyawH458ai6Gci0Y/gAoBmwqbMgPEWDusSJp32Vc6jHsbw==
   dependencies:
     tslib "^2.3.0"
 
@@ -16,10 +16,10 @@
   dependencies:
     tslib "^1.9.0"
 
-"@adins/integration@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@adins/integration/-/integration-1.1.1.tgz"
-  integrity sha512-YzXLsBYWHOkN9yev00kwqzNQF49POMb8XOWN4xhX2GidZZZEVl2/AOF0piu8Wjih9ts6gzFiE1BNMF6ObNJ3OQ==
+"@adins/integration@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/@adins/integration/-/integration-1.2.0.tgz"
+  integrity sha512-SWcyX+9e26wYB/sJhezh9VTmXOdvTlpPMQkUD5n1GsCRiimjn+2yhkH8chmcMTpXmYgCoyxPYUeQnHOKPFeDpQ==
   dependencies:
     tslib "^2.3.0"
 
@@ -238,6 +238,13 @@
   version "3.7.21-canary.0"
   resolved "https://registry.npmjs.org/@adins/ucgridview/-/ucgridview-3.7.21-canary.0.tgz"
   integrity sha512-1CBcEn17ZnVV4tOcsb2BtKxmNcaEZFvp8UeAO+LnHu9JFm8hAxXa/WAWjFEEXYaMtiKkNuSX4CJPyXqxPCj/3g==
+  dependencies:
+    tslib "^2.3.0"
+
+"@adins/ucloginhist@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@adins/ucloginhist/-/ucloginhist-1.0.0.tgz"
+  integrity sha512-O0aXU56DsAhkPo1lwIPpwAR2jYYLLlo20tm34UUNNC95OinLt0S0HZC9pHSUgOjCLX96u2R17wQAmI+wHSDk6Q==
   dependencies:
     tslib "^2.3.0"
 

@@ -9,7 +9,7 @@ import { URLConstant } from '../constant/URLConstant';
 export class ConfinsAuthService extends AuthService {
   
   get config(): { [key: string]: any; } {
-    const options = environment.oidc;
+    const options = environment.identityProviders;
     const serviceUrl = URLConstant.env[options.issuer];
     return {...options, ...{serviceUrl: serviceUrl}};
   }

@@ -51,17 +51,19 @@
                 </div>
               </div>
 
-              <ng-container *ngIf="oidc?.enabled">
+              <!-- #region Identity Providers -->
+              <ng-container *ngIf="providers.length > 0">
                 <div class="mt-3 mb-3 text-divider text-muted">Or continue with</div>
                 <div class="d-flex flex-column">
                   <ng-container *ngFor="let provider of providers">
-                    <a *ngIf="provider.enabled" class="btn btn-full btn-outline-secondary" (click)="loginWithProvider(provider.alias)">
-                      <img [src]="'assets/icons/'+ provider.alias +'.svg'" style="height: 24px; width: 24px; margin-right: 8px;" />
-                      <span style="font-weight: 500;">Log in with <span style="text-transform: capitalize;">{{provider.alias}}</span></span>
+                    <a *ngIf="!provider.HideOnLoginPage" class="btn btn-full btn-outline-secondary" (click)="loginWithProvider(provider.AuthUrl)">
+                      <img [src]="'assets/icons/'+ provider.ProviderId +'.svg'" style="height: 24px; width: 24px; margin-right: 8px;" />
+                      <span style="font-weight: 500;">Log in with <span style="text-transform: capitalize;">{{provider.Alias}}</span></span>
                     </a>
                   </ng-container>
                 </div>
               </ng-container>
+              <!-- #endregion End of Identity Providers -->
 
             </form>
           </div>

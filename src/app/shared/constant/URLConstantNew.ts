@@ -3,18 +3,15 @@ import { EnviConfigService } from "../services/enviConfig.service";
 import { UrlConstantService } from "../services/urlConstant.service";
 
 import * as _urlConstant from "../../../assets/urlConstant.json";
-import { URLConstant } from "./URLConstant";
 @Injectable()
 
 export class UrlConstantNew{
 
     constructor( private configEnv: EnviConfigService, private urlConfig: UrlConstantService) {
     }
-    
-    public env = URLConstant.env;
-    private url =  _urlConstant;
-    // public env = this.configEnv.getConfig();
-    // private url = this.urlConfig.getConfig();
+
+    public env = this.configEnv.getConfig();
+    private url = this.urlConfig.getConfig();
 
     // SYS CONFIG RESULT
     public GetSysConfigResultByCode = this.env.FoundationR3Url + this.url.GetSysConfigResultByCode;
@@ -165,6 +162,7 @@ export class UrlConstantNew{
     public DeleteRefUserRole = this.url.DeleteRefUserRole;
     public GetRefUserByResetCode = this.env.FoundationR3Url + this.url.GetRefUserByResetCode;
     public ResetPasswordByUsername = this.env.FoundationR3Url + this.url.ResetPasswordByUsername;
+    public ResetPasswordByUsernameV3_1 = this.env.FoundationR3Url + this.url.ResetPasswordByUsernameV3_1;
 
     //REF-ROLE
     public GetRefRolePaging = this.env.FoundationR3Url + this.url.GetRefRolePaging;
@@ -1216,8 +1214,10 @@ export class UrlConstantNew{
 
     public Login = this.env.FoundationR3Url + this.url.Login;
     public LoginV2 = this.env.FoundationR3Url + this.url.LoginV2;
+    public LoginV4 = this.env.FoundationR3Url + this.url.LoginV4;
     public LoginWithToken = this.env.FoundationR3Url + this.url.LoginWithToken;
     public Logout = this.env.FoundationR3Url + this.url.Logout;
+    public LogoutV2 = this.env.FoundationR3Url + this.url.LogoutV2;
     public GetAllActiveRefFormByRoleCodeAndModuleCode = this.env.FoundationR3Url + this.url.GetAllActiveRefFormByRoleCodeAndModuleCode;
     public GetDashboardAccessToken = this.env.FoundationR3Url + this.url.GetDashboardAccessToken;
     public GetThingsToDoCamunda = this.env.FoundationR3Url_svc + this.url.GetThingsToDoCamunda;
@@ -1234,6 +1234,8 @@ export class UrlConstantNew{
 
     //REF-USER
     public GetRefUserByUsername = this.env.FoundationR3Url + this.url.GetRefUserByUsername;
+    public GetRefUserPasswordExpirationDtById = this.env.FoundationR3Url + this.url.GetRefUserPasswordExpirationDtById;
+
 
     //FRAMEWORK
     public GetPagingObjectBySQL = this.url.GetPagingObjectBySQL; // UCPaging

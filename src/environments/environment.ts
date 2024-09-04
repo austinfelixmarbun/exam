@@ -11,16 +11,12 @@ export const environment = {
   Module: "IAM",
   isCore: true,
   SpinnerOnHttpPost: false,
-  isPageFromService: true,
+  isPageFromService: false,
   useSafeUrl: true,
 
-  // Open ID Connect Integration
-  oidc: {
-    enabled: true,
-    issuer: 'KeycloakUrl',
-    realm: 'confins',
-    clientId: 'confinsr3',
-    clientSecret: 'Px53F7CBQDzSm8b4JdqmS2TjLC3HCAgN'
+  // Keycloak Open ID Integration
+  identityProviders: {
+    enabled: true
   },
 
   losUrl: 'https://r3app-server.ad-ins.com/LOS_DEV',

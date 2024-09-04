@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -52,17 +52,17 @@ export class LoginPageComponent implements OnInit {
   });
   SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
 
-  // OIDC Integration
+  // Open ID Integration
   public providers: any[] = [];
-  public oidc: Record<string, any>;
+  public iamOptions: Record<string, any>;
 
   constructor(private router: Router, private http: HttpClient, public rolePickService: RolePickService,
     private route: ActivatedRoute, private cookieService: CookieService,
-    private toastr: NGXToastrService, private url: UrlConstantNew, 
+    private toastr: NGXToastrService, private url: UrlConstantNew, private cdr: ChangeDetectorRef,
     private ngxRouter: NgxRouterService, private authService: ConfinsAuthService) {
     //Ini buat check klo misal udah login jadi lgsg lempar ke tempat laennya lagi
 
-    this.oidc = environment.oidc;
+    this.iamOptions = environment.identityProviders;
     this.version = localStorage.getItem(CommonConstant.VERSION);
     this.route.queryParams.subscribe(async params => {
       const query = this.ngxRouter.getQueryParams(params);
@@ -74,18 +74,23 @@ export class LoginPageComponent implements OnInit {
       await this.fetchIdentityProvider();
 
       if (query['code']) {
-        this.authService.exchangeCode(query['code']).then(async res => {
-          if (res?.error) {
-            return this.toastr.errorMessage(res['error_description']);
-          }
+        const redirectUri = `${window.location.origin}/Pages/Login`;
+        this.http.post(URLConstant.LoginByCode, {Code: query['code'], RedirectUri: redirectUri}, AdInsConstant.SpinnerOptions).subscribe({
+          next: async (res) => {
+            // if (res?.error) {
+            //   return this.toastr.errorMessage(res['error_description']);
+            // }
 
-          this.authService.token = res;
-          const identity = this.authService.introspect(this.authService.token?.access_token);
-          const AuthObj  = {Username: identity['preferred_username'], Password: ''};
-          await this.getUserDetail(AuthObj?.Username, AuthObj?.Password);
-        }, (err) => {
-          console.error('Error: ', err);
-          this.toastr.errorMessage('Authentication failed!');
+            console.log('Token', res);
+            this.authService.token = res;
+            const identity = this.authService.introspect(this.authService.token?.AccessToken);
+            const AuthObj  = {Username: identity['preferred_username'], Password: ''};
+            await this.getUserDetail(AuthObj?.Username, AuthObj?.Password);
+          },
+          error: err => {
+            console.error('Error: ', err);
+            this.toastr.errorMessage('Authentication failed!');
+          }
         })
       }
     });
@@ -123,7 +128,9 @@ export class LoginPageComponent implements OnInit {
         }
       );
     }
-    else{
+    
+    // Get  OTP Properties if not used iam integration
+    if (!this.iamOptions.enabled) {
       this.http.post(this.url.GetOtpProperties, {}).subscribe(
         (response) => {
           this.otpProperties = response;
@@ -133,14 +140,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   private async fetchIdentityProvider() {
-    const listProvider = await this.authService.getIdentityProviders();
-    this.providers.push(...listProvider);
-    // console.table(providers);
+    await this.http.post(URLConstant.GetIdentityProviders, null, AdInsConstant.SpinnerOptions).subscribe({
+      next: (response) => {
+        // this.providers.push(...response['Providers']);
+        const list: any[] = response['Providers'] || [];
+        this.providers = list.sort((a, b) => a?.Order.localeCompare(b?.Order));
+        console.log('Providers', this.providers);
+      }
+    });
   }
 
-  loginWithProvider(alias: string) {
+  loginWithProvider(authUrl: string) {
     const redirectUri = window.location.origin + '/Pages/Login';
-    window.location.href = `${URLConstant.env[this.oidc.issuer]}/realms/${this.oidc.realm}/protocol/openid-connect/auth?client_id=${this.oidc.clientId}&redirect_uri=${redirectUri}&response_type=code&scope=openid&kc_idp_hint=${alias}`;
+    window.location.href = `${authUrl}&redirect_uri=${redirectUri}`;
   }
 
   async getUserDetail(username: string, password: string = '') {
@@ -161,7 +173,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate([NavigationConstant.PAGES_CHANGE_PASSWORD], { queryParams: { "Username": username } });
         }
         else {
-          if (this.otpProperties['IsUseOtp']) {
+          if (Boolean(this.otpProperties?.IsUseOtp)) {
             this.sendOtp();
           }
           else {
@@ -180,24 +192,19 @@ export class LoginPageComponent implements OnInit {
     localStorage.setItem('AuthObj', JSON.stringify(requestObj));
     //this.rolePickService.openDialog(data.returnObject);
 
-    if (this.oidc?.enabled) {
-      await this.authService.login(username, password).then(async res => {
-        // store jwt token to secure storage
-        this.authService.token = res;
-        await this.getUserDetail(username, password);
-      });
-    } else {
-      this.http.post(this.url.LoginV2, requestObj, AdInsConstant.SpinnerOptions).subscribe(
-        async (response) => {
-          if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
-            this.mode = "locked";
-          }
-          else {
-            await this.getUserDetail(username, password);
-          };
+    const loginUrl = this.iamOptions.enabled ? this.url.LoginV4 : this.url.LoginV2;
+    this.http.post(loginUrl, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+      async (response) => {
+        if (response["StatusCode"] == CommonConstant.STATUS_CODE_USER_LOCKED) {
+          this.mode = "locked";
+          return;
         }
-      );
-    }
+
+        console.log('Token @Login:', response);
+        this.authService.token = response;
+        await this.getUserDetail(username, password);
+      }
+    );
   }
 
   onSubmitOtp() {
@@ -262,16 +269,20 @@ export class LoginPageComponent implements OnInit {
 
   selectRole() {
     this.rolePickService.openDialog(this.loginObj);
-    let object2 = {
-      Usernames: [
-        this.loginObj.user
-      ],
-      Role: "",
-      Message: "",
-      Title: "Password Expiration",
-      Type: "Notification"
-    };
-    this.http.post(this.url.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();    
+    
+    // Sent Password expiration if not used iam integration
+    if (!this.iamOptions.enabled) {
+      let object2 = {
+        Usernames: [
+          this.loginObj.user
+        ],
+        Role: "",
+        Message: "",
+        Title: "Password Expiration",
+        Type: "Notification"
+      };
+      this.http.post(this.url.SendNotificationRemainingPasswordExpirationDaysToUser, object2).subscribe();    
+    }
   }
 
   startTimer() {

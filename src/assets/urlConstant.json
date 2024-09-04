@@ -117,6 +117,7 @@
     "ChangePasswordRefUserByUsername": "/v1/RefUser/ChangePasswordRefUserByUsername",
     "GetRefUserByResetCode": "/v1/RefUser/GetRefUserByResetCode",
     "ResetPasswordByUsername": "/v1/RefUser/ResetPasswordByUsername",
+    "ResetPasswordByUsernameV3_1": "/v3.1/RefUser/ResetPasswordByUsername",
     "GetRefRolePaging": "/v1/UserManagement/GetRefRolePaging",
     "AddRefRole": "/v1/RefRole/AddRefRole",
     "AddRefRoleV2": "/v2/RefRole/AddRefRole",
@@ -838,6 +839,7 @@
     "GetRuleForAttrContent": "/v1/CustAttrContent/GetRuleForAttrContent",
     "Login": "/v1/Authenticate/Login",
     "LoginV2": "/v2/Authenticate/Login",
+    "LoginV4": "/v4/Authenticate/Login",
     "LoginWithToken": "/v1/Authenticate/LoginWithToken",
     "GetJournalResultPagingObjectBySQL": "/Generic/GetJournalResultPagingObjectBySQL",
     "GetCenterGrpByCenterGrpTypeCode": "/v1/RefOffice/GetCenterGrpByCenterGrpCode",
@@ -980,5 +982,8 @@
     "GetPefindoTrxSrcData" : "/v1/Pefindo/GetPefindoTrxSrcData",
     "PefindoSmartSearchV2" : "/v2/Pefindo/PefindoSmartSearch",
     "SubmitEditRefAttr" : "/v1/RefPaymentAlloc/SubmitEditRefAttr",
-    "GetListVendorContactPersonWithoutJobPositionByVendorId" : "/v1/VendorContactPerson/GetListVendorContactPersonWithoutJobPositionByVendorId"
+    "GetListVendorContactPersonWithoutJobPositionByVendorId" : "/v1/VendorContactPerson/GetListVendorContactPersonWithoutJobPositionByVendorId",
+    "GetIdentityProviders": "v1/IdentityProvider/Instances",
+    "LogoutV2": "/v2/Authenticate/Logout",
+    "GetRefUserPasswordExpirationDtById": "/v1/RefUser/GetRefUserPasswordExpirationDtById"
 }

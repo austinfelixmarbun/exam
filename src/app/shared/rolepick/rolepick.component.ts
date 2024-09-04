@@ -142,7 +142,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
 
     }
     else {
-      const loginByRoleUrl  = environment.oidc.enabled ? this.UrlConstantNew.LoginByRoleV2 : this.UrlConstantNew.LoginByRole;
+      const loginByRoleUrl  = environment.identityProviders.enabled ? this.UrlConstantNew.LoginByRoleV2 : this.UrlConstantNew.LoginByRole;
       this.http.post(loginByRoleUrl, roleObject, this.SpinnerOptions).subscribe(
         (response) => {
           //Cookie sudah diambil dari BE (Di set manual dulu)
@@ -158,7 +158,7 @@ export class RolepickComponent implements OnInit, AfterViewInit {
           this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: this.listRole[this.selectedOffice].Roles[this.selectedRole].RoleCode, ModuleCode: environment.Module }, { withCredentials: true }).subscribe(
             (response) => {
               AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
-              this.router.navigate([NavigationConstant.DASHBOARD]);
+              this.router.navigate([NavigationConstant.DASHBOARD], {queryParams: {showLoginHistory: 1}});
               this.dialog.closeAll();
             });
         }

@@ -42,6 +42,6 @@ export class AdinsTemplateService extends UcTemplateService {
     this.moment = _moment;
     this.module = Module;
     this.navConstant = NavigationConstant
-    this.baseUrl = envi.FoundationR3Web;
+    this.baseUrl = window.location.origin; //envi.FoundationR3Web;
   }
 }
