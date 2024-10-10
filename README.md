@@ -10,6 +10,10 @@ Run `ng serve` or `ng serve -aot` for a dev server. Navigate to `http://localhos
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
+## Version
+v1.1
+- Bugfix login keycloak error
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
