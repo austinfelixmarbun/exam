@@ -1,9 +1,13 @@
 image: atlassian/default-image:3
 
 definitions:
+  caches:
+    sonar: ~/.sonar
   steps:
     - step: &run-sonarscanner
         name: Run Sonarscanner
+        caches:
+          - sonar
         script:
         - pipe: sonarsource/sonarqube-scan:3.0.2
           variables:
