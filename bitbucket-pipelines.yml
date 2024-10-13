@@ -1,0 +1,20 @@
+image: atlassian/default-image:3
+
+definitions:
+  steps:
+    - step: &run-sonarscanner
+        name: Run Sonarscanner
+        script:
+        - pipe: sonarsource/sonarqube-scan:3.0.2
+          variables:
+            SONAR_HOST_URL: ${SONAR_HOST_URL}
+            SONAR_TOKEN: ${SONAR_TOKEN}
+            EXTRA_ARGS: >
+              -Dsonar.projectKey=R3CORE:IAM_FE
+              -Dsonar.dependencyCheck.jsonReportPath=./dependency-check-report/dependency-check-report.json
+              -Dsonar.dependencyCheck.htmlReportPath=./dependency-check-report/dependency-check-report.html
+
+pipelines:
+ custom:
+  run sonarscanner:
+    - step: *run-sonarscanner
