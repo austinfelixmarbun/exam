@@ -10,7 +10,7 @@ export class ConfinsAuthService extends AuthService {
   
   get config(): { [key: string]: any; } {
     const options = environment.identityProviders;
-    const issuer  = options?.issuer || 'KeycloakUrl';
+    const issuer  = options["issuer"] ?? 'KeycloakUrl';
     const serviceUrl = URLConstant.env[issuer];
     return {...options, ...{serviceUrl: serviceUrl}};
   }
