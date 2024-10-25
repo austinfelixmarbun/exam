@@ -17,5 +17,6 @@ export const environment = {
   // Keycloak Open ID Integration
   identityProviders: {
     enabled: true,
+    issuer: "",
   },
 };
