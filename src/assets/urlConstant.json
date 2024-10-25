@@ -983,7 +983,7 @@
     "PefindoSmartSearchV2": "/v2/Pefindo/PefindoSmartSearch",
     "SubmitEditRefAttr": "/v1/RefPaymentAlloc/SubmitEditRefAttr",
     "GetListVendorContactPersonWithoutJobPositionByVendorId": "/v1/VendorContactPerson/GetListVendorContactPersonWithoutJobPositionByVendorId",
-    "GetIdentityProviders": "v1/IdentityProvider/Instances",
+    "GetIdentityProviders": "/v1/IdentityProvider/Instances",
     "LogoutV2": "/v2/Authenticate/Logout",
     "GetRefUserPasswordExpirationDtById": "/v1/RefUser/GetRefUserPasswordExpirationDtById",
     "GetRefBankByRefBankCodeAsync": "/v1/RefBank/GetRefBankByBankCodeAsync",
