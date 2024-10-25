@@ -13,6 +13,7 @@ export const environment = {
   SpinnerOnHttpPost: false,
   isPageFromService: false,
   useSafeUrl: true,
+  NotificationPublicKey: "",
 
   // Keycloak Open ID Integration
   identityProviders: {
