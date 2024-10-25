@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { StorageService } from 'app/shared/services/StorageService';
 import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
@@ -23,7 +23,7 @@ export class ContentLayoutComponent implements OnInit {
     unsubscribe: any;
     token: string = null;
     constructor(public translate: TranslateService, private strService: StorageService, private route: ActivatedRoute, 
-        private cookieService: CookieService, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+        private cookieService: CookieService, private http: HttpClient,
         private ngxRouter: NgxRouterService) {
         const browserLang: string = translate.getBrowserLang();
         this.route.queryParams.subscribe(params => {
@@ -68,7 +68,7 @@ export class ContentLayoutComponent implements OnInit {
     });
     SpinnerOptions = { headers: this.SpinnerHeaders, withCredentials: true };
     async LoginWithToken() {
-        await this.http.post(this.UrlConstantNew.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
+        await this.http.post(URLConstant.LoginWithToken, { ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
             async (response) => {
                 var DateParse = formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US');
                 AdInsHelper.SetCookie(this.cookieService, "BusinessDateRaw", formatDate(response["Identity"].BusinessDt, 'yyyy/MM/dd', 'en-US'));
@@ -87,7 +87,7 @@ export class ContentLayoutComponent implements OnInit {
                 
                 AdInsHelper.SetLocalStorage(CommonConstant.ENVIRONMENT_MODULE, environment.Module);
 
-                await this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
+                await this.http.post(URLConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, { RoleCode: response["Identity"].RoleCode, ModuleCode: environment.Module }, this.SpinnerOptions).toPromise().then(
                     (response) => {
                         AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
                     });

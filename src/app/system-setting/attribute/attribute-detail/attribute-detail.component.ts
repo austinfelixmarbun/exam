@@ -13,7 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -52,8 +52,7 @@ export class AttributeDetailComponent implements OnInit {
     private http: HttpClient,
     private toastr: NGXToastrService,
     private fb: FormBuilder, 
-    private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
+    private ngxRouter: NgxRouterService
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -72,31 +71,31 @@ export class AttributeDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupRefMasterType = new InputLookupObj(this.UrlConstantNew);
+    this.inputLookupRefMasterType = new InputLookupObj();
     this.inputLookupRefMasterType.urlJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.pagingJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.genericJson = "./assets/lookup/lookupRefMasterType.json";
     this.inputLookupRefMasterType.isRequired = false;
     var datePipe = new DatePipe("en-US");
-    let getAttrType = this.http.post(this.UrlConstantNew.GetListActiveRefAttrType, new Object()).pipe(first());
+    let getAttrType = this.http.post(URLConstant.GetListActiveRefAttrType, new Object()).pipe(first());
     var RefMasterInputType = new RefMasterObj();
     RefMasterInputType.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttrInputType;
-    let getRefMasterInputType = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
+    let getRefMasterInputType = this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterInputType);
 
     var RefMasterPatternCode = new RefMasterObj();
     RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
-    let getRefMasterPatternCode = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
+    let getRefMasterPatternCode = this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode);
 
     var RefMasterAttributeGroup = new RefMasterObj();
     RefMasterAttributeGroup.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeAttributeGroup;
-    let getRefMasterAttributeGroup = this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterAttributeGroup);
+    let getRefMasterAttributeGroup = this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterAttributeGroup);
 
 
 
 
     
     if (this.pageType == "edit") {
-      let getRefAttr = this.http.post(this.UrlConstantNew.GetRefAttrById, {Id: this.refAttrId }).pipe(first());
+      let getRefAttr = this.http.post(URLConstant.GetRefAttrById, {Id: this.refAttrId }).pipe(first());
       forkJoin([getRefAttr, getAttrType, getRefMasterInputType, getRefMasterPatternCode, getRefMasterAttributeGroup]).subscribe(
         (response) => {
           var refAttr = response[0];
@@ -213,7 +212,7 @@ export class AttributeDetailComponent implements OnInit {
 
   Save() {
     var formValue = this.RefAttrForm.value;
-    var url = this.pageType == "add" ? this.UrlConstantNew.AddRefAttr : this.UrlConstantNew.EditRefAttr;
+    var url = this.pageType == "add" ? URLConstant.AddRefAttr : URLConstant.EditRefAttr;
 
     if (formValue["AttrInputType"] == CommonConstant.AttrInputTypeList) {
       if (formValue["AttrValue"].length < 1) {
@@ -271,7 +270,7 @@ export class AttributeDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

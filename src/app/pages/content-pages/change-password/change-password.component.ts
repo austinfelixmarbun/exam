@@ -9,7 +9,7 @@ import { CustomPatternObj } from 'app/shared/model/library-obj/custom-pattern-ob
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute, 
     private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.username = queryParams['Username'];
@@ -41,7 +41,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, { Code: CommonConstant.GsCodePasswordRegex }).subscribe(
       (response: { GsValue }) => {
         let patternObj: CustomPatternObj = new CustomPatternObj();
         patternObj.pattern = response.GsValue;
@@ -72,7 +72,7 @@ export class ChangePasswordComponent implements OnInit {
         this.username = context[CommonConstant.USER_NAME];
       }
       var requestObj = { "Username": this.username, "Password": password, "NewPassword": newpassword };
-      this.http.post(this.UrlConstantNew.ChangePasswordRefUserByUsername, requestObj).subscribe(
+      this.http.post(URLConstant.ChangePasswordRefUserByUsername, requestObj).subscribe(
         (response) => {
           if (response["Message"] == "Success") {
             this.toastr.successMessage(response["message"]);

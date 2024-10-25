@@ -3,7 +3,7 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-notification-approval-paging',
@@ -12,9 +12,9 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class NotificationApprovalPagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchNotificationApproval.json";

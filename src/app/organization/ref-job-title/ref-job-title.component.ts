@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { UcPagingObj } from '../../shared/model/uc-paging-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-job-title',
@@ -11,9 +11,9 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class RefJobTitleComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchJobTitle.json";

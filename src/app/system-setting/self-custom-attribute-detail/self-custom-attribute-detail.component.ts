@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
 import { RefMasterObj } from 'app/shared/model/ref-master-obj.model';
 
@@ -20,7 +20,7 @@ export class SelfCustomAttributeDetailComponent implements OnInit {
   RefAttrId: number = 0;
   Form: FormGroup = this.fb.group({});
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private UrlConstantNew: UrlConstantNew,
+  constructor(private route: ActivatedRoute, private http: HttpClient,
     private ddlSvc: FormDropDownListService, private fb: FormBuilder, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -36,7 +36,7 @@ export class SelfCustomAttributeDetailComponent implements OnInit {
   async ngOnInit() {
     var RefMasterPatternCode = new RefMasterObj();
     RefMasterPatternCode.RefMasterTypeCode = CommonConstant.RefMasterTypeCodeRegularExpression;
-    await this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode).toPromise().then(
+    await this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterPatternCode).toPromise().then(
       (response) => {
         this.patternCodeList = response[CommonConstant.ReturnObj];
       });

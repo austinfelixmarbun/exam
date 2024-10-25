@@ -1,4 +1,3 @@
-import { UrlConstantNew } from "../constant/URLConstantNew";
 import { InputLookupObj } from "./input-lookup-obj.model";
  
 export class InputFieldObj{
@@ -19,7 +18,7 @@ export class InputFieldObj{
     city: any;
     inputLookupObj: InputLookupObj;
 
-    constructor(private UrlConstantNew: UrlConstantNew)
+    constructor()
     {
         this.addr = "";
         this.areaCode4 = "";
@@ -36,6 +35,6 @@ export class InputFieldObj{
         this.areaCode2 = "";
         this.areaCode1 = "";
         this.city = "";
-        this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+        this.inputLookupObj = new InputLookupObj();
     }
 }

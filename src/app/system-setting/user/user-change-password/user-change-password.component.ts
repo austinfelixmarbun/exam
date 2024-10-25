@@ -12,7 +12,7 @@ import { CommonConstant } from "app/shared/constant/CommonConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { CookieService } from "ngx-cookie";
 import { NavigationConstant } from "app/shared/NavigationConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-user-change-password",
@@ -40,7 +40,7 @@ export class UserChangePasswordComponent implements OnInit {
     private toastr: NGXToastrService,
     private service: NGXToastrService, 
     private cookieService: CookieService, 
-    private UrlConstantNew: UrlConstantNew
+    
   ) {
     var currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.username = currentUserContext.UserName;
@@ -49,14 +49,14 @@ export class UserChangePasswordComponent implements OnInit {
   ngOnInit() {
     var getEmpUrl: any;
 
-    this.apiUrl = this.UrlConstantNew.GetUserByUsername;
+    this.apiUrl = URLConstant.GetUserByUsername;
     this.refUserObj = new RefUserObj();
     // this.refUserObj.username = this.username;
     this.http.post(this.apiUrl, this.refUserObj).subscribe(
       response => {
         this.refUserObj = response["returnObject"];
         this.refEmpObj = new RefEmpObj();
-        getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
+        getEmpUrl = URLConstant.GetRefEmployeeById;
         // this.refEmpObj.refEmpId = +this.refUserObj.refEmpId;
         this.http.post(getEmpUrl, {Id : this.refEmpObj.RefEmpId}).subscribe(response => {
           this.refEmpObj = response["returnObject"];
@@ -83,7 +83,7 @@ export class UserChangePasswordComponent implements OnInit {
       // this.refUserObj.oldPass = UserAddEditForm.value.Password;
       // this.refUserObj.newPassVerif = UserAddEditForm.value.NewRePassword;
       //SAVE
-      this.apiUrl = this.UrlConstantNew.ChangePassword;
+      this.apiUrl = URLConstant.ChangePassword;
       this.http.post(this.apiUrl, this.refUserObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.service.typeSave(response["message"]);

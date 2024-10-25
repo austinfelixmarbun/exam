@@ -14,7 +14,7 @@ import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 @Component({
   selector: 'app-employee-position',
@@ -48,9 +48,9 @@ export class EmployeePositionComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.EMP_POS_DETAIL;
   readonly EditLink: string = NavigationConstant.EMP_POS_DETAIL;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
-    this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
-    this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
+    private ngxRouter: NgxRouterService) {
+    this.apiUrl = URLConstant.GetEmpPositionPaging;
+    this.deleteUrl = URLConstant.DeleteEmpPosition;
     
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -67,14 +67,14 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetEmpPositionPaging;
-    this.getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
+    this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
+    this.getEmpUrl = URLConstant.GetRefEmployeeById;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
-        environment: this.UrlConstantNew.env.FoundationR3Url
+        environment: URLConstant.env.FoundationR3Url
       }
     ];
 

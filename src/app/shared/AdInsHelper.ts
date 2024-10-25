@@ -78,7 +78,7 @@ export class AdInsHelper {
 
     // see AdInsHelper.service.ts
     // public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
-    //     var url = environment.FoundationR3Url + this.UrlConstantNew.LogoutAuth;
+    //     var url = environment.FoundationR3Url + URLConstant.LogoutAuth;
     //     http.post(url, {}).subscribe();
     //     let version = localStorage.getItem(CommonConstant.VERSION);
     //     localStorage.clear();

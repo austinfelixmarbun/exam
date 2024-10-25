@@ -12,8 +12,8 @@ import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-org-job-title-paging",
@@ -48,7 +48,6 @@ export class OrgJobTitlePagingComponent implements OnInit {
     private service: NGXToastrService,
     private http: HttpClient,
     private location: Location, 
-    private UrlConstantNew: UrlConstantNew,
     private ngxRouter: NgxRouterService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -66,13 +65,13 @@ export class OrgJobTitlePagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgJobTitle.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgJobTitlePaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOrgJobTitlePaging;
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.UrlConstantNew.GetOrgJobTitlePaging;
+    this.apiUrl = URLConstant.GetOrgJobTitlePaging;
     this.initiateForm();
   }
 
@@ -120,7 +119,7 @@ export class OrgJobTitlePagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm(ExceptionConstant.DELETE_CONFIRMATION)) {
-      this.deleteUrl = this.UrlConstantNew.DeleteOrgJobTitle;
+      this.deleteUrl = URLConstant.DeleteOrgJobTitle;
       this.orgJobTitleObj = new OrgJobTitleObj();
       this.orgJobTitleObj.orgJobTitleId = +id;
 

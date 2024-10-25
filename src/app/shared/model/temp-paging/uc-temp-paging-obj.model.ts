@@ -1,5 +1,5 @@
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { environment } from 'environments/environment';
 import { CriteriaObj } from '../criteria-obj.model';
@@ -17,17 +17,17 @@ export class UcTempPagingObj {
     navigationConst: any;
     listEnvironments: Array<EnvisObj>;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.urlJson = "";
-        this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + "/v2.1";
-        this.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+        this.enviromentUrl = URLConstant.env.FoundationR3Url + "/v2.1";
+        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.isReady = false;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + "/v1" });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + "/v1" });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.fromValue = new Array<FromValueObj>();
         this.navigationConst = NavigationConstant;

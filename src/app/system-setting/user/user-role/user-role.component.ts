@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { RefUserObj } from 'app/shared/model/ref-user-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 
@@ -26,8 +26,7 @@ export class UserRoleComponent implements OnInit {
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private location: Location, 
-    private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
+    private ngxRouter: NgxRouterService    
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -38,15 +37,15 @@ export class UserRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = this.UrlConstantNew.GetRefUserPaging;
+    this.apiUrl = URLConstant.GetRefUserPaging;
 
     this.initiateForm();
   }
 
   initiateForm() {
-    var urlGetUser: any = this.UrlConstantNew.GetRefUser;
-    var urlGetEmp: any = this.UrlConstantNew.GetRefEmployeeById;
-    var urlGetListEmpPos: any = this.UrlConstantNew.GetListEmployeebyRefEmpId;
+    var urlGetUser: any = URLConstant.GetRefUser;
+    var urlGetEmp: any = URLConstant.GetRefEmployeeById;
+    var urlGetListEmpPos: any = URLConstant.GetListEmployeebyRefEmpId;
     var empObj: RefEmpObj = new RefEmpObj;
 
     this.refUserObj = new RefUserObj();

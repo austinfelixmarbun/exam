@@ -26,9 +26,9 @@ import { BusinessUnitObj } from 'app/shared/model/business-unit-obj.model';
 import { RefJobTitleObj } from 'app/shared/model/ref-job-title-obj.model';
 import { OfficeObj } from 'app/shared/model/office-obj.model';
 import { RefRoleObj } from 'app/shared/model/ref-role-obj.model';
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from '@adins/fe-core';
 import { RegexService } from 'app/shared/services/regex.service';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-system-user-add',
@@ -85,13 +85,12 @@ export class SystemUserAddComponent implements OnInit {
     APIKey:[''],
     IsActiveEmpBusinessUnit :[true]
   });
-  inputFieldAddr: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
+  inputFieldAddr: InputFieldObj = new InputFieldObj();
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
   
   readonly CancelLink: string = NavigationConstant.SYS_USER_PAGING;
   constructor(
-    private UrlConstantNew: UrlConstantNew,
     private regexService: RegexService, 
     private router: Router,
     private route: ActivatedRoute,
@@ -115,7 +114,7 @@ export class SystemUserAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    httpClient.post(this.UrlConstantNew.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
+    httpClient.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response: {GsValue}) => {
         this.passwordPattern = response.GsValue;
       }
@@ -194,7 +193,7 @@ export class SystemUserAddComponent implements OnInit {
     var RefMasterIdType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.IdTypeList = response[CommonConstant.ReturnObj];
@@ -211,7 +210,7 @@ export class SystemUserAddComponent implements OnInit {
       }
     );
 
-    this.inputLookupBankObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -222,7 +221,7 @@ export class SystemUserAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.http.post(this.UrlConstantNew.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
+      this.http.post(URLConstant.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
         (response) => {
           this.refEmpObj = response['RefEmpObj'];
           this.refUserObj = response['RefUserObj'];
@@ -283,7 +282,7 @@ export class SystemUserAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.refEmpObj.PhnExt3;
           this.addressObj.FaxArea = this.refEmpObj.FaxArea;
           this.addressObj.Fax = this.refEmpObj.Fax;
-          this.inputFieldAddr.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
 
@@ -291,7 +290,7 @@ export class SystemUserAddComponent implements OnInit {
           
           BizUnit.RefBizUnitId = this.userRole.RefBizUnitId;
 
-          this.http.post(this.UrlConstantNew.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
+          this.http.post(URLConstant.GetRefBizUnit, {Id : BizUnit.RefBizUnitId}).subscribe(
             (response) => {
               this.inputPagingObjBusinessUnit.nameSelect = response["BizUnitName"];
             }
@@ -300,7 +299,7 @@ export class SystemUserAddComponent implements OnInit {
           var JobTitle = new RefJobTitleObj();
           JobTitle.RefJobTitleId = this.userRole.RefJobTitleId;
 
-          this.http.post(this.UrlConstantNew.GetRefJobTitleById, {Id: JobTitle.RefJobTitleId}).subscribe(
+          this.http.post(URLConstant.GetRefJobTitleById, {Id: JobTitle.RefJobTitleId}).subscribe(
             (response) => {
               this.inputPagingObjJobTitle.nameSelect = response["JobTitleName"];
             }
@@ -310,7 +309,7 @@ export class SystemUserAddComponent implements OnInit {
           if(this.userRole.RefOfficeId != 0){
             Office.RefOfficeId = this.userRole.RefOfficeId;
             console.log("office",Office);
-            this.http.post(this.UrlConstantNew.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
+            this.http.post(URLConstant.GetRefOfficeByRefOfficeId, {Id : Office.RefOfficeId}).subscribe(
               (response) => {
                 this.inputPagingObjOffice.nameSelect = response["OfficeName"];
               }
@@ -319,7 +318,7 @@ export class SystemUserAddComponent implements OnInit {
 
           var Role = new RefRoleObj();
           Role.RefRoleId = this.userRole.RefRoleId;
-          this.http.post(this.UrlConstantNew.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
+          this.http.post(URLConstant.GetRefRoleByRefRoleId, {Id : Role.RefRoleId}).subscribe(
             (response) => {
               this.inputPagingObjRole.nameSelect = response["RoleName"];
             }
@@ -328,7 +327,7 @@ export class SystemUserAddComponent implements OnInit {
         }
       );
     }
-    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
+    this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.requiredPhn1 = true;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
@@ -432,7 +431,7 @@ export class SystemUserAddComponent implements OnInit {
     refEmpData.RefUserRoleObj = this.userRole;
 
     if (this.pageType == "add") {
-      this.httpClient.post(this.UrlConstantNew.AddRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.AddRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYS_USER_PAGING],{});
@@ -442,7 +441,7 @@ export class SystemUserAddComponent implements OnInit {
     else {
       refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
       refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
-      this.httpClient.post(this.UrlConstantNew.EditRefEmp, refEmpData).subscribe(
+      this.httpClient.post(URLConstant.EditRefEmp, refEmpData).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYS_USER_PAGING],{});
@@ -507,7 +506,7 @@ export class SystemUserAddComponent implements OnInit {
   regenetate(){
     var refEmpFormData = this.RefEmpForm.value;
     
-    this.httpClient.post(this.UrlConstantNew.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}).subscribe(
+    this.httpClient.post(URLConstant.GenerateAPIKey, {Username : refEmpFormData.Username, TimeToLive : 365}).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();
@@ -517,7 +516,7 @@ export class SystemUserAddComponent implements OnInit {
 
   revoke(){
     var refEmpFormData = this.RefEmpForm.value;
-    this.httpClient.post(this.UrlConstantNew.RevokeAPIKey, {UserName : refEmpFormData.Username}).subscribe(
+    this.httpClient.post(URLConstant.RevokeAPIKey, {UserName : refEmpFormData.Username}).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         window.location.reload();
@@ -526,22 +525,22 @@ export class SystemUserAddComponent implements OnInit {
   }
 
   initLookUp() {
-    this.inputPagingObjBusinessUnit = new InputLookupObj(this.UrlConstantNew);
+    this.inputPagingObjBusinessUnit = new InputLookupObj();
     this.inputPagingObjBusinessUnit.urlJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
     this.inputPagingObjBusinessUnit.pagingJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
     this.inputPagingObjBusinessUnit.genericJson = "./assets/lookup/lookupEmployeeBusinessUnit.json";
 
-    this.inputPagingObjJobTitle = new InputLookupObj(this.UrlConstantNew);
+    this.inputPagingObjJobTitle = new InputLookupObj();
     this.inputPagingObjJobTitle.urlJson = "./assets/lookup/lookupEmployeeJobTitle.json";
     this.inputPagingObjJobTitle.pagingJson = "./assets/lookup/lookupEmployeeJobTitle.json";
     this.inputPagingObjJobTitle.genericJson = "./assets/lookup/lookupEmployeeJobTitle.json";
 
-    this.inputPagingObjOffice = new InputLookupObj(this.UrlConstantNew);
+    this.inputPagingObjOffice = new InputLookupObj();
     this.inputPagingObjOffice.urlJson = "./assets/lookup/lookupEmployeeOffice.json";
     this.inputPagingObjOffice.pagingJson = "./assets/lookup/lookupEmployeeOffice.json";
     this.inputPagingObjOffice.genericJson = "./assets/lookup/lookupEmployeeOffice.json";
 
-    this.inputPagingObjRole = new InputLookupObj(this.UrlConstantNew);
+    this.inputPagingObjRole = new InputLookupObj();
     this.inputPagingObjRole.urlJson = "./assets/lookup/lookupEmployeeRole.json";
     this.inputPagingObjRole.pagingJson = "./assets/lookup/lookupEmployeeRole.json";
     this.inputPagingObjRole.genericJson = "./assets/lookup/lookupEmployeeRole.json";

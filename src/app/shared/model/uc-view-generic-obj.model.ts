@@ -1,6 +1,5 @@
-import { environment } from "environments/environment";
-import { UrlConstantNew } from "../constant/URLConstantNew";
 import { NavigationConstant } from "../NavigationConstant";
+import { URLConstant } from "../constant/URLConstant";
 
 export class UcViewGenericObj {
     viewInput: string;
@@ -12,13 +11,13 @@ export class UcViewGenericObj {
     IsCard: boolean;
     dataInput: any;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.viewInput = "";
-        this.viewEnvironment = this.UrlConstantNew.env.FoundationR3Url + '/v1';
+        this.viewEnvironment = URLConstant.env.FoundationR3Url + '/v1';
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.FoundationR3Web });
         this.whereValue = new Array<WhereValueObj>();
         this.navigationConst = NavigationConstant;
     }

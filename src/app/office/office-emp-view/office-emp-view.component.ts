@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
@@ -15,12 +15,12 @@ import { NgxRouterService } from '@adins/fe-core';
 export class OfficeEmpViewComponent implements OnInit {
 
   RefOfficeId: number;
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly BackLink: string = NavigationConstant.OFFICE_PAGING;
 
-  constructor(private UrlConstantNew: UrlConstantNew, private route: ActivatedRoute, private ngxRouter: NgxRouterService) {
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       if (queryParams['RefOfficeId'] != null) {

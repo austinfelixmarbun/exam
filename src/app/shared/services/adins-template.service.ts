@@ -5,8 +5,7 @@ import * as _moment from 'moment';
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "../AdInsHelper";
 import * as Module from '../../form-template';
-import { envi } from '../constant/URLConstant';
-import { UrlConstantNew } from '../constant/URLConstantNew';
+import { envi, URLConstant } from '../constant/URLConstant';
 import { NavigationConstant } from '../NavigationConstant';
 
 const listEnvironments = [
@@ -24,9 +23,8 @@ const listEnvironments = [
 })
 export class AdinsTemplateService extends UcTemplateService {
 
-  constructor(private UrlConstant: UrlConstantNew) {
+  constructor() {
     super();
-    this.UrlConstant = UrlConstant;
     this.configure();
   }
 
@@ -37,7 +35,7 @@ export class AdinsTemplateService extends UcTemplateService {
   private configure() {
     this.environment  = environment;
     this.envConfig    = envi;
-    this.urlConstant  = this.UrlConstant;
+    this.urlConstant  = URLConstant;
     this.listEnvironments = listEnvironments;
     this.moment = _moment;
     this.module = Module;

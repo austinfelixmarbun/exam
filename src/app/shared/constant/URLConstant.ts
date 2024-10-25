@@ -1,10 +1,6 @@
 import * as _urlConstant from "../../../assets/urlConstant.json";
 import * as _environment from "../../../assets/config/enviConfig.json";
 
-// URL" API di concat dengan environment url + version + api path
-// KECUALI: API" yang di pakai di UC". contoh: GetPagingObjectBySQL, DeleteFromPaging, Approval CreateNewRFA
-// HARAP JANGAN PAKE INI LAGI, KARENA SEKARANG SUDAH ADA UrlConstantNew YANG PAKE JSON
-// export const envi = _environment;
 const urlConstant = _urlConstant;
 export class URLConstant {
     public static get env() {

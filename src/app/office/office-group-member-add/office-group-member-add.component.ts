@@ -9,7 +9,7 @@ import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -17,16 +17,16 @@ import { NgxRouterService } from '@adins/fe-core';
   templateUrl: './office-group-member-add.component.html'
 })
 export class OfficeGroupMemberAddComponent implements OnInit {
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeId: number;
   CenterGrpId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
 
   readonly CancelLink: string = NavigationConstant.OFFICE_GROUP_MEMBER;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefOfficeId = queryParams['RefOfficeId'];
@@ -43,7 +43,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
   }
 
   GetListCenterGrpMemberByRefOfficeId() {
-    this.http.post(this.UrlConstantNew.GetListCenterGrpMemberByRefOfficeId, { Id: this.RefOfficeId }).subscribe(
+    this.http.post(URLConstant.GetListCenterGrpMemberByRefOfficeId, { Id: this.RefOfficeId }).subscribe(
       (response) => {
         var arrMemberList = new Array();
         for (let index = 0; index < response["ListCenterGrpOfficeMbr"].length; index++) {
@@ -78,7 +78,7 @@ export class OfficeGroupMemberAddComponent implements OnInit {
       RefOfficeId: this.listSelectedId
     }
 
-    this.http.post(this.UrlConstantNew.AddCenterGrpOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.AddCenterGrpOfficeMember, obj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response['message']);
         AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.OFFICE_GROUP_MEMBER],{ "RefOfficeId": this.RefOfficeId, "CenterGrpId": this.CenterGrpId });

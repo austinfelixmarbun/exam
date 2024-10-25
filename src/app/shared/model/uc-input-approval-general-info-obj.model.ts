@@ -1,13 +1,12 @@
-import { environment } from "environments/environment";
-import { UrlConstantNew } from "../constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 
 export class UcInputApprovalGeneralInfoObj {
     TaskId: number;
     EnvUrl: string;
     PathUrl: string;
-    constructor(private UrlConstantNew: UrlConstantNew) { 
+    constructor() { 
         this.TaskId = 0;
-        this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
+        this.EnvUrl = URLConstant.env.FoundationR3Url + "/v1";
         this.PathUrl = "";
     }
 }  

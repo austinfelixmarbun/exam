@@ -8,13 +8,12 @@ import { RefRoleObj } from "app/shared/model/ref-role-obj.model";
 import { Location, DecimalPipe } from "@angular/common";
 import { NgForm, FormBuilder, FormGroup } from "@angular/forms";
 import { ExcelService } from "app/shared/excel-service/excel-service";
-import { environment } from "environments/environment";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { CriteriaObj } from "app/shared/model/criteria-obj.model";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
+import { URLConstant } from "app/shared/constant/URLConstant";
 @Component({
   selector: "app-role-user",
   templateUrl: "./role-user.component.html",
@@ -55,8 +54,7 @@ export class RoleUserComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder, 
-    private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
+    private ngxRouter: NgxRouterService
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -71,15 +69,15 @@ export class RoleUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetListUserEmployee;
+    this.inputObj.apiQryPaging = URLConstant.GetListUserEmployee;
     
     this.initiateForm();
     this.show = AdInsConstant.showData.split(",");
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.UrlConstantNew.GetListUserEmployee;
+    this.apiUrl = URLConstant.GetListUserEmployee;
     this.arrCrit = new Array();
     var critObj = new CriteriaObj();
     critObj.DataType = 'Numeric'
@@ -128,7 +126,7 @@ export class RoleUserComponent implements OnInit {
   initiateForm() {
     this.spinner.show();
     /// GET INFO USER AND EMPLOYEE
-    var urlGetRefRole: any = this.UrlConstantNew.GetRefRoleByRefRoleId;
+    var urlGetRefRole: any = URLConstant.GetRefRoleByRefRoleId;
 
     this.refRoleObj = new RefRoleObj();
     this.refRoleObj.RefRoleId = this.refRoleId;
@@ -159,7 +157,7 @@ export class RoleUserComponent implements OnInit {
   }
 
   Save(RoleUserForm: NgForm): void {
-    var urlAssignRole = this.UrlConstantNew.env.FoundationR3Url + this.UrlConstantNew.AssignRoleToUsers;
+    var urlAssignRole = URLConstant.env.FoundationR3Url + URLConstant.AssignRoleToUsers;
     this.refRoleObj.RefRoleId = this.refRoleId;
     // this.refRoleObj.listAddEmpPositionId = this.listSelectedId;
     // this.refRoleObj.listDelEmpPositionId = this.listDeletedId;

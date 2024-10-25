@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -27,7 +27,7 @@ export class AddBusinessUnitComponent implements OnInit {
 
     readonly CancelLink: string = NavigationConstant.ORG_BZ_UNIT;
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: HttpClient, 
-        private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+        private toastr: NGXToastrService, private ngxRouter: NgxRouterService) {
         this.route.queryParams.subscribe(params => {
             const queryParams = this.ngxRouter.getQueryParams(params);
             this.RefBizUnitId = queryParams["RefBizUnitId"];
@@ -50,7 +50,7 @@ export class AddBusinessUnitComponent implements OnInit {
             this.bizUnitObj = new BusinessUnitObj();
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
             this.BizUnitForm.controls.BizUnitCode.disable();
-            this.http.post(this.UrlConstantNew.GetRefBizUnit, {Id : this.RefBizUnitId}).subscribe(
+            this.http.post(URLConstant.GetRefBizUnit, {Id : this.RefBizUnitId}).subscribe(
                 (response) => {
                     this.result = response;
                     this.BizUnitForm.patchValue({
@@ -72,14 +72,14 @@ export class AddBusinessUnitComponent implements OnInit {
             this.bizUnitObj.BizUnitCode = this.result.BizUnitCode;
             this.bizUnitObj.RefBizUnitId = this.RefBizUnitId;
 
-            this.http.post(this.UrlConstantNew.EditRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(URLConstant.EditRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ORG_BZ_UNIT],{});
                 });
         }
         else {
-            this.http.post(this.UrlConstantNew.AddRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
+            this.http.post(URLConstant.AddRefBizUnit, this.bizUnitObj, AdInsConstant.SpinnerOptions).subscribe(
                 (response) => {
                     this.toastr.successMessage(response["message"]);
                     AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.ORG_BZ_UNIT],{});

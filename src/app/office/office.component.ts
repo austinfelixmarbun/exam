@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'environments/environment';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-office',
@@ -11,11 +11,11 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 
 export class OfficeComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.OFFICE_ADD;
 
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchOffice.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchOffice.json";

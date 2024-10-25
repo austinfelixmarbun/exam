@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 
@@ -9,10 +8,10 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 })
 export class EmployeeComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.EMP_DETAIL;
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/search/searchEmployee.json";

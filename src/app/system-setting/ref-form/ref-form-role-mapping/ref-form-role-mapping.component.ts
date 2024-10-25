@@ -9,7 +9,7 @@ import { FromValueObj, UcTempPagingObj } from 'app/shared/model/temp-paging/uc-t
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -22,13 +22,13 @@ export class RefFormRoleMappingComponent implements OnInit {
   AuthFormObj: AuthFormObj;
   listAuthFormObj: {[key: string]: any};
   listSelectedId: Array<number> = new Array<number>();
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefFormId = queryParams['RefFormId'];
@@ -69,7 +69,7 @@ export class RefFormRoleMappingComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(this.UrlConstantNew.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP],{ "RefFormId": this.RefFormId });

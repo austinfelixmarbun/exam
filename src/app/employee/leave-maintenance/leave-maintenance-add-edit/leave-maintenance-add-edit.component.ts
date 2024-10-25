@@ -13,7 +13,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -40,7 +40,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
   readonly CancelLink: string = NavigationConstant.EMP_LEAVE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
     private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -57,7 +57,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     var context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.businessDt = new Date(context[CommonConstant.BUSINESS_DT]);
 
-    this.inputEmpLookupObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputEmpLookupObj = new InputLookupObj();
     this.inputEmpLookupObj.urlJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.pagingJson = "./assets/lookup/lookupEmpLeave.json";
     this.inputEmpLookupObj.genericJson = "./assets/lookup/lookupEmpLeave.json";
@@ -65,7 +65,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
     if (this.pageType == "edit") {
       this.relmObj = new RefEmpLeaveMngmntObj();
       this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
-      this.http.post(this.UrlConstantNew.GetRefEmpLeaveMngmntById, {Id : this.refEmpLeaveMngmntId}).subscribe(
+      this.http.post(URLConstant.GetRefEmpLeaveMngmntById, {Id : this.refEmpLeaveMngmntId}).subscribe(
         response => {
           this.resultData = response;
           this.refEmpLeaveMngmntId = this.resultData.RefEmpLeaveMngmntId;
@@ -79,7 +79,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
           });
           this.refEmp = new RefEmpObj();
           this.refEmp.RefEmpId = this.resultData.RefEmpId;
-          this.http.post(this.UrlConstantNew.GetRefEmployeeById, {Id : this.resultData.RefEmpId}).subscribe(
+          this.http.post(URLConstant.GetRefEmployeeById, {Id : this.resultData.RefEmpId}).subscribe(
             (response) => {
               this.resultEmpData = response;
               this.empName = this.resultEmpData.EmpName;
@@ -116,7 +116,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
    
       if (this.pageType == "add") {
         this.relmObj.RefEmpId = this.inputEmpLookupObj.jsonSelect.refEmpId;
-        this.http.post(this.UrlConstantNew.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(URLConstant.AddRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_LEAVE_PAGING],{});
@@ -126,7 +126,7 @@ export class LeaveMaintenanceAddEditComponent implements OnInit {
         this.relmObj.RefEmpId = this.RefEmpId;
         this.relmObj.RefEmpLeaveMngmntId = this.refEmpLeaveMngmntId;
         this.relmObj.RowVersion = this.resultData.RowVersion;
-        this.http.post(this.UrlConstantNew.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
+        this.http.post(URLConstant.EditRefEmpLeaveMngmnt, this.relmObj, AdInsConstant.SpinnerOptions).subscribe(
           response => {
             this.toastr.successMessage(response["message"]);
             AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_LEAVE_PAGING],{});

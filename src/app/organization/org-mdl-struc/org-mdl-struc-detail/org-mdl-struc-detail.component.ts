@@ -12,8 +12,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { InputLookupObj } from "app/shared/model/input-lookup-obj.model";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-org-mdl-struc-detail",
@@ -51,8 +51,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private http: HttpClient,
     private service: NGXToastrService, 
-    private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
+    private ngxRouter: NgxRouterService,    
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -72,17 +71,17 @@ export class OrgMdlStrucDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputLookupObj = new InputLookupObj();
     this.inputLookupObj.urlJson = "./assets/lookup/lookupOrgMdlStruc.json";
-    this.inputLookupObj.urlQryPaging = this.UrlConstantNew.GetOrgMdlStrucPaging;
-    this.inputLookupObj.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
+    this.inputLookupObj.urlQryPaging = URLConstant.GetOrgMdlStrucPaging;
+    this.inputLookupObj.urlEnviPaging = URLConstant.env.FoundationR3Url;
     this.inputLookupObj.pagingJson = "./assets/form-setting/orgMdlStrucDetailPaging.json";
     this.inputLookupObj.genericJson = "./assets/form-setting/orgMdlStrucDetailGeneric.json";
 
-    this.inputLookupObj2 = new InputLookupObj(this.UrlConstantNew);
+    this.inputLookupObj2 = new InputLookupObj();
     this.inputLookupObj2.urlJson = "./assets/lookup/lookupBizUnit.json";
-    this.inputLookupObj2.urlQryPaging = this.UrlConstantNew.GetBusinessUnitPaging;
-    this.inputLookupObj2.urlEnviPaging = this.UrlConstantNew.env.FoundationR3Url;
+    this.inputLookupObj2.urlQryPaging = URLConstant.GetBusinessUnitPaging;
+    this.inputLookupObj2.urlEnviPaging = URLConstant.env.FoundationR3Url;
     this.inputLookupObj2.pagingJson = "./assets/form-setting/bizUnitPaging.json";
     this.inputLookupObj2.genericJson = "./assets/form-setting/bizUnitGeneric.json";
     this.inputLookupObj2.isRequired = true;
@@ -90,7 +89,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     this.orgMdlStrucObj = new OrgMdlStrucObj();
     this.InitForm();
     if (this.type == "edit") {
-      this.apiUrl = this.UrlConstantNew.GetOrgMdlStrucById;
+      this.apiUrl = URLConstant.GetOrgMdlStrucById;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
       this.http.post(this.apiUrl, this.orgMdlStrucObj).subscribe(
@@ -108,8 +107,8 @@ export class OrgMdlStrucDetailComponent implements OnInit {
           /* #region Fill Lookup Mdl Struct */
           if (this.parentId != 0) {
             var orgMdlStruc: OrgMdlStrucObj = new OrgMdlStrucObj();
-            var getOrgMdlSructUrl = this.UrlConstantNew.GetOrgMdlStrucById;
-            var getBizUnitUrl: any = this.UrlConstantNew.GetRefBizUnit;
+            var getOrgMdlSructUrl = URLConstant.GetOrgMdlStrucById;
+            var getBizUnitUrl: any = URLConstant.GetRefBizUnit;
             orgMdlStruc.orgMdlStrucId = +this.inputLookupObj2.idSelect;
             this.http
               .post(getOrgMdlSructUrl, orgMdlStruc)
@@ -128,7 +127,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
 
           /* #region Fill Lookup Biz Unit */
           var bizUnitObj: BusinessUnitObj = new BusinessUnitObj();
-          var getBizUnitUrl: any = this.UrlConstantNew.GetRefBizUnit;
+          var getBizUnitUrl: any = URLConstant.GetRefBizUnit;
           bizUnitObj.RefBizUnitId = this.refBizUnitId;
           this.http
             .post(getBizUnitUrl, {Id : bizUnitObj.RefBizUnitId})
@@ -159,7 +158,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
       /* #region  Have Parent */
       if (this.inputLookupObj2.idSelect != undefined) {
         var orgMdlStrucCheck: OrgMdlStrucObj = new OrgMdlStrucObj();
-        var getOrgMdlSructCheckUrl = this.UrlConstantNew.GetOrgMdlStrucById;
+        var getOrgMdlSructCheckUrl = URLConstant.GetOrgMdlStrucById;
         orgMdlStrucCheck.orgMdlStrucId = +this.inputLookupObj2.idSelect;
         this.http
           .post(getOrgMdlSructCheckUrl, orgMdlStrucCheck)
@@ -172,7 +171,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
             } else {
               //MODE-ADD
               if (this.type != "edit") {
-                this.apiUrl = this.UrlConstantNew.AddOrgMdlStruc;
+                this.apiUrl = URLConstant.AddOrgMdlStruc;
                 this.orgMdlStrucObj = new OrgMdlStrucObj();
                 this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
                 this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
@@ -196,7 +195,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
               }
               //MODE-EDIT
               else {
-                this.apiUrl = this.UrlConstantNew.EditOrgMdlStruc;
+                this.apiUrl = URLConstant.EditOrgMdlStruc;
                 this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
                 this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
                 this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
@@ -227,7 +226,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
       else {
         //MODE-ADD
         if (this.type != "edit") {
-          this.apiUrl = this.UrlConstantNew.AddOrgMdlStruc;
+          this.apiUrl = URLConstant.AddOrgMdlStruc;
           this.orgMdlStrucObj = new OrgMdlStrucObj();
           this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
@@ -250,7 +249,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
         }
         //MODE-EDIT
         else {
-          this.apiUrl = this.UrlConstantNew.EditOrgMdlStruc;
+          this.apiUrl = URLConstant.EditOrgMdlStruc;
           this.orgMdlStrucObj.orgMdlStrucId = +this.orgMdlStrucId;
           this.orgMdlStrucObj.orgMdlId = +this.orgMdlId;
           this.orgMdlStrucObj.orgMdlLvl = OrgMdlForm.value.orgMdlLvl;
@@ -277,7 +276,7 @@ export class OrgMdlStrucDetailComponent implements OnInit {
     }
   }
   InitForm() {
-    var getOrgMdlUrl = this.UrlConstantNew.GetOrgMdlByOrgMdlId;
+    var getOrgMdlUrl = URLConstant.GetOrgMdlByOrgMdlId;
     this.orgModelObj = new OrgMdlObj();
     this.orgModelObj.orgMdlId = +this.orgMdlId;
     this.http.post(getOrgMdlUrl, this.orgModelObj).subscribe(

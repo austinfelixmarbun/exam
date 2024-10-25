@@ -12,7 +12,7 @@ import { Location, DecimalPipe } from "@angular/common";
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -50,8 +50,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
     private service: NGXToastrService,
     private https: HttpClient,
     private location: Location, 
-    private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
+    private ngxRouter: NgxRouterService,    
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -62,15 +61,15 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchOrgMdlStruc.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetOrgMdlStrucPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetOrgMdlStrucPaging;
     
     this.spinner.show();
     this.show = AdInsConstant.showData.split(',');
     this.pageNow = 1;
     this.pageSize = this.show[0];
-    this.apiUrl = this.UrlConstantNew.GetOrgMdlStrucPaging;
+    this.apiUrl = URLConstant.GetOrgMdlStrucPaging;
     this.initiateForm();
     this.spinner.hide();
   }
@@ -102,7 +101,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
   }
 
   initiateForm() {
-    var getOrgMdlUrl = this.UrlConstantNew.GetOrgMdlByOrgMdlId;
+    var getOrgMdlUrl = URLConstant.GetOrgMdlByOrgMdlId;
     this.orgMdlObj = new OrgMdlObj();
     this.orgMdlObj.orgMdlId = +this.orgMdlId;
     this.https.post(getOrgMdlUrl, this.orgMdlObj).subscribe(
@@ -127,7 +126,7 @@ export class OrgMdlStrucPagingComponent implements OnInit {
 
   del(id: any) {
     if (confirm("Are you sure to delete this record?")) {
-      this.deleteUrl = this.UrlConstantNew.DeleteOrgMdlStruc;
+      this.deleteUrl = URLConstant.DeleteOrgMdlStruc;
       this.orgMdlStrucObj = new OrgMdlStrucObj();
       this.orgMdlStrucObj.orgMdlStrucId = +id;
 

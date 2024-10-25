@@ -6,11 +6,10 @@ import { CookieService } from 'ngx-cookie';
 import {NavigationEnd, Router} from '@angular/router';
 import { CommonConstant } from './shared/constant/CommonConstant';
 import { NavigationConstant } from './shared/NavigationConstant';
-import { UrlConstantNew } from './shared/constant/URLConstantNew';
-import { EnviConfigService } from './shared/services/enviConfig.service';
 import Swal from 'sweetalert2';
 import { NgxRouterService } from '@adins/fe-core';
 import { environment } from 'environments/environment';
+import { URLConstant } from './shared/constant/URLConstant';
 
 @Component({
     selector: 'app-root',
@@ -23,10 +22,9 @@ export class AppComponent implements OnInit {
     private env;
 
     // TEST PUSH MASTER 5
-    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router, public configEnv: EnviConfigService,
-                private UrlConstantNew: UrlConstantNew, private elementRef: ElementRef, private renderer: Renderer2,
+    constructor(private http: HttpClient, private cookieService: CookieService, private router: Router,
+                private elementRef: ElementRef, private renderer: Renderer2,
                 private ngxRouter: NgxRouterService) {
-      this.env = this.configEnv.getConfig();
       AdInsHelper.ngxRouter = this.ngxRouter;
     }
 
@@ -140,7 +138,7 @@ export class AppComponent implements OnInit {
     }
 
     checkisEODforlogout() {
-        this.http.post(this.UrlConstantNew.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
+        this.http.post(URLConstant.GetSysCtrlCoyBySysKey, {Code: CommonConstant.IsEodRun}).subscribe(
             (response) => {
               if (response['SysValue'] == '1') {
                 localStorage.setItem('IsEod', response['SysValue'] );
@@ -152,7 +150,7 @@ export class AppComponent implements OnInit {
 
     validateIp() {
         const context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        this.http.post(this.UrlConstantNew.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
+        this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if (response['LastIpAddress'] != localStorage.getItem('LocalIp')) {
                 const version = localStorage.getItem(CommonConstant.VERSION);

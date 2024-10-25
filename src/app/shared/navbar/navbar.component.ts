@@ -14,7 +14,6 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { StorageService } from '../services/StorageService';
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { UrlConstantNew } from '../constant/URLConstantNew';
 import { AdInsHelperService } from '../services/AdInsHelper.service';
 import { RolePickNewService } from '../rolepick/rolepick-new.service';
 import { UcnotificationComponent } from '@adins/ucnotification';
@@ -46,7 +45,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     backgroundColor = environment.navbarColor;
     NotificationHListObj = new Array<NotificationHObj>();
     TotalUnread: number = 0;
-    NotificationObj: UcNotificationObj = new UcNotificationObj(this.cookieService, this.UrlConstantNew);
+    NotificationObj: UcNotificationObj = new UcNotificationObj(this.cookieService);
     IsUseNotification: string = '';
     @ViewChild('appnotif') appnotif: UcnotificationComponent;
 
@@ -61,8 +60,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         private route: ActivatedRoute,
         private authService: ConfinsAuthService,
         private router: Router, private cookieService: CookieService, private strService: StorageService,
-        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService, 
-        private UrlConstantNew: UrlConstantNew,
+        private http: HttpClient, public rolePickService: RolePickService, private toastr: NGXToastrService,
         private adInsHelperService: AdInsHelperService,
         private rolePickNewService: RolePickNewService,
         public dialog: MatDialog,
@@ -91,7 +89,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
         
         // var _hubConnection = new HubConnectionBuilder()
-        //     .withUrl(this.UrlConstantNew.WebSocketUrl)
+        //     .withUrl(URLConstant.WebSocketUrl)
         //     .withAutomaticReconnect()
         //     .build();
 
@@ -136,7 +134,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         var requestObj = {
             isLoading: false
         };
-        this.http.post(this.UrlConstantNew.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
+        this.http.post(URLConstant.GetListNotificationHByRefUserId, { isLoading: false }).subscribe(
             (response) => {
                 this.TotalUnread = response["TotalUnreadNotification"];
                 this.NotificationHListObj = response["ResponseNotificationHCustomObjs"];
@@ -150,7 +148,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     ClickNotification(item) {
-        this.http.post(this.UrlConstantNew.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
+        this.http.post(URLConstant.UpdateReadNotification, { Id: item.NotificationDId }).subscribe(
             (response) => {
             });
         if (item.MrNotificationMethodCode == CommonConstant.NOTIF_METHOD_EXT_LINK) {
@@ -168,8 +166,8 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
     }
 
     checkUseNotification() {
-        this.IsUseNotification = this.UrlConstantNew.env.IseUseNotification;
-        AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, this.UrlConstantNew.env.IseUseNotification);
+        this.IsUseNotification = URLConstant.env.IseUseNotification;
+        AdInsHelper.SetLocalStorage(CommonConstant.GSCodeIsUseNotification, URLConstant.env.IseUseNotification);
         if(this.IsUseNotification == "1") {
             this.NotificationObj.IsClickable = true;
         }
@@ -180,7 +178,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             RefreshToken: this.authService.token?.RefreshToken
         };
 
-        this.http.post(this.UrlConstantNew.LogoutV2, logoutObj, AdInsConstant.SpinnerOptions).subscribe({
+        this.http.post(URLConstant.LogoutV2, logoutObj, AdInsConstant.SpinnerOptions).subscribe({
             next: () => {
                 AdInsHelper.ClearAllLog(this.cookieService);
                 this.clearSession();
@@ -216,7 +214,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         }
         else {
             var token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            var url = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
+            var url = URLConstant.env.losR3Web + NavigationConstant.PAGES_LOGIN + "?token=" + token;
             window.open(url, "_blank");
         }
         
@@ -235,7 +233,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
         console.log(this.userAccess.UserName);
         var _hubConnection = new HubConnectionBuilder()
-            .withUrl(this.UrlConstantNew.WebSocketUrl)
+            .withUrl(URLConstant.WebSocketUrl)
             .withAutomaticReconnect()
             .build();
 
@@ -287,7 +285,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             this.passwordExpirationObj = JSON.parse(data);
             return;
         }
-        this.http.post(this.UrlConstantNew.GetRefUserPasswordExpirationDtById, {id: useraccess.RefUserId}).subscribe(
+        this.http.post(URLConstant.GetRefUserPasswordExpirationDtById, {id: useraccess.RefUserId}).subscribe(
             (res: any) => {
                 this.passwordExpirationObj = {
                     username: res.Username,

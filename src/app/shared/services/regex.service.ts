@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 
 @Injectable({
     providedIn: 'root'
 })
 export class RegexService {
-    constructor(private http: HttpClient, private UrlConstantNew: UrlConstantNew) { }
+    constructor(private http: HttpClient, ) { }
 
   getErrMessage(pattern: string): string {
     let errMessage: string = "";
@@ -40,6 +40,6 @@ export class RegexService {
           RefMasterTypeCode: CommonConstant.RefMasterTypeCodeRegularExpression,
           RowVersion: ""
         }
-        return this.http.post(this.UrlConstantNew.GetListActiveRefMaster, RefMasterPatternCode);
+        return this.http.post(URLConstant.GetListActiveRefMaster, RefMasterPatternCode);
     }
 }
