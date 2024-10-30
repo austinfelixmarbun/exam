@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
-import { UrlConstantNew } from '../constant/URLConstantNew';
+import { URLConstant } from '../constant/URLConstant';
 
 declare var $: any;
 
@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
     @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
 
     constructor(private router: Router,
-        private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+        private strService: StorageService, public translate: TranslateService, private http: HttpClient, private cookieService: CookieService, ) {
         this.version = localStorage.getItem(CommonConstant.VERSION);
 
     }
@@ -52,7 +52,7 @@ export class SidebarComponent implements OnInit {
         // }
         const currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         if (currentUserContext) {
-            await this.http.post(this.UrlConstantNew.GetAllActiveRefFormByRoleCodeAndModuleCode, {
+            await this.http.post(URLConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {
               RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module
             }, { withCredentials: true }).toPromise().then(
                 (response) => {

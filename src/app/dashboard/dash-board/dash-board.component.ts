@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { ThingsToDoIntegrationV2Obj, UcThingsToDoObj } from 'app/shared/model/library/uc-things-to-do-obj.model';
-import { environment } from 'environments/environment';
 import { CookieService } from 'ngx-cookie';
 
 @Component({
@@ -19,7 +18,7 @@ export class DashBoardComponent implements OnInit {
   officeCode: string;
   roleCode: string;
 
-  constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) { }
+  constructor(private cookieService: CookieService) { }
 
   ngOnInit() {
     // this.Item = {Url : AdInsConstant.GetThingsToDoByRole, Module : "FOU"};
@@ -35,23 +34,23 @@ export class DashBoardComponent implements OnInit {
     // );
     let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
     this.username = context[CommonConstant.USER_NAME];
-    this.url = this.UrlConstantNew.env.DashboardURL;
+    this.url = URLConstant.env.DashboardURL;
     this.officeCode = context[CommonConstant.OFFICE_CODE];
     this.roleCode = context[CommonConstant.ROLE_CODE];
-    this.Item.Url = this.UrlConstantNew.GetThingsToDoByRoleV2;
+    this.Item.Url = URLConstant.GetThingsToDoByRoleV2;
     this.Item.RequestObj.ModuleCode = CommonConstant.MODULE_FOU;
 
     let integrationObj;
     let integrationObj2;
 
     integrationObj = new ThingsToDoIntegrationV2Obj();
-    integrationObj.BaseUrl = this.UrlConstantNew.GetThingsToDoCamunda;
+    integrationObj.BaseUrl = URLConstant.GetThingsToDoCamunda;
     integrationObj.ApiPath = "";
     integrationObj.RequestObj.OfficeCode = "";
     integrationObj.RequestObj.UserName = this.username;
 
     integrationObj2 = new ThingsToDoIntegrationV2Obj();
-    integrationObj2.BaseUrl = this.UrlConstantNew.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
+    integrationObj2.BaseUrl = URLConstant.GetListApvTaskListByUsernameAndRoleCodeForThingsToDo;
     integrationObj2.ApiPath = "";
     integrationObj2.RequestObj.OfficeCode = "";
     integrationObj2.RequestObj.UserName = this.username;

@@ -7,7 +7,7 @@ import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -33,11 +33,11 @@ export class RefJobTitleAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.ORG_JOB_TITLE;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
-    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private toastr: NGXToastrService, private fb: FormBuilder,
     private ngxRouter: NgxRouterService) {
-    this.apiUrl = this.UrlConstantNew.GetRefJobTitleById;
-    this.addUrl = this.UrlConstantNew.AddRefJobTitle;
-    this.editUrl = this.UrlConstantNew.EditRefJobTitle;
+    this.apiUrl = URLConstant.GetRefJobTitleById;
+    this.addUrl = URLConstant.AddRefJobTitle;
+    this.editUrl = URLConstant.EditRefJobTitle;
 
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);

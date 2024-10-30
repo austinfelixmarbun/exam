@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 
 
@@ -23,7 +23,7 @@ export class RequestNewPasswordComponent implements OnInit {
   version: string;
   isRequested: boolean = false;
   censoredEmail: string = "";
-  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router, private UrlConstantNew: UrlConstantNew) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, private fb: FormBuilder, private router: Router) {
     this.version = localStorage.getItem(CommonConstant.VERSION);
   }
 
@@ -37,7 +37,7 @@ export class RequestNewPasswordComponent implements OnInit {
     {
       UserName: this.ReqPassForm.controls["Username"].value
     };
-    this.http.post(this.UrlConstantNew.RequestNewPassword, requestObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.RequestNewPassword, requestObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.censoredEmail = response["CensoredEmail"];
         this.isRequested = true;

@@ -15,7 +15,7 @@ import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { CookieService } from 'ngx-cookie';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -73,17 +73,17 @@ export class EmployeePositionAddComponent implements OnInit {
     readonly CancelLink: string = NavigationConstant.EMP_POS;
     constructor(private router: Router, private route: ActivatedRoute, private httpClient: HttpClient, 
         private toastr: NGXToastrService, private fb: FormBuilder, private cookieService: CookieService, 
-        private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
-        this.getUrl = this.UrlConstantNew.GetRefEmployeeById;
-        this.addUrl = this.UrlConstantNew.AddEmpPosition;
-        this.refOfficeUrl = this.UrlConstantNew.GetAllRefOffice;
-        this.supervisorUrl = this.UrlConstantNew.GetEmpListByOfficeIdAndIsActive;
-        this.refMasterUrl = this.UrlConstantNew.GetRefMasterListDesc;
-        this.bizUrl = this.UrlConstantNew.GetRefBizUnitByOffice;
-        this.orgJobTitleUrl = this.UrlConstantNew.GetOrgJobTitleByMdlStruc;
-        this.getEditUrl = this.UrlConstantNew.GetEmpByEmpPositionId;
-        this.editUrl = this.UrlConstantNew.EditEmpPosition;
-        this.getEmpUrl = this.UrlConstantNew.GetRefEmployeeById;
+        private ngxRouter: NgxRouterService) {
+        this.getUrl = URLConstant.GetRefEmployeeById;
+        this.addUrl = URLConstant.AddEmpPosition;
+        this.refOfficeUrl = URLConstant.GetAllRefOffice;
+        this.supervisorUrl = URLConstant.GetEmpListByOfficeIdAndIsActive;
+        this.refMasterUrl = URLConstant.GetRefMasterListDesc;
+        this.bizUrl = URLConstant.GetRefBizUnitByOffice;
+        this.orgJobTitleUrl = URLConstant.GetOrgJobTitleByMdlStruc;
+        this.getEditUrl = URLConstant.GetEmpByEmpPositionId;
+        this.editUrl = URLConstant.EditEmpPosition;
+        this.getEmpUrl = URLConstant.GetRefEmployeeById;
 
         this.route.queryParams.subscribe(params => {
             const queryParams = this.ngxRouter.getQueryParams(params);
@@ -112,7 +112,7 @@ export class EmployeePositionAddComponent implements OnInit {
 
     ngOnInit() {
 
-        this.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+        this.inputLookupObj = new InputLookupObj();
         this.inputLookupObj.urlJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.pagingJson = "./assets/lookup/lookupSupervisor.json";
         this.inputLookupObj.genericJson = "./assets/lookup/lookupSupervisor.json";

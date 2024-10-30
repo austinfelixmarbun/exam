@@ -5,7 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -14,12 +14,12 @@ import { NgxRouterService } from '@adins/fe-core';
 })
 export class RoleFormPagingComponent implements OnInit {
   RefRoleId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService){
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService){
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefRoleId = queryParams["RefRoleId"];
@@ -31,7 +31,7 @@ export class RoleFormPagingComponent implements OnInit {
 
     this.inputPagingObj._url = "./assets/ucpaging/searchRoleRefForm.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRoleRefForm.json";
-    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAuthForm;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAuthForm;
 
     var critInput = new CriteriaObj();
     critInput.DataType = "numeric";

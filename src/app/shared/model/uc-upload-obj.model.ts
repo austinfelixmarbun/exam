@@ -1,4 +1,4 @@
-import { UrlConstantNew } from "../constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 
 export class UcUploadObj {
     title: string;
@@ -29,20 +29,20 @@ export class UcUploadObj {
     listEnvironments: Array<EnvisObj>;
     additionalPayload: Record<string,string>;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.title = "";
         this.subsectionId = "UcUploadFile";
         this.formatsAllowed = ".xls, .xlsx, .txt, .TXT";
         this.UploadTypeCode = "";
         this.ErrorDownloadUrl = "";
-        this.TemplateUrl = this.UrlConstantNew.DownloadTemplate;
+        this.TemplateUrl = URLConstant.DownloadTemplate;
         this.TemplateName = "";
         this.FileErrorName = "";
-        this.environmentUrl = this.UrlConstantNew.env.FoundationR3Url + '/v2';
-        this.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+        this.environmentUrl = URLConstant.env.FoundationR3Url + '/v2';
+        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.pagingJson = "";
         this.SheetName = "";
-        this.url = this.UrlConstantNew.UploadFileV2;
+        this.url = URLConstant.UploadFileV2;
         this.hideProgressBar = false;
         this.hideResetBtn = false;
         this.hideSelectBtn = false;
@@ -53,8 +53,8 @@ export class UcUploadObj {
         this.isDownloadTmplt = true;
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
+        this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.FoundationR3Web });
         this.additionalPayload = {};
     }
 }

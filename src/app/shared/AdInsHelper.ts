@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { CookieOptions, CookieService } from "ngx-cookie";
 import * as CryptoJS from 'crypto-js';
 import { NgxRouterService } from "@adins/fe-core";
+import { URLConstant } from "./constant/URLConstant";
 
 export class AdInsHelper {
 
@@ -77,7 +78,7 @@ export class AdInsHelper {
 
     // see AdInsHelper.service.ts
     // public static ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
-    //     var url = environment.FoundationR3Url + this.UrlConstantNew.LogoutAuth;
+    //     var url = environment.FoundationR3Url + URLConstant.LogoutAuth;
     //     http.post(url, {}).subscribe();
     //     let version = localStorage.getItem(CommonConstant.VERSION);
     //     localStorage.clear();
@@ -173,7 +174,7 @@ export class AdInsHelper {
     }
 
     public static OpenPefindoMultiResultView(TrxNo: string, MrCustTypeCode: string) {
-        var url = environment.FoundationR3Web + "/View/Pefindo?GroupTrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
+        var url = URLConstant.env.FoundationR3Web + "/View/Pefindo?GroupTrxNo=" + TrxNo + "&MrCustTypeCode=" + MrCustTypeCode;
         window.open(url, "_blank");
     }
 

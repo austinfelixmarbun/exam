@@ -1,6 +1,5 @@
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
-import { environment } from "environments/environment";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 export class UcDropdownListObj {
 
@@ -17,8 +16,8 @@ export class UcDropdownListObj {
     isReady: boolean;
     isCustomList: boolean;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
-        this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
+    constructor() {
+        this.enviromentUrl = URLConstant.env.FoundationR3Url + "/v1";
         this.apiPath = "";
         this.apiUrl = "";
         this.ddlType = UcDropdownListConstant.DDL_TYPE_ONE; // one | all | none | blank

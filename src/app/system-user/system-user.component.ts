@@ -4,7 +4,6 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { HttpClient } from '@angular/common/http';
 import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NGXToastrService } from 'app/shared/services/toastr.service';
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 
 @Component({
   selector: 'app-system-user',
@@ -13,11 +12,10 @@ import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 })
 export class SystemUserComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.SYS_DETAIL;
   constructor(private httpClient: HttpClient,
-    private UrlConstantNew: UrlConstantNew,
     private toastr: NGXToastrService
     ) { }
 

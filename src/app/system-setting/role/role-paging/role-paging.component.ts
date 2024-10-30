@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-role-paging',
@@ -11,10 +11,10 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
 })
 export class RolePagingComponent implements OnInit {
 
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_DETAIL;
-  constructor(private UrlConstantNew: UrlConstantNew) {
+  constructor() {
   }
 
   ngOnInit() {

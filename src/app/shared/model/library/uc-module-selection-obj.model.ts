@@ -1,4 +1,4 @@
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { URLConstant } from "app/shared/constant/URLConstant";
 import { NavigationConstant } from "app/shared/NavigationConstant";
 
 export class UcModuleSelectionObj {
@@ -7,15 +7,15 @@ export class UcModuleSelectionObj {
     listApis: Object;
     target: string;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.urlJson = '';
         this.urlLogo = 'assets/img/logo-01.png';
         this.listApis = new Object();
-        this.listApis['FOU_WEB'] = this.UrlConstantNew.env.FoundationR3Web + NavigationConstant.PAGES_LOGIN;
-        this.listApis['LOS_WEB'] = this.UrlConstantNew.env.losR3Web + NavigationConstant.PAGES_LOGIN;
-        this.listApis['CMS_WEB'] = this.UrlConstantNew.env.cmsR3Web + NavigationConstant.PAGES_LOGIN;
-        this.listApis['AMS_WEB'] = this.UrlConstantNew.env.amsR3Web + NavigationConstant.PAGES_LOGIN;
-        this.listApis['LMS_WEB'] = this.UrlConstantNew.env.lmsR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['FOU_WEB'] = URLConstant.env.FoundationR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['LOS_WEB'] = URLConstant.env.losR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['CMS_WEB'] = URLConstant.env.cmsR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['AMS_WEB'] = URLConstant.env.amsR3Web + NavigationConstant.PAGES_LOGIN;
+        this.listApis['LMS_WEB'] = URLConstant.env.lmsR3Web + NavigationConstant.PAGES_LOGIN;
         this.target = '_self';
     }
 }

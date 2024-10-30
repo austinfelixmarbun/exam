@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 
 @Component({
   selector: 'app-ref-form-paging',
@@ -9,16 +9,16 @@ import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
   styleUrls: ['./ref-form-paging.component.scss']
 })
 export class RefFormPagingComponent implements OnInit {
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
 
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_DETAIL;
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
 
   ngOnInit() {
     this.inputPagingObj._url = "./assets/ucpaging/searchRefForm.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefForm.json";
-    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteRefFormData;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteRefFormData;
     
   }
 }

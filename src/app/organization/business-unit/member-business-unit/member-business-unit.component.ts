@@ -5,7 +5,7 @@ import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
 import { ActivatedRoute } from '@angular/router';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -14,11 +14,11 @@ import { NgxRouterService } from '@adins/fe-core';
 })
 export class MemberBusinessUnitComponent implements OnInit {
   RefBizUnitId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
   
   readonly CancelLink: string = NavigationConstant.ORG_BZ_UNIT;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService){
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService){
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefBizUnitId = queryParams["RefBizUnitId"];

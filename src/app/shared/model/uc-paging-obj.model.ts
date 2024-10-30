@@ -1,6 +1,4 @@
-import { environment } from "environments/environment";
-import { AdInsConstant } from "../AdInstConstant";
-import { UrlConstantNew } from "../constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 import { NavigationConstant } from "../NavigationConstant";
 import { CriteriaObj } from "./criteria-obj.model";
 import { IntegrationObj } from "./library/integration-obj.model";
@@ -27,21 +25,21 @@ export class UcPagingObj {
     ListPageSize: number[];
     dicts: any
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.dicts = {};
         this._url = "";
         this.title = "";
-        this.enviromentUrl = this.UrlConstantNew.env.FoundationR3Url + '/v2';
-        this.apiQryPaging = this.UrlConstantNew.GetPagingObjectBySQL;
+        this.enviromentUrl = URLConstant.env.FoundationR3Url + '/v2';
+        this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
         this.arrCritObj = null;
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: this.UrlConstantNew.env.FoundationR3Web });
-        this.listEnvironments.push({ environment: "NOTIF_ENGINE", url: this.UrlConstantNew.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + '/v1' });
+        this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.FoundationR3Web });
+        this.listEnvironments.push({ environment: "NOTIF_ENGINE", url: URLConstant.env.FoundationR3Url + '/v1' });
         this.whereValue = new Array<WhereValueObj>();
         this.isHideSearch = false;
         this.delay = 0;

@@ -5,7 +5,7 @@ import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcPagingObj } from 'app/shared/model/uc-paging-obj.model';
 import { UcViewGenericObj } from 'app/shared/model/uc-view-generic-obj.model';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -15,12 +15,12 @@ import { NgxRouterService } from '@adins/fe-core';
 })
 export class RefFormRolePagingComponent implements OnInit {
   RefFormId: string;
-  inputPagingObj: UcPagingObj = new UcPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  inputPagingObj: UcPagingObj = new UcPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   readonly AddLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_ROLE_MAP_ADD;
-  constructor(private route: ActivatedRoute, private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+  constructor(private route: ActivatedRoute, private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefFormId = queryParams["RefFormId"];
@@ -30,10 +30,10 @@ export class RefFormRolePagingComponent implements OnInit {
   ngOnInit() {
     this.viewGenericObj.viewInput = "./assets/ucviewgeneric/viewRefFormRole.json";
 
-    this.inputPagingObj = new UcPagingObj(this.UrlConstantNew);
+    this.inputPagingObj = new UcPagingObj();
     this.inputPagingObj._url = "./assets/ucpaging/searchRefFormRole.json";
     this.inputPagingObj.pagingJson = "./assets/ucpaging/searchRefFormRole.json";
-    this.inputPagingObj.deleteUrl = this.UrlConstantNew.DeleteAuthForm;
+    this.inputPagingObj.deleteUrl = URLConstant.DeleteAuthForm;
 
     var critInput = new CriteriaObj();
     critInput.DataType = "numeric";

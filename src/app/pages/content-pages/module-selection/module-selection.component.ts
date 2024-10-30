@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { UcModuleSelectionObj } from 'app/shared/model/library/uc-module-selection-obj.model';
 
 @Component({
@@ -8,9 +8,9 @@ import { UcModuleSelectionObj } from 'app/shared/model/library/uc-module-selecti
   styleUrls: ['./module-selection.component.css']
 })
 export class ModuleSelectionComponent implements OnInit {
-  moduleSelectionObj: UcModuleSelectionObj = new UcModuleSelectionObj(this.UrlConstantNew);
+  moduleSelectionObj: UcModuleSelectionObj = new UcModuleSelectionObj();
 
-  constructor(private UrlConstantNew: UrlConstantNew) { }
+  constructor() { }
 
   ngOnInit() {
     this.moduleSelectionObj.urlJson = './assets/module-selection.json';

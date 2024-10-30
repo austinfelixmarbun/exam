@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { CommonConstant } from 'app/shared/constant/CommonConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { RequestDateObj } from 'app/shared/model/integration/request-date-obj.model';
 
 @Component({
@@ -27,7 +27,7 @@ export class DailyMasterContinuousFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private http: HttpClient, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.Type = queryParams["Type"];
@@ -49,7 +49,7 @@ export class DailyMasterContinuousFormComponent implements OnInit {
   ReqForm() {
     var reqDt: RequestDateObj = this.DateForm.getRawValue();
 
-    this.http.post(this.UrlConstantNew.SendMasterDailyToRabbitMq, reqDt, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.SendMasterDailyToRabbitMq, reqDt, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
       this.toastr.successMessage(response['message']);
     });

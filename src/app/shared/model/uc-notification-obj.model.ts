@@ -2,7 +2,7 @@ import { environment } from "environments/environment";
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "../AdInsHelper";
 import { CommonConstant } from "../constant/CommonConstant";
-import { UrlConstantNew } from "../constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 
 export class UcNotificationObj {
     Username: string;
@@ -17,18 +17,18 @@ export class UcNotificationObj {
     ClickMethodLink: string;
     IsReady: boolean;
 
-    constructor(private cookieService: CookieService, private UrlConstantNew: UrlConstantNew) {
+    constructor(private cookieService: CookieService, ) {
         let context = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
         this.Username = context[CommonConstant.USER_NAME];
-        this.EnvUrl = this.UrlConstantNew.env.NotifEngineURL;
-        this.PathUrlSubs = this.UrlConstantNew.PushNotifSubscribe;
-        this.PathUrlUnsubs = this.UrlConstantNew.PushNotifUnsubscribe;
-        this.PathUrlGetAllNotif = this.UrlConstantNew.GetNotReadPushNotif;
-        this.PathUrlUpdateReadNotif = this.UrlConstantNew.UpdateReadPushNotif;
+        this.EnvUrl = URLConstant.env.NotifEngineURL;
+        this.PathUrlSubs = URLConstant.PushNotifSubscribe;
+        this.PathUrlUnsubs = URLConstant.PushNotifUnsubscribe;
+        this.PathUrlGetAllNotif = URLConstant.GetNotReadPushNotif;
+        this.PathUrlUpdateReadNotif = URLConstant.UpdateReadPushNotif;
         this.PublicKey = environment.NotificationPublicKey;
         this.ListEnvironments = new Array<EnvisObj>();
-        this.ListEnvironments.push({ environment: "FOU", url: this.UrlConstantNew.env.FoundationR3Web});
-        this.ListEnvironments.push({ environment: "LOS", url: this.UrlConstantNew.env.losR3Web});
+        this.ListEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Web});
+        this.ListEnvironments.push({ environment: "LOS", url: URLConstant.env.losR3Web});
         this.IsClickable = false;
         this.ClickMethodLink = CommonConstant.NOTIF_METHOD_INT_LINK;
         this.IsReady = false;

@@ -1,7 +1,4 @@
-
-import {FormGroup} from '@angular/forms';
-import { environment } from 'environments/environment';
-import { UrlConstantNew } from '../constant/URLConstantNew';
+import { URLConstant } from '../constant/URLConstant';
 import { InputFieldObj } from './input-field-obj.model';
 import { UcAddressObj } from './uc-address-obj.model';
 
@@ -30,10 +27,10 @@ export class InputAddressObj {
     isReadonly: boolean;
     isAddrUppercase: boolean;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
+    constructor() {
         this.default = new UcAddressObj();
         this.title = "Address Information";
-        this.inputField = new InputFieldObj(this.UrlConstantNew);
+        this.inputField = new InputFieldObj();
         this.showAllPhn = true;
         this.showPhn1 = true;
         this.showPhn2 = true;
@@ -51,7 +48,7 @@ export class InputAddressObj {
         this.useStaySince = false;
         this.showStayLength = false;
         this.isRequired = true;
-        this.environmentUrl = this.UrlConstantNew.env.FoundationR3Url + "/v1";
+        this.environmentUrl = URLConstant.env.FoundationR3Url + "/v1";
         this.isReadonly = false;
         this.isAddrUppercase = true;
     }

@@ -1,4 +1,4 @@
-import { UrlConstantNew } from "../constant/URLConstantNew";
+import { URLConstant } from "../constant/URLConstant";
 
 export class UcInputApprovalObj {
     TaskId: number;
@@ -15,20 +15,20 @@ export class UcInputApprovalObj {
     PathUrlGetHistory: string;
     TrxNo: string;
     EnableRequiredNotes: boolean;
-    constructor(private UrlConstantNew: UrlConstantNew) { 
+    constructor() { 
         this.TaskId = 0;
-        this.EnvUrl = this.UrlConstantNew.env.FoundationR3Url + "";
-        this.PathUrlGetLevelVoting = this.UrlConstantNew.GetLevelVoting;
-        this.PathUrlGetPossibleResult = this.UrlConstantNew.GetPossibleResult;
-        this.PathUrlSubmitApproval = this.UrlConstantNew.SubmitApproval;
-        this.PathUrlGetNextNodeMember = this.UrlConstantNew.GetNextNodeMember;
-        this.PathUrlGetReasonActive = this.UrlConstantNew.GetRefReasonActive;
-        this.PathUrlGetChangeFinalLevel = this.UrlConstantNew.GetCanChangeMinFinalLevel;
+        this.EnvUrl = URLConstant.env.FoundationR3Url + "";
+        this.PathUrlGetLevelVoting = URLConstant.GetLevelVoting;
+        this.PathUrlGetPossibleResult = URLConstant.GetPossibleResult;
+        this.PathUrlSubmitApproval = URLConstant.SubmitApproval;
+        this.PathUrlGetNextNodeMember = URLConstant.GetNextNodeMember;
+        this.PathUrlGetReasonActive = URLConstant.GetRefReasonActive;
+        this.PathUrlGetChangeFinalLevel = URLConstant.GetCanChangeMinFinalLevel;
         this.PathUrlReturnToLevel = "";
         this.PathUrlContinueToLevel = "";
         this.TrxNo = "";
         this.RequestId = 0;
-        this.PathUrlGetHistory = this.UrlConstantNew.GetTaskHistory;
+        this.PathUrlGetHistory = URLConstant.GetTaskHistory;
         this.EnableRequiredNotes = true;
     }
 }  

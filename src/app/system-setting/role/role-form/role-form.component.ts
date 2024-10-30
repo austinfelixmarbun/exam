@@ -10,8 +10,8 @@ import { FromValueObj, UcTempPagingObj } from "app/shared/model/temp-paging/uc-t
 import { ExceptionConstant } from "app/shared/constant/ExceptionConstant";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: 'app-role-form',
@@ -24,13 +24,13 @@ export class RoleFormComponent implements OnInit {
   listAuthFormObj: {[key: string]: any};
   listSelectedId: Array<number> = new Array<number>();
   RefOfficeAreaId: number;
-  tempPagingObj: UcTempPagingObj = new UcTempPagingObj(this.UrlConstantNew);
-  viewGenericObj: UcViewGenericObj = new UcViewGenericObj(this.UrlConstantNew);
+  tempPagingObj: UcTempPagingObj = new UcTempPagingObj();
+  viewGenericObj: UcViewGenericObj = new UcViewGenericObj();
 
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_ROLE_FORM;
   constructor(private http: HttpClient,
     private route: ActivatedRoute, private router: Router, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
+    private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
       this.RefRoleId = queryParams['RefRoleId'];
@@ -70,7 +70,7 @@ export class RoleFormComponent implements OnInit {
       this.listAuthFormObj.ListAuthFormObj.push(this.AuthFormObj);
     }
 
-    this.http.post(this.UrlConstantNew.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
+    this.http.post(URLConstant.AddListAuthForm, this.listAuthFormObj, AdInsConstant.SpinnerOptions).subscribe(
       (response) => {
         this.toastr.successMessage(response["message"]);
         AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.SYSTEM_SETTING_ROLE_FORM],{ "RefRoleId": this.RefRoleId });

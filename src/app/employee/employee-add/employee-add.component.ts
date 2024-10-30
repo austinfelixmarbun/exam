@@ -22,9 +22,9 @@ import { NavigationConstant } from "app/shared/NavigationConstant";
 import { RefEmployeeObj } from "app/shared/model/ref-employee-obj";
 import { ReqRefEmployeeObj } from "app/shared/model/request/user-organization/ref-emp/req-ref-employee.model";
 import { AdInsConstant } from "app/shared/AdInstConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
 import { NgxRouterService } from "@adins/fe-core";
 import { RegexService } from "app/shared/services/regex.service";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-employee-add",
@@ -71,7 +71,7 @@ export class EmployeeAddComponent implements OnInit {
     BankAccNo: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     BankAccName: ['', [Validators.required]]
   });
-  inputFieldAddr: InputFieldObj = new InputFieldObj(this.UrlConstantNew);
+  inputFieldAddr: InputFieldObj = new InputFieldObj();
   addressObj: UcAddressObj;
   inputAddressObj: InputAddressObj;
   
@@ -86,7 +86,6 @@ export class EmployeeAddComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private cookieService: CookieService, 
     private ngxRouter: NgxRouterService,
-    private UrlConstantNew: UrlConstantNew
   ) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -100,7 +99,7 @@ export class EmployeeAddComponent implements OnInit {
 
     this.generalSettingObj = new GeneralSettingObj();
     this.generalSettingObj.GsCode = CommonConstant.GsCodePasswordRegex;
-    this.http.post(this.UrlConstantNew.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingValueByCode, {Code: CommonConstant.GsCodePasswordRegex}).subscribe(
       (response: {GsValue}) => {
         this.passwordPattern = response.GsValue;
       }
@@ -175,7 +174,7 @@ export class EmployeeAddComponent implements OnInit {
     var RefMasterIdType = {
       RefMasterTypeCode: CommonConstant.RefMasterTypeCodeIdType,
     }
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, RefMasterIdType).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.IdTypeList = response[CommonConstant.ReturnObj];
@@ -192,7 +191,7 @@ export class EmployeeAddComponent implements OnInit {
       }
     );
 
-    this.inputLookupBankObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputLookupBankObj = new InputLookupObj();
     this.inputLookupBankObj.urlJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.pagingJson = "./assets/uclookup/Bank/lookupBank.json";
     this.inputLookupBankObj.genericJson = "./assets/uclookup/Bank/lookupBank.json";
@@ -202,7 +201,7 @@ export class EmployeeAddComponent implements OnInit {
       var empObj = new RefEmpObj();
       empObj.RefEmpId = this.RefEmpId;
 
-      this.http.post(this.UrlConstantNew.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
+      this.http.post(URLConstant.GetEmpForUpdateById, {Id : this.RefEmpId}).subscribe(
         (response) => {
           this.refEmpObj = response['RefEmpObj'];
           this.refUserObj = response['RefUserObj'];
@@ -260,13 +259,13 @@ export class EmployeeAddComponent implements OnInit {
           this.addressObj.PhnExt3 = this.refEmpObj.PhnExt3;
           this.addressObj.FaxArea = this.refEmpObj.FaxArea;
           this.addressObj.Fax = this.refEmpObj.Fax;
-          this.inputFieldAddr.inputLookupObj = new InputLookupObj(this.UrlConstantNew);
+          this.inputFieldAddr.inputLookupObj = new InputLookupObj();
           this.inputFieldAddr.inputLookupObj.jsonSelect = { Zipcode: this.refEmpObj.Zipcode };
           this.inputFieldAddr.inputLookupObj.nameSelect = this.refEmpObj.Zipcode;
         }
       );
     }
-    this.inputAddressObj = new InputAddressObj(this.UrlConstantNew);
+    this.inputAddressObj = new InputAddressObj();
     this.inputAddressObj.requiredPhn1 = true;
     this.inputAddressObj.default = this.addressObj;
     this.inputAddressObj.inputField = this.inputFieldAddr;
@@ -358,7 +357,7 @@ export class EmployeeAddComponent implements OnInit {
     refEmpData.EmpBankAccObj.RefEmpId = refEmpFormData.RefEmpId;
 
     if (this.pageType == "add") {
-      this.http.post(this.UrlConstantNew.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.AddRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_PAGING],{});
@@ -368,7 +367,7 @@ export class EmployeeAddComponent implements OnInit {
     else {
       refEmpData.EmpBankAccObj.RowVersion = this.empBankAccObj.RowVersion;
       refEmpData.RefUserObj.RowVersion = this.refUserObj.RowVersion;
-      this.http.post(this.UrlConstantNew.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.EditRefEmp, refEmpData, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.EMP_PAGING],{});

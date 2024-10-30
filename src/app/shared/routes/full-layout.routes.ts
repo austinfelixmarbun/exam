@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { PathConstant } from '../PathConstant';
-import * as _environment from "../../../assets/config/enviConfig.json";
 import { UcTemplateComponent } from '@adins/uctemplate';
 
 //Route for content layout with sidebar, navbar and footer.

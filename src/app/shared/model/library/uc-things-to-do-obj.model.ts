@@ -1,5 +1,5 @@
 import { CommonConstant } from "app/shared/constant/CommonConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 export class UcThingsToDoObj {
     Url: string;
@@ -26,9 +26,9 @@ export class ThingsToDoIntegrationObj {
     ApiPath: string;
     RequestObj: IntegrationReqObj;
 
-    constructor(private UrlConstantNew: UrlConstantNew) {
-        this.BaseUrl = this.UrlConstantNew.env.WFThingsToDoUrl;
-        this.ApiPath = this.UrlConstantNew.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
+    constructor() {
+        this.BaseUrl = URLConstant.env.WFThingsToDoUrl;
+        this.ApiPath = URLConstant.GetListWfTaskListByUsernameAndRoleCodeAndOfficeCodeForThingsToDo;
         this.RequestObj = new IntegrationReqObj();
     }
 }

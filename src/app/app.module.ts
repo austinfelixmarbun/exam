@@ -27,9 +27,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CookieModule } from 'ngx-cookie';
 import { StorageService } from './shared/services/StorageService';
 import { AdInsSharedModule } from './components/adins-module/adins-shared.module';
-import { EnviConfigService } from './shared/services/enviConfig.service';
-import { UrlConstantService } from './shared/services/urlConstant.service';
-import { UrlConstantNew } from './shared/constant/URLConstantNew';
 import { ClipboardModule } from 'ngx-clipboard'
 import { AddressService } from './shared/services/custAddr.service';
 import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,19 +53,6 @@ import { ApplicationContextService } from './shared/services/application-context
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
-const enviConfig = (config: EnviConfigService) => {
-    return () => {
-        return config.loadConfig();
-    }
-}
-
-const urlConstantConfig = (urlConfig: UrlConstantService) => {
-    return () => {
-        return urlConfig.loadConfig();
-    }
-}
-
 
 @NgModule({
     declarations: [
@@ -131,20 +115,11 @@ const urlConstantConfig = (urlConfig: UrlConstantService) => {
         NGXToastrService,
         AddressService,
         AdInsHelperService,
-        UrlConstantNew,
-        EnviConfigService,
         FormGroupDirective,
         LoggingService,
         { provide: UcTemplateService, useClass: AdinsTemplateService },
         { provide: ExecutorService, useClass: AdInsExecutorService },
         { provide: AppContextService, useClass: ApplicationContextService },
-        {
-            provide: APP_INITIALIZER, useFactory: enviConfig, multi: true, deps: [EnviConfigService]
-        },
-        UrlConstantService,
-        {
-            provide: APP_INITIALIZER, useFactory: urlConstantConfig, multi: true, deps: [UrlConstantService]
-        },
         ErrorDialogService,
         { provide: HTTP_INTERCEPTORS, useClass: LogsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },

@@ -5,7 +5,6 @@ import { NGXToastrService } from 'app/shared/services/toastr.service';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
 import { UcgridfooterComponent } from '@adins/ucgridfooter';
 import { UCSearchComponent } from '@adins/ucsearch';
-import { environment } from 'environments/environment';
 import { RefEmpObj } from 'app/shared/model/ref-emp-obj.model';
 import { RefOfficeObj } from 'app/shared/model/ref-office-obj.model';
 import { CriteriaObj } from 'app/shared/model/criteria-obj.model';
@@ -14,7 +13,7 @@ import { DecimalPipe } from '@angular/common';
 import { InputSearchObj } from 'app/shared/model/input-search-obj.model';
 import { ExceptionConstant } from 'app/shared/constant/ExceptionConstant';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -50,9 +49,9 @@ export class OfficeEmpPosComponent implements OnInit {
   readonly AddLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   readonly EditLink: string = NavigationConstant.OFFICE_EMP_POS_ADD;
   constructor(private route: ActivatedRoute, private http: HttpClient, private toastr: NGXToastrService, 
-    private UrlConstantNew: UrlConstantNew, private ngxRouter: NgxRouterService) {
-    this.apiUrl = this.UrlConstantNew.GetEmpPositionPaging;
-    this.deleteUrl = this.UrlConstantNew.DeleteEmpPosition;
+    private ngxRouter: NgxRouterService) {
+    this.apiUrl = URLConstant.GetEmpPositionPaging;
+    this.deleteUrl = URLConstant.DeleteEmpPosition;
 
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -69,13 +68,13 @@ export class OfficeEmpPosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchEmpList.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetEmpPositionPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetEmpPositionPaging;
     this.inputObj.ddlEnvironments = [
       {
         name: "refOfficeId",
-        environment: this.UrlConstantNew.env.FoundationR3Url
+        environment: URLConstant.env.FoundationR3Url
       }
     ];
 

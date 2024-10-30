@@ -11,7 +11,7 @@ import { DecimalPipe } from "@angular/common";
 import { InputSearchObj } from "app/shared/model/input-search-obj.model";
 import { AdInsHelper } from "app/shared/AdInsHelper";
 import { NavigationConstant } from "app/shared/NavigationConstant";
-import { UrlConstantNew } from "app/shared/constant/URLConstantNew";
+import { URLConstant } from "app/shared/constant/URLConstant";
 
 @Component({
   selector: "app-user-paging",
@@ -35,18 +35,17 @@ export class UserPagingComponent implements OnInit {
   constructor(
     private service: NGXToastrService,
     private https: HttpClient,
-    private router: Router, 
-    private UrlConstantNew: UrlConstantNew
+    private router: Router    
   ) {}
 
   ngOnInit() {
-    this.inputObj = new InputSearchObj(this.UrlConstantNew);
+    this.inputObj = new InputSearchObj();
     this.inputObj._url = "./assets/search/searchUser.json";
-    this.inputObj.apiQryPaging = this.UrlConstantNew.GetRefUserPaging;
+    this.inputObj.apiQryPaging = URLConstant.GetRefUserPaging;
     
     this.pageNow = 1;
     this.pageSize = 10;
-    this.apiUrl = this.UrlConstantNew.GetRefUserPaging;
+    this.apiUrl = URLConstant.GetRefUserPaging;
 
     this.initiateForm();
   }
@@ -97,7 +96,7 @@ export class UserPagingComponent implements OnInit {
 
   resetPassword(id: any) {
     if (confirm("Are you sure to reset this password to default?")) {
-      var resetPassUrl = this.UrlConstantNew.ResetPassword;
+      var resetPassUrl = URLConstant.ResetPassword;
       var refUser = new RefUserObj();
       // refUser.refUserId = id;
       this.https.post(resetPassUrl, refUser, AdInsConstant.SpinnerOptions).subscribe(

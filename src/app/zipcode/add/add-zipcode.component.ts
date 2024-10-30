@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NGXToastrService } from 'app/components/extra/toastr/toastr.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { RefZipcodeObj } from 'app/shared/model/ref-zipcode-obj.model';
@@ -9,8 +8,9 @@ import { InputLookupObj } from 'app/shared/model/input-lookup-obj.model';
 import { AdInsHelper } from 'app/shared/AdInsHelper';
 import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { AdInsConstant } from 'app/shared/AdInstConstant';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
+import { NGXToastrService } from 'app/shared/services/toastr.service';
 
 @Component({
   selector: 'add-zipcode',
@@ -38,7 +38,7 @@ export class ZipcodeAddComponent implements OnInit {
 
   readonly CancelLink: string = NavigationConstant.CS_ZIPCODE_PAGING;
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, 
-    private toastr: NGXToastrService, private fb: FormBuilder, private UrlConstantNew: UrlConstantNew,
+    private toastr: NGXToastrService, private fb: FormBuilder,
     private ngxRouter: NgxRouterService) {
 
     this.route.queryParams.subscribe(params => {
@@ -53,7 +53,7 @@ export class ZipcodeAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.inputDistrictLookupObj = new InputLookupObj(this.UrlConstantNew);
+    this.inputDistrictLookupObj = new InputLookupObj();
     this.inputDistrictLookupObj.urlJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.pagingJson = "./assets/lookup/lookupDistrict.json";
     this.inputDistrictLookupObj.genericJson = "./assets/lookup/lookupDistrict.json";
@@ -61,7 +61,7 @@ export class ZipcodeAddComponent implements OnInit {
     if (this.pageType == "edit") {
       this.rzcObj = new RefZipcodeObj();
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
-      this.http.post(this.UrlConstantNew.GetRefZipCodeById, {Id : this.refZipcodeId}).subscribe(
+      this.http.post(URLConstant.GetRefZipCodeById, {Id : this.refZipcodeId}).subscribe(
         response => {
           this.resultData = response;
           this.refZipcodeId = this.resultData.RefZipcodeId;
@@ -77,7 +77,7 @@ export class ZipcodeAddComponent implements OnInit {
           });
           this.refDistrict = new RefProvDistrictObj();
           this.refDistrict.RefProvDistrictId = this.resultData.RefProvDistrictId;
-          this.http.post(this.UrlConstantNew.GetRefProvDistrictById, {Id : this.resultData.RefProvDistrictId}).subscribe(
+          this.http.post(URLConstant.GetRefProvDistrictById, {Id : this.resultData.RefProvDistrictId}).subscribe(
             (response) => {
               this.resultDistrictData = response;
               this.inputDistrictLookupObj.jsonSelect = this.resultDistrictData;
@@ -96,7 +96,7 @@ export class ZipcodeAddComponent implements OnInit {
     }
     if (this.pageType == "add") {
       this.rzcObj.RowVersion = "";
-      this.http.post(this.UrlConstantNew.AddRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.AddRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ZIPCODE_PAGING],{});
@@ -105,7 +105,7 @@ export class ZipcodeAddComponent implements OnInit {
     } else {
       this.rzcObj.RefZipcodeId = this.refZipcodeId;
       this.rzcObj.RowVersion = this.resultData.RowVersion;
-      this.http.post(this.UrlConstantNew.EditRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.EditRefZipcodeV2, this.rzcObj, AdInsConstant.SpinnerOptions).subscribe(
         response => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter,[NavigationConstant.CS_ZIPCODE_PAGING],{});

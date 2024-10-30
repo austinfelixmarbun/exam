@@ -14,7 +14,7 @@ import { NavigationConstant } from 'app/shared/NavigationConstant';
 import { UcDropdownListConstant, UcDropdownListObj } from 'app/shared/model/library/uc-dropdown-list-obj.model';
 import { UclookupgenericComponent } from '@adins/uclookupgeneric';
 import { KeyValueObj } from 'app/shared/model/key-value/key-value-obj.model';
-import { UrlConstantNew } from 'app/shared/constant/URLConstantNew';
+import { URLConstant } from 'app/shared/constant/URLConstant';
 import { NgxRouterService } from '@adins/fe-core';
 
 @Component({
@@ -32,7 +32,7 @@ export class RefFormDetailComponent implements OnInit {
   RefFormId: number;
   checkClass: boolean = false;
   parameterObj: Array<ParameterObj> = new Array<ParameterObj>();
-  ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj(this.UrlConstantNew);
+  ddlTemplateIcon: UcDropdownListObj = new UcDropdownListObj();
   // IsTextMode: boolean = false;
 
   private ucLookupParentForm: UclookupgenericComponent;
@@ -43,7 +43,7 @@ export class RefFormDetailComponent implements OnInit {
   }
   readonly CancelLink: string = NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING;
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, 
-    private toastr: NGXToastrService, private UrlConstantNew: UrlConstantNew,
+    private toastr: NGXToastrService,
     private ngxRouter: NgxRouterService) {
     this.route.queryParams.subscribe(params => {
       const queryParams = this.ngxRouter.getQueryParams(params);
@@ -71,11 +71,11 @@ export class RefFormDetailComponent implements OnInit {
   });
   async ngOnInit() { 
     this.checkIsAutoFormNoFromSetting("FR");
-    this.ddlTemplateIcon.apiUrl = this.UrlConstantNew.GetTemplateIcon;
+    this.ddlTemplateIcon.apiUrl = URLConstant.GetTemplateIcon;
     this.ddlTemplateIcon.requestObj = {};
     this.ddlTemplateIcon.ddlType = UcDropdownListConstant.DDL_TYPE_NONE;
 
-    await this.http.post(this.UrlConstantNew.GetListRefModuleKeyValue, {}).toPromise().then(
+    await this.http.post(URLConstant.GetListRefModuleKeyValue, {}).toPromise().then(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemModuleType = response[CommonConstant.ReturnObj];
@@ -89,7 +89,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
 
-    this.http.post(this.UrlConstantNew.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeFormClass }).subscribe(
+    this.http.post(URLConstant.GetRefMasterListKeyValueActiveByCode, { RefMasterTypeCode: CommonConstant.RefMasterTypeCodeFormClass }).subscribe(
       (response) => {
         if (response[CommonConstant.ReturnObj].length > 0) {
           this.itemClassType = response[CommonConstant.ReturnObj];
@@ -104,7 +104,7 @@ export class RefFormDetailComponent implements OnInit {
     );
 
     if (this.mode == "edit") {
-      this.http.post<RefFormObj>(this.UrlConstantNew.GetRefFormDataByRefFormId, { Id: this.RefFormId }).subscribe(
+      this.http.post<RefFormObj>(URLConstant.GetRefFormDataByRefFormId, { Id: this.RefFormId }).subscribe(
         (response) => {
           this.refFormObj = response;
           this.refFormObj.RefFormId = this.RefFormId;
@@ -182,7 +182,7 @@ export class RefFormDetailComponent implements OnInit {
     let tempHierachyNo = 1;
     let tempListHierachyNo = [1, 2];
     if (isNew) {
-      this.inputLookupParentObj = new InputLookupObj(this.UrlConstantNew);
+      this.inputLookupParentObj = new InputLookupObj();
       this.inputLookupParentObj.urlJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.pagingJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
       this.inputLookupParentObj.genericJson = "./assets/uclookup/refForm/lookupRefFormParent.json";
@@ -290,14 +290,14 @@ export class RefFormDetailComponent implements OnInit {
 
     if (this.mode == "edit") {
       this.refFormObj.RowVersion = this.RefForm.controls.RowVersion.value;
-      this.http.post(this.UrlConstantNew.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.EditRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
 
         });
     } else {
-      this.http.post(this.UrlConstantNew.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
+      this.http.post(URLConstant.AddRefFormData, this.refFormObj, AdInsConstant.SpinnerOptions).subscribe(
         (response) => {
           this.toastr.successMessage(response["message"]);
           AdInsHelper.RedirectUrl(this.ngxRouter, [NavigationConstant.SYSTEM_SETTING_REF_FORM_PAGING], {});
@@ -313,7 +313,7 @@ export class RefFormDetailComponent implements OnInit {
       code: "MASTER_AUTO_GNRT_CODE"
     }
     var result: any;
-    this.http.post(this.UrlConstantNew.GetGeneralSettingByCode, generalSettingObj).subscribe(
+    this.http.post(URLConstant.GetGeneralSettingByCode, generalSettingObj).subscribe(
       (response) => {
         result = response;
 

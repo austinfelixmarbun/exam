@@ -45,10 +45,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         var currentUserContext = AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS) ? JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS)) : null;
         var token: string = "";
-        let jwtToken: string = "";
         var myObj;
         let today = new Date();
         var businessDt = formatDate(today, 'yyyy-MM-dd', 'en-US');
+        let jtoken = "";
 
         var checkSession = AdInsHelper.CheckSessionTimeout(this.cookieService);
         if (checkSession == "1") {
@@ -68,13 +68,13 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         if (currentUserContext != null) {
             token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.authService.token?.AccessToken;
 
             myObj = new Object();
             if (request.body != null) {
                 myObj = request.body;
             }
             myObj["RequestDateTime"] = businessDt;
+            jtoken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN);
         }
         else {
             myObj = new Object();
@@ -83,19 +83,23 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }
             myObj["RequestDateTime"] = businessDt;
             token = AdInsHelper.GetCookie(this.cookieService, CommonConstant.TOKEN);
-            jwtToken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.authService.token?.AccessToken;
+            jtoken = AdInsHelper.GetCookie(this.cookieService, CommonConstant.JWT_TOKEN) || this.authService.token?.AccessToken;
         }
 
         if (token == null) {
             token = "";
         }
 
+        if (jtoken == null) {
+            jtoken = "";
+        }
+
         if (token != "") {
             request = request.clone({ headers: request.headers.set('AdInsKey', token) });
         }
         
-        if (jwtToken) {
-            request = request.clone({ headers: request.headers.set('Authorization', `Bearer ${jwtToken}`)});
+        if (jtoken != "") {
+            request = request.clone({ headers: request.headers.set('Authorization', `Bearer ${jtoken}`)});
         }
 
         if (!request.headers.has('Content-Type')) {
