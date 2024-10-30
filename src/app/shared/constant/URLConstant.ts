@@ -1347,5 +1347,3 @@ export class URLConstant {
     public static GetIdentityProviders = this.env.FoundationR3Url + urlConstant.GetIdentityProviders;
     //#endregion
 }
-
-export const envi: any = URLConstant.env;
