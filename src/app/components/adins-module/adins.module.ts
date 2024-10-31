@@ -19,7 +19,7 @@ import { UcdropdownlistModule } from '@adins/ucdropdownlist';
 import { UcaddtotempModule } from '@adins/ucaddtotemp';
 import { UcDirectiveUpperCaseModule } from '@adins/uc-directive-upper-case';
 import { UcDirectiveValidateDateModule } from '@adins/uc-directive-validate-date';
-import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
+import { Ucdropdownsearch2Module } from '@adins/ucdropdownsearch2';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpConfigInterceptor } from 'app/shared/interceptor/httpconfig.interceptor';
 import { LogsInterceptor } from 'app/shared/interceptor/logs.interceptor';
@@ -45,7 +45,7 @@ import { LoggingService } from '@adins/fe-core';
         UcuploadModule,
         UcdropdownlistModule,
         UcaddtotempModule,
-        UcdropdownsearchModule
+        Ucdropdownsearch2Module
     ],
     imports: [
         CommonModule,
@@ -69,7 +69,7 @@ import { LoggingService } from '@adins/fe-core';
         UcaddtotempModule,
         UcDirectiveUpperCaseModule,
         UcDirectiveValidateDateModule,
-        UcdropdownsearchModule
+        Ucdropdownsearch2Module
     ],
     providers: [
       LoggingService,
