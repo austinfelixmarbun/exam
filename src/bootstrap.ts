@@ -14,7 +14,7 @@ fetch('assets/config/enviConfig.json').then(response => {
     localStorage.setItem('envi', JSON.stringify(config));
     setTimeout(() => {
       platformBrowserDynamic().bootstrapModule(AppModule);
-    }, 10)
+    }, 1000)
   })
 }).catch(err => {
   console.log('err', err);
