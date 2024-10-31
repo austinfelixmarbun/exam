@@ -1,5 +1,5 @@
 
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,6 @@ import { AdInsSharedModule } from './components/adins-module/adins-shared.module
 import { ClipboardModule } from 'ngx-clipboard'
 import { AddressService } from './shared/services/custAddr.service';
 import { FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UcdropdownsearchModule } from '@adins/ucdropdownsearch';
 import { AdInsHelperService } from './shared/services/AdInsHelper.service';
 import { RolePickNewService } from './shared/rolepick/rolepick-new.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -48,6 +47,7 @@ import { NGXToastrService } from './shared/services/toastr.service';
 import { AppContextService, LoggingService } from '@adins/fe-core';
 import { LogsInterceptor } from './shared/interceptor/logs.interceptor';
 import { ApplicationContextService } from './shared/services/application-context.service';
+import { Ucdropdownsearch2Module } from '@adins/ucdropdownsearch2';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -90,7 +90,7 @@ export function createTranslateLoader(http: HttpClient) {
         ClipboardModule,
         FormsModule,
         ReactiveFormsModule,
-        UcdropdownsearchModule,
+        Ucdropdownsearch2Module,
         UcformModule,
         UcloginhistModule,
         NgMultiSelectDropDownModule.forRoot(),
