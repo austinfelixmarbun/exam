@@ -25,7 +25,6 @@ export class ContentLayoutComponent implements OnInit {
     constructor(public translate: TranslateService, private strService: StorageService, private route: ActivatedRoute, 
         private cookieService: CookieService, private http: HttpClient,
         private ngxRouter: NgxRouterService) {
-        const browserLang: string = translate.getBrowserLang();
         this.route.queryParams.subscribe(params => {
             const queryParams = this.ngxRouter.getQueryParams(params);
             if (queryParams['Token'] != null && queryParams['Token'] != "null") {
@@ -44,7 +43,10 @@ export class ContentLayoutComponent implements OnInit {
                 }
             }
         );
-        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : langUse);
+        const lastLangUsed = localStorage.getItem(CommonConstant.LANG);
+        const _browserLang: string = lastLangUsed ?? translate.getBrowserLang();
+        const browserLang = _browserLang.match(/en|id|pt|de/) ? _browserLang : 'en';
+        translate.use(browserLang);
     }
 
     ngOnInit() {
@@ -96,8 +98,7 @@ export class ContentLayoutComponent implements OnInit {
     }
 
     ChangeLanguage(language: string) {
-        localStorage.setItem('lang', language);
-        this.strService.set('lang', language);
+        this.strService.set(CommonConstant.LANG, language);
         this.translate.use(language);
     }
 

@@ -65,8 +65,11 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
         private rolePickNewService: RolePickNewService,
         public dialog: MatDialog,
         private ngxRouter: NgxRouterService) {
-        const browserLang: string = translate.getBrowserLang();
-        translate.use(browserLang.match(/en|id|pt|de/) ? browserLang : 'en');
+        const lastLangUsed = localStorage.getItem(CommonConstant.LANG);
+        const _browserLang: string = lastLangUsed ?? translate.getBrowserLang();
+        const browserLang = _browserLang.match(/en|id|pt|de/) ? _browserLang : 'en';
+        translate.use(browserLang);
+        this.currentLang = browserLang;
         this.route.queryParams.subscribe(params => {
             const queryParams = this.ngxRouter.getQueryParams(params);
             if (queryParams.showLoginHistory == 1) {
@@ -203,8 +206,7 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
 
 
     ChangeLanguage(language: string) {
-        localStorage.setItem('lang',language);
-        this.strService.set('lang', language);
+        this.strService.set(CommonConstant.LANG, language);
         this.translate.use(language);
     }
 

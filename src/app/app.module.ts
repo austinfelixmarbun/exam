@@ -48,10 +48,11 @@ import { AppContextService, LoggingService } from '@adins/fe-core';
 import { LogsInterceptor } from './shared/interceptor/logs.interceptor';
 import { ApplicationContextService } from './shared/services/application-context.service';
 import { Ucdropdownsearch2Module } from '@adins/ucdropdownsearch2';
+import { URLConstant } from './shared/constant/URLConstant';
 
 
 export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, URLConstant.GetMultiLangDictionary, '');
 }
 
 @NgModule({

@@ -153,10 +153,7 @@ export class AppComponent implements OnInit {
         this.http.post(URLConstant.GetRefUserByUsername, {Username: context[CommonConstant.USER_NAME]}).subscribe(
             (response) => {
               if (response['LastIpAddress'] != localStorage.getItem('LocalIp')) {
-                const version = localStorage.getItem(CommonConstant.VERSION);
-                localStorage.clear();
-                localStorage.setItem('Version', version);
-                this.cookieService.removeAll();
+                AdInsHelper.ClearAllLog(this.cookieService);
                 window.location.reload();
               }
             }

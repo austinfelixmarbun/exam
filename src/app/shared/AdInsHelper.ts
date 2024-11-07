@@ -70,9 +70,11 @@ export class AdInsHelper {
     // }
 
     public static ClearAllLog(cookieService: CookieService) {
-        let version = localStorage.getItem(CommonConstant.VERSION);
+        const version = localStorage.getItem(CommonConstant.VERSION);
+        const lang = localStorage.getItem(CommonConstant.LANG);
         localStorage.clear();
-        localStorage.setItem("Version", version);
+        localStorage.setItem(CommonConstant.VERSION, version);
+        localStorage.setItem(CommonConstant.LANG, lang);
         cookieService.removeAll();
     }
 

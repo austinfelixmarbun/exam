@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CookieService } from "ngx-cookie";
-import { CommonConstant } from "../constant/CommonConstant";
 import { URLConstant } from "../constant/URLConstant";
 import { NavigationConstant } from "../NavigationConstant";
+import { AdInsHelper } from "../AdInsHelper";
 
 @Injectable()
 export class AdInsHelperService {
@@ -67,10 +67,7 @@ export class AdInsHelperService {
 	public ClearAllLogAndRemoveToken(cookieService: CookieService, http: HttpClient) {
         var url = URLConstant.LogoutAuth;
         http.post(url, {}).subscribe();
-        let version = localStorage.getItem(CommonConstant.VERSION);
-        localStorage.clear();
-        localStorage.setItem("Version", version);
-        cookieService.removeAll();
+        AdInsHelper.ClearAllLog(cookieService);
     }
 
 	public ForceLogOut(cookieService: CookieService, timeLeft, toastr, http: HttpClient) {

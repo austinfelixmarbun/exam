@@ -1,24 +1,13 @@
 
-import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
-import { HttpClient } from "@angular/common/http";
+import { TranslateModule } from "@ngx-translate/core";
 import { NgModule } from "@angular/core";
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 @NgModule({
   exports: [
     TranslateModule
   ],
   imports: [
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
+    TranslateModule.forChild(),
   ],
   declarations: []
 })

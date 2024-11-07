@@ -29,6 +29,7 @@ export class CommonConstant {
     public static TOKEN = "XSRF-TOKEN";
     public static JWT_TOKEN = "jtoken";
     public static VERSION = "Version";
+    public static LANG = "lang";
     public static LAST_ACCESS_TIME = "LastAccessTime";
     public static MENU = "Menu"
     public static ReturnObj = 'ReturnObject';
