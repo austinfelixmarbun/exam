@@ -991,5 +991,6 @@
     "GetVendorAddrByVendorIdOnly": "/v1/VendorAddr/GetVendorAddrByVendorId",
     "AddVendorFundingCoy": "/v1/Vendor/AddFundingCompany",
     "EditVendorFundingCoy": "/v1/Vendor/EditFundingCompany",
-    "GetTaxScheme": "/v1/TaxCalculation/GetTaxSchemeHByTaxKindAndNationality"
+    "GetTaxScheme": "/v1/TaxCalculation/GetTaxSchemeHByTaxKindAndNationality",
+    "GetMultiLangDictionary": "/v1/MultiLang/"
 }

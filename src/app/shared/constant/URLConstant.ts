@@ -1346,4 +1346,7 @@ export class URLConstant {
     //#region IDENTITY PROVIDER
     public static GetIdentityProviders = this.env.FoundationR3Url + urlConstant.GetIdentityProviders;
     //#endregion
+
+    // MULTILANG
+    public static GetMultiLangDictionary = this.env.FoundationR3Url + urlConstant.GetMultiLangDictionary;
 }
