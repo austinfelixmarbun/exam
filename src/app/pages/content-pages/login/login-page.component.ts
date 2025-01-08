@@ -73,7 +73,7 @@ export class LoginPageComponent implements OnInit {
       await this.fetchIdentityProvider();
 
       if (query['code']) {
-        const redirectUri = `${window.location.origin}/Pages/Login`;
+        const redirectUri = window.location.href;
         this.http.post(URLConstant.LoginByCode, {Code: query['code'], RedirectUri: redirectUri}, AdInsConstant.SpinnerOptions).subscribe({
           next: async (res) => {
             // if (res?.error) {
@@ -150,7 +150,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithProvider(authUrl: string) {
-    const redirectUri = window.location.origin + '/Pages/Login';
+    const redirectUri = window.location.href;
     window.location.href = `${authUrl}&redirect_uri=${redirectUri}`;
   }
 
