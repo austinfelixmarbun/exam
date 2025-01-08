@@ -73,7 +73,7 @@ export class LoginPageComponent implements OnInit {
       await this.fetchIdentityProvider();
 
       if (query['code']) {
-        const redirectUri = window.location.href;
+        const redirectUri = window.location.origin + window.location.pathname;
         this.http.post(URLConstant.LoginByCode, {Code: query['code'], RedirectUri: redirectUri}, AdInsConstant.SpinnerOptions).subscribe({
           next: async (res) => {
             // if (res?.error) {
