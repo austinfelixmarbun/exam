@@ -1,1 +1,0 @@
-export { EmployeeAddComponent } from '../employee/employee-add/employee-add.component';

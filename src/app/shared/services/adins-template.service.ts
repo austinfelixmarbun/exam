@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import * as _moment from 'moment';
 import { CookieService } from "ngx-cookie";
 import { AdInsHelper } from "../AdInsHelper";
-import * as Module from '../../form-template';
+//import * as Module from '../../form-template';
 import { URLConstant } from '../constant/URLConstant';
 import { NavigationConstant } from '../NavigationConstant';
 
@@ -38,7 +38,7 @@ export class AdinsTemplateService extends UcTemplateService {
     this.urlConstant  = URLConstant;
     this.listEnvironments = listEnvironments;
     this.moment = _moment;
-    this.module = Module;
+    //this.module = Module;
     this.navConstant = NavigationConstant
     this.baseUrl = envi.IamR3Web;
   }

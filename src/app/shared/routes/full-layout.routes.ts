@@ -20,22 +20,7 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_COMPNT,
     loadChildren: () => import('app/components/ui-components.module').then(m => m.UIComponentsModule)
   },
-  {
-    path: PathConstant.LR_OFFICE,
-    loadChildren: () => import('app/office/office.module').then(m => m.OfficeModule)
-  },
-  {
-    path: PathConstant.LR_EMP,
-    loadChildren: () => import('app/employee/employee.module').then(m => m.EmployeeModule)
-  },
-  {
-    path: PathConstant.LR_ORG,
-    loadChildren: () => import('app/organization/organization.module').then(m => m.OrganizationModule)
-  },
-  {
-    path: PathConstant.LR_SYSTEM_SETTING,
-    loadChildren: () => import('app/system-setting/system-setting.module').then(m => m.SystemSettingModule)
-  },
+  
   {
     path: PathConstant.LR_PAGES,
     loadChildren: () => import('app/pages/full-pages/full-pages.module').then(m => m.FullPagesModule)
@@ -48,10 +33,7 @@ export const Full_ROUTES: Routes = [
     path: PathConstant.LR_INTEGRATION,
     loadChildren: () => import('app/integration/integration.module').then(m => m.IntegrationModule)
   },
-  {
-    path: PathConstant.LR_SYS_USER,
-    loadChildren: () => import('app/system-user/system-user.module').then(m => m.SystemUserModule)
-  },
+  
 
   // dynamic import remote module
 

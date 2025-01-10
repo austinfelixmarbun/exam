@@ -185,13 +185,6 @@
   dependencies:
     tslib "^2.3.0"
 
-"@adins/ucdropdownsearch@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.npmjs.org/@adins/ucdropdownsearch/-/ucdropdownsearch-3.0.1.tgz"
-  integrity sha512-I2geP0xzDls5mkQOmYqGFWoawQ2v+bE6IVUCzFkBaxNq+dV+Pdo5RBqDdd86H4HWVHohC0DNLU8FrZmTk9wkeg==
-  dependencies:
-    tslib "^2.3.0"
-
 "@adins/ucdropdownsearch2@3.1.2":
   version "3.1.2"
   resolved "https://registry.npmjs.org/@adins/ucdropdownsearch2/-/ucdropdownsearch2-3.1.2.tgz"

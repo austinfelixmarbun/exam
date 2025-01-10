@@ -11,13 +11,13 @@ export const environment = {
   Module: "IAM",
   isCore: true,
   SpinnerOnHttpPost: false,
-  isPageFromService: false,
+  isPageFromService: true,
   useSafeUrl: true,
   NotificationPublicKey: "",
 
   // Keycloak Open ID Integration
   identityProviders: {
-    enabled: true,
+    enabled: false,
     issuer: "",
   },
 };

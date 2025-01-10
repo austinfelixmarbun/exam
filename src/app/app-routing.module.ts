@@ -9,8 +9,10 @@ import { CONTENT_ROUTES } from "app/shared/routes/content-layout.routes";
 
 import { AuthGuard } from 'app/shared/auth/auth-guard.service';
 import { NotFoundComponent } from './not-found-page/not-found.component';
+import { PageComponent } from './testjelvin/page/page.component';
 
 const appRoutes: Routes = [
+  { path: 'Page', component: PageComponent },
   {
     path: '',
     redirectTo: '/Pages/Login',

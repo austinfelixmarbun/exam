@@ -12,6 +12,7 @@ import { NavigationConstant } from '../NavigationConstant';
 import { AdInsConstant } from '../AdInstConstant';
 import { StorageService } from '../services/StorageService';
 import { URLConstant } from '../constant/URLConstant';
+import { ROUTES } from './sidebar-routes.config';
 
 declare var $: any;
 
@@ -47,26 +48,26 @@ export class SidebarComponent implements OnInit {
         //     }
         //     );
         // if (environment.production == false) {
-        //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+             this.menuItems = ROUTES.filter(menuItem => menuItem);
         //     return;
         // }
-        const currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
-        if (currentUserContext) {
-            await this.http.post(URLConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {
-              RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module
-            }, { withCredentials: true }).toPromise().then(
-                (response) => {
-                    AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
-                    this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
-                    $.getScript('./assets/js/app-sidebar.js');
-                    setTimeout(() => {
-                        this.jsFunc.then(v => v.clickRoute());
-                    }, 10);
-                });
-        }
-        else {
-            this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
-        }
+        // const currentUserContext = JSON.parse(AdInsHelper.GetCookie(this.cookieService, CommonConstant.USER_ACCESS));
+        // if (currentUserContext) {
+        //     await this.http.post(URLConstant.GetAllActiveRefFormByRoleCodeAndModuleCode, {
+        //       RoleCode: currentUserContext.RoleCode, ModuleCode: environment.Module
+        //     }, { withCredentials: true }).toPromise().then(
+        //         (response) => {
+        //             AdInsHelper.SetLocalStorage(CommonConstant.MENU, JSON.stringify(response[CommonConstant.ReturnObj]));
+        //             this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+        //             $.getScript('./assets/js/app-sidebar.js');
+        //             setTimeout(() => {
+        //                 this.jsFunc.then(v => v.clickRoute());
+        //             }, 10);
+        //         });
+        // }
+        // else {
+        //     this.menuItems = JSON.parse(AdInsHelper.GetLocalStorage(CommonConstant.MENU));
+        // }
 
         this.menuItems = this.queryParamGenerator(this.menuItems);
     }

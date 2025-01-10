@@ -49,6 +49,8 @@ import { LogsInterceptor } from './shared/interceptor/logs.interceptor';
 import { ApplicationContextService } from './shared/services/application-context.service';
 import { Ucdropdownsearch2Module } from '@adins/ucdropdownsearch2';
 import { URLConstant } from './shared/constant/URLConstant';
+import { PageComponent } from './testjelvin/page/page.component';
+
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -62,7 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
         ContentLayoutComponent,
         ErrorDialogComponent,
         RolepickComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        PageComponent
     ],
     imports: [
         BrowserAnimationsModule,
