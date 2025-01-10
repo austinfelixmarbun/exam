@@ -181,13 +181,20 @@ export class NavbarComponent implements AfterViewChecked, OnInit {
             RefreshToken: this.authService.token?.RefreshToken
         };
 
-        this.http.post(URLConstant.LogoutV2, logoutObj, AdInsConstant.SpinnerOptions).subscribe({
+        const iamEnabled = environment.identityProviders.enabled;
+        const serviceUrl = iamEnabled ? URLConstant.LogoutV2 : URLConstant.Logout;
+
+        this.http.post(serviceUrl, logoutObj, AdInsConstant.SpinnerOptions).subscribe({
             next: () => {
                 AdInsHelper.ClearAllLog(this.cookieService);
                 this.clearSession();
                 this.cookieService.removeAll();
+                
+                if (iamEnabled) {
+                    this.authService.revoke();
+                }
+
                 this.router.navigate([NavigationConstant.PAGES_LOGIN]);
-                this.authService.revoke();
             }
         });
     }

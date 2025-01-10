@@ -797,7 +797,7 @@
     "DeleteRefTaxOffice": "/v1/RefTaxOffice/DeleteRefTaxOffice",
     "GetRefTaxOfficeDetailById": "/v1/RefTaxOffice/GetRefTaxOfficeDetailById",
     "GetListRefTaxOfficeActive": "/v1/RefTaxOffice/GetListRefTaxOfficeActive",
-    "Logout": "/v1/UserManagement/LogOut",
+    "Logout": "/v1/Authenticate/Logout",
     "GetAllActiveRefFormByRoleCodeAndModuleCode": "/v1/RefForm/GetAllActiveRefFormByRoleCodeAndModuleCode",
     "GetDashboardAccessToken": "/v2/Dashboard/GetDashboardAccessToken",
     "GetThingsToDoCamunda": "/v2/ThingsToDo/GetThingsToDoCamunda",

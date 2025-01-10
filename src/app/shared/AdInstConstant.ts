@@ -40,5 +40,5 @@ export class AdInsConstant {
   public static ArmntR3Web= "https://r3web-server.ad-ins.com/LMSARMNT";
   public static PaymentR3Web= "https://r3web-server.ad-ins.com/LMSPAYMENT";
 
-  public static Logout = "/v1/UserManagement/LogOut";
+  public static Logout = "/v1/Authenticate/Logout";
 }

@@ -73,7 +73,7 @@ export class LoginPageComponent implements OnInit {
       await this.fetchIdentityProvider();
 
       if (query['code']) {
-        const redirectUri = `${window.location.origin}/Pages/Login`;
+        const redirectUri = this.getRedirectUrl();
         this.http.post(URLConstant.LoginByCode, {Code: query['code'], RedirectUri: redirectUri}, AdInsConstant.SpinnerOptions).subscribe({
           next: async (res) => {
             // if (res?.error) {
@@ -150,7 +150,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithProvider(authUrl: string) {
-    const redirectUri = window.location.origin + '/Pages/Login';
+    const redirectUri = this.getRedirectUrl();
     window.location.href = `${authUrl}&redirect_uri=${redirectUri}`;
   }
 
@@ -298,5 +298,10 @@ export class LoginPageComponent implements OnInit {
 
   onClickShowPass() {
     this.showPass = !this.showPass;
+  }
+
+  getRedirectUrl(): string {
+    const { protocol, hostname, port, pathname } = window.location;
+    return `${protocol}//${hostname}${port ? `:${port}` : ''}${pathname}`;
   }
 }
