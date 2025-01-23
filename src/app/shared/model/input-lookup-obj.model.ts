@@ -23,7 +23,7 @@ export class InputLookupObj {
     constructor() {
         this.urlJson = "./assets/uclookup/zipcode/lookupZipcode.json";
         this.urlQryPaging = URLConstant.GetPagingObjectBySQL; //taruh di adins constant
-        this.urlEnviPaging = URLConstant.env.FoundationR3Url + "/v1";
+        this.urlEnviPaging = URLConstant.env.LocalHostBE + "/v1"; //Ubah sesuai local host msg"
         this.jsonSelect = "";
         this.idSelect = "";
         this.nameSelect = "";

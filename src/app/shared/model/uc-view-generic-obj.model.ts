@@ -13,7 +13,7 @@ export class UcViewGenericObj {
 
     constructor() {
         this.viewInput = "";
-        this.viewEnvironment = URLConstant.env.FoundationR3Url + '/v1';
+      this.viewEnvironment = URLConstant.env.LocalHostBE + '/v1';  //Ubah ke local host masing-masing
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
         this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + '/v1' });

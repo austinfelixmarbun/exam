@@ -29,7 +29,7 @@ export class UcPagingObj {
         this.dicts = {};
         this._url = "";
         this.title = "";
-        this.enviromentUrl = URLConstant.env.FoundationR3Url + '/v2';
+      this.enviromentUrl = URLConstant.env.LocalHostBE + '/v1'; //Ubah ke local host masing-masing
         this.apiQryPaging = URLConstant.GetPagingObjectBySQL;
         this.deleteUrl = "";
         this.pagingJson = "";
@@ -37,9 +37,9 @@ export class UcPagingObj {
         this.addCritInput = new Array<CriteriaObj>();
         this.ddlEnvironments = new Array<EnviObj>();
         this.listEnvironments = new Array<EnvisObj>();
-        this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.FoundationR3Url + '/v1' });
-        this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.FoundationR3Web });
-        this.listEnvironments.push({ environment: "NOTIF_ENGINE", url: URLConstant.env.FoundationR3Url + '/v1' });
+      this.listEnvironments.push({ environment: "FOU", url: URLConstant.env.LocalHostBE + '/v1' });
+      this.listEnvironments.push({ environment: "FOU_WEB", url: URLConstant.env.LocalHostBE });
+      this.listEnvironments.push({ environment: "NOTIF_ENGINE", url: URLConstant.env.LocalHostBE + '/v1' });
         this.whereValue = new Array<WhereValueObj>();
         this.isHideSearch = false;
         this.delay = 0;
