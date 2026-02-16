@@ -30,7 +30,6 @@
   "dmsURL": "https://kfx-svr/LITEDMS_POC/LiteDMS/pageconfins.aspx",
   "WFThingsToDoUrl": "https://r3impl-appsvr.ad-ins.com/WORKFLOW_OPL/",
   "IseUseNotification": "1",
-  //"PagesURL": "http://rnd-server-2.ad-ins.com:6122/",
   "PagesURL": "http://template-editor.ad-ins.com:3590/",
   "PDCUrl": "https://r3app-server.ad-ins.com/PDC",
   "amsR3Web": "https://r3web-server.ad-ins.com/AMS",
