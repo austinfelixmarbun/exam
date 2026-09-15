@@ -7,6 +7,7 @@ import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { TagInputModule } from 'ngx-chips';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { AdInsSharedModule } from './adins-module/adins-shared.module';
+import { UcTemplateModule } from '@adins/uctemplate';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { AdInsSharedModule } from './adins-module/adins-shared.module';
         NgbModule,
         MatchHeightModule,
         TagInputModule,
-        UiSwitchModule
+        UiSwitchModule,
+        UcTemplateModule
     ]
 })
 export class UIComponentsModule { }
