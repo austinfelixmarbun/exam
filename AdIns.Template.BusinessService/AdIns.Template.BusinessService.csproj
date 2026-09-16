@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdIns.Journal.DataModel" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="AdIns.Core" Version="2.10.28" />
+    <PackageReference Include="AdIns.DataAccess" Version="2.3.4" />
+    <PackageReference Include="AdIns.DataModel" Version="2.4.2" />
+	<PackageReference Include="AdIns.Exp" Version="2.2.2" />
+	<PackageReference Include="AdIns.License" Version="2.2.3" />
+	<PackageReference Include="AdIns.Util" Version="2.10.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdIns.Template.DataAccess\AdIns.Template.DataAccess.csproj" />
+    <ProjectReference Include="..\AdIns.Template.DataModel\AdIns.Template.DataModel.csproj" />
+    <ProjectReference Include="..\AdIns.Template.Interface\AdIns.Template.Interface.csproj" />
+    <ProjectReference Include="..\AdIns.Template.Common\AdIns.Template.Common.csproj" />
+    <ProjectReference Include="..\AdIns.Template.DTO\AdIns.Template.DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AdIns.Foundation.Common">
+      <HintPath>..\Lib\AdIns.Foundation.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="AdIns.Foundation.Core">
+      <HintPath>..\Lib\AdIns.Foundation.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AdIns.Foundation.DTO">
+      <HintPath>..\Lib\AdIns.Foundation.DTO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TransactionObjectService\" />
+    <Folder Include="TransactionService\" />
+  </ItemGroup>
+
+</Project>

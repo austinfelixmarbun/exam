@@ -1,0 +1,34 @@
+{
+  "QueryString": {
+    "searchAgreement": {
+      "select": "select a.agrmnt_id AS \"AgrmntId\", a.agrmnt_no AS \"AgrmntNo\", a.agrmnt_dt AS \"AgrmntDt\", d.full_name AS \"DebtorName\", a.ntf_amt AS \"NtfAmt\", a.tenor AS \"Tenor\", a.contract_stat AS \"ContractStat\" ",
+      "from": "from agrmnt a left join debtor d on a.debtor_id = d.debtor_id ",
+      "where": "where 1=1 "
+    },
+    "searchPendingAgreement": {
+      "select": "select a.agrmnt_id AS \"AgrmntId\", a.agrmnt_no AS \"AgrmntNo\", d.full_name AS \"DebtorName\", a.ntf_amt AS \"NtfAmt\", a.tenor AS \"Tenor\", a.contract_stat AS \"ContractStat\" ",
+      "from": "from agrmnt a left join debtor d on a.debtor_id = d.debtor_id ",
+      "where": "where a.contract_stat = 'PAP' "
+    },
+    "searchActiveAgreement": {
+      "select": "select a.agrmnt_id AS \"AgrmntId\", a.agrmnt_no AS \"AgrmntNo\", d.full_name AS \"DebtorName\", a.agrmnt_dt AS \"AgrmntDt\", a.inst_amt AS \"InstAmt\", sub.next_due_dt AS \"NextDueDt\" ",
+      "from": "from agrmnt a left join debtor d on a.debtor_id = d.debtor_id cross join (select business_dt from business_dt order by business_dt_id desc limit 1) b cross join lateral (select min(s.inst_due_dt) as next_due_dt from inst_schdl s where s.agrmnt_id = a.agrmnt_id and s.inst_paid_amt < s.inst_amt) sub ",
+      "where": "where a.contract_stat = 'LIVE' and sub.next_due_dt is not null and b.business_dt <= (sub.next_due_dt + a.grace_period) "
+    },
+    "searchOverdueAgreement": {
+      "select": "select a.agrmnt_id AS \"AgrmntId\", a.agrmnt_no AS \"AgrmntNo\", d.full_name AS \"DebtorName\", a.agrmnt_dt AS \"AgrmntDt\", a.inst_amt AS \"InstAmt\", sub.next_due_dt AS \"NextDueDt\" ",
+      "from": "from agrmnt a left join debtor d on a.debtor_id = d.debtor_id cross join (select business_dt from business_dt order by business_dt_id desc limit 1) b cross join lateral (select min(s.inst_due_dt) as next_due_dt from inst_schdl s where s.agrmnt_id = a.agrmnt_id and s.inst_paid_amt < s.inst_amt) sub ",
+      "where": "where a.contract_stat = 'LIVE' and sub.next_due_dt is not null and b.business_dt > (sub.next_due_dt + a.grace_period) "
+    },
+    "Lookup_asset_master": {
+      "select": "select r.ref_asset_master_id AS \"RefAssetMasterId\", r.asset_name AS \"AssetName\", r.asset_category AS \"AssetCategory\", r.asset_price AS \"AssetPrice\", r.is_active AS \"IsActive\" ",
+      "from": "from ref_asset_master r ",
+      "where": "where r.is_active = true "
+    },
+    "Lookup_sales_person": {
+      "select": "select s.sales_person_id AS \"SalesPersonId\", s.sales_code AS \"SalesCode\", s.sales_name AS \"SalesName\", s.position AS \"Position\", s.phone_number AS \"PhoneNumber\" ",
+      "from": "from sales_person s ",
+      "where": "where 1=1 "
+    }
+  }
+}

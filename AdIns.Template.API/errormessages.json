@@ -1,0 +1,28 @@
+{
+  "ErrorList": {
+    "DATA_NOT_FOUND": {
+      "ErrorCode": "404",
+      "ErrorMessage": "{0} Not Found"
+    },
+    "VEHICLE_NOT_AVAILABLE": {
+      "ErrorCode": "400",
+      "ErrorMessage": "Vehicle is not available. Current status: {0}"
+    },
+    "PROMO_NOT_FOUND_OR_INACTIVE": {
+      "ErrorCode": "400",
+      "ErrorMessage": "PromoDiscount not found or inactive"
+    },
+    "TRX_CANNOT_BE_UPDATED": {
+      "ErrorCode": "400",
+      "ErrorMessage": "{0} cannot be updated. Current status: {1}"
+    },
+    "INVALID_FIELD_FORMAT": {
+      "ErrorCode": "400",
+      "ErrorMessage": "{0} must be a valid {1}"
+    },
+    "ENTITY_STILL_REFERENCED": {
+      "ErrorCode": "400",
+      "ErrorMessage": "{0} cannot be deleted because it is still referenced by {1}"
+    }
+  }
+}

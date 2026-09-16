@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Version>2.0.0</Version>
+    <VersionSuffix>alpha</VersionSuffix>
+    <UserSecretsId>56a2128f-047d-493e-aaa9-0c786b5fe80e</UserSecretsId>
+	<EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\bin\Debug\net6.0\AdIns.Template.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>.\bin\Release\net6.0\AdIns.Template.API.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog.MailKit" Version="5.0.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+	<PackageReference Include="AdIns.Core" Version="2.10.28" />
+	<PackageReference Include="AdIns.DataAccess" Version="2.3.4" />
+    <PackageReference Include="AdIns.DataModel" Version="2.4.2" />
+	<PackageReference Include="AdIns.Exp" Version="2.2.2" />
+	<PackageReference Include="AdIns.License" Version="2.2.3" />
+	<PackageReference Include="AdIns.Util" Version="2.10.3" />
+	<PackageReference Include="Npgsql" Version="7.0.7" />
+	<PackageReference Include="AdIns.FPE.Encryption" Version="1.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdIns.Template.BatchJob\AdIns.Template.BatchJob.csproj" />
+    <ProjectReference Include="..\AdIns.Template.BusinessService\AdIns.Template.BusinessService.csproj" />
+    <ProjectReference Include="..\AdIns.Template.Common\AdIns.Template.Common.csproj" />
+    <ProjectReference Include="..\AdIns.Template.DataAccess\AdIns.Template.DataAccess.csproj" />
+    <ProjectReference Include="..\AdIns.Template.DataModel\AdIns.Template.DataModel.csproj" />
+    <ProjectReference Include="..\AdIns.Template.DTO\AdIns.Template.DTO.csproj" />
+    <ProjectReference Include="..\AdIns.Template.Interface\AdIns.Template.Interface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AdIns.Foundation.Common">
+      <HintPath>..\Lib\AdIns.Foundation.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="AdIns.Foundation.Core">
+      <HintPath>..\Lib\AdIns.Foundation.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AdIns.Foundation.DTO">
+      <HintPath>..\Lib\AdIns.Foundation.DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="AdIns.Template.MigrationTables">
+      <HintPath>..\Lib\AdIns.Template.MigrationTables.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>

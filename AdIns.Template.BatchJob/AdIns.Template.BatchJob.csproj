@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputType>Library</OutputType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AdIns.Journal.DataModel" Version="4.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+		<PackageReference Include="AdIns.Core" Version="2.10.28" />
+		<PackageReference Include="AdIns.DataAccess" Version="2.3.4" />
+		<PackageReference Include="AdIns.DataModel" Version="2.4.2" />
+		<PackageReference Include="AdIns.Exp" Version="2.2.2" />
+		<PackageReference Include="AdIns.License" Version="2.2.3" />
+		<PackageReference Include="AdIns.Util" Version="2.10.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AdIns.Template.Interface\AdIns.Template.Interface.csproj" />
+		<ProjectReference Include="..\AdIns.Template.BusinessService\AdIns.Template.BusinessService.csproj" />
+		<ProjectReference Include="..\AdIns.Template.Common\AdIns.Template.Common.csproj" />
+		<ProjectReference Include="..\AdIns.Template.DataAccess\AdIns.Template.DataAccess.csproj" />
+		<ProjectReference Include="..\AdIns.Template.DataModel\AdIns.Template.DataModel.csproj" />
+		<ProjectReference Include="..\AdIns.Template.DTO\AdIns.Template.DTO.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="AdIns.Batch.CommandLine">
+	    <HintPath>..\Lib\AdIns.Batch.CommandLine.dll</HintPath>
+	  </Reference>
+	  <Reference Include="AdIns.Batch.DataAccess">
+	    <HintPath>..\Lib\AdIns.Batch.DataAccess.dll</HintPath>
+	  </Reference>
+	  <Reference Include="AdIns.Batch.DTO">
+	    <HintPath>..\Lib\AdIns.Batch.DTO.dll</HintPath>
+	  </Reference>
+	  <Reference Include="AdIns.Batch.Interface">
+	    <HintPath>..\Lib\AdIns.Batch.Interface.dll</HintPath>
+	  </Reference>
+	  <Reference Include="AdIns.Batch.Job">
+	    <HintPath>..\Lib\AdIns.Batch.Job.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+</Project>

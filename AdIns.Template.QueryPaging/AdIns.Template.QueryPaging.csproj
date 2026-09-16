@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AdIns.Core" Version="2.10.28" />
+    <PackageReference Include="AdIns.DataAccess" Version="2.3.4" />
+    <PackageReference Include="AdIns.Exp" Version="2.2.2" />
+    <PackageReference Include="AdIns.Util" Version="2.10.3" />
+  </ItemGroup>
+
+</Project>

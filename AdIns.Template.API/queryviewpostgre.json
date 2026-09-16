@@ -1,0 +1,9 @@
+{
+  "QueryString": {
+    "viewAgreement": {
+      "select": "select a.agrmnt_id AS \"AgrmntId\", a.agrmnt_no AS \"AgrmntNo\", d.full_name AS \"DebtorName\", a.inst_amt AS \"MonthlyInstallmentAmount\", coalesce((select min(s.inst_seq_no) from inst_schdl s where s.agrmnt_id = a.agrmnt_id and s.inst_paid_amt < s.inst_amt), 0) AS \"NextInstallmentSequence\" ",
+      "from": "from agrmnt a left join debtor d on a.debtor_id = d.debtor_id ",
+      "where": "where a.agrmnt_no = '{0}' or a.agrmnt_id::text = '{0}' "
+    }
+  }
+}

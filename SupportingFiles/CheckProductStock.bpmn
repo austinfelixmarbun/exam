@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0eodme2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.32.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.22.0">
+  <bpmn:process id="CheckProductStock" name="Check Product Stock" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1" name="Start" camunda:asyncAfter="true">
+      <bpmn:outgoing>Flow_1gf55td</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1gf55td" sourceRef="StartEvent_1" targetRef="CheckStock" />
+    <bpmn:exclusiveGateway id="Gateway_0e9fyqz" name="Enough?" camunda:asyncBefore="true">
+      <bpmn:incoming>Flow_0l9242h</bpmn:incoming>
+      <bpmn:outgoing>Flow_19lirif</bpmn:outgoing>
+      <bpmn:outgoing>Flow_02x04v5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="UpdateOrder" name="Update Order" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://ait-training-training-be.ait-training.svc.cluster.local:80/v1/OrderD/UpdateOrderNotesAndStat</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="content-type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">{
+  "orderHId": ${Order.orderHId},
+  "orderStat": ${OrderStat},
+  "notes": ${Notes}
+}</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02x04v5</bpmn:incoming>
+      <bpmn:incoming>Flow_110cmri</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rnb8xj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="AddShipping" name="Add Shipping" camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://ait-training-training-be.ait-training.svc.cluster.local:80/v1/Shipping/AddShipping</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="content-type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">{
+  "orderHId": "${Order.orderHId}"
+}</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_19lirif</bpmn:incoming>
+      <bpmn:outgoing>Flow_110cmri</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_19lirif" name="True" sourceRef="Gateway_0e9fyqz" targetRef="AddShipping">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IsStockAvailable == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_02x04v5" name="False" sourceRef="Gateway_0e9fyqz" targetRef="UpdateOrder">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${IsStockAvailable == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_110cmri" sourceRef="AddShipping" targetRef="UpdateOrder" />
+    <bpmn:endEvent id="Event_1goif75" name="End">
+      <bpmn:incoming>Flow_1rnb8xj</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1rnb8xj" sourceRef="UpdateOrder" targetRef="Event_1goif75" />
+    <bpmn:serviceTask id="CheckStock" name="Check Product Stock " camunda:asyncBefore="true">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://ait-training-training-be.ait-training.svc.cluster.local:80/v1/Product/CheckProductStock</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="content-type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="payload">{
+  "id": ${Order.orderHId}
+}
+</camunda:inputParameter>
+            <camunda:outputParameter name="IsStockAvailable">${S(response).prop("IsStockAvailable").boolValue()}</camunda:outputParameter>
+            <camunda:outputParameter name="OrderStat">${S(response).prop("OrderStat")}</camunda:outputParameter>
+            <camunda:outputParameter name="Notes">${S(response).prop("Notes")}</camunda:outputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1gf55td</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l9242h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0l9242h" sourceRef="CheckStock" targetRef="Gateway_0e9fyqz" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CheckProductStock">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="162" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="168" y="225" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0lvlpmv_di" bpmnElement="Gateway_0e9fyqz" isMarkerVisible="true">
+        <dc:Bounds x="465" y="175" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="469" y="232" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ahkb5p" bpmnElement="UpdateOrder">
+        <dc:Bounds x="750" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0l9vk4o" bpmnElement="AddShipping">
+        <dc:Bounds x="580" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1goif75_di" bpmnElement="Event_1goif75">
+        <dc:Bounds x="952" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="960" y="225" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0tj6hs6" bpmnElement="CheckStock">
+        <dc:Bounds x="280" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1gf55td_di" bpmnElement="Flow_1gf55td">
+        <di:waypoint x="198" y="200" />
+        <di:waypoint x="280" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19lirif_di" bpmnElement="Flow_19lirif">
+        <di:waypoint x="490" y="175" />
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="580" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="509" y="103" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02x04v5_di" bpmnElement="Flow_02x04v5">
+        <di:waypoint x="515" y="200" />
+        <di:waypoint x="750" y="200" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="619" y="182" width="28" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_110cmri_di" bpmnElement="Flow_110cmri">
+        <di:waypoint x="680" y="120" />
+        <di:waypoint x="800" y="120" />
+        <di:waypoint x="800" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rnb8xj_di" bpmnElement="Flow_1rnb8xj">
+        <di:waypoint x="850" y="200" />
+        <di:waypoint x="952" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l9242h_di" bpmnElement="Flow_0l9242h">
+        <di:waypoint x="380" y="200" />
+        <di:waypoint x="465" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

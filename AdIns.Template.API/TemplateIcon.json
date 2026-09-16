@@ -1,0 +1,44 @@
+{
+  "ReturnObject": [
+    {
+      "Key": "fa fa-check-square",
+      "Value": "Check Square Icon"
+    },
+    {
+      "Key": "fa fa-minus-square",
+      "Value": "Minus Square Icon"
+    },
+    {
+      "Key": "fa fa-plus-square",
+      "Value": "Plus Square Icon"
+    },
+    {
+      "Key": "ft-users",
+      "Value": "Multiple User Icon"
+    },
+    {
+      "Key": "ft-user",
+      "Value": "Single User Icon"
+    },
+    {
+      "Key": "ft-briefcase",
+      "Value": "Briefcase Icon"
+    },
+    {
+      "Key": "ft-aperture",
+      "Value": "Aperture Icon"
+    },
+    {
+      "Key": "ft-file-plus",
+      "Value": "File Plus Icon"
+    },
+    {
+      "Key": "ft-home",
+      "Value": "Home Icon"
+    },
+    {
+      "Key": "ft-bar-chart-2",
+      "Value": "Bar Chart Icon"
+    }
+  ]
+}
